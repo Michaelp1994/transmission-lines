@@ -104,9 +104,9 @@ export default class GeneralStudy {
 
     build() {
         this.driver.clear();
-        // this.driver.send(this.create());
         this.components.forEach((component) => {
-            this.driver.send(component.create());
+            const command = component.create();
+            this.driver.send(command);
         });
     }
 

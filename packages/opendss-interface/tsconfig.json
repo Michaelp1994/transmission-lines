@@ -23,6 +23,9 @@
             "@helpers/*": ["./src/helpers/*"]
         }
     },
-    "include": ["src"],
-    "exclude": ["node_modules", "dist"]
+    "include": ["src", "tests"],
+    "exclude": ["node_modules", "dist"],
+    "tsc-alias": {
+        "resolveFullPaths": true
+    }
 }

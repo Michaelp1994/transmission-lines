@@ -5,6 +5,7 @@ import solution from "./solution";
 import source from "./source";
 import towerGeometry from "./towerGeometry";
 import transmissionLine from "./transmissionLine";
+import meta from "./meta";
 
 export const appRouter = router({
     conductorType,
@@ -13,6 +14,7 @@ export const appRouter = router({
     source,
     towerGeometry,
     transmissionLine,
+    meta,
 });
 
 export type AppRouter = typeof appRouter;

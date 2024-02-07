@@ -26,7 +26,6 @@ app.whenReady().then(async () => {
     const databasePath = electron.app.isPackaged
         ? path.join(electron.app.getPath("userData"), "database.sqlite")
         : "./database.sqlite";
-    console.log(databasePath);
     const dataSources = await databaseInit(databasePath);
     createServer(dataSources);
 

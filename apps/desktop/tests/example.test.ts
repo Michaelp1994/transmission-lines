@@ -11,5 +11,5 @@ test("get isPackaged", async () => {
 
     expect(isPackaged).toBeFalsy();
     // close app
-    await electronApp.close();
+    electronApp.close();
 });

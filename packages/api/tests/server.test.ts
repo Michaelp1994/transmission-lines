@@ -1,11 +1,13 @@
 import supertest from "supertest";
-import { expect, beforeAll, afterAll, it, describe } from "vitest";
-import createServer from ".";
+import { expect, beforeAll, afterAll, it, describe, vi } from "vitest";
+import createServer from "../src";
+import databaseInit from "@repo/db";
 
 let server: ReturnType<typeof createServer>;
 
 beforeAll(async () => {
-    // server = createServer();
+    const dataSources = await databaseInit(":memory:");
+    server = createServer(dataSources);
 });
 describe("API Server", () => {
     it("says hello world", () => {
