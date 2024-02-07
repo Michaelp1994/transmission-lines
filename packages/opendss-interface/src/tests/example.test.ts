@@ -1,4 +1,4 @@
-import { test, expect, afterAll, describe } from "@jest/globals";
+import { test, expect, describe } from "@jest/globals";
 import GeneralStudy from "../classes/GeneralStudy";
 import {
     Circuit,
@@ -74,7 +74,6 @@ describe("An example test for OpenDSS", () => {
         expect(basefreq).toBe("60");
         study.solve();
         const current = study.readCurrent(fault, 1);
-        console.log(current);
         expect(current).toBeGreaterThan(0);
     });
     test("should build a basic circuit and test the correct buses.", () => {
@@ -109,8 +108,4 @@ describe("An example test for OpenDSS", () => {
         const buses = study.getBuses();
         expect(buses).toStrictEqual(["b_toyota", "b_esoura"]);
     });
-});
-
-afterAll(() => {
-    console.log("afterAll script");
 });

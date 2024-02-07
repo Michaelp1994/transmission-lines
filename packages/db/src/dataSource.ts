@@ -17,7 +17,7 @@ async function databaseInit(path: string) {
         type: "better-sqlite3",
         database: path,
         // synchronize: true,
-        logging: "all",
+        logging: ["error", "warn"],
         entities: [ConductorLocation, ConductorType, TowerGeometry],
         migrations: [InitialMigration1703610359462, SeedDatabase1703629418838],
     }).initialize();
@@ -26,7 +26,7 @@ async function databaseInit(path: string) {
         type: "better-sqlite3",
         database: ":memory:",
         synchronize: true,
-        logging: "all",
+        logging: ["error", "warn"],
         entities: [
             TransmissionLine,
             TransmissionTower,

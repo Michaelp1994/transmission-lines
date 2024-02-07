@@ -12,18 +12,25 @@ import TransmissionLine from "./TransmissionLine.model";
 export default class TransmissionConductor extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column()
     name: string;
+
     @Column()
     fromPhase: number;
+
     @Column()
     toPhase: number;
+
     @Column()
     bundleNumber: number;
+
     @Column()
     bundleSpacing: number;
+
     @Column()
     isNeutral: boolean;
+
     @Column()
     typeId: number;
 

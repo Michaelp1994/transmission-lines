@@ -5,7 +5,7 @@ import ROUTES from "@/router/routes";
 import { styled } from "@linaria/react";
 import { toast } from "sonner";
 import { format } from "date-fns";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,
     Form,
@@ -17,9 +17,6 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-
-import ConductorLocationTable from "../ConductorLocationTable";
-import TowerGeometryDiagram from "../TowerGeometryDiagram";
 import {
     TowerGeometryInput,
     towerGeometryInputSchema,
@@ -27,7 +24,8 @@ import {
 } from "@repo/validators/schemas/TowerGeometry.schema";
 
 import trpc from "@/utils/trpc";
-import { zodResolver } from "@hookform/resolvers/zod";
+import ConductorLocationTable from "../ConductorLocationTable";
+// import TowerGeometryDiagram from "../TowerGeometryDiagram";
 
 interface Props {
     id: number;
@@ -93,9 +91,7 @@ const EditTowerGeometryForm: React.FC<Props> = ({ id }) => {
                         <Button type="submit">{t("form:submit")}</Button>
                     </ButtonsContainer>
                 </LeftSide>
-                <RightSide>
-                    <TowerGeometryDiagram />
-                </RightSide>
+                <RightSide>{/* <TowerGeometryDiagram /> */}</RightSide>
             </StyledForm>
         </Form>
     );

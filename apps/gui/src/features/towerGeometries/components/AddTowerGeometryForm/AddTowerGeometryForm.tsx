@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "@/router/routes";
 import { styled } from "@linaria/react";
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { format } from "date-fns";
 import {
     Button,
     Form,
@@ -15,18 +16,15 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-
-import ConductorLocationTable from "../ConductorLocationTable";
-import TowerGeometryDiagram from "../TowerGeometryDiagram";
 import {
     TowerGeometryInput,
     towerGeometryInputSchema,
     defaultTowerGeometry,
 } from "@repo/validators/schemas/TowerGeometry.schema";
-import { toast } from "sonner";
-import { format } from "date-fns";
 import trpc from "@/utils/trpc";
-import { zodResolver } from "@hookform/resolvers/zod";
+import ROUTES from "@/router/routes";
+import ConductorLocationTable from "../ConductorLocationTable";
+// import TowerGeometryDiagram from "../TowerGeometryDiagram";
 
 interface Props {}
 
@@ -84,9 +82,7 @@ const AddTowerGeometryForm: React.FC<Props> = () => {
                         <Button type="submit">{t("form:submit")}</Button>
                     </ButtonsContainer>
                 </LeftSide>
-                <RightSide>
-                    <TowerGeometryDiagram />
-                </RightSide>
+                <RightSide>{/* <TowerGeometryDiagram /> */}</RightSide>
             </StyledForm>
         </Form>
     );

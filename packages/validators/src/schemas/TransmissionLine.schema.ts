@@ -1,14 +1,9 @@
 import * as z from "zod";
 
-import {
-    conductorInputSchema,
-    conductorSchema,
-    defaultConductor,
-} from "./Conductor.schema";
+import { conductorInputSchema, defaultConductor } from "./Conductor.schema";
 import {
     transmissionTowerInputSchema,
     defaultTransmissionTower,
-    transmissionTowerSchema,
 } from "./TransmissionTower.schema";
 
 export const transmissionLineInputSchema = z.object({

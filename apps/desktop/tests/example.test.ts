@@ -7,9 +7,8 @@ test("get isPackaged", async () => {
         // the result of the require('electron') in the main app script.
         return app.isPackaged;
     });
-    console.log(isPackaged); // false (because we're in development mode)
 
     expect(isPackaged).toBeFalsy();
-    // close app
+    // close app FIXME: should be awaited but currently bugging.
     electronApp.close();
 });

@@ -21,7 +21,7 @@ import {
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 import CurrentGraph from "@/features/results/components/CurrentGraph/CurrentGraph";
-import CircuitDiagram from "@/features/results/components/CircuitDiagram";
+// import CircuitDiagram from "@/features/results/components/CircuitDiagram";
 
 interface Props {}
 

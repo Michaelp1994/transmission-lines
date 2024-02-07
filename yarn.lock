@@ -2862,11 +2862,13 @@ __metadata:
   dependencies:
     "@swc/core": "npm:^1.4.0"
     better-sqlite3: "npm:^9.4.0"
+    eslint: "npm:^8.56.0"
     jest: "npm:^29.7.0"
     reflect-metadata: "npm:^0.2.1"
     ts-jest: "npm:^29.1.2"
     tsc-alias: "npm:^1.8.8"
     typeorm: "npm:^0.3.20"
+    typescript: "npm:^5.3.3"
     unplugin-swc: "npm:^1.4.4"
     vite: "npm:^5.0.12"
     vite-tsconfig-paths: "npm:^4.3.1"
@@ -2903,8 +2905,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@repo/jest-presets@workspace:configs/jest-presets"
   dependencies:
+    jest: "npm:^29.7.0"
     jest-environment-jsdom: "npm:^29.7.0"
     ts-jest: "npm:^29.1.2"
+    typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
 
@@ -2932,9 +2936,11 @@ __metadata:
   dependencies:
     "@repo/eslint-config": "workspace:*"
     "@types/activex-opendssengine": "npm:^4.0.0"
+    eslint: "npm:^8.56.0"
     jest: "npm:^29.7.0"
     ts-jest: "npm:^29.1.2"
     tsc-alias: "npm:^1.8.8"
+    typescript: "npm:^5.3.3"
     vite-tsconfig-paths: "npm:^4.3.1"
     vitest: "npm:^1.2.2"
     winax: "npm:^3.4.2"
@@ -3030,6 +3036,7 @@ __metadata:
     jest: "npm:^29.7.0"
     ts-jest: "npm:^29.1.2"
     tsc-alias: "npm:^1.8.8"
+    typescript: "npm:^5.3.3"
     zod: "npm:^3.22.4"
   languageName: unknown
   linkType: soft
@@ -8678,6 +8685,7 @@ __metadata:
     "@repo/validators": "workspace:*"
     "@tanstack/react-query": "npm:^4.36.1"
     "@tanstack/react-table": "npm:^8.11.8"
+    "@testing-library/react": "npm:^14.2.1"
     "@trpc/client": "npm:^10.45.1"
     "@trpc/next": "npm:^10.45.1"
     "@trpc/react-query": "npm:^10.45.1"
@@ -8705,6 +8713,7 @@ __metadata:
     typescript: "npm:^5.3.3"
     vite: "npm:^5.0.12"
     vite-tsconfig-paths: "npm:^4.3.1"
+    vitest: "npm:^1.2.2"
     zod: "npm:^3.22.4"
   languageName: unknown
   linkType: soft
