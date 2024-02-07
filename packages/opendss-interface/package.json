@@ -1,0 +1,25 @@
+{
+    "name": "@repo/opendss-interface",
+    "exports": {
+        ".": "./dist/index.js",
+        "./classes/*": "./dist/classes/*.js",
+        "./elements/*": "./dist/classes/elements/*.js",
+        "./elements": "./dist/classes/elements/index.js",
+        "./elements/**/*": "./dist/classes/elements/**/*.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "lint": "eslint src/",
+        "typecheck": "tsc --noEmit",
+        "watch": "tsc --watch",
+        "test": "jest"
+    },
+    "dependencies": {
+        "winax": "^3.4.1"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "@types/activex-opendssengine": "^4.0.0"
+    },
+    "packageManager": "yarn@4.1.0"
+}

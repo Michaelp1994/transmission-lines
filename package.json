@@ -1,0 +1,34 @@
+{
+    "name": "example-app",
+    "version": "0.0.1",
+    "private": true,
+    "author": "Michael Poulgrain",
+    "workspaces": {
+        "packages": [
+            "packages/*",
+            "apps/*",
+            "configs/*"
+        ]
+    },
+    "scripts": {
+        "build": "turbo run build",
+        "clean": "turbo run clean",
+        "postclean": "rm -rf .turbo node_modules dist .yarn",
+        "dev": "turbo run dev",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+        "lint": "turbo run lint",
+        "package": "turbo run package",
+        "test": "turbo run test",
+        "typecheck": "turbo run typecheck",
+        "watch": "turbo run watch"
+    },
+    "devDependencies": {
+        "electron": "^28.2.1",
+        "prettier": "^3.2.5",
+        "turbo": "latest"
+    },
+    "packageManager": "yarn@4.1.0",
+    "engines": {
+        "node": ">=18"
+    }
+}

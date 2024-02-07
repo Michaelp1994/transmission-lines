@@ -1,0 +1,31 @@
+{
+    "name": "@repo/db",
+    "type": "module",
+    "exports": {
+        ".": "./dist/dataSource.js",
+        "./models/*": "./dist/models/*.js"
+    },
+    "types": "./dist/dataSource.d.ts",
+    "scripts": {
+        "build": "rm -rf dist && tsc && tsc-alias",
+        "clean": "rm -rf .turbo node_modules dist",
+        "lint": "eslint src/",
+        "test": "jest",
+        "typecheck": "tsc --noEmit",
+        "watch": "tsc --watch"
+    },
+    "dependencies": {
+        "typeorm": "^0.3.20"
+    },
+    "devDependencies": {
+        "better-sqlite3": "^9.3.0",
+        "tsc-alias": "^1.8.8"
+    },
+    "peerDependencies": {
+        "better-sqlite3": "^9.3.0"
+    },
+    "packageManager": "yarn@4.1.0",
+    "installConfig": {
+        "hoistingLimits": "workspaces"
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "extends": "@repo/typescript-config/react-library.json",
+    "compilerOptions": {
+        "lib": ["dom", "ES2015"],
+        "types": ["jest", "node", "@testing-library/jest-dom"],
+        "preserveSymlinks": true,
+        "baseUrl": "./",
+        "outDir": "dist",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
+    "include": ["src"],
+    "exclude": ["dist", "build", "node_modules"]
+}

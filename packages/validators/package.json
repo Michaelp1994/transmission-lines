@@ -1,0 +1,29 @@
+{
+    "name": "@repo/validators",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "license": "ISC",
+    "author": "Michael Poulgrain",
+    "type": "module",
+    "exports": {
+        ".": "./dist/index.js",
+        "./schemas/*": "./dist/schemas/*.js"
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc && tsc-alias",
+        "clean": "rm -rf .turbo node_modules dist",
+        "lint": "eslint src",
+        "test": "jest",
+        "typecheck": "tsc --noEmit",
+        "watch": "tsc --watch"
+    },
+    "dependencies": {
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "eslint": "^8.56.0",
+        "tsc-alias": "^1.8.8"
+    }
+}

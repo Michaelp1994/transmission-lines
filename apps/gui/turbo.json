@@ -1,0 +1,9 @@
+{
+  "extends": ["//"],
+  "pipeline": {
+    "build": {
+      "outputs": ["dist/**"],
+      "inputs": ["src/**", "vite.config.ts"]
+    }
+  }
+}

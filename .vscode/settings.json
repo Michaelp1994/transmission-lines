@@ -1,0 +1,15 @@
+{
+    "i18n-ally.localesPaths": ["apps/gui/src/locales/**"],
+    "i18n-ally.keystyle": "nested",
+    "conventionalCommits.scopes": ["gui", "monorepo", "ui"],
+    "i18n-ally.sourceLanguage": "ns",
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:transmission-lines-monorepo}/apps/desktop/database.sqlite",
+            "name": "Database.sqlite3"
+        }
+    ]
+}
