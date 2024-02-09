@@ -1,12 +1,14 @@
 {
     "extends": "@repo/typescript-config/node.json",
     "compilerOptions": {
+        "baseUrl": "./",
         "paths": {
             "@classes/*": ["./src/classes/*"],
             "@elements/*": ["./src/classes/elements/*"],
             "@enums/*": ["./src/enums/*"],
             "@helpers/*": ["./src/helpers/*"]
-        }
+        },
+        "outDir": "dist"
     },
     "include": ["src", "tests"]
 }

@@ -8,7 +8,6 @@
         "lib": ["dom", "dom.iterable", "esnext"],
         "module": "ESNext",
         "noEmit": true,
-        "resolveJsonModule": true,
         "moduleResolution": "Bundler",
         "target": "ESNext",
         "types": ["vite/client"]

@@ -1,13 +1,12 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        "baseUrl": "./",
+        "incremental": true,
         "declaration": true,
         "declarationMap": true,
         "lib": ["ES2022"],
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        "outDir": "./dist",
         "target": "ESNext"
     },
     "extends": "./base.json",

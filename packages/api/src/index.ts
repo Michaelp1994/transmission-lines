@@ -3,7 +3,7 @@ import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import type { DBContext } from "@repo/db";
 
 import { appRouter } from "./routers/index";
-import { Electron, createContext } from "./context";
+import { Electron } from "./context";
 
 const createServer = (dbcontexts: DBContext, electron: Electron) => {
     const server = createHTTPServer({

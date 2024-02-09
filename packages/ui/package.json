@@ -14,7 +14,7 @@
         "dist/**"
     ],
     "scripts": {
-        "build": "rm -rf dist && tsc && tsc-alias && postcss src/global.css -o dist/global.css",
+        "build": "tsc && tsc-alias && postcss src/global.css -o dist/global.css",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint src/",
         "test": "jest ",

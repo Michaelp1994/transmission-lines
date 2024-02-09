@@ -3,9 +3,11 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
+        "baseUrl": "./",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
+        "outDir": "dist"
     },
     "extends": "@repo/typescript-config/node.json",
     "include": ["src"]

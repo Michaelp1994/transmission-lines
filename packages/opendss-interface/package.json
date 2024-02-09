@@ -9,7 +9,7 @@
         "./elements/**/*": "./dist/classes/elements/**/*.js"
     },
     "scripts": {
-        "build": "rm -rf dist && tsc && tsc-alias",
+        "build": "tsc && tsc-alias",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint src/",
         "test": "jest",

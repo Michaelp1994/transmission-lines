@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
+        "baseUrl": "./",
+        "outDir": "dist",
         "paths": {
             "@/*": ["./src/*"]
         }
     },
-    "include": ["src"],
-    "extends": "@repo/typescript-config/node.json"
+    "extends": "@repo/typescript-config/node.json",
+    "include": ["src"]
 }
