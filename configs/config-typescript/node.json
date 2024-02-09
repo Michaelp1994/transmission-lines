@@ -4,10 +4,10 @@
         "incremental": true,
         "declaration": true,
         "declarationMap": true,
-        "lib": ["ES2022"],
+        "lib": ["ES2023"],
         "module": "ESNext",
         "moduleResolution": "Bundler",
-        "target": "ESNext"
+        "target": "ES2022"
     },
     "extends": "./base.json",
     "tsc-alias": {

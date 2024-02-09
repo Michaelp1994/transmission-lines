@@ -4,7 +4,7 @@ import { Button, Input } from "@repo/ui";
 interface Props {
     table: any;
 }
-const ConductorTypeToolbar: React.FC<Props> = ({ table }) => {
+const ConductorTypeToolbar: React.FC<Props> = () => {
     return (
         <ToolbarContainer>
             <LeftSide>

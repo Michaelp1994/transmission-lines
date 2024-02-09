@@ -3,7 +3,7 @@ import FaultInterface from "./FaultInterface";
 
 /**   Circuit Element, PD Element  */
 export default class Fault extends CircuitElement implements FaultInterface {
-    _type = "Fault";
+    override _type = "Fault";
 
     parameters: Array<keyof this> = [
         "bus1",

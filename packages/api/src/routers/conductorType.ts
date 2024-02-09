@@ -13,7 +13,11 @@ export default router({
         .input(getAllConductorsSchema)
         .query(async ({ ctx, input }) => {
             const repository = ctx.mainDb.getRepository(ConductorType);
-            const allConductorTypes = await repository.find({skip: input?.pageIndex, take: input?.pageSize });
+            const findOptions = input && {
+                skip: input.pageIndex,
+                take: input.pageSize,
+            };
+            const allConductorTypes = await repository.find(findOptions);
             return allConductorTypes;
         }),
     getById: publicProcedure

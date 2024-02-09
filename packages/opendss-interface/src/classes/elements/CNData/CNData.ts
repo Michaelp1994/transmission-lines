@@ -7,7 +7,7 @@ export default class CNData
     extends ConductorDataElement
     implements CNDataInterface
 {
-    _type = "CNData";
+    override _type = "CNData";
 
     parameters: Array<keyof this> = [
         "k",

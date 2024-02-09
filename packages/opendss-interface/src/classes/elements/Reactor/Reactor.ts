@@ -7,7 +7,7 @@ export default class Reactor
     extends CircuitElement
     implements ReactorInterface
 {
-    _type = "Reactor";
+    override _type = "Reactor";
 
     parameters: Array<keyof this> = [
         "bus1",

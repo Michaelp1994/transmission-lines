@@ -9,7 +9,7 @@ import os from "node:os";
 
 export default async function init() {
     // Install DevTools extensions
-    if (process.env.NODE_ENV === "development") {
+    if (process.env["NODE_ENV"] === "development") {
         try {
             const reactDevToolsPath = path.join(
                 os.homedir(),

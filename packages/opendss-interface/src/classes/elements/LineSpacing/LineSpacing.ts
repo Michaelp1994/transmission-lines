@@ -7,7 +7,7 @@ export default class LineSpacing
     extends GeneralElement
     implements LineSpacingInterface
 {
-    readonly _type = "LineSpacing";
+    override readonly _type = "LineSpacing";
 
     readonly parameters: Array<keyof this> = [
         "nConds",

@@ -1,4 +1,4 @@
-import trpc, { RouterOutput } from "@/utils/trpc";
+import trpc, { RouterOutputs } from "@/utils/trpc";
 import { styled } from "@linaria/react";
 import React from "react";
 import { Stage, Layer, Line, Rect, Text } from "react-konva";
@@ -6,7 +6,7 @@ import { useTypedParams } from "react-router-typesafe-routes/dom";
 import ROUTES from "@/router/routes";
 
 interface Props {
-    data: RouterOutput["towerFault"];
+    data: RouterOutputs["solution"]["towerFault"];
 }
 
 const CircuitDiagram: React.FC<Props> = () => {

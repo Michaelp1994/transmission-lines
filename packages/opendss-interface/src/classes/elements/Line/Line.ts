@@ -4,7 +4,7 @@ import LineInterface from "./LineInterface";
 
 /**   Circuit Element, PD Element  */
 export default class Line extends CircuitElement implements LineInterface {
-    _type = "Line";
+    override _type = "Line";
 
     parameters: Array<keyof this> = [
         "bus1",

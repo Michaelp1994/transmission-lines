@@ -1,10 +1,5 @@
 import { styled } from "@linaria/react";
-import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
+import { flexRender } from "@tanstack/react-table";
 import {
     Table,
     TableBody,

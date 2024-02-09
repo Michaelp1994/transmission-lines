@@ -3,19 +3,18 @@ import { Info } from "lucide-react";
 import { styled } from "@linaria/react";
 import { Button } from "@repo/ui";
 import { useTranslation } from "react-i18next";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
-    ColumnDef,
-    flexRender,
     getCoreRowModel,
     useReactTable,
     createColumnHelper,
     PaginationState,
 } from "@tanstack/react-table";
 
-import DataTable from "./DataTable";
 import ROUTES from "@/router/routes";
 import trpc, { RouterOutputs } from "@/utils/trpc";
+import DataTable from "./DataTable";
+
 import ConductorTypeTableToolbar from "./ConductorTypeTableToolbar";
 import ConductorTypeTablePagination from "./ConductorTypeTablePagination";
 

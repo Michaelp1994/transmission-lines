@@ -8,7 +8,7 @@ export default class TSData
     extends ConductorDataElement
     implements TSDataInterface
 {
-    _type = "TSData";
+    override _type = "TSData";
 
     parameters: Array<keyof this> = [
         "DiaShield",

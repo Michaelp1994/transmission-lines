@@ -35,9 +35,9 @@ export default class GeneralStudy {
         if (index === -1) throw Error("cannot find component in circuit");
         const removed = this.components.splice(index, 1);
         // this.circuitSolved = false;
-        if (removed[0].name !== component.name)
+        if (removed[0]?.name !== component.name)
             throw Error(
-                `Removed ${removed[0].name} instead of ${component.name}`
+                `Removed ${removed[0]?.name} instead of ${component.name}`
             );
     }
 

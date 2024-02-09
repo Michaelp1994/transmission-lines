@@ -28,6 +28,16 @@ module.exports = {
         },
     },
     rules: {
+        "sort-imports": [
+            "error",
+            {
+                ignoreCase: false,
+                ignoreDeclarationSort: true, // don"t want to sort import lines, use eslint-plugin-import instead
+                ignoreMemberSort: false,
+                memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+                allowSeparatedGroups: true,
+            },
+        ],
         "i18next/no-literal-string": 0,
         "arrow-body-style": 0,
         "react/prop-types": 0,

@@ -25,7 +25,7 @@ function calcImageDistance(
 }
 
 export default async function buildTransmissionLineMatrix(id: string) {
-    const transmissionLine = await TransmissionLine.findOneBy({id})
+    const transmissionLine = await TransmissionLine.findOneBy({ id });
     console.log("Calculating Transmission line parameters...");
     if (!transmissionLine) throw Error("Can't find Transmission Line");
     const u0 = 1.2566370621219 * 10 ** -6; // N/A^2
