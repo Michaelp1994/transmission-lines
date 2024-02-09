@@ -21,6 +21,7 @@ module.exports = {
         },
     },
     rules: {
+        "no-console": "off",
         ...importRules,
     },
     ignorePatterns: ["node_modules/", "dist/"],

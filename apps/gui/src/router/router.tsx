@@ -1,33 +1,22 @@
 import { RouteObject, createHashRouter } from "react-router-dom";
 
-
 import DefaultLayout from "@/layouts/DefaultLayout";
-
-// Conductor Types
 import AllConductorTypesPage from "@/pages/AllConductorTypesPage";
-
-// Transmission Lines
-
-// Tower Geometries
 import AllTowerGeometriesPage from "@/pages/AllTowerGeometriesPage";
-import CreateTowerGeometryPage from "@/pages/CreateTowerGeometryPage";
-import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
-
-// Sources
-import CreateSourcePage from "@/pages/CreateSourcePage";
-import UpdateSourcePage from "@/pages/UpdateSourcePage";
-
-// Results
-import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
 import BuildTransmissionLinePage from "@/pages/BuildTransmissionLinePage";
 import CreateConductorTypePage from "@/pages/CreateConductorTypePage";
+import CreateSourcePage from "@/pages/CreateSourcePage";
+import CreateTowerGeometryPage from "@/pages/CreateTowerGeometryPage";
 import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
 import ErrorPage from "@/pages/ErrorPage";
 import GeneratePage from "@/pages/GenerateResultsPage";
 import Home from "@/pages/HomePage";
 import PageNotFound from "@/pages/PageNotFound";
 import ProjectPage from "@/pages/ProjectPage";
+import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
 import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
+import UpdateSourcePage from "@/pages/UpdateSourcePage";
+import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
 import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
 import WelcomePage from "@/pages/WelcomePage";
 

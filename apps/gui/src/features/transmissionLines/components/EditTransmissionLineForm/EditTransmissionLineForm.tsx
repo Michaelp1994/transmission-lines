@@ -25,7 +25,6 @@ import { SourceSelect } from "@/features/sources";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
-
 import ConductorConfigurationTable from "../ConductorConfigurationTable";
 import TowerConfigurationTable from "../TowerConfigurationTable";
 
@@ -36,7 +35,7 @@ interface Props {
 const EditTransmissionLineForm: React.FC<Props> = ({ id }) => {
     const navigate = useNavigate();
     const { t } = useTranslation("transmissionLine");
-    const { data, isLoading, error } = trpc.transmissionLine.getById.useQuery({
+    const { data } = trpc.transmissionLine.getById.useQuery({
         id,
     });
     const updateTransmissionLineMutation =

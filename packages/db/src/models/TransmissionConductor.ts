@@ -7,6 +7,7 @@ import {
     type Relation,
 } from "typeorm";
 
+// eslint-disable-next-line import/no-cycle
 import TransmissionLine from "./TransmissionLine.model";
 
 @Entity()

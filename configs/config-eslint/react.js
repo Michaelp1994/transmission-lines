@@ -29,6 +29,7 @@ module.exports = {
     },
     rules: {
         ...importRules,
+        "no-console": "off",
         "i18next/no-literal-string": 0,
         "react/prop-types": 0,
         "react/jsx-props-no-spreading": 0,

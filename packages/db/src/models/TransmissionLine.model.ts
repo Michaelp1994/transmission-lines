@@ -7,7 +7,9 @@ import {
     type Relation,
 } from "typeorm";
 
+// eslint-disable-next-line import/no-cycle
 import TransmissionConductor from "./TransmissionConductor";
+// eslint-disable-next-line import/no-cycle
 import TransmissionTower from "./TransmissionTower.model";
 
 @Entity()

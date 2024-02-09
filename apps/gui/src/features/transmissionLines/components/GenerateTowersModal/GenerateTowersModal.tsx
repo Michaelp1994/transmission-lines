@@ -33,7 +33,6 @@ import { useTranslation } from "react-i18next";
 
 import { TowerGeometrySelect } from "@/features/towerGeometries";
 
-
 interface Props {
     onSubmit(values: GenerateTowersInput): void;
 }

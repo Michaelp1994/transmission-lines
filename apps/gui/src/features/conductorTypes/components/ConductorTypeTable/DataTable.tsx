@@ -10,8 +10,6 @@ import {
 import { flexRender } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 
-import { TableContext } from "./types";
-
 interface Props {
     table: TableContext;
 }
