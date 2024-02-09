@@ -1,3 +1,4 @@
+import TransmissionLine from "@repo/db/models/TransmissionLine.model";
 import {
     createTransmissionLineSchema,
     deleteTransmissionLineSchema,
@@ -5,8 +6,8 @@ import {
     getTransmissionLineByIdSchema,
     updateTransmissionLineSchema,
 } from "@repo/validators/schemas/TransmissionLine.schema";
-import TransmissionLine from "@repo/db/models/TransmissionLine.model";
-import { router, publicProcedure } from "../trpc";
+
+import { publicProcedure, router } from "../trpc";
 
 export default router({
     getAll: publicProcedure

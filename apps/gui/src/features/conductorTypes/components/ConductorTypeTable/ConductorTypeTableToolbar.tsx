@@ -4,8 +4,7 @@ import { Button, Input } from "@repo/ui";
 interface Props {
     table: any;
 }
-const ConductorTypeToolbar: React.FC<Props> = () => {
-    return (
+const ConductorTypeToolbar: React.FC<Props> = () => (
         <ToolbarContainer>
             <LeftSide>
                 <StyledInput />
@@ -14,7 +13,6 @@ const ConductorTypeToolbar: React.FC<Props> = () => {
             <Input />
         </ToolbarContainer>
     );
-};
 
 const ToolbarContainer = styled.div`
     display: flex;

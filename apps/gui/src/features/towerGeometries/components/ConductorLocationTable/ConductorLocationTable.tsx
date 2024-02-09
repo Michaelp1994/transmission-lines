@@ -1,7 +1,3 @@
-import { Plus, X, FlipHorizontal } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { useFieldArray, useFormContext } from "react-hook-form";
-
 import {
     Button,
     Card,
@@ -15,20 +11,24 @@ import {
     FormItem,
     FormMessage,
     Input,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-    Table,
-    TableHead,
-    TableBody,
-    TableHeader,
-    TableRow,
-    TableCell,
 } from "@repo/ui";
-
-import type { CreateTowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
 import { defaultConductorLocation } from "@repo/validators/schemas/ConductorLocation.schema";
+import type { CreateTowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
+import { FlipHorizontal, Plus, X } from "lucide-react";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+
 
 interface Props {}
 

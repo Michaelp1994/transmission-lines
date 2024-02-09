@@ -1,11 +1,12 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
     BaseEntity,
+    Column,
+    Entity,
     ManyToOne,
+    PrimaryGeneratedColumn,
     type Relation,
 } from "typeorm";
+
 import TransmissionLine from "./TransmissionLine.model";
 
 @Entity()

@@ -1,6 +1,7 @@
 import * as z from "zod";
-import { createTransmissionLineSchema } from "./TransmissionLine.schema";
+
 import { createSourceSchema } from "./Source.schema";
+import { createTransmissionLineSchema } from "./TransmissionLine.schema";
 
 export const createProjectSchema = z.object({
     sources: createSourceSchema.array(),

@@ -1,10 +1,5 @@
-import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { styled } from "@linaria/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
-import { format } from "date-fns";
+import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -17,12 +12,19 @@ import {
     Input,
 } from "@repo/ui";
 import {
-    createTowerGeometrySchema,
     CreateTowerGeometryInput,
+    createTowerGeometrySchema,
     defaultTowerGeometry,
 } from "@repo/validators/schemas/TowerGeometry.schema";
-import trpc from "@/utils/trpc";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+
 import ROUTES from "@/router/routes";
+import trpc from "@/utils/trpc";
+
 import ConductorLocationTable from "../ConductorLocationTable";
 // import TowerGeometryDiagram from "../TowerGeometryDiagram";
 

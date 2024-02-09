@@ -1,6 +1,7 @@
 import { Menu } from "electron";
-import migrationMenu from "./migrationMenu";
+
 import developerMenu from "./developerMenu";
+import migrationMenu from "./migrationMenu";
 
 export default function createMenu() {
     const template: Electron.MenuItemConstructorOptions[] = [

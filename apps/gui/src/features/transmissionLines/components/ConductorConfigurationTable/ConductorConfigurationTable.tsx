@@ -1,39 +1,39 @@
-import { useFieldArray, useFormContext } from "react-hook-form";
-
-import { Plus, X } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import {
     Button,
     Card,
-    CardHeader,
-    CardHeaderText,
-    CardHeaderActions,
-    CardTitle,
     CardContent,
     CardDescription,
-    FormItem,
+    CardHeader,
+    CardHeaderActions,
+    CardHeaderText,
+    CardTitle,
+    Checkbox,
     FormControl,
+    FormField,
+    FormItem,
     FormMessage,
     Input,
-    FormField,
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
     Table,
     TableBody,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
-    Checkbox,
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
 } from "@repo/ui";
+import { defaultConductor } from "@repo/validators/schemas/Conductor.schema";
+import type { TransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
+import { Plus, X } from "lucide-react";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { ConductorTypeSelect } from "@/features/conductorTypes";
-import { defaultConductor } from "@repo/validators/schemas/Conductor.schema";
 import GenerateConductorsModal from "@/features/transmissionLines/components/GenerateConductorsModal";
 import generateConductors from "@/helpers/generateConductors";
-import type { TransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
+
 
 interface Props {}
 

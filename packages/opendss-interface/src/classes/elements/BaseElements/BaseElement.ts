@@ -1,4 +1,5 @@
 import splitStringsIntoRows from "@helpers/splitArray";
+
 import BaseElementInterface from "./BaseElementInterface";
 
 export default abstract class BaseElement {

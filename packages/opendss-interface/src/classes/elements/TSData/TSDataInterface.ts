@@ -1,5 +1,5 @@
-import { GMRunitsEnum, RadunitsEnum, UnitsEnum } from "@enums/enums";
 import { BaseElementInterface } from "@elements/BaseElements";
+import { GMRunitsEnum, RadunitsEnum, UnitsEnum } from "@enums/enums";
 
 /**   Conductor Data, Cable Data  */
 export default interface TSDataInterface extends BaseElementInterface {

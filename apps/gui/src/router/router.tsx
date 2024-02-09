@@ -1,22 +1,12 @@
-import { createHashRouter, RouteObject } from "react-router-dom";
-import ROUTES from "./routes";
+import { RouteObject, createHashRouter } from "react-router-dom";
+
 
 import DefaultLayout from "@/layouts/DefaultLayout";
 
-import Home from "@/pages/HomePage";
-import PageNotFound from "@/pages/PageNotFound";
-import WelcomePage from "@/pages/WelcomePage";
-import ErrorPage from "@/pages/ErrorPage";
-import ProjectPage from "@/pages/ProjectPage";
-
 // Conductor Types
-import CreateConductorTypePage from "@/pages/CreateConductorTypePage";
-import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
 import AllConductorTypesPage from "@/pages/AllConductorTypesPage";
 
 // Transmission Lines
-import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
-import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
 
 // Tower Geometries
 import AllTowerGeometriesPage from "@/pages/AllTowerGeometriesPage";
@@ -30,7 +20,18 @@ import UpdateSourcePage from "@/pages/UpdateSourcePage";
 // Results
 import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
 import BuildTransmissionLinePage from "@/pages/BuildTransmissionLinePage";
+import CreateConductorTypePage from "@/pages/CreateConductorTypePage";
+import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
+import ErrorPage from "@/pages/ErrorPage";
 import GeneratePage from "@/pages/GenerateResultsPage";
+import Home from "@/pages/HomePage";
+import PageNotFound from "@/pages/PageNotFound";
+import ProjectPage from "@/pages/ProjectPage";
+import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
+import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
+import WelcomePage from "@/pages/WelcomePage";
+
+import ROUTES from "./routes";
 
 const routeObjects: RouteObject[] = [
     {

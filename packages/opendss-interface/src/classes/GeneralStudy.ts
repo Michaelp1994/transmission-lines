@@ -1,9 +1,10 @@
-import type OpenDSSOptionsInterface from "@classes/OpenDSSOptionsInterface";
 import { open } from "node:fs/promises";
 import { EOL } from "node:os";
 
+import type OpenDSSOptionsInterface from "@classes/OpenDSSOptionsInterface";
 import BaseElement from "@elements/BaseElements/BaseElement";
 import CircuitElement from "@elements/BaseElements/CircuitElement";
+
 import OpenDssDriver from "./OpenDssDriver";
 
 export default class GeneralStudy {

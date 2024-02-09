@@ -6,7 +6,7 @@
 // import solveTransmissionTowerFault from "@/helpers/solveTransmissionTower";
 // import worseCaseScenario from "@/helpers/worstCaseScenario";
 // import saveScript from "@/helpers/saveScript";
-import { router, publicProcedure } from "../trpc";
+import { publicProcedure, router } from "../trpc";
 
 export default router({
     test: publicProcedure.query(() => {

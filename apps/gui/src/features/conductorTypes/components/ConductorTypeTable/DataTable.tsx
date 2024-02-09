@@ -1,5 +1,4 @@
 import { styled } from "@linaria/react";
-import { flexRender } from "@tanstack/react-table";
 import {
     Table,
     TableBody,
@@ -8,7 +7,9 @@ import {
     TableHeader,
     TableRow,
 } from "@repo/ui";
+import { flexRender } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
+
 import { TableContext } from "./types";
 
 interface Props {

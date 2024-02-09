@@ -1,11 +1,12 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
     BaseEntity,
+    Column,
+    Entity,
     OneToMany,
+    PrimaryGeneratedColumn,
 } from "typeorm";
 import type { Relation } from "typeorm";
+
 import ConductorLocation from "./ConductorLocation.model";
 
 @Entity()

@@ -1,5 +1,6 @@
+import { expect, test } from "@jest/globals";
+
 import splitStringsIntoRows from "../helpers/splitArray";
-import { test, expect } from "@jest/globals";
 
 test("should split an array of strings into rows with a maximum length of 150 characters", () => {
     // Example usage:

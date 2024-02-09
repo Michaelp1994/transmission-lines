@@ -1,11 +1,13 @@
 import "reflect-metadata";
-import { app, BrowserWindow, dialog } from "electron";
+import { BrowserWindow, app, dialog } from "electron";
+
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
+
 import { dataSources } from "./config/db";
 // import fs from "fs/promises";
-import createWindow from "./config/window";
 import setupDevTools from "./config/devTools";
+import createWindow from "./config/window";
 
 app.whenReady().then(async () => {
     await setupDevTools();

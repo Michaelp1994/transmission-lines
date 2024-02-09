@@ -1,5 +1,5 @@
-import { UnitsEnum } from "@enums/enums";
 import { BaseElementInterface } from "@elements/BaseElements";
+import { UnitsEnum } from "@enums/enums";
 
 /**   General  */
 export default interface LineCodeInterface extends BaseElementInterface {

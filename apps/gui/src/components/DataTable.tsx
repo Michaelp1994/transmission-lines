@@ -1,11 +1,5 @@
 import { styled } from "@linaria/react";
 import {
-    ColumnDef,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from "@tanstack/react-table";
-import {
     Table,
     TableBody,
     TableCell,
@@ -13,6 +7,12 @@ import {
     TableHeader,
     TableRow,
 } from "@repo/ui";
+import {
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
+} from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 
 interface Props<T> {

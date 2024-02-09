@@ -1,5 +1,5 @@
 const { resolve } = require("node:path");
-
+const importRules = require("./rules/imports");
 const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */
@@ -12,10 +12,10 @@ module.exports = {
         "plugin:i18next/recommended",
         "prettier",
     ],
+    plugins: ["i18next", "only-warn"],
     parserOptions: {
         project,
     },
-    plugins: ["i18next", "only-warn"],
     env: {
         browser: true,
         es2023: true,
@@ -28,18 +28,8 @@ module.exports = {
         },
     },
     rules: {
-        "sort-imports": [
-            "error",
-            {
-                ignoreCase: false,
-                ignoreDeclarationSort: true, // don"t want to sort import lines, use eslint-plugin-import instead
-                ignoreMemberSort: false,
-                memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-                allowSeparatedGroups: true,
-            },
-        ],
+        ...importRules,
         "i18next/no-literal-string": 0,
-        "arrow-body-style": 0,
         "react/prop-types": 0,
         "react/jsx-props-no-spreading": 0,
         "@typescript-eslint/no-use-before-define": 0,

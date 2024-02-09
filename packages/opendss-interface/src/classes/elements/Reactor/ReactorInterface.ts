@@ -1,5 +1,5 @@
-import { ConnEnum } from "@enums/enums";
 import { BaseElementInterface } from "@elements/BaseElements";
+import { ConnEnum } from "@enums/enums";
 
 /**   Circuit Element, PD Element  */
 export default interface ReactorInterface extends BaseElementInterface {

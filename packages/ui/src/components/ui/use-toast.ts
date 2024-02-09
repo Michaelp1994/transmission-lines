@@ -1,5 +1,6 @@
 // Inspired by react-hot-toast library
 import * as React from "react";
+
 import type { ToastActionElement, ToastProps } from "./toast";
 
 const TOAST_LIMIT = 1;
@@ -61,7 +62,7 @@ const addToRemoveQueue = (toastId: string) => {
         toastTimeouts.delete(toastId);
         dispatch({
             type: "REMOVE_TOAST",
-            toastId: toastId,
+            toastId,
         });
     }, TOAST_REMOVE_DELAY);
 
@@ -159,7 +160,7 @@ function toast({ ...props }: Toast) {
     });
 
     return {
-        id: id,
+        id,
         dismiss,
         update,
     };

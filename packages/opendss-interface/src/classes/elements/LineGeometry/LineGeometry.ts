@@ -1,5 +1,6 @@
-import { UnitsEnum } from "@enums/enums";
 import GeneralElement from "@elements/BaseElements/GeneralElement";
+import { UnitsEnum } from "@enums/enums";
+
 import LineGeometryInterface from "./LineGeometryInterface";
 
 /**   General  */

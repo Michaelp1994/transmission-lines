@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
 import { styled } from "@linaria/react";
-import { useTypedParams } from "react-router-typesafe-routes/dom";
-import { useTranslation } from "react-i18next";
 import {
     Card,
+    CardContent,
     CardHeader,
     CardHeaderText,
     CardTitle,
-    CardContent,
 } from "@repo/ui";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useTypedParams } from "react-router-typesafe-routes/dom";
 
 import { EditConductorTypeForm } from "@/features/conductorTypes";
 import ROUTES from "@/router/routes";

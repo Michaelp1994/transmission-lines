@@ -1,5 +1,5 @@
-import type { GMRunitsEnum, RadunitsEnum, UnitsEnum } from "@enums/enums";
 import type { BaseElementInterface } from "@elements/BaseElements";
+import type { GMRunitsEnum, RadunitsEnum, UnitsEnum } from "@enums/enums";
 
 /**   Conductor Data  */
 export default interface WireDataInterface extends BaseElementInterface {

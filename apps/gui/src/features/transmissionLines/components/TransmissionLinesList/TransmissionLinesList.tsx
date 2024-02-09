@@ -1,8 +1,4 @@
 import { styled } from "@linaria/react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Trash2, Info, Brackets } from "lucide-react";
-
 import {
     AlertDialog,
     AlertDialogAction,
@@ -16,6 +12,9 @@ import {
     Button,
     buttonVariants,
 } from "@repo/ui";
+import { Brackets, Info, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import {
     ItemActions,
@@ -25,7 +24,6 @@ import {
     ListItemText,
     ListItemTitle,
 } from "@/components/List";
-
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 

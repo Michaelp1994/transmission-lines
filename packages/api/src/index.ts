@@ -1,9 +1,9 @@
-import cors from "cors";
-import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import type { DBContext } from "@repo/db";
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import cors from "cors";
 
-import { appRouter } from "./routers/index";
 import { Electron } from "./context";
+import { appRouter } from "./routers/index";
 
 const createServer = (dbcontexts: DBContext, electron: Electron) => {
     const server = createHTTPServer({

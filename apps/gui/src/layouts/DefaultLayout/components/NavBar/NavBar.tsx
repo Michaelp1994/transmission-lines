@@ -1,14 +1,15 @@
 import { styled } from "@linaria/react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import {
-    Switch,
+    Label,
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuList,
+    Switch,
     navigationMenuTriggerStyle,
-    Label,
 } from "@repo/ui";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
 import ROUTES from "@/router/routes";
 
 interface Props {}

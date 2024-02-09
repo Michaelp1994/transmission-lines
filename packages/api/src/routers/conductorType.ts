@@ -1,12 +1,13 @@
+import ConductorType from "@repo/db/models/ConductorType.model";
 import {
+    createConductorTypeSchema,
+    deleteConductorTypeSchema,
     getAllConductorsSchema,
     getConductorTypeByIdSchema,
-    createConductorTypeSchema,
     updateConductorTypeSchema,
-    deleteConductorTypeSchema,
 } from "@repo/validators/schemas/ConductorType.schema";
-import ConductorType from "@repo/db/models/ConductorType.model";
-import { router, publicProcedure } from "../trpc";
+
+import { publicProcedure, router } from "../trpc";
 
 export default router({
     getAll: publicProcedure

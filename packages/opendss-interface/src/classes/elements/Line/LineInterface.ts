@@ -1,5 +1,5 @@
-import { EarthModelEnum, UnitsEnum } from "@enums/enums";
 import { BaseElementInterface } from "@elements/BaseElements";
+import { EarthModelEnum, UnitsEnum } from "@enums/enums";
 
 /**   Circuit Element, PD Element  */
 export default interface LineInterface extends BaseElementInterface {

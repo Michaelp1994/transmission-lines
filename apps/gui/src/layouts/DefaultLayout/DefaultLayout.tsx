@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
 
 import { styled } from "@linaria/react";
 import { Toaster } from "@repo/ui";
+import { Outlet } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
 

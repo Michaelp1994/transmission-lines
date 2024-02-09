@@ -1,26 +1,25 @@
 import { styled } from "@linaria/react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
-
 import {
-    Table,
-    TableHeader,
-    TableRow,
-    TableHead,
-    TableCell,
-    TableBody,
-    CardHeader,
+    Button,
     Card,
     CardContent,
+    CardHeader,
     CardHeaderText,
     CardTitle,
-    Button,
+    Table,
+    TableBody,
     TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@repo/ui";
+import { ChevronRight } from "lucide-react";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import ROUTES from "@/router/routes";
-import { ChevronRight } from "lucide-react";
 import trpc from "@/utils/trpc";
 
 interface Props {}
@@ -71,7 +70,7 @@ const GenerateResults: React.FC<Props> = () => {
                                             <TableCell>
                                                 {source.current.toFixed(2)}
                                             </TableCell>
-                                            <TableCell></TableCell>
+                                            <TableCell />
 
                                             <StyledTableCell>
                                                 <Button

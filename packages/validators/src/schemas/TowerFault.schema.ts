@@ -1,4 +1,5 @@
 import * as z from "zod";
+
 import { updateTransmissionTowerSchema } from "./TransmissionTower.schema";
 
 export const faultLocation = z.object({

@@ -1,9 +1,4 @@
 import { styled } from "@linaria/react";
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useTypedParams } from "react-router-typesafe-routes/dom";
-
 import {
     Card,
     CardContent,
@@ -18,6 +13,11 @@ import {
     TableHeader,
     TableRow,
 } from "@repo/ui";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useTypedParams } from "react-router-typesafe-routes/dom";
+
 
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
@@ -59,7 +59,7 @@ const BuildTransmissionLine: React.FC<Props> = () => {
                                 lineName: transmissionLine.name,
                             })}
                         </CardTitle>
-                        <CardDescription></CardDescription>
+                        <CardDescription />
                     </CardHeaderText>
                 </CardHeader>
                 <CardContent>

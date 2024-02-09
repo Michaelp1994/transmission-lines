@@ -1,5 +1,6 @@
-import { ScanTypeEnum, SequenceEnum } from "@enums/enums";
 import CircuitElement from "@elements/BaseElements/CircuitElement";
+import { ScanTypeEnum, SequenceEnum } from "@enums/enums";
+
 import IsourceInterface from "./IsourceInterface";
 
 /**   Circuit Element, PC Element  */

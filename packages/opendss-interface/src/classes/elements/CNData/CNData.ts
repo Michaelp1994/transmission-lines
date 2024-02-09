@@ -1,5 +1,6 @@
-import { GMRunitsEnum, RadunitsEnum, UnitsEnum } from "@enums/enums";
 import ConductorDataElement from "@elements/BaseElements/ConductorDataElement";
+import { GMRunitsEnum, RadunitsEnum, UnitsEnum } from "@enums/enums";
+
 import CNDataInterface from "./CNDataInterface";
 
 /**   Conductor Data, Cable Data  */

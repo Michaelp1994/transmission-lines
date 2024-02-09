@@ -1,6 +1,4 @@
 import { styled } from "@linaria/react";
-import { Link, useRouteError } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import {
     Card,
     CardContent,
@@ -8,6 +6,8 @@ import {
     CardHeaderText,
     CardTitle,
 } from "@repo/ui";
+import { useTranslation } from "react-i18next";
+import { Link, useRouteError } from "react-router-dom";
 
 import ROUTES from "@/router/routes";
 

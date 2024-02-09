@@ -1,5 +1,6 @@
-import { ConnEnum } from "@enums/enums";
 import CircuitElement from "@elements/BaseElements/CircuitElement";
+import { ConnEnum } from "@enums/enums";
+
 import ReactorInterface from "./ReactorInterface";
 
 /**   Circuit Element, PD Element  */

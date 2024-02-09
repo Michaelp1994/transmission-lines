@@ -1,38 +1,39 @@
-import { useFieldArray, useFormContext } from "react-hook-form";
-
 import {
     Button,
     Card,
-    CardHeader,
-    CardHeaderText,
-    CardHeaderActions,
-    CardTitle,
     CardContent,
     CardDescription,
+    CardHeader,
+    CardHeaderActions,
+    CardHeaderText,
+    CardTitle,
     FormControl,
     FormField,
     FormItem,
     FormMessage,
     Input,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-    TableHead,
-    TableBody,
-    TableCell,
-    TableHeader,
-    TableRow,
-    Table,
 } from "@repo/ui";
+import type { TransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
+import { defaultTransmissionTower } from "@repo/validators/schemas/TransmissionTower.schema";
 import { Plus, X } from "lucide-react";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import TowerGeometrySelect from "../../../towerGeometries/components/TowerGeometrySelect";
-import { defaultTransmissionTower } from "@repo/validators/schemas/TransmissionTower.schema";
-import GenerateTowersModal from "../GenerateTowersModal";
 import generateTowers from "@/helpers/generateTowers";
-import type { TransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
+
+import TowerGeometrySelect from "../../../towerGeometries/components/TowerGeometrySelect";
+import GenerateTowersModal from "../GenerateTowersModal";
+
 
 interface Props {}
 

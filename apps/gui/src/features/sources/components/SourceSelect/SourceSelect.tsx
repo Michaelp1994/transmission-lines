@@ -1,8 +1,4 @@
 import { styled } from "@linaria/react";
-import { useMemo, useState, forwardRef } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { useTranslation } from "react-i18next";
-
 import {
     Button,
     Command,
@@ -14,6 +10,9 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@repo/ui";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { forwardRef, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 

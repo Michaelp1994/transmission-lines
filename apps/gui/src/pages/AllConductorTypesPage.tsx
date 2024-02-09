@@ -10,11 +10,11 @@ import {
     CardTitle,
     Input,
 } from "@repo/ui";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
 import { ConductorTypeTable } from "@/features/conductorTypes";
+import ROUTES from "@/router/routes";
 
 interface Props {}
 

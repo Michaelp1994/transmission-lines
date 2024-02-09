@@ -13,6 +13,7 @@
         "dev": "pnpm run build && electron .",
         "postinstall": "electron-builder install-app-deps",
         "lint": "eslint src/",
+        "lint:fix": "eslint src/ --fix",
         "package": "electron-builder build -c builder.config.cjs",
         "rebuild": "electron-rebuild",
         "setup-dev": "wait-on http://localhost:5173/",
@@ -23,7 +24,6 @@
         "@electron-toolkit/utils": "^3.0.0",
         "@repo/api": "workspace:*",
         "@repo/db": "workspace:^",
-        "@repo/logger": "workspace:*",
         "better-sqlite3": "^9.4.0",
         "reflect-metadata": "^0.2.1",
         "winax": "3.4.2"

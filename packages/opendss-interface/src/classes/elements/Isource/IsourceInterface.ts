@@ -1,5 +1,5 @@
-import { ScanTypeEnum, SequenceEnum } from "@enums/enums";
 import { BaseElementInterface } from "@elements/BaseElements";
+import { ScanTypeEnum, SequenceEnum } from "@enums/enums";
 
 /**   Circuit Element, PC Element  */
 export default interface IsourceInterface extends BaseElementInterface {

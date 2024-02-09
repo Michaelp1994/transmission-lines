@@ -1,7 +1,7 @@
 import AddConductorTypeForm from "./components/AddConductorTypeForm";
-import EditConductorTypeForm from "./components/EditConductorTypeForm";
-import ConductorTypeTable from "./components/ConductorTypeTable";
 import ConductorTypeSelect from "./components/ConductorTypeSelect";
+import ConductorTypeTable from "./components/ConductorTypeTable";
+import EditConductorTypeForm from "./components/EditConductorTypeForm";
 
 export {
     AddConductorTypeForm,

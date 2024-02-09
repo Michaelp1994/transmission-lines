@@ -1,7 +1,7 @@
+import { styled } from "@linaria/react";
 import { TowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
 import { useWatch } from "react-hook-form";
-import { Stage, Layer, Circle, Line } from "react-konva";
-import { styled } from "@linaria/react";
+import { Circle, Layer, Line, Stage } from "react-konva";
 
 const SCALE = 5;
 

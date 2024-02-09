@@ -1,29 +1,30 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { format } from "date-fns";
 import {
+    Button,
     Form,
+    FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
-    FormControl,
-    Input,
-    FormDescription,
     FormMessage,
-    Button,
+    Input,
 } from "@repo/ui";
-
-import trpc from "@/utils/trpc";
-import ROUTES from "@/router/routes";
 import {
-    updateConductorTypeSchema,
     UpdateConductorTypeInput,
     defaultConductorType,
+    updateConductorTypeSchema,
 } from "@repo/validators/schemas/ConductorType.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+
+import ROUTES from "@/router/routes";
+import trpc from "@/utils/trpc";
+
 
 interface Props {
     id: number;

@@ -1,5 +1,6 @@
 /// <reference types="@types/activex-opendssengine" />
 import winax from "winax";
+
 import OpenDSSOptionsInterface from "./OpenDSSOptionsInterface";
 
 export default class OpenDssDriver {

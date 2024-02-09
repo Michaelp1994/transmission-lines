@@ -1,14 +1,15 @@
 import { DataSource } from "typeorm";
-import ConductorLocation from "./models/ConductorLocation.model";
-import ConductorType from "./models/ConductorType.model";
-import TowerGeometry from "./models/TowerGeometry.model";
-import TransmissionConductor from "./models/TransmissionConductor";
-import Source from "./models/Source.model";
-import TransmissionTower from "./models/TransmissionTower.model";
-import TransmissionLine from "./models/TransmissionLine.model";
 
 import InitialMigration1703610359462 from "./migrations/1703610359462-initialMigration";
 import SeedDatabase1703629418838 from "./migrations/1703629418838-seedDatabase";
+import ConductorLocation from "./models/ConductorLocation.model";
+import ConductorType from "./models/ConductorType.model";
+import Source from "./models/Source.model";
+import TowerGeometry from "./models/TowerGeometry.model";
+import TransmissionConductor from "./models/TransmissionConductor";
+import TransmissionLine from "./models/TransmissionLine.model";
+import TransmissionTower from "./models/TransmissionTower.model";
+
 
 async function databaseInit(path: string) {
     const mainDb = await new DataSource({

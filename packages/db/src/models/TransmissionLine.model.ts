@@ -1,11 +1,12 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
     BaseEntity,
+    Column,
+    Entity,
     OneToMany,
+    PrimaryGeneratedColumn,
     type Relation,
 } from "typeorm";
+
 import TransmissionConductor from "./TransmissionConductor";
 import TransmissionTower from "./TransmissionTower.model";
 

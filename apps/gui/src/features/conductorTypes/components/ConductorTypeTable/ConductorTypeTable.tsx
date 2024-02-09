@@ -1,22 +1,22 @@
-import { Link } from "react-router-dom";
-import { Info } from "lucide-react";
 import { styled } from "@linaria/react";
 import { Button } from "@repo/ui";
-import { useTranslation } from "react-i18next";
-import { useCallback, useMemo, useState } from "react";
 import {
+    PaginationState,
+    createColumnHelper,
     getCoreRowModel,
     useReactTable,
-    createColumnHelper,
-    PaginationState,
 } from "@tanstack/react-table";
+import { Info } from "lucide-react";
+import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import ROUTES from "@/router/routes";
 import trpc, { RouterOutputs } from "@/utils/trpc";
-import DataTable from "./DataTable";
 
-import ConductorTypeTableToolbar from "./ConductorTypeTableToolbar";
 import ConductorTypeTablePagination from "./ConductorTypeTablePagination";
+import ConductorTypeTableToolbar from "./ConductorTypeTableToolbar";
+import DataTable from "./DataTable";
 
 const columnHelper =
     createColumnHelper<RouterOutputs["conductorType"]["getAll"]>();

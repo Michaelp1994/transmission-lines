@@ -1,10 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { styled } from "@linaria/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { format } from "date-fns";
-
+import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -16,19 +11,26 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
+import {
+    CreateTransmissionLineInput,
+    createTransmissionLineSchema,
+    defaultTransmissionLine,
+} from "@repo/validators/schemas/TransmissionLine.schema";
+import { format } from "date-fns";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+
+import { SourceSelect } from "@/features/sources";
+import ROUTES from "@/router/routes";
+import trpc from "@/utils/trpc";
 
 import ConductorConfigurationTable from "../ConductorConfigurationTable";
 import TowerConfigurationTable from "../TowerConfigurationTable";
 
-import { SourceSelect } from "@/features/sources";
-import ROUTES from "@/router/routes";
-import {
-    createTransmissionLineSchema,
-    defaultTransmissionLine,
-    CreateTransmissionLineInput,
-} from "@repo/validators/schemas/TransmissionLine.schema";
-import trpc from "@/utils/trpc";
+
+
 
 interface Props {}
 

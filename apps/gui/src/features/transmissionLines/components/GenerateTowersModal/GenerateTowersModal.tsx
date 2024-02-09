@@ -1,8 +1,5 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
-import { useState } from "react";
-
 import {
     Button,
     Dialog,
@@ -25,14 +22,17 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@repo/ui";
-
-import { TowerGeometrySelect } from "@/features/towerGeometries";
 import {
     GenerateTowersInput,
     defaultGenerateTowers,
     generateTowersSchema,
 } from "@repo/validators/schemas/GenerateTowers.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+import { TowerGeometrySelect } from "@/features/towerGeometries";
+
 
 interface Props {
     onSubmit(values: GenerateTowersInput): void;

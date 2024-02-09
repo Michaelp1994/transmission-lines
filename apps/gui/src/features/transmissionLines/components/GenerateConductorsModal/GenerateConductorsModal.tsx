@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
-import { SubmitHandler, useForm } from "react-hook-form";
-
 import {
     Button,
     Dialog,
@@ -25,14 +22,17 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@repo/ui";
-
-import { ConductorTypeSelect } from "@/features/conductorTypes";
 import {
     GenerateConductorsInput,
     defaultGenerateConductors,
     generateConductorsSchema,
 } from "@repo/validators/schemas/GenerateConductors.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+import { ConductorTypeSelect } from "@/features/conductorTypes";
+
 
 interface Props {
     onSubmit(values: GenerateConductorsInput): void;

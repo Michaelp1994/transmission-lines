@@ -1,8 +1,6 @@
 import { styled } from "@linaria/react";
 import React from "react";
-import type { ContentType } from "recharts/types/component/Tooltip";
 import { useTranslation } from "react-i18next";
-
 import {
     CartesianGrid,
     Label,
@@ -13,6 +11,7 @@ import {
     XAxis,
     YAxis,
 } from "recharts";
+import type { ContentType } from "recharts/types/component/Tooltip";
 
 interface Props {
     data: any;

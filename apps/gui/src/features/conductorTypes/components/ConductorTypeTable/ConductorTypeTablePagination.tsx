@@ -1,14 +1,9 @@
-import React from "react";
 import { styled } from "@linaria/react";
 import {
     Button,
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
     PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
 } from "@repo/ui";
 import { Table } from "@tanstack/react-table";
 import {
@@ -17,13 +12,13 @@ import {
     ChevronsLeft,
     ChevronsRight,
 } from "lucide-react";
+import React from "react";
 
 interface Props {
     table: Table<{}>;
 }
 
-const ConductorTypeTablePagination: React.FC<Props> = ({ table }) => {
-    return (
+const ConductorTypeTablePagination: React.FC<Props> = ({ table }) => (
         <Wrapper>
             <Pagination>
                 <PaginationContent>
@@ -65,7 +60,6 @@ const ConductorTypeTablePagination: React.FC<Props> = ({ table }) => {
             </Pagination>
         </Wrapper>
     );
-};
 
 const Wrapper = styled.div``;
 export default ConductorTypeTablePagination;

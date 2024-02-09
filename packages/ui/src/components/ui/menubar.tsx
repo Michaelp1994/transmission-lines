@@ -1,6 +1,6 @@
-import * as React from "react";
 import * as MenubarPrimitive from "@radix-ui/react-menubar";
 import { Check, ChevronRight, Circle } from "lucide-react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -207,8 +207,7 @@ MenubarSeparator.displayName = MenubarPrimitive.Separator.displayName;
 const MenubarShortcut = ({
     className,
     ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
-    return (
+}: React.HTMLAttributes<HTMLSpanElement>) => (
         <span
             className={cn(
                 "ml-auto text-xs tracking-widest text-muted-foreground",
@@ -217,7 +216,6 @@ const MenubarShortcut = ({
             {...props}
         />
     );
-};
 MenubarShortcut.displayname = "MenubarShortcut";
 
 export {

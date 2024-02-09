@@ -1,11 +1,13 @@
 import fs from "fs/promises";
-import {
-    createProjectSchema,
-    CreateProjectInput,
-} from "@repo/validators/schemas/Project.schema";
+
 import Source from "@repo/db/models/Source.model";
 import TransmissionLine from "@repo/db/models/TransmissionLine.model";
-import { router, publicProcedure } from "../trpc";
+import {
+    CreateProjectInput,
+    createProjectSchema,
+} from "@repo/validators/schemas/Project.schema";
+
+import { publicProcedure, router } from "../trpc";
 
 export default router({
     openProject: publicProcedure.mutation(async ({ ctx }) => {

@@ -1,5 +1,5 @@
-import { test, expect, describe } from "@jest/globals";
-import GeneralStudy from "../classes/GeneralStudy";
+import { describe, expect, test } from "@jest/globals";
+
 import {
     Circuit,
     Fault,
@@ -7,6 +7,7 @@ import {
     Reactor,
     Vsource,
 } from "../classes/elements/index";
+import GeneralStudy from "../classes/GeneralStudy";
 
 describe("An example test for OpenDSS", () => {
     test("Create a Circuit", async () => {

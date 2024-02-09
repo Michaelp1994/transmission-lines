@@ -1,5 +1,6 @@
-import { EarthModelEnum, UnitsEnum } from "@enums/enums";
 import CircuitElement from "@elements/BaseElements/CircuitElement";
+import { EarthModelEnum, UnitsEnum } from "@enums/enums";
+
 import LineInterface from "./LineInterface";
 
 /**   Circuit Element, PD Element  */

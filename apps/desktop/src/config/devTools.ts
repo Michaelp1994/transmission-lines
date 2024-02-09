@@ -4,8 +4,8 @@
 // } from "electron-devtools-installer";
 
 import { session } from "electron";
-import path from "node:path";
 import os from "node:os";
+import path from "node:path";
 
 export default async function init() {
     // Install DevTools extensions

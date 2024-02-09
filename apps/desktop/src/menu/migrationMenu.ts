@@ -1,5 +1,7 @@
-import { MigrationExecutor } from "@repo/db/migrations/index";
 import fs from "fs/promises";
+
+import { MigrationExecutor } from "@repo/db/migrations/index";
+
 import { dataSources, databasePath } from "../config/db";
 
 const migrationExecutor = new MigrationExecutor(dataSources.mainDb);

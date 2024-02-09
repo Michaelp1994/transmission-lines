@@ -6,8 +6,7 @@ export interface InputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ className, type, onChange, ...props }, ref) => {
-        return (
+    ({ className, type, onChange, ...props }, ref) => (
             <input
                 type={type}
                 className={cn(
@@ -25,14 +24,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                         if (e.target.value === "") return onChange(null);
                         // @ts-expect-error FIXME: working only within the context of react hook forms
                         return onChange(Number(e.target.value));
-                    } else {
+                    } 
                         onChange(e);
-                    }
+                    
                 }}
                 {...props}
             />
-        );
-    }
+        )
 );
 Input.displayName = "Input";
 

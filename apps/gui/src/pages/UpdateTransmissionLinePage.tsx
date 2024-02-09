@@ -1,7 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
 import { styled } from "@linaria/react";
-import { useTypedParams } from "react-router-typesafe-routes/dom";
-import { useTranslation } from "react-i18next";
 import {
     Card,
     CardContent,
@@ -11,8 +8,12 @@ import {
     CardTitle,
     Separator,
 } from "@repo/ui";
-import ROUTES from "@/router/routes";
+import { useTranslation } from "react-i18next";
+import { Link, Outlet } from "react-router-dom";
+import { useTypedParams } from "react-router-typesafe-routes/dom";
+
 import { EditTransmissionLineForm } from "@/features/transmissionLines";
+import ROUTES from "@/router/routes";
 
 interface Props {}
 

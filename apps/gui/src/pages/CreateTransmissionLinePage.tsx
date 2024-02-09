@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
 import { styled } from "@linaria/react";
-import { useTranslation } from "react-i18next";
 import {
     Card,
+    CardContent,
     CardHeader,
     CardHeaderText,
     CardTitle,
-    CardContent,
 } from "@repo/ui";
-import ROUTES from "@/router/routes";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
 import { AddTransmissionLineForm } from "@/features/transmissionLines";
+import ROUTES from "@/router/routes";
 
 interface Props {}
 

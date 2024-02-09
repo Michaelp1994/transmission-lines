@@ -1,26 +1,26 @@
 import { styled } from "@linaria/react";
-import { useTranslation } from "react-i18next";
-import { useTypedParams } from "react-router-typesafe-routes/dom";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-
 import {
-    Table,
-    TableHeader,
-    TableRow,
-    TableHead,
-    TableCell,
-    TableBody,
     Card,
     CardContent,
     CardHeader,
     CardHeaderText,
     CardTitle,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@repo/ui";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useTypedParams } from "react-router-typesafe-routes/dom";
 
+
+import CurrentGraph from "@/features/results/components/CurrentGraph/CurrentGraph";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
-import CurrentGraph from "@/features/results/components/CurrentGraph/CurrentGraph";
 // import CircuitDiagram from "@/features/results/components/CircuitDiagram";
 
 interface Props {}

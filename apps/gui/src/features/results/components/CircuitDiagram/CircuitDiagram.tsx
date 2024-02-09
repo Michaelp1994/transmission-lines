@@ -1,9 +1,10 @@
-import trpc, { RouterOutputs } from "@/utils/trpc";
 import { styled } from "@linaria/react";
 import React from "react";
-import { Stage, Layer, Line, Rect, Text } from "react-konva";
+import { Layer, Line, Rect, Stage, Text } from "react-konva";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
+
 import ROUTES from "@/router/routes";
+import trpc, { RouterOutputs } from "@/utils/trpc";
 
 interface Props {
     data: RouterOutputs["solution"]["towerFault"];

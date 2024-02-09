@@ -14,13 +14,13 @@
         "build": "tsc && tsc-alias",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint src/",
+        "lint:fix": "eslint src/ --fix",
         "test": "vitest run",
         "typecheck": "tsc --noEmit",
         "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"
     },
     "dependencies": {
         "@repo/db": "workspace:^",
-        "@repo/logger": "workspace:*",
         "@repo/opendss-interface": "workspace:^",
         "@repo/validators": "workspace:*",
         "@trpc/server": "^10.45.1",

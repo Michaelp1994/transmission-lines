@@ -1,12 +1,13 @@
+import Source from "@repo/db/models/Source.model";
 import {
     createSourceSchema,
+    deleteSourceSchema,
     getAllSourcesSchema,
     getSourceByIdSchema,
     updateSourceSchema,
-    deleteSourceSchema,
 } from "@repo/validators/schemas/Source.schema";
-import Source from "@repo/db/models/Source.model";
-import { router, publicProcedure } from "../trpc";
+
+import { publicProcedure, router } from "../trpc";
 
 export default router({
     getAll: publicProcedure

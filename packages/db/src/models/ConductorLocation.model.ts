@@ -1,11 +1,12 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
     BaseEntity,
+    Column,
+    Entity,
     ManyToOne,
+    PrimaryGeneratedColumn,
 } from "typeorm";
 import type { Relation } from "typeorm";
+
 import TowerGeometry from "./TowerGeometry.model";
 
 @Entity()

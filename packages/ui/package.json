@@ -17,6 +17,7 @@
         "build": "tsc && tsc-alias && postcss src/global.css -o dist/global.css",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint src/",
+        "lint:fix": "eslint src/ --fix",
         "test": "jest ",
         "typecheck": "tsc --noEmit"
     },

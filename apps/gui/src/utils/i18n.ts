@@ -1,5 +1,6 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+
 import enAU from "../locales/en-AU.json";
 import ptBR from "../locales/pt-BR.json";
 

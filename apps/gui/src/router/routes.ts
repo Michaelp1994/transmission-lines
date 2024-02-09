@@ -1,4 +1,4 @@
-import { route, number, string } from "react-router-typesafe-routes/dom";
+import { number, route, string } from "react-router-typesafe-routes/dom";
 
 const ROUTES = {
     HOME: route(""),

@@ -1,9 +1,4 @@
-import { Link } from "react-router-dom";
 import { styled } from "@linaria/react";
-import { useTranslation } from "react-i18next";
-
-import { AddConductorTypeForm } from "@/features/conductorTypes";
-import ROUTES from "@/router/routes";
 import {
     Card,
     CardContent,
@@ -11,6 +6,12 @@ import {
     CardHeaderText,
     CardTitle,
 } from "@repo/ui";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import { AddConductorTypeForm } from "@/features/conductorTypes";
+import ROUTES from "@/router/routes";
+
 
 interface Props {}
 

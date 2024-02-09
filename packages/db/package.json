@@ -11,6 +11,7 @@
         "build": "tsc && tsc-alias",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint src/",
+        "lint:fix": "eslint src/ --fix",
         "test": "vitest run",
         "typecheck": "tsc --noEmit",
         "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"

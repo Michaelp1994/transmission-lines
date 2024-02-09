@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
     type EmblaCarouselType as CarouselApi,
     type EmblaOptionsType as CarouselOptions,
@@ -8,9 +7,10 @@ import {
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type CarouselProps = {
     opts?: CarouselOptions;
@@ -122,7 +122,7 @@ const Carousel = React.forwardRef<
             <CarouselContext.Provider
                 value={{
                     carouselRef,
-                    api: api,
+                    api,
                     opts,
                     orientation:
                         orientation ||
