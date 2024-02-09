@@ -1,8 +1,8 @@
-import TowerGeometry from "@/db/models/TowerGeometry.model";
-import ConductorType from "@/db/models/ConductorType.model";
+import TowerGeometry from "@repo/db/models/TowerGeometry.model";
+import ConductorType from "@repo/db/models/ConductorType.model";
 import GeneralStudy from "@repo/opendss-interface/classes/GeneralStudy";
-import Source from "@/db/models/Source.model";
-import TransmissionLine from "@/db/models/TransmissionLine.model";
+import Source from "@repo/db/models/Source.model";
+import TransmissionLine from "@repo/db/models/TransmissionLine.model";
 
 import {
     Circuit,
@@ -13,15 +13,12 @@ import {
     Vsource,
     WireData,
 } from "@repo/opendss-interface/elements";
+import { Context } from "@/context";
 
 const NEUTRAL_PHASE = 20;
 
-export default async function buildCircuit() {
+export default async function buildCircuit(ctx: Context) {
     console.log("Building Circuit");
-    const updatedProject = {
-        sources: [],
-        transmissionLines: [],
-    };
     const study = new GeneralStudy();
     // Sources
     const sources = await Source.find();

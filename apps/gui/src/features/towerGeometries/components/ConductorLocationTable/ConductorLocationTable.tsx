@@ -27,7 +27,7 @@ import {
     TableCell,
 } from "@repo/ui";
 
-import type { TowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
+import type { CreateTowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
 import { defaultConductorLocation } from "@repo/validators/schemas/ConductorLocation.schema";
 
 interface Props {}
@@ -35,7 +35,7 @@ interface Props {}
 const ConductorLocationTable: React.FC<Props> = () => {
     const { t } = useTranslation("conductorLocations");
     const { resetField, control, getFieldState, getValues, formState } =
-        useFormContext<TowerGeometryInput>();
+        useFormContext<CreateTowerGeometryInput>();
     const { fields, append, remove } = useFieldArray({
         control,
         name: "conductors",

@@ -1,26 +1,10 @@
 {
-    "include": ["src/**/*", "src/**/*.json"],
-    "exclude": ["node_modules"],
+    "include": ["src", "src/**/*.json"],
     "references": [{ "path": "./tsconfig.node.json" }],
+    "extends": "@repo/typescript-config/vite.json",
     "compilerOptions": {
         "paths": {
             "@/*": ["./src/*"]
-        },
-        "noEmit": true,
-        "target": "ES2020",
-        "lib": ["DOM", "ES2020", "DOM.Iterable"],
-        "jsx": "react-jsx",
-        "module": "ESNEXT",
-        "moduleResolution": "Bundler",
-        "declaration": true,
-        "declarationMap": true,
-        "outDir": "./tsc-dist",
-        "isolatedModules": true,
-        "esModuleInterop": true,
-        "preserveSymlinks": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        "skipLibCheck": true
+        }
     }
 }

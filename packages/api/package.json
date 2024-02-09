@@ -5,8 +5,7 @@
     "type": "module",
     "exports": {
         ".": "./dist/index.js",
-        "./db/*": "./dist/db/*.js",
-        "./server/*": "./dist/server/*.js"
+        "./routers/*": "./dist/routers/*.js"
     },
     "files": [
         "dist"
@@ -17,7 +16,7 @@
         "lint": "eslint src/",
         "test": "vitest run",
         "typecheck": "tsc --noEmit",
-        "watch": "tsc --watch"
+        "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"
     },
     "dependencies": {
         "@repo/db": "workspace:^",
@@ -42,6 +41,9 @@
         "@types/morgan": "^1.9.9",
         "@types/node": "^20.11.16",
         "@types/supertest": "^6.0.2",
+        "better-sqlite3": "^9.4.0",
+        "concurrently": "^8.2.2",
+        "electron": "^28.2.2",
         "eslint": "^8.56.0",
         "supertest": "^6.3.4",
         "tsc-alias": "^1.8.8",

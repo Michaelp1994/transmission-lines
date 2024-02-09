@@ -1,4 +1,4 @@
-import GeneralStudy from "@classes/GeneralStudy";
+import GeneralStudy from "@repo/opendss-interface/classes/GeneralStudy";
 
 export default async function saveScript(
     study: GeneralStudy,

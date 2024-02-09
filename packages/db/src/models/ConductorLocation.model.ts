@@ -21,7 +21,8 @@ export default class ConductorLocation extends BaseEntity {
 
     @ManyToOne(
         () => TowerGeometry,
-        (towerGeometery) => towerGeometery.conductors
+        (towerGeometery) => towerGeometery.conductors,
+        { onDelete: "CASCADE" }
     )
     geometry: Relation<TowerGeometry>;
 }

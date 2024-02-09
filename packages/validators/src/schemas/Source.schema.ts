@@ -1,6 +1,8 @@
 import * as z from "zod";
 
-export const sourceInputSchema = z.object({
+// create
+
+export const createSourceSchema = z.object({
     name: z.string().min(2).max(50).trim(),
     phases: z
         .number({
@@ -18,19 +20,9 @@ export const sourceInputSchema = z.object({
     frequency: z.number().gt(0),
 });
 
-export const sourceSchema = sourceInputSchema.extend({
-    id: z.string().uuid(),
-});
+export type CreateSourceInput = z.infer<typeof createSourceSchema>;
 
-export const updateSourceSchema = z.object({
-    id: z.string().uuid(),
-    source: sourceSchema,
-});
-
-export type Source = z.infer<typeof sourceSchema>;
-export type SourceInput = z.infer<typeof sourceInputSchema>;
-
-export const defaultSource: SourceInput = {
+export const defaultSource: CreateSourceInput = {
     name: "",
     phases: 3,
     voltage: 138,
@@ -41,3 +33,29 @@ export const defaultSource: SourceInput = {
     resistance: 15,
     frequency: 60,
 };
+
+// update
+
+export const updateSourceSchema = createSourceSchema.extend({
+    id: z.string().uuid(),
+});
+
+export type UpdateSourceInput = z.infer<typeof updateSourceSchema>;
+
+// getAllSources
+
+export const getAllSourcesSchema = z.object({}).optional();
+
+export type GetAllSourcesInput = z.infer<typeof getAllSourcesSchema>;
+
+// getById
+
+export const getSourceByIdSchema = z.object({ id: z.string().uuid() });
+
+export type GetSourceByIdInput = z.infer<typeof getSourceByIdSchema>;
+
+// delete
+
+export const deleteSourceSchema = z.object({ id: z.string().uuid() });
+
+export type DeleteSourceInput = z.infer<typeof deleteSourceSchema>;

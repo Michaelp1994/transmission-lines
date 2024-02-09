@@ -42,7 +42,7 @@ const SourcesList: React.FC<Props> = () => {
     const { t } = useTranslation("source");
 
     async function remove(id: string) {
-        await deleteSourceMutation.mutateAsync(id);
+        await deleteSourceMutation.mutateAsync({ id });
     }
 
     return (

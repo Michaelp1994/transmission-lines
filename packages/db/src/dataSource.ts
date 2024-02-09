@@ -10,8 +10,6 @@ import TransmissionLine from "./models/TransmissionLine.model";
 import InitialMigration1703610359462 from "./migrations/1703610359462-initialMigration";
 import SeedDatabase1703629418838 from "./migrations/1703629418838-seedDatabase";
 
-export const databasePath = "test.s3db";
-
 async function databaseInit(path: string) {
     const mainDb = await new DataSource({
         type: "better-sqlite3",

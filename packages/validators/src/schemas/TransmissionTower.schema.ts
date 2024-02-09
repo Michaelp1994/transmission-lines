@@ -1,6 +1,8 @@
 import * as z from "zod";
 
-export const transmissionTowerInputSchema = z.object({
+// create
+
+export const createTransmissionTowerSchema = z.object({
     name: z.string().min(2).max(50).trim(),
     resistance: z.number(),
     distance: z.number(),
@@ -9,17 +11,22 @@ export const transmissionTowerInputSchema = z.object({
         .positive({ message: "Please select a geometry type" }),
 });
 
-export const transmissionTowerSchema = transmissionTowerInputSchema.extend({
-    id: z.number(),
-});
-
-export type TransmissionTowerInput = z.infer<
-    typeof transmissionTowerInputSchema
+export type CreateTransmissionTowerInput = z.infer<
+    typeof createTransmissionTowerSchema
 >;
 
-export type TransmissionTower = z.infer<typeof transmissionTowerSchema>;
+// update
 
-export const defaultTransmissionTower: TransmissionTowerInput = {
+export const updateTransmissionTowerSchema =
+    createTransmissionTowerSchema.extend({
+        id: z.number(),
+    });
+
+export type UpdateTransmissionTowerInput = z.infer<
+    typeof updateTransmissionTowerSchema
+>;
+
+export const defaultTransmissionTower: CreateTransmissionTowerInput = {
     name: "",
     resistance: 15,
     distance: 1,

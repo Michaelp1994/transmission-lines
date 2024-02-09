@@ -1,11 +1,9 @@
 import "reflect-metadata";
-import electron, { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, dialog } from "electron";
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
-import path from "node:path";
-
+import { dataSources } from "./config/db";
 // import fs from "fs/promises";
-import databaseInit from "@repo/db";
 import createWindow from "./config/window";
 import setupDevTools from "./config/devTools";
 
@@ -21,13 +19,9 @@ app.whenReady().then(async () => {
     app.on("browser-window-created", async (_, window) => {
         optimizer.watchWindowShortcuts(window);
     });
-    await createWindow();
+    const window = await createWindow();
 
-    const databasePath = electron.app.isPackaged
-        ? path.join(electron.app.getPath("userData"), "database.sqlite")
-        : "./database.sqlite";
-    const dataSources = await databaseInit(databasePath);
-    createServer(dataSources);
+    createServer(dataSources, { browserWindow: window, dialog });
 
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the

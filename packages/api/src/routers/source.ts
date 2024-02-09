@@ -1,50 +1,40 @@
-import { z } from "zod";
 import {
-    sourceInputSchema,
+    createSourceSchema,
+    getAllSourcesSchema,
+    getSourceByIdSchema,
     updateSourceSchema,
+    deleteSourceSchema,
 } from "@repo/validators/schemas/Source.schema";
 import Source from "@repo/db/models/Source.model";
 import { router, publicProcedure } from "../trpc";
 
 export default router({
-    getAll: publicProcedure.query(({ ctx }) =>
-        ctx.memoryDb.getRepository(Source).find()
-    ),
+    getAll: publicProcedure
+        .input(getAllSourcesSchema)
+        .query(({ ctx }) => ctx.memoryDb.getRepository(Source).find()),
     getById: publicProcedure
-        .input(z.string().uuid())
+        .input(getSourceByIdSchema)
         .query(async ({ input, ctx }) => {
             const sourceRepository = ctx.memoryDb.getRepository(Source);
             return sourceRepository.findOneByOrFail({
-                id: input,
+                id: input.id,
             });
         }),
     create: publicProcedure
-        .input(sourceInputSchema)
+        .input(createSourceSchema)
         .mutation(async ({ input, ctx }) => {
             const sourceRepository = ctx.memoryDb.getRepository(Source);
-
             const source = await sourceRepository.create(input);
             source.save();
         }),
     update: publicProcedure
         .input(updateSourceSchema)
-        .mutation(async ({ input, ctx }) => {
-            const sourceRepository = ctx.memoryDb.getRepository(Source);
-            const source = await sourceRepository.findOne({
-                where: { id: input.id },
-            });
-            if (!source) throw Error("Can't find Source!");
-            Object.assign(source, input.source);
-            source.save();
-        }),
+        .mutation(async ({ input, ctx }) =>
+            ctx.memoryDb.getRepository(Source).update({ id: input.id }, input)
+        ),
     delete: publicProcedure
-        .input(z.string().uuid())
+        .input(deleteSourceSchema)
         .mutation(async ({ input, ctx }) => {
-            const sourceRepository = ctx.memoryDb.getRepository(Source);
-            const source = await sourceRepository.findOne({
-                where: { id: input },
-            });
-            if (!source) throw Error("Can't find Source!");
-            source.remove();
+            ctx.memoryDb.getRepository(Source).delete({ id: input.id });
         }),
 });

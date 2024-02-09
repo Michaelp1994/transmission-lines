@@ -45,7 +45,7 @@ const TransmissionLinesList: React.FC<Props> = () => {
         });
 
     async function removeLine(id: string) {
-        await deleteTransmissionLineMutation.mutateAsync(id);
+        await deleteTransmissionLineMutation.mutateAsync({ id });
     }
 
     return (

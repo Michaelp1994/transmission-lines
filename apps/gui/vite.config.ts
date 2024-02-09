@@ -8,9 +8,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
     plugins: [react(), wyw(), tsconfigPaths()],
     base: "./",
-    build: {
-        target: "es2015",
-    },
     test: {
         environment: "jsdom",
     },

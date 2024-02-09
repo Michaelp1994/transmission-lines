@@ -28,14 +28,12 @@ export default class TransmissionLine extends BaseEntity {
         (conductor) => conductor.transmissionLine,
         {
             cascade: true,
-            eager: true,
         }
     )
     conductors: Relation<TransmissionConductor[]>;
 
     @OneToMany(() => TransmissionTower, (tower) => tower.transmissionLine, {
         cascade: true,
-        eager: true,
     })
     towers: Relation<TransmissionTower[]>;
 }

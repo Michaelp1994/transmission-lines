@@ -1,22 +1,31 @@
-import { z } from "zod";
 import TowerGeometry from "@repo/db/models/TowerGeometry.model";
 import {
-    towerGeometryInputSchema,
+    createTowerGeometrySchema,
     updateTowerGeometrySchema,
-} from "@repo/validators/schemas/TowerGeometry.schema";
+    deleteTowerGeometrySchema,
+    getAllTowerGeometriesSchema,
+    getTowerGeometryByIdSchema,
+} from "@repo/validators";
 import { router, publicProcedure } from "../trpc";
 
 export default router({
-    getAll: publicProcedure.query(async ({ ctx }) =>
-        ctx.mainDb.getRepository(TowerGeometry).find()
-    ),
-    getById: publicProcedure.input(z.number()).query(async ({ input, ctx }) => {
-        return ctx.mainDb.getRepository(TowerGeometry).findOneByOrFail({
-            id: input,
-        });
-    }),
+    getAll: publicProcedure
+        .input(getAllTowerGeometriesSchema)
+        .query(async ({ ctx }) =>
+            ctx.mainDb.getRepository(TowerGeometry).find()
+        ),
+    getById: publicProcedure
+        .input(getTowerGeometryByIdSchema)
+        .query(async ({ input, ctx }) => {
+            return ctx.mainDb.getRepository(TowerGeometry).findOneOrFail({
+                where: {
+                    id: input.id,
+                },
+                relations: ["conductors"],
+            });
+        }),
     create: publicProcedure
-        .input(towerGeometryInputSchema)
+        .input(createTowerGeometrySchema)
         .mutation(async ({ input, ctx }) => {
             const repository = ctx.mainDb.getRepository(TowerGeometry);
             const towerGeometry = repository.create(input);
@@ -24,9 +33,13 @@ export default router({
         }),
     update: publicProcedure
         .input(updateTowerGeometrySchema)
-        .mutation(async ({ input: { id, towerGeometry }, ctx }) =>
-            ctx.mainDb
-                .getRepository(TowerGeometry)
-                .update({ id }, towerGeometry)
-        ),
+        .mutation(async ({ input, ctx }) => {
+            const repository = ctx.mainDb.getRepository(TowerGeometry);
+            return repository.save({ ...input });
+        }),
+    delete: publicProcedure
+        .input(deleteTowerGeometrySchema)
+        .mutation(async ({ input, ctx }) => {
+            ctx.mainDb.getRepository(TowerGeometry).delete({ id: input.id });
+        }),
 });

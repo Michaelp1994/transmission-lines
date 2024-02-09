@@ -10,10 +10,11 @@
   "scripts": {
     "build": "rm -rf dist && tsc && tsc-alias",
     "clean": "rm -rf .turbo node_modules dist",
-    "dev": "yarn run build && electron .",
+    "dev": "pnpm run build && electron .",
     "postinstall": "electron-builder install-app-deps",
     "lint": "eslint src/",
     "package": "electron-builder build -c builder.config.cjs",
+    "rebuild": "electron-rebuild",
     "setup-dev": "wait-on http://localhost:5173/",
     "test": "xvfb-maybe -- playwright test",
     "typecheck": "tsc --noEmit"
@@ -24,9 +25,11 @@
     "@repo/db": "workspace:^",
     "@repo/logger": "workspace:*",
     "better-sqlite3": "^9.4.0",
-    "reflect-metadata": "^0.2.1"
+    "reflect-metadata": "^0.2.1",
+    "winax": "3.4.2"
   },
   "devDependencies": {
+    "@electron/rebuild": "^3.6.0",
     "@playwright/test": "^1.41.2",
     "@repo/eslint-config": "workspace:*",
     "@repo/jest-presets": "workspace:*",
@@ -39,8 +42,5 @@
     "typescript": "^5.3.3",
     "wait-on": "^7.2.0",
     "xvfb-maybe": "^0.2.1"
-  },
-  "installConfig": {
-    "hoistingLimits": "workspaces"
   }
 }

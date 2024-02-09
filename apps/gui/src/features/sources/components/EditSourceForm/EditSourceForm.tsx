@@ -20,9 +20,9 @@ import {
 
 import ROUTES from "@/router/routes";
 import {
-    SourceInput,
+    UpdateSourceInput,
     defaultSource,
-    sourceSchema,
+    updateSourceSchema,
 } from "@repo/validators/schemas/Source.schema";
 import trpc from "@/utils/trpc";
 
@@ -33,20 +33,16 @@ interface Props {
 const EditSourceForm: React.FC<Props> = ({ id }) => {
     const { t } = useTranslation("source");
     const navigate = useNavigate();
-    const { data, isLoading, error } = trpc.source.getById.useQuery(id);
+    const { data, isLoading, error } = trpc.source.getById.useQuery({ id });
     const updateSourceMutation = trpc.source.update.useMutation();
 
-    const form = useForm<SourceInput>({
-        resolver: zodResolver(sourceSchema),
-        defaultValues: defaultSource,
+    const form = useForm<UpdateSourceInput>({
+        resolver: zodResolver(updateSourceSchema),
         values: data,
     });
 
-    async function onSubmit(values: SourceInput) {
-        await updateSourceMutation.mutateAsync({
-            id,
-            source: values,
-        });
+    async function onSubmit(values: UpdateSourceInput) {
+        await updateSourceMutation.mutateAsync(values);
         if (updateSourceMutation.error) {
             console.log(updateSourceMutation.error);
             return;

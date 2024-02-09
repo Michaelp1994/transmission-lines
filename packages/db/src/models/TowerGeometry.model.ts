@@ -19,10 +19,7 @@ export default class TowerGeometry extends BaseEntity {
     @OneToMany(
         () => ConductorLocation,
         (conductorLocation) => conductorLocation.geometry,
-        {
-            cascade: true,
-            eager: true,
-        }
+        { cascade: true }
     )
     conductors: Relation<ConductorLocation[]>;
 }

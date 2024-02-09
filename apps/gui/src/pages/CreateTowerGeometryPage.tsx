@@ -1,25 +1,26 @@
-import { Link } from "react-router-dom";
 import { styled } from "@linaria/react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { AddConductorTypeForm } from "@/features/conductorTypes";
-import ROUTES from "@/router/routes";
 import {
     Card,
-    CardContent,
     CardHeader,
     CardHeaderText,
     CardTitle,
+    CardContent,
 } from "@repo/ui";
+import { AddTowerGeometryForm } from "@/features/towerGeometries";
+import ROUTES from "@/router/routes";
 
 interface Props {}
 
-const CreateConductorType: React.FC<Props> = () => {
-    const { t } = useTranslation("conductorType");
+const CreateTowerGeometry: React.FC<Props> = () => {
+    const { t } = useTranslation("towerGeometry");
 
     return (
         <Wrapper>
-            <Link to={ROUTES.CONDUCTORS.path}>{t("general:goBack")}</Link>
+            <Link to={ROUTES.ALL_TOWER_GEOMETRIES.path}>
+                {t("general:goBack")}
+            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -27,7 +28,7 @@ const CreateConductorType: React.FC<Props> = () => {
                     </CardHeaderText>
                 </CardHeader>
                 <CardContent>
-                    <AddConductorTypeForm />
+                    <AddTowerGeometryForm />
                 </CardContent>
             </Card>
         </Wrapper>
@@ -35,4 +36,5 @@ const CreateConductorType: React.FC<Props> = () => {
 };
 
 const Wrapper = styled.div``;
-export default CreateConductorType;
+
+export default CreateTowerGeometry;

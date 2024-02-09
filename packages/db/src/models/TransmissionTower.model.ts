@@ -25,6 +25,8 @@ export default class TransmissionTower extends BaseEntity {
     @Column()
     geometryId: number;
 
-    @ManyToOne(() => TransmissionLine, (line) => line.conductors)
+    @ManyToOne(() => TransmissionLine, (line) => line.conductors, {
+        onDelete: "CASCADE",
+    })
     transmissionLine: Relation<TransmissionLine>;
 }

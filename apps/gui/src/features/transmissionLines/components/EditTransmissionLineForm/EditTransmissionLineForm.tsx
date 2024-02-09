@@ -17,18 +17,16 @@ import {
     FormMessage,
     Button,
 } from "@repo/ui";
-
+import trpc from "@/utils/trpc";
 import ROUTES from "@/router/routes";
 import { SourceSelect } from "@/features/sources";
 import {
-    TransmissionLine,
-    defaultTransmissionLine,
-    transmissionLineSchema,
+    updateTransmissionLineSchema,
+    UpdateTransmissionLineInput,
 } from "@repo/validators/schemas/TransmissionLine.schema";
 
 import ConductorConfigurationTable from "../ConductorConfigurationTable";
 import TowerConfigurationTable from "../TowerConfigurationTable";
-import trpc from "@/utils/trpc";
 
 interface Props {
     id: string;
@@ -37,17 +35,17 @@ interface Props {
 const EditTransmissionLineForm: React.FC<Props> = ({ id }) => {
     const navigate = useNavigate();
     const { t } = useTranslation("transmissionLine");
-    const { data } = trpc.transmissionLine.getById.useQuery(id);
+    const { data, isLoading, error } = trpc.transmissionLine.getById.useQuery({
+        id,
+    });
     const updateTransmissionLineMutation =
         trpc.transmissionLine.update.useMutation();
-
-    const form = useForm<TransmissionLine>({
-        resolver: zodResolver(transmissionLineSchema),
-        defaultValues: defaultTransmissionLine,
+    const form = useForm<UpdateTransmissionLineInput>({
+        resolver: zodResolver(updateTransmissionLineSchema),
         values: data,
     });
 
-    async function onSubmit(values: TransmissionLine) {
+    async function onSubmit(values: UpdateTransmissionLineInput) {
         await updateTransmissionLineMutation.mutateAsync(values);
 
         toast.success(`${values.name} has been updated.`, {

@@ -1,13 +1,26 @@
 import * as z from "zod";
 
-export const conductorLocationSchema = z.object({
+export const createConductorLocationSchema = z.object({
     x: z.number(),
     y: z.number(),
 });
 
-export type ConductorLocationInput = z.infer<typeof conductorLocationSchema>;
+export type CreateConductorLocationInput = z.infer<
+    typeof createConductorLocationSchema
+>;
 
-export const defaultConductorLocation: ConductorLocationInput = {
+export const defaultConductorLocation: CreateConductorLocationInput = {
     x: 0,
     y: 0,
 };
+
+// update
+
+export const updateConductorLocationSchema =
+    createConductorLocationSchema.extend({
+        id: z.number(),
+    });
+
+export type UpdateConductorLocationInput = z.infer<
+    typeof updateConductorLocationSchema
+>;

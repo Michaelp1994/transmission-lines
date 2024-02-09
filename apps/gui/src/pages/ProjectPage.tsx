@@ -27,7 +27,7 @@ interface Props {}
 
 const ProjectPage: React.FC<Props> = () => {
     const { t } = useTranslation("project");
-    const saveProjectMutation = trpc.saveProject.useMutation();
+    const saveProjectMutation = trpc.files.saveProject.useMutation();
 
     async function handleSave() {
         await saveProjectMutation.mutateAsync();

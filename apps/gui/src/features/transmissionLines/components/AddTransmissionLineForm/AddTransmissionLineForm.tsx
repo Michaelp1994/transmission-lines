@@ -4,7 +4,6 @@ import { styled } from "@linaria/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { format } from "date-fns";
-import { useMemo } from "react";
 
 import {
     Button,
@@ -25,9 +24,9 @@ import TowerConfigurationTable from "../TowerConfigurationTable";
 import { SourceSelect } from "@/features/sources";
 import ROUTES from "@/router/routes";
 import {
-    transmissionLineInputSchema,
+    createTransmissionLineSchema,
     defaultTransmissionLine,
-    TransmissionLineInput,
+    CreateTransmissionLineInput,
 } from "@repo/validators/schemas/TransmissionLine.schema";
 import trpc from "@/utils/trpc";
 
@@ -39,12 +38,12 @@ const AddTransmissionLineForm: React.FC<Props> = () => {
     const createTransmissionLineMutation =
         trpc.transmissionLine.create.useMutation();
 
-    const form = useForm<TransmissionLineInput>({
-        resolver: zodResolver(transmissionLineInputSchema),
+    const form = useForm<CreateTransmissionLineInput>({
+        resolver: zodResolver(createTransmissionLineSchema),
         defaultValues: defaultTransmissionLine,
     });
 
-    async function onSubmit(values: TransmissionLineInput) {
+    async function onSubmit(values: CreateTransmissionLineInput) {
         await createTransmissionLineMutation.mutateAsync(values);
         toast.success(`${values.name} has been added to the project.`, {
             description: format(new Date(), "PPPPpp"),

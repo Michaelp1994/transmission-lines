@@ -1,28 +1,31 @@
-import { z } from "zod";
 import {
-    conductorTypeInputSchema,
+    getAllConductorsSchema,
+    getConductorTypeByIdSchema,
+    createConductorTypeSchema,
     updateConductorTypeSchema,
+    deleteConductorTypeSchema,
 } from "@repo/validators/schemas/ConductorType.schema";
 import ConductorType from "@repo/db/models/ConductorType.model";
 import { router, publicProcedure } from "../trpc";
 
 export default router({
-    getAll: publicProcedure.query(async ({ ctx }) => {
-        console.log("HERE");
-        const repository = ctx.mainDb.getRepository(ConductorType);
-        console.log(repository);
-        const allConductorTypes = await repository.find();
-        console.log(allConductorTypes);
-        return allConductorTypes;
-    }),
-    getById: publicProcedure.input(z.number()).query(({ input, ctx }) => {
-        const repository = ctx.mainDb.getRepository(ConductorType);
-        return repository.findOneByOrFail({
-            id: input,
-        });
-    }),
+    getAll: publicProcedure
+        .input(getAllConductorsSchema)
+        .query(async ({ ctx, input }) => {
+            const repository = ctx.mainDb.getRepository(ConductorType);
+            const allConductorTypes = await repository.find({skip: input?.pageIndex, take: input?.pageSize });
+            return allConductorTypes;
+        }),
+    getById: publicProcedure
+        .input(getConductorTypeByIdSchema)
+        .query(({ input, ctx }) => {
+            const repository = ctx.mainDb.getRepository(ConductorType);
+            return repository.findOneByOrFail({
+                id: input.id,
+            });
+        }),
     create: publicProcedure
-        .input(conductorTypeInputSchema)
+        .input(createConductorTypeSchema)
         .mutation(({ input, ctx }) => {
             const newConductorType = ctx.mainDb
                 .getRepository(ConductorType)
@@ -31,9 +34,13 @@ export default router({
         }),
     update: publicProcedure
         .input(updateConductorTypeSchema)
-        .mutation(async ({ input, ctx }) =>
-            ctx.mainDb
-                .getRepository(ConductorType)
-                .update({ id: input.id }, input.conductorType)
-        ),
+        .mutation(async ({ input, ctx }) => {
+            const repository = ctx.mainDb.getRepository(ConductorType);
+            return repository.save({ ...input });
+        }),
+    delete: publicProcedure
+        .input(deleteConductorTypeSchema)
+        .mutation(async ({ input, ctx }) => {
+            ctx.mainDb.getRepository(ConductorType).delete({ id: input.id });
+        }),
 });

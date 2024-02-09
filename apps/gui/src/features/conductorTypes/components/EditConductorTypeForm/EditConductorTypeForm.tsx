@@ -19,8 +19,8 @@ import {
 import trpc from "@/utils/trpc";
 import ROUTES from "@/router/routes";
 import {
-    ConductorTypeInput,
-    conductorTypeInputSchema,
+    updateConductorTypeSchema,
+    UpdateConductorTypeInput,
     defaultConductorType,
 } from "@repo/validators/schemas/ConductorType.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,20 +33,19 @@ const EditConductorTypeForm: React.FC<Props> = ({ id }) => {
     const navigate = useNavigate();
     const { t } = useTranslation("conductorType");
 
-    const { data, isLoading, error } = trpc.conductorType.getById.useQuery(id);
+    const { data, isLoading, error } = trpc.conductorType.getById.useQuery({
+        id,
+    });
     const updateConductorTypeMutation = trpc.conductorType.update.useMutation();
 
-    const form = useForm<ConductorTypeInput>({
-        resolver: zodResolver(conductorTypeInputSchema),
+    const form = useForm<UpdateConductorTypeInput>({
+        resolver: zodResolver(updateConductorTypeSchema),
         defaultValues: defaultConductorType,
         values: data,
     });
 
-    async function onSubmit(values: ConductorTypeInput) {
-        await updateConductorTypeMutation.mutate({
-            id,
-            conductorType: values,
-        });
+    async function onSubmit(values: UpdateConductorTypeInput) {
+        await updateConductorTypeMutation.mutate(values);
         if (updateConductorTypeMutation.error) {
             console.log(updateConductorTypeMutation.error);
             return;
@@ -54,7 +53,7 @@ const EditConductorTypeForm: React.FC<Props> = ({ id }) => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(ROUTES.CONDUCTORS.path);
+        navigate(ROUTES.ALL_CONDUCTOR_TYPES.path);
     }
 
     if (isLoading) {
@@ -156,7 +155,7 @@ const EditConductorTypeForm: React.FC<Props> = ({ id }) => {
                         <FormItem>
                             <FormLabel>{t("layers.label")}</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("layers.description")}

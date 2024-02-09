@@ -19,9 +19,9 @@ import {
 } from "@repo/ui";
 
 import {
-    sourceInputSchema,
+    createSourceSchema,
     defaultSource,
-    SourceInput,
+    type CreateSourceInput,
 } from "@repo/validators/schemas/Source.schema";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
@@ -34,12 +34,12 @@ const AddSourceForm: React.FC<Props> = () => {
 
     const createSourceMutation = trpc.source.create.useMutation();
 
-    const form = useForm<SourceInput>({
-        resolver: zodResolver(sourceInputSchema),
+    const form = useForm<CreateSourceInput>({
+        resolver: zodResolver(createSourceSchema),
         defaultValues: defaultSource,
     });
 
-    async function onSubmit(values: SourceInput) {
+    async function onSubmit(values: CreateSourceInput) {
         await createSourceMutation.mutateAsync(values);
         toast.success(`${values.name} has been added to the project.`, {
             description: format(new Date(), "PPPPpp"),

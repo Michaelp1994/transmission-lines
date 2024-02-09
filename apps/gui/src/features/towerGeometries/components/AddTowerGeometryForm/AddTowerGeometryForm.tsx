@@ -17,8 +17,8 @@ import {
     Input,
 } from "@repo/ui";
 import {
-    TowerGeometryInput,
-    towerGeometryInputSchema,
+    createTowerGeometrySchema,
+    CreateTowerGeometryInput,
     defaultTowerGeometry,
 } from "@repo/validators/schemas/TowerGeometry.schema";
 import trpc from "@/utils/trpc";
@@ -32,18 +32,18 @@ const AddTowerGeometryForm: React.FC<Props> = () => {
     const navigate = useNavigate();
     const { t } = useTranslation("towerGeometry");
     const createTowerGeometryMutation = trpc.towerGeometry.create.useMutation();
-    const form = useForm<TowerGeometryInput>({
-        resolver: zodResolver(towerGeometryInputSchema),
+    const form = useForm<CreateTowerGeometryInput>({
+        resolver: zodResolver(createTowerGeometrySchema),
         defaultValues: defaultTowerGeometry,
     });
 
-    async function onSubmit(values: TowerGeometryInput) {
+    async function onSubmit(values: CreateTowerGeometryInput) {
         try {
             await createTowerGeometryMutation.mutateAsync(values);
             toast.success(`${values.name} has been added.`, {
                 description: format(new Date(), "PPPPpp"),
             });
-            navigate(ROUTES.TOWER_GEOMETRIES.path);
+            navigate(ROUTES.ALL_TOWER_GEOMETRIES.path);
         } catch (e) {
             console.log(e);
             toast.error("There was an error");

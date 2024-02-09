@@ -10,7 +10,7 @@ interface Props {}
 
 const Home: React.FC<Props> = () => {
     const navigate = useNavigate();
-    const openProjectMutation = trpc.openProject.useMutation();
+    const openProjectMutation = trpc.files.openProject.useMutation();
 
     const { t } = useTranslation("home");
     async function handleOpen() {

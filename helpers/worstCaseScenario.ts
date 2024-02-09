@@ -1,28 +1,5 @@
 import { Fault } from "@repo/opendss-interface/elements";
 import GeneralStudy from "@repo/opendss-interface/classes/GeneralStudy";
-import type {
-    UpdatedProject,
-    UpdatedSource,
-    UpdatedTransmissionTower,
-    UpdatedTransmissionLine,
-} from "./buildCircuit";
-
-export interface SourceResults extends UpdatedSource {
-    current: number;
-}
-
-export interface TransmissionTowerResults extends UpdatedTransmissionTower {
-    current: number;
-}
-
-export interface TransmissionLineResults extends UpdatedTransmissionLine {
-    towers: TransmissionTowerResults[];
-}
-
-export interface WorstCaseResults extends UpdatedProject {
-    sources: SourceResults[];
-    transmissionLines: TransmissionLineResults[];
-}
 
 export default async function worseCaseScenario2(
     study: GeneralStudy,
@@ -30,7 +7,8 @@ export default async function worseCaseScenario2(
 ) {
     const results: WorstCaseResults = { ...updatedProject } as WorstCaseResults;
     const faultPhase = 1;
-    const fault = new Fault("SHORT_CIRCUIT", {
+    const fault = new Fault({
+        name: "SHORT_CIRCUIT",
         bus1: `NOWHERE.1`,
         bus2: `NOWHERE.1`,
         phases: 1,

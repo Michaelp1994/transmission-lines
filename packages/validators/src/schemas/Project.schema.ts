@@ -1,15 +1,15 @@
 import * as z from "zod";
-import { transmissionLineSchema } from "./TransmissionLine.schema";
-import { sourceSchema } from "./Source.schema";
+import { createTransmissionLineSchema } from "./TransmissionLine.schema";
+import { createSourceSchema } from "./Source.schema";
 
-export const projectSchema = z.object({
-  sources: sourceSchema.array(),
-  transmissionLines: transmissionLineSchema.array(),
+export const createProjectSchema = z.object({
+    sources: createSourceSchema.array(),
+    transmissionLines: createTransmissionLineSchema.array(),
 });
 
-export type ProjectInput = z.infer<typeof projectSchema>;
+export type CreateProjectInput = z.infer<typeof createProjectSchema>;
 
-export const defaultProject: ProjectInput = {
-  sources: [],
-  transmissionLines: [],
+export const defaultProject: CreateProjectInput = {
+    sources: [],
+    transmissionLines: [],
 };

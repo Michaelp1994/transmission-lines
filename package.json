@@ -1,34 +1,33 @@
 {
-    "name": "example-app",
-    "version": "0.0.1",
-    "private": true,
-    "author": "Michael Poulgrain",
-    "workspaces": {
-        "packages": [
-            "packages/*",
-            "apps/*",
-            "configs/*"
-        ]
-    },
-    "scripts": {
-        "build": "turbo run build",
-        "clean": "turbo run clean",
-        "postclean": "rm -rf .turbo node_modules dist .yarn",
-        "dev": "turbo run dev",
-        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "lint": "turbo run lint",
-        "package": "turbo run package",
-        "test": "turbo run test",
-        "typecheck": "turbo run typecheck",
-        "watch": "turbo run watch"
-    },
-    "devDependencies": {
-        "electron": "^28.2.1",
-        "prettier": "^3.2.5",
-        "turbo": "^1.12.3"
-    },
-    "packageManager": "yarn@4.1.0",
-    "engines": {
-        "node": ">=18"
-    }
+  "name": "example-app",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Michael Poulgrain",
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*",
+      "configs/*"
+    ]
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean && rm -rf .turbo node_modules dist",
+    "dev": "turbo run dev",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint",
+    "package": "turbo run package",
+    "rebuild": "turbo run rebuild",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "watch": "turbo run watch"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.3"
+  },
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": ">=18"
+  }
 }

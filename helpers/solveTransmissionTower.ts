@@ -2,25 +2,6 @@ import { Fault } from "@repo/opendss-interface/elements";
 import GeneralStudy from "@repo/opendss-interface/classes/GeneralStudy";
 import { FaultLocation } from "@repo/validators/schemas/TowerFault.schema";
 
-function findTransmissionLine(
-    id: string,
-    transmissionLines: UpdatedTransmissionLine[]
-) {
-    const transmissionLine = transmissionLines.find(
-        (needle) => needle.id === id
-    );
-    if (!transmissionLine) throw Error(`Can't find transmission line: ${id}`);
-    return transmissionLine;
-}
-
-function findTransmissionTower(
-    id: number,
-    transmissionLine: UpdatedTransmissionLine
-) {
-    const tower = transmissionLine.towers.find((needle) => needle.id === id);
-    if (!tower) throw Error(`Can't find transmission tower: ${id}`);
-    return tower;
-}
 export interface CurrentResult {
     name: string;
     current: number;

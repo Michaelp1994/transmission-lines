@@ -44,7 +44,7 @@ const NavBar: React.FC<Props> = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={ROUTES.CONDUCTORS.path}
+                            to={ROUTES.ALL_CONDUCTOR_TYPES.path}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("conductorTypes")}
@@ -52,7 +52,7 @@ const NavBar: React.FC<Props> = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={ROUTES.TOWER_GEOMETRIES.path}
+                            to={ROUTES.ALL_TOWER_GEOMETRIES.path}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("towerGeometries")}

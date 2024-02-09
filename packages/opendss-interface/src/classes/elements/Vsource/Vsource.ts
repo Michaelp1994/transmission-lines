@@ -20,8 +20,8 @@ export default class Vsource
         "MVAsc1",
         "x1r1",
         "x0r0",
-        "Isc3",
-        "Isc1",
+        "isc3",
+        "isc1",
         "r1",
         "x1",
         "r0",
@@ -88,12 +88,12 @@ export default class Vsource
     /** Alternate method of defining the source impedance.
      *
      * 3-phase short circuit current, amps.  Default is 10000. */
-    Isc3?: number;
+    isc3?: number;
 
     /** Alternate method of defining the source impedance.
      *
      * single-phase short circuit current, amps.  Default is 10500. */
-    Isc1?: number;
+    isc1?: number;
 
     /** Alternate method of defining the source impedance.
      *

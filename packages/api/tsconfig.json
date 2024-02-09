@@ -1,30 +1,9 @@
 {
     "compilerOptions": {
-        "preserveWatchOutput": true,
-        "lib": ["ES2022"],
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
-        "target": "ESNext",
-        "declaration": true,
-        "declarationMap": true,
-        "outDir": "./dist",
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "strictNullChecks": true,
-        "strictPropertyInitialization": false,
-        "baseUrl": "./",
         "paths": {
             "@/*": ["./src/*"]
-        },
-        "skipLibCheck": true
+        }
     },
-    "exclude": ["node_modules"],
-    "include": ["src"],
-    "tsc-alias": {
-        "resolveFullPaths": true
-    }
+    "extends": "@repo/typescript-config/node.json",
+    "include": ["src"]
 }

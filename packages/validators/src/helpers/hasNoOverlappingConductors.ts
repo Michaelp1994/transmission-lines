@@ -1,7 +1,7 @@
-import { ConductorLocationInput } from "../schemas/ConductorLocation.schema";
+import { CreateConductorLocationInput } from "../schemas/ConductorLocation.schema";
 
 export default function hasNoOverlappingConductors(
-    conductors: ConductorLocationInput[]
+    conductors: CreateConductorLocationInput[]
 ): boolean {
     const uniqueConductors = conductors.filter((conductor, index) => {
         return (

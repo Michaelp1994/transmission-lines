@@ -18,9 +18,8 @@ import {
     Input,
 } from "@repo/ui";
 import {
-    TowerGeometryInput,
-    towerGeometryInputSchema,
-    defaultTowerGeometry,
+    updateTowerGeometrySchema,
+    UpdateTowerGeometryInput,
 } from "@repo/validators/schemas/TowerGeometry.schema";
 
 import trpc from "@/utils/trpc";
@@ -32,15 +31,16 @@ interface Props {
 }
 
 const EditTowerGeometryForm: React.FC<Props> = ({ id }) => {
-    const { data, error, isLoading } = trpc.towerGeometry.getById.useQuery(id);
+    const { data, error, isLoading } = trpc.towerGeometry.getById.useQuery({
+        id,
+    });
+    console.log("data: ", data);
 
     const navigate = useNavigate();
     const { t } = useTranslation("towerGeometry");
-    // const [editTowerGeometry, result] = useEditTowerGeometryMutation();
     const updateTowerGeometryMutation = trpc.towerGeometry.update.useMutation();
-    const form = useForm<TowerGeometryInput>({
-        resolver: zodResolver(towerGeometryInputSchema),
-        defaultValues: defaultTowerGeometry,
+    const form = useForm<UpdateTowerGeometryInput>({
+        resolver: zodResolver(updateTowerGeometrySchema),
         values: data,
     });
 
@@ -51,8 +51,9 @@ const EditTowerGeometryForm: React.FC<Props> = ({ id }) => {
         return <div>{t("general:errorMessage")}</div>;
     }
 
-    async function onSubmit(values: TowerGeometryInput) {
-        await updateTowerGeometryMutation.mutate({ id, towerGeometry: values });
+    async function onSubmit(values: UpdateTowerGeometryInput) {
+        console.log(values);
+        await updateTowerGeometryMutation.mutateAsync(values);
         if (updateTowerGeometryMutation.error) {
             console.log(updateTowerGeometryMutation.error);
             return;
@@ -60,7 +61,7 @@ const EditTowerGeometryForm: React.FC<Props> = ({ id }) => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(ROUTES.TOWER_GEOMETRIES.path);
+        navigate(ROUTES.ALL_TOWER_GEOMETRIES.path);
     }
 
     return (

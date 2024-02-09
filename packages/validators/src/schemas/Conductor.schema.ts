@@ -2,7 +2,7 @@ import * as z from "zod";
 
 /** @see https://github.com/aiji42/zod-i18n for Internationalization */
 
-export const conductorInputSchema = z.object({
+export const createConductorSchema = z.object({
     name: z.string().min(2).max(50).trim(),
     fromPhase: z.number().nonnegative(),
     toPhase: z.number().nonnegative(),
@@ -14,14 +14,17 @@ export const conductorInputSchema = z.object({
         .positive({ message: "Please select a conductor type" }),
 });
 
-export const conductorSchema = conductorInputSchema.extend({
+export type CreateConductorInput = z.infer<typeof createConductorSchema>;
+
+// update
+
+export const updateConductorSchema = createConductorSchema.extend({
     id: z.number(),
 });
 
-export type ConductorInput = z.infer<typeof conductorInputSchema>;
-export type Conductor = z.infer<typeof conductorSchema>;
+export type UpdateConductorInput = z.infer<typeof updateConductorSchema>;
 
-export const defaultConductor: ConductorInput = {
+export const defaultConductor: CreateConductorInput = {
     name: "",
     fromPhase: 0,
     toPhase: 0,

@@ -20,7 +20,9 @@ const UpdateTowerGeometry: React.FC<Props> = () => {
     const { id } = useTypedParams(ROUTES.UPDATE_TOWER_GEOMETRY);
     return (
         <Wrapper>
-            <Link to={ROUTES.TOWER_GEOMETRIES.path}>{t("general:goBack")}</Link>
+            <Link to={ROUTES.ALL_TOWER_GEOMETRIES.path}>
+                {t("general:goBack")}
+            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>

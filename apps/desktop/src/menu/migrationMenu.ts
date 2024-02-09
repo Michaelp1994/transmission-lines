@@ -1,9 +1,9 @@
-import { MigrationExecutor } from "typeorm";
+import { MigrationExecutor } from "@repo/db/migrations/index";
 import fs from "fs/promises";
+import { dataSources, databasePath } from "../config/db";
 
-import { databasePath, db } from "@database/dataSource";
-
-const migrationExecutor = new MigrationExecutor(db);
+const migrationExecutor = new MigrationExecutor(dataSources.mainDb);
+const db = dataSources.mainDb;
 
 export default {
     label: "Migrations",
@@ -17,6 +17,8 @@ export default {
                 console.log(`database deleted at ${databasePath}`);
                 await db.initialize();
                 console.log("database initialized");
+                await migrationExecutor.executePendingMigrations();
+                console.log("migrations performed");
                 if (browserWindow)
                     browserWindow.webContents.send("invalidate-cache");
             },

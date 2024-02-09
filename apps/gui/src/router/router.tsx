@@ -2,26 +2,35 @@ import { createHashRouter, RouteObject } from "react-router-dom";
 import ROUTES from "./routes";
 
 import DefaultLayout from "@/layouts/DefaultLayout";
-import Home from "@/pages/Home";
-import CreateTransmissionLine from "@/pages/CreateTransmissionLine";
-import GeneratePage from "@/pages/GenerateResults";
-import TowerGeometries from "@/pages/TowerGeometries";
-import Conductors from "@/pages/Conductors";
-import UpdateTransmissionLine from "@/pages/UpdateTransmissionLine";
-import UpdateSource from "@/pages/UpdateSource";
+
+import Home from "@/pages/HomePage";
 import PageNotFound from "@/pages/PageNotFound";
-import CreateSource from "@/pages/CreateSource";
 import WelcomePage from "@/pages/WelcomePage";
-import CreateConductorType from "@/pages/CreateConductorType";
-import CreateTowerGeometry from "@/pages/CreateTowerGeometry";
-import UpdateConductorType from "@/pages/UpdateConductorType";
-import UpdateTowerGeometry from "@/pages/UpdateTowerGeometry";
 import ErrorPage from "@/pages/ErrorPage";
 import ProjectPage from "@/pages/ProjectPage";
-import BuildTransmissionLine from "@/pages/BuildTransmissionLine";
-import TransmissionLineFault from "@/pages/TransmissionLineFault";
-import TowerConfigurationTable from "@/features/transmissionLines/components/TowerConfigurationTable";
-import TransmissionLineInfo from "@/features/transmissionLines/components/TransmissionLineInfo";
+
+// Conductor Types
+import CreateConductorTypePage from "@/pages/CreateConductorTypePage";
+import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
+import AllConductorTypesPage from "@/pages/AllConductorTypesPage";
+
+// Transmission Lines
+import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
+import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
+
+// Tower Geometries
+import AllTowerGeometriesPage from "@/pages/AllTowerGeometriesPage";
+import CreateTowerGeometryPage from "@/pages/CreateTowerGeometryPage";
+import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
+
+// Sources
+import CreateSourcePage from "@/pages/CreateSourcePage";
+import UpdateSourcePage from "@/pages/UpdateSourcePage";
+
+// Results
+import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
+import BuildTransmissionLinePage from "@/pages/BuildTransmissionLinePage";
+import GeneratePage from "@/pages/GenerateResultsPage";
 
 const routeObjects: RouteObject[] = [
     {
@@ -44,47 +53,48 @@ const routeObjects: RouteObject[] = [
             },
             {
                 path: ROUTES.CREATE_TOWER_GEOMETRY.path,
-                element: <CreateTowerGeometry />,
-            },
-            {
-                path: ROUTES.CREATE_TRANSMISSION_LINE.path,
-                element: <CreateTransmissionLine />,
-            },
-            {
-                path: ROUTES.CREATE_SOURCE.path,
-                element: <CreateSource />,
-            },
-            {
-                path: ROUTES.CREATE_CONDUCTOR.path,
-                element: <CreateConductorType />,
-            },
-            {
-                path: ROUTES.TRANSMISSION_FAULT.path,
-                element: <TransmissionLineFault />,
-            },
-            {
-                path: ROUTES.UPDATE_TRANSMISSION_LINE.path,
-                element: <UpdateTransmissionLine />,
+                element: <CreateTowerGeometryPage />,
             },
             {
                 path: ROUTES.UPDATE_TOWER_GEOMETRY.path,
-                element: <UpdateTowerGeometry />,
+                element: <UpdateTowerGeometryPage />,
+            },
+            {
+                path: ROUTES.CREATE_TRANSMISSION_LINE.path,
+                element: <CreateTransmissionLinePage />,
+            },
+            {
+                path: ROUTES.UPDATE_TRANSMISSION_LINE.path,
+                element: <UpdateTransmissionLinePage />,
+            },
+            {
+                path: ROUTES.CREATE_SOURCE.path,
+                element: <CreateSourcePage />,
             },
             {
                 path: ROUTES.UPDATE_SOURCE.path,
-                element: <UpdateSource />,
+                element: <UpdateSourcePage />,
             },
+            {
+                path: ROUTES.CREATE_CONDUCTOR_TYPE.path,
+                element: <CreateConductorTypePage />,
+            },
+            {
+                path: ROUTES.TRANSMISSION_FAULT.path,
+                element: <TransmissionLineFaultPage />,
+            },
+
             {
                 path: ROUTES.UPDATE_CONDUCTOR_TYPE.path,
-                element: <UpdateConductorType />,
+                element: <UpdateConductorTypePage />,
             },
             {
-                path: ROUTES.TOWER_GEOMETRIES.path,
-                element: <TowerGeometries />,
+                path: ROUTES.ALL_TOWER_GEOMETRIES.path,
+                element: <AllTowerGeometriesPage />,
             },
             {
-                path: ROUTES.CONDUCTORS.path,
-                element: <Conductors />,
+                path: ROUTES.ALL_CONDUCTOR_TYPES.path,
+                element: <AllConductorTypesPage />,
             },
             {
                 path: ROUTES.GENERATE_RESULTS.path,
@@ -92,7 +102,7 @@ const routeObjects: RouteObject[] = [
             },
             {
                 path: ROUTES.BUILD_TRANSMISSION_LINE.path,
-                element: <BuildTransmissionLine />,
+                element: <BuildTransmissionLinePage />,
             },
             {
                 path: "*",

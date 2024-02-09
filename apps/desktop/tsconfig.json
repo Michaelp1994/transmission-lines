@@ -1,15 +1,5 @@
 {
-    "extends": "@repo/typescript-config/base.json",
-    "compilerOptions": {
-        "lib": ["ES2022"],
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
-        "target": "ESNext",
-        "outDir": "./dist"
-    },
-    "exclude": ["node_modules"],
-    "include": ["src"],
-    "tsc-alias": {
-        "resolveFullPaths": true
-    }
+    "extends": "@repo/typescript-config/node.json",
+    "compilerOptions": {},
+    "include": ["src"]
 }

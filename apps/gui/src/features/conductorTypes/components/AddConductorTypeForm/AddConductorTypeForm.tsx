@@ -18,8 +18,8 @@ import {
 } from "@repo/ui";
 
 import {
-    ConductorTypeInput,
-    conductorTypeSchema,
+    CreateConductorTypeInput,
+    createConductorTypeSchema,
     defaultConductorType,
 } from "@repo/validators/schemas/ConductorType.schema";
 import ROUTES from "@/router/routes";
@@ -32,18 +32,18 @@ const AddConductorTypeForm: React.FC<Props> = () => {
     const { t } = useTranslation("conductorType");
     const navigate = useNavigate();
     const createConductorMutation = trpc.conductorType.create.useMutation();
-    const form = useForm<ConductorTypeInput>({
-        resolver: zodResolver(conductorTypeSchema),
+    const form = useForm<CreateConductorTypeInput>({
+        resolver: zodResolver(createConductorTypeSchema),
         defaultValues: defaultConductorType,
     });
 
-    async function onSubmit(values: ConductorTypeInput) {
+    async function onSubmit(values: CreateConductorTypeInput) {
         try {
             await createConductorMutation.mutateAsync(values);
             toast.success(`${values.name} has been added.`, {
                 description: format(new Date(), "PPPPpp"),
             });
-            navigate(ROUTES.CONDUCTORS.path);
+            navigate(ROUTES.ALL_CONDUCTOR_TYPES.path);
         } catch (e) {
             console.log(e);
             toast.error("There was an error");

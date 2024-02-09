@@ -34,6 +34,8 @@ export default class TransmissionConductor extends BaseEntity {
     @Column()
     typeId: number;
 
-    @ManyToOne(() => TransmissionLine, (line) => line.conductors)
+    @ManyToOne(() => TransmissionLine, (line) => line.conductors, {
+        onDelete: "CASCADE",
+    })
     transmissionLine: Relation<TransmissionLine>;
 }

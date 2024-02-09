@@ -1,8 +1,9 @@
 import * as Math from "mathjs";
 
-import TowerGeometry from "@/db/models/TowerGeometry.model";
-import ConductorType from "@/db/models/ConductorType.model";
-import ConductorLocation from "@/db/models/ConductorLocation.model";
+import TowerGeometry from "@repo/db/models/TowerGeometry.model";
+import ConductorType from "@repo/db/models/ConductorType.model";
+import ConductorLocation from "@repo/db/models/ConductorLocation.model";
+import TransmissionLine from "@repo/db/models/TransmissionLine.model";
 
 function calcDistance(
     conductor1: ConductorLocation,
@@ -24,9 +25,7 @@ function calcImageDistance(
 }
 
 export default async function buildTransmissionLineMatrix(id: string) {
-    const transmissionLine = global.transmissionLines.find(
-        (tl) => tl.id === id
-    );
+    const transmissionLine = await TransmissionLine.findOneBy({id})
     console.log("Calculating Transmission line parameters...");
     if (!transmissionLine) throw Error("Can't find Transmission Line");
     const u0 = 1.2566370621219 * 10 ** -6; // N/A^2

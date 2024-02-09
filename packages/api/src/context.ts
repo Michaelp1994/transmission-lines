@@ -1,10 +1,16 @@
 import type { DBContext } from "@repo/db";
+import type { BrowserWindow, Dialog } from "electron";
 
-export const createContext = (dbContext: DBContext) => {
+export type Electron = {
+    browserWindow: BrowserWindow;
+    dialog: Dialog;
+};
+export const createContext = (dbContext: DBContext, electron: Electron) => {
     // const session = await getSession({ req: opts.req });
 
     return {
         ...dbContext,
+        electron,
     };
 };
 

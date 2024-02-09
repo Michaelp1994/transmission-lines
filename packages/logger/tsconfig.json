@@ -1,24 +1,9 @@
 {
     "compilerOptions": {
-        "composite": false,
-        "declaration": true,
-        "declarationMap": true,
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "isolatedModules": true,
-        "outDir": "dist",
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "preserveWatchOutput": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "strictNullChecks": true
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     },
     "include": ["src"],
-    "exclude": ["node_modules", "dist"],
-    "tsc-alias": {
-        "resolveFullPaths": true
-    }
+    "extends": "@repo/typescript-config/node.json"
 }

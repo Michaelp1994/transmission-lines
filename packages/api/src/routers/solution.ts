@@ -1,4 +1,4 @@
-import { dialog, BrowserWindow } from "electron";
+// import { dialog, BrowserWindow } from "electron";
 import { z } from "zod";
 import { towerFaultSchema } from "@repo/validators/schemas/TowerFault.schema";
 // import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
@@ -15,36 +15,40 @@ export default router({
     }),
     // buildTransmissionLine: publicProcedure
     //     .input(z.string().uuid())
-    //     .mutation(async ({ input }) => {
-    //         return buildTransmissionLineMatrix(input);
+    //     .mutation(async ({ input, ctx }) => {
+    //         return buildTransmissionLineMatrix(input, ctx);
     //     }),
-    // saveScript: publicProcedure.mutation(async () => {
-    //     const currentBrowser = BrowserWindow.getFocusedWindow();
+
+    // saveScript: publicProcedure.mutation(async ({ ctx }) => {
+    //     const currentBrowser = ctx.electron.browserWindow;
     //     if (!currentBrowser) {
     //         throw new Error("No browser window found");
     //     }
-    //     const saveDialogReturn = await dialog.showSaveDialog(currentBrowser, {
-    //         filters: [
-    //             { name: "DSS File", extensions: ["dss"] },
-    //             { name: "All Files", extensions: ["*"] },
-    //         ],
-    //     });
+    //     const saveDialogReturn = await ctx.electron.dialog.showSaveDialog(
+    //         currentBrowser,
+    //         {
+    //             filters: [
+    //                 { name: "DSS File", extensions: ["dss"] },
+    //                 { name: "All Files", extensions: ["*"] },
+    //             ],
+    //         }
+    //     );
     //     if (!saveDialogReturn.canceled) {
-    //         const { study } = await buildCircuit();
+    //         const { study } = await buildCircuit(ctx);
     //         await saveScript(study, saveDialogReturn.filePath!);
     //         return true;
     //     }
     //     return false;
     // }),
-    // worstCaseScenario: publicProcedure.mutation(async () => {
-    //     const { study, updatedProject } = await buildCircuit();
+    // worstCaseScenario: publicProcedure.mutation(async ({ ctx }) => {
+    //     const { study, updatedProject } = await buildCircuit(ctx);
     //     const results = await worseCaseScenario(study, updatedProject);
     //     return results;
     // }),
     // circuitDiagram: publicProcedure
     //     .input(towerFaultSchema)
-    //     .query(async ({ input: { location } }) => {
-    //         const { study, updatedProject } = await buildCircuit();
+    //     .query(async ({ input: { location }, ctx }) => {
+    //         const { study, updatedProject } = await buildCircuit(ctx);
     //         const results = await solveTransmissionTowerFault(
     //             study,
     //             updatedProject,
@@ -54,8 +58,8 @@ export default router({
     //     }),
     // towerFault: publicProcedure
     //     .input(towerFaultSchema)
-    //     .query(async ({ input: { location } }) => {
-    //         const { study, updatedProject } = await buildCircuit();
+    //     .query(async ({ input: { location }, ctx }) => {
+    //         const { study, updatedProject } = await buildCircuit(ctx);
     //         const results = await solveTransmissionTowerFault(
     //             study,
     //             updatedProject,
