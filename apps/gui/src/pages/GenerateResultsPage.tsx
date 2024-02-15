@@ -18,33 +18,34 @@ import { ChevronRight } from "lucide-react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useTypedParams } from "react-router-typesafe-routes/dom";
 
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
 
-const GenerateResults: React.FC<Props> = () => {
+const GenerateResultsPage: React.FC<Props> = () => {
     const { t } = useTranslation("worstCaseResults");
+    const { projectId } = useTypedParams(ROUTES.GENERATE_RESULTS);
+    // const saveScriptMutation = trpc.saveScript.useMutation();
 
-    const saveScriptMutation = trpc.saveScript.useMutation();
-
-    const worstCaseScenario = trpc.worstCaseScenario.useMutation();
-
-    useEffect(() => {
-        async function callMutation() {
-            await worstCaseScenario.mutateAsync();
+    const worstCaseScenario = trpc.project.solve.useQuery(
+        { id: projectId },
+        {
+            retry: false,
         }
-        callMutation();
-    }, []);
+    );
 
     async function handleSaveScript() {
-        await saveScriptMutation.mutateAsync();
+        // await saveScriptMutation.mutateAsync();
     }
 
     return (
         <Wrapper>
-            <Link to={ROUTES.PROJECT.path}>{t("general:goBack")}</Link>
+            <Link to={ROUTES.VIEW_PROJECT.buildPath({ projectId })}>
+                {t("general:goBack")}
+            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -52,7 +53,7 @@ const GenerateResults: React.FC<Props> = () => {
                     </CardHeaderText>
                 </CardHeader>
                 <CardContent>
-                    <TableWrapper>
+                    {/*     <TableWrapper>
                         <Table>
                             <TableCaption>Sources</TableCaption>
                             <TableHeader>
@@ -78,15 +79,15 @@ const GenerateResults: React.FC<Props> = () => {
                                                     size="icon"
                                                     asChild
                                                 >
-                                                    {/* <Link
+                                                     <Link
                                                     to={ROUTES.TRANSMISSION_FAULT.buildPath(
                                                         {
                                                             id: source.id,
                                                         }
                                                     )}
-                                                > */}
+                                                > 
                                                     <ChevronRight />
-                                                    {/* </Link> */}
+                                                     </Link>
                                                 </Button>
                                             </StyledTableCell>
                                         </TableRow>
@@ -150,7 +151,7 @@ const GenerateResults: React.FC<Props> = () => {
                                 </Table>
                             )
                         )}
-                    </TableWrapper>
+                    </TableWrapper> */}
                     <Button onClick={handleSaveScript}>Save Script</Button>
                 </CardContent>
             </Card>
@@ -170,4 +171,4 @@ const TableWrapper = styled.div`
     margin-bottom: 2rem;
 `;
 
-export default GenerateResults;
+export default GenerateResultsPage;

@@ -17,7 +17,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 
-
 import CurrentGraph from "@/features/results/components/CurrentGraph/CurrentGraph";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
@@ -25,7 +24,7 @@ import trpc from "@/utils/trpc";
 
 interface Props {}
 
-const TransmissionLineFault: React.FC<Props> = () => {
+const TransmissionLineFaultPage: React.FC<Props> = () => {
     const { t } = useTranslation("singleFault");
     const { lineId, towerId } = useTypedParams(ROUTES.TRANSMISSION_FAULT);
 
@@ -177,4 +176,4 @@ const Title = styled.h1`
     text-align: center;
 `;
 
-export default TransmissionLineFault;
+export default TransmissionLineFaultPage;

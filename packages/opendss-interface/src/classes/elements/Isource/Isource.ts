@@ -94,18 +94,8 @@ export default class Isource
     /** {Yes|No or True|False} Indicates whether this element is enabled. */
     enabled?: boolean;
 
-    constructor(options: IsourceInterface);
-    constructor(name: string, options?: OmitName<IsourceInterface>);
-    constructor(
-        nameOrOptions: string | IsourceInterface,
-        options?: OmitName<IsourceInterface>
-    ) {
-        super(nameOrOptions);
-        if (typeof nameOrOptions === "string") {
-            Object.assign(this, options);
-        } else {
-            const { name, ...otherOptions } = nameOrOptions;
-            Object.assign(this, otherOptions);
-        }
+    constructor(options: IsourceInterface) {
+        super(options);
+        Object.assign(this, options);
     }
 }

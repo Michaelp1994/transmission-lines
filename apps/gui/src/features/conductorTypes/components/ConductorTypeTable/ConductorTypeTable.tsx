@@ -1,96 +1,58 @@
 import { styled } from "@linaria/react";
-import { Button } from "@repo/ui";
 import {
+    ColumnFiltersState,
     PaginationState,
-    createColumnHelper,
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
-import { Info } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
-import trpc, { RouterOutputs } from "@/utils/trpc";
+import trpc from "@/utils/trpc";
 
+import useColumns, { ConductorType } from "./columns";
 import ConductorTypeTablePagination from "./ConductorTypeTablePagination";
 import ConductorTypeTableToolbar from "./ConductorTypeTableToolbar";
 import DataTable from "./DataTable";
-
-const columnHelper =
-    createColumnHelper<RouterOutputs["conductorType"]["getAll"]>();
-
-interface EditButtonProps {
-    id: number;
-}
-
-const EditButton: React.FC<EditButtonProps> = ({ id }) => (
-    <Button asChild variant="ghost" size="icon">
-        <Link to={ROUTES.UPDATE_CONDUCTOR_TYPE.buildPath({ id })}>
-            <Info />
-        </Link>
-    </Button>
-);
 
 interface Props {}
 
 const ConductorTable: React.FC<Props> = () => {
     const { t } = useTranslation("conductorType");
+    const columns = useColumns();
 
-    const columns = useMemo(
-        () => [
-            columnHelper.accessor("name", {
-                header: () => t("name.label"),
-            }),
-            columnHelper.accessor("outerDiameter", {
-                header: () => t("outerDiameter.label"),
-            }),
-            columnHelper.accessor("acResistance75", {
-                header: () => t("acResistance75.label"),
-            }),
-            columnHelper.accessor("gmr", {
-                header: () => t("gmr.label"),
-            }),
-            columnHelper.accessor("id", {
-                id: "id",
-                header: () => t("table:actions"),
-                cell: (props) => <EditButton id={props.getValue()} />,
-            }),
-        ],
-        [t]
-    );
-
-    const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
         pageSize: 10,
     });
-    const defaultData = useMemo(() => [], []);
-    const pagination = useMemo(
-        () => ({
-            pageIndex,
-            pageSize,
-        }),
-        [pageIndex, pageSize]
-    );
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const defaultData: ConductorType[] = [];
+
     const { data, isLoading, error } = trpc.conductorType.getAll.useQuery(
         {
-            pageIndex,
-            pageSize,
+            pageIndex: pagination.pageIndex,
+            pageSize: pagination.pageSize,
         },
         { keepPreviousData: true }
     );
+
+    const { data: pageCount } = trpc.conductorType.getCount.useQuery({
+        pageIndex: pagination.pageIndex,
+        pageSize: pagination.pageSize,
+    });
+
     const table = useReactTable({
-        data: data ?? defaultData,
+        data: data || defaultData,
         columns,
         onPaginationChange: setPagination,
         manualPagination: true,
         state: {
             pagination,
+            columnFilters,
         },
-        pageCount: 10,
-
+        pageCount: pageCount ?? -1,
         getCoreRowModel: getCoreRowModel(),
+        onColumnFiltersChange: setColumnFilters,
     });
 
     if (isLoading) {

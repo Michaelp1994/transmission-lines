@@ -1,4 +1,14 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    BaseEntity,
+    Column,
+    Entity,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    type Relation,
+} from "typeorm";
+
+// eslint-disable-next-line import/no-cycle
+import Project from "./Project.model";
 
 @Entity()
 export default class Source extends BaseEntity {
@@ -31,4 +41,13 @@ export default class Source extends BaseEntity {
 
     @Column()
     frequency: number;
+
+    @ManyToOne(() => Project, (project) => project.sources, {
+        cascade: true,
+        onDelete: "CASCADE",
+    })
+    project: Relation<Project>;
+
+    @Column("uuid")
+    projectId: string;
 }

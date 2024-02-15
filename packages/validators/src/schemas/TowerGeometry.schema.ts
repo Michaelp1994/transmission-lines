@@ -5,6 +5,7 @@ import {
     defaultConductorLocation,
     updateConductorLocationSchema,
 } from "./ConductorLocation.schema";
+import { geometryId } from "./Ids.schema";
 import hasNoOverlappingConductors from "../helpers/hasNoOverlappingConductors";
 
 // create
@@ -25,7 +26,7 @@ export type CreateTowerGeometryInput = z.infer<
 // update
 
 export const updateTowerGeometrySchema = createTowerGeometrySchema.extend({
-    id: z.number().positive(),
+    id: geometryId,
     conductors: createConductorLocationSchema
         .or(updateConductorLocationSchema)
         .array(),
@@ -45,7 +46,7 @@ export type GetAllTowerGeometriesInput = z.infer<
 
 // getById
 
-export const getTowerGeometryByIdSchema = z.object({ id: z.number() });
+export const getTowerGeometryByIdSchema = z.object({ id: geometryId });
 
 export type GetTowerGeometryByIdInput = z.infer<
     typeof getTowerGeometryByIdSchema
@@ -53,7 +54,7 @@ export type GetTowerGeometryByIdInput = z.infer<
 
 // delete
 
-export const deleteTowerGeometrySchema = z.object({ id: z.number() });
+export const deleteTowerGeometrySchema = z.object({ id: geometryId });
 
 export type DeleteTowerGeometryInput = z.infer<
     typeof deleteTowerGeometrySchema

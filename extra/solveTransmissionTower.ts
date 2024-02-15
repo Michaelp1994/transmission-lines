@@ -1,5 +1,5 @@
-import { Fault } from "@repo/opendss-interface/elements";
 import GeneralStudy from "@repo/opendss-interface/classes/GeneralStudy";
+import { Fault } from "@repo/opendss-interface/elements";
 import { FaultLocation } from "@repo/validators/schemas/TowerFault.schema";
 
 export interface CurrentResult {

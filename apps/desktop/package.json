@@ -8,9 +8,10 @@
     "type": "module",
     "main": "dist/index.js",
     "scripts": {
-        "build": "tsc && tsc-alias",
+        "// dev": "electron --inspect=9229 .",
+        "build": "vite build",
         "clean": "rm -rf .turbo node_modules dist",
-        "dev": "pnpm run build && electron .",
+        "dev": "vite build -w",
         "postinstall": "electron-builder install-app-deps",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
@@ -40,6 +41,7 @@
         "playwright": "^1.41.2",
         "tsc-alias": "^1.8.8",
         "typescript": "^5.3.3",
+        "vite": "^5.0.12",
         "wait-on": "^7.2.0",
         "xvfb-maybe": "^0.2.1"
     }

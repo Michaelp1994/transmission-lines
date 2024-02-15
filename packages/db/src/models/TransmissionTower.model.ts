@@ -7,6 +7,7 @@ import {
     type Relation,
 } from "typeorm";
 
+import TowerGeometry from "./TowerGeometry.model";
 // eslint-disable-next-line import/no-cycle
 import TransmissionLine from "./TransmissionLine.model";
 
@@ -26,6 +27,11 @@ export default class TransmissionTower extends BaseEntity {
 
     @Column()
     geometryId: number;
+
+    @ManyToOne(() => TowerGeometry, {
+        onDelete: "CASCADE",
+    })
+    geometry: Relation<TowerGeometry>;
 
     @ManyToOne(() => TransmissionLine, (line) => line.conductors, {
         onDelete: "CASCADE",

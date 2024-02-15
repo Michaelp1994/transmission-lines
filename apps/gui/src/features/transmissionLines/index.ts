@@ -1,11 +1,13 @@
-import AddTransmissionLineForm from "./components/AddTransmissionLineForm";
 import ConductorConfigurationTable from "./components/ConductorConfigurationTable";
-import EditTransmissionLineForm from "./components/EditTransmissionLineForm";
+import GenerateConductorsModal from "./components/GenerateConductorsModal";
+import GenerateTowersModal from "./components/GenerateTowersModal";
+import TowerConfigurationTable from "./components/TowerConfigurationTable";
 import TransmissionLinesList from "./components/TransmissionLinesList";
 
 export {
-    AddTransmissionLineForm,
-    EditTransmissionLineForm,
+    GenerateConductorsModal,
+    GenerateTowersModal,
+    TowerConfigurationTable,
     TransmissionLinesList,
     ConductorConfigurationTable,
 };

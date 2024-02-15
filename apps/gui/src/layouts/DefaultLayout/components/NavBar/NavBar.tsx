@@ -35,14 +35,14 @@ const NavBar: React.FC<Props> = () => {
                             {t("home")}
                         </Link>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
+                    {/* <NavigationMenuItem>
                         <Link
                             to={ROUTES.PROJECT.path}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("project")}
                         </Link>
-                    </NavigationMenuItem>
+                    </NavigationMenuItem> */}
                     <NavigationMenuItem>
                         <Link
                             to={ROUTES.ALL_CONDUCTOR_TYPES.path}

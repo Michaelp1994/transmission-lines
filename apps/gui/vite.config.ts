@@ -6,7 +6,16 @@ import wyw from "@wyw-in-js/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-    plugins: [react(), wyw(), tsconfigPaths()],
+    plugins: [
+        wyw({
+            include: ["**/*.{ts,tsx}"],
+            babelOptions: {
+                presets: ["@babel/preset-typescript", "@babel/preset-react"],
+            },
+        }),
+        react(),
+        tsconfigPaths(),
+    ],
     base: "./",
     test: {
         environment: "jsdom",

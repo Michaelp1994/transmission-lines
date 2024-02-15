@@ -15,7 +15,7 @@ import ROUTES from "@/router/routes";
 
 interface Props {}
 
-const UpdateConductorType: React.FC<Props> = () => {
+const UpdateConductorTypePage: React.FC<Props> = () => {
     const { id } = useTypedParams(ROUTES.UPDATE_CONDUCTOR_TYPE);
     const { t } = useTranslation("conductorType");
 
@@ -41,4 +41,4 @@ const UpdateConductorType: React.FC<Props> = () => {
 
 const Wrapper = styled.div``;
 
-export default UpdateConductorType;
+export default UpdateConductorTypePage;

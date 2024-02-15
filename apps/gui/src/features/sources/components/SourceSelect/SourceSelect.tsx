@@ -16,17 +16,21 @@ import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+    projectId: string;
+}
 
 const SourceSelect = forwardRef<HTMLButtonElement, Props>(
-    ({ value, onChange, ...props }, ref) => {
+    ({ projectId, value, onChange, ...props }, ref) => {
         const { t } = useTranslation("source");
-        const { data, error, isLoading } = trpc.source.getAll.useQuery();
+        const { data, error, isLoading } = trpc.source.getAll.useQuery({
+            projectId,
+        });
         const [open, setOpen] = useState(false);
         const [search, setSearch] = useState("");
         const filteredItems = useMemo(
             () =>
-                data.filter(
+                data?.filter(
                     /** dumb filtering, until cmdk allows for custom search key
                      * @see https://github.com/pacocoursey/cmdk/issues/181 */
                     (source) =>
@@ -50,7 +54,7 @@ const SourceSelect = forwardRef<HTMLButtonElement, Props>(
                         {...props}
                     >
                         {value
-                            ? data.find((source) => source.id === value)?.name
+                            ? data?.find((source) => source.id === value)?.name
                             : t("select")}
                         <StyledChevron />
                     </StyledButton>
@@ -64,7 +68,7 @@ const SourceSelect = forwardRef<HTMLButtonElement, Props>(
                         />
                         <CommandEmpty>{t("noneFound")}</CommandEmpty>
                         <CommandGroup>
-                            {filteredItems.map((source) => (
+                            {filteredItems?.map((source) => (
                                 <CommandItem
                                     key={source.id}
                                     value={source.id}

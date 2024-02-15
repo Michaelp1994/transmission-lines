@@ -1,20 +1,20 @@
-import conductorType from "./conductorType";
-import files from "./files";
-import meta from "./meta";
-import solution from "./solution";
-import source from "./source";
-import towerGeometry from "./towerGeometry";
-import transmissionLine from "./transmissionLine";
+import conductorTypeRouter from "./conductorType";
+import metaRouter from "./meta";
+import projectRouter from "./project";
+import solutionRouter from "./solution";
+import sourceRouter from "./source";
+import towerGeometryRouter from "./towerGeometry";
+import transmissionLineRouter from "./transmissionLine";
 import { router } from "../trpc";
 
 export const appRouter = router({
-    conductorType,
-    files,
-    solution,
-    source,
-    towerGeometry,
-    transmissionLine,
-    meta,
+    conductorType: conductorTypeRouter,
+    solution: solutionRouter,
+    source: sourceRouter,
+    towerGeometry: towerGeometryRouter,
+    transmissionLine: transmissionLineRouter,
+    meta: metaRouter,
+    project: projectRouter,
 });
 
 export type AppRouter = typeof appRouter;

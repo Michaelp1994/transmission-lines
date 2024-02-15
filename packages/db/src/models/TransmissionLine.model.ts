@@ -2,12 +2,15 @@ import {
     BaseEntity,
     Column,
     Entity,
+    ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
     type Relation,
 } from "typeorm";
 
 // eslint-disable-next-line import/no-cycle
+import Project from "./Project.model";
+import Source from "./Source.model";
 import TransmissionConductor from "./TransmissionConductor";
 // eslint-disable-next-line import/no-cycle
 import TransmissionTower from "./TransmissionTower.model";
@@ -20,11 +23,30 @@ export default class TransmissionLine extends BaseEntity {
     @Column()
     name: string;
 
-    @Column()
-    fromSource: string;
+    @ManyToOne(() => Project, (project) => project.sources, {
+        cascade: true,
+        onDelete: "CASCADE",
+    })
+    project: Relation<Project>;
 
-    @Column({ nullable: true })
-    toSource?: string;
+    @Column("uuid")
+    projectId: string;
+
+    @ManyToOne(() => Source, {
+        onDelete: "CASCADE",
+    })
+    fromSource: Relation<Source>;
+
+    @Column("uuid")
+    fromSourceId: string;
+
+    @ManyToOne(() => Source, {
+        onDelete: "CASCADE",
+    })
+    toSource: Relation<Source>;
+
+    @Column("uuid")
+    toSourceId: string;
 
     @OneToMany(
         () => TransmissionConductor,

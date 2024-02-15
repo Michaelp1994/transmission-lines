@@ -13,7 +13,7 @@ export default router({
     getAll: publicProcedure
         .input(getAllConductorsSchema)
         .query(async ({ ctx, input }) => {
-            const repository = ctx.mainDb.getRepository(ConductorType);
+            const repository = ctx.dataSource.getRepository(ConductorType);
             const findOptions = input && {
                 skip: input.pageIndex,
                 take: input.pageSize,
@@ -21,10 +21,20 @@ export default router({
             const allConductorTypes = await repository.find(findOptions);
             return allConductorTypes;
         }),
+    getCount: publicProcedure
+        .input(getAllConductorsSchema)
+        .query(async ({ ctx, input }) => {
+            const repository = ctx.dataSource.getRepository(ConductorType);
+            const totalCount = await repository.count();
+            const pageCount = input
+                ? Math.ceil(totalCount / input.pageSize)
+                : -1;
+            return pageCount;
+        }),
     getById: publicProcedure
         .input(getConductorTypeByIdSchema)
         .query(({ input, ctx }) => {
-            const repository = ctx.mainDb.getRepository(ConductorType);
+            const repository = ctx.dataSource.getRepository(ConductorType);
             return repository.findOneByOrFail({
                 id: input.id,
             });
@@ -32,7 +42,7 @@ export default router({
     create: publicProcedure
         .input(createConductorTypeSchema)
         .mutation(({ input, ctx }) => {
-            const newConductorType = ctx.mainDb
+            const newConductorType = ctx.dataSource
                 .getRepository(ConductorType)
                 .create(input);
             return newConductorType.save();
@@ -40,12 +50,14 @@ export default router({
     update: publicProcedure
         .input(updateConductorTypeSchema)
         .mutation(async ({ input, ctx }) => {
-            const repository = ctx.mainDb.getRepository(ConductorType);
+            const repository = ctx.dataSource.getRepository(ConductorType);
             return repository.save({ ...input });
         }),
     delete: publicProcedure
         .input(deleteConductorTypeSchema)
         .mutation(async ({ input, ctx }) => {
-            ctx.mainDb.getRepository(ConductorType).delete({ id: input.id });
+            ctx.dataSource
+                .getRepository(ConductorType)
+                .delete({ id: input.id });
         }),
 });

@@ -2,22 +2,23 @@ import { RouteObject, createHashRouter } from "react-router-dom";
 
 import DefaultLayout from "@/layouts/DefaultLayout";
 import AllConductorTypesPage from "@/pages/AllConductorTypesPage";
+import AllProjectsPage from "@/pages/AllProjectsPage";
 import AllTowerGeometriesPage from "@/pages/AllTowerGeometriesPage";
-import BuildTransmissionLinePage from "@/pages/BuildTransmissionLinePage";
 import CreateConductorTypePage from "@/pages/CreateConductorTypePage";
+import CreateProjectPage from "@/pages/CreateProjectPage";
 import CreateSourcePage from "@/pages/CreateSourcePage";
 import CreateTowerGeometryPage from "@/pages/CreateTowerGeometryPage";
 import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
 import ErrorPage from "@/pages/ErrorPage";
 import GeneratePage from "@/pages/GenerateResultsPage";
-import Home from "@/pages/HomePage";
 import PageNotFound from "@/pages/PageNotFound";
-import ProjectPage from "@/pages/ProjectPage";
 import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
 import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
 import UpdateSourcePage from "@/pages/UpdateSourcePage";
 import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
 import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
+import ViewProjectPage from "@/pages/ViewProjectPage";
+import ViewTransmissionLineParametersPage from "@/pages/ViewTransmissionLineParametersPage";
 import WelcomePage from "@/pages/WelcomePage";
 
 import ROUTES from "./routes";
@@ -31,15 +32,19 @@ const routeObjects: RouteObject[] = [
             {
                 index: true,
                 path: ROUTES.HOME.path,
-                element: <Home />,
+                element: <AllProjectsPage />,
             },
             {
                 path: ROUTES.WELCOME.path,
                 element: <WelcomePage />,
             },
             {
-                path: ROUTES.PROJECT.path,
-                element: <ProjectPage />,
+                path: ROUTES.VIEW_PROJECT.path,
+                element: <ViewProjectPage />,
+            },
+            {
+                path: ROUTES.CREATE_PROJECT.path,
+                element: <CreateProjectPage />,
             },
             {
                 path: ROUTES.CREATE_TOWER_GEOMETRY.path,
@@ -91,8 +96,8 @@ const routeObjects: RouteObject[] = [
                 element: <GeneratePage />,
             },
             {
-                path: ROUTES.BUILD_TRANSMISSION_LINE.path,
-                element: <BuildTransmissionLinePage />,
+                path: ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS.path,
+                element: <ViewTransmissionLineParametersPage />,
             },
             {
                 path: "*",

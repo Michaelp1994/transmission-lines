@@ -4,7 +4,7 @@ import { BrowserWindow, app, dialog } from "electron";
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
 
-import { dataSources } from "./config/db";
+import { dataSource } from "./config/db";
 // import fs from "fs/promises";
 import setupDevTools from "./config/devTools";
 import createWindow from "./config/window";
@@ -23,7 +23,7 @@ app.whenReady().then(async () => {
     });
     const window = await createWindow();
 
-    createServer(dataSources, { browserWindow: window, dialog });
+    createServer(dataSource, { browserWindow: window, dialog });
 
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the

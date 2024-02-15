@@ -1,5 +1,4 @@
 import { styled } from "@linaria/react";
-import React from "react";
 import { Layer, Line, Rect, Stage, Text } from "react-konva";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 

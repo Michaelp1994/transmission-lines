@@ -15,7 +15,7 @@ import ROUTES from "@/router/routes";
 
 interface Props {}
 
-const UpdateTowerGeometry: React.FC<Props> = () => {
+const UpdateTowerGeometryPage: React.FC<Props> = () => {
     const { t } = useTranslation("towerGeometry");
     const { id } = useTypedParams(ROUTES.UPDATE_TOWER_GEOMETRY);
     return (
@@ -39,4 +39,4 @@ const UpdateTowerGeometry: React.FC<Props> = () => {
 
 const Wrapper = styled.div``;
 
-export default UpdateTowerGeometry;
+export default UpdateTowerGeometryPage;

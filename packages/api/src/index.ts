@@ -5,11 +5,11 @@ import cors from "cors";
 import { Electron } from "./context";
 import { appRouter } from "./routers/index";
 
-const createServer = (dbcontexts: DBContext, electron: Electron) => {
+const createServer = (dataSource: DBContext, electron: Electron) => {
     const server = createHTTPServer({
         middleware: cors(),
         createContext() {
-            return { ...dbcontexts, electron };
+            return { dataSource, electron };
         },
         router: appRouter,
     });

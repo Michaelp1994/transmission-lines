@@ -2,10 +2,9 @@ import fs from "fs/promises";
 
 import { MigrationExecutor } from "@repo/db/migrations/index";
 
-import { dataSources, databasePath } from "../config/db";
+import { dataSource, databasePath } from "../config/db";
 
-const migrationExecutor = new MigrationExecutor(dataSources.mainDb);
-const db = dataSources.mainDb;
+const migrationExecutor = new MigrationExecutor(dataSource);
 
 export default {
     label: "Migrations",
@@ -13,11 +12,11 @@ export default {
         {
             label: "Synchronize Database",
             click: async (_, browserWindow) => {
-                await db.destroy();
+                await dataSource.destroy();
                 console.log("database connection closed");
                 await fs.unlink(databasePath);
                 console.log(`database deleted at ${databasePath}`);
-                await db.initialize();
+                await dataSource.initialize();
                 console.log("database initialized");
                 await migrationExecutor.executePendingMigrations();
                 console.log("migrations performed");

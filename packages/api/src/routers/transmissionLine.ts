@@ -4,21 +4,26 @@ import {
     deleteTransmissionLineSchema,
     getAllTransmissionLinesSchema,
     getTransmissionLineByIdSchema,
+    getTransmissionLineParametersSchema,
     updateTransmissionLineSchema,
 } from "@repo/validators/schemas/TransmissionLine.schema";
+
+import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
 
 import { publicProcedure, router } from "../trpc";
 
 export default router({
     getAll: publicProcedure
         .input(getAllTransmissionLinesSchema)
-        .query(async ({ ctx }) =>
-            ctx.memoryDb.getRepository(TransmissionLine).find()
+        .query(async ({ ctx, input }) =>
+            ctx.dataSource
+                .getRepository(TransmissionLine)
+                .find({ where: { projectId: input.projectId } })
         ),
     getById: publicProcedure
         .input(getTransmissionLineByIdSchema)
         .query(async ({ input, ctx }) =>
-            ctx.memoryDb.getRepository(TransmissionLine).findOneOrFail({
+            ctx.dataSource.getRepository(TransmissionLine).findOneOrFail({
                 where: {
                     id: input.id,
                 },
@@ -29,7 +34,7 @@ export default router({
         .input(createTransmissionLineSchema)
         .mutation(async ({ input, ctx }) => {
             const transmissionLineRepository =
-                ctx.memoryDb.getRepository(TransmissionLine);
+                ctx.dataSource.getRepository(TransmissionLine);
             const transmissionLine = transmissionLineRepository.create(input);
             transmissionLine.save();
         }),
@@ -37,14 +42,38 @@ export default router({
         .input(updateTransmissionLineSchema)
         .mutation(async ({ input, ctx }) => {
             const transmissionLineRepository =
-                ctx.memoryDb.getRepository(TransmissionLine);
+                ctx.dataSource.getRepository(TransmissionLine);
             return transmissionLineRepository.save({ ...input });
+        }),
+    getParameters: publicProcedure
+        .input(getTransmissionLineParametersSchema)
+        .query(async ({ input, ctx }) => {
+            const transmissionLine = await ctx.dataSource
+                .getRepository(TransmissionLine)
+                .findOneOrFail({
+                    where: {
+                        id: input.id,
+                    },
+                    relations: {
+                        towers: {
+                            geometry: {
+                                conductors: true,
+                            },
+                        },
+                        conductors: {
+                            type: true,
+                        },
+                    },
+                });
+
+            const matrixes = buildTransmissionLineMatrix(transmissionLine);
+            return matrixes;
         }),
     delete: publicProcedure
         .input(deleteTransmissionLineSchema)
         .mutation(async ({ input, ctx }) => {
             const transmissionLineRepository =
-                ctx.memoryDb.getRepository(TransmissionLine);
+                ctx.dataSource.getRepository(TransmissionLine);
             await transmissionLineRepository.delete({ id: input.id });
         }),
 });

@@ -17,6 +17,7 @@
         "@linaria/core": "^6.0.0",
         "@linaria/react": "^6.0.0",
         "@repo/api": "workspace:*",
+        "@repo/db": "workspace:*",
         "@repo/ui": "workspace:*",
         "@repo/validators": "workspace:*",
         "@tanstack/react-query": "^4.36.1",
@@ -43,6 +44,8 @@
         "zod": "^3.22.4"
     },
     "devDependencies": {
+        "@babel/preset-react": "^7.23.3",
+        "@babel/preset-typescript": "^7.23.3",
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@testing-library/react": "^14.2.1",

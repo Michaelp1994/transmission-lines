@@ -27,13 +27,18 @@ import {
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
-interface Props {}
+interface Props {
+    projectId: string;
+}
 
-const SourcesList: React.FC<Props> = () => {
+const SourcesList: React.FC<Props> = ({ projectId }) => {
     const utils = trpc.useUtils();
-    const { data, error, isLoading } = trpc.source.getAll.useQuery();
+    const { data, isError, error, isLoading } = trpc.source.getAll.useQuery({
+        projectId,
+    });
     const deleteSourceMutation = trpc.source.delete.useMutation({
         onSuccess(input) {
+            utils.project.getById.invalidate({ id: projectId });
             utils.source.getAll.invalidate();
             utils.source.getById.invalidate(input);
         },
@@ -42,6 +47,15 @@ const SourcesList: React.FC<Props> = () => {
 
     async function remove(id: string) {
         await deleteSourceMutation.mutateAsync({ id });
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        console.log(error);
+        return <div>Error!</div>;
     }
 
     return (
@@ -59,7 +73,8 @@ const SourcesList: React.FC<Props> = () => {
                         <Button asChild variant="ghost">
                             <Link
                                 to={ROUTES.UPDATE_SOURCE.buildPath({
-                                    id,
+                                    projectId,
+                                    sourceId: id,
                                 })}
                             >
                                 <InfoIcon />

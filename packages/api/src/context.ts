@@ -5,13 +5,12 @@ export type Electron = {
     browserWindow: BrowserWindow;
     dialog: Dialog;
 };
-export const createContext = (dbContext: DBContext, electron: Electron) => 
+export const createContext = (dataSource: DBContext, electron: Electron) =>
     // const session = await getSession({ req: opts.req });
 
-     ({
-        ...dbContext,
+    ({
+        dataSource,
         electron,
-    })
-;
+    });
 
 export type Context = ReturnType<typeof createContext>;

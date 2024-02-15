@@ -12,10 +12,9 @@ import { Link } from "react-router-dom";
 import { AddConductorTypeForm } from "@/features/conductorTypes";
 import ROUTES from "@/router/routes";
 
-
 interface Props {}
 
-const CreateConductorType: React.FC<Props> = () => {
+const CreateConductorTypePage: React.FC<Props> = () => {
     const { t } = useTranslation("conductorType");
 
     return (
@@ -38,4 +37,4 @@ const CreateConductorType: React.FC<Props> = () => {
 };
 
 const Wrapper = styled.div``;
-export default CreateConductorType;
+export default CreateConductorTypePage;

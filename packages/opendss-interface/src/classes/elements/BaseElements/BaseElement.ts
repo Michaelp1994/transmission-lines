@@ -2,7 +2,7 @@ import splitStringsIntoRows from "@helpers/splitArray";
 
 import BaseElementInterface from "./BaseElementInterface";
 
-export default abstract class BaseElement {
+export default abstract class BaseElement implements BaseElementInterface {
     /** Type of Component
      * @ignore
      */
@@ -19,12 +19,8 @@ export default abstract class BaseElement {
      * New Capacitor.C2 like=c1  ... */
     like?: string;
 
-    constructor(nameOrOptions: string | BaseElementInterface) {
-        if (typeof nameOrOptions === "string") {
-            this.name = nameOrOptions;
-        } else {
-            this.name = nameOrOptions.name;
-        }
+    constructor(options: BaseElementInterface) {
+        this.name = options.name;
     }
 
     create() {

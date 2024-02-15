@@ -13,34 +13,26 @@ import {
     TableHeader,
     TableRow,
 } from "@repo/ui";
-import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
-
 
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
 
-const BuildTransmissionLine: React.FC<Props> = () => {
+const ViewTransmissionLineParametersPage: React.FC<Props> = () => {
     const { t } = useTranslation("transmissionLine");
-    const { id } = useTypedParams(ROUTES.BUILD_TRANSMISSION_LINE);
+    const { projectId, lineId } = useTypedParams(
+        ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS
+    );
 
-    const { mutateAsync, data } = trpc.buildTransmissionLine.useMutation();
-    const {
-        data: transmissionLine,
-        isLoading,
-        isError,
-    } = trpc.getTransmissionLineById.useQuery(id);
+    const { data, isError, isLoading } =
+        trpc.transmissionLine.getParameters.useQuery({
+            id: lineId,
+        });
 
-    useEffect(() => {
-        async function callMutation() {
-            await mutateAsync(id);
-        }
-        callMutation();
-    }, []);
     if (isError) {
         return <div>Error!</div>;
     }
@@ -50,14 +42,17 @@ const BuildTransmissionLine: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            <Link to={ROUTES.PROJECT.path}>{t("general:goBack")}</Link>
+            <Link to={ROUTES.VIEW_PROJECT.buildPath({ projectId })}>
+                {t("general:goBack")}
+            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
                         <CardTitle>
-                            {t("build.title", {
+                            Transmission Line Parameters
+                            {/* {t("build.title", {
                                 lineName: transmissionLine.name,
-                            })}
+                            })} */}
                         </CardTitle>
                         <CardDescription />
                     </CardHeaderText>
@@ -67,10 +62,10 @@ const BuildTransmissionLine: React.FC<Props> = () => {
                     <TableContainer>
                         <Table>
                             <TableBody>
-                                {data?.rMatrix.map((row, index) => (
-                                    <TableRow key={index}>
-                                        {row.map((col, index2) => (
-                                            <TableCell key={index2}>
+                                {data.rMatrix.map((row, rowIndex) => (
+                                    <TableRow key={rowIndex}>
+                                        {row.map((col, colIndex) => (
+                                            <TableCell key={colIndex}>
                                                 {col}
                                             </TableCell>
                                         ))}
@@ -83,10 +78,10 @@ const BuildTransmissionLine: React.FC<Props> = () => {
                     <TableContainer>
                         <Table>
                             <TableBody>
-                                {data?.xMatrix.map((row, index) => (
-                                    <TableRow key={index}>
-                                        {row.map((col, index2) => (
-                                            <TableCell key={index2}>
+                                {data.xMatrix.map((row, rowIndex) => (
+                                    <TableRow key={rowIndex}>
+                                        {row.map((col, colIndex) => (
+                                            <TableCell key={colIndex}>
                                                 {col}
                                             </TableCell>
                                         ))}
@@ -101,17 +96,17 @@ const BuildTransmissionLine: React.FC<Props> = () => {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead> </TableHead>
-                                    {data?.cMatrix.map((_, index) => (
+                                    {data.cMatrix.map((_, index) => (
                                         <TableHead>{index + 1}</TableHead>
                                     ))}
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {data?.cMatrix.map((row, index) => (
-                                    <TableRow key={index}>
-                                        <TableCell>{index + 1}</TableCell>
-                                        {row.map((col, index2) => (
-                                            <TableCell key={index2}>
+                                {data.cMatrix.map((row, rowIndex) => (
+                                    <TableRow key={rowIndex}>
+                                        <TableCell>{rowIndex + 1}</TableCell>
+                                        {row.map((col, colIndex) => (
+                                            <TableCell key={colIndex}>
                                                 {col}
                                             </TableCell>
                                         ))}
@@ -138,4 +133,4 @@ const TableContainer = styled.div`
     max-width: 100%;
     overflow-y: auto;
 `;
-export default BuildTransmissionLine;
+export default ViewTransmissionLineParametersPage;

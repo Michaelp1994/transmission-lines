@@ -7,4 +7,4 @@ export const databasePath = app.isPackaged
     ? path.join(app.getPath("userData"), "database.sqlite")
     : "./database.sqlite";
 
-export const dataSources = await databaseInit(databasePath);
+export const dataSource = await databaseInit(databasePath);

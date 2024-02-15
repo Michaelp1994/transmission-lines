@@ -27,13 +27,15 @@ import {
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
-interface Props {}
+interface Props {
+    projectId: string;
+}
 
-const TransmissionLinesList: React.FC<Props> = () => {
+const TransmissionLinesList: React.FC<Props> = ({ projectId }) => {
     const utils = trpc.useUtils();
     const { t } = useTranslation("transmissionLine");
 
-    const { data } = trpc.transmissionLine.getAll.useQuery();
+    const { data } = trpc.transmissionLine.getAll.useQuery({ projectId });
     const deleteTransmissionLineMutation =
         trpc.transmissionLine.delete.useMutation({
             onSuccess(input) {
@@ -59,9 +61,12 @@ const TransmissionLinesList: React.FC<Props> = () => {
                     <ItemActions>
                         <Button variant="ghost" asChild>
                             <Link
-                                to={ROUTES.BUILD_TRANSMISSION_LINE.buildPath({
-                                    id,
-                                })}
+                                to={ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS.buildPath(
+                                    {
+                                        projectId,
+                                        lineId: id,
+                                    }
+                                )}
                             >
                                 <BracketsIcon />
                             </Link>
@@ -69,7 +74,8 @@ const TransmissionLinesList: React.FC<Props> = () => {
                         <Button variant="ghost" asChild>
                             <Link
                                 to={ROUTES.UPDATE_TRANSMISSION_LINE.buildPath({
-                                    id,
+                                    projectId,
+                                    lineId: id,
                                 })}
                             >
                                 <InfoIcon />

@@ -1,5 +1,5 @@
-import { Fault } from "@repo/opendss-interface/elements";
 import GeneralStudy from "@repo/opendss-interface/classes/GeneralStudy";
+import { Fault } from "@repo/opendss-interface/elements";
 
 export default async function worseCaseScenario2(
     study: GeneralStudy,

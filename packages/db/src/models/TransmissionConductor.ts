@@ -8,6 +8,8 @@ import {
 } from "typeorm";
 
 // eslint-disable-next-line import/no-cycle
+import ConductorType from "./ConductorType.model";
+// eslint-disable-next-line import/no-cycle
 import TransmissionLine from "./TransmissionLine.model";
 
 @Entity()
@@ -35,6 +37,11 @@ export default class TransmissionConductor extends BaseEntity {
 
     @Column()
     typeId: number;
+
+    @ManyToOne(() => ConductorType, {
+        onDelete: "CASCADE",
+    })
+    type: Relation<ConductorType>;
 
     @ManyToOne(() => TransmissionLine, (line) => line.conductors, {
         onDelete: "CASCADE",

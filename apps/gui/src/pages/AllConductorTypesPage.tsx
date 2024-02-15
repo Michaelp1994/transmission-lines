@@ -31,7 +31,7 @@ const AllConductorTypesPage: React.FC<Props> = () => {
                         </CardDescription>
                     </CardHeaderText>
                     <CardHeaderActions>
-                        <Button asChild variant="outline">
+                        <Button asChild>
                             <Link to={ROUTES.CREATE_CONDUCTOR_TYPE.path}>
                                 {t("add.buttonText")}
                             </Link>

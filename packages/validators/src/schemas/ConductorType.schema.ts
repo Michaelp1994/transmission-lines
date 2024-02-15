@@ -1,5 +1,6 @@
 import * as z from "zod";
 
+import { conductorTypeId } from "./Ids.schema";
 // create
 
 export const createConductorTypeSchema = z.object({
@@ -39,7 +40,7 @@ export const defaultConductorType: CreateConductorTypeInput = {
 // update
 
 export const updateConductorTypeSchema = createConductorTypeSchema.extend({
-    id: z.number(),
+    id: conductorTypeId,
 });
 
 export type UpdateConductorTypeInput = z.infer<
@@ -59,7 +60,7 @@ export type GetAllConductorsInput = z.infer<typeof getAllConductorsSchema>;
 
 // getById
 
-export const getConductorTypeByIdSchema = z.object({ id: z.number() });
+export const getConductorTypeByIdSchema = z.object({ id: conductorTypeId });
 
 export type GetConductorTypeByIdInput = z.infer<
     typeof getConductorTypeByIdSchema
@@ -67,7 +68,7 @@ export type GetConductorTypeByIdInput = z.infer<
 
 // delete
 
-export const deleteConductorTypeSchema = z.object({ id: z.number() });
+export const deleteConductorTypeSchema = z.object({ id: conductorTypeId });
 
 export type DeleteConductorTypeInput = z.infer<
     typeof deleteConductorTypeSchema

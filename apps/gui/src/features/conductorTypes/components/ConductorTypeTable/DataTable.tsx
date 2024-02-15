@@ -8,10 +8,13 @@ import {
     TableRow,
 } from "@repo/ui";
 import { flexRender } from "@tanstack/react-table";
+import type { Table as TableType } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 
+import { ConductorType } from "./columns";
+
 interface Props {
-    table: TableContext;
+    table: TableType<ConductorType>;
 }
 
 const DataTable: React.FC<Props> = ({ table }) => {
@@ -23,7 +26,13 @@ const DataTable: React.FC<Props> = ({ table }) => {
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => (
-                                <TableHead key={header.id}>
+                                <TableHead
+                                    key={header.id}
+                                    align={
+                                        (header.column.columnDef.meta as any)
+                                            ?.align
+                                    }
+                                >
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(
@@ -40,7 +49,13 @@ const DataTable: React.FC<Props> = ({ table }) => {
                         table.getRowModel().rows.map((row) => (
                             <TableRow key={row.id}>
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                    <TableCell
+                                        key={cell.id}
+                                        align={
+                                            (cell.column.columnDef.meta as any)
+                                                ?.align
+                                        }
+                                    >
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()
