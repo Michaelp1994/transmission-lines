@@ -12,5 +12,7 @@
             "path": "./tsconfig.test.json"
         }
     ],
-    "include": [".eslintrc.cjs"]
+    "extends": "@repo/typescript-config/node.json",
+    "include": [".eslintrc.cjs"],
+    "exclude": ["node_modules"]
 }

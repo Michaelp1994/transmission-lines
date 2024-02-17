@@ -11,5 +11,6 @@
             "path": "./tsconfig.test.json"
         }
     ],
+    "extends": "@repo/typescript-config/node.json",
     "include": [".eslintrc.cjs", "drizzle.config.ts", "vite.config.ts"]
 }

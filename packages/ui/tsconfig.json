@@ -3,6 +3,7 @@
         "checkJs": true,
         "outDir": "./dist"
     },
+    "extends": "@repo/typescript-config/node.json",
     "references": [
         {
             "path": "./tsconfig.app.json"
