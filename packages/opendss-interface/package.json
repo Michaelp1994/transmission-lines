@@ -2,11 +2,11 @@
     "name": "@repo/opendss-interface",
     "type": "module",
     "exports": {
-        ".": "./dist/index.js",
-        "./classes/*": "./dist/classes/*.js",
-        "./elements/*": "./dist/classes/elements/*.js",
-        "./elements": "./dist/classes/elements/index.js",
-        "./elements/**/*": "./dist/classes/elements/**/*.js"
+        ".": "./src/index.ts",
+        "./classes/*": "./src/classes/*.ts",
+        "./elements/*": "./src/classes/elements/*.ts",
+        "./elements": "./src/classes/elements/index.ts",
+        "./elements/**/*": "./src/classes/elements/**/*.ts"
     },
     "scripts": {
         "build": "tsc && tsc-alias",

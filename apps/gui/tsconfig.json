@@ -1,12 +1,15 @@
 {
-    "include": ["src", "src/**/*.json"],
-    "references": [{ "path": "./tsconfig.node.json" }],
-    "extends": "@repo/typescript-config/vite.json",
-    "compilerOptions": {
-        "noErrorTruncation": true,
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["./src/*"]
+    "extends": "@repo/typescript-config/node.json",
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.test.json"
         }
-    }
+    ],
+    "compilerOptions": {
+        "noEmit": true
+    },
+    "include": [".eslintrc.cjs", "vite.config.ts"]
 }

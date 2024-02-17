@@ -1,0 +1,11 @@
+{
+    "include": ["src", "src/**/*.json"],
+    "extends": "@repo/typescript-config/vite.json",
+    "compilerOptions": {
+        "composite": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    }
+}

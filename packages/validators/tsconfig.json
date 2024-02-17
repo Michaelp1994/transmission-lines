@@ -1,11 +1,15 @@
 {
     "compilerOptions": {
-        "baseUrl": "./",
-        "outDir": "dist",
-        "paths": {
-            "@/*": ["./src/*"]
-        }
+        "checkJs": true,
+        "outDir": "./dist"
     },
-    "extends": "@repo/typescript-config/node.json",
-    "include": ["src"]
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.test.json"
+        }
+    ],
+    "include": [".eslintrc.cjs", "jest.config.ts"]
 }

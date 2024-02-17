@@ -26,7 +26,6 @@
         "@repo/api": "workspace:*",
         "@repo/db": "workspace:^",
         "better-sqlite3": "^9.4.0",
-        "reflect-metadata": "^0.2.1",
         "winax": "3.4.2"
     },
     "devDependencies": {
@@ -35,6 +34,7 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/jest-presets": "workspace:*",
         "@repo/typescript-config": "workspace:*",
+        "@rollup/plugin-swc": "^0.3.0",
         "electron": "28.2.1",
         "electron-builder": "24.9.1",
         "eslint": "^8.56.0",

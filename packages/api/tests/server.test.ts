@@ -1,18 +1,28 @@
-import supertest from "supertest";
-import { expect, beforeAll, afterAll, it, describe, vi } from "vitest";
-import createServer from "../src";
 import databaseInit from "@repo/db";
+import supertest from "supertest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+
+import createServer from "../src";
 
 let server: ReturnType<typeof createServer>;
 
 beforeAll(async () => {
-    const dataSources = await databaseInit(":memory:");
-    server = createServer(dataSources);
+    const db = databaseInit(":memory:");
+    server = createServer(db);
 });
 describe("API Server", () => {
     it("says hello world", () => {
         supertest(server.server)
             .get("/meta.hello")
+            .expect(200)
+            .then((res) => {
+                expect(res.body).toEqual({ result: { data: "hello world!" } });
+            });
+    });
+
+    it("gets conductor types", () => {
+        supertest(server.server)
+            .get("/conductortype.getall?")
             .expect(200)
             .then((res) => {
                 expect(res.body).toEqual({ result: { data: "hello world!" } });

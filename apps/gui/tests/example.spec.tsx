@@ -23,6 +23,6 @@ beforeAll(() => {
 describe("GUI", () => {
     it("renders", () => {
         render(<App />);
-        expect(screen.getByText("Open Project")).toBeDefined();
+        expect(screen.getByText("Add Project")).toBeDefined();
     });
 });

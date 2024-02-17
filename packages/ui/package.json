@@ -6,7 +6,7 @@
     "sideEffects": false,
     "type": "module",
     "exports": {
-        ".": "./dist/index.js",
+        ".": "./src/index.ts",
         "./global.css": "./dist/global.css"
     },
     "types": "./dist/index.d.ts",
@@ -16,6 +16,7 @@
     "scripts": {
         "build": "tsc && tsc-alias && postcss src/global.css -o dist/global.css",
         "clean": "rm -rf .turbo node_modules dist",
+        "dev": "postcss src/global.css -o dist/global.css",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "test": "jest ",

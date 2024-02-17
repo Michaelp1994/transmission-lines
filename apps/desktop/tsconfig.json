@@ -1,11 +1,17 @@
 {
     "extends": "@repo/typescript-config/node.json",
-    "compilerOptions": {
-        "outDir": "dist",
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["./src/*"]
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.test.json"
         }
-    },
-    "include": ["src"]
+    ],
+    "include": [
+        ".eslintrc.cjs",
+        "builder.config.cjs",
+        "playwright.config.ts",
+        "vite.config.ts"
+    ]
 }

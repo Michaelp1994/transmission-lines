@@ -4,14 +4,14 @@
     "private": true,
     "type": "module",
     "exports": {
-        ".": "./dist/index.js",
-        "./routers/*": "./dist/routers/*.js"
+        ".": "./src/index.ts",
+        "./routers/*": "./src/routers/*.ts"
     },
     "files": [
         "dist"
     ],
     "scripts": {
-        "build": "tsc && tsc-alias",
+        "build": "tsc -b && tsc-alias",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
@@ -33,7 +33,6 @@
     },
     "devDependencies": {
         "@repo/eslint-config": "workspace:*",
-        "@repo/jest-presets": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/body-parser": "^1.19.5",
         "@types/cors": "^2.8.17",

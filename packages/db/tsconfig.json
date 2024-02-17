@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "strictPropertyInitialization": false,
-        "baseUrl": "./",
-        "paths": {
-            "@/*": ["./src/*"]
-        },
-        "outDir": "dist"
+        "checkJs": true,
+        "outDir": "./dist"
     },
-    "extends": "@repo/typescript-config/node.json",
-    "include": ["src"]
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.test.json"
+        }
+    ],
+    "include": [".eslintrc.cjs", "drizzle.config.ts", "vite.config.ts"]
 }

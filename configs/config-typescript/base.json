@@ -38,6 +38,5 @@
         "allowUnreachableCode": false,
         /* Completeness */
         "skipLibCheck": true
-    },
-    "exclude": ["node_modules"]
+    }
 }

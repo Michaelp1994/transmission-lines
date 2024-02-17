@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "baseUrl": "./",
+        "outDir": "dist/app",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
+    },
+    "extends": "@repo/typescript-config/node.json",
+    "include": ["src"]
+}

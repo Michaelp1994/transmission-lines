@@ -7,7 +7,6 @@
         "jsx": "react-jsx",
         "lib": ["dom", "dom.iterable", "esnext"],
         "module": "ESNext",
-        "noEmit": true,
         "moduleResolution": "Bundler",
         "target": "ESNext",
         "types": ["vite/client"]

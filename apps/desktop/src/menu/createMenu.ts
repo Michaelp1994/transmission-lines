@@ -1,13 +1,9 @@
 import { Menu } from "electron";
 
 import developerMenu from "./developerMenu";
-import migrationMenu from "./migrationMenu";
 
 export default function createMenu() {
-    const template: Electron.MenuItemConstructorOptions[] = [
-        migrationMenu,
-        developerMenu,
-    ];
+    const template: Electron.MenuItemConstructorOptions[] = [developerMenu];
 
     const menu = Menu.buildFromTemplate(template);
 

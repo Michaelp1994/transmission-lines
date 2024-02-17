@@ -1,8 +1,10 @@
 import { defineConfig } from "vite";
 import { spawn, type ChildProcess } from "child_process";
 import electronPath from "electron";
+import tsconfigPaths from "vite-tsconfig-paths";
+import swc from "@rollup/plugin-swc";
 
-const ElectronPlugin = () => {
+const electronPlugin = () => {
     var pr: ChildProcess;
     return {
         name: "prebuild-commands",
@@ -15,19 +17,27 @@ const ElectronPlugin = () => {
             pr = spawn(electronPath as unknown as string, ["dist/index.js"], {
                 cwd,
             });
+            pr.stdout?.on("data", (data) => {
+                console.log(`${data}`);
+            });
         },
         watchChange: async () => {
-            pr.kill();
+            if (pr) {
+                pr.kill();
+            }
         },
     };
 };
 
 export default defineConfig({
-    plugins: [ElectronPlugin()],
+    plugins: [electronPlugin(), tsconfigPaths()],
+    optimizeDeps: {
+        force: true,
+    },
     build: {
         ssr: true,
         target: "esnext",
-
+        sourcemap: true,
         lib: {
             // Could also be a dictionary or array of multiple entry points
             entry: "src/index.ts",
@@ -42,13 +52,7 @@ export default defineConfig({
             },
             // make sure to externalize deps that shouldn't be bundled
             // into your library
-            external: [
-                "electron",
-                "better-sqlite3",
-                "@repo/api",
-                "@repo/db",
-                "@repo/validators",
-            ],
+            external: ["electron", "better-sqlite3"],
         },
     },
 });

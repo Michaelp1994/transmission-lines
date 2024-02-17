@@ -1,10 +1,9 @@
 import fs from "fs/promises";
 
-import ConductorType from "@repo/db/models/ConductorType.model";
-import Project from "@repo/db/models/Project.model";
-import TowerGeometry from "@repo/db/models/TowerGeometry.model";
-import TransmissionLine from "@repo/db/models/TransmissionLine.model";
-import TransmissionTower from "@repo/db/models/TransmissionTower.model";
+import { eq } from "@repo/db/drizzle";
+import { conductorTypes } from "@repo/db/schemas/conductorTypes";
+import { projects } from "@repo/db/schemas/projects";
+import { towerGeometries } from "@repo/db/schemas/towerGeometries";
 import {
     createProjectSchema,
     deleteProjectSchema,
@@ -16,100 +15,111 @@ import {
     updateProjectSchema,
 } from "@repo/validators/schemas/Project.schema";
 
-import buildCircuit from "@/helpers/buildCircuit";
-
 import { publicProcedure, router } from "../trpc";
+
+import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
     getAll: publicProcedure
         .input(getAllProjectsSchema)
-        .query(({ ctx }) => ctx.dataSource.getRepository(Project).find()),
+        .query(({ ctx: { db } }) => {
+            const allProjects = db.query.projects.findMany();
+            return allProjects;
+        }),
     getById: publicProcedure
         .input(getProjectByIdSchema)
-        .query(async ({ input, ctx }) => {
-            const projectRepository = ctx.dataSource.getRepository(Project);
-            const project = await projectRepository.findOneOrFail({
-                relations: {
+        .query(async ({ input, ctx: { db } }) => {
+            const project = await db.query.projects.findFirst({
+                with: {
                     sources: true,
                     transmissionLines: true,
                 },
-                where: {
-                    id: input.id,
-                },
+                where: eq(projects.id, input.id),
             });
+            if (!project) throw Error("Can't find project");
 
             return project;
         }),
     create: publicProcedure
         .input(createProjectSchema)
-        .mutation(async ({ input, ctx }) => {
-            const projectRepository = ctx.dataSource.getRepository(Project);
-            const project = await projectRepository.create(input);
-            return project.save();
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [newProject] = await db
+                .insert(projects)
+                .values(input)
+                .returning();
+            if (!newProject) throw Error("Can't create project");
+
+            return newProject;
         }),
     update: publicProcedure
         .input(updateProjectSchema)
-        .mutation(async ({ input, ctx }) =>
-            ctx.dataSource
-                .getRepository(Project)
-                .update({ id: input.id }, input)
-        ),
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [updatedProject] = await db
+                .update(projects)
+                .set(input)
+                .where(eq(projects.id, input.id))
+                .returning();
+            if (!updatedProject) throw Error("Can't update project");
+
+            return updatedProject;
+        }),
     delete: publicProcedure
         .input(deleteProjectSchema)
-        .mutation(async ({ input, ctx }) =>
-            ctx.dataSource.getRepository(Project).delete({ id: input.id })
-        ),
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [deletedProject] = await db
+                .delete(projects)
+                .where(eq(projects.id, input.id))
+                .returning();
+            if (!deletedProject) throw Error("Can't delete project");
+
+            return deletedProject;
+        }),
 
     solve: publicProcedure
         .input(solveProjectSchema)
-        .query(async ({ input, ctx }) => {
-            const project = await ctx.dataSource
-                .getRepository(Project)
-                .findOneOrFail({
-                    where: { id: input.id },
-                    order: {
-                        transmissionLines: {
-                            towers: {
-                                id: "ASC",
-                            },
-                        },
-                    },
-                    relations: {
-                        sources: true,
-                        transmissionLines: {
+        .query(async ({ input, ctx: { db } }) => {
+            const project = await db.query.projects.findFirst({
+                where: eq(projects.id, input.id),
+                with: {
+                    transmissionLines: {
+                        with: {
                             conductors: {
-                                type: true,
+                                with: {
+                                    type: true,
+                                },
                             },
                             fromSource: true,
                             toSource: true,
                             towers: {
-                                geometry: true,
+                                with: {
+                                    geometry: true,
+                                },
                             },
                         },
                     },
-                });
+                    sources: true,
+                },
+            });
+
             /*
             SELECT DISTINCT tower_geometry.* FROM tower_geometry 
             LEFT JOIN transmission_tower ON transmission_tower.geometryId = tower_geometry.id 
             LEFT JOIN transmission_line ON transmission_line.id = transmission_tower.transmissionLineId 
             WHERE projectId = "a8815e72-0738-408d-a1d8-eb0e72995f43";
             */
-            const uniqueTowerGeometries = await ctx.dataSource
-                .getRepository(TowerGeometry)
-                .findOneOrFail({
-                    where: {
-                        id: 1,
-                    },
-                    relations: {
+            const uniqueTowerGeometries =
+                await db.query.towerGeometries.findFirst({
+                    with: {
                         conductors: true,
                     },
+                    where: eq(towerGeometries.id, 1),
                 });
-            const uniqueConductorTypes = await ctx.dataSource
-                .getRepository(ConductorType)
-                .findOneOrFail({
-                    where: {
-                        id: 1,
+            const uniqueConductorTypes =
+                await db.query.conductorTypes.findFirst({
+                    with: {
+                        conductors: true,
                     },
+                    where: eq(conductorTypes.id, 1),
                 });
             const faultStudy = await buildCircuit(
                 project,
@@ -119,12 +129,15 @@ export default router({
             const results = faultStudy.worstCase();
             return results;
         }),
-    import: publicProcedure.mutation(async ({ ctx }) => {
-        const currentBrowser = ctx.electron.browserWindow;
+    import: publicProcedure.mutation(async ({ ctx: { electron, db } }) => {
+        if (!electron) {
+            throw new Error("Not in electron context");
+        }
+        const currentBrowser = electron.browserWindow;
         if (!currentBrowser) {
             throw new Error("No browser window found");
         }
-        const openDialogReturn = await ctx.electron.dialog.showOpenDialog(
+        const openDialogReturn = await electron.dialog.showOpenDialog(
             currentBrowser,
             {
                 properties: ["openFile"],
@@ -139,24 +152,29 @@ export default router({
             if (!fileName) throw Error("Can't get file name");
             const file = await fs.readFile(fileName);
             const contents = JSON.parse(file.toString());
-            const project = importProjectSchema.parse(contents);
+            const input = importProjectSchema.parse(contents);
             // TODO: check if exists and which version is more up to date, then prompt user if they want to replace it.
-            const projectRepository = ctx.dataSource.getRepository(Project);
-            await projectRepository.save(project);
+            const [project] = await db
+                .insert(projects)
+                .values(input)
+                .returning();
 
-            return project.id;
+            return project;
         }
 
         return null;
     }),
     export: publicProcedure
         .input(exportProjectSchema)
-        .mutation(async ({ input, ctx }) => {
-            const currentBrowser = ctx.electron.browserWindow;
+        .mutation(async ({ input, ctx: { electron, db } }) => {
+            if (!electron) {
+                throw new Error("Not in electron context");
+            }
+            const currentBrowser = electron.browserWindow;
             if (!currentBrowser) {
                 throw new Error("No browser window found");
             }
-            const saveDialogReturn = await ctx.electron.dialog.showSaveDialog(
+            const saveDialogReturn = await electron.dialog.showSaveDialog(
                 currentBrowser,
                 {
                     filters: [
@@ -167,14 +185,15 @@ export default router({
             );
             if (!saveDialogReturn.canceled) {
                 const fileName = saveDialogReturn.filePath!;
-                const projectRepository = ctx.dataSource.getRepository(Project);
-                const project = await projectRepository.findOne({
-                    where: { id: input.id },
-                    relations: {
+                const project = await db.query.projects.findFirst({
+                    where: eq(projects.id, input.id),
+                    with: {
                         sources: true,
                         transmissionLines: {
-                            towers: true,
-                            conductors: true,
+                            with: {
+                                towers: true,
+                                conductors: true,
+                            },
                         },
                     },
                 });

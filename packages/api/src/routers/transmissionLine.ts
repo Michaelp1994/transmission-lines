@@ -1,4 +1,5 @@
-import TransmissionLine from "@repo/db/models/TransmissionLine.model";
+import { eq } from "@repo/db/drizzle";
+import { transmissionLines } from "@repo/db/schemas/transmissionLines";
 import {
     createTransmissionLineSchema,
     deleteTransmissionLineSchema,
@@ -8,72 +9,90 @@ import {
     updateTransmissionLineSchema,
 } from "@repo/validators/schemas/TransmissionLine.schema";
 
-import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
-
 import { publicProcedure, router } from "../trpc";
+
+import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
 
 export default router({
     getAll: publicProcedure
         .input(getAllTransmissionLinesSchema)
-        .query(async ({ ctx, input }) =>
-            ctx.dataSource
-                .getRepository(TransmissionLine)
-                .find({ where: { projectId: input.projectId } })
-        ),
+        .query(async ({ ctx: { db }, input }) => {
+            const allTransmissionLines =
+                await db.query.transmissionLines.findMany({
+                    where: eq(transmissionLines.id, input.projectId),
+                });
+            return allTransmissionLines;
+        }),
     getById: publicProcedure
         .input(getTransmissionLineByIdSchema)
-        .query(async ({ input, ctx }) =>
-            ctx.dataSource.getRepository(TransmissionLine).findOneOrFail({
-                where: {
-                    id: input.id,
-                },
-                relations: ["towers", "conductors"],
-            })
-        ),
+        .query(async ({ input, ctx: { db } }) => {
+            const transmissionLine = await db.query.transmissionLines.findFirst(
+                {
+                    where: eq(transmissionLines.id, input.id),
+                    with: {
+                        towers: true,
+                        conductors: true,
+                    },
+                }
+            );
+            if (!transmissionLine) throw Error("Can't find transmission line");
+            return transmissionLine;
+        }),
     create: publicProcedure
         .input(createTransmissionLineSchema)
-        .mutation(async ({ input, ctx }) => {
-            const transmissionLineRepository =
-                ctx.dataSource.getRepository(TransmissionLine);
-            const transmissionLine = transmissionLineRepository.create(input);
-            transmissionLine.save();
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [newTranmissionLine] = await db
+                .insert(transmissionLines)
+                .values(input)
+                .returning();
+            if (!newTranmissionLine)
+                throw Error("Can't create transmission line");
+            return newTranmissionLine;
         }),
     update: publicProcedure
         .input(updateTransmissionLineSchema)
-        .mutation(async ({ input, ctx }) => {
-            const transmissionLineRepository =
-                ctx.dataSource.getRepository(TransmissionLine);
-            return transmissionLineRepository.save({ ...input });
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [updatedTranmissionLine] = await db
+                .update(transmissionLines)
+                .set(input)
+                .returning();
+            if (!updatedTranmissionLine)
+                throw Error("Can't update transmission line");
+
+            return updatedTranmissionLine;
         }),
     getParameters: publicProcedure
         .input(getTransmissionLineParametersSchema)
-        .query(async ({ input, ctx }) => {
-            const transmissionLine = await ctx.dataSource
-                .getRepository(TransmissionLine)
-                .findOneOrFail({
-                    where: {
-                        id: input.id,
-                    },
-                    relations: {
+        .query(async ({ input, ctx: { db } }) => {
+            const transmissionLine = await db.query.transmissionLines.findFirst(
+                {
+                    where: eq(transmissionLines.id, input.id),
+                    with: {
                         towers: {
-                            geometry: {
-                                conductors: true,
+                            with: {
+                                geometry: {
+                                    with: {
+                                        conductors: true,
+                                    },
+                                },
                             },
                         },
-                        conductors: {
-                            type: true,
-                        },
+                        conductors: true,
                     },
-                });
-
+                }
+            );
             const matrixes = buildTransmissionLineMatrix(transmissionLine);
             return matrixes;
         }),
     delete: publicProcedure
         .input(deleteTransmissionLineSchema)
-        .mutation(async ({ input, ctx }) => {
-            const transmissionLineRepository =
-                ctx.dataSource.getRepository(TransmissionLine);
-            await transmissionLineRepository.delete({ id: input.id });
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [deletedTranmissionLine] = await db
+                .delete(transmissionLines)
+                .where(eq(transmissionLines.id, input.id))
+                .returning();
+            if (!deletedTranmissionLine)
+                throw Error("Can't delete transmission line");
+            return deletedTranmissionLine;
         }),
 });

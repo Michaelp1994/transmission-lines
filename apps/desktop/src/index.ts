@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import { BrowserWindow, app, dialog } from "electron";
 
 import { electronApp, optimizer } from "@electron-toolkit/utils";
@@ -23,8 +22,8 @@ app.whenReady().then(async () => {
     });
     const window = await createWindow();
 
-    createServer(dataSource, { browserWindow: window, dialog });
-
+    const server = createServer(dataSource, { browserWindow: window, dialog });
+    server.listen(5001);
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
@@ -35,7 +34,7 @@ app.whenReady().then(async () => {
         (app.isPackaged && process.argv.length > 1) ||
         (!app.isPackaged && process.argv.length > 2)
     ) {
-        console.log("process.argv: ");
+        console.log("process.argv:");
         console.log(process.argv);
 
         // const fileName = process.argv[app.isPackaged ? 1 : 2];

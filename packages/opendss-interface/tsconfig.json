@@ -1,14 +1,15 @@
 {
-    "extends": "@repo/typescript-config/node.json",
     "compilerOptions": {
-        "baseUrl": "./",
-        "paths": {
-            "@classes/*": ["./src/classes/*"],
-            "@elements/*": ["./src/classes/elements/*"],
-            "@enums/*": ["./src/enums/*"],
-            "@helpers/*": ["./src/helpers/*"]
-        },
-        "outDir": "dist"
+        "checkJs": true,
+        "outDir": "./dist"
     },
-    "include": ["src", "tests"]
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.test.json"
+        }
+    ],
+    "include": [".eslintrc.cjs", "vite.config.ts", "jest.config.ts"]
 }

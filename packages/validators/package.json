@@ -7,8 +7,8 @@
     "author": "Michael Poulgrain",
     "type": "module",
     "exports": {
-        ".": "./dist/index.js",
-        "./schemas/*": "./dist/schemas/*.js"
+        ".": "./src/index.ts",
+        "./schemas/*": "./src/schemas/*.ts"
     },
     "scripts": {
         "build": "tsc && tsc-alias",
