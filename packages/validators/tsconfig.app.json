@@ -2,7 +2,7 @@
     "compilerOptions": {
         "composite": true,
         "baseUrl": "./",
-        "outDir": "dist",
+        "outDir": "dist/app",
         "paths": {
             "@/*": ["./src/*"]
         }

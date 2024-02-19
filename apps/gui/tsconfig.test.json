@@ -4,8 +4,14 @@
     "compilerOptions": {
         "composite": true,
         "baseUrl": "./",
+        "outDir": "dist/test",
         "paths": {
             "@/*": ["./src/*"]
         }
-    }
+    },
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        }
+    ]
 }

@@ -3,9 +3,15 @@
     "extends": "@repo/typescript-config/vite.json",
     "compilerOptions": {
         "composite": true,
+        "outDir": "dist/app",
         "baseUrl": "./",
         "paths": {
             "@/*": ["./src/*"]
         }
-    }
+    },
+    "references": [
+        {
+            "path": "../../packages/ui/tsconfig.app.json"
+        }
+    ]
 }

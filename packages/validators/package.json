@@ -16,13 +16,13 @@
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "test": "jest",
-        "typecheck": "tsc --noEmit",
-        "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"
+        "typecheck": "tsc --build"
     },
     "dependencies": {
         "zod": "^3.22.4"
     },
     "devDependencies": {
+        "@repo/db": "workspace:*",
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "concurrently": "^8.2.2",

@@ -17,7 +17,7 @@
         "lint:fix": "eslint src/ --fix",
         "migrate": "tsx src/migrate.ts",
         "test": "vitest run",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --build"
     },
     "dependencies": {
         "drizzle-orm": "^0.29.3",

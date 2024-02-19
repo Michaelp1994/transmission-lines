@@ -1,6 +1,3 @@
-"use client";
-
-import ROUTES from "@/router/routes";
 import {
     Button,
     DropdownMenu,
@@ -17,6 +14,8 @@ import {
 } from "@repo/ui";
 import { MoreHorizontal } from "lucide-react";
 import { Link } from "react-router-dom";
+
+import ROUTES from "@/router/routes";
 
 interface Props {
     row: any;

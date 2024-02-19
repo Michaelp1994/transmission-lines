@@ -1,6 +1,13 @@
-import ConductorType from "@repo/db/models/ConductorType.model";
-import Project from "@repo/db/models/Project.model";
-import TowerGeometry from "@repo/db/models/TowerGeometry.model";
+import type { ConductorType } from "@repo/db/schemas/conductorTypes";
+import type { Project } from "@repo/db/schemas/projects";
+import type { Source as SourceDB } from "@repo/db/schemas/sources";
+import type {
+    TowerGeometry,
+    TowerGeometryWithRelations,
+} from "@repo/db/schemas/towerGeometries";
+import { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
+import type { TransmissionLine as TransmissionLineDB } from "@repo/db/schemas/transmissionLines";
+import { TransmissionTower } from "@repo/db/schemas/transmissionTowers";
 import FaultStudy from "@repo/opendss-interface/classes/FaultStudy";
 import Source from "@repo/opendss-interface/classes/molecules/Source";
 import TransmissionLine from "@repo/opendss-interface/classes/molecules/TransmissionLine";
@@ -10,9 +17,29 @@ import {
     WireData,
 } from "@repo/opendss-interface/elements";
 
+type TransmissionConductorWithRelations = TransmissionConductor & {
+    type: ConductorType;
+};
+
+type TransmissionTowerWithRelations = TransmissionTower & {
+    geometry: TowerGeometry;
+};
+
+type TransmissionLineWithRelations = TransmissionLineDB & {
+    fromSource: SourceDB;
+    toSource: SourceDB;
+    conductors: TransmissionConductorWithRelations[];
+    towers: TransmissionTowerWithRelations[];
+};
+
+type ProjectWithRelations = Project & {
+    sources: SourceDB[];
+    transmissionLines: TransmissionLineWithRelations[];
+};
+
 export default async function buildCircuit(
-    project: Project,
-    towerGeometries: TowerGeometry[],
+    project: ProjectWithRelations,
+    towerGeometries: TowerGeometryWithRelations[],
     conductorTypes: ConductorType[]
 ) {
     console.log("Building Circuit");

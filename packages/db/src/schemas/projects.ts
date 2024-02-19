@@ -4,8 +4,11 @@ import { relations } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
 
-import { sources } from "./sources";
-import { transmissionLines } from "./transmissionLines";
+import { Source, sources } from "./sources";
+import {
+    TransmissionLineWithRelations,
+    transmissionLines,
+} from "./transmissionLines";
 
 export const projects = sqliteTable("projects", {
     id: text("id")
@@ -21,3 +24,8 @@ export const projectsRelations = relations(projects, ({ many }) => ({
     sources: many(sources),
     transmissionLines: many(transmissionLines),
 }));
+
+export type ProjectWithRelations = Project & {
+    sources: Source[];
+    transmissionLines: TransmissionLineWithRelations[];
+};

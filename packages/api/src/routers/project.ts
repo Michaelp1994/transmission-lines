@@ -17,7 +17,7 @@ import {
 
 import { publicProcedure, router } from "../trpc";
 
-import buildCircuit from "@/helpers/buildCircuit";
+// import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
     getAll: publicProcedure
@@ -100,6 +100,7 @@ export default router({
                     sources: true,
                 },
             });
+            if (!project) throw Error("Can't find project");
 
             /*
             SELECT DISTINCT tower_geometry.* FROM tower_geometry 
@@ -107,27 +108,27 @@ export default router({
             LEFT JOIN transmission_line ON transmission_line.id = transmission_tower.transmissionLineId 
             WHERE projectId = "a8815e72-0738-408d-a1d8-eb0e72995f43";
             */
-            const uniqueTowerGeometries =
-                await db.query.towerGeometries.findFirst({
-                    with: {
-                        conductors: true,
-                    },
-                    where: eq(towerGeometries.id, 1),
-                });
-            const uniqueConductorTypes =
-                await db.query.conductorTypes.findFirst({
-                    with: {
-                        conductors: true,
-                    },
-                    where: eq(conductorTypes.id, 1),
-                });
-            const faultStudy = await buildCircuit(
-                project,
-                [uniqueTowerGeometries],
-                [uniqueConductorTypes]
-            );
-            const results = faultStudy.worstCase();
-            return results;
+            // const uniqueTowerGeometries =
+            //     await db.query.towerGeometries.findFirst({
+            //         with: {
+            //             conductors: true,
+            //         },
+            //         where: eq(towerGeometries.id, 1),
+            //     });
+            // const uniqueConductorTypes =
+            //     await db.query.conductorTypes.findFirst({
+            //         with: {
+            //             conductors: true,
+            //         },
+            //         where: eq(conductorTypes.id, 1),
+            //     });
+            // const faultStudy = await buildCircuit(
+            //     project,
+            //     [uniqueTowerGeometries],
+            //     [uniqueConductorTypes]
+            // );
+            // const results = faultStudy.worstCase();
+            // return results;
         }),
     import: publicProcedure.mutation(async ({ ctx: { electron, db } }) => {
         if (!electron) {

@@ -1,6 +1,5 @@
 import { eq } from "@repo/db/drizzle";
 import {
-    ConductorLocation,
     NewConductorLocation,
     conductorLocations,
 } from "@repo/db/schemas/conductorLocations";

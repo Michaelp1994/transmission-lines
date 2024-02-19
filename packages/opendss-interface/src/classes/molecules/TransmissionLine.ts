@@ -1,6 +1,5 @@
-import type TransmissionLineDB from "@repo/db/models/TransmissionLine.model";
-
 import { Line } from "@classes/elements";
+import type { TransmissionLineWithRelations as TransmissionLineDB } from "@repo/db/schemas/transmissionLines";
 
 import TransmissionTower from "./TransmissionTower";
 

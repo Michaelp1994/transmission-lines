@@ -19,7 +19,7 @@
         "rebuild": "electron-rebuild",
         "setup-dev": "wait-on http://localhost:5173/",
         "test": "xvfb-maybe -- playwright test",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --build"
     },
     "dependencies": {
         "@electron-toolkit/utils": "^3.0.0",

@@ -2,7 +2,7 @@
     "compilerOptions": {
         "composite": true,
         "baseUrl": "./",
-        "outDir": "dist/test",
+        "outDir": "dist/tests",
         "types": ["vitest/globals"],
         "paths": {
             "@/*": ["./src/*"]

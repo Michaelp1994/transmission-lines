@@ -1,13 +1,19 @@
 /* eslint-disable import/no-cycle */
 
 import { relations } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
 
-import { projects } from "./projects";
-import { sources } from "./sources";
-import { transmissionConductors } from "./transmissionConductors";
-import { transmissionTowers } from "./transmissionTowers";
+import { type Project, projects } from "./projects";
+import { type Source, sources } from "./sources";
+import {
+    type TransmissionConductorWithRelations,
+    transmissionConductors,
+} from "./transmissionConductors";
+import {
+    type TransmissionTowerWithRelations,
+    transmissionTowers,
+} from "./transmissionTowers";
 
 export const transmissionLines = sqliteTable("transmission_lines", {
     id: text("id")
@@ -45,3 +51,11 @@ export const transmissionLinesRelations = relations(
         conductors: many(transmissionConductors),
     })
 );
+
+export type TransmissionLineWithRelations = TransmissionLine & {
+    fromSource: Source;
+    toSource: Source;
+    project: Project;
+    towers: TransmissionTowerWithRelations[];
+    conductors: TransmissionConductorWithRelations[];
+};

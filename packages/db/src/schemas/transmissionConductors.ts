@@ -3,8 +3,8 @@
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-import { conductorTypes } from "./conductorTypes";
-import { transmissionLines } from "./transmissionLines";
+import { ConductorType, conductorTypes } from "./conductorTypes";
+import { TransmissionLine, transmissionLines } from "./transmissionLines";
 
 export const transmissionConductors = sqliteTable("transmission_conductors", {
     id: integer("id").primaryKey(),
@@ -39,3 +39,8 @@ export const transmissionConductorsRelations = relations(
         }),
     })
 );
+
+export type TransmissionConductorWithRelations = TransmissionConductor & {
+    type: ConductorType;
+    transmissionLine: TransmissionLine;
+};

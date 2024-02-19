@@ -1,6 +1,5 @@
-import type SourceDB from "@repo/db/models/Source.model";
-
 import { Circuit, Reactor, Vsource } from "@classes/elements";
+import type { Source as SourceDB } from "@repo/db/schemas/sources";
 
 interface SourceInterface {
     source: Vsource;

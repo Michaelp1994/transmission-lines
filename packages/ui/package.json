@@ -9,7 +9,7 @@
         ".": "./src/index.ts",
         "./global.css": "./dist/global.css"
     },
-    "types": "./dist/index.d.ts",
+    "types": "./src/index.ts",
     "files": [
         "dist/**"
     ],
@@ -20,7 +20,7 @@
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "test": "jest ",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --build"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.3.4",

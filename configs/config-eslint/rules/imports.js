@@ -19,6 +19,8 @@ module.exports = {
             },
         },
     ],
+    "import/extensions": ["error", "never"],
+    "import/no-extraneous-dependencies": "off",
     "sort-imports": [
         "error",
         {

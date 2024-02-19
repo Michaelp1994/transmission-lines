@@ -1,5 +1,9 @@
-import type ConductorLocation from "@repo/db/models/ConductorLocation.model";
-import type TransmissionLine from "@repo/db/models/TransmissionLine.model";
+import { ConductorLocation } from "@repo/db/schemas/conductorLocations";
+import { ConductorType } from "@repo/db/schemas/conductorTypes";
+import { TowerGeometry } from "@repo/db/schemas/towerGeometries";
+import { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
+import { TransmissionLine } from "@repo/db/schemas/transmissionLines";
+import { TransmissionTower } from "@repo/db/schemas/transmissionTowers";
 import * as Math from "mathjs";
 
 function calcDistance(
@@ -21,8 +25,25 @@ function calcImageDistance(
     );
 }
 
+type TowerGeometryWithRelations = TowerGeometry & {
+    conductors: ConductorLocation[];
+};
+
+type TranmissionTowerWithRelations = TransmissionTower & {
+    geometry: TowerGeometryWithRelations;
+};
+
+type TransmissionConductorWithRelations = TransmissionConductor & {
+    type: ConductorType;
+};
+
+type TransmissionLineWithRelations = TransmissionLine & {
+    towers: TranmissionTowerWithRelations[];
+    conductors: TransmissionConductorWithRelations[];
+};
+
 export default function buildTransmissionLineMatrix(
-    transmissionLine: TransmissionLine
+    transmissionLine: TransmissionLineWithRelations
 ) {
     console.log("Calculating Transmission line parameters...");
     const u0 = 1.2566370621219 * 10 ** -6; // N/A^2

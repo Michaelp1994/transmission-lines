@@ -14,8 +14,7 @@
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "test": "jest",
-        "typecheck": "tsc --noEmit",
-        "watch": "tsc && (concurrently \"tsc -w\" \"tsc-alias -w\")"
+        "typecheck": "tsc --build"
     },
     "devDependencies": {
         "@jest/globals": "^29.7.0",

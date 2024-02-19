@@ -3,8 +3,11 @@
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-import { towerGeometries } from "./towerGeometries";
-import { transmissionLines } from "./transmissionLines";
+import { TowerGeometryWithRelations, towerGeometries } from "./towerGeometries";
+import {
+    TransmissionLineWithRelations,
+    transmissionLines,
+} from "./transmissionLines";
 
 export const transmissionTowers = sqliteTable("transmission_towers", {
     id: integer("id").primaryKey(),
@@ -35,3 +38,8 @@ export const transmissionTowersRelations = relations(
         }),
     })
 );
+
+export type TransmissionTowerWithRelations = TransmissionTower & {
+    transmissionLine: TransmissionLineWithRelations;
+    geometry: TowerGeometryWithRelations;
+};

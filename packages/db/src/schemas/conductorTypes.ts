@@ -24,9 +24,9 @@ export const conductorTypes = sqliteTable("conductor_types", {
 export type ConductorType = typeof conductorTypes.$inferSelect;
 export type NewConductorType = typeof conductorTypes.$inferInsert;
 
-// export const conductorTypesRelations = relations(
-//     conductorTypes,
-//     ({ many }) => ({
-//         conductors: many(transmissionConductors),
-//     })
-// );
+export const conductorTypesRelations = relations(
+    conductorTypes,
+    ({ many }) => ({
+        conductors: many(transmissionConductors),
+    })
+);

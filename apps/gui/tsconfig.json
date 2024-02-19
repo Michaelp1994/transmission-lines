@@ -1,5 +1,5 @@
 {
-    "extends": "@repo/typescript-config/node.json",
+    "extends": "@repo/typescript-config/vite.json",
     "references": [
         {
             "path": "./tsconfig.app.json"
@@ -9,7 +9,8 @@
         }
     ],
     "compilerOptions": {
-        "noEmit": true
+        "noEmit": true,
+        "outDir": "dist"
     },
     "include": [".eslintrc.cjs", "vite.config.ts"]
 }

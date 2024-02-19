@@ -31,6 +31,7 @@ module.exports = {
         ...importRules,
         "no-console": "off",
         "i18next/no-literal-string": 0,
+        "react/require-default-props": 0,
         "react/prop-types": 0,
         "react/jsx-props-no-spreading": 0,
         "@typescript-eslint/no-use-before-define": 0,

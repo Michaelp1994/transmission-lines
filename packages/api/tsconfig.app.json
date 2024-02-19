@@ -8,5 +8,10 @@
         }
     },
     "extends": "@repo/typescript-config/node.json",
+    "references": [
+        {
+            "path": "../opendss-interface/tsconfig.app.json"
+        }
+    ],
     "include": ["src"]
 }

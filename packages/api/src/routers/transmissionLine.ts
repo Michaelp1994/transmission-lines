@@ -77,10 +77,16 @@ export default router({
                                 },
                             },
                         },
-                        conductors: true,
+                        conductors: {
+                            with: {
+                                type: true,
+                            },
+                        },
                     },
                 }
             );
+            if (!transmissionLine)
+                throw Error("Can't update transmission line");
             const matrixes = buildTransmissionLineMatrix(transmissionLine);
             return matrixes;
         }),
