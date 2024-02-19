@@ -8,5 +8,10 @@
             "@/*": ["./src/*"]
         }
     },
+    "references": [
+        {
+            "path": "../../packages/api/tsconfig.app.json"
+        }
+    ],
     "include": ["src"]
 }

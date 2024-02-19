@@ -17,7 +17,7 @@ export const transmissionTowers = sqliteTable("transmission_towers", {
     geometryId: integer("geometryId")
         .notNull()
         .references(() => towerGeometries.id),
-    transmissionLineId: integer("transmission_line_id")
+    transmissionLineId: text("transmission_line_id")
         .notNull()
         .references(() => transmissionLines.id),
 });

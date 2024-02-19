@@ -17,7 +17,7 @@ export const transmissionConductors = sqliteTable("transmission_conductors", {
     typeId: integer("type_id")
         .notNull()
         .references(() => conductorTypes.id),
-    transmissionLineId: integer("transmission_line_id")
+    transmissionLineId: text("transmission_line_id")
         .notNull()
         .references(() => transmissionLines.id),
 });

@@ -44,7 +44,7 @@ const CreateProjectPage: React.FC<Props> = () => {
             });
             navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId: data.id }));
         },
-        onError(_, values) {
+        onError() {
             toast.error(`There is an error!`, {
                 description: format(new Date(), "PPPPpp"),
             });

@@ -1,10 +1,10 @@
-import type { ConductorInput } from "@repo/validators/schemas/Conductor.schema";
+import type { CreateConductorInput } from "@repo/validators/schemas/Conductor.schema";
 import type { GenerateConductorsInput } from "@repo/validators/schemas/GenerateConductors.schema";
 
 export default function generateConductors(
     values: GenerateConductorsInput
-): ConductorInput[] {
-    const newConductors: ConductorInput[] = [];
+): CreateConductorInput[] {
+    const newConductors: CreateConductorInput[] = [];
     for (let i = 0; i < values.circuits; i += 1) {
         for (let j = 0; j < values.phases; j += 1) {
             newConductors.push({

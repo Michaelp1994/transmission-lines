@@ -25,7 +25,7 @@ import {
     TooltipTrigger,
 } from "@repo/ui";
 import { defaultConductor } from "@repo/validators/schemas/Conductor.schema";
-import type { TransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
+import type { CreateTransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
 import { Plus, X } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,6 @@ import { useTranslation } from "react-i18next";
 import { ConductorTypeSelect } from "@/features/conductorTypes";
 import GenerateConductorsModal from "@/features/transmissionLines/components/GenerateConductorsModal";
 import generateConductors from "@/helpers/generateConductors";
-
 
 interface Props {}
 
@@ -45,7 +44,7 @@ const ConductorConfigurationTable: React.FC<Props> = () => {
         resetField,
         getFieldState,
         formState: { errors },
-    } = useFormContext<TransmissionLineInput>();
+    } = useFormContext<CreateTransmissionLineInput>();
     const { fields, append, remove, replace } = useFieldArray({
         control,
         name: "conductors",

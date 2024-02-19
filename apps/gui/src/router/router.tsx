@@ -1,5 +1,7 @@
 import { RouteObject, createHashRouter } from "react-router-dom";
 
+import ROUTES from "./routes";
+
 import DefaultLayout from "@/layouts/DefaultLayout";
 import AllConductorTypesPage from "@/pages/AllConductorTypesPage";
 import AllProjectsPage from "@/pages/AllProjectsPage";
@@ -10,18 +12,16 @@ import CreateSourcePage from "@/pages/CreateSourcePage";
 import CreateTowerGeometryPage from "@/pages/CreateTowerGeometryPage";
 import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
 import ErrorPage from "@/pages/ErrorPage";
-import GeneratePage from "@/pages/GenerateResultsPage";
+// import GeneratePage from "@/pages/GenerateResultsPage";
 import PageNotFound from "@/pages/PageNotFound";
-import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
+// import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
 import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
 import UpdateSourcePage from "@/pages/UpdateSourcePage";
 import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
 import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
 import ViewProjectPage from "@/pages/ViewProjectPage";
-import ViewTransmissionLineParametersPage from "@/pages/ViewTransmissionLineParametersPage";
+// import ViewTransmissionLineParametersPage from "@/pages/ViewTransmissionLineParametersPage";
 import WelcomePage from "@/pages/WelcomePage";
-
-import ROUTES from "./routes";
 
 const routeObjects: RouteObject[] = [
     {
@@ -74,10 +74,10 @@ const routeObjects: RouteObject[] = [
                 path: ROUTES.CREATE_CONDUCTOR_TYPE.path,
                 element: <CreateConductorTypePage />,
             },
-            {
-                path: ROUTES.TRANSMISSION_FAULT.path,
-                element: <TransmissionLineFaultPage />,
-            },
+            // {
+            //     path: ROUTES.TRANSMISSION_FAULT.path,
+            //     element: <TransmissionLineFaultPage />,
+            // },
 
             {
                 path: ROUTES.UPDATE_CONDUCTOR_TYPE.path,
@@ -91,14 +91,14 @@ const routeObjects: RouteObject[] = [
                 path: ROUTES.ALL_CONDUCTOR_TYPES.path,
                 element: <AllConductorTypesPage />,
             },
-            {
-                path: ROUTES.GENERATE_RESULTS.path,
-                element: <GeneratePage />,
-            },
-            {
-                path: ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS.path,
-                element: <ViewTransmissionLineParametersPage />,
-            },
+            // {
+            //     path: ROUTES.GENERATE_RESULTS.path,
+            //     element: <GeneratePage />,
+            // },
+            // {
+            //     path: ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS.path,
+            //     element: <ViewTransmissionLineParametersPage />,
+            // },
             {
                 path: "*",
                 element: <PageNotFound />,

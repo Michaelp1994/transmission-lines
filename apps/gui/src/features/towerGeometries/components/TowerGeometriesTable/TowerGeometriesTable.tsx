@@ -1,30 +1,30 @@
 import { Button } from "@repo/ui";
-import { TowerGeometry } from "@repo/validators/schemas/TowerGeometry.schema";
-import { createColumnHelper } from "@tanstack/react-table";
+import { UpdateTowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
+import { CellContext, createColumnHelper } from "@tanstack/react-table";
 import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import DataTable from "@/components/DataTable";
 import ROUTES from "@/router/routes";
-import trpc from "@/utils/trpc";
-
+import trpc, { RouterOutputs } from "@/utils/trpc";
 
 interface Props {}
 
-const columnHelper = createColumnHelper<TowerGeometry>();
+type TowerGeometrty = RouterOutputs["towerGeometry"]["getAll"][number];
 
-interface EditButtonProps {
-    id: number;
-}
+const columnHelper = createColumnHelper<TowerGeometrty>();
 
-const EditButton: React.FC<EditButtonProps> = ({ id }) => {
+const EditButton: React.FC<CellContext<TowerGeometrty, number>> = ({
+    getValue,
+}) => {
+    const id = getValue();
     const navigate = useNavigate();
     function handleClick() {
         navigate(ROUTES.UPDATE_TOWER_GEOMETRY.buildPath({ id }));
     }
     return (
-        <Button variant="ghost" size="icon" onClick={handleClick}>
+        <Button variant="ghost" size="icon" onClick={() => handleClick()}>
             <Info />
         </Button>
     );
@@ -44,7 +44,7 @@ const GeometriesTable: React.FC<Props> = () => {
         }),
         columnHelper.accessor("id", {
             header: () => t("table:actions"),
-            cell: (props) => <EditButton id={props.getValue()} />,
+            cell: EditButton,
         }),
     ];
     if (error) {

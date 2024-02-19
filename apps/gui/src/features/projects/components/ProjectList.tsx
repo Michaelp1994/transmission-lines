@@ -41,7 +41,7 @@ const ProjectList: React.FC<Props> = () => {
         },
     });
 
-    async function removeLine(id: number) {
+    async function removeProject(id: string) {
         await deleteProjectMutation.mutateAsync({ id });
     }
 
@@ -65,7 +65,7 @@ const ProjectList: React.FC<Props> = () => {
                                 <InfoIcon />
                             </Link>
                         </Button>
-                        <ConfirmDialog onConfirm={() => removeLine(id)} />
+                        <ConfirmDialog onConfirm={() => removeProject(id)} />
                     </ItemActions>
                 </ListItem>
             ))}

@@ -1,5 +1,10 @@
 import { eq } from "@repo/db/drizzle";
+import {
+    NewTransmissionConductor,
+    transmissionConductors,
+} from "@repo/db/schemas/transmissionConductors";
 import { transmissionLines } from "@repo/db/schemas/transmissionLines";
+import { transmissionTowers } from "@repo/db/schemas/transmissionTowers";
 import {
     createTransmissionLineSchema,
     deleteTransmissionLineSchema,
@@ -19,7 +24,7 @@ export default router({
         .query(async ({ ctx: { db }, input }) => {
             const allTransmissionLines =
                 await db.query.transmissionLines.findMany({
-                    where: eq(transmissionLines.id, input.projectId),
+                    where: eq(transmissionLines.projectId, input.projectId),
                 });
             return allTransmissionLines;
         }),
@@ -41,10 +46,39 @@ export default router({
     create: publicProcedure
         .input(createTransmissionLineSchema)
         .mutation(async ({ input, ctx: { db } }) => {
-            const [newTranmissionLine] = await db
-                .insert(transmissionLines)
-                .values(input)
-                .returning();
+            const newTranmissionLine = await db.transaction(async (tx) => {
+                const [transmissionLine] = await tx
+                    .insert(transmissionLines)
+                    .values(input)
+                    .returning();
+                if (!transmissionLine) {
+                    await tx.rollback();
+                    throw Error("Failed to create a new Transmission Line");
+                }
+                const newTransmissionConductors = await tx
+                    .insert(transmissionConductors)
+                    .values(
+                        input.conductors.map((conductor) => ({
+                            ...conductor,
+                            transmissionLineId: transmissionLine.id,
+                        }))
+                    )
+                    .returning();
+                const newTransmissionTowers = await tx
+                    .insert(transmissionTowers)
+                    .values(
+                        input.towers.map((tower) => ({
+                            ...tower,
+                            transmissionLineId: transmissionLine.id,
+                        }))
+                    )
+                    .returning();
+                return {
+                    ...transmissionLine,
+                    conductors: newTransmissionConductors,
+                    towers: newTransmissionTowers,
+                };
+            });
             if (!newTranmissionLine)
                 throw Error("Can't create transmission line");
             return newTranmissionLine;

@@ -5,15 +5,15 @@ import { conductorTypeId } from "./Ids.schema";
 
 export const createConductorTypeSchema = z.object({
     name: z.string().min(2),
-    surfaceArea: z.number().positive().optional(),
-    stranding: z.string().optional(),
+    surfaceArea: z.number().positive().nullable(),
+    stranding: z.string().nullable(),
     outerDiameter: z.number().positive(),
-    coreDiameter: z.number().positive().optional(),
-    layers: z.number().optional(),
-    currentCapacity: z.number().positive().optional(),
-    dcResistance25: z.number().positive().optional(),
-    acResistance25: z.number().positive().optional(),
-    acResistance50: z.number().positive().optional(),
+    coreDiameter: z.number().positive().nullable(),
+    layers: z.number().nullable(),
+    currentCapacity: z.number().positive().nullable(),
+    dcResistance25: z.number().positive().nullable(),
+    acResistance25: z.number().positive().nullable(),
+    acResistance50: z.number().positive().nullable(),
     acResistance75: z.number().positive(),
     gmr: z.number().positive(),
 });
