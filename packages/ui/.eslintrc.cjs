@@ -5,7 +5,4 @@ module.exports = {
     rules: {
         "import/prefer-default-export": 0,
     },
-    parserOptions: {
-        EXPERIMENTAL_useProjectService: true,
-    },
 };

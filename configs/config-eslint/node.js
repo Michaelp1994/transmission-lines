@@ -1,12 +1,14 @@
 const { resolve } = require("node:path");
 const importRules = require("./rules/imports");
 const project = resolve(process.cwd(), "tsconfig.json");
+console.log(project);
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
     extends: ["airbnb-base", "airbnb-typescript/base", "prettier"],
     parserOptions: {
         project,
+        EXPERIMENTAL_useProjectService: true,
     },
     plugins: ["only-warn"],
     env: {

@@ -1,7 +1,7 @@
 /// <reference types="@types/activex-opendssengine" />
 import winax from "winax";
 
-import OpenDSSOptionsInterface from "./OpenDSSOptionsInterface";
+import { OpenDSSOptions } from "@/schemas/opendss/options";
 
 export default class OpenDssDriver {
     private dss: OpenDSSengine.DSS;
@@ -88,18 +88,18 @@ export default class OpenDssDriver {
         this.send("Show Currents Elements");
     }
 
-    setOptions(options: OpenDSSOptionsInterface) {
+    setOptions(options: OpenDSSOptions) {
         Object.keys(options).forEach((optionName) => {
             this.send(
                 `SET ${optionName} = ${
-                    options[optionName as keyof OpenDSSOptionsInterface]
+                    options[optionName as keyof OpenDSSOptions]
                 }`
             );
         });
         // this.dssText.Command = text;
     }
 
-    getOption(option: keyof OpenDSSOptionsInterface) {
+    getOption(option: keyof OpenDSSOptions) {
         this.dssText.Command = `GET ${option}`;
         return this.dssText.Result;
     }

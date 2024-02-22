@@ -12,6 +12,7 @@ import {
     FormItem,
     FormMessage,
     Input,
+    NumberInput,
     Table,
     TableBody,
     TableCell,
@@ -23,17 +24,16 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@repo/ui";
-import type { TransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
+import type { CreateTransmissionLineInput } from "@repo/validators/schemas/TransmissionLine.schema";
 import { defaultTransmissionTower } from "@repo/validators/schemas/TransmissionTower.schema";
 import { Plus, X } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import generateTowers from "@/helpers/generateTowers";
-
 import TowerGeometrySelect from "../../../towerGeometries/components/TowerGeometrySelect";
 import GenerateTowersModal from "../GenerateTowersModal";
 
+import generateTowers from "@/helpers/generateTowers";
 
 interface Props {}
 
@@ -45,7 +45,7 @@ const TowerConfigurationTable: React.FC<Props> = () => {
         resetField,
         getFieldState,
         formState: { errors },
-    } = useFormContext<TransmissionLineInput>();
+    } = useFormContext<CreateTransmissionLineInput>();
     const { fields, append, remove, replace } = useFieldArray({
         control,
         name: "towers",
@@ -147,7 +147,7 @@ const TowerConfigurationTable: React.FC<Props> = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...field}
                                                     />
@@ -163,7 +163,7 @@ const TowerConfigurationTable: React.FC<Props> = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...field}
                                                     />

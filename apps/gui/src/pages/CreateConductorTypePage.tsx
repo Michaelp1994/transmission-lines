@@ -15,6 +15,7 @@ import {
     FormLabel,
     FormMessage,
     Input,
+    NumberInput,
 } from "@repo/ui";
 import {
     CreateConductorTypeInput,
@@ -95,7 +96,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("surfaceArea.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("surfaceArea.description")}
@@ -113,7 +117,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("outerDiameter.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("outerDiameter.description")}
@@ -131,7 +138,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("coreDiameter.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("coreDiameter.description")}
@@ -167,7 +177,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("layers.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("layers.description")}
@@ -185,7 +198,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("currentCapacity.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("currentCapacity.description")}
@@ -203,7 +219,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("dcResistance25.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("dcResistance25.description")}
@@ -221,7 +240,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("acResistance25.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("acResistance25.description")}
@@ -239,7 +261,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("acResistance50.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("acResistance50.description")}
@@ -257,7 +282,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                             {t("acResistance75.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("acResistance75.description")}
@@ -273,7 +301,10 @@ const CreateConductorTypePage: React.FC<Props> = () => {
                                     <FormItem>
                                         <FormLabel>{t("gmr.label")}</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("gmr.description")}

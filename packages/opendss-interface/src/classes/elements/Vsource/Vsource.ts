@@ -8,7 +8,7 @@ export default class Vsource
     extends CircuitElement
     implements VsourceInterface
 {
-    override _type = "Vsource";
+    override #type = "Vsource";
 
     parameters: Array<keyof this> = [
         "bus1",

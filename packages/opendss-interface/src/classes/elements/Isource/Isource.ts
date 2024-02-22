@@ -8,7 +8,7 @@ export default class Isource
     extends CircuitElement
     implements IsourceInterface
 {
-    override _type = "Isource";
+    override #type = "Isource";
 
     parameters: Array<keyof this> = [
         "bus1",

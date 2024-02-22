@@ -13,6 +13,7 @@ import {
     FormItem,
     FormMessage,
     Input,
+    NumberInput,
     Table,
     TableBody,
     TableCell,
@@ -150,7 +151,7 @@ const ConductorConfigurationTable: React.FC<Props> = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...field}
                                                     />
@@ -167,7 +168,7 @@ const ConductorConfigurationTable: React.FC<Props> = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...field}
                                                     />
@@ -184,7 +185,7 @@ const ConductorConfigurationTable: React.FC<Props> = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...field}
                                                     />
@@ -201,7 +202,7 @@ const ConductorConfigurationTable: React.FC<Props> = () => {
                                         render={({ field }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...field}
                                                     />

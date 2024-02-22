@@ -8,7 +8,7 @@ export default class LineCode
     extends GeneralElement
     implements LineCodeInterface
 {
-    override _type = "LineCode";
+    override #type = "LineCode";
 
     parameters: Array<keyof this> = [
         "nphases",

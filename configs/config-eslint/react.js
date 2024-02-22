@@ -15,6 +15,7 @@ module.exports = {
     plugins: ["i18next", "only-warn"],
     parserOptions: {
         project,
+        EXPERIMENTAL_useProjectService: true,
     },
     env: {
         browser: true,

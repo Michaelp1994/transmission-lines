@@ -15,6 +15,7 @@ import {
     FormLabel,
     FormMessage,
     Input,
+    NumberInput,
 } from "@repo/ui";
 import {
     UpdateSourceInput,
@@ -113,7 +114,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                             {t("phases.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("phases.description")}
@@ -131,7 +135,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                             {t("voltage.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("voltage.description")}
@@ -147,7 +154,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                     <FormItem>
                                         <FormLabel>{t("x1r1.label")}</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("x1r1.description")}
@@ -163,7 +173,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                     <FormItem>
                                         <FormLabel>{t("x0r0.label")}</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("x0r0.description")}
@@ -179,7 +192,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                     <FormItem>
                                         <FormLabel>{t("isc3.label")}</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("isc3.description")}
@@ -195,7 +211,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                     <FormItem>
                                         <FormLabel>{t("isc1.label")}</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("isc1.description")}
@@ -213,7 +232,10 @@ const UpdateSourcePage: React.FC<Props> = () => {
                                             {t("resistance.label")}
                                         </FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <NumberInput
+                                                type="number"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormDescription>
                                             {t("resistance.description")}

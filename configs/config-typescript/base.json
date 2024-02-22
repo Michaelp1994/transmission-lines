@@ -1,22 +1,13 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        /* Projects */
         "composite": false,
-
-        /* Language and Environment */
         "preserveWatchOutput": true,
-
-        /* Modules */
         "module": "ESNext",
         "moduleResolution": "Bundler",
-
-        /* Interop Constraints */
         "isolatedModules": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-
-        /* Type Checking */
         "strict": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
@@ -28,7 +19,7 @@
         "alwaysStrict": true,
         "noUnusedLocals": false,
         "noUnusedParameters": true,
-        "exactOptionalPropertyTypes": false,
+        "exactOptionalPropertyTypes": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedIndexedAccess": true,
@@ -36,7 +27,6 @@
         "noPropertyAccessFromIndexSignature": true,
         "allowUnusedLabels": false,
         "allowUnreachableCode": false,
-        /* Completeness */
         "skipLibCheck": true
     }
 }

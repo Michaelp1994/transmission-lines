@@ -8,7 +8,7 @@
         "lib": ["ES2015", "DOM"],
         "module": "ESNext",
         "target": "ES6",
-        "types": ["jest", "node", "@testing-library/jest-dom"]
+        "types": ["node"]
     },
     "extends": "./base.json"
 }

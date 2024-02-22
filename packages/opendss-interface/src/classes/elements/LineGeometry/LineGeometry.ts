@@ -8,7 +8,7 @@ export default class LineGeometry
     extends GeneralElement
     implements LineGeometryInterface
 {
-    override _type = "LineGeometry";
+    override #type = "LineGeometry";
 
     parameters: Array<keyof this> = [
         "nconds",

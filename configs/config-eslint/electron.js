@@ -7,6 +7,7 @@ module.exports = {
     extends: ["airbnb-base", "airbnb-typescript/base", "prettier"],
     parserOptions: {
         project,
+        EXPERIMENTAL_useProjectService: true,
     },
     plugins: ["only-warn"],
     env: {

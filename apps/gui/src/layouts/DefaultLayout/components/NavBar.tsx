@@ -10,6 +10,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import UserButton from "./UserButton";
+
 import ROUTES from "@/router/routes";
 
 interface Props {}
@@ -35,14 +37,6 @@ const NavBar: React.FC<Props> = () => {
                             {t("home")}
                         </Link>
                     </NavigationMenuItem>
-                    {/* <NavigationMenuItem>
-                        <Link
-                            to={ROUTES.PROJECT.path}
-                            className={navigationMenuTriggerStyle()}
-                        >
-                            {t("project")}
-                        </Link>
-                    </NavigationMenuItem> */}
                     <NavigationMenuItem>
                         <Link
                             to={ROUTES.ALL_CONDUCTOR_TYPES.path}
@@ -62,8 +56,9 @@ const NavBar: React.FC<Props> = () => {
                 </NavigationMenuList>
             </NavigationMenu>
             <RightSide>
-                <Switch id="language" onCheckedChange={changeLanguage} />{" "}
-                <Label htmlFor="language">{t("changeLanguage")}</Label>
+                <UserButton />
+                {/* <Switch id="language" onCheckedChange={changeLanguage} />{" "}
+                <Label htmlFor="language">{t("changeLanguage")}</Label> */}
             </RightSide>
         </Wrapper>
     );

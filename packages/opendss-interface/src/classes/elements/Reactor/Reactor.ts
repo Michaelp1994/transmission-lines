@@ -8,7 +8,7 @@ export default class Reactor
     extends CircuitElement
     implements ReactorInterface
 {
-    override _type = "Reactor";
+    override #type = "Reactor";
 
     parameters: Array<keyof this> = [
         "bus1",
@@ -47,12 +47,12 @@ export default class Reactor
      * bus1=busname.1.2.3
      *
      * Bus2 property will default to this bus, node 0, unless previously specified. Only Bus1 need be specified for a Yg shunt reactor. */
-    bus1?: string;
+    bus1?: string | undefined;
 
     /** Name of 2nd bus. Defaults to all phases connected to first bus, node 0, (Shunt Wye Connection) except when Bus2 is specifically defined.
      *
      * Not necessary to specify for delta (LL) connection */
-    bus2?: string;
+    bus2?: string | undefined;
 
     /** Number of phases. */
     phases?: number;

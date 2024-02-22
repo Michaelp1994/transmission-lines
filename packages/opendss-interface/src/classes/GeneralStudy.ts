@@ -1,11 +1,12 @@
 import { open } from "node:fs/promises";
 import { EOL } from "node:os";
 
-import type OpenDSSOptionsInterface from "@classes/OpenDSSOptionsInterface";
 import BaseElement from "@elements/BaseElements/BaseElement";
 import CircuitElement from "@elements/BaseElements/CircuitElement";
 
 import OpenDssDriver from "./OpenDssDriver";
+
+import type { OpenDSSOptions } from "@/schemas/opendss/options";
 
 export default class GeneralStudy {
     private components: Array<BaseElement>;
@@ -14,7 +15,7 @@ export default class GeneralStudy {
 
     driver: OpenDssDriver;
 
-    constructor(options?: OpenDSSOptionsInterface) {
+    constructor(options?: OpenDSSOptions) {
         // this.circuitSolved = false;
         this.components = [];
         this.driver = new OpenDssDriver();
@@ -65,11 +66,11 @@ export default class GeneralStudy {
         this.driver.getCurrents();
     }
 
-    setOptions(options: OpenDSSOptionsInterface) {
+    setOptions(options: OpenDSSOptions) {
         this.driver.setOptions(options);
     }
 
-    getOption(option: keyof OpenDSSOptionsInterface) {
+    getOption(option: keyof OpenDSSOptions) {
         return this.driver.getOption(option);
     }
 

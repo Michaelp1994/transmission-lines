@@ -8,7 +8,7 @@ export default class WireData
     extends ConductorDataElement
     implements WireDataInterface
 {
-    override _type = "WireData";
+    override #type = "WireData";
 
     parameters: Array<keyof this> = [
         "rdc",

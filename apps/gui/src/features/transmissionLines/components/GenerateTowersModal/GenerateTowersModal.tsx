@@ -17,6 +17,7 @@ import {
     FormLabel,
     FormMessage,
     Input,
+    NumberInput,
     Tooltip,
     TooltipContent,
     TooltipProvider,
@@ -27,7 +28,7 @@ import {
     defaultGenerateTowers,
     generateTowersSchema,
 } from "@repo/validators/schemas/GenerateTowers.schema";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -44,12 +45,15 @@ const GenerateTowersModal: React.FC<Props> = (props) => {
         resolver: zodResolver(generateTowersSchema),
         defaultValues: defaultGenerateTowers,
     });
-    function handleOpenChange(value: boolean) {
-        if (!value) {
-            form.reset();
-        }
-        setOpen(value);
-    }
+    const handleOpenChange = useCallback(
+        (value: boolean) => {
+            if (!value) {
+                form.reset();
+            }
+            setOpen(value);
+        },
+        [form]
+    );
     const onSubmit: SubmitHandler<GenerateTowersInput> = (values) => {
         props.onSubmit(values);
         handleOpenChange(false);
@@ -131,7 +135,7 @@ const GenerateTowersModal: React.FC<Props> = (props) => {
                                         {t("numTowers.label")}
                                     </FormLabel>
                                     <FormControl>
-                                        <Input type="number" {...field} />
+                                        <NumberInput type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         {t("numTowers.description")}
@@ -149,7 +153,7 @@ const GenerateTowersModal: React.FC<Props> = (props) => {
                                         {t("resistance.label")}
                                     </FormLabel>
                                     <FormControl>
-                                        <Input type="number" {...field} />
+                                        <NumberInput type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         {t("resistance.description")}
@@ -165,7 +169,7 @@ const GenerateTowersModal: React.FC<Props> = (props) => {
                                 <FormItem>
                                     <FormLabel>{t("distance.label")}</FormLabel>
                                     <FormControl>
-                                        <Input type="number" {...field} />
+                                        <NumberInput type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         {t("distance.description")}

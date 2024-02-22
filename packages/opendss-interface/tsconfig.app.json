@@ -7,7 +7,8 @@
             "@classes/*": ["./src/classes/*"],
             "@elements/*": ["./src/classes/elements/*"],
             "@enums/*": ["./src/enums/*"],
-            "@helpers/*": ["./src/helpers/*"]
+            "@helpers/*": ["./src/helpers/*"],
+            "@/*": ["./src/*"]
         },
         "outDir": "dist/app"
     },

@@ -11,6 +11,7 @@ import {
     FormItem,
     FormMessage,
     Input,
+    NumberInput,
     Table,
     TableBody,
     TableCell,
@@ -27,8 +28,6 @@ import type { CreateTowerGeometryInput } from "@repo/validators/schemas/TowerGeo
 import { FlipHorizontal, Plus, X } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
-
 
 interface Props {}
 
@@ -163,7 +162,7 @@ const ConductorLocationTable: React.FC<Props> = () => {
                                         }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...fieldProps}
                                                     />
@@ -181,7 +180,7 @@ const ConductorLocationTable: React.FC<Props> = () => {
                                         }) => (
                                             <FormItem>
                                                 <FormControl>
-                                                    <Input
+                                                    <NumberInput
                                                         type="number"
                                                         {...fieldProps}
                                                     />

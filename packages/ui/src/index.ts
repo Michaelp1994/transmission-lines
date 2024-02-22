@@ -18,6 +18,7 @@ export * from "@/components/ui/dropdown-menu";
 export * from "@/components/ui/form";
 export * from "@/components/ui/hover-card";
 export * from "@/components/ui/input";
+export * from "@/components/ui/number-input";
 export * from "@/components/ui/label";
 export * from "@/components/ui/menubar";
 export * from "@/components/ui/navigation-menu";

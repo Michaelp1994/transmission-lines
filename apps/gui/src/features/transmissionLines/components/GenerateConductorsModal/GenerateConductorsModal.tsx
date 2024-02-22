@@ -17,6 +17,7 @@ import {
     FormLabel,
     FormMessage,
     Input,
+    NumberInput,
     Tooltip,
     TooltipContent,
     TooltipProvider,
@@ -32,7 +33,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ConductorTypeSelect } from "@/features/conductorTypes";
-
 
 interface Props {
     onSubmit(values: GenerateConductorsInput): void;
@@ -95,7 +95,7 @@ const GenerateConductorsModal: React.FC<Props> = (props) => {
                                 <FormItem>
                                     <FormLabel>{t("phases.label")}</FormLabel>
                                     <FormControl>
-                                        <Input type="number" {...field} />
+                                        <NumberInput type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         {t("phases.description")}
@@ -111,7 +111,7 @@ const GenerateConductorsModal: React.FC<Props> = (props) => {
                                 <FormItem>
                                     <FormLabel>{t("circuits.label")}</FormLabel>
                                     <FormControl>
-                                        <Input type="number" {...field} />
+                                        <NumberInput type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         {t("circuits.description")}
@@ -128,7 +128,7 @@ const GenerateConductorsModal: React.FC<Props> = (props) => {
                                 <FormItem>
                                     <FormLabel>{t("neutrals.label")}</FormLabel>
                                     <FormControl>
-                                        <Input type="number" {...field} />
+                                        <NumberInput type="number" {...field} />
                                     </FormControl>
                                     <FormDescription>
                                         {t("neutrals.description")}

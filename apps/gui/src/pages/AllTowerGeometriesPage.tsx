@@ -25,9 +25,9 @@ const AllTowerGeometriesPage: React.FC<Props> = () => {
             <Card>
                 <CardHeader>
                     <CardHeaderText>
-                        <CardTitle>Conductor Types</CardTitle>
+                        <CardTitle>Tower Geometries</CardTitle>
                         <CardDescription>
-                            Conductor types in the database
+                            Tower Geometries in the database
                         </CardDescription>
                     </CardHeaderText>
                     <CardHeaderActions>
