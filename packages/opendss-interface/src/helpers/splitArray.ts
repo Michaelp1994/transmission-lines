@@ -1,4 +1,4 @@
-const MAX_LENGTH = 100;
+const MAX_LENGTH = 500;
 
 export default function splitStringsIntoRows(inputArray: string[]): string[] {
     const resultArray: string[] = [];

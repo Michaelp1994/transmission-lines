@@ -13,10 +13,6 @@ export const controlModeOptionSchema = z.enum([
 
 export type ControlModeOptionEnum = z.infer<typeof controlModeOptionSchema>;
 
-export const earthModelSchema = z.enum(["Carson", "FullCarson", "Deri"]);
-
-export type EarthModelEnum = z.infer<typeof earthModelSchema>;
-
 export const randomSchema = z.enum([
     "Uniform",
     "Gaussian",

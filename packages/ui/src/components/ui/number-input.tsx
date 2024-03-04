@@ -12,7 +12,7 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
         <Input
             type="number"
             ref={ref}
-            value={Number.isNaN(value) || value === 0 ? "" : value.toString()}
+            value={Number.isNaN(value) || value === 0 ? "" : String(value)}
             onChange={(e) => {
                 const output = parseInt(e.target.value, 10) as any;
                 const newEvent = {

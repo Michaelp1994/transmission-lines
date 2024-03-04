@@ -12,4 +12,9 @@ const t = initTRPC.context<Context>().create();
  * Export reusable router and procedure helpers
  * that can be used throughout the router
  */
-export const { router, procedure: publicProcedure, mergeRouters } = t;
+export const {
+    router,
+    procedure: publicProcedure,
+    mergeRouters,
+    createCallerFactory,
+} = t;

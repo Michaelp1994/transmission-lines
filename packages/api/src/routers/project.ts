@@ -1,9 +1,7 @@
 import fs from "fs/promises";
 
 import { eq } from "@repo/db/drizzle";
-import { conductorTypes } from "@repo/db/schemas/conductorTypes";
 import { projects } from "@repo/db/schemas/projects";
-import { towerGeometries } from "@repo/db/schemas/towerGeometries";
 import {
     createProjectSchema,
     deleteProjectSchema,
@@ -101,34 +99,6 @@ export default router({
                 },
             });
             if (!project) throw Error("Can't find project");
-
-            /*
-            SELECT DISTINCT tower_geometry.* FROM tower_geometry 
-            LEFT JOIN transmission_tower ON transmission_tower.geometryId = tower_geometry.id 
-            LEFT JOIN transmission_line ON transmission_line.id = transmission_tower.transmissionLineId 
-            WHERE projectId = "a8815e72-0738-408d-a1d8-eb0e72995f43";
-            */
-            // const uniqueTowerGeometries =
-            //     await db.query.towerGeometries.findFirst({
-            //         with: {
-            //             conductors: true,
-            //         },
-            //         where: eq(towerGeometries.id, 1),
-            //     });
-            // const uniqueConductorTypes =
-            //     await db.query.conductorTypes.findFirst({
-            //         with: {
-            //             conductors: true,
-            //         },
-            //         where: eq(conductorTypes.id, 1),
-            //     });
-            // const faultStudy = await buildCircuit(
-            //     project,
-            //     [uniqueTowerGeometries],
-            //     [uniqueConductorTypes]
-            // );
-            // const results = faultStudy.worstCase();
-            // return results;
         }),
     import: publicProcedure.mutation(async ({ ctx: { electron, db } }) => {
         if (!electron) {

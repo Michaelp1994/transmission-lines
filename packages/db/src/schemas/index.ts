@@ -1,4 +1,6 @@
 export * from "./conductorLocations";
+export * from "./conductorLayers";
+export * from "./conductorMaterials";
 export * from "./conductorTypes";
 export * from "./projects";
 export * from "./sources";
