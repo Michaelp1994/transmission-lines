@@ -24,9 +24,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const SourceSelect = forwardRef<HTMLButtonElement, Props>(
     ({ projectId, value, onChange, ...props }, ref) => {
         const { t } = useTranslation("source");
-        const { data, error, isLoading } = trpc.source.getAll.useQuery({
-            projectId,
-        });
+        const { data, error, isLoading } =
+            trpc.source.getAllByProjectId.useQuery({
+                projectId,
+            });
         const [open, setOpen] = useState(false);
         function handleSelect(currentValue) {
             if (onChange) onChange(currentValue === value ? "" : currentValue);

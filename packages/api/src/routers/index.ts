@@ -1,4 +1,5 @@
 import conductorRouter from "./conductor";
+import conductorLocationRouter from "./conductorLocation";
 import conductorTypeRouter from "./conductorType";
 import metaRouter from "./meta";
 import projectRouter from "./project";
@@ -11,6 +12,7 @@ import { router } from "../trpc";
 export const appRouter = router({
     conductor: conductorRouter,
     conductorType: conductorTypeRouter,
+    conductorLocations: conductorLocationRouter,
     meta: metaRouter,
     project: projectRouter,
     source: sourceRouter,

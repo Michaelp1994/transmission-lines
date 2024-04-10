@@ -58,12 +58,19 @@ export default router({
                     },
                 },
             });
-            console.log(tower?.geometry.conductors);
+            console.log(tower);
             if (!tower) throw Error("Can't update transmission line");
-            const matrixes = buildTransmissionLineMatrix(
-                tower.geometry,
-                tower.transmissionLine.conductors
-            );
+            try {
+                const matrixes = buildTransmissionLineMatrix(
+                    tower.geometry,
+                    tower.transmissionLine.conductors
+                );
+            } catch (e) {
+                console.log(e);
+                throw Error("Can't calculate matrixes");
+            }
+
+            console.log("matrices: ", matrixes);
             return matrixes;
         }),
 

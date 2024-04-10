@@ -43,7 +43,6 @@ const CreateTransmissionLinePage: React.FC<Props> = () => {
 
     const form = useForm<CreateTransmissionLineInput>({
         resolver: zodResolver(createTransmissionLineSchema),
-        // defaultValues: defaultTransmissionLine,
         values: {
             ...defaultTransmissionLine,
             projectId,

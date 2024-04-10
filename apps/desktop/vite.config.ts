@@ -1,22 +1,27 @@
-import { defineConfig } from "vite";
-import { spawn, type ChildProcess } from "child_process";
+import { type ChildProcess, spawn } from "child_process";
 import electronPath from "electron";
-import tsconfigPaths from "vite-tsconfig-paths";
+
 import swc from "@rollup/plugin-swc";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const electronPlugin = () => {
-    var pr: ChildProcess;
+    let pr: ChildProcess;
     return {
         name: "prebuild-commands",
         // handleHotUpdate: async () => {
         //     runElectron();
         // },
         writeBundle: async () => {
-            let cwd = (process && process.cwd()) || __dirname;
+            const cwd = (process && process.cwd()) || __dirname;
             console.log("spawning electron...");
-            pr = spawn(electronPath as unknown as string, ["dist/index.js"], {
-                cwd,
-            });
+            pr = spawn(
+                electronPath as unknown as string,
+                ["dist/index.js", "--inspect=9229"],
+                {
+                    cwd,
+                }
+            );
             pr.stdout?.on("data", (data) => {
                 console.log(`${data}`);
             });

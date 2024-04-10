@@ -1,7 +1,7 @@
 /* eslint-disable import/no-cycle */
 
 import { relations } from "drizzle-orm";
-import { integer, real, sqliteTable } from "drizzle-orm/sqlite-core";
+import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { towerGeometries } from "./towerGeometries";
 
@@ -9,7 +9,7 @@ export const conductorLocations = sqliteTable("conductor_locations", {
     id: integer("id").notNull().primaryKey({ autoIncrement: true }),
     x: real("x").notNull(),
     y: real("y").notNull(),
-    towerGeometryId: integer("tower_geometry_id")
+    geometryId: text("tower_geometry_id")
         .notNull()
         .references(() => towerGeometries.id),
 });
@@ -21,7 +21,7 @@ export const conductorLocationsRelations = relations(
     conductorLocations,
     ({ one }) => ({
         towerGeometry: one(towerGeometries, {
-            fields: [conductorLocations.towerGeometryId],
+            fields: [conductorLocations.geometryId],
             references: [towerGeometries.id],
         }),
     })

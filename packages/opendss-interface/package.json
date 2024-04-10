@@ -26,7 +26,7 @@
         "@types/activex-opendssengine": "^4.0.0",
         "concurrently": "^8.2.2",
         "eslint": "^8.57.0",
-        "typescript": "^5.4.3",
+        "typescript": "^5.4.5",
         "vite-tsconfig-paths": "^4.3.2",
         "vitest": "^1.4.0"
     },

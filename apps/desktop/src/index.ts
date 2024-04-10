@@ -4,16 +4,16 @@ import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
 
 import { dataSource } from "./config/db";
-// import fs from "fs/promises";
 import setupDevTools from "./config/devTools";
+import setupLogging from "./config/logging";
 import createWindow from "./config/window";
 
 app.whenReady().then(async () => {
     await setupDevTools();
+    await setupLogging();
 
     // Set app user model id for windows
     electronApp.setAppUserModelId("com.electron");
-
     // Default open or close DevTools by F12 in development
     // and ignore CommandOrControl + R in production.
     // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils

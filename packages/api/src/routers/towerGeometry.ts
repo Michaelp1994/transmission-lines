@@ -27,9 +27,6 @@ export default router({
         .query(async ({ input, ctx: { db } }) => {
             const towerGeometry = await db.query.towerGeometries.findFirst({
                 where: eq(towerGeometries.id, input.id),
-                with: {
-                    conductors: true,
-                },
             });
             if (!towerGeometry) throw Error("Can't find tower geometry");
             return towerGeometry;

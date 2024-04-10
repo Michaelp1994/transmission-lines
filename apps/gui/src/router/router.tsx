@@ -16,6 +16,8 @@ import ErrorPage from "@/pages/ErrorPage";
 import LineParametersPage from "@/pages/LineParametersPage";
 import PageNotFound from "@/pages/PageNotFound";
 // import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
+import TowerGeometryConductors from "@/pages/TowerGeometryConductors";
+import TowerGeometryGeneral from "@/pages/TowerGeometryGeneral";
 import TransmissionLineConductors from "@/pages/TransmissionLineConductors";
 import TransmissionLineGeneral from "@/pages/TransmissionLineGeneral";
 import TransmissionLineTowers from "@/pages/TransmissionLineTowers";
@@ -24,6 +26,7 @@ import UpdateSourcePage from "@/pages/UpdateSourcePage";
 import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
 import ViewProjectPage from "@/pages/ViewProjectPage";
 // import ViewTransmissionLineParametersPage from "@/pages/ViewTransmissionLineParametersPage";
+import ViewTowerGeometryPage from "@/pages/ViewTowerGeometryPage";
 import ViewTransmissionLinePage from "@/pages/ViewTransmissionLinePage";
 
 const routeObjects: RouteObject[] = [
@@ -179,6 +182,32 @@ const routeObjects: RouteObject[] = [
             {
                 path: ROUTES.ALL_TOWER_GEOMETRIES.path,
                 element: <AllTowerGeometriesPage />,
+                handle: {
+                    crumb: () => ({
+                        link: ROUTES.ALL_TOWER_GEOMETRIES.path,
+                        text: "Tower Geometries",
+                    }),
+                },
+            },
+            {
+                path: ROUTES.VIEW_TOWER_GEOMETRY.path,
+                element: <ViewTowerGeometryPage />,
+                handle: {
+                    crumb: () => ({
+                        link: ROUTES.VIEW_TOWER_GEOMETRY.path,
+                        text: "Tower Geometry",
+                    }),
+                },
+                children: [
+                    {
+                        index: true,
+                        element: <TowerGeometryGeneral />,
+                    },
+                    {
+                        path: ROUTES.VIEW_TOWER_GEOMETRY.CONDUCTORS.path,
+                        element: <TowerGeometryConductors />,
+                    },
+                ],
             },
             {
                 path: ROUTES.ALL_CONDUCTOR_TYPES.path,

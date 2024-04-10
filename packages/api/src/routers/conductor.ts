@@ -2,7 +2,6 @@ import { eq } from "@repo/db/drizzle";
 import { transmissionConductors } from "@repo/db/schemas/transmissionConductors";
 import { generateConductorsSchema } from "@repo/validators";
 import {
-    CreateConductorInput,
     createConductorSchema,
     deleteConductorSchema,
     getAllConductorsByLineIdSchema,

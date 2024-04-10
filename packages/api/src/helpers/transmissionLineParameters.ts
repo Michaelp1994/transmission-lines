@@ -42,6 +42,7 @@ export default function buildTransmissionLineMatrix(
 
     const reactanceGround =
         u0 * freq * Math.log(658.5 * (resistivity / freq) ** (1 / 2)); // ohm/m
+
     const numConductors = conductors.length;
     const rMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
     const xMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;

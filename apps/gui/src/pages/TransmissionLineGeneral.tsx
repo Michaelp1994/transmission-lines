@@ -40,12 +40,12 @@ const TransmissionLineGeneral: React.FC<Props> = () => {
     const { projectId, lineId } = useTypedParams(
         ROUTES.UPDATE_TRANSMISSION_LINE
     );
-
-    const navigate = useNavigate();
-    const { t } = useTranslation("transmissionLine");
     const { data } = trpc.transmissionLine.getById.useQuery({
         id: lineId,
     });
+    const navigate = useNavigate();
+    const { t } = useTranslation("transmissionLine");
+
     const updateTransmissionLineMutation =
         trpc.transmissionLine.update.useMutation();
 

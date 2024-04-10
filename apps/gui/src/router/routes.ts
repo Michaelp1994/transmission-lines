@@ -28,6 +28,7 @@ const ROUTES = {
             params: { projectId },
         }
     ),
+
     VIEW_TRANSMISSION_LINE: route(
         "projects/:projectId/transmission-lines/:lineId",
         {
@@ -78,9 +79,20 @@ const ROUTES = {
     // Tower Geometries
     ALL_TOWER_GEOMETRIES: route("tower-geometries"),
     CREATE_TOWER_GEOMETRY: route("tower-geometries/new"),
-    UPDATE_TOWER_GEOMETRY: route("tower-geometries/:id/update", {
-        params: { id: geometryId },
+    UPDATE_TOWER_GEOMETRY: route("tower-geometries/:geometryId/update", {
+        params: { geometryId },
     }),
+    VIEW_TOWER_GEOMETRY: route(
+        "tower-geometries/:geometryId",
+        {
+            params: {
+                geometryId,
+            },
+        },
+        {
+            CONDUCTORS: route("conductors"),
+        }
+    ),
     // Conductor Types
     ALL_CONDUCTOR_TYPES: route("conductor-types"),
     CREATE_CONDUCTOR_TYPE: route("conductor-types/new"),
