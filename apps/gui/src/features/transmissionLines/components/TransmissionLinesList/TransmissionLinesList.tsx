@@ -16,6 +16,7 @@ import { Brackets, Info, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 import {
     ItemActions,
     ListHeader,
@@ -61,19 +62,7 @@ const TransmissionLinesList: React.FC<Props> = ({ projectId }) => {
                     <ItemActions>
                         <Button variant="ghost" asChild>
                             <Link
-                                to={ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS.buildPath(
-                                    {
-                                        projectId,
-                                        lineId: id,
-                                    }
-                                )}
-                            >
-                                <BracketsIcon />
-                            </Link>
-                        </Button>
-                        <Button variant="ghost" asChild>
-                            <Link
-                                to={ROUTES.UPDATE_TRANSMISSION_LINE.buildPath({
+                                to={ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
                                     projectId,
                                     lineId: id,
                                 })}
@@ -81,7 +70,7 @@ const TransmissionLinesList: React.FC<Props> = ({ projectId }) => {
                                 <InfoIcon />
                             </Link>
                         </Button>
-                        <ConfirmDialog onConfirm={() => removeLine(id)} />
+                        <ConfirmationDialog onConfirm={() => removeLine(id)} />
                     </ItemActions>
                 </ListItem>
             ))}
@@ -95,50 +84,6 @@ const BracketsIcon = styled(Brackets)`
 `;
 
 const InfoIcon = styled(Info)`
-    height: 24px;
-    width: 24px;
-`;
-
-interface ConfirmDialogProps {
-    onConfirm(): void;
-}
-
-const ConfirmDialog: React.FC<ConfirmDialogProps> = ({ onConfirm }) => {
-    const { t } = useTranslation("transmissionLine");
-
-    return (
-        <AlertDialog>
-            <AlertDialogTrigger asChild>
-                <Button variant="destructive" size="icon">
-                    <CloseIcon />
-                </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>
-                        {t("general:confirmationTitle")}
-                    </AlertDialogTitle>
-                    <AlertDialogDescription>
-                        {t("general:cannotUndo")}
-                        <br />
-                        {t("deletionWarning")}
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>{t("form:cancel")}</AlertDialogCancel>
-                    <AlertDialogAction
-                        className={buttonVariants({ variant: "destructive" })}
-                        onClick={() => onConfirm()}
-                    >
-                        {t("form:delete")}
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
-    );
-};
-
-const CloseIcon = styled(Trash2)`
     height: 24px;
     width: 24px;
 `;

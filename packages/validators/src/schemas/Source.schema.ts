@@ -52,6 +52,14 @@ export const getAllSourcesSchema = z.object({ projectId });
 
 export type GetAllSourcesInput = z.infer<typeof getAllSourcesSchema>;
 
+// getAllSources
+
+export const getAllSourcesByProjectIdSchema = z.object({ projectId });
+
+export type GetAllSourcesByProjectIdInput = z.infer<
+    typeof getAllSourcesByProjectIdSchema
+>;
+
 // getById
 
 export const getSourceByIdSchema = z.object({ id: sourceId });

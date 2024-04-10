@@ -3,7 +3,7 @@ import { conductorTypes } from "@repo/db/schemas/conductorTypes";
 import {
     createConductorTypeSchema,
     deleteConductorTypeSchema,
-    getAllConductorsSchema,
+    getAllConductorTypesSchema,
     getConductorTypeByIdSchema,
     updateConductorTypeSchema,
 } from "@repo/validators/schemas/ConductorType.schema";
@@ -12,7 +12,7 @@ import { publicProcedure, router } from "../trpc";
 
 export default router({
     getAll: publicProcedure
-        .input(getAllConductorsSchema)
+        .input(getAllConductorTypesSchema)
         .query(async ({ ctx: { db }, input }) => {
             const findOptions = input && {
                 limit: input.pageSize,
@@ -23,7 +23,7 @@ export default router({
             return allConductorTypes;
         }),
     getCount: publicProcedure
-        .input(getAllConductorsSchema)
+        .input(getAllConductorTypesSchema)
         .query(async ({ ctx: { db }, input }) => {
             const [totalCount] = await db
                 .select({

@@ -1,40 +1,14 @@
 import * as z from "zod";
 
-import {
-    createConductorSchema,
-    defaultConductor,
-    updateConductorSchema,
-} from "./Conductor.schema";
 import { lineId, projectId } from "./Ids.schema";
-import {
-    createTransmissionTowerSchema,
-    defaultTransmissionTower,
-    updateTransmissionTowerSchema,
-} from "./TransmissionTower.schema";
 
 // create
 
 export const createTransmissionLineSchema = z.object({
     name: z.string().min(2).max(50).trim(),
     fromSourceId: z.string().min(1, { message: "Please select a Source" }),
-    toSourceId: z.string().optional(),
+    toSourceId: z.string().nullable(),
     projectId,
-    conductors: createConductorSchema
-        .array()
-        .refine(
-            (conductors) =>
-                new Set(conductors.map((conductor) => conductor.name)).size ===
-                conductors.length,
-            { message: "Please ensure your conductors have unique names." }
-        ),
-    towers: createTransmissionTowerSchema
-        .array()
-        .refine(
-            (towers) =>
-                new Set(towers.map((tower) => tower.name)).size ===
-                towers.length,
-            { message: "Please ensure your towers have unique names." }
-        ),
 });
 
 export type CreateTransmissionLineInput = z.infer<
@@ -46,16 +20,6 @@ export const defaultTransmissionLine: CreateTransmissionLineInput = {
     fromSourceId: "",
     toSourceId: "",
     projectId: "",
-    conductors: [
-        {
-            ...defaultConductor,
-        },
-    ],
-    towers: [
-        {
-            ...defaultTransmissionTower,
-        },
-    ],
 };
 
 // update
@@ -63,10 +27,6 @@ export const defaultTransmissionLine: CreateTransmissionLineInput = {
 export const updateTransmissionLineSchema = createTransmissionLineSchema.extend(
     {
         id: lineId,
-        towers: z.array(
-            createTransmissionTowerSchema.or(updateTransmissionTowerSchema)
-        ),
-        conductors: z.array(createConductorSchema.or(updateConductorSchema)),
     }
 );
 
@@ -82,6 +42,16 @@ export const getAllTransmissionLinesSchema = z.object({
 
 export type GetAllTransmissionLinesInput = z.infer<
     typeof getAllTransmissionLinesSchema
+>;
+
+// getAllTransmissionLines
+
+export const getAllTransmissionLinesByProjectIdSchema = z.object({
+    projectId,
+});
+
+export type GetAllTransmissionLinesByProjectIdInput = z.infer<
+    typeof getAllTransmissionLinesByProjectIdSchema
 >;
 
 // getById

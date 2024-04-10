@@ -1,13 +1,16 @@
 /* eslint-disable import/no-cycle */
 
 import { relations } from "drizzle-orm";
-import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { v4 as uuidv4 } from "uuid";
 
 import { conductorLayers } from "./conductorLayers";
 import { transmissionConductors } from "./transmissionConductors";
 
 export const conductorTypes = sqliteTable("conductor_types", {
-    id: integer("id").primaryKey({ autoIncrement: true }),
+    id: text("id")
+        .primaryKey()
+        .$defaultFn(() => uuidv4()),
     name: text("name").notNull(),
     surfaceArea: real("surface_area"),
     stranding: text("stranding"),

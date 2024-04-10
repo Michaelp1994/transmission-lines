@@ -28,52 +28,44 @@ import {
     defaultGenerateConductors,
     generateConductorsSchema,
 } from "@repo/validators/schemas/GenerateConductors.schema";
-import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { LineID } from "@repo/validators/schemas/Ids.schema";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ConductorTypeSelect } from "@/features/conductorTypes";
+import trpc from "@/utils/trpc";
 
-interface Props {
-    onSubmit(values: GenerateConductorsInput): void;
+export interface GenerateConductorsModalProps {
+    lineId: LineID;
+    onClose: () => void;
 }
 
-const GenerateConductorsModal: React.FC<Props> = (props) => {
+const GenerateConductorsModal: React.FC<GenerateConductorsModalProps> = ({
+    lineId,
+    onClose,
+}) => {
     const { t } = useTranslation("generateConductors");
-    const [open, setOpen] = useState(false);
+    const utils = trpc.useUtils();
+
     const form = useForm<GenerateConductorsInput>({
         resolver: zodResolver(generateConductorsSchema),
-        defaultValues: defaultGenerateConductors,
+        values: {
+            ...defaultGenerateConductors,
+            lineId,
+        },
+    });
+    const generateConductorsMutation = trpc.conductor.generate.useMutation();
+    const handleSubmit = form.handleSubmit(async (values) => {
+        const data = await generateConductorsMutation.mutateAsync(values);
+        await utils.conductor.getAllByLineId.invalidate({
+            lineId,
+        });
+        onClose();
     });
 
-    function handleOpenChange(value: boolean) {
-        if (!value) {
-            form.reset();
-        }
-        setOpen(value);
-    }
-    const onSubmit: SubmitHandler<GenerateConductorsInput> = (values) => {
-        props.onSubmit(values);
-        handleOpenChange(false);
-    };
-
     return (
-        <Dialog open={open} onOpenChange={handleOpenChange}>
-            <TooltipProvider>
-                <Tooltip>
-                    <DialogTrigger asChild>
-                        <TooltipTrigger asChild>
-                            <Button>{t("form:generate")}</Button>
-                        </TooltipTrigger>
-                    </DialogTrigger>
-
-                    <TooltipContent>
-                        <p>{t("tooltip")}</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-
-            <DialogContent onCloseAutoFocus={(e) => e.preventDefault()}>
+        <Dialog open defaultOpen onOpenChange={onClose}>
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>{t("modalTitle")}</DialogTitle>
                     <DialogDescription>
@@ -81,13 +73,7 @@ const GenerateConductorsModal: React.FC<Props> = (props) => {
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
-                    <StyledForm
-                        onSubmit={(e) => {
-                            e.stopPropagation();
-                            form.handleSubmit(onSubmit)(e);
-                        }}
-                        onReset={() => form.reset()}
-                    >
+                    <StyledForm onSubmit={handleSubmit}>
                         <FormField
                             control={form.control}
                             name="phases"
@@ -139,7 +125,7 @@ const GenerateConductorsModal: React.FC<Props> = (props) => {
                         />
                         <FormField
                             control={form.control}
-                            name="phaseConductorTypeId"
+                            name="phaseTypeId"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
@@ -157,7 +143,7 @@ const GenerateConductorsModal: React.FC<Props> = (props) => {
                         />
                         <FormField
                             control={form.control}
-                            name="neutralConductorTypeId"
+                            name="neutralTypeId"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>

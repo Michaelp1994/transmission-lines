@@ -14,7 +14,8 @@ export default function generateConductors(
                 bundleNumber: 1,
                 isNeutral: false,
                 bundleSpacing: 0,
-                typeId: values.phaseConductorTypeId,
+                typeId: values.phaseTypeId,
+                lineId: values.lineId,
             });
         }
     }
@@ -26,7 +27,8 @@ export default function generateConductors(
             isNeutral: true,
             bundleNumber: 1,
             bundleSpacing: 0,
-            typeId: values.neutralConductorTypeId,
+            typeId: values.neutralTypeId,
+            lineId: values.lineId,
         });
     }
     return newConductors;

@@ -62,7 +62,6 @@ const CreateProjectPage: React.FC<Props> = () => {
 
     return (
         <PageWrapper>
-            <Link to={ROUTES.HOME.path}>{t("general:goBack")}</Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -110,7 +109,6 @@ const CreateProjectPage: React.FC<Props> = () => {
 };
 
 const PageWrapper = styled.div`
-    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;

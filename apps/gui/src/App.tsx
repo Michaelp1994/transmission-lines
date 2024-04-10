@@ -7,6 +7,7 @@ import router from "./router";
 import trpc from "./utils/trpc";
 import "@repo/ui/global.css";
 import "./utils/i18n";
+import ModalRenderer from "./components/modals/modal-renderer";
 
 const App = () => {
     const [queryClient] = useState(() => new QueryClient());
@@ -22,6 +23,7 @@ const App = () => {
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
             <QueryClientProvider client={queryClient}>
+                <ModalRenderer />
                 <RouterProvider router={router} />
             </QueryClientProvider>
         </trpc.Provider>

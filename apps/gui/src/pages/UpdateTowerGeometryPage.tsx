@@ -70,9 +70,6 @@ const UpdateTowerGeometryPage: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            <Link to={ROUTES.ALL_TOWER_GEOMETRIES.path}>
-                {t("general:goBack")}
-            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>

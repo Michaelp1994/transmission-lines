@@ -103,7 +103,6 @@ const TransmissionLineFaultPage: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            <Link to={ROUTES.GENERATE_RESULTS.path}>{t("general:goBack")}</Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>

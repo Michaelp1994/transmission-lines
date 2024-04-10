@@ -1,10 +1,12 @@
 import { number, route, string } from "react-router-typesafe-routes/dom";
+
 import {
     conductorTypeId,
     geometryId,
     lineId,
     projectId,
     sourceId,
+    towerId,
 } from "./route-ids";
 
 const ROUTES = {
@@ -26,6 +28,20 @@ const ROUTES = {
             params: { projectId },
         }
     ),
+    VIEW_TRANSMISSION_LINE: route(
+        "projects/:projectId/transmission-lines/:lineId",
+        {
+            params: {
+                projectId,
+                lineId,
+            },
+        },
+        {
+            CONDUCTORS: route("conductors"),
+            TOWERS: route("towers"),
+        }
+    ),
+
     UPDATE_TRANSMISSION_LINE: route(
         "projects/:projectId/transmission-lines/:lineId/update",
         {
@@ -35,12 +51,14 @@ const ROUTES = {
             },
         }
     ),
-    VIEW_TRANSMISSION_LINE_PARAMETERS: route(
-        "projects/:projectId/transmission-lines/:lineId/parameters",
+
+    // Transmission Line Parameters
+    LINE_PARAMETERS: route(
+        "projects/:projectId/transmission-lines/:lineId/towers/:towerId",
         {
             params: {
-                projectId,
                 lineId,
+                towerId,
             },
         }
     ),

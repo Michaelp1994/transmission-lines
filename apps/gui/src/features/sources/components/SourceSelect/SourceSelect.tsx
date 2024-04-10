@@ -6,6 +6,7 @@ import {
     CommandGroup,
     CommandInput,
     CommandItem,
+    CommandList,
     Popover,
     PopoverContent,
     PopoverTrigger,
@@ -27,18 +28,6 @@ const SourceSelect = forwardRef<HTMLButtonElement, Props>(
             projectId,
         });
         const [open, setOpen] = useState(false);
-        const [search, setSearch] = useState("");
-        const filteredItems = useMemo(
-            () =>
-                data?.filter(
-                    /** dumb filtering, until cmdk allows for custom search key
-                     * @see https://github.com/pacocoursey/cmdk/issues/181 */
-                    (source) =>
-                        source.name.toLowerCase().includes(search.toLowerCase())
-                ),
-            [data, search]
-        );
-
         function handleSelect(currentValue) {
             if (onChange) onChange(currentValue === value ? "" : currentValue);
             setOpen(false);
@@ -56,31 +45,32 @@ const SourceSelect = forwardRef<HTMLButtonElement, Props>(
                         {value
                             ? data?.find((source) => source.id === value)?.name
                             : t("select")}
+
                         <StyledChevron />
                     </StyledButton>
                 </PopoverTrigger>
                 <StyledPopoverContent>
-                    <Command shouldFilter={false}>
-                        <CommandInput
-                            placeholder={t("searchSources")}
-                            value={search}
-                            onValueChange={setSearch}
-                        />
+                    <Command>
+                        <CommandInput placeholder={t("searchSources")} />
                         <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                        <CommandGroup>
-                            {filteredItems?.map((source) => (
-                                <CommandItem
-                                    key={source.id}
-                                    value={source.id}
-                                    onSelect={handleSelect}
-                                >
-                                    <StyledIcon
-                                        selected={value === source.id}
-                                    />
-                                    {source.name}
-                                </CommandItem>
-                            ))}
-                        </CommandGroup>
+
+                        <CommandList>
+                            <CommandGroup>
+                                {data?.map((source) => (
+                                    <CommandItem
+                                        key={source.id}
+                                        value={source.id}
+                                        keywords={[source.name]}
+                                        onSelect={handleSelect}
+                                    >
+                                        <StyledIcon
+                                            selected={value === source.id}
+                                        />
+                                        {source.name}
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        </CommandList>
                     </Command>
                 </StyledPopoverContent>
             </Popover>

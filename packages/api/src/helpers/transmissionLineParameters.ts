@@ -25,25 +25,11 @@ function calcImageDistance(
     );
 }
 
-type TowerGeometryWithRelations = TowerGeometry & {
-    conductors: ConductorLocation[];
-};
-
-type TranmissionTowerWithRelations = TransmissionTower & {
-    geometry: TowerGeometryWithRelations;
-};
-
-type TransmissionConductorWithRelations = TransmissionConductor & {
-    type: ConductorType;
-};
-
-type TransmissionLineWithRelations = TransmissionLine & {
-    towers: TranmissionTowerWithRelations[];
-    conductors: TransmissionConductorWithRelations[];
-};
+// type TowerGeometryWithLocations = TowerGeometry &
 
 export default function buildTransmissionLineMatrix(
-    transmissionLine: TransmissionLineWithRelations
+    geometry: TowerGeometry & { conductors: ConductorLocation[] },
+    conductors: Array<TransmissionConductor & { type: ConductorType }>
 ) {
     console.log("Calculating Transmission line parameters...");
     const u0 = 1.2566370621219 * 10 ** -6; // N/A^2
@@ -52,22 +38,19 @@ export default function buildTransmissionLineMatrix(
     const resistivity = 100; // # ohm*m
     const resistanceGround = (u0 * 2 * Math.pi * freq) / 8; // ohm/m
 
-    const { geometry } = transmissionLine.towers[0]!;
+    // const { geometry } = transmissionLine.towers[0]!;
 
     const reactanceGround =
         u0 * freq * Math.log(658.5 * (resistivity / freq) ** (1 / 2)); // ohm/m
-    const numConductors = transmissionLine.conductors.length;
+    const numConductors = conductors.length;
     const rMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
     const xMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
     const pMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
 
     // eslint-disable-next-line no-restricted-syntax
-    for (const [i, firstConductor] of transmissionLine.conductors.entries()) {
+    for (const [i, firstConductor] of conductors.entries()) {
         // eslint-disable-next-line no-restricted-syntax
-        for (const [
-            j,
-            secondConductor,
-        ] of transmissionLine.conductors.entries()) {
+        for (const [j, secondConductor] of conductors.entries()) {
             const imageDistance = calcImageDistance(
                 geometry.conductors[i]!,
                 geometry.conductors[j]!

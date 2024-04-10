@@ -1,34 +1,11 @@
-import { Button } from "@repo/ui";
-import { UpdateTowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
-import { CellContext, createColumnHelper } from "@tanstack/react-table";
-import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+
+import columns from "./columns";
 
 import DataTable from "@/components/DataTable";
-import ROUTES from "@/router/routes";
 import trpc, { RouterOutputs } from "@/utils/trpc";
 
 interface Props {}
-
-type TowerGeometrty = RouterOutputs["towerGeometry"]["getAll"][number];
-
-const columnHelper = createColumnHelper<TowerGeometrty>();
-
-const EditButton: React.FC<CellContext<TowerGeometrty, number>> = ({
-    getValue,
-}) => {
-    const id = getValue();
-    const navigate = useNavigate();
-    function handleClick() {
-        navigate(ROUTES.UPDATE_TOWER_GEOMETRY.buildPath({ id }));
-    }
-    return (
-        <Button variant="ghost" size="icon" onClick={() => handleClick()}>
-            <Info />
-        </Button>
-    );
-};
 
 const GeometriesTable: React.FC<Props> = () => {
     const { t } = useTranslation("towerGeometry");
@@ -37,16 +14,7 @@ const GeometriesTable: React.FC<Props> = () => {
         error,
         isLoading,
     } = trpc.towerGeometry.getAll.useQuery();
-    const columns = [
-        columnHelper.accessor("name", {
-            header: () => t("name.label"),
-            cell: (info) => info.renderValue(),
-        }),
-        columnHelper.accessor("id", {
-            header: () => t("table:actions"),
-            cell: EditButton,
-        }),
-    ];
+
     if (error) {
         return <div>{t("general:errorMessage")}</div>;
     }

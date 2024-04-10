@@ -24,15 +24,11 @@ import {
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 import { toast } from "sonner";
 
 import { SourceSelect } from "@/features/sources";
-import {
-    ConductorConfigurationTable,
-    TowerConfigurationTable,
-} from "@/features/transmissionLines";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
@@ -55,17 +51,20 @@ const CreateTransmissionLinePage: React.FC<Props> = () => {
     });
 
     async function onSubmit(values: CreateTransmissionLineInput) {
-        await createTransmissionLineMutation.mutateAsync(values);
+        const response =
+            await createTransmissionLineMutation.mutateAsync(values);
         toast.success(`${values.name} has been added to the project.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId }));
+        navigate(
+            ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+                projectId,
+                lineId: response.id,
+            })
+        );
     }
     return (
         <Wrapper>
-            <Link to={ROUTES.VIEW_PROJECT.buildPath({ projectId })}>
-                {t("general:goBack")}
-            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -142,8 +141,6 @@ const CreateTransmissionLinePage: React.FC<Props> = () => {
                                     </FormItem>
                                 )}
                             />
-                            <ConductorConfigurationTable />
-                            <TowerConfigurationTable />
                             <ButtonsContainer>
                                 <Button variant="destructive" type="reset">
                                     {t("form:reset")}

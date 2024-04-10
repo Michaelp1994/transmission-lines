@@ -3,7 +3,7 @@
 import { relations } from "drizzle-orm";
 import { integer, real, sqliteTable } from "drizzle-orm/sqlite-core";
 
-import { TowerGeometryWithRelations, towerGeometries } from "./towerGeometries";
+import { towerGeometries } from "./towerGeometries";
 
 export const conductorLocations = sqliteTable("conductor_locations", {
     id: integer("id").notNull().primaryKey({ autoIncrement: true }),
@@ -26,7 +26,3 @@ export const conductorLocationsRelations = relations(
         }),
     })
 );
-
-export type ConductorLocationWithRelations = ConductorLocation & {
-    towerGeometry: TowerGeometryWithRelations;
-};

@@ -8,12 +8,12 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import trpc from "@/utils/trpc";
-
 import useColumns, { ConductorType } from "./columns";
-import ConductorTypeTablePagination from "./ConductorTypeTablePagination";
-import ConductorTypeTableToolbar from "./ConductorTypeTableToolbar";
+import TablePagination from "./TablePagination";
+import TableToolbar from "./TableToolbar";
 import DataTable from "./DataTable";
+
+import trpc from "@/utils/trpc";
 
 interface Props {}
 
@@ -64,9 +64,9 @@ const ConductorTable: React.FC<Props> = () => {
 
     return (
         <ContentContainer>
-            <ConductorTypeTableToolbar table={table} />
+            <TableToolbar table={table} />
             <DataTable table={table} />
-            <ConductorTypeTablePagination table={table} />
+            <TablePagination table={table} />
         </ContentContainer>
     );
 };

@@ -20,8 +20,6 @@ const ErrorPage: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            <Link to={ROUTES.HOME.path}>{t("general:goBack")}</Link>
-
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -30,6 +28,7 @@ const ErrorPage: React.FC<Props> = () => {
                 </CardHeader>
                 <CardContent>
                     <div>{t("errorPageText")}</div>
+                    <Link to={ROUTES.HOME.path}>Go Home</Link>
                 </CardContent>
             </Card>
         </Wrapper>

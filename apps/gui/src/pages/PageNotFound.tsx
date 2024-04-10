@@ -18,8 +18,6 @@ const PageNotFound: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            <Link to={ROUTES.HOME.path}>{t("general:goBack")}</Link>
-
             <Card>
                 <CardHeader>
                     <CardHeaderText>

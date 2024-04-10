@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { ProjectList } from "@/features/projects";
+import ProjectTable from "@/features/projects/components/ProjectTable";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
@@ -27,7 +28,7 @@ const HomePage: React.FC<Props> = () => {
         try {
             const data = await openProjectMutation.mutateAsync();
             if (!data) return; // The user closed the open file dialog
-            navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId: data }));
+            navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId: data.id }));
         } catch (e) {
             console.log(e);
             toast.error("There is an error in your file");
@@ -50,13 +51,13 @@ const HomePage: React.FC<Props> = () => {
                         </Button>
                         <Button asChild>
                             <Link to={ROUTES.CREATE_PROJECT.path}>
-                                Add Project
+                                New Project
                             </Link>
                         </Button>
                     </CardHeaderActions>
                 </CardHeader>
                 <CardContent>
-                    <ProjectList />
+                    <ProjectTable />
                 </CardContent>
             </Card>
         </Wrapper>

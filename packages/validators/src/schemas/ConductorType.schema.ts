@@ -51,14 +51,16 @@ export type UpdateConductorTypeInput = z.infer<
 
 // getAll
 
-export const getAllConductorsSchema = z
+export const getAllConductorTypesSchema = z
     .object({
         pageIndex: z.number(),
         pageSize: z.number(),
     })
     .optional();
 
-export type GetAllConductorsInput = z.infer<typeof getAllConductorsSchema>;
+export type GetAllConductorTypesInput = z.infer<
+    typeof getAllConductorTypesSchema
+>;
 
 // getById
 

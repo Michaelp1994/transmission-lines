@@ -12,6 +12,7 @@ export default function generateTowers(
             resistance: values.resistance,
             distance: avgDistance,
             geometryId: values.geometryId,
+            lineId: values.lineId,
         }));
     return newTowers;
 }

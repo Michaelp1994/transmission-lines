@@ -11,18 +11,22 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@repo/ui";
-import { CircleUserRound } from "lucide-react";
+import { CircleUser, CircleUserRound } from "lucide-react";
 
 import SettingsModal from "./SettingsModal";
 
 const UserButton = () => (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-            <StyledButton variant="ghost">
+            {/* <StyledButton variant="ghost">
                 <Avatar asChild>
                     <UserIcon />
                 </Avatar>
-            </StyledButton>
+            </StyledButton> */}
+            <Button variant="secondary" size="icon" className="rounded-full">
+                <CircleUser className="h-5 w-5" />
+                <span className="sr-only">Toggle user menu</span>
+            </Button>
         </DropdownMenuTrigger>
         <UserMenu align="end" forceMount>
             {/* <DropdownMenuLabel className="font-normal">

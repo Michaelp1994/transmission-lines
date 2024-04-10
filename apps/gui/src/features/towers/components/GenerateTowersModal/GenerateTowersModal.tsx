@@ -8,7 +8,6 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
     Form,
     FormControl,
     FormDescription,
@@ -18,70 +17,54 @@ import {
     FormMessage,
     Input,
     NumberInput,
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
 } from "@repo/ui";
+import { LineID } from "@repo/validators/schemas/Ids.schema";
 import {
     GenerateTowersInput,
     defaultGenerateTowers,
     generateTowersSchema,
-} from "@repo/validators/schemas/GenerateTowers.schema";
-import { useCallback, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+} from "@repo/validators/schemas/TransmissionTower.schema";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { TowerGeometrySelect } from "@/features/towerGeometries";
+import trpc from "@/utils/trpc";
 
-interface Props {
-    onSubmit(values: GenerateTowersInput): void;
+export interface GenerateTowersModalProps {
+    lineId: LineID;
+    onClose: () => void;
 }
 
-const GenerateTowersModal: React.FC<Props> = (props) => {
+const GenerateTowersModal: React.FC<GenerateTowersModalProps> = ({
+    onClose,
+    lineId,
+}) => {
     const { t } = useTranslation("generateTowers");
-    const [open, setOpen] = useState(false);
+    const utils = trpc.useUtils();
+    const generateMutation = trpc.tower.generate.useMutation();
     const form = useForm<GenerateTowersInput>({
         resolver: zodResolver(generateTowersSchema),
-        defaultValues: defaultGenerateTowers,
-    });
-    const handleOpenChange = useCallback(
-        (value: boolean) => {
-            if (!value) {
-                form.reset();
-            }
-            setOpen(value);
+        values: {
+            ...defaultGenerateTowers,
+            lineId,
         },
-        [form]
-    );
-    const onSubmit: SubmitHandler<GenerateTowersInput> = (values) => {
-        props.onSubmit(values);
-        handleOpenChange(false);
-    };
+    });
+
+    const handleSubmit = form.handleSubmit(async (values) => {
+        await generateMutation.mutateAsync(values);
+        await utils.tower.getAllByLineId.invalidate({
+            lineId: values.lineId,
+        });
+        onClose();
+    });
 
     return (
-        <Dialog open={open} onOpenChange={handleOpenChange}>
-            <TooltipProvider>
-                <Tooltip>
-                    <DialogTrigger asChild>
-                        <TooltipTrigger asChild>
-                            <Button>{t("form:generate")}</Button>
-                        </TooltipTrigger>
-                    </DialogTrigger>
-
-                    <TooltipContent>
-                        <p>{t("tooltip")}</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
+        <Dialog open defaultOpen onOpenChange={onClose}>
             <DialogContent>
                 <Form {...form}>
                     <StyledForm
-                        onSubmit={(e) => {
-                            e.stopPropagation();
-                            form.handleSubmit(onSubmit)(e);
-                        }}
                         onReset={() => form.reset()}
+                        onSubmit={handleSubmit}
                     >
                         <DialogHeader>
                             <DialogTitle>{t("modalTitle")}</DialogTitle>

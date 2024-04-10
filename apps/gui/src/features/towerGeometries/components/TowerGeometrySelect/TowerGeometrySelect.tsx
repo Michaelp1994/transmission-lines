@@ -6,13 +6,14 @@ import {
     CommandGroup,
     CommandInput,
     CommandItem,
+    CommandList,
     Popover,
     PopoverContent,
     PopoverTrigger,
     ScrollArea,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
@@ -31,26 +32,13 @@ const TowerGeometrySelect = forwardRef<HTMLButtonElement, Props>(
     ({ onChange, value, ...props }, ref) => {
         const { t } = useTranslation("towerGeometry");
         const { data, error, isLoading } = trpc.towerGeometry.getAll.useQuery();
-        const [open, setOpen] = useState(false);
-        const [search, setSearch] = useState("");
-        const filteredItems = useMemo(
-            () =>
-                data?.filter(
-                    /** dumb filtering, until cmdk allows for custom search key
-                     * @see https://github.com/pacocoursey/cmdk/issues/181 */
-                    (source) =>
-                        source.name.toLowerCase().includes(search.toLowerCase())
-                ),
-            [data, search]
-        );
-        function handleSelect(currentValue: number) {
-            if (onChange)
-                onChange(
-                    currentValue === value ? null : parseInt(currentValue, 10)
-                );
+        const [open, setOpen] = React.useState(false);
+
+        function handleSelect(currentValue: string) {
+            if (onChange) onChange(currentValue === value ? "" : currentValue);
             setOpen(false);
-            setSearch("");
         }
+
         if (isLoading) {
             return <div>{t("general:loading")}</div>;
         }
@@ -63,8 +51,8 @@ const TowerGeometrySelect = forwardRef<HTMLButtonElement, Props>(
                     <StyledButton
                         variant="outline"
                         role="combobox"
-                        aria-expanded={open}
                         ref={ref}
+                        aria-expanded={open}
                         {...props}
                     >
                         {value
@@ -76,31 +64,30 @@ const TowerGeometrySelect = forwardRef<HTMLButtonElement, Props>(
                     </StyledButton>
                 </PopoverTrigger>
                 <StyledPopoverContent>
-                    <Command shouldFilter={false}>
-                        <CommandInput
-                            placeholder={t("searchPlaceholder")}
-                            value={search}
-                            onValueChange={setSearch}
-                        />
-                        <StyledScrollArea>
-                            <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                            <CommandGroup>
-                                {filteredItems?.map((conductorType) => (
-                                    <CommandItem
-                                        key={conductorType.id}
-                                        value={conductorType.id.toString()}
-                                        onSelect={handleSelect}
-                                    >
-                                        <StyledCheck
-                                            selected={
-                                                value === conductorType.id
-                                            }
-                                        />
-                                        {conductorType.name}
-                                    </CommandItem>
-                                ))}
-                            </CommandGroup>
-                        </StyledScrollArea>
+                    <Command>
+                        <CommandInput placeholder={t("searchPlaceholder")} />
+                        <CommandList>
+                            <StyledScrollArea>
+                                <CommandEmpty>{t("noneFound")}</CommandEmpty>
+                                <CommandGroup>
+                                    {data?.map((conductorType) => (
+                                        <CommandItem
+                                            key={conductorType.id}
+                                            value={conductorType.id}
+                                            keywords={[conductorType.name]}
+                                            onSelect={handleSelect}
+                                        >
+                                            <StyledCheck
+                                                selected={
+                                                    value === conductorType.id
+                                                }
+                                            />
+                                            {conductorType.name}
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </StyledScrollArea>
+                        </CommandList>
                     </Command>
                 </StyledPopoverContent>
             </Popover>

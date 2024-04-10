@@ -1,6 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
 import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
     Button,
     Card,
     CardContent,
@@ -68,9 +74,6 @@ const UpdateSourcePage: React.FC<Props> = () => {
     }
     return (
         <PageWrapper>
-            <Link to={ROUTES.VIEW_PROJECT.buildPath({ projectId })}>
-                {t("general:goBack")}
-            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -262,7 +265,6 @@ const UpdateSourcePage: React.FC<Props> = () => {
 };
 
 const PageWrapper = styled.div`
-    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;

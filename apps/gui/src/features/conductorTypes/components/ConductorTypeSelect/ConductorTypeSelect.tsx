@@ -6,6 +6,7 @@ import {
     CommandGroup,
     CommandInput,
     CommandItem,
+    CommandList,
     FormControl,
     Popover,
     PopoverContent,
@@ -13,44 +14,22 @@ import {
     ScrollArea,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-/**
- * for now, the id is coming from the database and being cast to a string,
- *  as cmdk doesn't allow using integers for values.
- *  Eventually, either transform to string in the backend or wait for cmdk to fix this.
- *
- * Also the size changes when the text grows/shrinks
- */
 const ConductorTypeSelect = forwardRef<HTMLButtonElement, Props>(
     ({ value, onChange, ...props }, ref) => {
         const { t } = useTranslation("conductorType");
         const { data, error, isLoading } = trpc.conductorType.getAll.useQuery();
         const [open, setOpen] = useState(false);
-        const [search, setSearch] = useState("");
-        const filteredItems = useMemo(
-            () =>
-                data?.filter(
-                    /** dumb filtering, until cmdk allows for custom search key
-                     * @see https://github.com/pacocoursey/cmdk/issues/181 */
-                    (source) =>
-                        source.name.toLowerCase().includes(search.toLowerCase())
-                ),
-            [data, search]
-        );
-        function handleSelect(currentValue: number) {
-            if (onChange)
-                onChange(
-                    currentValue === value ? null : parseInt(currentValue, 10)
-                );
+        const handleSelect = (currentValue: string) => {
+            if (onChange) onChange(currentValue === value ? "" : currentValue);
             setOpen(false);
-            setSearch("");
-        }
+        };
         if (isLoading) {
             return <div>{t("general:loading")}</div>;
         }
@@ -79,30 +58,29 @@ const ConductorTypeSelect = forwardRef<HTMLButtonElement, Props>(
                     </FormControl>
                 </PopoverTrigger>
                 <StyledPopoverContent>
-                    <Command shouldFilter={false}>
-                        <CommandInput
-                            placeholder={t("searchConductors")}
-                            value={search}
-                            onValueChange={setSearch}
-                        />
+                    <Command>
+                        <CommandInput placeholder={t("searchConductors")} />
                         <StyledScrollArea>
                             <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                            <CommandGroup>
-                                {filteredItems?.map((conductorType) => (
-                                    <CommandItem
-                                        key={conductorType.id}
-                                        value={conductorType.id.toString()}
-                                        onSelect={handleSelect}
-                                    >
-                                        <StyledIcon
-                                            selected={
-                                                value === conductorType.id
-                                            }
-                                        />
-                                        {conductorType.name}
-                                    </CommandItem>
-                                ))}
-                            </CommandGroup>
+                            <CommandList>
+                                <CommandGroup>
+                                    {data?.map((conductorType) => (
+                                        <CommandItem
+                                            key={conductorType.id}
+                                            value={conductorType.id}
+                                            keywords={[conductorType.name]}
+                                            onSelect={handleSelect}
+                                        >
+                                            <StyledIcon
+                                                selected={
+                                                    value === conductorType.id
+                                                }
+                                            />
+                                            {conductorType.name}
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </CommandList>
                         </StyledScrollArea>
                     </Command>
                 </StyledPopoverContent>

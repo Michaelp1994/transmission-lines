@@ -1,14 +1,15 @@
-
 import { styled } from "@linaria/react";
 import { Toaster } from "@repo/ui";
 import { Outlet } from "react-router-dom";
 
+import Breadcrumbs from "./components/Breadcrumbs";
 import NavBar from "./components/NavBar";
 
 const DefaultLayout = () => (
     <Wrapper>
         <NavBar />
         <OutletContainer>
+            <Breadcrumbs />
             <Outlet />
         </OutletContainer>
         <Toaster position="bottom-center" richColors closeButton />
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
     height: 100%;
 `;
 const OutletContainer = styled.main`
-    max-width: 1440px;
+    /* max-width: 1440px; */
     padding-left: 2rem;
     padding-right: 2rem;
     padding-top: 2rem;

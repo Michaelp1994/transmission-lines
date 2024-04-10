@@ -2,9 +2,9 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { RouterOutputs } from "@/utils/trpc";
+import RowActions from "./RowActions";
 
-import ConductorTypeTableActions from "./ConductorTypeTableActions";
+import { RouterOutputs } from "@/utils/trpc";
 
 export type ConductorType = RouterOutputs["conductorType"]["getAll"][number];
 
@@ -36,7 +36,7 @@ const useColumns = () => {
                 meta: {
                     align: "right",
                 },
-                cell: (props) => <ConductorTypeTableActions row={props.row} />,
+                cell: (props) => <RowActions row={props.row} />,
             }),
         ],
         [t]

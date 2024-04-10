@@ -2,22 +2,25 @@
 
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { v4 as uuidv4 } from "uuid";
 
-import { ConductorType, conductorTypes } from "./conductorTypes";
-import { TransmissionLine, transmissionLines } from "./transmissionLines";
+import { conductorTypes } from "./conductorTypes";
+import { transmissionLines } from "./transmissionLines";
 
 export const transmissionConductors = sqliteTable("transmission_conductors", {
-    id: integer("id").primaryKey(),
+    id: text("id")
+        .primaryKey()
+        .$defaultFn(() => uuidv4()),
     name: text("name").notNull(),
     fromPhase: integer("from_phase").notNull(),
     toPhase: integer("to_phase").notNull(),
     bundleNumber: integer("bundle_number").notNull(),
     bundleSpacing: integer("bundle_spacing").notNull(),
     isNeutral: integer("isNeutral", { mode: "boolean" }).notNull(),
-    typeId: integer("type_id")
+    typeId: text("type_id")
         .notNull()
         .references(() => conductorTypes.id),
-    transmissionLineId: text("transmission_line_id")
+    lineId: text("transmission_line_id")
         .notNull()
         .references(() => transmissionLines.id),
 });
@@ -34,13 +37,8 @@ export const transmissionConductorsRelations = relations(
             references: [conductorTypes.id],
         }),
         transmissionLine: one(transmissionLines, {
-            fields: [transmissionConductors.transmissionLineId],
+            fields: [transmissionConductors.lineId],
             references: [transmissionLines.id],
         }),
     })
 );
-
-export type TransmissionConductorWithRelations = TransmissionConductor & {
-    type: ConductorType;
-    transmissionLine: TransmissionLine;
-};

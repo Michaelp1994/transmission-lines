@@ -43,9 +43,6 @@ const GenerateResultsPage: React.FC<Props> = () => {
 
     return (
         <Wrapper>
-            <Link to={ROUTES.VIEW_PROJECT.buildPath({ projectId })}>
-                {t("general:goBack")}
-            </Link>
             <Card>
                 <CardHeader>
                     <CardHeaderText>

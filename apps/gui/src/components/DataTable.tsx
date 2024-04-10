@@ -51,7 +51,13 @@ const DataTable = <T,>({ data, columns }: Props<T>) => {
                         table.getRowModel().rows.map((row) => (
                             <TableRow key={row.id}>
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                    <TableCell
+                                        key={cell.id}
+                                        align={
+                                            (cell.column.columnDef.meta as any)
+                                                ?.align
+                                        }
+                                    >
                                         {flexRender(
                                             cell.column.columnDef.cell,
                                             cell.getContext()

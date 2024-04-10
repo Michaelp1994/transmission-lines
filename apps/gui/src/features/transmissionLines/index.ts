@@ -1,13 +1,4 @@
-import ConductorConfigurationTable from "./components/ConductorConfigurationTable";
-import GenerateConductorsModal from "./components/GenerateConductorsModal";
-import GenerateTowersModal from "./components/GenerateTowersModal";
-import TowerConfigurationTable from "./components/TowerConfigurationTable";
 import TransmissionLinesList from "./components/TransmissionLinesList";
+import TransmissionLineTable from "./components/TransmissionLinesTable";
 
-export {
-    GenerateConductorsModal,
-    GenerateTowersModal,
-    TowerConfigurationTable,
-    TransmissionLinesList,
-    ConductorConfigurationTable,
-};
+export { TransmissionLinesList, TransmissionLineTable };

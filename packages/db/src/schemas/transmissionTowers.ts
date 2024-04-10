@@ -2,22 +2,22 @@
 
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { v4 as uuidv4 } from "uuid";
 
-import { TowerGeometryWithRelations, towerGeometries } from "./towerGeometries";
-import {
-    TransmissionLineWithRelations,
-    transmissionLines,
-} from "./transmissionLines";
+import { towerGeometries } from "./towerGeometries";
+import { transmissionLines } from "./transmissionLines";
 
 export const transmissionTowers = sqliteTable("transmission_towers", {
-    id: integer("id").primaryKey(),
+    id: text("id")
+        .primaryKey()
+        .$defaultFn(() => uuidv4()),
     name: text("name").notNull(),
     resistance: integer("resistance").notNull(),
     distance: integer("distance").notNull(),
-    geometryId: integer("geometryId")
+    geometryId: text("geometryId")
         .notNull()
         .references(() => towerGeometries.id),
-    transmissionLineId: text("transmission_line_id")
+    lineId: text("transmission_line_id")
         .notNull()
         .references(() => transmissionLines.id),
 });
@@ -29,7 +29,7 @@ export const transmissionTowersRelations = relations(
     transmissionTowers,
     ({ one }) => ({
         transmissionLine: one(transmissionLines, {
-            fields: [transmissionTowers.transmissionLineId],
+            fields: [transmissionTowers.lineId],
             references: [transmissionLines.id],
         }),
         geometry: one(towerGeometries, {
@@ -38,8 +38,3 @@ export const transmissionTowersRelations = relations(
         }),
     })
 );
-
-export type TransmissionTowerWithRelations = TransmissionTower & {
-    transmissionLine: TransmissionLineWithRelations;
-    geometry: TowerGeometryWithRelations;
-};

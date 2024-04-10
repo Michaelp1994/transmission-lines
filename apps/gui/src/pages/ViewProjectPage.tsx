@@ -1,5 +1,11 @@
 import { styled } from "@linaria/react";
 import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
     Button,
     Card,
     CardContent,
@@ -19,7 +25,9 @@ import { Link } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 
 import { SourcesList } from "@/features/sources";
+import SourceTable from "@/features/sources/components/SourceTable";
 import { TransmissionLinesList } from "@/features/transmissionLines";
+import TransmissionLineTable from "@/features/transmissionLines/components/TransmissionLinesTable";
 import ROUTES from "@/router/routes";
 import trpc from "@/utils/trpc";
 
@@ -47,8 +55,7 @@ const ViewProjectPage: React.FC<Props> = () => {
             <Card>
                 <CardHeader>
                     <CardHeaderText>
-                        <CardTitle>Project: {data.name}</CardTitle>
-                        <CardDescription />
+                        <CardTitle>Sources</CardTitle>
                     </CardHeaderText>
                     <CardHeaderActions>
                         <TooltipProvider>
@@ -69,6 +76,18 @@ const ViewProjectPage: React.FC<Props> = () => {
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
+                    </CardHeaderActions>
+                </CardHeader>
+                <CardContent>
+                    <SourceTable projectId={projectId} />
+                </CardContent>
+            </Card>
+            <Card>
+                <CardHeader>
+                    <CardHeaderText>
+                        <CardTitle>Transmission Lines</CardTitle>
+                    </CardHeaderText>
+                    <CardHeaderActions>
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger asChild>
@@ -96,25 +115,34 @@ const ViewProjectPage: React.FC<Props> = () => {
                     </CardHeaderActions>
                 </CardHeader>
                 <CardContent>
-                    <SourcesList projectId={projectId} />
-                    <TransmissionLinesList projectId={projectId} />
+                    <TransmissionLineTable projectId={projectId} />
                 </CardContent>
-                <CardFooter>
-                    <Button asChild>
-                        <Link
-                            to={ROUTES.GENERATE_RESULTS.buildPath({
-                                projectId,
-                            })}
-                        >
-                            Solve
-                        </Link>
-                    </Button>
-                    <Button onClick={() => exportProject()}>Export</Button>
-                </CardFooter>
             </Card>
+            <Buttons>
+                <Button asChild>
+                    <Link
+                        to={ROUTES.GENERATE_RESULTS.buildPath({
+                            projectId,
+                        })}
+                    >
+                        Solve
+                    </Link>
+                </Button>
+                <Button onClick={() => exportProject()}>Export</Button>
+            </Buttons>
         </Wrapper>
     );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+`;
 export default ViewProjectPage;

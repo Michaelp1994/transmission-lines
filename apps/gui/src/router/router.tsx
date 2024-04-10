@@ -1,4 +1,4 @@
-import { RouteObject, createHashRouter } from "react-router-dom";
+import { Link, RouteObject, createHashRouter } from "react-router-dom";
 
 import ROUTES from "./routes";
 
@@ -13,39 +13,152 @@ import CreateTowerGeometryPage from "@/pages/CreateTowerGeometryPage";
 import CreateTransmissionLinePage from "@/pages/CreateTransmissionLinePage";
 import ErrorPage from "@/pages/ErrorPage";
 // import GeneratePage from "@/pages/GenerateResultsPage";
+import LineParametersPage from "@/pages/LineParametersPage";
 import PageNotFound from "@/pages/PageNotFound";
 // import TransmissionLineFaultPage from "@/pages/TransmissionLineFaultPage";
+import TransmissionLineConductors from "@/pages/TransmissionLineConductors";
+import TransmissionLineGeneral from "@/pages/TransmissionLineGeneral";
+import TransmissionLineTowers from "@/pages/TransmissionLineTowers";
 import UpdateConductorTypePage from "@/pages/UpdateConductorTypePage";
 import UpdateSourcePage from "@/pages/UpdateSourcePage";
 import UpdateTowerGeometryPage from "@/pages/UpdateTowerGeometryPage";
-import UpdateTransmissionLinePage from "@/pages/UpdateTransmissionLinePage";
 import ViewProjectPage from "@/pages/ViewProjectPage";
 // import ViewTransmissionLineParametersPage from "@/pages/ViewTransmissionLineParametersPage";
-import WelcomePage from "@/pages/WelcomePage";
+import ViewTransmissionLinePage from "@/pages/ViewTransmissionLinePage";
 
 const routeObjects: RouteObject[] = [
     {
-        path: "/",
+        // path: "/",
         element: <DefaultLayout />,
         errorElement: <ErrorPage />,
+        handle: {
+            crumb: () => ({
+                link: ROUTES.HOME.path,
+                text: "Home",
+            }),
+        },
         children: [
             {
                 index: true,
                 path: ROUTES.HOME.path,
                 element: <AllProjectsPage />,
-            },
-            {
-                path: ROUTES.WELCOME.path,
-                element: <WelcomePage />,
+                handle: {
+                    crumb: (data) => ({
+                        link: ROUTES.HOME.path,
+                        text: "All Projects",
+                    }),
+                },
             },
             {
                 path: ROUTES.VIEW_PROJECT.path,
-                element: <ViewProjectPage />,
+                handle: {
+                    crumb: (data) => ({
+                        link: ROUTES.VIEW_PROJECT.buildPath({
+                            projectId: data.projectId,
+                        }),
+                        text: "Project",
+                    }),
+                },
+
+                children: [
+                    {
+                        element: <ViewProjectPage />,
+                        index: true,
+                    },
+                    {
+                        path: ROUTES.CREATE_SOURCE.path,
+                        element: <CreateSourcePage />,
+                        handle: {
+                            crumb: (data) => ({
+                                link: ROUTES.CREATE_SOURCE.buildPath({
+                                    projectId: data.projectId,
+                                }),
+                                text: "Create Source",
+                            }),
+                        },
+                    },
+                    {
+                        path: ROUTES.UPDATE_SOURCE.path,
+                        element: <UpdateSourcePage />,
+                        handle: {
+                            crumb: (data) => ({
+                                link: ROUTES.UPDATE_SOURCE.buildPath({
+                                    projectId: data.projectId,
+                                    sourceId: data.sourceId,
+                                }),
+                                text: "Update Source",
+                            }),
+                        },
+                    },
+                    {
+                        path: ROUTES.CREATE_TRANSMISSION_LINE.path,
+                        element: <CreateTransmissionLinePage />,
+                        handle: {
+                            crumb: (data) => ({
+                                link: ROUTES.CREATE_TRANSMISSION_LINE.buildPath(
+                                    {
+                                        projectId: data.projectId,
+                                    }
+                                ),
+                                text: "Create Transmission Line",
+                            }),
+                        },
+                    },
+
+                    {
+                        path: ROUTES.VIEW_TRANSMISSION_LINE.path,
+                        element: <ViewTransmissionLinePage />,
+                        handle: {
+                            crumb: (data) => ({
+                                link: ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+                                    projectId: data.projectId,
+                                    lineId: data.lineId,
+                                }),
+                                text: "Transmission Line",
+                            }),
+                        },
+                        children: [
+                            {
+                                index: true,
+                                element: <TransmissionLineGeneral />,
+                            },
+                            {
+                                path: ROUTES.VIEW_TRANSMISSION_LINE.CONDUCTORS
+                                    .path,
+                                element: <TransmissionLineConductors />,
+                            },
+                            {
+                                path: ROUTES.VIEW_TRANSMISSION_LINE.TOWERS.path,
+                                element: <TransmissionLineTowers />,
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                path: ROUTES.LINE_PARAMETERS.path,
+                element: <LineParametersPage />,
+                handle: {
+                    crumb: (data) => ({
+                        link: ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+                            projectId: data.projectId,
+                            lineId: data.lineId,
+                        }),
+                        text: "Line Parameters",
+                    }),
+                },
             },
             {
                 path: ROUTES.CREATE_PROJECT.path,
                 element: <CreateProjectPage />,
+                handle: {
+                    crumb: () => ({
+                        link: ROUTES.CREATE_PROJECT.path,
+                        text: "Create Project",
+                    }),
+                },
             },
+
             {
                 path: ROUTES.CREATE_TOWER_GEOMETRY.path,
                 element: <CreateTowerGeometryPage />,
@@ -54,31 +167,11 @@ const routeObjects: RouteObject[] = [
                 path: ROUTES.UPDATE_TOWER_GEOMETRY.path,
                 element: <UpdateTowerGeometryPage />,
             },
-            {
-                path: ROUTES.CREATE_TRANSMISSION_LINE.path,
-                element: <CreateTransmissionLinePage />,
-            },
-            {
-                path: ROUTES.UPDATE_TRANSMISSION_LINE.path,
-                element: <UpdateTransmissionLinePage />,
-            },
-            {
-                path: ROUTES.CREATE_SOURCE.path,
-                element: <CreateSourcePage />,
-            },
-            {
-                path: ROUTES.UPDATE_SOURCE.path,
-                element: <UpdateSourcePage />,
-            },
+
             {
                 path: ROUTES.CREATE_CONDUCTOR_TYPE.path,
                 element: <CreateConductorTypePage />,
             },
-            // {
-            //     path: ROUTES.TRANSMISSION_FAULT.path,
-            //     element: <TransmissionLineFaultPage />,
-            // },
-
             {
                 path: ROUTES.UPDATE_CONDUCTOR_TYPE.path,
                 element: <UpdateConductorTypePage />,
@@ -91,14 +184,6 @@ const routeObjects: RouteObject[] = [
                 path: ROUTES.ALL_CONDUCTOR_TYPES.path,
                 element: <AllConductorTypesPage />,
             },
-            // {
-            //     path: ROUTES.GENERATE_RESULTS.path,
-            //     element: <GeneratePage />,
-            // },
-            // {
-            //     path: ROUTES.VIEW_TRANSMISSION_LINE_PARAMETERS.path,
-            //     element: <ViewTransmissionLineParametersPage />,
-            // },
             {
                 path: "*",
                 element: <PageNotFound />,

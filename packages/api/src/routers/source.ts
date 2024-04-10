@@ -3,6 +3,7 @@ import { sources } from "@repo/db/schemas/sources";
 import {
     createSourceSchema,
     deleteSourceSchema,
+    getAllSourcesByProjectIdSchema,
     getAllSourcesSchema,
     getSourceByIdSchema,
     updateSourceSchema,
@@ -13,6 +14,13 @@ import { publicProcedure, router } from "../trpc";
 export default router({
     getAll: publicProcedure
         .input(getAllSourcesSchema)
+        .query(async ({ ctx: { db }, input }) => {
+            const allSources = await db.query.sources.findMany();
+
+            return allSources;
+        }),
+    getAllByProjectId: publicProcedure
+        .input(getAllSourcesByProjectIdSchema)
         .query(async ({ ctx: { db }, input }) => {
             const allSources = await db.query.sources.findMany({
                 where: eq(sources.projectId, input.projectId),
