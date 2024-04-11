@@ -16,8 +16,6 @@ import { Link } from "react-router-dom";
 
 import ROUTES from "@/router/routes";
 
-interface Props {}
-
 const RowActions: React.FC<CellContext<TransmissionConductor, number>> = ({
     row,
 }) => (
@@ -81,18 +79,3 @@ const DeleteIcon = styled(Delete)`
     height: 1rem;
 `;
 export default RowActions;
-
-const EditButton: React.FC<CellContext<TowerGeometrty, number>> = ({
-    getValue,
-}) => {
-    const id = getValue();
-    const navigate = useNavigate();
-    function handleClick() {
-        navigate(ROUTES.UPDATE_TOWER_GEOMETRY.buildPath({ id }));
-    }
-    return (
-        <Button variant="ghost" size="icon" onClick={() => handleClick()}>
-            <Info />
-        </Button>
-    );
-};

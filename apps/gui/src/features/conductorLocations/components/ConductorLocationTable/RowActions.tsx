@@ -1,5 +1,4 @@
 import { styled } from "@linaria/react";
-import { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
 import {
     Button,
     DropdownMenu,
@@ -14,11 +13,11 @@ import { Delete, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { ConductorLocation } from "./type";
+
 import ROUTES from "@/router/routes";
 
-interface Props {}
-
-const RowActions: React.FC<CellContext<TransmissionConductor, number>> = ({
+const RowActions: React.FC<CellContext<ConductorLocation, number>> = ({
     row,
 }) => (
     <DropdownMenu>
@@ -81,18 +80,3 @@ const DeleteIcon = styled(Delete)`
     height: 1rem;
 `;
 export default RowActions;
-
-const EditButton: React.FC<CellContext<TowerGeometrty, number>> = ({
-    getValue,
-}) => {
-    const id = getValue();
-    const navigate = useNavigate();
-    function handleClick() {
-        navigate(ROUTES.UPDATE_TOWER_GEOMETRY.buildPath({ id }));
-    }
-    return (
-        <Button variant="ghost" size="icon" onClick={() => handleClick()}>
-            <Info />
-        </Button>
-    );
-};

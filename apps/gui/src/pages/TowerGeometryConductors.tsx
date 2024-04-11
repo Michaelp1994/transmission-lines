@@ -47,6 +47,7 @@ const TowerGeometryConductors: React.FC<Props> = () => {
                         </CardHeaderText>
                         <CardHeaderActions>
                             <Button>Add</Button>
+                            <Button onClick>Edit</Button>
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>

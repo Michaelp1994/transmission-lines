@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import { GeometryID } from "@repo/validators/schemas/Ids.schema";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -31,5 +30,4 @@ const ConductorLocationTable: React.FC<ConductorLocationTableProps> = ({
     return <DataTable data={data} columns={columns} />;
 };
 
-const Wrapper = styled.div``;
 export default ConductorLocationTable;

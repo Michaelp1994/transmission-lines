@@ -436,5 +436,16 @@
   },
   "updateTowerModal": {
     "modalTitle": "Edit Tower"
+  },
+  "towerGeomeryConductors": {
+    "title": "Conductors"
+  },
+  "conductorLocationTable": {
+    "x": {
+      "label": "X"
+    },
+    "y": {
+      "label": "Y"
+    }
   }
 }

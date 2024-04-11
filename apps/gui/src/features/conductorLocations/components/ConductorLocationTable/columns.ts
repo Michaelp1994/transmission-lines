@@ -2,10 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
 
 import RowActions from "./RowActions";
-
-import { RouterOutputs } from "@/utils/trpc";
-
-type ConductorLocation = RouterOutputs["conductorLocations"]["getAll"][number];
+import { ConductorLocation } from "./type";
 
 const columnHelper = createColumnHelper<ConductorLocation>();
 
@@ -19,7 +16,11 @@ export default [
         cell: (info) => info.renderValue(),
     }),
     columnHelper.display({
-        id: "id",
+        id: "edit",
+        cell: (info) => info.renderValue(),
+    }),
+    columnHelper.display({
+        id: "actions",
         header: "",
         meta: {
             align: "right",
