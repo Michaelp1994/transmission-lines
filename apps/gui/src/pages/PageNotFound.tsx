@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 

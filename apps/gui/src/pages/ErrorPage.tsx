@@ -9,7 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link, useRouteError } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
@@ -28,7 +28,7 @@ const ErrorPage: React.FC<Props> = () => {
                 </CardHeader>
                 <CardContent>
                     <div>{t("errorPageText")}</div>
-                    <Link to={ROUTES.HOME.path}>Go Home</Link>
+                    <Link to={routes.home.path}>Go Home</Link>
                 </CardContent>
             </Card>
         </Wrapper>

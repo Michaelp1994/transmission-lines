@@ -16,7 +16,7 @@ import { Delete, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
@@ -38,7 +38,7 @@ const ConductorTableRowActions: React.FC<CellContext<Source, number>> = ({
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={ROUTES.UPDATE_SOURCE.buildPath({
+                    to={routes.projects.View.Sources.View.buildPath({
                         projectId: row.original.projectId,
                         sourceId: row.original.id,
                     })}

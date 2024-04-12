@@ -4,22 +4,20 @@ import { useTypedParams } from "react-router-typesafe-routes/dom";
 
 import ModalRenderer from "../components/modals/modal-renderer";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 const ViewTransmissionLinePage: React.FC = () => {
     const { projectId, lineId } = useTypedParams(
-        ROUTES.UPDATE_TRANSMISSION_LINE
+        routes.projects.View.Lines.View
     );
 
     return (
         <Wrapper>
-            <ModalRenderer />
-
             <Title>Transmission Line</Title>
             <Grid>
                 <nav className="grid gap-4 text-sm text-muted-foreground">
                     <StyledLink
-                        to={ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+                        to={routes.projects.View.Lines.View.buildPath({
                             projectId,
                             lineId,
                         })}
@@ -28,15 +26,17 @@ const ViewTransmissionLinePage: React.FC = () => {
                         General
                     </StyledLink>
                     <StyledLink
-                        to={ROUTES.VIEW_TRANSMISSION_LINE.CONDUCTORS.buildPath({
-                            projectId,
-                            lineId,
-                        })}
+                        to={routes.projects.View.Lines.View.Conductors.buildPath(
+                            {
+                                projectId,
+                                lineId,
+                            }
+                        )}
                     >
                         Conductors
                     </StyledLink>
                     <StyledLink
-                        to={ROUTES.VIEW_TRANSMISSION_LINE.TOWERS.buildPath({
+                        to={routes.projects.View.Lines.View.Towers.buildPath({
                             projectId,
                             lineId,
                         })}

@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 import { toast } from "sonner";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
@@ -36,7 +36,7 @@ interface Props {}
 const TowerGeometryGeneral: React.FC<Props> = () => {
     const navigate = useNavigate();
     const { t } = useTranslation("towerGeometry");
-    const { geometryId } = useTypedParams(ROUTES.UPDATE_TOWER_GEOMETRY);
+    const { geometryId } = useTypedParams(routes.towerGeometries.View);
     const { data, error, isLoading } = trpc.towerGeometry.getById.useQuery({
         id: geometryId,
     });
@@ -63,7 +63,7 @@ const TowerGeometryGeneral: React.FC<Props> = () => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(ROUTES.ALL_TOWER_GEOMETRIES.path);
+        navigate(routes.towerGeometries.path);
     }
     return (
         <Wrapper>

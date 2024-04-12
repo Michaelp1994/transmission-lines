@@ -13,14 +13,13 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { ProjectList } from "@/features/projects";
 import ProjectTable from "@/features/projects/components/ProjectTable";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
 
-const HomePage: React.FC<Props> = () => {
+const AllProjectsPage: React.FC<Props> = () => {
     const navigate = useNavigate();
     const openProjectMutation = trpc.project.import.useMutation();
     const { t } = useTranslation("home");
@@ -28,7 +27,7 @@ const HomePage: React.FC<Props> = () => {
         try {
             const data = await openProjectMutation.mutateAsync();
             if (!data) return; // The user closed the open file dialog
-            navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId: data.id }));
+            navigate(routes.projects.View.buildPath({ projectId: data.id }));
         } catch (e) {
             console.log(e);
             toast.error("There is an error in your file");
@@ -50,7 +49,7 @@ const HomePage: React.FC<Props> = () => {
                             Import Project
                         </Button>
                         <Button asChild>
-                            <Link to={ROUTES.CREATE_PROJECT.path}>
+                            <Link to={routes.projects.Create.path}>
                                 New Project
                             </Link>
                         </Button>
@@ -66,4 +65,4 @@ const HomePage: React.FC<Props> = () => {
 
 const Wrapper = styled.div``;
 
-export default HomePage;
+export default AllProjectsPage;

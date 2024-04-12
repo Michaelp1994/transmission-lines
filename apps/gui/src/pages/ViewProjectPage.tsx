@@ -1,135 +1,74 @@
 import { styled } from "@linaria/react";
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-    Button,
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
-    CardTitle,
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@repo/ui";
+import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 
-import { SourcesList } from "@/features/sources";
-import SourceTable from "@/features/sources/components/SourceTable";
-import { TransmissionLinesList } from "@/features/transmissionLines";
-import TransmissionLineTable from "@/features/transmissionLines/components/TransmissionLinesTable";
-import ROUTES from "@/router/routes";
+import ProjectGeneral from "./ProjectGeneral";
+import ProjectSources from "./ProjectSources";
+import ProjectTransmissionLines from "./ProjectTransmissionLines";
+import TransmissionLineGeneral from "./TransmissionLineGeneral";
+
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
 
 const ViewProjectPage: React.FC<Props> = () => {
-    const { t } = useTranslation();
-    const { projectId } = useTypedParams(ROUTES.VIEW_PROJECT);
+    const { projectId } = useTypedParams(routes.projects.View);
     const exportProjectMutation = trpc.project.export.useMutation();
-    const { data, isLoading, isError } = trpc.project.getById.useQuery({
-        id: projectId,
-    });
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    if (isError) {
-        return <div>Error!...</div>;
-    }
-
     async function exportProject() {
         await exportProjectMutation.mutateAsync({ id: projectId });
     }
     return (
         <Wrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>Sources</CardTitle>
-                    </CardHeaderText>
-                    <CardHeaderActions>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button asChild>
-                                        <Link
-                                            to={ROUTES.CREATE_SOURCE.buildPath({
-                                                projectId,
-                                            })}
-                                        >
-                                            {t("source:add.buttonText")}
-                                        </Link>
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{t("source:add.buttonTooltip")}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    </CardHeaderActions>
-                </CardHeader>
-                <CardContent>
-                    <SourceTable projectId={projectId} />
-                </CardContent>
-            </Card>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>Transmission Lines</CardTitle>
-                    </CardHeaderText>
-                    <CardHeaderActions>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button asChild>
-                                        <Link
-                                            to={ROUTES.CREATE_TRANSMISSION_LINE.buildPath(
-                                                { projectId }
-                                            )}
-                                        >
-                                            {t(
-                                                "transmissionLine:add.buttonText"
-                                            )}
-                                        </Link>
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>
-                                        {t(
-                                            "transmissionLine:add.buttonTooltip"
-                                        )}
-                                    </p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    </CardHeaderActions>
-                </CardHeader>
-                <CardContent>
-                    <TransmissionLineTable projectId={projectId} />
-                </CardContent>
-            </Card>
-            <Buttons>
-                <Button asChild>
-                    <Link
-                        to={ROUTES.GENERATE_RESULTS.buildPath({
+            <Title>Project</Title>
+            {/* <Tabs defaultValue="general" orientation="horizontal">
+                <TabsList>
+                    <TabsTrigger value="general">General</TabsTrigger>
+                    <TabsTrigger value="sources">Sources</TabsTrigger>
+                    <TabsTrigger value="lines">Transmission Lines</TabsTrigger>
+                </TabsList>
+                <TabsContent value="general">
+                    <ProjectGeneral />
+                </TabsContent>
+                <TabsContent value="sources">
+                    <ProjectSources />
+                </TabsContent>
+                <TabsContent value="lines">
+                    <ProjectTransmissionLines />
+                </TabsContent>
+            </Tabs> */}
+
+            <Grid>
+                <nav className="grid gap-4 text-sm text-muted-foreground">
+                    <StyledLink
+                        to={routes.projects.View.buildPath({
+                            projectId,
+                        })}
+                        end
+                    >
+                        General
+                    </StyledLink>
+                    <StyledLink
+                        to={routes.projects.View.Sources.buildPath({
                             projectId,
                         })}
                     >
-                        Solve
-                    </Link>
-                </Button>
-                <Button onClick={() => exportProject()}>Export</Button>
-            </Buttons>
+                        Sources
+                    </StyledLink>
+                    <StyledLink
+                        to={routes.projects.View.Lines.buildPath({
+                            projectId,
+                        })}
+                    >
+                        Transmission Lines
+                    </StyledLink>
+                </nav>
+                <div className="grid gap-4">
+                    <Outlet />
+                </div>
+            </Grid>
         </Wrapper>
     );
 };
@@ -140,9 +79,24 @@ const Wrapper = styled.div`
     gap: 1rem;
 `;
 
-const Buttons = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: end;
+const Title = styled.h1`
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
 `;
+
+const StyledLink = styled(NavLink)`
+    font-weight: 300;
+    &.active {
+        font-weight: 600;
+    }
+`;
+const Grid = styled.div`
+    display: grid;
+    gap: 1.5rem;
+    align-items: flex-start;
+    grid-template-columns: 180px 1fr;
+`;
+
 export default ViewProjectPage;

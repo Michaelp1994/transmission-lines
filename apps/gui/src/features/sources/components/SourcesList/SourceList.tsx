@@ -24,7 +24,7 @@ import {
     ListItemText,
     ListItemTitle,
 } from "@/components/List";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {
@@ -72,10 +72,12 @@ const SourcesList: React.FC<Props> = ({ projectId }) => {
                     <ItemActions>
                         <Button asChild variant="ghost">
                             <Link
-                                to={ROUTES.UPDATE_SOURCE.buildPath({
-                                    projectId,
-                                    sourceId: id,
-                                })}
+                                to={routes.projects.View.Sources.View.buildPath(
+                                    {
+                                        projectId,
+                                        sourceId: id,
+                                    }
+                                )}
                             >
                                 <InfoIcon />
                             </Link>

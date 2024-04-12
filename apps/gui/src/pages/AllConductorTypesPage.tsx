@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { ConductorTypeTable } from "@/features/conductorTypes";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
@@ -32,7 +32,7 @@ const AllConductorTypesPage: React.FC<Props> = () => {
                     </CardHeaderText>
                     <CardHeaderActions>
                         <Button asChild>
-                            <Link to={ROUTES.CREATE_CONDUCTOR_TYPE.path}>
+                            <Link to={routes.conductorTypes.Create.path}>
                                 {t("add.buttonText")}
                             </Link>
                         </Button>

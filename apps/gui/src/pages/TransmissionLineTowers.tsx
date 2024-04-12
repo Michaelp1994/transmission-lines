@@ -22,12 +22,12 @@ import useModal from "@/components/modals/use-modal";
 import { CreateTowerModalProps } from "@/features/towers/components/CreateTowerModal/CreateTowerModal";
 import { GenerateTowersModalProps } from "@/features/towers/components/GenerateTowersModal/GenerateTowersModal";
 import TowerTable from "@/features/towers/components/TowerTable";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
 const TransmissionLineTowers: React.FC<Props> = () => {
-    const { lineId } = useTypedParams(ROUTES.VIEW_TRANSMISSION_LINE.TOWERS);
+    const { lineId } = useTypedParams(routes.projects.View.Lines.View.Towers);
     const createModal = useModal<CreateTowerModalProps>(
         Modals.CreateTowerModal
     );

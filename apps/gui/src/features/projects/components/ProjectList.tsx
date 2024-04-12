@@ -24,7 +24,7 @@ import {
     ListItemText,
     ListItemTitle,
 } from "@/components/List";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
@@ -58,7 +58,7 @@ const ProjectList: React.FC<Props> = () => {
                     <ItemActions>
                         <Button variant="ghost" asChild>
                             <Link
-                                to={ROUTES.VIEW_PROJECT.buildPath({
+                                to={routes.projects.View.buildPath({
                                     projectId: id,
                                 })}
                             >

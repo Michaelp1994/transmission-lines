@@ -22,13 +22,13 @@ import useModal from "@/components/modals/use-modal";
 import ConductorTable from "@/features/conductors/components/ConductorTable";
 import { CreateConductorModalProps } from "@/features/conductors/components/CreateConductorModal/CreateConductorModal";
 import { GenerateConductorsModalProps } from "@/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
 const TransmissionLineConductors: React.FC<Props> = () => {
     const { projectId, lineId } = useTypedParams(
-        ROUTES.VIEW_TRANSMISSION_LINE.CONDUCTORS
+        routes.projects.View.Lines.View.Conductors
     );
     const { t } = useTranslation("transmissionLineConductors");
     const createModal = useModal<CreateConductorModalProps>(

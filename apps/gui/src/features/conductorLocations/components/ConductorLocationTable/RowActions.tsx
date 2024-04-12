@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 
 import { ConductorLocation } from "./type";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 const RowActions: React.FC<CellContext<ConductorLocation, number>> = ({
     row,
@@ -35,7 +35,7 @@ const RowActions: React.FC<CellContext<ConductorLocation, number>> = ({
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={ROUTES.VIEW_TOWER_GEOMETRY.buildPath({
+                    to={routes.towerGeometries.View.buildPath({
                         geometryId: row.original.id,
                     })}
                 >
@@ -43,17 +43,6 @@ const RowActions: React.FC<CellContext<ConductorLocation, number>> = ({
                     <span>View</span>
                 </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-                <Link
-                    to={ROUTES.UPDATE_TOWER_GEOMETRY.buildPath({
-                        geometryId: row.original.id,
-                    })}
-                >
-                    <EditIcon />
-                    <span>Edit</span>
-                </Link>
-            </DropdownMenuItem>
-
             <DropdownMenuItem>
                 <DeleteIcon />
                 <span>Delete</span>

@@ -31,14 +31,14 @@ import { useTypedParams } from "react-router-typesafe-routes/dom";
 import { toast } from "sonner";
 
 import { SourceSelect } from "@/features/sources";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
 
 const TransmissionLineGeneral: React.FC<Props> = () => {
     const { projectId, lineId } = useTypedParams(
-        ROUTES.UPDATE_TRANSMISSION_LINE
+        routes.projects.View.Lines.View
     );
     const { data } = trpc.transmissionLine.getById.useQuery({
         id: lineId,
@@ -60,7 +60,7 @@ const TransmissionLineGeneral: React.FC<Props> = () => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId }));
+        navigate(routes.projects.View.buildPath({ projectId }));
     }
     return (
         <Wrapper>

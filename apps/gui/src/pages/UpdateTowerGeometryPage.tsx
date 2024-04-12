@@ -28,7 +28,7 @@ import { useTypedParams } from "react-router-typesafe-routes/dom";
 import { toast } from "sonner";
 
 import { ConductorLocationTable } from "@/features/towerGeometries";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 // import TowerGeometryDiagram from "../TowerGeometryDiagram";
@@ -37,7 +37,7 @@ interface Props {}
 const UpdateTowerGeometryPage: React.FC<Props> = () => {
     const navigate = useNavigate();
     const { t } = useTranslation("towerGeometry");
-    const { geometryId } = useTypedParams(ROUTES.UPDATE_TOWER_GEOMETRY);
+    const { geometryId } = useTypedParams(routes.towerGeometries.View);
     const { data, error, isLoading } = trpc.towerGeometry.getById.useQuery({
         id: geometryId,
     });
@@ -56,7 +56,6 @@ const UpdateTowerGeometryPage: React.FC<Props> = () => {
     }
 
     async function onSubmit(values: UpdateTowerGeometryInput) {
-        console.log(values);
         await updateTowerGeometryMutation.mutateAsync(values);
         if (updateTowerGeometryMutation.error) {
             console.log(updateTowerGeometryMutation.error);
@@ -65,7 +64,7 @@ const UpdateTowerGeometryPage: React.FC<Props> = () => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(ROUTES.ALL_TOWER_GEOMETRIES.path);
+        navigate(routes.towerGeometries.path);
     }
 
     return (

@@ -14,7 +14,7 @@ import { Delete, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
@@ -36,7 +36,7 @@ const ConductorTableRowActions: React.FC<
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+                    to={routes.projects.View.Lines.View.buildPath({
                         projectId: row.original.projectId,
                         lineId: row.original.id,
                     })}

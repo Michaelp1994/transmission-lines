@@ -2,22 +2,18 @@ import { styled } from "@linaria/react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 
-import ModalRenderer from "../components/modals/modal-renderer";
-
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 const ViewTowerGeometryPage: React.FC = () => {
-    const { geometryId } = useTypedParams(ROUTES.VIEW_TOWER_GEOMETRY);
+    const { geometryId } = useTypedParams(routes.towerGeometries.View);
 
     return (
         <Wrapper>
-            <ModalRenderer />
-
             <Title>Tower Geometry</Title>
             <Grid>
                 <nav className="grid gap-4 text-sm text-muted-foreground">
                     <StyledLink
-                        to={ROUTES.VIEW_TOWER_GEOMETRY.buildPath({
+                        to={routes.towerGeometries.View.buildPath({
                             geometryId,
                         })}
                         end
@@ -25,7 +21,7 @@ const ViewTowerGeometryPage: React.FC = () => {
                         General
                     </StyledLink>
                     <StyledLink
-                        to={ROUTES.VIEW_TOWER_GEOMETRY.CONDUCTORS.buildPath({
+                        to={routes.towerGeometries.View.Conductors.buildPath({
                             geometryId,
                         })}
                     >
@@ -61,8 +57,6 @@ const Grid = styled.div`
     display: grid;
     gap: 1.5rem;
     align-items: flex-start;
-    /* width: 100%; */
-    /* max-width: 72rem; */
     grid-template-columns: 180px 1fr;
 `;
 

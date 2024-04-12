@@ -20,14 +20,13 @@ import { useTranslation } from "react-i18next";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 
 import { ConductorLocationTable } from "@/features/conductorLocations";
-import { TowerGeometryDiagram } from "@/features/towerGeometries";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
 const TowerGeometryConductors: React.FC<Props> = () => {
     const { geometryId } = useTypedParams(
-        ROUTES.VIEW_TOWER_GEOMETRY.CONDUCTORS
+        routes.towerGeometries.View.Conductors
     );
     const { t } = useTranslation("towerGeomeryConductors");
 
@@ -47,7 +46,7 @@ const TowerGeometryConductors: React.FC<Props> = () => {
                         </CardHeaderText>
                         <CardHeaderActions>
                             <Button>Add</Button>
-                            <Button onClick>Edit</Button>
+                            <Button>Edit</Button>
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>

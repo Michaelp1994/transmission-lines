@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 import UserButton from "./UserButton";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
@@ -31,7 +31,7 @@ const NavBar: React.FC<Props> = () => {
                 <NavigationMenuList>
                     <NavigationMenuItem>
                         <Link
-                            to={ROUTES.HOME.path}
+                            to={routes.home.path}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("home")}
@@ -39,7 +39,15 @@ const NavBar: React.FC<Props> = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={ROUTES.ALL_CONDUCTOR_TYPES.path}
+                            to={routes.projects.path}
+                            className={navigationMenuTriggerStyle()}
+                        >
+                            {t("projects")}
+                        </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <Link
+                            to={routes.conductorTypes.path}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("conductorTypes")}
@@ -47,7 +55,7 @@ const NavBar: React.FC<Props> = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={ROUTES.ALL_TOWER_GEOMETRIES.path}
+                            to={routes.towerGeometries.path}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("towerGeometries")}

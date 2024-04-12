@@ -3,11 +3,11 @@ import { httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 
+import ModalRenderer from "./components/modals/modal-renderer";
 import router from "./router";
 import trpc from "./utils/trpc";
 import "@repo/ui/global.css";
 import "./utils/i18n";
-import ModalRenderer from "./components/modals/modal-renderer";
 
 const App = () => {
     const [queryClient] = useState(() => new QueryClient());

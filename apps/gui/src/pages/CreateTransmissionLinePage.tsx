@@ -29,14 +29,14 @@ import { useTypedParams } from "react-router-typesafe-routes/dom";
 import { toast } from "sonner";
 
 import { SourceSelect } from "@/features/sources";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
 
 const CreateTransmissionLinePage: React.FC<Props> = () => {
     const { t } = useTranslation("transmissionLine");
-    const { projectId } = useTypedParams(ROUTES.CREATE_TRANSMISSION_LINE);
+    const { projectId } = useTypedParams(routes.projects.View.Lines.Create);
     const navigate = useNavigate();
     const createTransmissionLineMutation =
         trpc.transmissionLine.create.useMutation();
@@ -56,7 +56,7 @@ const CreateTransmissionLinePage: React.FC<Props> = () => {
             description: format(new Date(), "PPPPpp"),
         });
         navigate(
-            ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+            routes.projects.View.Lines.View.buildPath({
                 projectId,
                 lineId: response.id,
             })

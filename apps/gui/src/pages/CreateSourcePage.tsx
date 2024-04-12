@@ -30,7 +30,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTypedParams } from "react-router-typesafe-routes/dom";
 import { toast } from "sonner";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
@@ -38,13 +38,13 @@ interface Props {}
 const CreateSourcePage: React.FC<Props> = () => {
     const { t } = useTranslation("source");
     const navigate = useNavigate();
-    const { projectId } = useTypedParams(ROUTES.CREATE_SOURCE);
+    const { projectId } = useTypedParams(routes.projects.View.Sources.Create);
     const createSourceMutation = trpc.source.create.useMutation({
         onSuccess(_, values) {
             toast.success(`${values.name} has been added to the project.`, {
                 description: format(new Date(), "PPPPpp"),
             });
-            navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId }));
+            navigate(routes.projects.View.buildPath({ projectId }));
         },
         onError(_, values) {
             toast.error(`There is an error!`, {

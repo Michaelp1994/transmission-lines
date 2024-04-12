@@ -11,7 +11,7 @@ import {
 import { MoreHorizontal, Pencil } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {
     row: any;
@@ -33,8 +33,8 @@ const ConductorTypeTableActions: React.FC<Props> = ({ row }) => (
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={ROUTES.UPDATE_CONDUCTOR_TYPE.buildPath({
-                        id: row.original.id,
+                    to={routes.conductorTypes.View.buildPath({
+                        conductorTypeId: row.original.id,
                     })}
                 >
                     <EditIcon />

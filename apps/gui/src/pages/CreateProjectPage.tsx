@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
@@ -42,7 +42,7 @@ const CreateProjectPage: React.FC<Props> = () => {
             toast.success(`${values.name} has been created`, {
                 description: format(new Date(), "PPPPpp"),
             });
-            navigate(ROUTES.VIEW_PROJECT.buildPath({ projectId: data.id }));
+            navigate(routes.projects.View.buildPath({ projectId: data.id }));
         },
         onError() {
             toast.error(`There is an error!`, {

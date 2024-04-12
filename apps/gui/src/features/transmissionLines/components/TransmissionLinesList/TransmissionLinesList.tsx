@@ -25,7 +25,7 @@ import {
     ListItemText,
     ListItemTitle,
 } from "@/components/List";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {
@@ -62,7 +62,7 @@ const TransmissionLinesList: React.FC<Props> = ({ projectId }) => {
                     <ItemActions>
                         <Button variant="ghost" asChild>
                             <Link
-                                to={ROUTES.VIEW_TRANSMISSION_LINE.buildPath({
+                                to={routes.projects.View.Lines.View.buildPath({
                                     projectId,
                                     lineId: id,
                                 })}

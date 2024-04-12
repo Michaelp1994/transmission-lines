@@ -28,7 +28,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface Props {}
@@ -48,7 +48,7 @@ const CreateConductorTypePage: React.FC<Props> = () => {
             toast.success(`${values.name} has been added.`, {
                 description: format(new Date(), "PPPPpp"),
             });
-            navigate(ROUTES.ALL_CONDUCTOR_TYPES.path);
+            navigate(routes.conductorTypes.path);
         } catch (e) {
             console.log(e);
             toast.error("There was an error");

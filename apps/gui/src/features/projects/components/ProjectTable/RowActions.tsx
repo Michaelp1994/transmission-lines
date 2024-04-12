@@ -8,16 +8,16 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
-import { MoreHorizontal, Pencil } from "lucide-react";
+import { Eye, MoreHorizontal, Pencil } from "lucide-react";
 import { Link } from "react-router-dom";
 
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
-interface Props {
+interface RowActionsProps {
     row: any;
 }
 
-const RowActions: React.FC<Props> = ({ row }) => (
+const RowActions: React.FC<RowActionsProps> = ({ row }) => (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Button
@@ -33,7 +33,17 @@ const RowActions: React.FC<Props> = ({ row }) => (
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={ROUTES.VIEW_PROJECT.buildPath({
+                    to={routes.projects.View.buildPath({
+                        projectId: row.original.id,
+                    })}
+                >
+                    <ViewIcon />
+                    View
+                </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+                <Link
+                    to={routes.projects.View.buildPath({
                         projectId: row.original.id,
                     })}
                 >
@@ -46,6 +56,12 @@ const RowActions: React.FC<Props> = ({ row }) => (
 );
 
 const EditIcon = styled(Pencil)`
+    margin-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+`;
+
+const ViewIcon = styled(Eye)`
     margin-right: 0.5rem;
     width: 1rem;
     height: 1rem;

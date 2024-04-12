@@ -21,6 +21,7 @@
         "@repo/ui": "workspace:*",
         "@repo/validators": "workspace:*",
         "@tanstack/react-query": "^4.36.1",
+        "@tanstack/react-router": "^1.26.20",
         "@tanstack/react-table": "^8.15.3",
         "@trpc/client": "^10.45.2",
         "@trpc/react-query": "^10.45.2",

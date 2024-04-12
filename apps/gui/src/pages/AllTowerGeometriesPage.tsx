@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { TowerGeometriesTable } from "@/features/towerGeometries";
-import ROUTES from "@/router/routes";
+import routes from "@/router/routes";
 
 interface Props {}
 
@@ -32,7 +32,7 @@ const AllTowerGeometriesPage: React.FC<Props> = () => {
                     </CardHeaderText>
                     <CardHeaderActions>
                         <Button asChild>
-                            <Link to={ROUTES.CREATE_TOWER_GEOMETRY.path}>
+                            <Link to={routes.towerGeometries.Create.path}>
                                 {t("add.buttonText")}
                             </Link>
                         </Button>

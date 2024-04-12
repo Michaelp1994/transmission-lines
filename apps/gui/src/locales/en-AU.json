@@ -283,7 +283,8 @@
     "changeLanguage": "Change Language",
     "goBack": "Go Back",
     "solve": "Solve",
-    "noResults": "No results."
+    "noResults": "No results.",
+    "projects": "Projects"
   },
   "conductorConfiguration": {
     "title": "Conductor Configuration",
