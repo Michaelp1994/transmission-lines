@@ -10,7 +10,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import CreateSourceForm from "@/features/sources/components/CreateSourceForm/CreateSourceForm";
+import { CreateSourceForm } from "@/features/sources";
 
 interface CreateSourcePageProps {}
 

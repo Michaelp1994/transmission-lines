@@ -9,7 +9,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import UpdateSourceForm from "@/features/sources/components/UpdateSourceForm";
+import { UpdateSourceForm } from "@/features/sources";
 import trpc from "@/utils/trpc";
 
 interface ViewSourcePageProps {}
@@ -49,7 +49,9 @@ const PageWrapper = styled.div`
     gap: 1rem;
 `;
 
-export const Route = createFileRoute("/projects/$projectId/sources/_projectCrumb/$sourceId/")({
+export const Route = createFileRoute(
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/"
+)({
     component: ViewSourcePage,
     beforeLoad: () => ({
         text: "View Source",

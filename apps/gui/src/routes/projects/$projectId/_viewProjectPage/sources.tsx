@@ -15,7 +15,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import SourceTable from "@/features/sources/components/SourceTable";
+import { SourceTable } from "@/features/sources";
 
 interface ProjectSourcesProps {}
 

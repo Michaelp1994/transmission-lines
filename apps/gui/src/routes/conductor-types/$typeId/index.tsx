@@ -9,7 +9,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import UpdateConductorTypeForm from "@/features/conductorTypes/components/UpdateConductorTypeForm";
+import { UpdateConductorTypeForm } from "@/features/conductorTypes";
 import trpc from "@/utils/trpc";
 
 interface UpdateConductorTypePageProps {}

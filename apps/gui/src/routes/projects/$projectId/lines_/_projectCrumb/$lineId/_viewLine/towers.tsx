@@ -18,9 +18,9 @@ import { useTranslation } from "react-i18next";
 
 import { Modals } from "@/components/modals/config";
 import useModal from "@/components/modals/use-modal";
+import { TowerTable } from "@/features/towers";
 import { CreateTowerModalProps } from "@/features/towers/components/CreateTowerModal/CreateTowerModal";
 import { GenerateTowersModalProps } from "@/features/towers/components/GenerateTowersModal/GenerateTowersModal";
-import TowerTable from "@/features/towers/components/TowerTable";
 
 interface TransmissionLineTowersProps {}
 

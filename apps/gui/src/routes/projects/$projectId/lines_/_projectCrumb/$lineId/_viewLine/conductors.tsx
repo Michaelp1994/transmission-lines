@@ -7,7 +7,6 @@ import {
     CardHeaderActions,
     CardHeaderText,
     CardTitle,
-    DialogTrigger,
     Tooltip,
     TooltipContent,
     TooltipProvider,
@@ -19,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 import { Modals } from "@/components/modals/config";
 import useModal from "@/components/modals/use-modal";
-import ConductorTable from "@/features/conductors/components/ConductorTable";
+import { ConductorTable } from "@/features/conductors";
 import { CreateConductorModalProps } from "@/features/conductors/components/CreateConductorModal/CreateConductorModal";
 import { GenerateConductorsModalProps } from "@/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
 

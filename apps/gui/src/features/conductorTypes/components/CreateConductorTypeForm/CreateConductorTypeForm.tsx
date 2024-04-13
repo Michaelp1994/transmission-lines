@@ -25,9 +25,9 @@ import { toast } from "sonner";
 
 import trpc from "@/utils/trpc";
 
-interface Props {}
+export interface CreateConductorTypeFormProps {}
 
-const CreateConductorTypeForm: React.FC<Props> = () => {
+const CreateConductorTypeForm: React.FC<CreateConductorTypeFormProps> = () => {
     const navigate = useNavigate();
     const { t } = useTranslation("conductorType");
     const createConductorMutation = trpc.conductorType.create.useMutation();
@@ -265,4 +265,5 @@ const ButtonsContainer = styled.div`
     gap: 1rem;
     justify-content: flex-end;
 `;
+
 export default CreateConductorTypeForm;

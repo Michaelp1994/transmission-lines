@@ -1,3 +1,5 @@
-import ProjectList from "./components/ProjectList";
+import CreateProjectForm from "./components/CreateProjectForm";
+import ProjectTable from "./components/ProjectTable";
+import UpdateProjectForm from "./components/UpdateProjectForm";
 
-export { ProjectList };
+export { ProjectTable, CreateProjectForm, UpdateProjectForm };
