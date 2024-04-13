@@ -7,11 +7,11 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface TowerTableProps {
     lineId: string;
 }
 
-const TowerTable: React.FC<Props> = ({ lineId }) => {
+const TowerTable: React.FC<TowerTableProps> = ({ lineId }) => {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.tower.getAllByLineId.useQuery({
         lineId,

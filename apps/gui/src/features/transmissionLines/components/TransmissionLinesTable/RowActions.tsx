@@ -9,14 +9,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 import { Delete, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
-
-import routes from "@/router/routes";
-
-interface Props {}
 
 const ConductorTableRowActions: React.FC<
     CellContext<TransmissionLine, number>
@@ -36,10 +32,11 @@ const ConductorTableRowActions: React.FC<
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={routes.projects.View.Lines.View.buildPath({
+                    to="/projects/$projectId/lines/$lineId"
+                    params={{
                         projectId: row.original.projectId,
                         lineId: row.original.id,
-                    })}
+                    }}
                 >
                     <EditIcon />
                     <span>Edit</span>

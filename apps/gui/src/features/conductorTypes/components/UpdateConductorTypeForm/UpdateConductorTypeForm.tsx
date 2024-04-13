@@ -17,21 +17,22 @@ import {
     defaultConductorType,
     updateConductorTypeSchema,
 } from "@repo/validators";
+import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface UpdateConductorTypeFormProps {
     data: UpdateConductorTypeInput;
 }
 
-const UpdateConductorTypeForm: React.FC<Props> = ({ data }) => {
+const UpdateConductorTypeForm: React.FC<UpdateConductorTypeFormProps> = ({
+    data,
+}) => {
     const updateConductorTypeMutation = trpc.conductorType.update.useMutation();
     const navigate = useNavigate();
 
@@ -52,7 +53,7 @@ const UpdateConductorTypeForm: React.FC<Props> = ({ data }) => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(routes.conductorTypes.path);
+        navigate({ to: "/conductor-types" });
     }
     return (
         <Form {...form}>

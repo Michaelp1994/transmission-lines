@@ -1,6 +1,7 @@
 import { styled } from "@linaria/react";
 import { Toaster } from "@repo/ui";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 import Breadcrumbs from "./components/Breadcrumbs";
 import NavBar from "./components/NavBar";
@@ -8,11 +9,13 @@ import NavBar from "./components/NavBar";
 const DefaultLayout = () => (
     <Wrapper>
         <NavBar />
+
         <OutletContainer>
             <Breadcrumbs />
             <Outlet />
         </OutletContainer>
         <Toaster position="bottom-center" richColors closeButton />
+        <TanStackRouterDevtools />
     </Wrapper>
 );
 const Wrapper = styled.div`

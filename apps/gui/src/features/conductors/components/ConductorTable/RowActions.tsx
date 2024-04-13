@@ -19,8 +19,6 @@ import { UpdateConductorModalProps } from "../UpdateConductorModal/UpdateConduct
 import { Modals } from "@/components/modals/config";
 import useModal from "@/components/modals/use-modal";
 
-interface Props {}
-
 const RowActions: React.FC<CellContext<Conductor, number>> = ({ row }) => {
     const updateModal = useModal<UpdateConductorModalProps>(
         Modals.UpdateConductorModal

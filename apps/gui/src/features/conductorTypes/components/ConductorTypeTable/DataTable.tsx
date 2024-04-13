@@ -13,11 +13,11 @@ import { useTranslation } from "react-i18next";
 
 import { ConductorType } from "./columns";
 
-interface Props {
+interface DataTableProps {
     table: TableType<ConductorType>;
 }
 
-const DataTable: React.FC<Props> = ({ table }) => {
+const DataTable: React.FC<DataTableProps> = ({ table }) => {
     const { t } = useTranslation("general");
     return (
         <TableWrapper>

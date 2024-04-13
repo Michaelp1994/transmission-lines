@@ -15,14 +15,13 @@ import {
     UpdateTowerGeometryInput,
     updateTowerGeometrySchema,
 } from "@repo/validators";
+import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
 interface UpdateProjectFormProps {
@@ -44,7 +43,7 @@ const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ data }) => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(routes.projects.path);
+        navigate({ to: "/projects" });
     }
 
     return (

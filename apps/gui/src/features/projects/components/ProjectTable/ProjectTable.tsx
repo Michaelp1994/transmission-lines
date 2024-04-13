@@ -7,9 +7,9 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
-interface Props {}
+interface ProjectTableProps {}
 
-const ProjectTable: React.FC<Props> = () => {
+const ProjectTable: React.FC<ProjectTableProps> = () => {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.project.getAll.useQuery();
     if (error) {

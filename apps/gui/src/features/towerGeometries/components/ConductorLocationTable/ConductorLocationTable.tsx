@@ -29,9 +29,9 @@ import { FlipHorizontal, Plus, X } from "lucide-react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-interface Props {}
+interface ConductorLocationTableProps {}
 
-const ConductorLocationTable: React.FC<Props> = () => {
+const ConductorLocationTable: React.FC<ConductorLocationTableProps> = () => {
     const { t } = useTranslation("conductorLocations");
     const { resetField, control, getFieldState, getValues, formState } =
         useFormContext<CreateTowerGeometryInput>();

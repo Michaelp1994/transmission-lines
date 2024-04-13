@@ -1,4 +1,6 @@
+import CreateSourceForm from "./components/CreateSourceForm/CreateSourceForm";
 import SourceSelect from "./components/SourceSelect";
-import SourcesList from "./components/SourcesList";
+import SourceTable from "./components/SourceTable";
+import UpdateSourceForm from "./components/UpdateSourceForm";
 
-export { SourceSelect, SourcesList };
+export { SourceSelect, CreateSourceForm, UpdateSourceForm, SourceTable };

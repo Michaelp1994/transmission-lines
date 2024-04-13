@@ -7,11 +7,11 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface SourceTableProps {
     projectId: string;
 }
 
-const SourceTable: React.FC<Props> = ({ projectId }) => {
+const SourceTable: React.FC<SourceTableProps> = ({ projectId }) => {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.source.getAllByProjectId.useQuery({
         projectId,

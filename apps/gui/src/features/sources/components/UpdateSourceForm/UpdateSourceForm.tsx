@@ -13,21 +13,20 @@ import {
     NumberInput,
 } from "@repo/ui";
 import { UpdateSourceInput, updateSourceSchema } from "@repo/validators";
+import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { t } from "i18next";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface UpdateSourceFormProps {
     data: UpdateSourceInput;
 }
 
-const UpdateSourceForm: React.FC<Props> = ({ data }) => {
+const UpdateSourceForm: React.FC<UpdateSourceFormProps> = ({ data }) => {
     const navigate = useNavigate();
     const updateSourceMutation = trpc.source.update.useMutation();
     const form = useForm<UpdateSourceInput>({
@@ -40,9 +39,10 @@ const UpdateSourceForm: React.FC<Props> = ({ data }) => {
         toast.success(`${values.name} has been updated.`, {
             description: format(new Date(), "PPPPpp"),
         });
-        navigate(
-            routes.projects.View.buildPath({ projectId: result.projectId })
-        );
+        navigate({
+            to: "/projects/$projectId/sources/",
+            params: { projectId: result.projectId },
+        });
     }
 
     return (

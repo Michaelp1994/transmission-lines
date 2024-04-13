@@ -6,14 +6,12 @@ import {
     CardHeaderText,
     CardTitle,
 } from "@repo/ui";
+import { Link, useRouteError } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Link, useRouteError } from "react-router-dom";
 
-import routes from "@/router/routes";
+interface ErrorPageProps {}
 
-interface Props {}
-
-const ErrorPage: React.FC<Props> = () => {
+const ErrorPage: React.FC<ErrorPageProps> = () => {
     const error = useRouteError();
     const { t } = useTranslation("errorPage");
     console.error(error);
@@ -28,7 +26,7 @@ const ErrorPage: React.FC<Props> = () => {
                 </CardHeader>
                 <CardContent>
                     <div>{t("errorPageText")}</div>
-                    <Link to={routes.home.path}>Go Home</Link>
+                    <Link to="/">Go Home</Link>
                 </CardContent>
             </Card>
         </Wrapper>

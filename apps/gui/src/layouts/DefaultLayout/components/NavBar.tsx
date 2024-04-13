@@ -1,22 +1,23 @@
 import { styled } from "@linaria/react";
 import {
-    Label,
     NavigationMenu,
     NavigationMenuItem,
     NavigationMenuList,
-    Switch,
     navigationMenuTriggerStyle,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 import UserButton from "./UserButton";
 
-import routes from "@/router/routes";
+import { Route as HomePageRoute } from "@/routes";
+import { Route as AllConductorTypesRoute } from "@/routes/conductor-types";
+import { Route as AllProjectsRoute } from "@/routes/projects";
+import { Route as AllTowerGeometriesRoute } from "@/routes/tower-geometries";
 
-interface Props {}
+interface NavBarProps {}
 
-const NavBar: React.FC<Props> = () => {
+const NavBar: React.FC<NavBarProps> = () => {
     const { t, i18n } = useTranslation("general");
     function changeLanguage(checked: boolean) {
         if (checked) {
@@ -30,16 +31,13 @@ const NavBar: React.FC<Props> = () => {
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <Link
-                            to={routes.home.path}
-                            className={navigationMenuTriggerStyle()}
-                        >
+                        <Link to="/" className={navigationMenuTriggerStyle()}>
                             {t("home")}
                         </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={routes.projects.path}
+                            to="/projects"
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("projects")}
@@ -47,7 +45,7 @@ const NavBar: React.FC<Props> = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={routes.conductorTypes.path}
+                            to="/conductor-types"
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("conductorTypes")}
@@ -55,7 +53,7 @@ const NavBar: React.FC<Props> = () => {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to={routes.towerGeometries.path}
+                            to="/tower-geometries"
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("towerGeometries")}

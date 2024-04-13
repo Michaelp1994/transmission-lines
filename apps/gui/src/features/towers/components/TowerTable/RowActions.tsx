@@ -11,7 +11,6 @@ import {
 import { CellContext } from "@tanstack/react-table";
 import { Delete, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
-import { useTypedParams } from "react-router-typesafe-routes/dom";
 
 import { TransmissionTower } from "./RowType";
 import { DeleteTowerModalProps } from "../DeleteTowerModal/DeleteTowerModal";

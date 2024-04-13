@@ -6,14 +6,12 @@ import {
     CardHeaderText,
     CardTitle,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
-import routes from "@/router/routes";
+interface PageNotFoundProps {}
 
-interface Props {}
-
-const PageNotFound: React.FC<Props> = () => {
+const PageNotFound: React.FC<PageNotFoundProps> = () => {
     const { t } = useTranslation("pageNotFound");
 
     return (

@@ -15,12 +15,12 @@ import {
 } from "@tanstack/react-table";
 import { useTranslation } from "react-i18next";
 
-interface Props<T> {
+interface DataTableProps<T> {
     data: T[];
     columns: ColumnDef<T, any>[];
 }
 
-const DataTable = <T,>({ data, columns }: Props<T>) => {
+const DataTable = <T,>({ data, columns }: DataTableProps<T>) => {
     const { t } = useTranslation("general");
     const table = useReactTable({
         data,

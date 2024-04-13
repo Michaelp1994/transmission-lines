@@ -9,12 +9,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 import { Delete, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
-import { Link } from "react-router-dom";
-
-import routes from "@/router/routes";
 
 const RowActions: React.FC<CellContext<TransmissionConductor, number>> = ({
     row,
@@ -34,9 +32,8 @@ const RowActions: React.FC<CellContext<TransmissionConductor, number>> = ({
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={routes.towerGeometries.View.buildPath({
-                        geometryId: row.original.id,
-                    })}
+                    to="/tower-geometries/$geometryId"
+                    params={{ geometryId: row.original.id }}
                 >
                     <ViewIcon />
                     <span>View</span>

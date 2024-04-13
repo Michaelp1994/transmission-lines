@@ -17,11 +17,12 @@ import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface SourceSelectProps
+    extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     projectId: string;
 }
 
-const SourceSelect = forwardRef<HTMLButtonElement, Props>(
+const SourceSelect = forwardRef<HTMLButtonElement, SourceSelectProps>(
     ({ projectId, value, onChange, ...props }, ref) => {
         const { t } = useTranslation("source");
         const { data, error, isLoading } =

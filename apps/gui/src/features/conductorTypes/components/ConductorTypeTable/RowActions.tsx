@@ -8,16 +8,16 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { MoreHorizontal, Pencil } from "lucide-react";
-import { Link } from "react-router-dom";
 
-import routes from "@/router/routes";
-
-interface Props {
+interface ConductorTypeTableActionsProps {
     row: any;
 }
 
-const ConductorTypeTableActions: React.FC<Props> = ({ row }) => (
+const ConductorTypeTableActions: React.FC<ConductorTypeTableActionsProps> = ({
+    row,
+}) => (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Button
@@ -33,9 +33,8 @@ const ConductorTypeTableActions: React.FC<Props> = ({ row }) => (
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={routes.conductorTypes.View.buildPath({
-                        conductorTypeId: row.original.id,
-                    })}
+                    to="/conductor-types/$typeId"
+                    params={{ typeId: row.original.id }}
                 >
                     <EditIcon />
                     Edit

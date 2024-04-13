@@ -19,75 +19,76 @@ import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+interface ConductorTypeSelectProps
+    extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
-const ConductorTypeSelect = forwardRef<HTMLButtonElement, Props>(
-    ({ value, onChange, ...props }, ref) => {
-        const { t } = useTranslation("conductorType");
-        const { data, error, isLoading } = trpc.conductorType.getAll.useQuery();
-        const [open, setOpen] = useState(false);
-        const handleSelect = (currentValue: string) => {
-            if (onChange) onChange(currentValue === value ? "" : currentValue);
-            setOpen(false);
-        };
-        if (isLoading) {
-            return <div>{t("general:loading")}</div>;
-        }
-        if (error || !data) {
-            return <div>{t("general:errorMessage")}</div>;
-        }
-        return (
-            <Popover open={open} onOpenChange={setOpen} modal>
-                <PopoverTrigger asChild>
-                    <FormControl>
-                        <StyledButton
-                            variant="outline"
-                            role="combobox"
-                            aria-expanded={open}
-                            ref={ref}
-                            {...props}
-                        >
-                            {value
-                                ? data.find(
-                                      (conductorType) =>
-                                          conductorType.id === value
-                                  )?.name
-                                : t("selectConductorType")}
-                            <StyledChevron />
-                        </StyledButton>
-                    </FormControl>
-                </PopoverTrigger>
-                <StyledPopoverContent>
-                    <Command>
-                        <CommandInput placeholder={t("searchConductors")} />
-                        <StyledScrollArea>
-                            <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                            <CommandList>
-                                <CommandGroup>
-                                    {data?.map((conductorType) => (
-                                        <CommandItem
-                                            key={conductorType.id}
-                                            value={conductorType.id}
-                                            keywords={[conductorType.name]}
-                                            onSelect={handleSelect}
-                                        >
-                                            <StyledIcon
-                                                selected={
-                                                    value === conductorType.id
-                                                }
-                                            />
-                                            {conductorType.name}
-                                        </CommandItem>
-                                    ))}
-                                </CommandGroup>
-                            </CommandList>
-                        </StyledScrollArea>
-                    </Command>
-                </StyledPopoverContent>
-            </Popover>
-        );
+const ConductorTypeSelect = forwardRef<
+    HTMLButtonElement,
+    ConductorTypeSelectProps
+>(({ value, onChange, ...props }, ref) => {
+    const { t } = useTranslation("conductorType");
+    const { data, error, isLoading } = trpc.conductorType.getAll.useQuery();
+    const [open, setOpen] = useState(false);
+    const handleSelect = (currentValue: string) => {
+        if (onChange) onChange(currentValue === value ? "" : currentValue);
+        setOpen(false);
+    };
+    if (isLoading) {
+        return <div>{t("general:loading")}</div>;
     }
-);
+    if (error || !data) {
+        return <div>{t("general:errorMessage")}</div>;
+    }
+    return (
+        <Popover open={open} onOpenChange={setOpen} modal>
+            <PopoverTrigger asChild>
+                <FormControl>
+                    <StyledButton
+                        variant="outline"
+                        role="combobox"
+                        aria-expanded={open}
+                        ref={ref}
+                        {...props}
+                    >
+                        {value
+                            ? data.find(
+                                  (conductorType) => conductorType.id === value
+                              )?.name
+                            : t("selectConductorType")}
+                        <StyledChevron />
+                    </StyledButton>
+                </FormControl>
+            </PopoverTrigger>
+            <StyledPopoverContent>
+                <Command>
+                    <CommandInput placeholder={t("searchConductors")} />
+                    <StyledScrollArea>
+                        <CommandEmpty>{t("noneFound")}</CommandEmpty>
+                        <CommandList>
+                            <CommandGroup>
+                                {data?.map((conductorType) => (
+                                    <CommandItem
+                                        key={conductorType.id}
+                                        value={conductorType.id}
+                                        keywords={[conductorType.name]}
+                                        onSelect={handleSelect}
+                                    >
+                                        <StyledIcon
+                                            selected={
+                                                value === conductorType.id
+                                            }
+                                        />
+                                        {conductorType.name}
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        </CommandList>
+                    </StyledScrollArea>
+                </Command>
+            </StyledPopoverContent>
+        </Popover>
+    );
+});
 
 export default ConductorTypeSelect;
 

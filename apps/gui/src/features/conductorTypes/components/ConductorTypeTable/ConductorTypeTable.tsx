@@ -9,15 +9,15 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import useColumns, { ConductorType } from "./columns";
+import DataTable from "./DataTable";
 import TablePagination from "./TablePagination";
 import TableToolbar from "./TableToolbar";
-import DataTable from "./DataTable";
 
 import trpc from "@/utils/trpc";
 
-interface Props {}
+interface ConductorTableProps {}
 
-const ConductorTable: React.FC<Props> = () => {
+const ConductorTable: React.FC<ConductorTableProps> = () => {
     const { t } = useTranslation("conductorType");
     const columns = useColumns();
 

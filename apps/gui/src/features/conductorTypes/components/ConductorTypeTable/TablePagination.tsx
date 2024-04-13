@@ -15,11 +15,13 @@ import {
 
 import { ConductorType } from "./columns";
 
-interface Props {
+interface ConductorTypeTablePaginationProps {
     table: Table<ConductorType>;
 }
 
-const ConductorTypeTablePagination: React.FC<Props> = ({ table }) => (
+const ConductorTypeTablePagination: React.FC<
+    ConductorTypeTablePaginationProps
+> = ({ table }) => (
     <Wrapper>
         <Pagination>
             <PaginationContent>

@@ -18,7 +18,8 @@ import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+interface TowerGeometrySelectProps
+    extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 /**
  * for now, the id is coming from the database and being cast to a string,
@@ -28,72 +29,73 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
  * Also the size changes when the text grows/shrinks
  */
 
-const TowerGeometrySelect = forwardRef<HTMLButtonElement, Props>(
-    ({ onChange, value, ...props }, ref) => {
-        const { t } = useTranslation("towerGeometry");
-        const { data, error, isLoading } = trpc.towerGeometry.getAll.useQuery();
-        const [open, setOpen] = React.useState(false);
+const TowerGeometrySelect = forwardRef<
+    HTMLButtonElement,
+    TowerGeometrySelectProps
+>(({ onChange, value, ...props }, ref) => {
+    const { t } = useTranslation("towerGeometry");
+    const { data, error, isLoading } = trpc.towerGeometry.getAll.useQuery();
+    const [open, setOpen] = React.useState(false);
 
-        function handleSelect(currentValue: string) {
-            if (onChange) onChange(currentValue === value ? "" : currentValue);
-            setOpen(false);
-        }
-
-        if (isLoading) {
-            return <div>{t("general:loading")}</div>;
-        }
-        if (error || !data) {
-            return <div>{t("general:errorMessage")}</div>;
-        }
-        return (
-            <Popover open={open} onOpenChange={setOpen} modal>
-                <PopoverTrigger asChild>
-                    <StyledButton
-                        variant="outline"
-                        role="combobox"
-                        ref={ref}
-                        aria-expanded={open}
-                        {...props}
-                    >
-                        {value
-                            ? data.find(
-                                  (towerGeometry) => towerGeometry.id === value
-                              )?.name
-                            : t("nothingSelected")}
-                        <StyledChevron />
-                    </StyledButton>
-                </PopoverTrigger>
-                <StyledPopoverContent>
-                    <Command>
-                        <CommandInput placeholder={t("searchPlaceholder")} />
-                        <CommandList>
-                            <StyledScrollArea>
-                                <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                                <CommandGroup>
-                                    {data?.map((conductorType) => (
-                                        <CommandItem
-                                            key={conductorType.id}
-                                            value={conductorType.id}
-                                            keywords={[conductorType.name]}
-                                            onSelect={handleSelect}
-                                        >
-                                            <StyledCheck
-                                                selected={
-                                                    value === conductorType.id
-                                                }
-                                            />
-                                            {conductorType.name}
-                                        </CommandItem>
-                                    ))}
-                                </CommandGroup>
-                            </StyledScrollArea>
-                        </CommandList>
-                    </Command>
-                </StyledPopoverContent>
-            </Popover>
-        );
+    function handleSelect(currentValue: string) {
+        if (onChange) onChange(currentValue === value ? "" : currentValue);
+        setOpen(false);
     }
-);
+
+    if (isLoading) {
+        return <div>{t("general:loading")}</div>;
+    }
+    if (error || !data) {
+        return <div>{t("general:errorMessage")}</div>;
+    }
+    return (
+        <Popover open={open} onOpenChange={setOpen} modal>
+            <PopoverTrigger asChild>
+                <StyledButton
+                    variant="outline"
+                    role="combobox"
+                    ref={ref}
+                    aria-expanded={open}
+                    {...props}
+                >
+                    {value
+                        ? data.find(
+                              (towerGeometry) => towerGeometry.id === value
+                          )?.name
+                        : t("nothingSelected")}
+                    <StyledChevron />
+                </StyledButton>
+            </PopoverTrigger>
+            <StyledPopoverContent>
+                <Command>
+                    <CommandInput placeholder={t("searchPlaceholder")} />
+                    <CommandList>
+                        <StyledScrollArea>
+                            <CommandEmpty>{t("noneFound")}</CommandEmpty>
+                            <CommandGroup>
+                                {data?.map((conductorType) => (
+                                    <CommandItem
+                                        key={conductorType.id}
+                                        value={conductorType.id}
+                                        keywords={[conductorType.name]}
+                                        onSelect={handleSelect}
+                                    >
+                                        <StyledCheck
+                                            selected={
+                                                value === conductorType.id
+                                            }
+                                        />
+                                        {conductorType.name}
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        </StyledScrollArea>
+                    </CommandList>
+                </Command>
+            </StyledPopoverContent>
+        </Popover>
+    );
+});
 
 export default TowerGeometrySelect;
 

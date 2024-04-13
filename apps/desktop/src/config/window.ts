@@ -39,6 +39,6 @@ export default async function create() {
     //         fileURLToPath(new URL("../renderer/index.html", import.meta.url))
     //     );
     // }
-    createMenu();
+    // createMenu();
     return mainWindow;
 }

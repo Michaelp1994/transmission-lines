@@ -12,9 +12,9 @@ import {
     Button,
     buttonVariants,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { Info, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 import {
     ItemActions,
@@ -24,14 +24,13 @@ import {
     ListItemText,
     ListItemTitle,
 } from "@/components/List";
-import routes from "@/router/routes";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface SourcesListProps {
     projectId: string;
 }
 
-const SourcesList: React.FC<Props> = ({ projectId }) => {
+const SourcesList: React.FC<SourcesListProps> = ({ projectId }) => {
     const utils = trpc.useUtils();
     const { data, isError, error, isLoading } = trpc.source.getAll.useQuery({
         projectId,
@@ -72,12 +71,8 @@ const SourcesList: React.FC<Props> = ({ projectId }) => {
                     <ItemActions>
                         <Button asChild variant="ghost">
                             <Link
-                                to={routes.projects.View.Sources.View.buildPath(
-                                    {
-                                        projectId,
-                                        sourceId: id,
-                                    }
-                                )}
+                                to="/projects/$projectId/sources/$sourceId"
+                                params={{ projectId, sourceId: id }}
                             >
                                 <InfoIcon />
                             </Link>

@@ -7,19 +7,20 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@repo/ui";
+import { Link, useMatches } from "@tanstack/react-router";
 import React from "react";
-import { Link, useMatches } from "react-router-dom";
 
-interface Props {}
+interface BreadcrumbsProps {}
 
-const Breadcrumbs: React.FC<Props> = () => {
-    const matches = useMatches();
-    const crumbs = matches
-        // first get rid of any matches that don't have handle and crumb
-        .filter((match) => Boolean(match.handle?.crumb))
-        // now map them into an array of elements, passing the loader
-        // data to each one
-        .map((match) => match.handle.crumb(match.params));
+const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
+    const routes = useMatches();
+    console.log(routes);
+    const filteredRoutes = routes.filter((route) => route.routeContext?.text);
+    const crumbs = filteredRoutes.map((match) => ({
+        text: match.routeContext.text,
+        link: match.pathname,
+    }));
+
     return (
         <Wrapper>
             <Breadcrumb>

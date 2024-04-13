@@ -11,10 +11,12 @@ import { Table } from "@tanstack/react-table";
 
 import { ConductorType } from "./columns";
 
-interface Props {
+interface ConductorTypeToolbarProps {
     table: Table<ConductorType>;
 }
-const ConductorTypeToolbar: React.FC<Props> = ({ table }) => (
+const ConductorTypeToolbar: React.FC<ConductorTypeToolbarProps> = ({
+    table,
+}) => (
     <ToolbarContainer>
         <LeftSide>
             {/* <StyledInput

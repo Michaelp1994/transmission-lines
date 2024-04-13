@@ -8,10 +8,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { Eye, MoreHorizontal, Pencil } from "lucide-react";
-import { Link } from "react-router-dom";
-
-import routes from "@/router/routes";
 
 interface RowActionsProps {
     row: any;
@@ -33,9 +31,8 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => (
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
                 <Link
-                    to={routes.projects.View.buildPath({
-                        projectId: row.original.id,
-                    })}
+                    to="/projects/$projectId"
+                    params={{ projectId: row.original.id }}
                 >
                     <ViewIcon />
                     View
@@ -43,9 +40,8 @@ const RowActions: React.FC<RowActionsProps> = ({ row }) => (
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
                 <Link
-                    to={routes.projects.View.buildPath({
-                        projectId: row.original.id,
-                    })}
+                    to="/projects/$projectId"
+                    params={{ projectId: row.original.id }}
                 >
                     <EditIcon />
                     Edit

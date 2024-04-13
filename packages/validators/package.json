@@ -27,6 +27,6 @@
         "concurrently": "^8.2.2",
         "eslint": "^8.57.0",
         "typescript": "^5.4.5",
-        "vitest": "^1.4.0"
+        "vitest": "^1.5.0"
     }
 }

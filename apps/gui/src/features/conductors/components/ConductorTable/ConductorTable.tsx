@@ -7,11 +7,11 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface ConductorTableProps {
     lineId: string;
 }
 
-const ConductorTable: React.FC<Props> = ({ lineId }) => {
+const ConductorTable: React.FC<ConductorTableProps> = ({ lineId }) => {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.conductor.getAllByLineId.useQuery({
         lineId,

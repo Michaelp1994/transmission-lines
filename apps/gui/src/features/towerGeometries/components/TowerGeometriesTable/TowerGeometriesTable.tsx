@@ -5,9 +5,9 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc, { RouterOutputs } from "@/utils/trpc";
 
-interface Props {}
+interface GeometriesTableProps {}
 
-const GeometriesTable: React.FC<Props> = () => {
+const GeometriesTable: React.FC<GeometriesTableProps> = () => {
     const { t } = useTranslation("towerGeometry");
     const {
         data = [],

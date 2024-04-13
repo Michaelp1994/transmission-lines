@@ -13,9 +13,9 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-interface Props {}
+interface SettingsModalProps {}
 
-const SettingsModal: React.FC<Props> = () => {
+const SettingsModal: React.FC<SettingsModalProps> = () => {
     const { t } = useTranslation("generateConductors");
     const [open, setOpen] = useState(false);
 

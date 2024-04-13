@@ -5,8 +5,8 @@ import { Circle, Layer, Line, Stage } from "react-konva";
 
 const SCALE = 5;
 
-interface Props {}
-const TowerGeometryDiagram: React.FC<Props> = () => {
+interface TowerGeometryDiagramProps {}
+const TowerGeometryDiagram: React.FC<TowerGeometryDiagramProps> = () => {
     const fields = useWatch<TowerGeometryInput>({ name: "conductors" });
 
     return (

@@ -59,7 +59,7 @@
         "lucide-react": "^0.367.0",
         "postcss-cli": "^11.0.0",
         "react-day-picker": "^8.10.0",
-        "react-hook-form": "^7.51.2",
+        "react-hook-form": "^7.51.3",
         "react-resizable-panels": "^2.0.16",
         "sonner": "^1.4.41",
         "tailwind-merge": "^2.2.2",
@@ -70,10 +70,10 @@
     "devDependencies": {
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
-        "@testing-library/react": "^15.0.0",
+        "@testing-library/react": "^15.0.1",
         "@types/node": "^20.12.7",
-        "@types/react": "^18.2.75",
-        "@types/react-dom": "^18.2.24",
+        "@types/react": "^18.2.77",
+        "@types/react-dom": "^18.2.25",
         "@vitejs/plugin-react": "^4.2.1",
         "autoprefixer": "^10.4.19",
         "eslint": "^8.57.0",
@@ -85,7 +85,7 @@
         "react-i18next": "^14.1.0",
         "tailwindcss": "^3.4.3",
         "typescript": "^5.4.5",
-        "vitest": "^1.4.0"
+        "vitest": "^1.5.0"
     },
     "peerDependencies": {
         "i18next": "^23.8.2",

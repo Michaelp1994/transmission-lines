@@ -6,11 +6,13 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
-interface Props {
+interface TransmissionLineTableProps {
     projectId: string;
 }
 
-const TransmissionLineTable: React.FC<Props> = ({ projectId }) => {
+const TransmissionLineTable: React.FC<TransmissionLineTableProps> = ({
+    projectId,
+}) => {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } =
         trpc.transmissionLine.getAllByProjectId.useQuery({
