@@ -47,6 +47,6 @@ export const AllConductorTypesPage: React.FC<
 export const Route = createFileRoute("/conductor-types/")({
     component: AllConductorTypesPage,
     beforeLoad: () => ({
-        text: "ViewSourcePage",
+        text: "Conductor Types",
     }),
 });

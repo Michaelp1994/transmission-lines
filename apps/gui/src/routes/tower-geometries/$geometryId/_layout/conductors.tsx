@@ -89,7 +89,4 @@ export const Route = createFileRoute(
     "/tower-geometries/$geometryId/_layout/conductors"
 )({
     component: TowerGeometryConductors,
-    beforeLoad: () => ({
-        text: "TowerGeometryConductors",
-    }),
 });

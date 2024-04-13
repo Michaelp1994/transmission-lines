@@ -57,6 +57,6 @@ const Grid = styled.div`
 export const Route = createFileRoute("/tower-geometries/$geometryId/_layout")({
     component: ViewTowerGeometryPage,
     beforeLoad: () => ({
-        text: "ViewTowerGeometryPage",
+        text: "View Tower Geometry",
     }),
 });

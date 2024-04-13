@@ -34,6 +34,6 @@ export const CreateConductorTypePage: React.FC<
 export const Route = createFileRoute("/conductor-types/new")({
     component: CreateConductorTypePage,
     beforeLoad: () => ({
-        text: "CreateConductorTypePage",
+        text: "New Conductor Type",
     }),
 });

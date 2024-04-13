@@ -52,6 +52,6 @@ const Wrapper = styled.div``;
 export const Route = createFileRoute("/tower-geometries/")({
     component: AllTowerGeometriesPage,
     beforeLoad: () => ({
-        text: "AllTowerGeometriesPage",
+        text: "Tower Geometries",
     }),
 });
