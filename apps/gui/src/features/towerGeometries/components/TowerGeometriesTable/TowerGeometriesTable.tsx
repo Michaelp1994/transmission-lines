@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import columns from "./columns";
 
 import DataTable from "@/components/DataTable";
-import trpc, { RouterOutputs } from "@/utils/trpc";
+import trpc from "@/utils/trpc";
 
 interface GeometriesTableProps {}
 

@@ -3,7 +3,7 @@ import { BrowserWindow, shell } from "electron";
 import { is } from "@electron-toolkit/utils";
 
 // import appIcon from "@resources/favicon.ico?asset";
-import createMenu from "../menu";
+// import createMenu from "../menu";
 
 export default async function create() {
     // Create the browser window.

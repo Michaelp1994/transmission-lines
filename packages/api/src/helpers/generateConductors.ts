@@ -1,5 +1,7 @@
-import type { CreateConductorInput } from "@repo/validators/schemas/Conductor.schema";
-import type { GenerateConductorsInput } from "@repo/validators/schemas/GenerateConductors.schema";
+import type {
+    CreateConductorInput,
+    GenerateConductorsInput,
+} from "@repo/validators/schemas/Conductor.schema";
 
 export default function generateConductors(
     values: GenerateConductorsInput

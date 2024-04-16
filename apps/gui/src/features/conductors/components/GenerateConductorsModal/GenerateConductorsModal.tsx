@@ -21,7 +21,7 @@ import {
     GenerateConductorsInput,
     defaultGenerateConductors,
     generateConductorsSchema,
-} from "@repo/validators/schemas/GenerateConductors.schema";
+} from "@repo/validators/schemas/Conductor.schema";
 import { LineID } from "@repo/validators/schemas/Ids.schema";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

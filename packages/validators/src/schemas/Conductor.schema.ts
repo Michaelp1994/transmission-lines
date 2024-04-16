@@ -17,6 +17,39 @@ export const createConductorSchema = z.object({
 
 export type CreateConductorInput = z.infer<typeof createConductorSchema>;
 
+export const defaultConductor: CreateConductorInput = {
+    name: "",
+    fromPhase: 0,
+    toPhase: 0,
+    isNeutral: false,
+    bundleNumber: 1,
+    bundleSpacing: 0,
+    typeId: "",
+    lineId: "",
+};
+
+// generate
+
+export const generateConductorsSchema = z.object({
+    lineId,
+    phases: z.number().positive(),
+    circuits: z.number().positive(),
+    neutrals: z.number().positive(),
+    phaseTypeId: conductorTypeId,
+    neutralTypeId: conductorTypeId,
+});
+
+export type GenerateConductorsInput = z.infer<typeof generateConductorsSchema>;
+
+export const defaultGenerateConductors: GenerateConductorsInput = {
+    lineId: "",
+    phaseTypeId: "",
+    neutralTypeId: "",
+    phases: 3,
+    circuits: 2,
+    neutrals: 2,
+};
+
 // getAll
 export const getAllConductorsSchema = z.object({}).optional();
 
@@ -45,17 +78,6 @@ export const updateConductorSchema = createConductorSchema.extend({
 });
 
 export type UpdateConductorInput = z.infer<typeof updateConductorSchema>;
-
-export const defaultConductor: CreateConductorInput = {
-    name: "",
-    fromPhase: 0,
-    toPhase: 0,
-    isNeutral: false,
-    bundleNumber: 1,
-    bundleSpacing: 0,
-    typeId: "",
-    lineId: "",
-};
 
 // delete
 

@@ -17,7 +17,7 @@ import generateConductors from "@/helpers/generateConductors";
 export default router({
     getAll: publicProcedure
         .input(getAllConductorsSchema)
-        .query(async ({ ctx: { db }, input }) => {
+        .query(async ({ ctx: { db } }) => {
             const allConductors =
                 await db.query.transmissionConductors.findMany();
             return allConductors;

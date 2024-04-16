@@ -1,6 +1,5 @@
 import { styled } from "@linaria/react";
 import {
-    Input,
     Select,
     SelectContent,
     SelectItem,

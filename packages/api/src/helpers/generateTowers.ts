@@ -1,5 +1,7 @@
-import type { GenerateTowersInput } from "@repo/validators/schemas/GenerateTowers.schema";
-import type { CreateTransmissionTowerInput } from "@repo/validators/schemas/TransmissionTower.schema";
+import type {
+    CreateTransmissionTowerInput,
+    GenerateTowersInput,
+} from "@repo/validators/schemas/TransmissionTower.schema";
 
 export default function generateTowers(
     values: GenerateTowersInput
