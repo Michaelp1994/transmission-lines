@@ -1,3 +1,4 @@
+import { ProjectID } from "@repo/validators/schemas/Ids.schema";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -7,7 +8,7 @@ import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
 interface TransmissionLineTableProps {
-    projectId: string;
+    projectId: ProjectID;
 }
 
 const TransmissionLineTable: React.FC<TransmissionLineTableProps> = ({

@@ -6,7 +6,6 @@ import {
     CardHeaderText,
     CardTitle,
 } from "@repo/ui";
-import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 interface PageNotFoundProps {}

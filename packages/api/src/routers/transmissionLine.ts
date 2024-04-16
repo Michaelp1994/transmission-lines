@@ -6,13 +6,10 @@ import {
     getAllTransmissionLinesByProjectIdSchema,
     getAllTransmissionLinesSchema,
     getTransmissionLineByIdSchema,
-    getTransmissionLineParametersSchema,
     updateTransmissionLineSchema,
 } from "@repo/validators/schemas/TransmissionLine.schema";
 
 import { publicProcedure, router } from "../trpc";
-
-import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
 
 export default router({
     getAll: publicProcedure

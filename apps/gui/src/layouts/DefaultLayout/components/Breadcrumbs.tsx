@@ -14,7 +14,6 @@ interface BreadcrumbsProps {}
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
     const routes = useMatches();
-    console.log(routes);
     const filteredRoutes = routes.filter((route) => route.routeContext?.text);
     const crumbs = filteredRoutes.map((match) => ({
         text: match.routeContext.text,

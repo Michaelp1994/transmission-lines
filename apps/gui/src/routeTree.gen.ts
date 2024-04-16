@@ -35,7 +35,6 @@ import { Route as ProjectsProjectIdSourcesprojectCrumbNewImport } from './routes
 import { Route as ProjectsProjectIdLinesprojectCrumbNewImport } from './routes/projects/$projectId/lines_/_projectCrumb/new'
 import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdIndexImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/index'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine'
-import { Route as ProjectsProjectIdLinesprojectCrumbLineIdLayoutImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_layout'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/index'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/$towerId_/index'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/towers'
@@ -208,12 +207,6 @@ const ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute =
     getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdRoute,
   } as any)
 
-const ProjectsProjectIdLinesprojectCrumbLineIdLayoutRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdLayoutImport.update({
-    id: '/_layout',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdRoute,
-  } as any)
-
 const ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute =
   ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport.update({
     path: '/',
@@ -342,13 +335,9 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
     }
-    '/projects/$projectId/lines/_projectCrumb/$lineId/_layout': {
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdLayoutImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdRoute
-    }
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine': {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
+      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdRoute
     }
     '/projects/$projectId/sources/_projectCrumb/$sourceId/': {
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdIndexImport

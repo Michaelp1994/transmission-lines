@@ -3,7 +3,6 @@ import { conductorLocations } from "@repo/db/schemas/conductorLocations";
 import {
     createConductorLocationSchema,
     deleteConductorLocationSchema,
-    generateConductorLocationsSchema,
     getAllConductorLocationsByGeometryIdSchema,
     getAllConductorLocationsSchema,
     getConductorLocationByIdSchema,

@@ -2,10 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
 
 import RowActions from "./RowActions";
-
-import { RouterOutputs } from "@/utils/trpc";
-
-type TransmissionLine = RouterOutputs["transmissionLine"]["getAllByProjectId"];
+import { TransmissionLine } from "./RowType";
 
 const columnHelper = createColumnHelper<TransmissionLine>();
 export default [

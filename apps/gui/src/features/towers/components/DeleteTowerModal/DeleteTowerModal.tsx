@@ -31,7 +31,7 @@ const DeleteTowerModal: React.FC<DeleteTowerModalProps> = ({
     const utils = trpc.useUtils();
     const deleteMutation = trpc.tower.delete.useMutation();
     const handleConfirm = async () => {
-        const data = await deleteMutation.mutateAsync({ id: towerId });
+        await deleteMutation.mutateAsync({ id: towerId });
         await utils.tower.getAllByLineId.invalidate({
             lineId,
         });

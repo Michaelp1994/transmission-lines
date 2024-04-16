@@ -1,5 +1,4 @@
 import { styled } from "@linaria/react";
-import { TransmissionLine } from "@repo/db/schemas/transmissionLines";
 import {
     Button,
     DropdownMenu,
@@ -13,6 +12,8 @@ import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 import { Delete, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
+
+import { TransmissionLine } from "./RowType";
 
 const ConductorTableRowActions: React.FC<
     CellContext<TransmissionLine, number>

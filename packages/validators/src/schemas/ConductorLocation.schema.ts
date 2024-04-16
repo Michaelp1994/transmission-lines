@@ -5,8 +5,8 @@ import { geometryId, locationId } from "./Ids.schema";
 // create
 
 export const createConductorLocationSchema = z.object({
-    x: z.number(),
-    y: z.number(),
+    x: z.coerce.number(),
+    y: z.coerce.number(),
     geometryId,
 });
 

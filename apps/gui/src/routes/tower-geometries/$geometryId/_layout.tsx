@@ -12,6 +12,7 @@ export const ViewTowerGeometryPage: React.FC = () => {
                     <StyledLink
                         to="/tower-geometries/$geometryId"
                         params={{ geometryId }}
+                        activeOptions={{ exact: true }}
                     >
                         General
                     </StyledLink>

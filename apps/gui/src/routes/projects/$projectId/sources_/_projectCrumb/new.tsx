@@ -47,7 +47,7 @@ export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/new"
 )({
     component: CreateSourcePage,
-    beforeLoad: ({ params }) => ({
+    beforeLoad: () => ({
         text: "New Source",
     }),
 });

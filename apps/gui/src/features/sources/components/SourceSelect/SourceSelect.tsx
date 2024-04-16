@@ -12,7 +12,7 @@ import {
     PopoverTrigger,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
@@ -25,10 +25,9 @@ interface SourceSelectProps
 const SourceSelect = forwardRef<HTMLButtonElement, SourceSelectProps>(
     ({ projectId, value, onChange, ...props }, ref) => {
         const { t } = useTranslation("source");
-        const { data, error, isLoading } =
-            trpc.source.getAllByProjectId.useQuery({
-                projectId,
-            });
+        const { data } = trpc.source.getAllByProjectId.useQuery({
+            projectId,
+        });
         const [open, setOpen] = useState(false);
         function handleSelect(currentValue) {
             if (onChange) onChange(currentValue === value ? "" : currentValue);

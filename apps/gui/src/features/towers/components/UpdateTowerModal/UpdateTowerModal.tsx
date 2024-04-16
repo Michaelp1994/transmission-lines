@@ -44,7 +44,7 @@ const UpdateTowerModal: React.FC<UpdateTowerModalProps> = ({
 }) => {
     const { t } = useTranslation("updateTowerModal");
     const utils = trpc.useUtils();
-    const { data, error, isLoading } = trpc.tower.getById.useQuery({
+    const { data } = trpc.tower.getById.useQuery({
         id: towerId,
     });
     const updateMutation = trpc.tower.update.useMutation();

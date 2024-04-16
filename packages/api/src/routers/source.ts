@@ -14,7 +14,7 @@ import { publicProcedure, router } from "../trpc";
 export default router({
     getAll: publicProcedure
         .input(getAllSourcesSchema)
-        .query(async ({ ctx: { db }, input }) => {
+        .query(async ({ ctx: { db } }) => {
             const allSources = await db.query.sources.findMany();
 
             return allSources;

@@ -1,5 +1,3 @@
-import createScript from "@helpers/createScript";
-
 import BaseElement from "./BaseElement";
 
 import {

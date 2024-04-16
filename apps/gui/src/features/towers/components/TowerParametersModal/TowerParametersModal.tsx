@@ -26,7 +26,7 @@ const TowerParametersModal: React.FC<TowerParametersModalProps> = ({
     towerId,
 }) => {
     const { t } = useTranslation("towerParametersModal");
-    const { data, error, isLoading } = trpc.tower.getParameters.useQuery({
+    const { data } = trpc.tower.getParameters.useQuery({
         id: towerId,
     });
 

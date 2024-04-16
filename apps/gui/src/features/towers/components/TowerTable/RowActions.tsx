@@ -8,6 +8,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
+import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 import { Delete, Eye, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
@@ -67,9 +68,17 @@ const RowActions: React.FC<CellContext<TransmissionTower, number>> = ({
             <DropdownMenuContent align="end" className="w-[160px]">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={displayParametersModal}>
-                    <ViewIcon />
-                    <span>View</span>
+                <DropdownMenuItem asChild>
+                    <Link
+                        to="/projects/$projectId/lines/$lineId/$towerId"
+                        from="/projects/$projectId/lines/$lineId"
+                        params={{
+                            towerId: row.original.id,
+                        }}
+                    >
+                        <ViewIcon />
+                        <span>View</span>
+                    </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={displayUpdateModal}>
                     <EditIcon />

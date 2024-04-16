@@ -13,7 +13,7 @@ import {
     ScrollArea,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
-import React, { forwardRef, useMemo, useState } from "react";
+import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
@@ -37,10 +37,10 @@ const TowerGeometrySelect = forwardRef<
     const { data, error, isLoading } = trpc.towerGeometry.getAll.useQuery();
     const [open, setOpen] = React.useState(false);
 
-    function handleSelect(currentValue: string) {
+    const handleSelect = (currentValue: string) => {
         if (onChange) onChange(currentValue === value ? "" : currentValue);
         setOpen(false);
-    }
+    };
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;

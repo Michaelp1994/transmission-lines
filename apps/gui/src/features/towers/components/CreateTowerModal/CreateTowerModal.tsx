@@ -2,14 +2,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
 import {
     Button,
-    Checkbox,
     Dialog,
     DialogContent,
     DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
     Form,
     FormControl,
     FormDescription,

@@ -10,11 +10,6 @@ import { useTranslation } from "react-i18next";
 
 import UserButton from "./UserButton";
 
-import { Route as HomePageRoute } from "@/routes";
-import { Route as AllConductorTypesRoute } from "@/routes/conductor-types";
-import { Route as AllProjectsRoute } from "@/routes/projects";
-import { Route as AllTowerGeometriesRoute } from "@/routes/tower-geometries";
-
 interface NavBarProps {}
 
 const NavBar: React.FC<NavBarProps> = () => {

@@ -10,9 +10,30 @@ export enum Modals {
     CreateConductorModal,
     DeleteConductorModal,
     GenerateConductorsModal,
+    CreateConductorLocationModal,
+    UpdateConductorLocationModal,
+    DeleteConductorLocationModal,
 }
 
 export const modalsConfig: Record<Modals, LazyExoticComponent<any>> = {
+    [Modals.CreateConductorLocationModal]: React.lazy(
+        () =>
+            import(
+                "../../features/conductorLocations/components/CreateConductorLocationModal"
+            )
+    ),
+    [Modals.UpdateConductorLocationModal]: React.lazy(
+        () =>
+            import(
+                "../../features/conductorLocations/components/UpdateConductorLocationModal"
+            )
+    ),
+    [Modals.DeleteConductorLocationModal]: React.lazy(
+        () =>
+            import(
+                "../../features/conductorLocations/components/DeleteConductorLocationModal"
+            )
+    ),
     [Modals.CreateTowerModal]: React.lazy(
         () => import("../../features/towers/components/CreateTowerModal")
     ),

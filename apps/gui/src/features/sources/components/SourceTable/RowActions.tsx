@@ -1,9 +1,6 @@
 import { styled } from "@linaria/react";
-import { Source } from "@repo/db/schemas/sources";
 import {
     Button,
-    Dialog,
-    DialogTrigger,
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
@@ -16,7 +13,9 @@ import { CellContext } from "@tanstack/react-table";
 import { Delete, MoreHorizontal, Pencil } from "lucide-react";
 import React from "react";
 
-const ConductorTableRowActions: React.FC<CellContext<Source, number>> = ({
+import { Source } from "./RowType";
+
+const SourceTableRowActions: React.FC<CellContext<Source, number>> = ({
     row,
 }) => (
     <DropdownMenu>
@@ -63,4 +62,4 @@ const DeleteIcon = styled(Delete)`
     width: 1rem;
     height: 1rem;
 `;
-export default ConductorTableRowActions;
+export default SourceTableRowActions;

@@ -1,5 +1,4 @@
 import { styled } from "@linaria/react";
-import { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
 import {
     Button,
     DropdownMenu,
@@ -11,12 +10,12 @@ import {
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
-import { Delete, Eye, MoreHorizontal, Pencil } from "lucide-react";
+import { Delete, Eye, MoreHorizontal } from "lucide-react";
 import React from "react";
 
-const RowActions: React.FC<CellContext<TransmissionConductor, number>> = ({
-    row,
-}) => (
+import { TowerGeometry } from "./RowType";
+
+const RowActions: React.FC<CellContext<TowerGeometry, number>> = ({ row }) => (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Button
@@ -49,12 +48,6 @@ const RowActions: React.FC<CellContext<TransmissionConductor, number>> = ({
 );
 
 const ViewIcon = styled(Eye)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
-
-const EditIcon = styled(Pencil)`
     margin-right: 0.5rem;
     width: 1rem;
     height: 1rem;

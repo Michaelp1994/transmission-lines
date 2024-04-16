@@ -1,6 +1,5 @@
 import { styled } from "@linaria/react";
 import {
-    Avatar,
     Button,
     DropdownMenu,
     DropdownMenuContent,
@@ -29,7 +28,7 @@ const UserButton = () => (
             </Button>
         </DropdownMenuTrigger>
         <UserMenu align="end" forceMount>
-            {/* <DropdownMenuLabel className="font-normal">
+            <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none">shadcn</p>
                     <p className="text-xs leading-none text-muted-foreground">
@@ -54,7 +53,7 @@ const UserButton = () => (
             <DropdownMenuItem>
                 Log out
                 <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-            </DropdownMenuItem> */}
+            </DropdownMenuItem>
         </UserMenu>
     </DropdownMenu>
 );
@@ -63,15 +62,4 @@ const UserMenu = styled(DropdownMenuContent)`
     width: 14rem;
 `;
 
-const StyledButton = styled(Button)`
-    position: relative;
-    border-radius: 9999px;
-    width: 2rem;
-    height: 2rem;
-`;
-
-const UserIcon = styled(CircleUserRound)`
-    width: 2rem;
-    height: 2rem;
-`;
 export default UserButton;

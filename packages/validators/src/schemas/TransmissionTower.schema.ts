@@ -73,7 +73,7 @@ export const defaultGenerateTowers: GenerateTowersInput = {
 // getTowerParameters
 
 export const getTowerParametersSchema = z.object({
-    id: towerId,
+    towerId,
 });
 
 export type GetTowerParametersInput = z.infer<typeof getTowerParametersSchema>;

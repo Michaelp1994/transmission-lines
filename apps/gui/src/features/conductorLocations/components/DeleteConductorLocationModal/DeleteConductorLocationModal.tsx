@@ -11,29 +11,29 @@ import {
     AlertDialogTitle,
     buttonVariants,
 } from "@repo/ui";
-import { ConductorID, LineID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
-export interface DeleteConductorModalProps {
-    conductorId: ConductorID;
-    lineId: LineID;
+export interface DeleteConductorLocationModalProps {
+    conductorLocationId: number;
     onClose: () => void;
 }
 
-const DeleteConductorModal: React.FC<DeleteConductorModalProps> = ({
-    conductorId,
-    lineId,
+const DeleteConductorModal: React.FC<DeleteConductorLocationModalProps> = ({
+    conductorLocationId,
     onClose,
 }) => {
-    const { t } = useTranslation("transmissionLine");
+    const { t } = useTranslation("deleteConductorLocationModal");
     const utils = trpc.useUtils();
-    const deleteMutation = trpc.conductor.delete.useMutation();
+    const deleteMutation = trpc.conductorLocations.delete.useMutation();
     const handleConfirm = async () => {
-        await deleteMutation.mutateAsync({ id: conductorId });
-        await utils.conductor.getAllByLineId.invalidate({
-            lineId,
+        // handle delete
+        const data = await deleteMutation.mutateAsync({
+            locationId: conductorLocationId,
+        });
+        await utils.conductorLocations.getAllByGeometryId.invalidate({
+            geometryId: data.geometryId,
         });
     };
     return (

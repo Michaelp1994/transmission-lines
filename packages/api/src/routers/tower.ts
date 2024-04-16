@@ -12,7 +12,7 @@ import {
 
 import generateTowers from "@/helpers/generateTowers";
 import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
-import { publicProcedure, publicProcedure, router } from "@/trpc";
+import { publicProcedure, router } from "@/trpc";
 
 export default router({
     create: publicProcedure
@@ -40,7 +40,7 @@ export default router({
         .input(getTowerParametersSchema)
         .query(async ({ input, ctx: { db } }) => {
             const tower = await db.query.transmissionTowers.findFirst({
-                where: eq(transmissionTowers.id, input.id),
+                where: eq(transmissionTowers.id, input.towerId),
                 with: {
                     transmissionLine: {
                         with: {
@@ -58,19 +58,11 @@ export default router({
                     },
                 },
             });
-            console.log(tower);
-            if (!tower) throw Error("Can't update transmission line");
-            try {
-                const matrixes = buildTransmissionLineMatrix(
-                    tower.geometry,
-                    tower.transmissionLine.conductors
-                );
-            } catch (e) {
-                console.log(e);
-                throw Error("Can't calculate matrixes");
-            }
-
-            console.log("matrices: ", matrixes);
+            if (!tower) throw Error("Can't find transmission tower");
+            const matrixes = buildTransmissionLineMatrix(
+                tower.geometry,
+                tower.transmissionLine.conductors
+            );
             return matrixes;
         }),
 

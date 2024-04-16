@@ -1,8 +1,8 @@
-import { Source } from "@repo/db/schemas/sources";
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
 
-import RowActions from "./RowActions";
+import SourceTableRowActions from "./RowActions";
+import { Source } from "./RowType";
 
 const columnHelper = createColumnHelper<Source>();
 
@@ -41,6 +41,6 @@ export default [
         meta: {
             align: "right",
         },
-        cell: RowActions,
+        cell: SourceTableRowActions,
     }),
 ];
