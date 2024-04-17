@@ -11,6 +11,9 @@ import {
 
 import { publicProcedure, router } from "../trpc";
 
+import calculateZPhaseComponents from "@/helpers/calculateZPhaseComponents";
+import calculateZSequenceComponents from "@/helpers/calculateZSequenceComponents";
+
 export default router({
     getAll: publicProcedure
         .input(getAllSourcesSchema)
@@ -27,6 +30,31 @@ export default router({
             });
 
             return allSources;
+        }),
+    getPhaseComponents: publicProcedure
+        .input(getSourceByIdSchema)
+        .query(async ({ input, ctx: { db } }) => {
+            const source = await db.query.sources.findFirst({
+                where: eq(sources.id, input.id),
+            });
+            if (!source) throw Error("Can't find source");
+
+            const { z0, z1, z2 } = calculateZSequenceComponents({
+                voltage: source.voltage * 1000,
+                x1r1: source.x1r1,
+                isc1: source.isc1,
+                x0r0: source.x0r0,
+                isc3: source.isc3,
+            });
+
+            const zPhaseMatrix = calculateZPhaseComponents({ z0, z1, z2 });
+            const outputMatrix = zPhaseMatrix.toArray();
+            return {
+                phaseMatrix: outputMatrix,
+                z0: { re: z0.re, im: z0.im },
+                z1: { re: z1.re, im: z1.im },
+                z2: { re: z2.re, im: z2.im },
+            };
         }),
     getById: publicProcedure
         .input(getSourceByIdSchema)

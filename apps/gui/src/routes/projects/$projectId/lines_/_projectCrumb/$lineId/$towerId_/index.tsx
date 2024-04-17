@@ -12,7 +12,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardCopy } from "lucide-react";
 import React from "react";
 
-import { ParametersTable } from "@/features/towers/";
+import MatrixTable from "@/components/MatrixTable/MatrixTable";
 import trpc from "@/utils/trpc";
 
 interface LineParametersPageProps {}
@@ -48,7 +48,7 @@ export const LineParametersPage: React.FC<LineParametersPageProps> = () => {
                     </CardHeaderActions>
                 </CardHeader>
                 <CardContent>
-                    <ParametersTable data={data.rMatrix} />
+                    <MatrixTable data={data.rMatrix} />
                 </CardContent>
             </Card>
             <Card>
@@ -68,7 +68,7 @@ export const LineParametersPage: React.FC<LineParametersPageProps> = () => {
                     </CardHeaderActions>
                 </CardHeader>
                 <CardContent>
-                    <ParametersTable data={data.xMatrix} />
+                    <MatrixTable data={data.xMatrix} />
                 </CardContent>
             </Card>
             <Card>
@@ -88,7 +88,7 @@ export const LineParametersPage: React.FC<LineParametersPageProps> = () => {
                     </CardHeaderActions>
                 </CardHeader>
                 <CardContent>
-                    <ParametersTable data={data.cMatrix} />
+                    <MatrixTable data={data.cMatrix} />
                 </CardContent>
             </Card>
         </Wrapper>

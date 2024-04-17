@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Card,
     CardContent,
@@ -9,14 +8,13 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UpdateSourceForm } from "@/features/sources";
+import { UpdateSourceElectricalForm } from "@/features/sources";
 import trpc from "@/utils/trpc";
 
-interface ViewSourcePageProps {}
-
-export const ViewSourcePage: React.FC<ViewSourcePageProps> = () => {
+export const ViewSourcePage = () => {
     const { sourceId } = Route.useParams();
     const { t } = useTranslation("source");
+
     const { data, isLoading, error } = trpc.source.getById.useQuery({
         id: sourceId,
     });
@@ -28,29 +26,21 @@ export const ViewSourcePage: React.FC<ViewSourcePageProps> = () => {
         return <div>{t("general:errorMessage")}</div>;
     }
     return (
-        <PageWrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>{t("edit.title")}</CardTitle>
-                    </CardHeaderText>
-                </CardHeader>
-                <CardContent>
-                    <UpdateSourceForm data={data} />
-                </CardContent>
-            </Card>
-        </PageWrapper>
+        <Card>
+            <CardHeader>
+                <CardHeaderText>
+                    <CardTitle>Electrical Properties</CardTitle>
+                </CardHeaderText>
+            </CardHeader>
+            <CardContent>
+                <UpdateSourceElectricalForm data={data} />
+            </CardContent>
+        </Card>
     );
 };
 
-const PageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;
-
 export const Route = createFileRoute(
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/"
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical"
 )({
     component: ViewSourcePage,
     beforeLoad: () => ({

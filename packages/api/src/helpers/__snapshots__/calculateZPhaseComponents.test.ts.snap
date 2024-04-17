@@ -1,0 +1,57 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`calculate Z Phase Components > should calculate the phase components correctly 1`] = `
+[
+  [
+    {
+      "im": 3.417590933333333,
+      "mathjs": "Complex",
+      "re": 0.23086770666666667,
+    },
+    {
+      "im": 0.5186052333333341,
+      "mathjs": "Complex",
+      "re": 0.049681096666666605,
+    },
+    {
+      "im": 0.5186052333333341,
+      "mathjs": "Complex",
+      "re": 0.049681096666666605,
+    },
+  ],
+  [
+    {
+      "im": 0.5186052333333341,
+      "mathjs": "Complex",
+      "re": 0.049681096666666605,
+    },
+    {
+      "im": 3.417590933333333,
+      "mathjs": "Complex",
+      "re": 0.23086770666666628,
+    },
+    {
+      "im": 0.5186052333333326,
+      "mathjs": "Complex",
+      "re": 0.04968109666666705,
+    },
+  ],
+  [
+    {
+      "im": 0.5186052333333341,
+      "mathjs": "Complex",
+      "re": 0.049681096666666605,
+    },
+    {
+      "im": 0.5186052333333325,
+      "mathjs": "Complex",
+      "re": 0.04968109666666705,
+    },
+    {
+      "im": 3.417590933333333,
+      "mathjs": "Complex",
+      "re": 0.23086770666666628,
+    },
+  ],
+]
+`;

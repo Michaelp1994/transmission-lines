@@ -6,20 +6,20 @@ import { projectId, sourceId } from "./Ids.schema";
 
 export const createSourceSchema = z.object({
     name: z.string().min(2).max(50).trim(),
-    phases: z
+    phases: z.coerce
         .number({
             invalid_type_error: "Please enter a number",
         })
         .int({ message: "Please provide an integer value" })
         .min(0)
         .max(10),
-    voltage: z.number().positive(),
-    x1r1: z.number().min(0),
-    x0r0: z.number().min(0),
-    isc3: z.number().min(0),
-    isc1: z.number().min(0),
-    resistance: z.number().positive(),
-    frequency: z.number().positive(),
+    voltage: z.coerce.number().positive(),
+    x1r1: z.coerce.number().min(0),
+    x0r0: z.coerce.number().min(0),
+    isc3: z.coerce.number().min(0),
+    isc1: z.coerce.number().min(0),
+    resistance: z.coerce.number().positive(),
+    frequency: z.coerce.number().positive(),
     projectId,
 });
 
