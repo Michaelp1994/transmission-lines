@@ -1,4 +1,4 @@
-import { RouterOutputs } from "@/utils/trpc";
+import { RouterOutputs } from "~/utils/trpc";
 
 export type TransmissionTower =
     RouterOutputs["tower"]["getAllByLineId"][number];
