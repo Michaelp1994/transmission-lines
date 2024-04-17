@@ -18,7 +18,6 @@ import {
     defaultConductorLocation,
 } from "@repo/validators";
 import { GeometryID } from "@repo/validators/schemas/Ids.schema";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -29,9 +28,10 @@ interface CreateConductorLocationFormProps {
     onSubmit: () => void;
 }
 
-const CreateConductorLocationForm: React.FC<
-    CreateConductorLocationFormProps
-> = ({ geometryId, onSubmit }) => {
+export default function CreateConductorLocationForm({
+    geometryId,
+    onSubmit,
+}: CreateConductorLocationFormProps) {
     const { t } = useTranslation("createConductorLocationModal");
     const utils = trpc.useUtils();
     const createMutation = trpc.conductorLocations.create.useMutation({});
@@ -92,12 +92,10 @@ const CreateConductorLocationForm: React.FC<
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 `;
-
-export default CreateConductorLocationForm;

@@ -18,18 +18,13 @@ import {
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import ConductorLocationTable from "../ConductorLocationTable";
-
 import trpc from "@/utils/trpc";
 
-interface CreateTowerGeometryFormProps {}
-
-const CreateTowerGeometryForm: React.FC<CreateTowerGeometryFormProps> = () => {
+export default function CreateTowerGeometryForm() {
     const { t } = useTranslation("towerGeometry");
     const navigate = useNavigate();
     const createTowerGeometryMutation = trpc.towerGeometry.create.useMutation();
@@ -68,7 +63,6 @@ const CreateTowerGeometryForm: React.FC<CreateTowerGeometryFormProps> = () => {
                             </FormItem>
                         )}
                     />
-                    <ConductorLocationTable />
 
                     <ButtonsContainer>
                         <Button variant="destructive" type="reset">
@@ -81,7 +75,7 @@ const CreateTowerGeometryForm: React.FC<CreateTowerGeometryFormProps> = () => {
             </StyledForm>
         </Form>
     );
-};
+}
 const StyledForm = styled.form`
     display: flex;
     gap: 2rem;
@@ -103,5 +97,3 @@ const ButtonsContainer = styled.div`
     gap: 1rem;
     justify-content: flex-end;
 `;
-
-export default CreateTowerGeometryForm;

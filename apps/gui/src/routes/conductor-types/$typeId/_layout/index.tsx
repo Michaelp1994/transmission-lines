@@ -48,7 +48,7 @@ export const UpdateConductorTypePage: React.FC<
 
 const Wrapper = styled.div``;
 
-export const Route = createFileRoute("/conductor-types/$typeId/")({
+export const Route = createFileRoute("/conductor-types/$typeId/_layout/")({
     component: UpdateConductorTypePage,
     beforeLoad: () => ({
         text: "UpdateConductorTypePage",

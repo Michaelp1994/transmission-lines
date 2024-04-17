@@ -8,7 +8,7 @@ import {
 } from "@repo/ui";
 import { Table } from "@tanstack/react-table";
 
-import { ConductorType } from "./columns";
+import { ConductorType } from "./RowType";
 
 interface ConductorTypeToolbarProps {
     table: Table<ConductorType>;

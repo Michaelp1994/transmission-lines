@@ -9,58 +9,54 @@ import {
     DropdownMenuTrigger,
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
-import { Eye, MoreHorizontal, Pencil } from "lucide-react";
+import { CellContext } from "@tanstack/react-table";
 
-interface RowActionsProps {
-    row: any;
+import { Project } from "./RowType";
+import { DeleteProjectModalProps } from "../DeleteProjectModal/DeleteProjectModal";
+
+import { DeleteIcon, MenuIcon, ViewIcon } from "@/components/MenuIcons";
+import { Modals } from "@/components/modals/config";
+import useModal from "@/components/modals/use-modal";
+
+export default function RowActions({ row }: CellContext<Project, unknown>) {
+    const deleteModal = useModal<DeleteProjectModalProps>(
+        Modals.DeleteProjectModal
+    );
+
+    const displayDeleteModal = () => {
+        deleteModal.open({
+            projectId: row.original.id,
+            onClose: deleteModal.close,
+        });
+    };
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button
+                    variant="ghost"
+                    className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+                >
+                    <MenuIcon />
+                    <span className="sr-only">Open menu</span>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-[160px]">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                    <Link
+                        to="/projects/$projectId"
+                        params={{ projectId: row.original.id }}
+                    >
+                        <ViewIcon />
+                        View
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={displayDeleteModal}>
+                    <DeleteIcon />
+                    Delete
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
 }
-
-const RowActions: React.FC<RowActionsProps> = ({ row }) => (
-    <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-            <Button
-                variant="ghost"
-                className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-            >
-                <MoreHorizontal className="h-4 w-4" />
-                <span className="sr-only">Open menu</span>
-            </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-                <Link
-                    to="/projects/$projectId"
-                    params={{ projectId: row.original.id }}
-                >
-                    <ViewIcon />
-                    View
-                </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-                <Link
-                    to="/projects/$projectId"
-                    params={{ projectId: row.original.id }}
-                >
-                    <EditIcon />
-                    Edit
-                </Link>
-            </DropdownMenuItem>
-        </DropdownMenuContent>
-    </DropdownMenu>
-);
-
-const EditIcon = styled(Pencil)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
-
-const ViewIcon = styled(Eye)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
-
-export default RowActions;

@@ -11,31 +11,33 @@ import {
     AlertDialogTitle,
     buttonVariants,
 } from "@repo/ui";
+import { GeometryID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 import trpc from "@/utils/trpc";
 
-export interface DeleteConductorLocationModalProps {
-    conductorLocationId: number;
+export interface DeleteConductorTypeModalProps {
+    geometryId: GeometryID;
     onClose: () => void;
 }
 
-export default function DeleteConductorModal({
-    conductorLocationId,
+export default function DeleteConductorTypeModal({
+    geometryId,
     onClose,
-}: DeleteConductorLocationModalProps) {
-    const { t } = useTranslation("deleteConductorLocationModal");
+}: DeleteConductorTypeModalProps) {
+    const { t } = useTranslation("deleteConductorTypeModal");
     const utils = trpc.useUtils();
-    const deleteMutation = trpc.conductorLocations.delete.useMutation();
-    const handleConfirm = async () => {
-        // handle delete
-        const data = await deleteMutation.mutateAsync({
-            locationId: conductorLocationId,
-        });
-        await utils.conductorLocations.getAllByGeometryId.invalidate({
-            geometryId: data.geometryId,
-        });
-    };
+    const deleteMutation = trpc.conductorType.delete.useMutation({
+        onError: (error) => {
+            toast.error("Failed to delete conductor Type");
+            console.log(error);
+        },
+        onSuccess: async (data) => {
+            await utils.conductorType.getAll.invalidate();
+            toast.success(`${data.name} has been deleted`);
+        },
+    });
     return (
         <AlertDialog open defaultOpen onOpenChange={onClose}>
             <AlertDialogPortal>
@@ -59,7 +61,9 @@ export default function DeleteConductorModal({
                             className={buttonVariants({
                                 variant: "destructive",
                             })}
-                            onClick={() => handleConfirm()}
+                            onClick={() =>
+                                deleteMutation.mutate({ id: geometryId })
+                            }
                         >
                             {t("form:delete")}
                         </AlertDialogAction>

@@ -11,30 +11,26 @@ import {
     AlertDialogTitle,
     buttonVariants,
 } from "@repo/ui";
+import { ProjectID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
 
 import trpc from "@/utils/trpc";
 
-export interface DeleteConductorLocationModalProps {
-    conductorLocationId: number;
+export interface DeleteProjectModalProps {
+    projectId: ProjectID;
     onClose: () => void;
 }
 
-export default function DeleteConductorModal({
-    conductorLocationId,
+export default function DeleteProjectModal({
+    projectId,
     onClose,
-}: DeleteConductorLocationModalProps) {
-    const { t } = useTranslation("deleteConductorLocationModal");
+}: DeleteProjectModalProps) {
+    const { t } = useTranslation("deleteProjectModal");
     const utils = trpc.useUtils();
-    const deleteMutation = trpc.conductorLocations.delete.useMutation();
+    const deleteMutation = trpc.project.delete.useMutation();
     const handleConfirm = async () => {
-        // handle delete
-        const data = await deleteMutation.mutateAsync({
-            locationId: conductorLocationId,
-        });
-        await utils.conductorLocations.getAllByGeometryId.invalidate({
-            geometryId: data.geometryId,
-        });
+        await deleteMutation.mutateAsync({ id: projectId });
+        await utils.project.getAll.invalidate();
     };
     return (
         <AlertDialog open defaultOpen onOpenChange={onClose}>

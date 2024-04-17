@@ -5,9 +5,7 @@ import columns from "./columns";
 import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
-interface GeometriesTableProps {}
-
-const GeometriesTable: React.FC<GeometriesTableProps> = () => {
+export default function GeometriesTable() {
     const { t } = useTranslation("towerGeometry");
     const {
         data = [],
@@ -22,6 +20,4 @@ const GeometriesTable: React.FC<GeometriesTableProps> = () => {
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default GeometriesTable;
+}

@@ -3,19 +3,22 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
 
 import RowActions from "./RowActions";
-import { Project } from "./RowType";
+import { TowerGeometry } from "./RowType";
 
-const columnHelper = createColumnHelper<Project>();
+const columnHelper = createColumnHelper<TowerGeometry>();
 
-const columns = [
+export default [
     columnHelper.accessor("name", {
-        header: () => t("name.label", { ns: "projectTable" }),
-        cell: (props) => (
+        header: () => t("name.label", { ns: "towerGeometry" }),
+        cell: (info) => (
             <Link
-                to="/projects/$projectId"
-                params={{ projectId: props.row.original.id }}
+                draggable={false}
+                to="/tower-geometries/$geometryId"
+                params={{
+                    geometryId: info.row.original.id,
+                }}
             >
-                {props.getValue()}
+                {info.getValue()}
             </Link>
         ),
     }),
@@ -28,5 +31,3 @@ const columns = [
         cell: RowActions,
     }),
 ];
-
-export default columns;

@@ -21,22 +21,27 @@ import { Route as ConductorTypesIndexImport } from './routes/conductor-types/ind
 import { Route as TowerGeometriesNewImport } from './routes/tower-geometries/new'
 import { Route as ProjectsNewImport } from './routes/projects/new'
 import { Route as ConductorTypesNewImport } from './routes/conductor-types/new'
-import { Route as ConductorTypesTypeIdIndexImport } from './routes/conductor-types/$typeId/index'
 import { Route as TowerGeometriesGeometryIdLayoutImport } from './routes/tower-geometries/$geometryId/_layout'
 import { Route as ProjectsProjectIdViewProjectPageImport } from './routes/projects/$projectId/_viewProjectPage'
+import { Route as ConductorTypesTypeIdLayoutImport } from './routes/conductor-types/$typeId/_layout'
 import { Route as TowerGeometriesGeometryIdLayoutIndexImport } from './routes/tower-geometries/$geometryId/_layout/index'
 import { Route as ProjectsProjectIdViewProjectPageIndexImport } from './routes/projects/$projectId/_viewProjectPage/index'
+import { Route as ConductorTypesTypeIdLayoutIndexImport } from './routes/conductor-types/$typeId/_layout/index'
 import { Route as TowerGeometriesGeometryIdLayoutConductorsImport } from './routes/tower-geometries/$geometryId/_layout/conductors'
 import { Route as ProjectsProjectIdSourcesprojectCrumbImport } from './routes/projects/$projectId/sources_/_projectCrumb'
 import { Route as ProjectsProjectIdLinesprojectCrumbImport } from './routes/projects/$projectId/lines_/_projectCrumb'
 import { Route as ProjectsProjectIdViewProjectPageSourcesImport } from './routes/projects/$projectId/_viewProjectPage/sources'
 import { Route as ProjectsProjectIdViewProjectPageLinesImport } from './routes/projects/$projectId/_viewProjectPage/lines'
+import { Route as ConductorTypesTypeIdLayoutPropertiesImport } from './routes/conductor-types/$typeId/_layout/properties'
 import { Route as ProjectsProjectIdSourcesprojectCrumbNewImport } from './routes/projects/$projectId/sources_/_projectCrumb/new'
 import { Route as ProjectsProjectIdLinesprojectCrumbNewImport } from './routes/projects/$projectId/lines_/_projectCrumb/new'
-import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdIndexImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/index'
+import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine'
+import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/index'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/index'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/$towerId_/index'
+import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/sequence'
+import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/electrical'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/towers'
 import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/conductors'
 
@@ -46,11 +51,15 @@ const TowerGeometriesGeometryIdImport = createFileRoute(
   '/tower-geometries/$geometryId',
 )()
 const ProjectsProjectIdImport = createFileRoute('/projects/$projectId')()
+const ConductorTypesTypeIdImport = createFileRoute('/conductor-types/$typeId')()
 const ProjectsProjectIdSourcesImport = createFileRoute(
   '/projects/$projectId/sources',
 )()
 const ProjectsProjectIdLinesImport = createFileRoute(
   '/projects/$projectId/lines',
+)()
+const ProjectsProjectIdSourcesprojectCrumbSourceIdImport = createFileRoute(
+  '/projects/$projectId/sources/_projectCrumb/$sourceId',
 )()
 const ProjectsProjectIdLinesprojectCrumbLineIdImport = createFileRoute(
   '/projects/$projectId/lines/_projectCrumb/$lineId',
@@ -76,6 +85,11 @@ const TowerGeometriesGeometryIdRoute = TowerGeometriesGeometryIdImport.update({
 const ProjectsProjectIdRoute = ProjectsProjectIdImport.update({
   path: '/$projectId',
   getParentRoute: () => ProjectsRoute,
+} as any)
+
+const ConductorTypesTypeIdRoute = ConductorTypesTypeIdImport.update({
+  path: '/conductor-types/$typeId',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const TowerGeometriesIndexRoute = TowerGeometriesIndexImport.update({
@@ -118,11 +132,6 @@ const ProjectsProjectIdLinesRoute = ProjectsProjectIdLinesImport.update({
   getParentRoute: () => ProjectsProjectIdRoute,
 } as any)
 
-const ConductorTypesTypeIdIndexRoute = ConductorTypesTypeIdIndexImport.update({
-  path: '/conductor-types/$typeId/',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const TowerGeometriesGeometryIdLayoutRoute =
   TowerGeometriesGeometryIdLayoutImport.update({
     id: '/_layout',
@@ -135,6 +144,13 @@ const ProjectsProjectIdViewProjectPageRoute =
     getParentRoute: () => ProjectsProjectIdRoute,
   } as any)
 
+const ConductorTypesTypeIdLayoutRoute = ConductorTypesTypeIdLayoutImport.update(
+  {
+    id: '/_layout',
+    getParentRoute: () => ConductorTypesTypeIdRoute,
+  } as any,
+)
+
 const TowerGeometriesGeometryIdLayoutIndexRoute =
   TowerGeometriesGeometryIdLayoutIndexImport.update({
     path: '/',
@@ -145,6 +161,12 @@ const ProjectsProjectIdViewProjectPageIndexRoute =
   ProjectsProjectIdViewProjectPageIndexImport.update({
     path: '/',
     getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
+  } as any)
+
+const ConductorTypesTypeIdLayoutIndexRoute =
+  ConductorTypesTypeIdLayoutIndexImport.update({
+    path: '/',
+    getParentRoute: () => ConductorTypesTypeIdLayoutRoute,
   } as any)
 
 const TowerGeometriesGeometryIdLayoutConductorsRoute =
@@ -177,6 +199,18 @@ const ProjectsProjectIdViewProjectPageLinesRoute =
     getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
   } as any)
 
+const ConductorTypesTypeIdLayoutPropertiesRoute =
+  ConductorTypesTypeIdLayoutPropertiesImport.update({
+    path: '/properties',
+    getParentRoute: () => ConductorTypesTypeIdLayoutRoute,
+  } as any)
+
+const ProjectsProjectIdSourcesprojectCrumbSourceIdRoute =
+  ProjectsProjectIdSourcesprojectCrumbSourceIdImport.update({
+    path: '/$sourceId',
+    getParentRoute: () => ProjectsProjectIdSourcesprojectCrumbRoute,
+  } as any)
+
 const ProjectsProjectIdLinesprojectCrumbLineIdRoute =
   ProjectsProjectIdLinesprojectCrumbLineIdImport.update({
     path: '/$lineId',
@@ -195,16 +229,23 @@ const ProjectsProjectIdLinesprojectCrumbNewRoute =
     getParentRoute: () => ProjectsProjectIdLinesprojectCrumbRoute,
   } as any)
 
-const ProjectsProjectIdSourcesprojectCrumbSourceIdIndexRoute =
-  ProjectsProjectIdSourcesprojectCrumbSourceIdIndexImport.update({
-    path: '/$sourceId/',
-    getParentRoute: () => ProjectsProjectIdSourcesprojectCrumbRoute,
+const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute =
+  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport.update({
+    id: '/_viewSource',
+    getParentRoute: () => ProjectsProjectIdSourcesprojectCrumbSourceIdRoute,
   } as any)
 
 const ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute =
   ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport.update({
     id: '/_viewLine',
     getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdRoute,
+  } as any)
+
+const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute =
+  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport.update({
+    path: '/',
+    getParentRoute: () =>
+      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute,
   } as any)
 
 const ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute =
@@ -218,6 +259,22 @@ const ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute =
     path: '/$towerId/',
     getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdRoute,
   } as any)
+
+const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute =
+  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport.update({
+    path: '/sequence',
+    getParentRoute: () =>
+      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute,
+  } as any)
+
+const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute =
+  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport.update(
+    {
+      path: '/electrical',
+      getParentRoute: () =>
+        ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute,
+    } as any,
+  )
 
 const ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute =
   ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport.update({
@@ -267,6 +324,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TowerGeometriesIndexImport
       parentRoute: typeof rootRoute
     }
+    '/conductor-types/$typeId': {
+      preLoaderRoute: typeof ConductorTypesTypeIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/conductor-types/$typeId/_layout': {
+      preLoaderRoute: typeof ConductorTypesTypeIdLayoutImport
+      parentRoute: typeof ConductorTypesTypeIdRoute
+    }
     '/projects/$projectId': {
       preLoaderRoute: typeof ProjectsProjectIdImport
       parentRoute: typeof ProjectsImport
@@ -283,9 +348,9 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutImport
       parentRoute: typeof TowerGeometriesGeometryIdRoute
     }
-    '/conductor-types/$typeId/': {
-      preLoaderRoute: typeof ConductorTypesTypeIdIndexImport
-      parentRoute: typeof rootRoute
+    '/conductor-types/$typeId/_layout/properties': {
+      preLoaderRoute: typeof ConductorTypesTypeIdLayoutPropertiesImport
+      parentRoute: typeof ConductorTypesTypeIdLayoutImport
     }
     '/projects/$projectId/_viewProjectPage/lines': {
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageLinesImport
@@ -315,6 +380,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutConductorsImport
       parentRoute: typeof TowerGeometriesGeometryIdLayoutImport
     }
+    '/conductor-types/$typeId/_layout/': {
+      preLoaderRoute: typeof ConductorTypesTypeIdLayoutIndexImport
+      parentRoute: typeof ConductorTypesTypeIdLayoutImport
+    }
     '/projects/$projectId/_viewProjectPage/': {
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageIndexImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
@@ -339,9 +408,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdRoute
     }
-    '/projects/$projectId/sources/_projectCrumb/$sourceId/': {
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdIndexImport
+    '/projects/$projectId/sources/_projectCrumb/$sourceId': {
+      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
+    }
+    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource': {
+      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
+      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdRoute
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors': {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsImport
@@ -351,6 +424,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
     }
+    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical': {
+      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport
+      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
+    }
+    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence': {
+      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport
+      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
+    }
     '/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/': {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
@@ -358,6 +439,10 @@ declare module '@tanstack/react-router' {
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/': {
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
+    }
+    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/': {
+      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport
+      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
     }
   }
 }
@@ -391,7 +476,15 @@ export const routeTree = rootRoute.addChildren([
       ProjectsProjectIdSourcesRoute.addChildren([
         ProjectsProjectIdSourcesprojectCrumbRoute.addChildren([
           ProjectsProjectIdSourcesprojectCrumbNewRoute,
-          ProjectsProjectIdSourcesprojectCrumbSourceIdIndexRoute,
+          ProjectsProjectIdSourcesprojectCrumbSourceIdRoute.addChildren([
+            ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute.addChildren(
+              [
+                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute,
+                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute,
+                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute,
+              ],
+            ),
+          ]),
         ]),
       ]),
     ]),
@@ -400,13 +493,18 @@ export const routeTree = rootRoute.addChildren([
   TowerGeometriesNewRoute,
   ConductorTypesIndexRoute,
   TowerGeometriesIndexRoute,
+  ConductorTypesTypeIdRoute.addChildren([
+    ConductorTypesTypeIdLayoutRoute.addChildren([
+      ConductorTypesTypeIdLayoutPropertiesRoute,
+      ConductorTypesTypeIdLayoutIndexRoute,
+    ]),
+  ]),
   TowerGeometriesGeometryIdRoute.addChildren([
     TowerGeometriesGeometryIdLayoutRoute.addChildren([
       TowerGeometriesGeometryIdLayoutConductorsRoute,
       TowerGeometriesGeometryIdLayoutIndexRoute,
     ]),
   ]),
-  ConductorTypesTypeIdIndexRoute,
 ])
 
 /* prettier-ignore-end */

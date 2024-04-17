@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState } from "react";
 
 import { CurrentModal, currentModal } from "./current-modal";
 
-const ModalRenderer = () => {
+export default function ModalRenderer() {
     const [modal, updateCurrentModal] = useState<CurrentModal<any> | null>(
         null
     );
@@ -20,6 +20,4 @@ const ModalRenderer = () => {
     }
 
     return null;
-};
-
-export default ModalRenderer;
+}

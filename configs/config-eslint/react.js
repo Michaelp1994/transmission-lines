@@ -36,10 +36,10 @@ module.exports = {
         "react/prop-types": 0,
         "react/jsx-props-no-spreading": 0,
         "@typescript-eslint/no-use-before-define": 0,
-        "react/function-component-definition": [
-            2,
-            { namedComponents: "arrow-function" },
-        ],
+        // "react/function-component-definition": [
+        //     2,
+        //     { namedComponents: "arrow-declaration" },
+        // ],
     },
     ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js", "**/*.css"],
 };

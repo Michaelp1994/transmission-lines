@@ -1,5 +1,4 @@
 import { GeometryID } from "@repo/validators/schemas/Ids.schema";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
@@ -11,9 +10,9 @@ interface ConductorLocationTableProps {
     geometryId: GeometryID;
 }
 
-const ConductorLocationTable: React.FC<ConductorLocationTableProps> = ({
+export default function ConductorLocationTable({
     geometryId,
-}) => {
+}: ConductorLocationTableProps) {
     const { t } = useTranslation("towerGeometry");
     const {
         data = [],
@@ -28,6 +27,4 @@ const ConductorLocationTable: React.FC<ConductorLocationTableProps> = ({
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default ConductorLocationTable;
+}

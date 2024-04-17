@@ -44,4 +44,7 @@ export const TowerGeometryGeneral: React.FC<TowerGeometryGeneralProps> = () => {
 
 export const Route = createFileRoute("/tower-geometries/$geometryId/_layout/")({
     component: TowerGeometryGeneral,
+    beforeLoad: () => ({
+        text: "View Tower Geometry",
+    }),
 });

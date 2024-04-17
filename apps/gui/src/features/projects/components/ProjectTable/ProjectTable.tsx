@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -11,6 +12,7 @@ interface ProjectTableProps {}
 const ProjectTable: React.FC<ProjectTableProps> = () => {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.project.getAll.useQuery();
+
     if (error) {
         return <div>{t("general:errorMessage")}</div>;
     }

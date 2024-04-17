@@ -10,9 +10,7 @@ import {
 import { Link, useMatches } from "@tanstack/react-router";
 import React from "react";
 
-interface BreadcrumbsProps {}
-
-const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
+export default function Breadcrumbs() {
     const routes = useMatches();
     const filteredRoutes = routes.filter((route) => route.routeContext?.text);
     const crumbs = filteredRoutes.map((match) => ({
@@ -35,8 +33,8 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
                             );
                         }
                         return (
-                            <>
-                                <BreadcrumbItem key={index}>
+                            <React.Fragment key={index}>
+                                <BreadcrumbItem>
                                     <BreadcrumbLink asChild>
                                         <Link to={crumb.link}>
                                             {crumb.text}
@@ -44,16 +42,15 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = () => {
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator />
-                            </>
+                            </React.Fragment>
                         );
                     })}
                 </BreadcrumbList>
             </Breadcrumb>
         </Wrapper>
     );
-};
+}
 
 const Wrapper = styled.div`
     margin-bottom: 2rem;
 `;
-export default Breadcrumbs;

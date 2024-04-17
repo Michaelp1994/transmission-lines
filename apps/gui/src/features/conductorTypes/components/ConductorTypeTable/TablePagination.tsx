@@ -13,7 +13,7 @@ import {
     ChevronsRight,
 } from "lucide-react";
 
-import { ConductorType } from "./columns";
+import { ConductorType } from "./RowType";
 
 interface ConductorTypeTablePaginationProps {
     table: Table<ConductorType>;

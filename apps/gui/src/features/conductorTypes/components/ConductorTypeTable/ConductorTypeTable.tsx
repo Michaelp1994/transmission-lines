@@ -8,18 +8,18 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import useColumns, { ConductorType } from "./columns";
-import DataTable from "./DataTable";
+import columns from "./columns";
+import { ConductorType } from "./RowType";
 import TablePagination from "./TablePagination";
 import TableToolbar from "./TableToolbar";
 
+import DataTable from "@/components/DataTable";
 import trpc from "@/utils/trpc";
 
 interface ConductorTableProps {}
 
 const ConductorTable: React.FC<ConductorTableProps> = () => {
     const { t } = useTranslation("conductorType");
-    const columns = useColumns();
 
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
@@ -65,7 +65,7 @@ const ConductorTable: React.FC<ConductorTableProps> = () => {
     return (
         <ContentContainer>
             <TableToolbar table={table} />
-            <DataTable table={table} />
+            <DataTable data={data} columns={columns} />
             <TablePagination table={table} />
         </ContentContainer>
     );

@@ -15,9 +15,10 @@ export interface CreateConductorLocationModalProps {
     onClose: () => void;
 }
 
-const CreateConductorLocationModal: React.FC<
-    CreateConductorLocationModalProps
-> = ({ geometryId, onClose }) => {
+export default function CreateConductorLocationModal({
+    geometryId,
+    onClose,
+}: CreateConductorLocationModalProps) {
     const { t } = useTranslation("createConductorLocationModal");
 
     return (
@@ -36,6 +37,4 @@ const CreateConductorLocationModal: React.FC<
             </DialogContent>
         </Dialog>
     );
-};
-
-export default CreateConductorLocationModal;
+}

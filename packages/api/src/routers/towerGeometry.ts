@@ -34,29 +34,13 @@ export default router({
     create: publicProcedure
         .input(createTowerGeometrySchema)
         .mutation(async ({ input, ctx: { db } }) => {
-            const newTowerGeometry = await db.transaction(async (tx) => {
-                const [towerGeometry] = await tx
-                    .insert(towerGeometries)
-                    .values(input)
-                    .returning();
-                if (!towerGeometry) {
-                    await tx.rollback();
-                    throw Error("Failed to create a new Tower Geometry");
-                }
-                const newConductors: NewConductorLocation[] =
-                    input.conductors.map((conductor) => ({
-                        ...conductor,
-                        towerGeometryId: towerGeometry.id,
-                    }));
-                const newConductorLocations = await tx
-                    .insert(conductorLocations)
-                    .values(newConductors)
-                    .returning();
-                return {
-                    ...towerGeometry,
-                    conductors: newConductorLocations,
-                };
-            });
+            const [newTowerGeometry] = await db
+                .insert(towerGeometries)
+                .values(input)
+                .returning();
+            if (!newTowerGeometry) {
+                throw Error("Failed to create a new Tower Geometry");
+            }
 
             return newTowerGeometry;
         }),
@@ -75,14 +59,23 @@ export default router({
         }),
     delete: publicProcedure
         .input(deleteTowerGeometrySchema)
-        .mutation(async ({ input, ctx: { db } }) => {
-            const [deletedTowerGeometry] = await db
-                .delete(towerGeometries)
-                .where(eq(towerGeometries.id, input.id))
-                .returning();
-            if (!deletedTowerGeometry)
-                throw Error("Can't delete tower geometry");
+        .mutation(async ({ input, ctx: { db } }) =>
+            db.transaction((tx) => {
+                tx.delete(conductorLocations)
+                    .where(eq(conductorLocations.geometryId, input.id))
+                    .run();
+                const deletedTowerGeometry = tx
+                    .delete(towerGeometries)
+                    .where(eq(towerGeometries.id, input.id))
+                    .returning()
+                    .get();
+                if (!deletedTowerGeometry) {
+                    tx.rollback();
+                    throw Error("Can't delete tower geometry");
+                }
+                return deletedTowerGeometry;
 
-            return deletedTowerGeometry;
-        }),
+                // return deletedTowerGeometry;
+            })
+        ),
 });

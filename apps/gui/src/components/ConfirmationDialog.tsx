@@ -19,7 +19,7 @@ interface ConfirmDialogProps {
     onConfirm(): void;
 }
 
-const ConfirmationDialog: React.FC<ConfirmDialogProps> = ({ onConfirm }) => {
+export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
     const { t } = useTranslation("transmissionLine");
 
     return (
@@ -52,11 +52,9 @@ const ConfirmationDialog: React.FC<ConfirmDialogProps> = ({ onConfirm }) => {
             </AlertDialogContent>
         </AlertDialog>
     );
-};
+}
 
 const CloseIcon = styled(Trash2)`
     height: 24px;
     width: 24px;
 `;
-
-export default ConfirmationDialog;

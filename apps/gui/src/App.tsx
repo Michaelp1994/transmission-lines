@@ -20,7 +20,7 @@ declare module "@tanstack/react-router" {
     }
 }
 
-const App = () => {
+export default function App() {
     const [queryClient] = useState(() => new QueryClient());
     const [trpcClient] = useState(() =>
         trpc.createClient({
@@ -39,6 +39,4 @@ const App = () => {
             </QueryClientProvider>
         </trpc.Provider>
     );
-};
-
-export default App;
+}

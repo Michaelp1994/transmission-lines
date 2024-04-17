@@ -9,45 +9,43 @@ import {
     DropdownMenuTrigger,
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
-import { MoreHorizontal, Pencil } from "lucide-react";
+import { CellContext } from "@tanstack/react-table";
 
-interface ConductorTypeTableActionsProps {
-    row: any;
-}
+import { ConductorType } from "./RowType";
 
-const ConductorTypeTableActions: React.FC<ConductorTypeTableActionsProps> = ({
+import { DeleteIcon, MenuIcon, ViewIcon } from "@/components/MenuIcons";
+
+export default function ConductorTypeTableActions({
     row,
-}) => (
-    <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-            <Button
-                variant="ghost"
-                className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-            >
-                <MoreHorizontal className="h-4 w-4" />
-                <span className="sr-only">Open menu</span>
-            </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-                <Link
-                    to="/conductor-types/$typeId"
-                    params={{ typeId: row.original.id }}
+}: CellContext<ConductorType, unknown>) {
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button
+                    variant="ghost"
+                    className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
                 >
-                    <EditIcon />
-                    Edit
-                </Link>
-            </DropdownMenuItem>
-        </DropdownMenuContent>
-    </DropdownMenu>
-);
-
-const EditIcon = styled(Pencil)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
-
-export default ConductorTypeTableActions;
+                    <MenuIcon />
+                    <span className="sr-only">Open menu</span>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-[160px]">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                    <Link
+                        to="/conductor-types/$typeId"
+                        params={{ typeId: row.original.id }}
+                    >
+                        <ViewIcon />
+                        View
+                    </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <DeleteIcon />
+                    Delete
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+}

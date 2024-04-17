@@ -17,7 +17,6 @@ import {
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -28,9 +27,9 @@ interface UpdateTowerGeometryFormProps {
     data: UpdateTowerGeometryInput;
 }
 
-const UpdateTowerGeometryForm: React.FC<UpdateTowerGeometryFormProps> = ({
+export default function UpdateTowerGeometryForm({
     data,
-}) => {
+}: UpdateTowerGeometryFormProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("towerGeometry");
 
@@ -80,9 +79,7 @@ const UpdateTowerGeometryForm: React.FC<UpdateTowerGeometryFormProps> = ({
             </StyledForm>
         </Form>
     );
-};
-
-export default UpdateTowerGeometryForm;
+}
 
 const StyledForm = styled.form``;
 const ButtonsContainer = styled.div`
