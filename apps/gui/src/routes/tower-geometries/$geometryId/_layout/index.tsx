@@ -9,8 +9,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { UpdateTowerGeometryForm } from "@/features/towerGeometries";
-import trpc from "@/utils/trpc";
+import { UpdateTowerGeometryForm } from "~/features/towerGeometries";
+import trpc from "~/utils/trpc";
 
 interface TowerGeometryGeneralProps {}
 

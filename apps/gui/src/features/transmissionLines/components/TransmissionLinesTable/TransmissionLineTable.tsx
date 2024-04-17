@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
 
-import DataTable from "@/components/DataTable";
-import trpc from "@/utils/trpc";
+import DataTable from "~/components/DataTable";
+import trpc from "~/utils/trpc";
 
 interface TransmissionLineTableProps {
     projectId: ProjectID;

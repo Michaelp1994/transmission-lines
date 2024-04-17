@@ -1,6 +1,6 @@
 import { createRootRouteWithContext } from "@tanstack/react-router";
 
-import DefaultLayout from "@/layouts/DefaultLayout";
+import DefaultLayout from "~/layouts/DefaultLayout";
 
 export interface RouterContext {
     text?: string;

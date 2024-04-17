@@ -9,7 +9,7 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 
-import { CreateProjectForm } from "@/features/projects";
+import { CreateProjectForm } from "~/features/projects";
 
 interface CreateProjectPageProps {}
 

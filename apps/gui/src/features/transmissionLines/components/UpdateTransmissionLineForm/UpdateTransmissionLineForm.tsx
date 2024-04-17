@@ -22,8 +22,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import { SourceSelect } from "@/features/sources";
-import trpc from "@/utils/trpc";
+import { SourceSelect } from "~/features/sources";
+import trpc from "~/utils/trpc";
 
 interface UpdateTransmissionLineFormProps {
     data: UpdateTransmissionLineInput;

@@ -8,8 +8,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UpdateSourceElectricalForm } from "@/features/sources";
-import trpc from "@/utils/trpc";
+import { UpdateSourceElectricalForm } from "~/features/sources";
+import trpc from "~/utils/trpc";
 
 export const ViewSourcePage = () => {
     const { sourceId } = Route.useParams();

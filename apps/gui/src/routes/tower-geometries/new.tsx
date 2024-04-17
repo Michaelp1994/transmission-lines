@@ -9,7 +9,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { CreateTowerGeometryForm } from "@/features/towerGeometries";
+import { CreateTowerGeometryForm } from "~/features/towerGeometries";
 
 interface CreateTowerGeometryPageProps {}
 

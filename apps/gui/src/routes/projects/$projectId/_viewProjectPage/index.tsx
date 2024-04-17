@@ -8,8 +8,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UpdateProjectForm } from "@/features/projects";
-import trpc from "@/utils/trpc";
+import { UpdateProjectForm } from "~/features/projects";
+import trpc from "~/utils/trpc";
 
 interface ProjectGeneralProps {}
 

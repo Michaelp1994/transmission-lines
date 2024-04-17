@@ -12,7 +12,7 @@ import {
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { TowerGeometriesTable } from "@/features/towerGeometries";
+import { TowerGeometriesTable } from "~/features/towerGeometries";
 
 interface AllTowerGeometriesPageProps {}
 

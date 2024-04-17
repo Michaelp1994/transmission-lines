@@ -12,7 +12,7 @@ import { CellContext } from "@tanstack/react-table";
 
 import { TransmissionLine } from "./RowType";
 
-import { DeleteIcon, EditIcon, MenuIcon } from "@/components/MenuIcons";
+import { DeleteIcon, EditIcon, MenuIcon } from "~/components/MenuIcons";
 
 export default function ConductorTableRowActions({
     row,

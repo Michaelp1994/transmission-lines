@@ -27,8 +27,8 @@ import { LineID } from "@repo/validators/schemas/Ids.schema";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { TowerGeometrySelect } from "@/features/towerGeometries";
-import trpc from "@/utils/trpc";
+import { TowerGeometrySelect } from "~/features/towerGeometries";
+import trpc from "~/utils/trpc";
 
 export interface CreateTowerModalProps {
     lineId: LineID;

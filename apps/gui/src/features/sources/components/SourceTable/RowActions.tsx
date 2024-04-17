@@ -12,7 +12,7 @@ import { CellContext } from "@tanstack/react-table";
 
 import { Source } from "./RowType";
 
-import { DeleteIcon, MenuIcon, ViewIcon } from "@/components/MenuIcons";
+import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
 
 export default function SourceTableRowActions({
     row,

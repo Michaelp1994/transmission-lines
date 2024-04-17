@@ -8,7 +8,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { CreateConductorTypeForm } from "@/features/conductorTypes";
+import { CreateConductorTypeForm } from "~/features/conductorTypes";
 
 interface CreateConductorTypePageProps {}
 

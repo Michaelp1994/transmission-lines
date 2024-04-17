@@ -16,11 +16,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Modals } from "@/components/modals/config";
-import useModal from "@/components/modals/use-modal";
-import { ConductorTable } from "@/features/conductors";
-import { CreateConductorModalProps } from "@/features/conductors/components/CreateConductorModal/CreateConductorModal";
-import { GenerateConductorsModalProps } from "@/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
+import { Modals } from "~/components/modals/config";
+import useModal from "~/components/modals/use-modal";
+import { ConductorTable } from "~/features/conductors";
+import { CreateConductorModalProps } from "~/features/conductors/components/CreateConductorModal/CreateConductorModal";
+import { GenerateConductorsModalProps } from "~/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
 
 interface TransmissionLineConductorsProps {}
 

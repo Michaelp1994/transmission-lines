@@ -14,7 +14,7 @@ import {
 import { LineID, TowerID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 export interface DeleteTowerModalProps {
     towerId: TowerID;

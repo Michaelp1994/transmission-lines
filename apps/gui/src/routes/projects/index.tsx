@@ -11,8 +11,8 @@ import {
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
-import { ProjectTable } from "@/features/projects";
-import trpc from "@/utils/trpc";
+import { ProjectTable } from "~/features/projects";
+import trpc from "~/utils/trpc";
 
 interface AllProjectsPageProps {}
 

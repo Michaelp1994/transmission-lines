@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 import UpdateConductorLocationForm from "./UpdateConductorLocationForm";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 export interface UpdateConductorLocationModalProps {
     conductorLocationId: number;

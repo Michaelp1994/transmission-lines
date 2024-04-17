@@ -1,7 +1,7 @@
 import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 interface ViewProjectPageProps {}
 

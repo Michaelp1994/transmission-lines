@@ -13,8 +13,8 @@ import { ConductorType } from "./RowType";
 import TablePagination from "./TablePagination";
 import TableToolbar from "./TableToolbar";
 
-import DataTable from "@/components/DataTable";
-import trpc from "@/utils/trpc";
+import DataTable from "~/components/DataTable";
+import trpc from "~/utils/trpc";
 
 interface ConductorTableProps {}
 

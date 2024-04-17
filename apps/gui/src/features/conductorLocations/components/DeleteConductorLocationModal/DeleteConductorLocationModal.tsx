@@ -13,7 +13,7 @@ import {
 } from "@repo/ui";
 import { useTranslation } from "react-i18next";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 export interface DeleteConductorLocationModalProps {
     conductorLocationId: number;

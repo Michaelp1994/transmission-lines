@@ -8,8 +8,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import MatrixTable from "@/components/MatrixTable";
-import trpc from "@/utils/trpc";
+import MatrixTable from "~/components/MatrixTable";
+import trpc from "~/utils/trpc";
 
 export const ViewSourcePage = () => {
     const { sourceId } = Route.useParams();

@@ -15,7 +15,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 interface SourceSelectProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement> {

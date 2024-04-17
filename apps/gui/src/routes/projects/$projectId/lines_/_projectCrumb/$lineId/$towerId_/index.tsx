@@ -12,8 +12,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardCopy } from "lucide-react";
 import React from "react";
 
-import MatrixTable from "@/components/MatrixTable/MatrixTable";
-import trpc from "@/utils/trpc";
+import MatrixTable from "~/components/MatrixTable/MatrixTable";
+import trpc from "~/utils/trpc";
 
 interface LineParametersPageProps {}
 

@@ -9,8 +9,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
 
-import { UpdateTransmissionLineForm } from "@/features/transmissionLines";
-import trpc from "@/utils/trpc";
+import { UpdateTransmissionLineForm } from "~/features/transmissionLines";
+import trpc from "~/utils/trpc";
 
 interface TransmissionLineGeneralProps {}
 

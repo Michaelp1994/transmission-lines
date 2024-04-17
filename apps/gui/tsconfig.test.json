@@ -6,7 +6,7 @@
         "baseUrl": "./",
         "outDir": "dist/test",
         "paths": {
-            "@/*": ["./src/*"]
+            "~/*": ["./src/*"]
         }
     },
     "references": [

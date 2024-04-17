@@ -20,9 +20,9 @@ import {
     EditIcon,
     MenuIcon,
     ViewIcon,
-} from "@/components/MenuIcons";
-import { Modals } from "@/components/modals/config";
-import useModal from "@/components/modals/use-modal";
+} from "~/components/MenuIcons";
+import { Modals } from "~/components/modals/config";
+import useModal from "~/components/modals/use-modal";
 
 export default function RowActions({
     row,

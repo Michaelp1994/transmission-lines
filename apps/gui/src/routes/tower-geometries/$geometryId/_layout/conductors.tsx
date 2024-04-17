@@ -13,10 +13,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Modals } from "@/components/modals/config";
-import useModal from "@/components/modals/use-modal";
-import { ConductorLocationTable } from "@/features/conductorLocations";
-import { CreateConductorLocationModalProps } from "@/features/conductorLocations/components/CreateConductorLocationModal/CreateConductorLocationModal";
+import { Modals } from "~/components/modals/config";
+import useModal from "~/components/modals/use-modal";
+import { ConductorLocationTable } from "~/features/conductorLocations";
+import { CreateConductorLocationModalProps } from "~/features/conductorLocations/components/CreateConductorLocationModal/CreateConductorLocationModal";
 
 interface TowerGeometryConductorsProps {}
 

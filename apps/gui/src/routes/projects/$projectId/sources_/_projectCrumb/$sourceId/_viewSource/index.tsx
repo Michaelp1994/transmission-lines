@@ -8,8 +8,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UpdateSourceForm } from "@/features/sources";
-import trpc from "@/utils/trpc";
+import { UpdateSourceForm } from "~/features/sources";
+import trpc from "~/utils/trpc";
 
 interface ViewSourcePageProps {}
 

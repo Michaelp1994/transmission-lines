@@ -19,7 +19,7 @@ import { t } from "i18next";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 interface Props {
     data: UpdateConductorLocationInput;

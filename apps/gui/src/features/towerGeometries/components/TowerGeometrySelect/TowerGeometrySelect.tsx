@@ -16,7 +16,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 interface TowerGeometrySelectProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement> {}

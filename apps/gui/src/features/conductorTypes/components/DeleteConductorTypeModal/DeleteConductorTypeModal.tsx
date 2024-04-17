@@ -11,19 +11,19 @@ import {
     AlertDialogTitle,
     buttonVariants,
 } from "@repo/ui";
-import { GeometryID } from "@repo/validators/schemas/Ids.schema";
+import { ConductorTypeID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 export interface DeleteConductorTypeModalProps {
-    geometryId: GeometryID;
+    typeId: ConductorTypeID;
     onClose: () => void;
 }
 
 export default function DeleteConductorTypeModal({
-    geometryId,
+    typeId,
     onClose,
 }: DeleteConductorTypeModalProps) {
     const { t } = useTranslation("deleteConductorTypeModal");
@@ -62,7 +62,7 @@ export default function DeleteConductorTypeModal({
                                 variant: "destructive",
                             })}
                             onClick={() =>
-                                deleteMutation.mutate({ id: geometryId })
+                                deleteMutation.mutate({ id: typeId })
                             }
                         >
                             {t("form:delete")}

@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
-import trpc from "@/utils/trpc";
+import trpc from "~/utils/trpc";
 
 interface UpdateProjectFormProps {
     data: UpdateTowerGeometryInput;

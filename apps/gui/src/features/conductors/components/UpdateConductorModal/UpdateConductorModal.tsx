@@ -26,8 +26,8 @@ import { ConductorID, LineID } from "@repo/validators/schemas/Ids.schema";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { ConductorTypeSelect } from "@/features/conductorTypes";
-import trpc from "@/utils/trpc";
+import { ConductorTypeSelect } from "~/features/conductorTypes";
+import trpc from "~/utils/trpc";
 
 export interface UpdateConductorModalProps {
     conductorId: ConductorID;

@@ -14,9 +14,9 @@ import { CellContext } from "@tanstack/react-table";
 import { Project } from "./RowType";
 import { DeleteProjectModalProps } from "../DeleteProjectModal/DeleteProjectModal";
 
-import { DeleteIcon, MenuIcon, ViewIcon } from "@/components/MenuIcons";
-import { Modals } from "@/components/modals/config";
-import useModal from "@/components/modals/use-modal";
+import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
+import { Modals } from "~/components/modals/config";
+import useModal from "~/components/modals/use-modal";
 
 export default function RowActions({ row }: CellContext<Project, unknown>) {
     const deleteModal = useModal<DeleteProjectModalProps>(
