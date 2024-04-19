@@ -18,10 +18,10 @@ export interface UpdateConductorLocationModalProps {
     onClose: () => void;
 }
 
-const UpdateConductorModal: React.FC<UpdateConductorLocationModalProps> = ({
+export default function UpdateConductorLocationModal({
     conductorLocationId,
     onClose,
-}) => {
+}: UpdateConductorLocationModalProps) {
     const { t } = useTranslation("updateConductorModal");
     const { data, error, isLoading, isError } =
         trpc.conductorLocations.getById.useQuery({
@@ -54,6 +54,4 @@ const UpdateConductorModal: React.FC<UpdateConductorLocationModalProps> = ({
             </DialogPortal>
         </Dialog>
     );
-};
-
-export default UpdateConductorModal;
+}

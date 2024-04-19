@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Card,
     CardContent,
@@ -11,34 +10,26 @@ import { useTranslation } from "react-i18next";
 
 import { CreateTowerGeometryForm } from "~/features/towerGeometries";
 
-interface CreateTowerGeometryPageProps {}
-
-export const CreateTowerGeometryPage: React.FC<
-    CreateTowerGeometryPageProps
-> = () => {
-    const { t } = useTranslation("towerGeometry");
-
-    return (
-        <Wrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>{t("add.title")}</CardTitle>
-                    </CardHeaderText>
-                </CardHeader>
-                <CardContent>
-                    <CreateTowerGeometryForm />
-                </CardContent>
-            </Card>
-        </Wrapper>
-    );
-};
-
-const Wrapper = styled.div``;
-
 export const Route = createFileRoute("/tower-geometries/new")({
     component: CreateTowerGeometryPage,
     beforeLoad: () => ({
         text: "New Tower Geometry",
     }),
 });
+
+export default function CreateTowerGeometryPage() {
+    const { t } = useTranslation("towerGeometry");
+
+    return (
+        <Card>
+            <CardHeader>
+                <CardHeaderText>
+                    <CardTitle>{t("add.title")}</CardTitle>
+                </CardHeaderText>
+            </CardHeader>
+            <CardContent>
+                <CreateTowerGeometryForm />
+            </CardContent>
+        </Card>
+    );
+}

@@ -1,7 +1,16 @@
 import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const ViewTransmissionLinePage: React.FC = () => {
+export const Route = createFileRoute(
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
+)({
+    component: ViewTransmissionLinePage,
+    beforeLoad: () => ({
+        text: "Transmission Line",
+    }),
+});
+
+export default function ViewTransmissionLinePage() {
     const { projectId, lineId } = Route.useParams();
 
     return (
@@ -35,7 +44,7 @@ export const ViewTransmissionLinePage: React.FC = () => {
             </Grid>
         </Wrapper>
     );
-};
+}
 const Wrapper = styled.div`
     margin-left: 2rem;
     margin-right: 2rem;
@@ -62,12 +71,3 @@ const Grid = styled.div`
     /* max-width: 72rem; */
     grid-template-columns: 180px 1fr;
 `;
-
-export const Route = createFileRoute(
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
-)({
-    component: ViewTransmissionLinePage,
-    beforeLoad: () => ({
-        text: "Transmission Line",
-    }),
-});

@@ -26,26 +26,16 @@ export default function CreateSourcePage() {
     const { projectId } = Route.useParams();
 
     return (
-        <PageWrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>{t("add.title")}</CardTitle>
-                        <CardDescription>
-                            {t("add.description")}
-                        </CardDescription>
-                    </CardHeaderText>
-                </CardHeader>
-                <CardContent>
-                    <CreateSourceForm projectId={projectId} />
-                </CardContent>
-            </Card>
-        </PageWrapper>
+        <Card>
+            <CardHeader>
+                <CardHeaderText>
+                    <CardTitle>{t("add.title")}</CardTitle>
+                    <CardDescription>{t("add.description")}</CardDescription>
+                </CardHeaderText>
+            </CardHeader>
+            <CardContent>
+                <CreateSourceForm projectId={projectId} />
+            </CardContent>
+        </Card>
     );
 }
-
-const PageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;

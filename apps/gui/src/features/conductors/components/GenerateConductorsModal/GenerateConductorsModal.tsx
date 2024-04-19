@@ -34,10 +34,10 @@ export interface GenerateConductorsModalProps {
     onClose: () => void;
 }
 
-const GenerateConductorsModal: React.FC<GenerateConductorsModalProps> = ({
+export default function GenerateConductorsModal({
     lineId,
     onClose,
-}) => {
+}: GenerateConductorsModalProps) {
     const { t } = useTranslation("generateConductors");
     const utils = trpc.useUtils();
 
@@ -161,9 +161,7 @@ const GenerateConductorsModal: React.FC<GenerateConductorsModalProps> = ({
             </DialogContent>
         </Dialog>
     );
-};
-
-export default GenerateConductorsModal;
+}
 
 const StyledForm = styled.form`
     display: flex;

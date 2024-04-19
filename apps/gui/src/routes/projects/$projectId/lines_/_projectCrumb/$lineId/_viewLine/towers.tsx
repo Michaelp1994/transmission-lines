@@ -13,7 +13,6 @@ import {
     TooltipTrigger,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { Modals } from "~/components/modals/config";
@@ -22,11 +21,13 @@ import { TowerTable } from "~/features/towers";
 import { CreateTowerModalProps } from "~/features/towers/components/CreateTowerModal/CreateTowerModal";
 import { GenerateTowersModalProps } from "~/features/towers/components/GenerateTowersModal/GenerateTowersModal";
 
-interface TransmissionLineTowersProps {}
+export const Route = createFileRoute(
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers"
+)({
+    component: TransmissionLineTowers,
+});
 
-export const TransmissionLineTowers: React.FC<
-    TransmissionLineTowersProps
-> = () => {
+export default function TransmissionLineTowers() {
     const { lineId } = Route.useParams();
     const createModal = useModal<CreateTowerModalProps>(
         Modals.CreateTowerModal
@@ -87,10 +88,4 @@ export const TransmissionLineTowers: React.FC<
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute(
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers"
-)({
-    component: TransmissionLineTowers,
-});
+}

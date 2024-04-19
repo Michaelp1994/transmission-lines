@@ -16,17 +16,19 @@ import {
     updateConductorLocationSchema,
 } from "@repo/validators";
 import { t } from "i18next";
-import React from "react";
 import { useForm } from "react-hook-form";
 
 import trpc from "~/utils/trpc";
 
-interface Props {
+interface UpdateConductorLocationFormProps {
     data: UpdateConductorLocationInput;
     onSubmit: () => void;
 }
 
-const UpdateConductorLocationForm: React.FC<Props> = ({ data, onSubmit }) => {
+export default function UpdateConductorLocationForm({
+    data,
+    onSubmit,
+}: UpdateConductorLocationFormProps) {
     const updateMutation = trpc.conductorLocations.update.useMutation();
     const utils = trpc.useUtils();
 
@@ -83,11 +85,10 @@ const UpdateConductorLocationForm: React.FC<Props> = ({ data, onSubmit }) => {
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 `;
-export default UpdateConductorLocationForm;

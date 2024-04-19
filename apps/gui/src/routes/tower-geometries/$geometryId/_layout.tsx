@@ -1,7 +1,14 @@
 import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
-export const ViewTowerGeometryPage: React.FC = () => {
+export const Route = createFileRoute("/tower-geometries/$geometryId/_layout")({
+    component: ViewTowerGeometryPage,
+    beforeLoad: () => ({
+        text: "View Tower Geometry",
+    }),
+});
+
+export default function ViewTowerGeometryPage() {
     const { geometryId } = Route.useParams();
 
     return (
@@ -29,7 +36,7 @@ export const ViewTowerGeometryPage: React.FC = () => {
             </Grid>
         </Wrapper>
     );
-};
+}
 const Wrapper = styled.div`
     margin-left: 2rem;
     margin-right: 2rem;
@@ -54,10 +61,3 @@ const Grid = styled.div`
     align-items: flex-start;
     grid-template-columns: 180px 1fr;
 `;
-
-export const Route = createFileRoute("/tower-geometries/$geometryId/_layout")({
-    component: ViewTowerGeometryPage,
-    beforeLoad: () => ({
-        text: "View Tower Geometry",
-    }),
-});

@@ -35,11 +35,11 @@ export interface UpdateConductorModalProps {
     onClose: () => void;
 }
 
-const UpdateConductorModal: React.FC<UpdateConductorModalProps> = ({
+export default function UpdateConductorModal({
     conductorId,
     lineId,
     onClose,
-}) => {
+}: UpdateConductorModalProps) {
     const { t } = useTranslation("updateConductorModal");
     const utils = trpc.useUtils();
     const { data, error, isLoading } = trpc.conductor.getById.useQuery({
@@ -223,9 +223,7 @@ const UpdateConductorModal: React.FC<UpdateConductorModalProps> = ({
             </DialogPortal>
         </Dialog>
     );
-};
-
-export default UpdateConductorModal;
+}
 
 const StyledForm = styled.form`
     display: flex;

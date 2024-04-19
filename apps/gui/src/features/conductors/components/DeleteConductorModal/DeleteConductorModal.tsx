@@ -22,20 +22,20 @@ export interface DeleteConductorModalProps {
     onClose: () => void;
 }
 
-const DeleteConductorModal: React.FC<DeleteConductorModalProps> = ({
+export default function DeleteConductorModal({
     conductorId,
     lineId,
     onClose,
-}) => {
+}: DeleteConductorModalProps) {
     const { t } = useTranslation("transmissionLine");
     const utils = trpc.useUtils();
     const deleteMutation = trpc.conductor.delete.useMutation();
-    const handleConfirm = async () => {
+    async function handleConfirm() {
         await deleteMutation.mutateAsync({ id: conductorId });
         await utils.conductor.getAllByLineId.invalidate({
             lineId,
         });
-    };
+    }
     return (
         <AlertDialog open defaultOpen onOpenChange={onClose}>
             <AlertDialogPortal>
@@ -68,6 +68,4 @@ const DeleteConductorModal: React.FC<DeleteConductorModalProps> = ({
             </AlertDialogPortal>
         </AlertDialog>
     );
-};
-
-export default DeleteConductorModal;
+}

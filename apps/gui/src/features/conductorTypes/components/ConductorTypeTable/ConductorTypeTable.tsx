@@ -16,9 +16,7 @@ import TableToolbar from "./TableToolbar";
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
-interface ConductorTableProps {}
-
-const ConductorTable: React.FC<ConductorTableProps> = () => {
+export default function ConductorTypeTable() {
     const { t } = useTranslation("conductorType");
 
     const [pagination, setPagination] = useState<PaginationState>({
@@ -63,17 +61,15 @@ const ConductorTable: React.FC<ConductorTableProps> = () => {
     }
 
     return (
-        <ContentContainer>
+        <Wrapper>
             <TableToolbar table={table} />
             <DataTable data={data} columns={columns} />
             <TablePagination table={table} />
-        </ContentContainer>
+        </Wrapper>
     );
-};
+}
 
-export default ConductorTable;
-
-const ContentContainer = styled.div`
+const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;

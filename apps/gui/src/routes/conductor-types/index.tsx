@@ -13,11 +13,14 @@ import { useTranslation } from "react-i18next";
 
 import { ConductorTypeTable } from "~/features/conductorTypes";
 
-interface AllConductorTypesPageProps {}
+export const Route = createFileRoute("/conductor-types/")({
+    component: AllConductorTypesPage,
+    beforeLoad: () => ({
+        text: "Conductor Types",
+    }),
+});
 
-export const AllConductorTypesPage: React.FC<
-    AllConductorTypesPageProps
-> = () => {
+export default function AllConductorTypesPage() {
     const { t } = useTranslation("conductors");
 
     return (
@@ -42,11 +45,4 @@ export const AllConductorTypesPage: React.FC<
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute("/conductor-types/")({
-    component: AllConductorTypesPage,
-    beforeLoad: () => ({
-        text: "Conductor Types",
-    }),
-});
+}

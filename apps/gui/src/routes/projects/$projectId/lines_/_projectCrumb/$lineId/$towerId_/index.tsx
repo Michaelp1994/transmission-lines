@@ -10,19 +10,25 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardCopy } from "lucide-react";
-import React from "react";
 
 import MatrixTable from "~/components/MatrixTable/MatrixTable";
 import trpc from "~/utils/trpc";
-
-interface LineParametersPageProps {}
 
 function copyToClipboard(matrix: number[][]) {
     const matrixString = matrix.map((row) => row.join("\t")).join("\n");
     navigator.clipboard.writeText(matrixString);
 }
 
-export const LineParametersPage: React.FC<LineParametersPageProps> = () => {
+export const Route = createFileRoute(
+    "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/"
+)({
+    component: LineParametersPage,
+    beforeLoad: () => ({
+        text: "Line Parameter Page",
+    }),
+});
+
+export default function LineParametersPage() {
     const { towerId } = Route.useParams();
     const { data, isLoading, isError, error } =
         trpc.tower.getParameters.useQuery({ towerId });
@@ -93,30 +99,10 @@ export const LineParametersPage: React.FC<LineParametersPageProps> = () => {
             </Card>
         </Wrapper>
     );
-};
+}
 
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
 `;
-
-const ClipboardCopyButton = ({ data }) => (
-    <Button
-        size="icon"
-        variant="secondary"
-        type="button"
-        onClick={() => copyToClipboard(data.rMatrix)}
-    >
-        <ClipboardCopy />
-    </Button>
-);
-
-export const Route = createFileRoute(
-    "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/"
-)({
-    component: LineParametersPage,
-    beforeLoad: () => ({
-        text: "Line Parameter Page",
-    }),
-});

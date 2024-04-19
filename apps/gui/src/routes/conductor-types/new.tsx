@@ -10,11 +10,14 @@ import { useTranslation } from "react-i18next";
 
 import { CreateConductorTypeForm } from "~/features/conductorTypes";
 
-interface CreateConductorTypePageProps {}
+export const Route = createFileRoute("/conductor-types/new")({
+    component: CreateConductorTypePage,
+    beforeLoad: () => ({
+        text: "New Conductor Type",
+    }),
+});
 
-export const CreateConductorTypePage: React.FC<
-    CreateConductorTypePageProps
-> = () => {
+export default function CreateConductorTypePage() {
     const { t } = useTranslation("conductorType");
 
     return (
@@ -29,11 +32,4 @@ export const CreateConductorTypePage: React.FC<
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute("/conductor-types/new")({
-    component: CreateConductorTypePage,
-    beforeLoad: () => ({
-        text: "New Conductor Type",
-    }),
-});
+}

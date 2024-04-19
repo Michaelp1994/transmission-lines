@@ -7,16 +7,17 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-import React from "react";
 
 import { UpdateTransmissionLineForm } from "~/features/transmissionLines";
 import trpc from "~/utils/trpc";
 
-interface TransmissionLineGeneralProps {}
+export const Route = createFileRoute(
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/"
+)({
+    component: TransmissionLineGeneral,
+});
 
-export const TransmissionLineGeneral: React.FC<
-    TransmissionLineGeneralProps
-> = () => {
+export default function TransmissionLineGeneral() {
     const { lineId } = Route.useParams();
 
     const { data, isLoading, isError } = trpc.transmissionLine.getById.useQuery(
@@ -47,10 +48,4 @@ export const TransmissionLineGeneral: React.FC<
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute(
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/"
-)({
-    component: TransmissionLineGeneral,
-});
+}

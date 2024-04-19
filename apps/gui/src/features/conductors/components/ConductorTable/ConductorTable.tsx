@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
@@ -10,7 +9,7 @@ interface ConductorTableProps {
     lineId: string;
 }
 
-const ConductorTable: React.FC<ConductorTableProps> = ({ lineId }) => {
+export default function ConductorTable({ lineId }: ConductorTableProps) {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.conductor.getAllByLineId.useQuery({
         lineId,
@@ -22,6 +21,4 @@ const ConductorTable: React.FC<ConductorTableProps> = ({ lineId }) => {
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default ConductorTable;
+}

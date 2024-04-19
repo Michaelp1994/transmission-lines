@@ -11,7 +11,16 @@ import { useTranslation } from "react-i18next";
 import MatrixTable from "~/components/MatrixTable";
 import trpc from "~/utils/trpc";
 
-export const ViewSourcePage = () => {
+export const Route = createFileRoute(
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence"
+)({
+    component: ViewSourcePage,
+    beforeLoad: () => ({
+        text: "View Source",
+    }),
+});
+
+export default function ViewSourcePage() {
     const { sourceId } = Route.useParams();
     const { t } = useTranslation("source");
 
@@ -57,13 +66,4 @@ export const ViewSourcePage = () => {
             </Card>
         </>
     );
-};
-
-export const Route = createFileRoute(
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence"
-)({
-    component: ViewSourcePage,
-    beforeLoad: () => ({
-        text: "View Source",
-    }),
-});
+}

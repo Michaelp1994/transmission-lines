@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Card,
     CardContent,
@@ -12,11 +11,14 @@ import { useTranslation } from "react-i18next";
 import { UpdateConductorTypeForm } from "~/features/conductorTypes";
 import trpc from "~/utils/trpc";
 
-interface UpdateConductorTypePageProps {}
+export const Route = createFileRoute("/conductor-types/$typeId/_layout/")({
+    component: UpdateConductorTypePage,
+    beforeLoad: () => ({
+        text: "UpdateConductorTypePage",
+    }),
+});
 
-export const UpdateConductorTypePage: React.FC<
-    UpdateConductorTypePageProps
-> = () => {
+export default function UpdateConductorTypePage() {
     const { typeId } = Route.useParams();
     const { t } = useTranslation("conductorType");
 
@@ -31,26 +33,15 @@ export const UpdateConductorTypePage: React.FC<
         return <div>{t("general:errorMessage")}</div>;
     }
     return (
-        <Wrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>{t("edit.title")}</CardTitle>
-                    </CardHeaderText>
-                </CardHeader>
-                <CardContent>
-                    <UpdateConductorTypeForm data={data} />
-                </CardContent>
-            </Card>
-        </Wrapper>
+        <Card>
+            <CardHeader>
+                <CardHeaderText>
+                    <CardTitle>{t("edit.title")}</CardTitle>
+                </CardHeaderText>
+            </CardHeader>
+            <CardContent>
+                <UpdateConductorTypeForm data={data} />
+            </CardContent>
+        </Card>
     );
-};
-
-const Wrapper = styled.div``;
-
-export const Route = createFileRoute("/conductor-types/$typeId/_layout/")({
-    component: UpdateConductorTypePage,
-    beforeLoad: () => ({
-        text: "UpdateConductorTypePage",
-    }),
-});
+}

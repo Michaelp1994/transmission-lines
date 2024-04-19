@@ -9,7 +9,6 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
     Form,
     FormControl,
     FormDescription,
@@ -37,10 +36,10 @@ export interface CreateConductorModalProps {
     onClose: () => void;
 }
 
-const CreateConductorModal: React.FC<CreateConductorModalProps> = ({
+export default function CreateConductorModal({
     lineId,
     onClose,
-}) => {
+}: CreateConductorModalProps) {
     const { t } = useTranslation("addConductorModal");
     const utils = trpc.useUtils();
     const createConductorMutation = trpc.conductor.create.useMutation({});
@@ -206,9 +205,7 @@ const CreateConductorModal: React.FC<CreateConductorModalProps> = ({
             </DialogContent>
         </Dialog>
     );
-};
-
-export default CreateConductorModal;
+}
 
 const StyledForm = styled.form`
     display: flex;
