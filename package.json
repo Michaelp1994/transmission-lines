@@ -13,6 +13,7 @@
     "scripts": {
         "build": "turbo run build",
         "clean": "turbo run clean && rm -rf .turbo node_modules dist",
+        "db:push": "turbo run db:push",
         "dev": "turbo run dev",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "lint": "turbo run lint",
@@ -27,7 +28,6 @@
         "prettier": "^3.2.5",
         "turbo": "^1.13.2"
     },
-    "packageManager": "pnpm@8.15.3+sha256.fc4a49bd609550a41e14d20efbce802a4b892aa4cac877322de2f0924f122991",
     "engines": {
         "node": ">=18"
     }

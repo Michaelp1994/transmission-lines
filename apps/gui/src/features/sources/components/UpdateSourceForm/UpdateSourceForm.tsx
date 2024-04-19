@@ -10,13 +10,11 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    NumberInput,
 } from "@repo/ui";
 import { UpdateSourceInput, updateSourceSchema } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { t } from "i18next";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -26,7 +24,7 @@ interface UpdateSourceFormProps {
     data: UpdateSourceInput;
 }
 
-const UpdateSourceForm: React.FC<UpdateSourceFormProps> = ({ data }) => {
+export default function UpdateSourceForm({ data }: UpdateSourceFormProps) {
     const navigate = useNavigate();
     const updateSourceMutation = trpc.source.update.useMutation();
     const form = useForm<UpdateSourceInput>({
@@ -81,7 +79,7 @@ const UpdateSourceForm: React.FC<UpdateSourceFormProps> = ({ data }) => {
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
@@ -93,5 +91,3 @@ const ButtonsWrapper = styled.div`
     gap: 12px;
     justify-content: flex-end;
 `;
-
-export default UpdateSourceForm;

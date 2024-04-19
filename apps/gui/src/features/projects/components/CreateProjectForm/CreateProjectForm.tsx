@@ -16,80 +16,56 @@ import {
     createProjectSchema,
     defaultProject,
 } from "@repo/validators/schemas/Project.schema";
-import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
-import trpc from "~/utils/trpc";
+interface CreateProjectFormProps {
+    onSubmit: (values: CreateProjectInput) => Promise<void>;
+}
 
-interface Props {}
-
-const CreateProjectForm: React.FC<Props> = () => {
-    const { t } = useTranslation("source");
-    const navigate = useNavigate();
-
-    const createSourceMutation = trpc.project.create.useMutation({
-        onSuccess(data, values) {
-            toast.success(`${values.name} has been created`, {
-                description: format(new Date(), "PPPPpp"),
-            });
-        },
-        onError() {
-            toast.error(`There is an error!`, {
-                description: format(new Date(), "PPPPpp"),
-            });
-        },
-    });
+export default function CreateProjectForm({
+    onSubmit,
+}: CreateProjectFormProps) {
+    const { t } = useTranslation("createProjectForm");
 
     const form = useForm<CreateProjectInput>({
         resolver: zodResolver(createProjectSchema),
         defaultValues: defaultProject,
     });
 
-    async function onSubmit(values: CreateProjectInput) {
-        await createSourceMutation.mutateAsync(values);
-        navigate(ViewProjectPage.to);
-    }
     return (
-        <Wrapper>
-            <Form {...form}>
-                <StyledForm
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    onReset={() => form.reset()}
-                >
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Name</FormLabel>
-                                <FormControl>
-                                    <Input type="text" {...field} />
-                                </FormControl>
-                                <FormDescription>
-                                    Name of the project
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+        <Form {...form}>
+            <StyledForm
+                onSubmit={form.handleSubmit((values) => onSubmit(values))}
+                onReset={() => form.reset()}
+            >
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                                <Input type="text" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                Name of the project
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
-                    <ButtonsWrapper>
-                        <Button variant="destructive" type="reset">
-                            {t("form:reset")}
-                        </Button>
-                        <Button type="submit">{t("form:submit")}</Button>
-                    </ButtonsWrapper>
-                </StyledForm>
-            </Form>
-        </Wrapper>
+                <ButtonsWrapper>
+                    <Button variant="destructive" type="reset">
+                        {t("form:reset")}
+                    </Button>
+                    <Button type="submit">{t("form:submit")}</Button>
+                </ButtonsWrapper>
+            </StyledForm>
+        </Form>
     );
-};
-
-const Wrapper = styled.div``;
+}
 
 const StyledForm = styled.form`
     display: flex;
@@ -102,4 +78,3 @@ const ButtonsWrapper = styled.div`
     gap: 1rem;
     justify-content: flex-end;
 `;
-export default CreateProjectForm;

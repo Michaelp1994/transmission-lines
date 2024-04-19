@@ -12,14 +12,17 @@ import {
     TooltipTrigger,
 } from "@repo/ui";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import { TransmissionLineTable } from "~/features/transmissionLines";
 
-interface ProjectSourcesProps {}
+export const Route = createFileRoute(
+    "/projects/$projectId/_viewProjectPage/lines"
+)({
+    component: ProjectSources,
+});
 
-export const ProjectSources: React.FC<ProjectSourcesProps> = () => {
+export default function ProjectSources() {
     const { projectId } = Route.useParams();
     const { t } = useTranslation("transmissionLines");
 
@@ -54,10 +57,4 @@ export const ProjectSources: React.FC<ProjectSourcesProps> = () => {
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute(
-    "/projects/$projectId/_viewProjectPage/lines"
-)({
-    component: ProjectSources,
-});
+}

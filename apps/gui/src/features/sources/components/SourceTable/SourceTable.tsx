@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
@@ -10,7 +9,7 @@ interface SourceTableProps {
     projectId: string;
 }
 
-const SourceTable: React.FC<SourceTableProps> = ({ projectId }) => {
+export default function SourceTable({ projectId }: SourceTableProps) {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.source.getAllByProjectId.useQuery({
         projectId,
@@ -22,6 +21,4 @@ const SourceTable: React.FC<SourceTableProps> = ({ projectId }) => {
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default SourceTable;
+}

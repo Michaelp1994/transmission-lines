@@ -59,6 +59,14 @@ export default router({
                 },
             });
             if (!tower) throw Error("Can't find transmission tower");
+            if (
+                tower.geometry.conductors.length !==
+                tower.transmissionLine.conductors.length
+            ) {
+                throw Error(
+                    "Tower Geometry and Transmission Line have different number of conductors"
+                );
+            }
             const matrixes = buildTransmissionLineMatrix(
                 tower.geometry,
                 tower.transmissionLine.conductors

@@ -2,6 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
 import {
     Button,
+    Checkbox,
     Form,
     FormControl,
     FormDescription,
@@ -10,54 +11,37 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    NumberInput,
 } from "@repo/ui";
-import {
-    CreateSourceInput,
-    createSourceSchema,
-    defaultSource,
-} from "@repo/validators";
-import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
-import React from "react";
-import { useForm } from "react-hook-form";
+import { defaultSource } from "@repo/validators";
+import { FieldErrors, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
-import trpc from "~/utils/trpc";
+import { CreateSourceFormInput, formSchema } from "./FormSchema";
 
 interface CreateSourceFormProps {
-    projectId: string;
+    onValid: (values: CreateSourceFormInput) => void;
+    onInvalid: (errors: FieldErrors<CreateSourceFormInput>) => void;
 }
 
-const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
-    const { t } = useTranslation("source");
-    const navigate = useNavigate();
+export default function CreateSourceForm({
+    onValid,
+    onInvalid,
+}: CreateSourceFormProps) {
+    const { t } = useTranslation("createSourceForm");
 
-    const createSourceMutation = trpc.source.create.useMutation();
-
-    const form = useForm<CreateSourceInput>({
-        resolver: zodResolver(createSourceSchema),
-        // defaultValues: defaultSource,
-        values: {
-            ...defaultSource,
-            projectId,
-        },
+    const form = useForm<CreateSourceFormInput>({
+        resolver: zodResolver(formSchema),
+        values: defaultSource,
     });
 
-    async function onSubmit(values: CreateSourceInput) {
-        await createSourceMutation.mutateAsync(values);
-        toast.success(`${values.name} has been added to the project.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
-        navigate({ to: "/projects/$projectId", params: { projectId } });
-    }
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
+
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
-            >
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="name"
@@ -80,15 +64,55 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                 />
                 <FormField
                     control={form.control}
+                    name="enabled"
+                    render={({ field }) => (
+                        <FormItem>
+                            <CheckboxWrapper>
+                                <FormControl>
+                                    <Checkbox
+                                        checked={field.value}
+                                        onCheckedChange={field.onChange}
+                                    />
+                                </FormControl>
+                                <CheckboxText>
+                                    <FormLabel>{t("enabled.label")}</FormLabel>
+                                    <FormDescription>
+                                        {t("enabled.description")}
+                                    </FormDescription>
+                                </CheckboxText>
+
+                                <FormMessage />
+                            </CheckboxWrapper>
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
                     name="phases"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>{t("phases.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("phases.description")}
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="frequency"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{t("frequency.label")}</FormLabel>
+                            <FormControl>
+                                <Input type="number" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                {t("frequency.description")}
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -101,7 +125,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                         <FormItem>
                             <FormLabel>{t("voltage.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("voltage.description")}
@@ -117,7 +141,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                         <FormItem>
                             <FormLabel>{t("x1r1.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("x1r1.description")}
@@ -133,7 +157,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                         <FormItem>
                             <FormLabel>{t("x0r0.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("x0r0.description")}
@@ -149,7 +173,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                         <FormItem>
                             <FormLabel>{t("isc3.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("isc3.description")}
@@ -165,7 +189,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                         <FormItem>
                             <FormLabel>{t("isc1.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("isc1.description")}
@@ -181,7 +205,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
                         <FormItem>
                             <FormLabel>{t("resistance.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("resistance.description")}
@@ -200,7 +224,7 @@ const CreateSourceForm: React.FC<CreateSourceFormProps> = ({ projectId }) => {
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
@@ -213,4 +237,19 @@ const ButtonsWrapper = styled.div`
     justify-content: flex-end;
 `;
 
-export default CreateSourceForm;
+const CheckboxWrapper = styled.div`
+    display: flex;
+    padding: 1rem;
+    margin-top: 0.25rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 0.375rem;
+    border-width: 1px;
+`;
+
+const CheckboxText = styled.div`
+    /* margin-top: 0.25rem; */
+    margin-left: 0.75rem;
+    line-height: 1;
+`;

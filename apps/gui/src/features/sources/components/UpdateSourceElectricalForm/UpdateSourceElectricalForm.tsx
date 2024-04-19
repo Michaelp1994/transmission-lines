@@ -15,7 +15,6 @@ import { UpdateSourceInput, updateSourceSchema } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
 import { t } from "i18next";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -25,9 +24,9 @@ interface UpdateSourceElectricalFormProps {
     data: UpdateSourceInput;
 }
 
-const UpdateSourceElectricalForm: React.FC<UpdateSourceElectricalFormProps> = ({
+export default function UpdateSourceElectricalForm({
     data,
-}) => {
+}: UpdateSourceElectricalFormProps) {
     const navigate = useNavigate();
     const updateSourceMutation = trpc.source.update.useMutation();
     const form = useForm<UpdateSourceInput>({
@@ -174,7 +173,7 @@ const UpdateSourceElectricalForm: React.FC<UpdateSourceElectricalFormProps> = ({
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
@@ -186,5 +185,3 @@ const ButtonsWrapper = styled.div`
     gap: 12px;
     justify-content: flex-end;
 `;
-
-export default UpdateSourceElectricalForm;

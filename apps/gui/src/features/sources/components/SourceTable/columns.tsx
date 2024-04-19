@@ -8,8 +8,11 @@ import { Source } from "./RowType";
 const columnHelper = createColumnHelper<Source>();
 
 export default [
+    columnHelper.accessor("enabled", {
+        header: () => t("enabled.label", { ns: "sourceTable" }),
+    }),
     columnHelper.accessor("name", {
-        header: () => t("name.label", { ns: "conductorConfiguration" }),
+        header: () => t("name.label", { ns: "sourceTable" }),
         cell: (info) => (
             <Link
                 to="/projects/$projectId/sources/$sourceId"
@@ -23,28 +26,22 @@ export default [
         ),
     }),
     columnHelper.accessor("x1r1", {
-        header: () => "X1R1",
-        cell: (info) => info.renderValue(),
+        header: () => "X1/R1",
     }),
     columnHelper.accessor("x0r0", {
-        header: () => "X0R0",
-        cell: (info) => info.renderValue(),
+        header: () => "X0/R0",
     }),
     columnHelper.accessor("resistance", {
         header: "Resistance",
-        cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("frequency", {
         header: "Frequency",
-        cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("isc1", {
-        header: "ISC1",
-        cell: (info) => info.renderValue(),
+        header: "Short Circuit 1-Phase Current",
     }),
     columnHelper.accessor("isc3", {
-        header: "ISC3",
-        cell: (info) => info.renderValue(),
+        header: "Short Circuit 3-Phase Current",
     }),
     columnHelper.display({
         id: "id",

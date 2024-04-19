@@ -19,6 +19,7 @@ export const sources = sqliteTable("sources", {
     isc1: integer("isc1").notNull(),
     resistance: integer("resistance").notNull(),
     frequency: integer("frequency").notNull(),
+    enabled: integer("id", { mode: "boolean" }).notNull(),
     projectId: text("project_id")
         .references(() => projects.id)
         .notNull(),

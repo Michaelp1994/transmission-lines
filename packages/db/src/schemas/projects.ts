@@ -11,7 +11,7 @@ export const projects = sqliteTable("projects", {
     id: text("id")
         .primaryKey()
         .$defaultFn(() => uuidv4()),
-    name: text("name").notNull(),
+    name: text("name").notNull().unique(),
 });
 
 export type Project = typeof projects.$inferSelect;

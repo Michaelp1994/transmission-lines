@@ -11,9 +11,16 @@ import { useTranslation } from "react-i18next";
 import { UpdateSourceForm } from "~/features/sources";
 import trpc from "~/utils/trpc";
 
-interface ViewSourcePageProps {}
+export const Route = createFileRoute(
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
+)({
+    component: ViewSourcePage,
+    beforeLoad: () => ({
+        text: "View Source",
+    }),
+});
 
-export const ViewSourcePage: React.FC<ViewSourcePageProps> = () => {
+export default function ViewSourcePage() {
     const { sourceId } = Route.useParams();
     const { t } = useTranslation("source");
     const { data, isLoading, error } = trpc.source.getById.useQuery({
@@ -38,13 +45,4 @@ export const ViewSourcePage: React.FC<ViewSourcePageProps> = () => {
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute(
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
-)({
-    component: ViewSourcePage,
-    beforeLoad: () => ({
-        text: "View Source",
-    }),
-});
+}

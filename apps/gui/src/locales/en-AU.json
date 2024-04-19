@@ -8,7 +8,7 @@
     "update": "Update",
     "create": "Create"
   },
-  "source": {
+  "createSourceForm": {
     "add": {
       "description": "Add a source to the project",
       "title": "Add a source",
@@ -55,6 +55,13 @@
     "title": "Sources",
     "edit": {
       "title": "Edit Source"
+    },
+    "frequency": {
+      "label": "Frequency"
+    },
+    "enabled": {
+      "label": "Enabled",
+      "description": "Uncheck to disable the source from affecting the circuit."
     }
   },
   "transmissionLine": {

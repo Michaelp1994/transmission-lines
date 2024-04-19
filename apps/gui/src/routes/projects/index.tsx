@@ -14,9 +14,11 @@ import { toast } from "sonner";
 import { ProjectTable } from "~/features/projects";
 import trpc from "~/utils/trpc";
 
-interface AllProjectsPageProps {}
+export const Route = createFileRoute("/projects/")({
+    component: AllProjectsPage,
+});
 
-export const AllProjectsPage: React.FC<AllProjectsPageProps> = () => {
+export default function AllProjectsPage() {
     const navigate = useNavigate();
     const openProjectMutation = trpc.project.import.useMutation();
 
@@ -55,8 +57,4 @@ export const AllProjectsPage: React.FC<AllProjectsPageProps> = () => {
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute("/projects/")({
-    component: AllProjectsPage,
-});
+}

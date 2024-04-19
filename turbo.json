@@ -17,6 +17,7 @@
             "outputs": ["coverage/**"],
             "dependsOn": []
         },
+        "db:push": {},
         "lint": {},
         "lint:fix": {},
         "typecheck": {},

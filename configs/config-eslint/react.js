@@ -30,12 +30,13 @@ module.exports = {
     },
     rules: {
         ...importRules,
-        "no-console": "off",
+        "no-console": 0,
         "i18next/no-literal-string": 0,
         "react/require-default-props": 0,
         "react/prop-types": 0,
         "react/jsx-props-no-spreading": 0,
         "@typescript-eslint/no-use-before-define": 0,
+        "react/jsx-no-bind": 0,
         // "react/function-component-definition": [
         //     2,
         //     { namedComponents: "arrow-declaration" },

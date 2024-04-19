@@ -1,4 +1,4 @@
-import CreateSourceForm from "./components/CreateSourceForm/CreateSourceForm";
+import CreateSourceForm from "./components/CreateSourceForm";
 import SourceSelect from "./components/SourceSelect";
 import SourceTable from "./components/SourceTable";
 import UpdateSourceElectricalForm from "./components/UpdateSourceElectricalForm";

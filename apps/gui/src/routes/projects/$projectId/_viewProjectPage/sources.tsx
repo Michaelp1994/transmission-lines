@@ -17,9 +17,13 @@ import { useTranslation } from "react-i18next";
 
 import { SourceTable } from "~/features/sources";
 
-interface ProjectSourcesProps {}
+export const Route = createFileRoute(
+    "/projects/$projectId/_viewProjectPage/sources"
+)({
+    component: ProjectSources,
+});
 
-export const ProjectSources: React.FC<ProjectSourcesProps> = () => {
+export default function ProjectSources() {
     const { projectId } = Route.useParams();
     const { t } = useTranslation("viewProject");
 
@@ -54,10 +58,4 @@ export const ProjectSources: React.FC<ProjectSourcesProps> = () => {
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute(
-    "/projects/$projectId/_viewProjectPage/sources"
-)({
-    component: ProjectSources,
-});
+}

@@ -41,12 +41,12 @@
         "@types/supertest": "^6.0.2",
         "better-sqlite3": "^9.5.0",
         "concurrently": "^8.2.2",
-        "electron": "^29.3.0",
+        "electron": "^30.0.0",
         "eslint": "^8.57.0",
         "supertest": "^6.3.4",
         "typeorm": "^0.3.20",
         "typescript": "^5.4.5",
-        "vite": "^5.2.8",
+        "vite": "^5.2.9",
         "vite-tsconfig-paths": "^4.3.2",
         "vitest": "^1.5.0"
     }

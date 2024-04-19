@@ -12,10 +12,17 @@ import { useTranslation } from "react-i18next";
 
 import { CreateSourceForm } from "~/features/sources";
 
-interface CreateSourcePageProps {}
+export const Route = createFileRoute(
+    "/projects/$projectId/sources/_projectCrumb/new"
+)({
+    component: CreateSourcePage,
+    beforeLoad: () => ({
+        text: "New Source",
+    }),
+});
 
-export const CreateSourcePage: React.FC<CreateSourcePageProps> = () => {
-    const { t } = useTranslation("source");
+export default function CreateSourcePage() {
+    const { t } = useTranslation("createSourceForm");
     const { projectId } = Route.useParams();
 
     return (
@@ -35,19 +42,10 @@ export const CreateSourcePage: React.FC<CreateSourcePageProps> = () => {
             </Card>
         </PageWrapper>
     );
-};
+}
 
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
 `;
-
-export const Route = createFileRoute(
-    "/projects/$projectId/sources/_projectCrumb/new"
-)({
-    component: CreateSourcePage,
-    beforeLoad: () => ({
-        text: "New Source",
-    }),
-});

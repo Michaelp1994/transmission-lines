@@ -1,5 +1,11 @@
 {
     "include": ["src", "src/**/*.json"],
+    "exclude": [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.test.js",
+        "src/**/*.test.jsx"
+    ],
     "extends": "@repo/typescript-config/vite.json",
     "compilerOptions": {
         "composite": true,

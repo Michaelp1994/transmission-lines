@@ -11,9 +11,11 @@ import { useTranslation } from "react-i18next";
 import { UpdateProjectForm } from "~/features/projects";
 import trpc from "~/utils/trpc";
 
-interface ProjectGeneralProps {}
+export const Route = createFileRoute("/projects/$projectId/_viewProjectPage/")({
+    component: ProjectGeneral,
+});
 
-export const ProjectGeneral: React.FC<ProjectGeneralProps> = () => {
+export default function ProjectGeneral() {
     const { t } = useTranslation("projects");
     const { projectId } = Route.useParams();
     const { data, error, isLoading } = trpc.project.getById.useQuery({
@@ -39,8 +41,4 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = () => {
             </CardContent>
         </Card>
     );
-};
-
-export const Route = createFileRoute("/projects/$projectId/_viewProjectPage/")({
-    component: ProjectGeneral,
-});
+}

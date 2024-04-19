@@ -11,10 +11,15 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { CreateProjectForm } from "~/features/projects";
 
-interface CreateProjectPageProps {}
+export const Route = createFileRoute("/projects/new")({
+    component: CreateProjectPage,
+    beforeLoad: () => ({
+        text: "New Project",
+    }),
+});
 
-export const CreateProjectPage: React.FC<CreateProjectPageProps> = () => (
-    <PageWrapper>
+export default function CreateProjectPage() {
+    return (
         <Card>
             <CardHeader>
                 <CardHeaderText>
@@ -26,18 +31,5 @@ export const CreateProjectPage: React.FC<CreateProjectPageProps> = () => (
                 <CreateProjectForm />
             </CardContent>
         </Card>
-    </PageWrapper>
-);
-
-const PageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;
-
-export const Route = createFileRoute("/projects/new")({
-    component: CreateProjectPage,
-    beforeLoad: () => ({
-        text: "New Project",
-    }),
-});
+    );
+}

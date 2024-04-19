@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 
-import { eq } from "@repo/db/drizzle";
+import { SqliteError, eq } from "@repo/db/drizzle";
 import { projects } from "@repo/db/schemas/projects";
 import {
     createProjectSchema,
@@ -12,6 +12,8 @@ import {
     solveProjectSchema,
     updateProjectSchema,
 } from "@repo/validators/schemas/Project.schema";
+import { TRPCError } from "@trpc/server";
+import { ZodError, ZodIssueCode } from "zod";
 
 import { publicProcedure, router } from "../trpc";
 
@@ -41,13 +43,41 @@ export default router({
     create: publicProcedure
         .input(createProjectSchema)
         .mutation(async ({ input, ctx: { db } }) => {
-            const [newProject] = await db
-                .insert(projects)
-                .values(input)
-                .returning();
-            if (!newProject) throw Error("Can't create project");
-
-            return newProject;
+            try {
+                const [newProject] = await db
+                    .insert(projects)
+                    .values(input)
+                    .returning();
+                if (!newProject)
+                    throw new TRPCError({
+                        code: "INTERNAL_SERVER_ERROR",
+                        message: "Can't create project",
+                    });
+                return newProject;
+            } catch (e) {
+                if (
+                    e instanceof SqliteError &&
+                    e.code === "SQLITE_CONSTRAINT_UNIQUE"
+                ) {
+                    throw new TRPCError({
+                        code: "BAD_REQUEST",
+                        message: "Can't create project",
+                        cause: new ZodError([
+                            {
+                                path: ["name"],
+                                code: ZodIssueCode.custom,
+                                message:
+                                    "This name has already been used in another project.",
+                            },
+                        ]),
+                    });
+                } else {
+                    throw new TRPCError({
+                        code: "INTERNAL_SERVER_ERROR",
+                        message: "Can't create project",
+                    });
+                }
+            }
         }),
     update: publicProcedure
         .input(updateProjectSchema)

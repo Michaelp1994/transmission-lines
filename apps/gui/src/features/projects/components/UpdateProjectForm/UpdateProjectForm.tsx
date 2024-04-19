@@ -17,7 +17,6 @@ import {
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -28,9 +27,9 @@ interface UpdateProjectFormProps {
     data: UpdateTowerGeometryInput;
 }
 
-const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ data }) => {
+export default function UpdateProjectForm({ data }: UpdateProjectFormProps) {
     const navigate = useNavigate();
-    const { t } = useTranslation("projects");
+    const { t } = useTranslation("updateProjectForm");
 
     const updateMutation = trpc.project.update.useMutation();
     const form = useForm<UpdateTowerGeometryInput>({
@@ -77,7 +76,7 @@ const UpdateProjectForm: React.FC<UpdateProjectFormProps> = ({ data }) => {
             </Form>
         </Wrapper>
     );
-};
+}
 const Wrapper = styled.div``;
 
 const StyledForm = styled.form``;
@@ -86,5 +85,3 @@ const ButtonsContainer = styled.div`
     gap: 1rem;
     justify-content: flex-end;
 `;
-
-export default UpdateProjectForm;

@@ -1,3 +1,3 @@
-import CreateProjectForm from "./CreateProjectForm";
+import CreateProjectForm from "./FormHandler";
 
 export default CreateProjectForm;

@@ -1,10 +1,17 @@
 {
-    "include": ["tests"],
+    "include": [
+        "tests",
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.test.js",
+        "src/**/*.test.jsx"
+    ],
     "extends": "@repo/typescript-config/vite.json",
     "compilerOptions": {
         "composite": true,
         "baseUrl": "./",
         "outDir": "dist/test",
+        "types": ["@testing-library/jest-dom"],
         "paths": {
             "~/*": ["./src/*"]
         }

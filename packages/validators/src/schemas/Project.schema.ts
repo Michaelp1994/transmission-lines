@@ -1,16 +1,11 @@
 import * as z from "zod";
 
 import { projectId } from "./Ids.schema";
-import { createSourceSchema, updateSourceSchema } from "./Source.schema";
-import {
-    createTransmissionLineSchema,
-    updateTransmissionLineSchema,
-} from "./TransmissionLine.schema";
+import { updateSourceSchema } from "./Source.schema";
+import { updateTransmissionLineSchema } from "./TransmissionLine.schema";
 
 export const createProjectSchema = z.object({
-    name: z.string(),
-    sources: createSourceSchema.array().optional(),
-    transmissionLines: createTransmissionLineSchema.array().optional(),
+    name: z.string().min(3).max(100),
 });
 
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;

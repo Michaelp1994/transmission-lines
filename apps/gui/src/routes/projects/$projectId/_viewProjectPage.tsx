@@ -3,13 +3,18 @@ import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
 import trpc from "~/utils/trpc";
 
-interface ViewProjectPageProps {}
+export const Route = createFileRoute("/projects/$projectId/_viewProjectPage")({
+    component: ViewProjectPage,
+    beforeLoad: () => ({
+        text: "View Project",
+    }),
+});
 
-export const ViewProjectPage: React.FC<ViewProjectPageProps> = () => {
+export default function ViewProjectPage() {
     const { projectId } = Route.useParams();
-    const exportProjectMutation = trpc.project.export.useMutation();
+    const exportMutation = trpc.project.export.useMutation();
     async function exportProject() {
-        await exportProjectMutation.mutateAsync({ id: projectId });
+        await exportMutation.mutateAsync({ id: projectId });
     }
     return (
         <Wrapper>
@@ -36,6 +41,12 @@ export const ViewProjectPage: React.FC<ViewProjectPageProps> = () => {
                     >
                         Transmission Lines
                     </StyledLink>
+                    <StyledLink
+                        to="/projects/$projectId/results"
+                        params={{ projectId }}
+                    >
+                        Results
+                    </StyledLink>
                 </nav>
                 <div className="grid gap-4">
                     <Outlet />
@@ -43,7 +54,7 @@ export const ViewProjectPage: React.FC<ViewProjectPageProps> = () => {
             </Grid>
         </Wrapper>
     );
-};
+}
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -69,10 +80,3 @@ const Grid = styled.div`
     align-items: flex-start;
     grid-template-columns: 180px 1fr;
 `;
-
-export const Route = createFileRoute("/projects/$projectId/_viewProjectPage")({
-    component: ViewProjectPage,
-    beforeLoad: () => ({
-        text: "View Project",
-    }),
-});
