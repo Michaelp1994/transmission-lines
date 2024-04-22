@@ -11,10 +11,11 @@ import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 
 import { TowerGeometry } from "./RowType";
-import useModal from "~/components/modals/use-modal";
-import { Modals } from "~/components/modals/config";
 import { DeleteTowerGeometryModalProps } from "../DeleteTowerGeometryModal/DeleteTowerGeometryModal";
+
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
+import { Modals } from "~/components/modals/config";
+import useModal from "~/components/modals/use-modal";
 
 export default function RowActions({
     row,

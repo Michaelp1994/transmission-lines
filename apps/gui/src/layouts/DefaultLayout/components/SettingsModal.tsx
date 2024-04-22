@@ -13,9 +13,7 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-interface SettingsModalProps {}
-
-const SettingsModal: React.FC<SettingsModalProps> = () => {
+export default function SettingsModal() {
     const { t } = useTranslation("generateConductors");
     const [open, setOpen] = useState(false);
 
@@ -41,6 +39,4 @@ const SettingsModal: React.FC<SettingsModalProps> = () => {
             </DialogContent>
         </Dialog>
     );
-};
-
-export default SettingsModal;
+}

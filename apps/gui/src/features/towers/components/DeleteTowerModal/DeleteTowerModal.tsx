@@ -22,11 +22,11 @@ export interface DeleteTowerModalProps {
     onClose: () => void;
 }
 
-const DeleteTowerModal: React.FC<DeleteTowerModalProps> = ({
+export default function DeleteTowerModal({
     towerId,
     lineId,
     onClose,
-}) => {
+}: DeleteTowerModalProps) {
     const { t } = useTranslation("deleteTowerModal");
     const utils = trpc.useUtils();
     const deleteMutation = trpc.tower.delete.useMutation();
@@ -69,6 +69,4 @@ const DeleteTowerModal: React.FC<DeleteTowerModalProps> = ({
             </AlertDialogPortal>
         </AlertDialog>
     );
-};
-
-export default DeleteTowerModal;
+}

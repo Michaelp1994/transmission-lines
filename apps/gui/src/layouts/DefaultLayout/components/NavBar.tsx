@@ -10,9 +10,7 @@ import { useTranslation } from "react-i18next";
 
 import UserButton from "./UserButton";
 
-interface NavBarProps {}
-
-const NavBar: React.FC<NavBarProps> = () => {
+export default function NavBar() {
     const { t, i18n } = useTranslation("general");
     function changeLanguage(checked: boolean) {
         if (checked) {
@@ -63,7 +61,7 @@ const NavBar: React.FC<NavBarProps> = () => {
             </RightSide>
         </Wrapper>
     );
-};
+}
 
 const Wrapper = styled.nav`
     display: flex;
@@ -79,5 +77,3 @@ const RightSide = styled.div`
     align-items: center;
     gap: 12px;
 `;
-
-export default NavBar;

@@ -35,10 +35,10 @@ export interface CreateTowerModalProps {
     onClose: () => void;
 }
 
-const CreateTowerModal: React.FC<CreateTowerModalProps> = ({
+export default function CreateTowerModal({
     lineId,
     onClose,
-}) => {
+}: CreateTowerModalProps) {
     const { t } = useTranslation("addTowerModal");
     const utils = trpc.useUtils();
     const form = useForm<CreateTransmissionTowerInput>({
@@ -145,9 +145,7 @@ const CreateTowerModal: React.FC<CreateTowerModalProps> = ({
             </DialogContent>
         </Dialog>
     );
-};
-
-export default CreateTowerModal;
+}
 
 const StyledForm = styled.form`
     display: flex;

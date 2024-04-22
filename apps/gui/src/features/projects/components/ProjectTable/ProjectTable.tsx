@@ -1,5 +1,3 @@
-import { useNavigate } from "@tanstack/react-router";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
@@ -7,9 +5,7 @@ import columns from "./columns";
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
-interface ProjectTableProps {}
-
-const ProjectTable: React.FC<ProjectTableProps> = () => {
+export default function ProjectTable() {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.project.getAll.useQuery();
 
@@ -20,6 +16,4 @@ const ProjectTable: React.FC<ProjectTableProps> = () => {
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default ProjectTable;
+}

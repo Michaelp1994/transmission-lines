@@ -1,5 +1,4 @@
 import { ProjectID } from "@repo/validators/schemas/Ids.schema";
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
@@ -11,9 +10,9 @@ interface TransmissionLineTableProps {
     projectId: ProjectID;
 }
 
-const TransmissionLineTable: React.FC<TransmissionLineTableProps> = ({
+export default function TransmissionLineTable({
     projectId,
-}) => {
+}: TransmissionLineTableProps) {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } =
         trpc.transmissionLine.getAllByProjectId.useQuery({
@@ -26,6 +25,4 @@ const TransmissionLineTable: React.FC<TransmissionLineTableProps> = ({
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default TransmissionLineTable;
+}

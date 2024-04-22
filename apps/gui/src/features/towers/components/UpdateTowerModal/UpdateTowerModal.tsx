@@ -37,11 +37,11 @@ export interface UpdateTowerModalProps {
     onClose: () => void;
 }
 
-const UpdateTowerModal: React.FC<UpdateTowerModalProps> = ({
+export default function UpdateTowerModal({
     onClose,
     lineId,
     towerId,
-}) => {
+}: UpdateTowerModalProps) {
     const { t } = useTranslation("updateTowerModal");
     const utils = trpc.useUtils();
     const { data } = trpc.tower.getById.useQuery({
@@ -160,9 +160,7 @@ const UpdateTowerModal: React.FC<UpdateTowerModalProps> = ({
             </DialogPortal>
         </Dialog>
     );
-};
-
-export default UpdateTowerModal;
+}
 
 const StyledForm = styled.form`
     display: flex;

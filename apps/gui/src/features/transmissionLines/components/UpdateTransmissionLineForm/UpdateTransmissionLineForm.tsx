@@ -17,7 +17,6 @@ import {
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -29,9 +28,9 @@ interface UpdateTransmissionLineFormProps {
     data: UpdateTransmissionLineInput;
 }
 
-const UpdateTransmissionLineForm: React.FC<UpdateTransmissionLineFormProps> = ({
+export default function UpdateTransmissionLineForm({
     data,
-}) => {
+}: UpdateTransmissionLineFormProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("transmissionLine");
 
@@ -124,7 +123,7 @@ const UpdateTransmissionLineForm: React.FC<UpdateTransmissionLineFormProps> = ({
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form``;
 const FormContainer = styled.div`
@@ -132,4 +131,3 @@ const FormContainer = styled.div`
     flex-direction: column;
     gap: 2rem;
 `;
-export default UpdateTransmissionLineForm;

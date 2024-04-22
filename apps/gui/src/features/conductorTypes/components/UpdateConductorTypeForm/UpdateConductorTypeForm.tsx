@@ -19,7 +19,6 @@ import {
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -30,9 +29,9 @@ interface UpdateConductorTypeFormProps {
     data: UpdateConductorTypeInput;
 }
 
-const UpdateConductorTypeForm: React.FC<UpdateConductorTypeFormProps> = ({
+export default function UpdateConductorTypeForm({
     data,
-}) => {
+}: UpdateConductorTypeFormProps) {
     const updateConductorTypeMutation = trpc.conductorType.update.useMutation();
     const navigate = useNavigate();
 
@@ -259,7 +258,7 @@ const UpdateConductorTypeForm: React.FC<UpdateConductorTypeFormProps> = ({
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
@@ -274,4 +273,3 @@ const ButtonsContainer = styled.div`
     gap: 1rem;
     justify-content: flex-end;
 `;
-export default UpdateConductorTypeForm;

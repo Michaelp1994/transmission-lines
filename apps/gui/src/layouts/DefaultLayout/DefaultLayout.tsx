@@ -6,18 +6,21 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import Breadcrumbs from "./components/Breadcrumbs";
 import NavBar from "./components/NavBar";
 
-const DefaultLayout = () => (
-    <Wrapper>
-        <NavBar />
+export default function DefaultLayout() {
+    return (
+        <Wrapper>
+            <NavBar />
 
-        <OutletContainer>
-            <Breadcrumbs />
-            <Outlet />
-        </OutletContainer>
-        <Toaster position="bottom-center" richColors closeButton />
-        <TanStackRouterDevtools />
-    </Wrapper>
-);
+            <OutletContainer>
+                <Breadcrumbs />
+                <Outlet />
+            </OutletContainer>
+            <Toaster position="bottom-center" richColors closeButton />
+            <TanStackRouterDevtools />
+        </Wrapper>
+    );
+}
+
 const Wrapper = styled.div`
     background-color: rgb(249 250 251);
     // background-color: var(--background);
@@ -34,4 +37,3 @@ const OutletContainer = styled.main`
     margin-left: auto;
     margin-right: auto;
 `;
-export default DefaultLayout;

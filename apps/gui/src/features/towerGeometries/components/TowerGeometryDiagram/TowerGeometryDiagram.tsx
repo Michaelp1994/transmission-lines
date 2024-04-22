@@ -5,8 +5,7 @@ import { Circle, Layer, Line, Stage } from "react-konva";
 
 const SCALE = 5;
 
-interface TowerGeometryDiagramProps {}
-const TowerGeometryDiagram: React.FC<TowerGeometryDiagramProps> = () => {
+export default function TowerGeometryDiagram() {
     const fields = useWatch<TowerGeometryInput>({ name: "conductors" });
 
     return (
@@ -41,10 +40,8 @@ const TowerGeometryDiagram: React.FC<TowerGeometryDiagramProps> = () => {
             </Layer>
         </StyledStage>
     );
-};
+}
 
 const StyledStage = styled(Stage)`
     border: 1px solid black;
 `;
-
-export default TowerGeometryDiagram;

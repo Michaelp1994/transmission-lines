@@ -35,10 +35,10 @@ export interface GenerateTowersModalProps {
     onClose: () => void;
 }
 
-const GenerateTowersModal: React.FC<GenerateTowersModalProps> = ({
+export default function GenerateTowersModal({
     onClose,
     lineId,
-}) => {
+}: GenerateTowersModalProps) {
     const { t } = useTranslation("generateTowers");
     const utils = trpc.useUtils();
     const generateMutation = trpc.tower.generate.useMutation();
@@ -170,9 +170,7 @@ const GenerateTowersModal: React.FC<GenerateTowersModalProps> = ({
             </DialogContent>
         </Dialog>
     );
-};
-
-export default GenerateTowersModal;
+}
 
 const StyledForm = styled.form`
     display: flex;

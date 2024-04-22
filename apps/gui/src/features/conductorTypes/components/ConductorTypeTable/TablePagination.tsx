@@ -19,10 +19,10 @@ interface ConductorTypeTablePaginationProps {
     table: Table<ConductorType>;
 }
 
-const ConductorTypeTablePagination: React.FC<
-    ConductorTypeTablePaginationProps
-> = ({ table }) => (
-    <Wrapper>
+export default function ConductorTypeTablePagination({
+    table,
+}: ConductorTypeTablePaginationProps) {
+    return (
         <Pagination>
             <PaginationContent>
                 <PaginationItem>
@@ -63,8 +63,5 @@ const ConductorTypeTablePagination: React.FC<
                 </PaginationItem>
             </PaginationContent>
         </Pagination>
-    </Wrapper>
-);
-
-const Wrapper = styled.div``;
-export default ConductorTypeTablePagination;
+    );
+}

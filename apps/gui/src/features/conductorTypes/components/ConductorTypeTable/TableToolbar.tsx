@@ -13,12 +13,13 @@ import { ConductorType } from "./RowType";
 interface ConductorTypeToolbarProps {
     table: Table<ConductorType>;
 }
-const ConductorTypeToolbar: React.FC<ConductorTypeToolbarProps> = ({
+export default function ConductorTypeToolbar({
     table,
-}) => (
-    <ToolbarContainer>
-        <LeftSide>
-            {/* <StyledInput
+}: ConductorTypeToolbarProps) {
+    return (
+        <ToolbarContainer>
+            <LeftSide>
+                {/* <StyledInput
                 value={
                     (table.getColumn("name")?.getFilterValue() as string) ?? ""
                 }
@@ -27,31 +28,32 @@ const ConductorTypeToolbar: React.FC<ConductorTypeToolbarProps> = ({
                 }
                 placeholder="Search conductor types..."
             /> */}
-        </LeftSide>
-        <RightSide>
-            Rows per page:
-            <Select
-                value={`${table.getState().pagination.pageSize}`}
-                onValueChange={(value) => {
-                    table.setPageSize(Number(value));
-                }}
-            >
-                <SelectTrigger className="h-8 w-[70px]">
-                    <SelectValue
-                        placeholder={table.getState().pagination.pageSize}
-                    />
-                </SelectTrigger>
-                <SelectContent side="top">
-                    {[10, 20, 30, 40, 50].map((pageSize) => (
-                        <SelectItem key={pageSize} value={`${pageSize}`}>
-                            {pageSize}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
-        </RightSide>
-    </ToolbarContainer>
-);
+            </LeftSide>
+            <RightSide>
+                Rows per page:
+                <Select
+                    value={`${table.getState().pagination.pageSize}`}
+                    onValueChange={(value) => {
+                        table.setPageSize(Number(value));
+                    }}
+                >
+                    <SelectTrigger className="h-8 w-[70px]">
+                        <SelectValue
+                            placeholder={table.getState().pagination.pageSize}
+                        />
+                    </SelectTrigger>
+                    <SelectContent side="top">
+                        {[10, 20, 30, 40, 50].map((pageSize) => (
+                            <SelectItem key={pageSize} value={`${pageSize}`}>
+                                {pageSize}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+            </RightSide>
+        </ToolbarContainer>
+    );
+}
 
 const ToolbarContainer = styled.div`
     display: flex;
@@ -70,9 +72,3 @@ const RightSide = styled.div`
     gap: 0.5rem;
     align-items: center;
 `;
-
-// const StyledInput = styled(Input)`
-//     width: 500px;
-// `;
-
-export default ConductorTypeToolbar;

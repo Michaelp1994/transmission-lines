@@ -21,13 +21,13 @@ export interface TowerParametersModalProps {
     onClose: () => void;
 }
 
-const TowerParametersModal: React.FC<TowerParametersModalProps> = ({
+export default function TowerParametersModal({
     onClose,
     towerId,
-}) => {
+}: TowerParametersModalProps) {
     const { t } = useTranslation("towerParametersModal");
     const { data } = trpc.tower.getParameters.useQuery({
-        id: towerId,
+        towerId,
     });
 
     return (
@@ -62,6 +62,4 @@ const TowerParametersModal: React.FC<TowerParametersModalProps> = ({
             </DialogPortal>
         </Dialog>
     );
-};
-
-export default TowerParametersModal;
+}

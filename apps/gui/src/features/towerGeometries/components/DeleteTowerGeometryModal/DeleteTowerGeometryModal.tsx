@@ -13,9 +13,9 @@ import {
 } from "@repo/ui";
 import { GeometryID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 import trpc from "~/utils/trpc";
-import { toast } from "sonner";
 
 export interface DeleteTowerGeometryModalProps {
     geometryId: GeometryID;

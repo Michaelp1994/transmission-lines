@@ -19,7 +19,6 @@ import {
 import { ProjectID } from "@repo/validators/schemas/Ids.schema";
 import { useNavigate } from "@tanstack/react-router";
 import { format } from "date-fns";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
@@ -31,9 +30,9 @@ interface CreateTransmissionLineFormProps {
     projectId: ProjectID;
 }
 
-const CreateTransmissionLineForm: React.FC<CreateTransmissionLineFormProps> = ({
+export default function CreateTransmissionLineForm({
     projectId,
-}) => {
+}: CreateTransmissionLineFormProps) {
     const { t } = useTranslation("transmissionLine");
 
     const navigate = useNavigate();
@@ -132,7 +131,7 @@ const CreateTransmissionLineForm: React.FC<CreateTransmissionLineFormProps> = ({
             </StyledForm>
         </Form>
     );
-};
+}
 
 const StyledForm = styled.form`
     display: flex;
@@ -145,4 +144,3 @@ const ButtonsContainer = styled.div`
     justify-content: flex-end;
     gap: 1rem;
 `;
-export default CreateTransmissionLineForm;

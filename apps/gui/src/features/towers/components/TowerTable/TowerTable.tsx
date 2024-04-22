@@ -1,4 +1,3 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";
@@ -10,7 +9,7 @@ interface TowerTableProps {
     lineId: string;
 }
 
-const TowerTable: React.FC<TowerTableProps> = ({ lineId }) => {
+export default function TowerTable({ lineId }: TowerTableProps) {
     const { t } = useTranslation("transmissionLine");
     const { data, error, isLoading } = trpc.tower.getAllByLineId.useQuery({
         lineId,
@@ -23,6 +22,4 @@ const TowerTable: React.FC<TowerTableProps> = ({ lineId }) => {
         return <div>{t("general:loading")}</div>;
     }
     return <DataTable data={data} columns={columns} />;
-};
-
-export default TowerTable;
+}
