@@ -9,7 +9,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { UpdateSourceForm } from "~/features/sources";
-import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
@@ -23,16 +22,7 @@ export const Route = createFileRoute(
 export default function ViewSourcePage() {
     const { sourceId } = Route.useParams();
     const { t } = useTranslation("source");
-    const { data, isLoading, error } = trpc.source.getById.useQuery({
-        id: sourceId,
-    });
 
-    if (isLoading) {
-        return <div>{t("general:loading")}</div>;
-    }
-    if (error || !data) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
     return (
         <Card>
             <CardHeader>
@@ -41,7 +31,7 @@ export default function ViewSourcePage() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateSourceForm data={data} />
+                <UpdateSourceForm sourceId={sourceId} />
             </CardContent>
         </Card>
     );

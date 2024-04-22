@@ -32,10 +32,12 @@ export const transmissionLinesRelations = relations(
         fromSource: one(sources, {
             fields: [transmissionLines.fromSourceId],
             references: [sources.id],
+            relationName: "fromSource",
         }),
         toSource: one(sources, {
             fields: [transmissionLines.toSourceId],
             references: [sources.id],
+            relationName: "toSource",
         }),
         project: one(projects, {
             fields: [transmissionLines.projectId],

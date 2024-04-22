@@ -8,7 +8,7 @@ import {
 import { GeometryID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
 
-import CreateConductorLocationForm from "./CreateConductorLocationForm";
+import FormHandler from "./FormHandler";
 
 export interface CreateConductorLocationModalProps {
     geometryId: GeometryID;
@@ -30,10 +30,7 @@ export default function CreateConductorLocationModal({
                         {t("modalDescription")}
                     </DialogDescription>
                 </DialogHeader>
-                <CreateConductorLocationForm
-                    onSubmit={onClose}
-                    geometryId={geometryId}
-                />
+                <FormHandler onSubmit={onClose} geometryId={geometryId} />
             </DialogContent>
         </Dialog>
     );

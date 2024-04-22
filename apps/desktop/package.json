@@ -9,10 +9,10 @@
     "main": "dist/index.js",
     "scripts": {
         "// dev": "electron --inspect=9229 .",
+        "prebuild": "electron-builder install-app-deps",
         "build": "vite build",
         "clean": "rm -rf .turbo node_modules dist",
         "dev": "vite build -w",
-        "postinstall": "electron-builder install-app-deps",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "package": "electron-builder build -c builder.config.cjs",

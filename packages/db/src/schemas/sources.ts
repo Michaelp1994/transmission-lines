@@ -5,6 +5,7 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
 
 import { projects } from "./projects";
+import { transmissionLines } from "./transmissionLines";
 
 export const sources = sqliteTable("sources", {
     id: text("id")
@@ -28,9 +29,11 @@ export const sources = sqliteTable("sources", {
 export type Source = typeof sources.$inferSelect;
 export type NewSource = typeof sources.$inferInsert;
 
-export const sourcesRelations = relations(sources, ({ one }) => ({
+export const sourcesRelations = relations(sources, ({ one, many }) => ({
     project: one(projects, {
         fields: [sources.projectId],
         references: [projects.id],
     }),
+    startingLines: many(transmissionLines, { relationName: "fromSource" }),
+    finishingLines: many(transmissionLines, { relationName: "toSource" }),
 }));

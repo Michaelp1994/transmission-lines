@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, test, vi } from "vitest";
 
-import CreateSourceForm from "./CreateSourceForm";
+import BaseForm from "./BaseForm";
 import { CreateSourceFormInput } from "./FormSchema";
 import I18nProvider from "../../../../contexts/I18nProvider";
 
@@ -29,10 +29,7 @@ describe("Create Source Form", () => {
         const invalidHandler = vi.fn();
         render(
             <I18nProvider>
-                <CreateSourceForm
-                    onValid={validHandler}
-                    onInvalid={invalidHandler}
-                />
+                <BaseForm onValid={validHandler} onInvalid={invalidHandler} />
             </I18nProvider>
         );
 
@@ -68,10 +65,7 @@ describe("Create Source Form", () => {
 
         render(
             <I18nProvider>
-                <CreateSourceForm
-                    onValid={validHandler}
-                    onInvalid={invalidHandler}
-                />
+                <BaseForm onValid={validHandler} onInvalid={invalidHandler} />
             </I18nProvider>
         );
 
@@ -178,7 +172,7 @@ describe("Create Source Form", () => {
 
         render(
             <I18nProvider>
-                <CreateSourceForm
+                <BaseForm
                     onValid={validMockHandler}
                     onInvalid={invalidMockHandler}
                 />

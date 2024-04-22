@@ -13,6 +13,9 @@
         "rebuild": {
             "cache": false
         },
+        "prebuild": {
+            "cache": false
+        },
         "test": {
             "outputs": ["coverage/**"],
             "dependsOn": []

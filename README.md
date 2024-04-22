@@ -7,6 +7,7 @@
 -   [ ] Home Page
 -   [ ] Convert Projects to files ?
 -   [ ] Settings Page
+-   [ ] Translations
 -   [ ] User Accounts ?
 -   [ ] Redo Router (Code Based) / Breadcrumb
 -   [ ] Auto update

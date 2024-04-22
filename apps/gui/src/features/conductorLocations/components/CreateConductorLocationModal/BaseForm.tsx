@@ -17,42 +17,32 @@ import {
     createConductorLocationSchema,
     defaultConductorLocation,
 } from "@repo/validators";
-import { GeometryID } from "@repo/validators/schemas/Ids.schema";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import trpc from "~/utils/trpc";
-
 interface CreateConductorLocationFormProps {
-    geometryId: GeometryID;
-    onSubmit: () => void;
+    onValid: (values: CreateConductorLocationInput) => void;
+    onInvalid: (errors: FieldErrors<CreateConductorLocationInput>) => void;
 }
 
 export default function CreateConductorLocationForm({
-    geometryId,
-    onSubmit,
+    onValid,
+    onInvalid,
 }: CreateConductorLocationFormProps) {
     const { t } = useTranslation("createConductorLocationModal");
-    const utils = trpc.useUtils();
-    const createMutation = trpc.conductorLocations.create.useMutation({});
 
     const form = useForm<CreateConductorLocationInput>({
         resolver: zodResolver(createConductorLocationSchema),
-        values: {
-            ...defaultConductorLocation,
-            geometryId,
-        },
+        values: defaultConductorLocation,
     });
-    const submitHandler = form.handleSubmit(async (data) => {
-        await createMutation.mutateAsync(data);
-        await utils.conductorLocations.getAllByGeometryId.invalidate({
-            geometryId,
-        });
-        onSubmit();
-    });
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
+
     return (
         <Form {...form}>
-            <StyledForm onSubmit={submitHandler}>
+            <StyledForm onSubmit={handleSubmit}>
                 <FormField
                     control={form.control}
                     name="x"
