@@ -20,23 +20,23 @@
         "typecheck": "tsc --build"
     },
     "dependencies": {
-        "drizzle-orm": "^0.30.8",
+        "drizzle-orm": "^0.30.9",
         "drizzle-zod": "^0.5.1",
         "uuid": "^9.0.1"
     },
     "devDependencies": {
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
-        "@types/better-sqlite3": "^7.6.9",
+        "@types/better-sqlite3": "^7.6.10",
         "@types/node": "^20.12.7",
         "@types/uuid": "^9.0.8",
         "better-sqlite3": "^9.5.0",
-        "drizzle-kit": "^0.20.14",
+        "drizzle-kit": "^0.20.17",
         "eslint": "^8.57.0",
         "tsx": "^4.7.2",
         "typescript": "^5.4.5",
         "unplugin-swc": "^1.4.5",
-        "vite": "^5.2.9",
+        "vite": "^5.2.10",
         "vite-tsconfig-paths": "^4.3.2",
         "vitest": "^1.5.0"
     },
