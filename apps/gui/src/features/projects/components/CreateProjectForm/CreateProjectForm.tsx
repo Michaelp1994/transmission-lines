@@ -19,6 +19,8 @@ import {
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+
 interface CreateProjectFormProps {
     onSubmit: (values: CreateProjectInput) => Promise<void>;
 }
@@ -66,15 +68,3 @@ export default function CreateProjectForm({
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;
-
-const ButtonsWrapper = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-`;

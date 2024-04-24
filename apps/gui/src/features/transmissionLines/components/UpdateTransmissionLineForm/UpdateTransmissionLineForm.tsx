@@ -16,12 +16,12 @@ import {
     updateTransmissionLineSchema,
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import { StyledForm } from "~/components/StyledForm";
 import { SourceSelect } from "~/features/sources";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateTransmissionLineFormProps {
@@ -45,9 +45,7 @@ export default function UpdateTransmissionLineForm({
     async function onSubmit(values: UpdateTransmissionLineInput) {
         await updateTransmissionLineMutation.mutateAsync(values);
 
-        toast.success(`${values.name} has been updated.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
+        toast.success(`${values.name} has been updated.`);
         navigate({
             to: "/projects/$projectId",
             params: { projectId: values.projectId },
@@ -59,75 +57,66 @@ export default function UpdateTransmissionLineForm({
                 onSubmit={form.handleSubmit(onSubmit)}
                 onReset={() => form.reset()}
             >
-                <FormContainer>
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{t("name.label")}</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="text"
-                                        placeholder={t("name.placeholder")}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("name.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="fromSourceId"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{t("fromSource.label")}</FormLabel>
-                                <FormControl>
-                                    <SourceSelect
-                                        projectId={data.projectId}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("fromSource.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="toSourceId"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{t("toSource.label")}</FormLabel>
-                                <FormControl>
-                                    <SourceSelect
-                                        projectId={data.projectId}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("toSource.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </FormContainer>
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{t("name.label")}</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="text"
+                                    placeholder={t("name.placeholder")}
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormDescription>
+                                {t("name.description")}
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="fromSourceId"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{t("fromSource.label")}</FormLabel>
+                            <FormControl>
+                                <SourceSelect
+                                    projectId={data.projectId}
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormDescription>
+                                {t("fromSource.description")}
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="toSourceId"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{t("toSource.label")}</FormLabel>
+                            <FormControl>
+                                <SourceSelect
+                                    projectId={data.projectId}
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormDescription>
+                                {t("toSource.description")}
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
                 <Button type="submit">Save</Button>
             </StyledForm>
         </Form>
     );
 }
-
-const StyledForm = styled.form``;
-const FormContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-`;

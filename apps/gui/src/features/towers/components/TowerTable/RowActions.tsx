@@ -34,20 +34,20 @@ export default function RowActions({
         Modals.DeleteTowerModal
     );
 
-    const displayUpdateModal = () => {
+    function displayUpdateModal() {
         updateModal.open({
             lineId: row.original.lineId,
             towerId: row.original.id,
             onClose: updateModal.close,
         });
-    };
-    const displayDeleteModal = () => {
+    }
+    function displayDeleteModal() {
         deleteModal.open({
             lineId: row.original.lineId,
             towerId: row.original.id,
             onClose: deleteModal.close,
         });
-    };
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

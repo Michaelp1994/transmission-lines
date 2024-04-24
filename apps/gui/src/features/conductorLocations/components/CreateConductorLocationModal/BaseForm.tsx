@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     DialogFooter,
@@ -19,6 +18,8 @@ import {
 } from "@repo/validators";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+
+import { StyledForm } from "~/components/StyledForm";
 
 interface CreateConductorLocationFormProps {
     onValid: (values: CreateConductorLocationInput) => void;
@@ -83,9 +84,3 @@ export default function CreateConductorLocationForm({
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;

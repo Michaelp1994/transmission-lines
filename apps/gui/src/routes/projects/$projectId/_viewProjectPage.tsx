@@ -47,6 +47,12 @@ export default function ViewProjectPage() {
                     >
                         Results
                     </StyledLink>
+                    <StyledLink
+                        to="/projects/$projectId/diagram"
+                        params={{ projectId }}
+                    >
+                        Diagram
+                    </StyledLink>
                 </nav>
                 <div className="grid gap-4">
                     <Outlet />

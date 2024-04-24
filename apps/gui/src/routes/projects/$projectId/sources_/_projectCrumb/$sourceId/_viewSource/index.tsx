@@ -8,7 +8,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UpdateSourceForm } from "~/features/sources";
+import { UpdateSourceGeneralForm } from "~/features/sources";
 
 export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
@@ -31,7 +31,7 @@ export default function ViewSourcePage() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateSourceForm sourceId={sourceId} />
+                <UpdateSourceGeneralForm sourceId={sourceId} />
             </CardContent>
         </Card>
     );

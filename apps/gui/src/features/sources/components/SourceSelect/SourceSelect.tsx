@@ -15,24 +15,38 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import trpc from "~/utils/trpc";
+import { RouterOutputs } from "~/utils/trpc";
 
 interface SourceSelectProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    projectId: string;
+    extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
+    data: RouterOutputs["source"]["getAllByProjectId"];
+    onChange?: (value: string | number | readonly string[] | undefined) => void;
 }
 
 const SourceSelect = forwardRef<HTMLButtonElement, SourceSelectProps>(
-    ({ projectId, value, onChange, ...props }, ref) => {
-        const { t } = useTranslation("source");
-        const { data } = trpc.source.getAllByProjectId.useQuery({
-            projectId,
-        });
+    ({ data, value, onChange, ...props }, ref) => {
+        const { t } = useTranslation("sourceSelect");
         const [open, setOpen] = useState(false);
-        function handleSelect(currentValue) {
-            if (onChange) onChange(currentValue === value ? "" : currentValue);
+
+        function handleSelect(currentSource: typeof value) {
+            if (onChange)
+                onChange(currentSource === value ? "" : currentSource);
             setOpen(false);
         }
+
+        function displayName(currentSource: typeof value) {
+            if (currentSource) {
+                const source = data.find(
+                    (source) => source.id === currentSource
+                );
+                if (source) {
+                    return source.name;
+                }
+                throw Error("Can't find source name.");
+            }
+            return t("select");
+        }
+
         return (
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
@@ -43,21 +57,19 @@ const SourceSelect = forwardRef<HTMLButtonElement, SourceSelectProps>(
                         ref={ref}
                         {...props}
                     >
-                        {value
-                            ? data?.find((source) => source.id === value)?.name
-                            : t("select")}
+                        {displayName(value)}
 
                         <StyledChevron />
                     </StyledButton>
                 </PopoverTrigger>
                 <StyledPopoverContent>
                     <Command>
-                        <CommandInput placeholder={t("searchSources")} />
+                        <CommandInput placeholder={t("search.placeholder")} />
                         <CommandEmpty>{t("noneFound")}</CommandEmpty>
 
                         <CommandList>
                             <CommandGroup>
-                                {data?.map((source) => (
+                                {data.map((source) => (
                                     <CommandItem
                                         key={source.id}
                                         value={source.id}

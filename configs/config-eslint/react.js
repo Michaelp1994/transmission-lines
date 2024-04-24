@@ -37,6 +37,8 @@ module.exports = {
         "react/jsx-props-no-spreading": 0,
         "@typescript-eslint/no-use-before-define": 0,
         "react/jsx-no-bind": 0,
+        "no-restricted-syntax": 0,
+        "arrow-body-style": 0,
         // "react/function-component-definition": [
         //     2,
         //     { namedComponents: "arrow-declaration" },

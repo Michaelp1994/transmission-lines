@@ -8,9 +8,6 @@ import { Source } from "./RowType";
 const columnHelper = createColumnHelper<Source>();
 
 export default [
-    columnHelper.accessor("enabled", {
-        header: () => t("enabled.label", { ns: "sourceTable" }),
-    }),
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "sourceTable" }),
         cell: (info) => (

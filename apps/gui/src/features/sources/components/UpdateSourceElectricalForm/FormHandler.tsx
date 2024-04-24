@@ -1,40 +1,41 @@
-import { UpdateSourceInput } from "@repo/validators";
+import { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
 import { SourceID } from "@repo/validators/schemas/Ids.schema";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
 import BaseForm from "./BaseForm";
 
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface FormHandlerProps {
     sourceId: SourceID;
 }
-
 export default function FormHandler({ sourceId }: FormHandlerProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("source");
-
-    const updateSourceMutation = trpc.source.update.useMutation();
+    const updateSourceMutation = trpc.source.updateElectrical.useMutation();
     const { data, isLoading, error } = trpc.source.getById.useQuery({
         id: sourceId,
     });
 
-    async function handleValid(values: UpdateSourceInput) {
-        const result = await updateSourceMutation.mutateAsync(values);
-        toast.success(`${values.name} has been updated.`, {
-            description: format(new Date(), "PPPPpp"),
+    async function handleValid(values: UpdateSourceElectricalFormInput) {
+        const result = await updateSourceMutation.mutateAsync({
+            ...values,
+            id: sourceId,
         });
+
+        toast.success(`${result.name} has been updated.`);
         navigate({
-            to: "/projects/$projectId/sources/",
+            to: "/projects/$projectId/sources",
             params: { projectId: result.projectId },
         });
     }
 
-    async function handleInvalid(errors: FieldErrors<UpdateSourceInput>) {
+    function handleInvalid(
+        errors: FieldErrors<UpdateSourceElectricalFormInput>
+    ) {
         console.log(errors);
     }
 

@@ -51,8 +51,8 @@ export type SolveProjectInput = z.infer<typeof solveProjectSchema>;
 export const importProjectSchema = z.object({
     id: projectId,
     name: z.string(),
-    sources: updateSourceSchema.array().optional(),
-    transmissionLines: updateTransmissionLineSchema.array().optional(),
+    // sources: updateSourceSchema.array().optional(),
+    // transmissionLines: updateTransmissionLineSchema.array().optional(),
 });
 
 export type ImportProjectInput = z.infer<typeof importProjectSchema>;

@@ -1,87 +1,49 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
-import {
-    Button,
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    Input,
-} from "@repo/ui";
-import {
-    UpdateTowerGeometryInput,
-    updateTowerGeometrySchema,
-} from "@repo/validators";
+import { UpdateTowerGeometryInput } from "@repo/validators";
+import { ProjectID } from "@repo/validators/schemas/Ids.schema";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
-import { useForm } from "react-hook-form";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import BaseForm from "./BaseForm";
+
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateProjectFormProps {
-    data: UpdateTowerGeometryInput;
+    projectId: ProjectID;
 }
 
-export default function UpdateProjectForm({ data }: UpdateProjectFormProps) {
+export default function UpdateProjectForm({
+    projectId,
+}: UpdateProjectFormProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("updateProjectForm");
 
-    const updateMutation = trpc.project.update.useMutation();
-    const form = useForm<UpdateTowerGeometryInput>({
-        resolver: zodResolver(updateTowerGeometrySchema),
-        values: data,
+    const { data, error, isLoading } = trpc.project.getById.useQuery({
+        id: projectId,
     });
 
-    async function onSubmit(values: UpdateTowerGeometryInput) {
+    const updateMutation = trpc.project.update.useMutation();
+
+    async function handleValid(values: UpdateTowerGeometryInput) {
         await updateMutation.mutateAsync(values);
-        toast.success(`${values.name} has been updated.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
+        toast.success(`${values.name} has been updated.`);
         navigate({ to: "/projects" });
     }
 
+    async function handleInvalid(
+        errors: FieldErrors<UpdateTowerGeometryInput>
+    ) {
+        console.log(errors);
+    }
+
+    if (isLoading) {
+        return <div>{t("general:loading")}</div>;
+    }
+    if (error || !data) {
+        return <div>{t("general:errorMessage")}</div>;
+    }
     return (
-        <Wrapper>
-            <Form {...form}>
-                <StyledForm
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    onReset={() => form.reset()}
-                >
-                    {" "}
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>{t("name.label")}</FormLabel>
-                                <FormControl>
-                                    <Input {...field} />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("name.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <ButtonsContainer>
-                        <Button type="submit">{t("form:submit")}</Button>
-                    </ButtonsContainer>
-                </StyledForm>
-            </Form>
-        </Wrapper>
+        <BaseForm data={data} onValid={handleValid} onInvalid={handleInvalid} />
     );
 }
-const Wrapper = styled.div``;
-
-const StyledForm = styled.form``;
-const ButtonsContainer = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-`;

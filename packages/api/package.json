@@ -39,7 +39,6 @@
         "@types/morgan": "^1.9.9",
         "@types/node": "^20.12.7",
         "@types/supertest": "^6.0.2",
-        "better-sqlite3": "^9.5.0",
         "concurrently": "^8.2.2",
         "electron": "^30.0.1",
         "eslint": "^8.57.0",

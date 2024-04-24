@@ -36,18 +36,18 @@ export default function TransmissionLineTowers() {
         Modals.GenerateTowersModal
     );
 
-    const displayCreateModal = () => {
+    function displayCreateModal() {
         createModal.open({
             lineId,
             onClose: createModal.close,
         });
-    };
-    const displayGenerateModal = () => {
+    }
+    function displayGenerateModal() {
         generateModal.open({
             lineId,
             onClose: generateModal.close,
         });
-    };
+    }
     const { t } = useTranslation("towerConfiguration");
     return (
         <Card>

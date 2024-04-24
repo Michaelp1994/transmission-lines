@@ -22,12 +22,12 @@ export default function RowActions({ row }: CellContext<Project, unknown>) {
         Modals.DeleteProjectModal
     );
 
-    const displayDeleteModal = () => {
+    function displayDeleteModal() {
         deleteModal.open({
             projectId: row.original.id,
             onClose: deleteModal.close,
         });
-    };
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

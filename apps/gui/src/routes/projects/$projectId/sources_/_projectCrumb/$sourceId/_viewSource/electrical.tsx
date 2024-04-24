@@ -24,16 +24,6 @@ export default function ViewSourcePage() {
     const { sourceId } = Route.useParams();
     const { t } = useTranslation("source");
 
-    const { data, isLoading, error } = trpc.source.getById.useQuery({
-        id: sourceId,
-    });
-
-    if (isLoading) {
-        return <div>{t("general:loading")}</div>;
-    }
-    if (error || !data) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
     return (
         <Card>
             <CardHeader>
@@ -42,7 +32,7 @@ export default function ViewSourcePage() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateSourceElectricalForm data={data} />
+                <UpdateSourceElectricalForm sourceId={sourceId} />
             </CardContent>
         </Card>
     );

@@ -18,12 +18,12 @@ import {
 } from "@repo/validators";
 import { ProjectID } from "@repo/validators/schemas/Ids.schema";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { SourceSelect } from "~/features/sources";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface CreateTransmissionLineFormProps {
@@ -50,9 +50,7 @@ export default function CreateTransmissionLineForm({
     async function onSubmit(values: CreateTransmissionLineInput) {
         const response =
             await createTransmissionLineMutation.mutateAsync(values);
-        toast.success(`${values.name} has been added to the project.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
+        toast.success(`${values.name} has been added to the project.`);
         navigate({
             to: `/projects/$projectId/lines/$lineId`,
             params: { projectId, lineId: response.id },
@@ -122,25 +120,13 @@ export default function CreateTransmissionLineForm({
                         </FormItem>
                     )}
                 />
-                <ButtonsContainer>
+                <ButtonsWrapper>
                     <Button variant="destructive" type="reset">
                         {t("form:reset")}
                     </Button>
                     <Button type="submit">{t("form:submit")}</Button>
-                </ButtonsContainer>
+                </ButtonsWrapper>
             </StyledForm>
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-`;
-
-const ButtonsContainer = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-`;

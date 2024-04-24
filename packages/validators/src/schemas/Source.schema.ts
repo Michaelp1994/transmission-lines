@@ -26,27 +26,43 @@ export const createSourceSchema = z.object({
 
 export type CreateSourceInput = z.infer<typeof createSourceSchema>;
 
-export const defaultSource: CreateSourceInput = {
-    name: "",
-    phases: 3,
-    voltage: 138,
-    enabled: true,
-    x1r1: 4,
-    isc1: 4000,
-    isc3: 3000,
-    x0r0: 3,
-    resistance: 15,
-    frequency: 60,
-    projectId: "",
-};
+// update general
 
-// update
+export const updateSourceGeneralSchema = createSourceSchema
+    .extend({
+        id: sourceId,
+    })
+    .pick({
+        id: true,
+        name: true,
+        enabled: true,
+    });
 
-export const updateSourceSchema = createSourceSchema.extend({
-    id: sourceId,
-});
+export type UpdateSourceGeneralInput = z.infer<
+    typeof updateSourceGeneralSchema
+>;
 
-export type UpdateSourceInput = z.infer<typeof updateSourceSchema>;
+// update electrical
+
+export const updateSourceElectricalSchema = createSourceSchema
+    .extend({
+        id: sourceId,
+    })
+    .pick({
+        id: true,
+        phases: true,
+        voltage: true,
+        x1r1: true,
+        x0r0: true,
+        isc1: true,
+        isc3: true,
+        resistance: true,
+        frequency: true,
+    });
+
+export type UpdateSourceElectricalInput = z.infer<
+    typeof updateSourceElectricalSchema
+>;
 
 // getAllSources
 
@@ -54,7 +70,7 @@ export const getAllSourcesSchema = z.object({ projectId });
 
 export type GetAllSourcesInput = z.infer<typeof getAllSourcesSchema>;
 
-// getAllSources
+// getAllSourcesByProjectID
 
 export const getAllSourcesByProjectIdSchema = z.object({ projectId });
 

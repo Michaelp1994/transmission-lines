@@ -28,10 +28,10 @@ export default function DeleteProjectModal({
     const { t } = useTranslation("deleteProjectModal");
     const utils = trpc.useUtils();
     const deleteMutation = trpc.project.delete.useMutation();
-    const handleConfirm = async () => {
+    async function handleConfirm() {
         await deleteMutation.mutateAsync({ id: projectId });
         await utils.project.getAll.invalidate();
-    };
+    }
     return (
         <AlertDialog open defaultOpen onOpenChange={onClose}>
             <AlertDialogPortal>
@@ -55,7 +55,7 @@ export default function DeleteProjectModal({
                             className={buttonVariants({
                                 variant: "destructive",
                             })}
-                            onClick={() => handleConfirm()}
+                            onClick={handleConfirm}
                         >
                             {t("form:delete")}
                         </AlertDialogAction>

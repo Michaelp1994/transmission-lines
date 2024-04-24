@@ -4,7 +4,7 @@
     "submit": "Submit",
     "generate": "Generate",
     "cancel": "Cancel",
-    "delete": "Delete",
+    "delete": "Confirm",
     "update": "Update",
     "create": "Create"
   },
@@ -454,6 +454,42 @@
     },
     "y": {
       "label": "Y"
+    }
+  },
+  "updateSourceForm": {
+    "name": {
+      "label": "Name"
+    }
+  },
+  "updateSourceElectricalForm": {
+    "phases": {
+      "label": "Phases"
+    },
+    "voltage": {
+      "label": "Voltage"
+    },
+    "x1r1": {
+      "label": "X1/R1"
+    },
+    "x0r0": {
+      "label": "X0/R0"
+    },
+    "isc3": {
+      "label": "Short circuit 3 Phase Current"
+    },
+    "isc1": {
+      "label": "Short Circuit 1 phase Current"
+    },
+    "resistance": {
+      "label": "Resistance"
+    },
+    "frequency": {
+      "label": "Frequency"
+    }
+  },
+  "updateProjectForm": {
+    "name": {
+      "label": "Name"
     }
   }
 }

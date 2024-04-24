@@ -6,7 +6,8 @@ import {
     getAllSourcesByProjectIdSchema,
     getAllSourcesSchema,
     getSourceByIdSchema,
-    updateSourceSchema,
+    updateSourceElectricalSchema,
+    updateSourceGeneralSchema,
 } from "@repo/validators/schemas/Source.schema";
 
 import { publicProcedure, router } from "../trpc";
@@ -77,8 +78,20 @@ export default router({
 
             return newSource;
         }),
-    update: publicProcedure
-        .input(updateSourceSchema)
+    updateGeneral: publicProcedure
+        .input(updateSourceGeneralSchema)
+        .mutation(async ({ input, ctx: { db } }) => {
+            const [updatedSource] = await db
+                .update(sources)
+                .set(input)
+                .where(eq(sources.id, input.id))
+                .returning();
+            if (!updatedSource) throw Error("Can't update source");
+
+            return updatedSource;
+        }),
+    updateElectrical: publicProcedure
+        .input(updateSourceElectricalSchema)
         .mutation(async ({ input, ctx: { db } }) => {
             const [updatedSource] = await db
                 .update(sources)

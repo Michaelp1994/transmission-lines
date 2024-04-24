@@ -37,10 +37,10 @@ const TowerGeometrySelect = forwardRef<
     const { data, error, isLoading } = trpc.towerGeometry.getAll.useQuery();
     const [open, setOpen] = React.useState(false);
 
-    const handleSelect = (currentValue: string) => {
+    function handleSelect(currentValue: string) {
         if (onChange) onChange(currentValue === value ? "" : currentValue);
         setOpen(false);
-    };
+    }
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;

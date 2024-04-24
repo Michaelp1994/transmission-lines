@@ -18,11 +18,11 @@ import {
     defaultConductorType,
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 export default function CreateConductorTypeForm() {
@@ -37,9 +37,7 @@ export default function CreateConductorTypeForm() {
     async function onSubmit(values: CreateConductorTypeInput) {
         try {
             await createConductorMutation.mutateAsync(values);
-            toast.success(`${values.name} has been added.`, {
-                description: format(new Date(), "PPPPpp"),
-            });
+            toast.success(`${values.name} has been added.`);
             navigate({ to: "/conductor-types" });
         } catch (e) {
             console.log(e);
@@ -244,22 +242,10 @@ export default function CreateConductorTypeForm() {
                         </FormItem>
                     )}
                 />
-                <ButtonsContainer>
+                <ButtonsWrapper>
                     <Button type="submit">{t("form:submit")}</Button>
-                </ButtonsContainer>
+                </ButtonsWrapper>
             </StyledForm>
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-`;
-
-const ButtonsContainer = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-`;

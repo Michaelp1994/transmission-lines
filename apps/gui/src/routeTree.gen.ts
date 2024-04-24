@@ -33,6 +33,7 @@ import { Route as ProjectsProjectIdLinesprojectCrumbImport } from './routes/proj
 import { Route as ProjectsProjectIdViewProjectPageSourcesImport } from './routes/projects/$projectId/_viewProjectPage/sources'
 import { Route as ProjectsProjectIdViewProjectPageResultsImport } from './routes/projects/$projectId/_viewProjectPage/results'
 import { Route as ProjectsProjectIdViewProjectPageLinesImport } from './routes/projects/$projectId/_viewProjectPage/lines'
+import { Route as ProjectsProjectIdViewProjectPageDiagramImport } from './routes/projects/$projectId/_viewProjectPage/diagram'
 import { Route as ConductorTypesTypeIdLayoutPropertiesImport } from './routes/conductor-types/$typeId/_layout/properties'
 import { Route as ProjectsProjectIdSourcesprojectCrumbNewImport } from './routes/projects/$projectId/sources_/_projectCrumb/new'
 import { Route as ProjectsProjectIdLinesprojectCrumbNewImport } from './routes/projects/$projectId/lines_/_projectCrumb/new'
@@ -206,6 +207,12 @@ const ProjectsProjectIdViewProjectPageLinesRoute =
     getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
   } as any)
 
+const ProjectsProjectIdViewProjectPageDiagramRoute =
+  ProjectsProjectIdViewProjectPageDiagramImport.update({
+    path: '/diagram',
+    getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
+  } as any)
+
 const ConductorTypesTypeIdLayoutPropertiesRoute =
   ConductorTypesTypeIdLayoutPropertiesImport.update({
     path: '/properties',
@@ -359,6 +366,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConductorTypesTypeIdLayoutPropertiesImport
       parentRoute: typeof ConductorTypesTypeIdLayoutImport
     }
+    '/projects/$projectId/_viewProjectPage/diagram': {
+      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageDiagramImport
+      parentRoute: typeof ProjectsProjectIdViewProjectPageImport
+    }
     '/projects/$projectId/_viewProjectPage/lines': {
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageLinesImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
@@ -467,6 +478,7 @@ export const routeTree = rootRoute.addChildren([
     ProjectsIndexRoute,
     ProjectsProjectIdRoute.addChildren([
       ProjectsProjectIdViewProjectPageRoute.addChildren([
+        ProjectsProjectIdViewProjectPageDiagramRoute,
         ProjectsProjectIdViewProjectPageLinesRoute,
         ProjectsProjectIdViewProjectPageResultsRoute,
         ProjectsProjectIdViewProjectPageSourcesRoute,

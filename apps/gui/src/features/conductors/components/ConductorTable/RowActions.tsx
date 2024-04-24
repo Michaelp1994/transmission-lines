@@ -25,20 +25,20 @@ export default function RowActions({ row }: CellContext<Conductor, unknown>) {
         Modals.DeleteConductorModal
     );
 
-    const displayUpdateModal = () => {
+    function displayUpdateModal() {
         updateModal.open({
             lineId: row.original.lineId,
             conductorId: row.original.id,
             onClose: updateModal.close,
         });
-    };
-    const displayDeleteModal = () => {
+    }
+    function displayDeleteModal() {
         deleteModal.open({
             lineId: row.original.lineId,
             conductorId: row.original.id,
             onClose: deleteModal.close,
         });
-    };
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

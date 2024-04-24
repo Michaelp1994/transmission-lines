@@ -1,13 +1,11 @@
-import { styled } from "@linaria/react";
+import { CreateSourceFormInput } from "@repo/validators/forms/Source.schema";
 import { ProjectID } from "@repo/validators/schemas/Ids.schema";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { FieldErrors } from "react-hook-form";
-import { toast } from "sonner";
 
 import BaseForm from "./BaseForm";
-import { CreateSourceFormInput } from "./FormSchema";
 
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface CreateSourceFormProps {
@@ -16,11 +14,10 @@ interface CreateSourceFormProps {
 
 export default function CreateSourceForm({ projectId }: CreateSourceFormProps) {
     const navigate = useNavigate();
+
     const createMutation = trpc.source.create.useMutation({
         onSuccess: (result) => {
-            toast.success(`${result.name} has been added to the project.`, {
-                description: format(new Date(), "PPPPpp"),
-            });
+            toast.success(`${result.name} has been added to the project.`);
             navigate({ to: "/projects/$projectId", params: { projectId } });
         },
         onError: (error) => {
@@ -29,18 +26,15 @@ export default function CreateSourceForm({ projectId }: CreateSourceFormProps) {
     });
 
     async function handleValid(values: CreateSourceFormInput) {
-        await createMutation.mutateAsync({ ...values, projectId });
+        await createMutation.mutateAsync({
+            ...values,
+            projectId,
+        });
     }
 
     async function handleInvalid(errors: FieldErrors<CreateSourceFormInput>) {
         console.log(errors);
     }
 
-    return (
-        <Wrapper>
-            <BaseForm onValid={handleValid} onInvalid={handleInvalid} />
-        </Wrapper>
-    );
+    return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;
 }
-
-const Wrapper = styled.div``;

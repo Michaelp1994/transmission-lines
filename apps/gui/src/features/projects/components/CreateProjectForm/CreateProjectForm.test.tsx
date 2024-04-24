@@ -1,20 +1,16 @@
-import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import CreateProjectForm from "./CreateProjectForm";
-import I18nProvider from "../../../../contexts/I18nProvider";
+
+import { render, screen } from "~test-utils";
 
 // import MockApp from "./MockApp";
 
 describe("CreateProjectForm", () => {
     test("renders form fields and buttons", () => {
         const submitHandler = vi.fn();
-        render(
-            <I18nProvider>
-                <CreateProjectForm onSubmit={submitHandler} />
-            </I18nProvider>
-        );
+        render(<CreateProjectForm onSubmit={submitHandler} />);
 
         // Assert that form fields are rendered
         expect(screen.getByLabelText("Name")).toBeInTheDocument();

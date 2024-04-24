@@ -27,18 +27,18 @@ export default function RowActions({
         Modals.DeleteConductorLocationModal
     );
 
-    const displayUpdateModal = () => {
+    function displayUpdateModal() {
         updateModal.open({
             conductorLocationId: row.original.id,
             onClose: updateModal.close,
         });
-    };
-    const displayDeleteModal = () => {
+    }
+    function displayDeleteModal() {
         deleteModal.open({
             conductorLocationId: row.original.id,
             onClose: deleteModal.close,
         });
-    };
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

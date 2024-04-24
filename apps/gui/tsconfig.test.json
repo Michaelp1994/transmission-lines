@@ -1,6 +1,6 @@
 {
     "include": [
-        "tests",
+        "tests/**/*",
         "src/**/*.test.ts",
         "src/**/*.test.tsx",
         "src/**/*.test.js",
@@ -13,7 +13,9 @@
         "outDir": "dist/test",
         "types": ["@testing-library/jest-dom"],
         "paths": {
-            "~/*": ["./src/*"]
+            "~/*": ["./src/*"],
+            "~tests/*": ["./tests/*"],
+            "~test-utils": ["./tests/utils/test-utils.tsx"]
         }
     },
     "references": [

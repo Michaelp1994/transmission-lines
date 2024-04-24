@@ -26,6 +26,7 @@ import { ConductorID, LineID } from "@repo/validators/schemas/Ids.schema";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { StyledForm } from "~/components/StyledForm";
 import { ConductorTypeSelect } from "~/features/conductorTypes";
 import trpc from "~/utils/trpc";
 
@@ -224,9 +225,3 @@ export default function UpdateConductorModal({
         </Dialog>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;

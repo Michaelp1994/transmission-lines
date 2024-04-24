@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,14 +10,19 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { UpdateSourceInput, updateSourceSchema } from "@repo/validators";
-import { t } from "i18next";
+import {
+    UpdateSourceGeneralFormInput,
+    updateSourceGeneralFormSchema,
+} from "@repo/validators/forms/Source.schema";
 import { FieldErrors, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 
 interface UpdateSourceFormProps {
-    data: UpdateSourceInput;
-    onValid: (values: UpdateSourceInput) => void;
-    onInvalid: (errors: FieldErrors<UpdateSourceInput>) => void;
+    data: UpdateSourceGeneralFormInput;
+    onValid: (values: UpdateSourceGeneralFormInput) => void;
+    onInvalid: (errors: FieldErrors<UpdateSourceGeneralFormInput>) => void;
 }
 
 export default function UpdateSourceForm({
@@ -26,8 +30,9 @@ export default function UpdateSourceForm({
     onValid,
     onInvalid,
 }: UpdateSourceFormProps) {
-    const form = useForm<UpdateSourceInput>({
-        resolver: zodResolver(updateSourceSchema),
+    const { t } = useTranslation("updateSourceForm");
+    const form = useForm<UpdateSourceGeneralFormInput>({
+        resolver: zodResolver(updateSourceGeneralFormSchema),
         values: data,
     });
 
@@ -61,23 +66,18 @@ export default function UpdateSourceForm({
                 />
 
                 <ButtonsWrapper>
-                    <Button variant="destructive" type="reset">
+                    <Button
+                        variant="destructive"
+                        type="reset"
+                        disabled={!form.formState.isDirty}
+                    >
                         {t("form:reset")}
                     </Button>
-                    <Button type="submit">{t("form:submit")}</Button>
+                    <Button type="submit" disabled={!form.formState.isDirty}>
+                        {t("form:submit")}
+                    </Button>
                 </ButtonsWrapper>
             </StyledForm>
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-`;
-const ButtonsWrapper = styled.div`
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-`;

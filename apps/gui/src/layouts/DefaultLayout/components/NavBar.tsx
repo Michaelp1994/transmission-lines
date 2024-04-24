@@ -24,13 +24,18 @@ export default function NavBar() {
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <Link to="/" className={navigationMenuTriggerStyle()}>
+                        <Link
+                            to="/"
+                            className={navigationMenuTriggerStyle()}
+                            draggable={false}
+                        >
                             {t("home")}
                         </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
                             to="/projects"
+                            draggable={false}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("projects")}
@@ -39,6 +44,7 @@ export default function NavBar() {
                     <NavigationMenuItem>
                         <Link
                             to="/conductor-types"
+                            draggable={false}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("conductorTypes")}
@@ -47,6 +53,7 @@ export default function NavBar() {
                     <NavigationMenuItem>
                         <Link
                             to="/tower-geometries"
+                            draggable={false}
                             className={navigationMenuTriggerStyle()}
                         >
                             {t("towerGeometries")}

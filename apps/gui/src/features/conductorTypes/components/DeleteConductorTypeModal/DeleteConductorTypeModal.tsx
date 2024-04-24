@@ -13,8 +13,8 @@ import {
 } from "@repo/ui";
 import { ConductorTypeID } from "@repo/validators/schemas/Ids.schema";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteConductorTypeModalProps {

@@ -12,11 +12,15 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { defaultSource } from "@repo/validators";
+import {
+    CreateSourceFormInput,
+    createSourceFormSchema,
+    defaultSource,
+} from "@repo/validators/forms/Source.schema";
 import { FieldErrors, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { CreateSourceFormInput, formSchema } from "./FormSchema";
+import { StyledForm } from "~/components/StyledForm";
 
 interface CreateSourceFormProps {
     onValid: (values: CreateSourceFormInput) => void;
@@ -30,7 +34,7 @@ export default function CreateSourceForm({
     const { t } = useTranslation("createSourceForm");
 
     const form = useForm<CreateSourceFormInput>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(createSourceFormSchema),
         values: defaultSource,
     });
 
@@ -226,11 +230,6 @@ export default function CreateSourceForm({
     );
 }
 
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;
 const ButtonsWrapper = styled.div`
     display: flex;
     gap: 1rem;

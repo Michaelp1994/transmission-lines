@@ -17,11 +17,11 @@ import {
     defaultTowerGeometry,
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 export default function CreateTowerGeometryForm() {
@@ -35,9 +35,7 @@ export default function CreateTowerGeometryForm() {
 
     async function onSubmit(values: CreateTowerGeometryInput) {
         await createTowerGeometryMutation.mutateAsync(values);
-        toast.success(`${values.name} has been added.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
+        toast.success(`${values.name} has been added.`);
         navigate({ to: "/tower-geometries" });
     }
     return (
@@ -64,22 +62,18 @@ export default function CreateTowerGeometryForm() {
                         )}
                     />
 
-                    <ButtonsContainer>
+                    <ButtonsWrapper>
                         <Button variant="destructive" type="reset">
                             {t("form:reset")}
                         </Button>
                         <Button type="submit">{t("form:submit")}</Button>
-                    </ButtonsContainer>
+                    </ButtonsWrapper>
                 </LeftSide>
                 <RightSide>{/* <TowerGeometryDiagram /> */}</RightSide>
             </StyledForm>
         </Form>
     );
 }
-const StyledForm = styled.form`
-    display: flex;
-    gap: 2rem;
-`;
 const LeftSide = styled.div`
     display: flex;
     flex-direction: column;
@@ -90,10 +84,4 @@ const RightSide = styled.div`
     display: flex;
     flex: 1;
     justify-content: center;
-`;
-
-const ButtonsContainer = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
 `;

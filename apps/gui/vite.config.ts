@@ -8,7 +8,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
     plugins: [
-        // TanStackRouterVite(),
+        TanStackRouterVite(),
         wyw({
             include: ["**/*.{ts,tsx}"],
             babelOptions: {

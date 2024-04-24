@@ -1,3 +1,3 @@
-import UpdateSourceElectricalForm from "./UpdateSourceElectricalForm";
+import UpdateSourceElectricalForm from "./FormHandler";
 
 export default UpdateSourceElectricalForm;

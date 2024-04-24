@@ -16,11 +16,11 @@ import {
     updateTowerGeometrySchema,
 } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "sonner";
 
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateTowerGeometryFormProps {
@@ -45,9 +45,7 @@ export default function UpdateTowerGeometryForm({
             console.log(updateTowerGeometryMutation.error);
             return;
         }
-        toast.success(`${values.name} has been updated.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
+        toast.success(`${values.name} has been updated.`);
         navigate({ to: "/tower-geometries" });
     }
     return (
@@ -73,17 +71,10 @@ export default function UpdateTowerGeometryForm({
                         </FormItem>
                     )}
                 />
-                <ButtonsContainer>
+                <ButtonsWrapper>
                     <Button type="submit">{t("form:submit")}</Button>
-                </ButtonsContainer>
+                </ButtonsWrapper>
             </StyledForm>
         </Form>
     );
 }
-
-const StyledForm = styled.form``;
-const ButtonsContainer = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-`;

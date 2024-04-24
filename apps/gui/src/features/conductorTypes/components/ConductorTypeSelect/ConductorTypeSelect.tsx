@@ -29,10 +29,10 @@ const ConductorTypeSelect = forwardRef<
     const { t } = useTranslation("conductorType");
     const { data, error, isLoading } = trpc.conductorType.getAll.useQuery();
     const [open, setOpen] = useState(false);
-    const handleSelect = (currentValue: string) => {
+    function handleSelect(currentValue: string) {
         if (onChange) onChange(currentValue === value ? "" : currentValue);
         setOpen(false);
-    };
+    }
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }

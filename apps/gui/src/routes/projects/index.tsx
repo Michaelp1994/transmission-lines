@@ -9,9 +9,9 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
-import { toast } from "sonner";
 
 import { ProjectTable } from "~/features/projects";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute("/projects/")({

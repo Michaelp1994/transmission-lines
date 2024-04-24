@@ -13,6 +13,7 @@
         "clean": "rm -rf .turbo node_modules dist",
         "db:push": "drizzle-kit push:sqlite",
         "db:studio": "drizzle-kit studio",
+        "install": "node-gyp-build",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "migrate": "tsx src/migrate.ts",
@@ -20,8 +21,10 @@
         "typecheck": "tsc --build"
     },
     "dependencies": {
+        "better-sqlite3": "^9.5.0",
         "drizzle-orm": "^0.30.9",
         "drizzle-zod": "^0.5.1",
+        "node-gyp-build": "^4.8.0",
         "uuid": "^9.0.1"
     },
     "devDependencies": {
@@ -30,7 +33,6 @@
         "@types/better-sqlite3": "^7.6.10",
         "@types/node": "^20.12.7",
         "@types/uuid": "^9.0.8",
-        "better-sqlite3": "^9.5.0",
         "drizzle-kit": "^0.20.17",
         "eslint": "^8.57.0",
         "tsx": "^4.7.2",
@@ -39,8 +41,5 @@
         "vite": "^5.2.10",
         "vite-tsconfig-paths": "^4.3.2",
         "vitest": "^1.5.0"
-    },
-    "peerDependencies": {
-        "better-sqlite3": "^9.3.0"
     }
 }

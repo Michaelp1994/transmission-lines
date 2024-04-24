@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,46 +10,41 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { UpdateSourceInput, updateSourceSchema } from "@repo/validators";
-import { useNavigate } from "@tanstack/react-router";
-import { format } from "date-fns";
-import { t } from "i18next";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import {
+    UpdateSourceElectricalFormInput,
+    updateSourceElectricalFormSchema,
+} from "@repo/validators/forms/Source.schema";
+import { FieldErrors, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-import trpc from "~/utils/trpc";
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 
 interface UpdateSourceElectricalFormProps {
-    data: UpdateSourceInput;
+    data: UpdateSourceElectricalFormInput;
+    onValid: (values: UpdateSourceElectricalFormInput) => void;
+    onInvalid: (errors: FieldErrors<UpdateSourceElectricalFormInput>) => void;
 }
 
 export default function UpdateSourceElectricalForm({
     data,
+    onInvalid,
+    onValid,
 }: UpdateSourceElectricalFormProps) {
-    const navigate = useNavigate();
-    const updateSourceMutation = trpc.source.update.useMutation();
-    const form = useForm<UpdateSourceInput>({
-        resolver: zodResolver(updateSourceSchema),
+    const { t } = useTranslation("updateSourceElectricalForm");
+
+    const form = useForm<UpdateSourceElectricalFormInput>({
+        resolver: zodResolver(updateSourceElectricalFormSchema),
         values: data,
     });
 
-    async function onSubmit(values: UpdateSourceInput) {
-        const result = await updateSourceMutation.mutateAsync(values);
-        toast.success(`${values.name} has been updated.`, {
-            description: format(new Date(), "PPPPpp"),
-        });
-        navigate({
-            to: "/projects/$projectId/sources/",
-            params: { projectId: result.projectId },
-        });
-    }
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
 
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
-            >
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="phases"
@@ -62,6 +56,22 @@ export default function UpdateSourceElectricalForm({
                             </FormControl>
                             <FormDescription>
                                 {t("phases.description")}
+                            </FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="frequency"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{t("frequency.label")}</FormLabel>
+                            <FormControl>
+                                <Input type="number" {...field} />
+                            </FormControl>
+                            <FormDescription>
+                                {t("frequency.description")}
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -165,23 +175,18 @@ export default function UpdateSourceElectricalForm({
                 />
 
                 <ButtonsWrapper>
-                    <Button variant="destructive" type="reset">
+                    <Button
+                        variant="destructive"
+                        type="reset"
+                        disabled={!form.formState.isDirty}
+                    >
                         {t("form:reset")}
                     </Button>
-                    <Button type="submit">{t("form:submit")}</Button>
+                    <Button type="submit" disabled={!form.formState.isDirty}>
+                        {t("form:submit")}
+                    </Button>
                 </ButtonsWrapper>
             </StyledForm>
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-`;
-const ButtonsWrapper = styled.div`
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
-`;

@@ -27,6 +27,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
+import { StyledForm } from "~/components/StyledForm";
 import { TowerGeometrySelect } from "~/features/towerGeometries";
 import trpc from "~/utils/trpc";
 
@@ -171,9 +172,3 @@ export default function GenerateTowersModal({
         </Dialog>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;

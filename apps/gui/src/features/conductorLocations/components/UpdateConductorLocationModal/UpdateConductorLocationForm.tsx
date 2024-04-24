@@ -18,6 +18,7 @@ import {
 import { t } from "i18next";
 import { useForm } from "react-hook-form";
 
+import { StyledForm } from "~/components/StyledForm";
 import trpc from "~/utils/trpc";
 
 interface UpdateConductorLocationFormProps {
@@ -86,9 +87,3 @@ export default function UpdateConductorLocationForm({
         </Form>
     );
 }
-
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;

@@ -24,12 +24,12 @@ export default function RowActions({
         Modals.DeleteTowerGeometryModal
     );
 
-    const displayDeleteModal = () => {
+    function displayDeleteModal() {
         deleteModal.open({
             geometryId: row.original.id,
             onClose: deleteModal.close,
         });
-    };
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

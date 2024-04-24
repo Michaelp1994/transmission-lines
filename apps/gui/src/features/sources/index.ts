@@ -1,13 +1,15 @@
 import CreateSourceForm from "./components/CreateSourceForm";
+import DeleteSourceModal from "./components/DeleteSourceModal";
 import SourceSelect from "./components/SourceSelect";
 import SourceTable from "./components/SourceTable";
 import UpdateSourceElectricalForm from "./components/UpdateSourceElectricalForm";
-import UpdateSourceForm from "./components/UpdateSourceForm";
+import UpdateSourceGeneralForm from "./components/UpdateSourceGeneralForm";
 
 export {
     SourceSelect,
     CreateSourceForm,
-    UpdateSourceForm,
+    UpdateSourceGeneralForm,
     UpdateSourceElectricalForm,
     SourceTable,
+    DeleteSourceModal,
 };
