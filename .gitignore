@@ -12,4 +12,3 @@ server/dist
 public/dist
 *.tsbuildinfo
 releases
-packages/better-sqlite3

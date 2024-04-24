@@ -340,9 +340,6 @@ importers:
       '@types/supertest':
         specifier: ^6.0.2
         version: 6.0.2
-      better-sqlite3:
-        specifier: ^9.5.0
-        version: 9.5.0
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -382,9 +379,6 @@ importers:
       drizzle-zod:
         specifier: ^0.5.1
         version: 0.5.1(drizzle-orm@0.30.9(@types/better-sqlite3@7.6.10)(@types/react@18.2.79)(better-sqlite3@9.5.0)(react@18.2.0)(sqlite3@5.1.7))(zod@3.23.0)
-      node-gyp-build:
-        specifier: ^4.8.0
-        version: 4.8.0
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
@@ -5537,10 +5531,6 @@ packages:
     peerDependenciesMeta:
       encoding:
         optional: true
-
-  node-gyp-build@4.8.0:
-    resolution: {integrity: sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==}
-    hasBin: true
 
   node-gyp@8.4.1:
     resolution: {integrity: sha512-olTJRgUtAb/hOXG0E93wZDs5YiJlgbXxTwQAFHyNlRsXQnYzUaF2aGgujZbw+hR8aF4ZG/rST57bWMWD16jr9w==}
@@ -12996,8 +12986,6 @@ snapshots:
       whatwg-url: 5.0.0
     optionalDependencies:
       encoding: 0.1.13
-
-  node-gyp-build@4.8.0: {}
 
   node-gyp@8.4.1:
     dependencies:

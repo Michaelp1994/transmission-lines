@@ -13,7 +13,6 @@
         "clean": "rm -rf .turbo node_modules dist",
         "db:push": "drizzle-kit push:sqlite",
         "db:studio": "drizzle-kit studio",
-        "install": "node-gyp-build",
         "lint": "eslint src/",
         "lint:fix": "eslint src/ --fix",
         "migrate": "tsx src/migrate.ts",
@@ -24,7 +23,6 @@
         "better-sqlite3": "^9.5.0",
         "drizzle-orm": "^0.30.9",
         "drizzle-zod": "^0.5.1",
-        "node-gyp-build": "^4.8.0",
         "uuid": "^9.0.1"
     },
     "devDependencies": {
