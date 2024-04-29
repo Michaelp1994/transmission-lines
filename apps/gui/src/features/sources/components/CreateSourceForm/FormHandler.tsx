@@ -1,5 +1,5 @@
-import { CreateSourceFormInput } from "@repo/validators/forms/Source.schema";
-import { ProjectID } from "@repo/validators/schemas/Ids.schema";
+import { SourceFormInput } from "@repo/validators/forms/Source.schema";
+import { ProjectID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
 import { FieldErrors } from "react-hook-form";
 
@@ -18,21 +18,24 @@ export default function CreateSourceForm({ projectId }: CreateSourceFormProps) {
     const createMutation = trpc.source.create.useMutation({
         onSuccess: (result) => {
             toast.success(`${result.name} has been added to the project.`);
-            navigate({ to: "/projects/$projectId", params: { projectId } });
+            navigate({
+                to: "/projects/$projectId/sources/$sourceId",
+                params: { projectId: result.projectId, sourceId: result.id },
+            });
         },
         onError: (error) => {
             toast.error(error.message);
         },
     });
 
-    async function handleValid(values: CreateSourceFormInput) {
+    async function handleValid(values: SourceFormInput) {
         await createMutation.mutateAsync({
             ...values,
             projectId,
         });
     }
 
-    async function handleInvalid(errors: FieldErrors<CreateSourceFormInput>) {
+    async function handleInvalid(errors: FieldErrors<SourceFormInput>) {
         console.log(errors);
     }
 

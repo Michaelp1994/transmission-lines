@@ -1,4 +1,4 @@
-import { ProjectID } from "@repo/validators/schemas/Ids.schema";
+import { ProjectID } from "@repo/validators/Ids";
 
 import ProjectDiagram from "./ProjectDiagram";
 
@@ -9,15 +9,31 @@ interface DiagramWrapperProps {
 }
 
 export default function DiagramWrapper({ projectId }: DiagramWrapperProps) {
-    const { data, error, isLoading } = trpc.project.getById.useQuery({
-        id: projectId,
-    });
-    if (isLoading) {
+    // const { data, error, isLoading } = trpc.source.getAllByProjectId.useQuery({
+    //     projectId,
+    // });
+
+    const [sources, transmissionLines] = trpc.useQueries((t) => [
+        t.source.getAllByProjectId({ projectId }),
+        t.transmissionLine.getAllByProjectId({ projectId }),
+    ]);
+
+    if (sources.isLoading || transmissionLines.isLoading) {
         return <div>Loading...</div>;
     }
-    if (error || !data) {
+    if (
+        sources.error ||
+        !sources.data ||
+        transmissionLines.error ||
+        !transmissionLines.data
+    ) {
         return <div>Error</div>;
     }
 
-    return <ProjectDiagram data={data} />;
+    return (
+        <ProjectDiagram
+            sources={sources.data}
+            transmissionLines={transmissionLines.data}
+        />
+    );
 }

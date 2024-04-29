@@ -20,7 +20,7 @@ interface DataTableProps<T> {
     columns: ColumnDef<T, any>[];
 }
 
-const DataTable = <T,>({ data, columns }: DataTableProps<T>) => {
+export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
     const { t } = useTranslation("general");
     const table = useReactTable({
         data,
@@ -93,7 +93,7 @@ const DataTable = <T,>({ data, columns }: DataTableProps<T>) => {
             </Table>
         </TableWrapper>
     );
-};
+}
 
 const NoResultsCell = styled(TableCell)`
     height: 6rem;
@@ -104,5 +104,3 @@ const TableWrapper = styled.div`
     border-radius: 0.375rem;
     border-width: 1px;
 `;
-
-export default DataTable;

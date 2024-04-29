@@ -1,6 +1,6 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { geometryId } from "./Ids.schema";
+import { geometryId } from "../Ids.schema";
 
 // create
 
@@ -11,10 +11,6 @@ export const createTowerGeometrySchema = z.object({
 export type CreateTowerGeometryInput = z.infer<
     typeof createTowerGeometrySchema
 >;
-
-export const defaultTowerGeometry: CreateTowerGeometryInput = {
-    name: "",
-};
 
 // update
 

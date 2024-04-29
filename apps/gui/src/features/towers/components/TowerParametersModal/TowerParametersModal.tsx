@@ -11,7 +11,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@repo/ui";
-import { TowerID } from "@repo/validators/schemas/Ids.schema";
+import { TowerID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 
 import trpc from "~/utils/trpc";

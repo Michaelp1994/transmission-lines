@@ -48,11 +48,12 @@ export default router({
     create: publicProcedure
         .input(createTransmissionLineSchema)
         .mutation(async ({ input, ctx: { db } }) => {
-            const [transmissionLine] = await db
+            const [newTransmissionLine] = await db
                 .insert(transmissionLines)
                 .values(input)
                 .returning();
-            return transmissionLine;
+            if (!newTransmissionLine) throw Error("Can't create source");
+            return newTransmissionLine;
         }),
     update: publicProcedure
         .input(updateTransmissionLineSchema)

@@ -21,6 +21,6 @@ export default defineConfig({
     base: "./",
     test: {
         environment: "jsdom",
-        setupFiles: "./tests/setup.ts",
+        setupFiles: "./tests/setup.tsx",
     },
 });

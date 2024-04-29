@@ -1,5 +1,5 @@
 import { UpdateTowerGeometryInput } from "@repo/validators";
-import { ProjectID } from "@repo/validators/schemas/Ids.schema";
+import { ProjectID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
 import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -13,9 +13,7 @@ interface UpdateProjectFormProps {
     projectId: ProjectID;
 }
 
-export default function UpdateProjectForm({
-    projectId,
-}: UpdateProjectFormProps) {
+export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("updateProjectForm");
 

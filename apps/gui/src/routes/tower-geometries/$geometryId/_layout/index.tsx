@@ -21,16 +21,6 @@ export const Route = createFileRoute("/tower-geometries/$geometryId/_layout/")({
 export default function TowerGeometryGeneral() {
     const { t } = useTranslation("towerGeometry");
     const { geometryId } = Route.useParams();
-    const { data, error, isLoading } = trpc.towerGeometry.getById.useQuery({
-        id: geometryId,
-    });
-
-    if (isLoading) {
-        return <div>{t("general:loading")}</div>;
-    }
-    if (error || !data) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
 
     return (
         <Card>
@@ -40,7 +30,7 @@ export default function TowerGeometryGeneral() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateTowerGeometryForm data={data} />
+                <UpdateTowerGeometryForm geometryId={geometryId} />
             </CardContent>
         </Card>
     );

@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     Card,
@@ -12,10 +11,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
 import { ConductorLocationTable } from "~/features/conductorLocations";
-import { CreateConductorLocationModalProps } from "~/features/conductorLocations/components/CreateConductorLocationModal/CreateConductorLocationModal";
+import { useCreateConductorLocationModal } from "~/utils/modals";
 
 export const Route = createFileRoute(
     "/tower-geometries/$geometryId/_layout/conductors"
@@ -26,16 +23,8 @@ export const Route = createFileRoute(
 export default function TowerGeometryConductors() {
     const { geometryId } = Route.useParams();
     const { t } = useTranslation("towerGeomeryConductors");
-    const createModal = useModal<CreateConductorLocationModalProps>(
-        Modals.CreateConductorLocationModal
-    );
+    const displayCreateModal = useCreateConductorLocationModal(geometryId);
 
-    function displayCreateModal() {
-        createModal.open({
-            geometryId,
-            onClose: createModal.close,
-        });
-    }
     return (
         <Card>
             <CardHeader>

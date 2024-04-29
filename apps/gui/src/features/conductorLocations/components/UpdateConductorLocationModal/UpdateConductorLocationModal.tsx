@@ -9,9 +9,7 @@ import {
 } from "@repo/ui";
 import { useTranslation } from "react-i18next";
 
-import UpdateConductorLocationForm from "./UpdateConductorLocationForm";
-
-import trpc from "~/utils/trpc";
+import FormHandler from "./FormHandler";
 
 export interface UpdateConductorLocationModalProps {
     conductorLocationId: number;
@@ -23,17 +21,6 @@ export default function UpdateConductorLocationModal({
     onClose,
 }: UpdateConductorLocationModalProps) {
     const { t } = useTranslation("updateConductorModal");
-    const { data, error, isLoading, isError } =
-        trpc.conductorLocations.getById.useQuery({
-            locationId: conductorLocationId,
-        });
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    if (isError || !data) {
-        return <div>Error: {error.message}</div>;
-    }
 
     return (
         <Dialog open defaultOpen onOpenChange={onClose}>
@@ -46,9 +33,9 @@ export default function UpdateConductorLocationModal({
                             {t("modalDescription")}
                         </DialogDescription>
                     </DialogHeader>
-                    <UpdateConductorLocationForm
-                        data={data}
+                    <FormHandler
                         onSubmit={onClose}
+                        conductorLocationId={conductorLocationId}
                     />
                 </DialogContent>
             </DialogPortal>

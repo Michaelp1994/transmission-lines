@@ -1,4 +1,4 @@
-import * as z from "zod";
+import { z } from "zod";
 
 export const sourceId = z.string().uuid();
 export const projectId = z.string().uuid();
@@ -7,7 +7,7 @@ export const geometryId = z.string().uuid();
 export const conductorTypeId = z.string().uuid();
 export const conductorId = z.string().uuid();
 export const towerId = z.string().uuid();
-export const locationId = z.number();
+export const locationId = z.number(); // conductor Location
 
 export type SourceID = z.infer<typeof sourceId>;
 export type ProjectID = z.infer<typeof projectId>;

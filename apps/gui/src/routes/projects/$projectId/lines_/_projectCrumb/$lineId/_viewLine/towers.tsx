@@ -15,11 +15,8 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
 import { TowerTable } from "~/features/towers";
-import { CreateTowerModalProps } from "~/features/towers/components/CreateTowerModal/CreateTowerModal";
-import { GenerateTowersModalProps } from "~/features/towers/components/GenerateTowersModal/GenerateTowersModal";
+import { useCreateTowerModal, useGenerateTowersModal } from "~/utils/modals";
 
 export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers"
@@ -29,26 +26,10 @@ export const Route = createFileRoute(
 
 export default function TransmissionLineTowers() {
     const { lineId } = Route.useParams();
-    const createModal = useModal<CreateTowerModalProps>(
-        Modals.CreateTowerModal
-    );
-    const generateModal = useModal<GenerateTowersModalProps>(
-        Modals.GenerateTowersModal
-    );
-
-    function displayCreateModal() {
-        createModal.open({
-            lineId,
-            onClose: createModal.close,
-        });
-    }
-    function displayGenerateModal() {
-        generateModal.open({
-            lineId,
-            onClose: generateModal.close,
-        });
-    }
     const { t } = useTranslation("towerConfiguration");
+    const displayCreateModal = useCreateTowerModal(lineId);
+    const displayGenerateModal = useGenerateTowersModal(lineId);
+
     return (
         <Card>
             <CardHeader>

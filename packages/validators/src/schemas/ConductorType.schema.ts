@@ -1,6 +1,6 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { conductorTypeId } from "./Ids.schema";
+import { conductorTypeId } from "../Ids.schema";
 // create
 
 export const createConductorTypeSchema = z.object({
@@ -21,21 +21,6 @@ export const createConductorTypeSchema = z.object({
 export type CreateConductorTypeInput = z.infer<
     typeof createConductorTypeSchema
 >;
-
-export const defaultConductorType: CreateConductorTypeInput = {
-    name: "",
-    surfaceArea: 0,
-    stranding: "",
-    outerDiameter: 0,
-    coreDiameter: 0,
-    layers: 0,
-    currentCapacity: 0,
-    dcResistance25: 0,
-    acResistance25: 0,
-    acResistance50: 0,
-    acResistance75: 0,
-    gmr: 0,
-};
 
 // update
 

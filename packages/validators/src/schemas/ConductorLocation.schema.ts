@@ -1,30 +1,24 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { geometryId, locationId } from "./Ids.schema";
+import { geometryId, locationId } from "../Ids.schema";
 
 // create
 
 export const createConductorLocationSchema = z.object({
-    x: z.coerce.number(),
-    y: z.coerce.number(),
+    x: z.number(),
+    y: z.number().positive(),
     geometryId,
 });
 
 export type CreateConductorLocationInput = z.infer<
     typeof createConductorLocationSchema
 >;
-
-export const defaultConductorLocation: CreateConductorLocationInput = {
-    x: 0,
-    y: 0,
-    geometryId: "",
-};
-
 // update
 
-export const updateConductorLocationSchema =
-    createConductorLocationSchema.extend({
-        id: z.number(),
+export const updateConductorLocationSchema = createConductorLocationSchema
+    .pick({ x: true, y: true })
+    .extend({
+        id: locationId,
     });
 
 export type UpdateConductorLocationInput = z.infer<

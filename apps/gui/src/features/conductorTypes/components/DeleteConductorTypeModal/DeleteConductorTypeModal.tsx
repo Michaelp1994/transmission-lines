@@ -11,9 +11,10 @@ import {
     AlertDialogTitle,
     buttonVariants,
 } from "@repo/ui";
-import { ConductorTypeID } from "@repo/validators/schemas/Ids.schema";
+import { ConductorTypeID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 
+import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -26,7 +27,6 @@ export default function DeleteConductorTypeModal({
     typeId,
     onClose,
 }: DeleteConductorTypeModalProps) {
-    const { t } = useTranslation("deleteConductorTypeModal");
     const utils = trpc.useUtils();
     const deleteMutation = trpc.conductorType.delete.useMutation({
         onError: (error) => {
@@ -38,38 +38,10 @@ export default function DeleteConductorTypeModal({
             toast.success(`${data.name} has been deleted`);
         },
     });
-    return (
-        <AlertDialog open defaultOpen onOpenChange={onClose}>
-            <AlertDialogPortal>
-                <AlertDialogOverlay />
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>
-                            {t("general:confirmationTitle")}
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            {t("general:cannotUndo")}
-                            <br />
-                            {t("deletionWarning")}
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel>
-                            {t("form:cancel")}
-                        </AlertDialogCancel>
-                        <AlertDialogAction
-                            className={buttonVariants({
-                                variant: "destructive",
-                            })}
-                            onClick={() =>
-                                deleteMutation.mutate({ id: typeId })
-                            }
-                        >
-                            {t("form:delete")}
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialogPortal>
-        </AlertDialog>
-    );
+
+    async function handleConfirm() {
+        await deleteMutation.mutateAsync({ id: typeId });
+    }
+
+    return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
 }

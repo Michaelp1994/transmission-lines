@@ -1,58 +1,35 @@
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
-    AlertDialogPortal,
-    AlertDialogTitle,
-    buttonVariants,
-} from "@repo/ui";
-import { useTranslation } from "react-i18next";
+import { SourceID } from "@repo/validators/Ids";
+
+import BaseDeleteModal from "~/components/BaseDeleteModal";
+import toast from "~/utils/toast";
+import trpc from "~/utils/trpc";
 
 export interface DeleteSourceModalProps {
     onClose: () => void;
-    onConfirm: () => void;
+    sourceId: SourceID;
 }
 
 export default function DeleteSourceModal({
     onClose,
-    onConfirm,
+    sourceId,
 }: DeleteSourceModalProps) {
-    const { t } = useTranslation("deleteSourceModal");
-    return (
-        <AlertDialog open defaultOpen onOpenChange={onClose}>
-            <AlertDialogPortal>
-                <AlertDialogOverlay />
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>
-                            {t("general:confirmationTitle")}
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            {t("general:cannotUndo")}
-                            <br />
-                            {t("deletionWarning")}
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel>
-                            {t("form:cancel")}
-                        </AlertDialogCancel>
-                        <AlertDialogAction
-                            className={buttonVariants({
-                                variant: "destructive",
-                            })}
-                            onClick={onConfirm}
-                        >
-                            {t("form:delete")}
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialogPortal>
-        </AlertDialog>
-    );
+    const utils = trpc.useUtils();
+    const deleteMutation = trpc.source.delete.useMutation({
+        async onSuccess(values) {
+            toast.success(`Source ${values.name} deleted`);
+            await utils.source.getAllByProjectId.invalidate({
+                projectId: values.projectId,
+            });
+        },
+        onError(error) {
+            toast.error("Failed to delete source");
+            console.error("Failed to delete source", error);
+        },
+    });
+    async function handleConfirm() {
+        await deleteMutation.mutateAsync({
+            id: sourceId,
+        });
+    }
+    return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
 }

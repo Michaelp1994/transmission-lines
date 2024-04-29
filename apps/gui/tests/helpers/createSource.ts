@@ -3,13 +3,13 @@ import { faker } from "@faker-js/faker";
 export function createSourceElectrical() {
     return {
         phases: faker.number.int(10),
-        voltage: faker.number.float({ max: 1000, fractionDigits: 3 }),
-        frequency: faker.number.int({ max: 60 }),
-        x1r1: faker.number.float({ max: 10, fractionDigits: 2 }),
-        x0r0: faker.number.float({ max: 10, fractionDigits: 2 }),
+        voltage: faker.number.float({ min: 1, max: 1000, fractionDigits: 3 }),
+        frequency: faker.number.int({ min: 1, max: 60 }),
+        x1r1: faker.number.float({ min: 1, max: 10, fractionDigits: 2 }),
+        x0r0: faker.number.float({ min: 1, max: 10, fractionDigits: 2 }),
         isc3: faker.number.int(25000),
         isc1: faker.number.int(25000),
-        resistance: faker.number.float({ max: 25, fractionDigits: 2 }),
+        resistance: faker.number.float({ min: 1, max: 25, fractionDigits: 2 }),
     };
 }
 
@@ -33,6 +33,8 @@ export function createFullSource() {
         projectId: faker.string.uuid(),
         ...createSource(),
         ...createSourceElectrical(),
+        x: 0,
+        y: 0,
     };
 }
 

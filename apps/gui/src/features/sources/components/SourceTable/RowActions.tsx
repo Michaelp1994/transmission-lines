@@ -11,9 +11,9 @@ import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 
 import { Source } from "./RowType";
-import useDeleteSourceModal from "../DeleteSourceModal/useDeleteSourceModal";
 
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
+import { useDeleteSourceModal } from "~/utils/modals";
 
 export default function SourceTableRowActions({
     row,

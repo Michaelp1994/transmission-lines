@@ -1,40 +1,42 @@
-import { CreateConductorLocationInput } from "@repo/validators";
+import { ConductorLocationFormInput } from "@repo/validators/forms";
 import { FieldErrors } from "react-hook-form";
 
-import CreateConductorLocationForm from "./BaseForm";
+import BaseForm from "./BaseForm";
 
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface FormHandlerProps {
     geometryId: string;
-    onSubmit: () => void;
+    onFinish: () => void;
 }
 
 export default function FormHandler({
     geometryId,
-    onSubmit,
+    onFinish,
 }: FormHandlerProps) {
-    const createMutation = trpc.conductorLocations.create.useMutation({});
     const utils = trpc.useUtils();
+    const createMutation = trpc.conductorLocations.create.useMutation({
+        onSuccess: async () => {
+            toast.success("Conductor location created");
+            await utils.conductorLocations.getAllByGeometryId.invalidate({
+                geometryId,
+            });
+            onFinish();
+        },
+        onError: (error) => {
+            toast.error("Failed to create conductor location");
+            console.error(error);
+        },
+    });
 
-    async function handleValid(data: CreateConductorLocationInput) {
-        await createMutation.mutateAsync({ ...data, geometryId });
-        await utils.conductorLocations.getAllByGeometryId.invalidate({
-            geometryId,
-        });
-        onSubmit();
+    function handleValid(data: ConductorLocationFormInput) {
+        createMutation.mutate({ ...data, geometryId });
     }
 
-    async function handleInvalid(
-        errors: FieldErrors<CreateConductorLocationInput>
-    ) {
+    function handleInvalid(errors: FieldErrors<ConductorLocationFormInput>) {
         console.log(errors);
     }
 
-    return (
-        <CreateConductorLocationForm
-            onValid={handleValid}
-            onInvalid={handleInvalid}
-        />
-    );
+    return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;
 }

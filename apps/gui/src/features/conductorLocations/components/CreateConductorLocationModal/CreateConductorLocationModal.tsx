@@ -5,7 +5,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@repo/ui";
-import { GeometryID } from "@repo/validators/schemas/Ids.schema";
+import { GeometryID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 
 import FormHandler from "./FormHandler";
@@ -30,7 +30,7 @@ export default function CreateConductorLocationModal({
                         {t("modalDescription")}
                     </DialogDescription>
                 </DialogHeader>
-                <FormHandler onSubmit={onClose} geometryId={geometryId} />
+                <FormHandler onFinish={onClose} geometryId={geometryId} />
             </DialogContent>
         </Dialog>
     );

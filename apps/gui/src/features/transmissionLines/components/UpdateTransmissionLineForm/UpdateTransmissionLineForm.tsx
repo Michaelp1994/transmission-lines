@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,16 +9,13 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    UpdateTransmissionLineInput,
-    updateTransmissionLineSchema,
-} from "@repo/validators";
+import { UpdateTransmissionLineInput } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-import { StyledForm } from "~/components/StyledForm";
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { SourceSelect } from "~/features/sources";
+import { useUpdateTransmissionLineForm } from "~/utils/forms";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -36,11 +31,7 @@ export default function UpdateTransmissionLineForm({
 
     const updateTransmissionLineMutation =
         trpc.transmissionLine.update.useMutation();
-
-    const form = useForm<UpdateTransmissionLineInput>({
-        resolver: zodResolver(updateTransmissionLineSchema),
-        values: data,
-    });
+    const form = useUpdateTransmissionLineForm(data);
 
     async function onSubmit(values: UpdateTransmissionLineInput) {
         await updateTransmissionLineMutation.mutateAsync(values);
@@ -115,7 +106,9 @@ export default function UpdateTransmissionLineForm({
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Save</Button>
+                <ButtonsWrapper>
+                    <Button type="submit">Save</Button>
+                </ButtonsWrapper>
             </StyledForm>
         </Form>
     );

@@ -11,25 +11,15 @@ import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 
 import { TowerGeometry } from "./RowType";
-import { DeleteTowerGeometryModalProps } from "../DeleteTowerGeometryModal/DeleteTowerGeometryModal";
 
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
+import { useDeleteTowerGeometryModal } from "~/utils/modals";
 
 export default function RowActions({
     row,
 }: CellContext<TowerGeometry, unknown>) {
-    const deleteModal = useModal<DeleteTowerGeometryModalProps>(
-        Modals.DeleteTowerGeometryModal
-    );
+    const displayDeleteModal = useDeleteTowerGeometryModal(row.original.id);
 
-    function displayDeleteModal() {
-        deleteModal.open({
-            geometryId: row.original.id,
-            onClose: deleteModal.close,
-        });
-    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

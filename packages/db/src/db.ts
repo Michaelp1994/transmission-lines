@@ -3,6 +3,7 @@ import {
     type BetterSQLite3Database,
     drizzle,
 } from "drizzle-orm/better-sqlite3";
+import isElectron from "is-electron";
 
 import * as schema from "./schemas";
 
@@ -12,8 +13,11 @@ export interface DBContext {
 }
 
 function databaseInit(path: string): DBContext {
+    const nativeBinding = isElectron()
+        ? "../../prebuilds/win32-x64/better-sqlite3.node"
+        : undefined;
     const conn = new Connection(path, {
-        nativeBinding: "../../prebuilds/win32-x64/better-sqlite3.node",
+        nativeBinding,
     });
     const db = drizzle(conn, { schema });
 

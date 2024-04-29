@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     DropdownMenu,
@@ -12,8 +11,6 @@ import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 
 import { TransmissionTower } from "./RowType";
-import { DeleteTowerModalProps } from "../DeleteTowerModal/DeleteTowerModal";
-import { UpdateTowerModalProps } from "../UpdateTowerModal/UpdateTowerModal";
 
 import {
     DeleteIcon,
@@ -21,33 +18,14 @@ import {
     MenuIcon,
     ViewIcon,
 } from "~/components/MenuIcons";
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
+import { useDeleteTowerModal, useUpdateTowerModal } from "~/utils/modals";
 
 export default function RowActions({
     row,
 }: CellContext<TransmissionTower, unknown>) {
-    const updateModal = useModal<UpdateTowerModalProps>(
-        Modals.UpdateTowerModal
-    );
-    const deleteModal = useModal<DeleteTowerModalProps>(
-        Modals.DeleteTowerModal
-    );
+    const displayUpdateModal = useUpdateTowerModal(row.original.id);
+    const displayDeleteModal = useDeleteTowerModal(row.original.id);
 
-    function displayUpdateModal() {
-        updateModal.open({
-            lineId: row.original.lineId,
-            towerId: row.original.id,
-            onClose: updateModal.close,
-        });
-    }
-    function displayDeleteModal() {
-        deleteModal.open({
-            lineId: row.original.lineId,
-            towerId: row.original.id,
-            onClose: deleteModal.close,
-        });
-    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

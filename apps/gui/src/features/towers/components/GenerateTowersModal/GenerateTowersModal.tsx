@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Dialog,
@@ -18,17 +16,12 @@ import {
     Input,
     NumberInput,
 } from "@repo/ui";
-import { LineID } from "@repo/validators/schemas/Ids.schema";
-import {
-    GenerateTowersInput,
-    defaultGenerateTowers,
-    generateTowersSchema,
-} from "@repo/validators/schemas/TransmissionTower.schema";
-import { useForm } from "react-hook-form";
+import { LineID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 
 import { StyledForm } from "~/components/StyledForm";
 import { TowerGeometrySelect } from "~/features/towerGeometries";
+import { useGenerateTowersForm } from "~/utils/forms";
 import trpc from "~/utils/trpc";
 
 export interface GenerateTowersModalProps {
@@ -43,18 +36,12 @@ export default function GenerateTowersModal({
     const { t } = useTranslation("generateTowers");
     const utils = trpc.useUtils();
     const generateMutation = trpc.tower.generate.useMutation();
-    const form = useForm<GenerateTowersInput>({
-        resolver: zodResolver(generateTowersSchema),
-        values: {
-            ...defaultGenerateTowers,
-            lineId,
-        },
-    });
+    const form = useGenerateTowersForm();
 
     const handleSubmit = form.handleSubmit(async (values) => {
-        await generateMutation.mutateAsync(values);
+        await generateMutation.mutateAsync({ ...values, lineId });
         await utils.tower.getAllByLineId.invalidate({
-            lineId: values.lineId,
+            lineId,
         });
         onClose();
     });

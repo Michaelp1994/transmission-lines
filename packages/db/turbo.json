@@ -1,11 +1,15 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+    "$schema": "https://turbo.build/schema.json",
 
-  "extends": ["//"],
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+    "extends": ["//"],
+    "pipeline": {
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"]
+        },
+        "db:push": {
+            "cache": false,
+            "interactive": true
+        }
     }
-  }
 }

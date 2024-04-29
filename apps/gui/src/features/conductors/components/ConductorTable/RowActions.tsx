@@ -10,35 +10,17 @@ import {
 import { CellContext } from "@tanstack/react-table";
 
 import { Conductor } from "./RowType";
-import { DeleteConductorModalProps } from "../DeleteConductorModal/DeleteConductorModal";
-import { UpdateConductorModalProps } from "../UpdateConductorModal/UpdateConductorModal";
 
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
+import {
+    useDeleteConductorModal,
+    useUpdateConductorModal,
+} from "~/utils/modals";
 
 export default function RowActions({ row }: CellContext<Conductor, unknown>) {
-    const updateModal = useModal<UpdateConductorModalProps>(
-        Modals.UpdateConductorModal
-    );
-    const deleteModal = useModal<DeleteConductorModalProps>(
-        Modals.DeleteConductorModal
-    );
+    const displayUpdateModal = useUpdateConductorModal(row.original.id);
+    const displayDeleteModal = useDeleteConductorModal(row.original.id);
 
-    function displayUpdateModal() {
-        updateModal.open({
-            lineId: row.original.lineId,
-            conductorId: row.original.id,
-            onClose: updateModal.close,
-        });
-    }
-    function displayDeleteModal() {
-        deleteModal.open({
-            lineId: row.original.lineId,
-            conductorId: row.original.id,
-            onClose: deleteModal.close,
-        });
-    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

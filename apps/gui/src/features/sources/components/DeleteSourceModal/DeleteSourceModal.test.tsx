@@ -3,76 +3,57 @@ import { Button } from "@repo/ui";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
-import DeleteSourceModal from "./DeleteSourceModal";
-import useDeleteSourceModal from "./useDeleteSourceModal";
-
-import ModalRenderer from "~/components/modals/modal-renderer";
+import ModalProvider from "~/contexts/ModalProvider";
+import { useDeleteSourceModal } from "~/utils/modals";
 import { render, screen, within } from "~test-utils";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
 
-function ModalButton({ id }: { id: string }) {
-    const displayDeleteModal = useDeleteSourceModal(id);
-
-    return <Button onClick={displayDeleteModal}>Delete</Button>;
-}
-
 describe("Delete Source Modal", () => {
-    test("confirm delete", async () => {
+    test("correct API call on confirmation", async () => {
         const user = userEvent.setup();
+        const sourceId = faker.string.uuid();
+        const trpcMockFn = vi.fn(async () => ({ id: sourceId }));
 
-        const mockCloseFn = vi.fn();
-        const mockConfirmFn = vi.fn();
+        const displayDeleteModal = useDeleteSourceModal(sourceId);
 
         render(
-            <DeleteSourceModal
-                onClose={mockCloseFn}
-                onConfirm={mockConfirmFn}
-            />
+            <MockTrpcProvider mockFn={trpcMockFn}>
+                <ModalProvider>
+                    <Button onClick={displayDeleteModal}>Delete</Button>;
+                </ModalProvider>
+            </MockTrpcProvider>
         );
-
-        await user.click(screen.getByRole("button", { name: "Confirm" }));
-        expect(mockConfirmFn).toBeCalled();
-        expect(mockCloseFn).toBeCalled();
-    });
-
-    test("cancel delete", async () => {
-        const user = userEvent.setup();
-
-        const mockCloseFn = vi.fn();
-        const mockConfirmFn = vi.fn();
-
-        render(
-            <DeleteSourceModal
-                onClose={mockCloseFn}
-                onConfirm={mockConfirmFn}
-            />
+        await user.click(screen.getByRole("button", { name: "Delete" }));
+        const dialog = await screen.findByRole("alertdialog");
+        await user.click(
+            within(dialog).getByRole("button", { name: /confirm/i })
         );
-
-        await user.click(screen.getByRole("button", { name: "Cancel" }));
-        expect(mockConfirmFn).not.toBeCalled();
-        expect(mockCloseFn).toBeCalled();
+        expect(trpcMockFn).toBeCalledWith({
+            id: sourceId,
+        });
+        expect(dialog).not.toBeInTheDocument();
     });
-
-    test("trpc call", async () => {
+    test("doesn't call API on cancel", async () => {
         const user = userEvent.setup();
 
         const trpcMockFn = vi.fn(async () => ({ name: "test" }));
         const sourceId = faker.string.uuid();
+        const displayDeleteModal = useDeleteSourceModal(sourceId);
 
         render(
             <MockTrpcProvider mockFn={trpcMockFn}>
-                <ModalRenderer />
-                <ModalButton id={sourceId} />
+                <ModalProvider>
+                    <Button onClick={displayDeleteModal}>Delete</Button>;
+                </ModalProvider>
             </MockTrpcProvider>
         );
         await user.click(screen.getByRole("button", { name: "Delete" }));
-        const modal = await screen.findByRole("alertdialog");
+        const dialog = await screen.findByRole("alertdialog");
         await user.click(
-            within(modal).getByRole("button", { name: "Confirm" })
+            within(dialog).getByRole("button", { name: /cancel/i })
         );
-        expect(trpcMockFn).toBeCalled();
-        expect(trpcMockFn).toBeCalledWith({
-            id: sourceId,
-        });
+
+        expect(trpcMockFn).not.toBeCalled();
+        expect(dialog).not.toBeInTheDocument();
     });
 });

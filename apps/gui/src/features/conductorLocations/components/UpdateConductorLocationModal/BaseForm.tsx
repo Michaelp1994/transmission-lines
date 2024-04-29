@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,40 +9,31 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    UpdateConductorLocationInput,
-    updateConductorLocationSchema,
-} from "@repo/validators";
-import { t } from "i18next";
-import { useForm } from "react-hook-form";
+import { ConductorLocationFormInput } from "@repo/validators/forms";
+import { FieldErrors } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import { StyledForm } from "~/components/StyledForm";
-import trpc from "~/utils/trpc";
+import { useUpdateConductorLocationForm } from "~/utils/forms";
 
 interface UpdateConductorLocationFormProps {
-    data: UpdateConductorLocationInput;
-    onSubmit: () => void;
+    data: ConductorLocationFormInput;
+    onValid: (values: ConductorLocationFormInput) => void;
+    onInvalid: (errors: FieldErrors<ConductorLocationFormInput>) => void;
 }
 
-export default function UpdateConductorLocationForm({
+export default function BaseForm({
     data,
-    onSubmit,
+    onValid,
+    onInvalid,
 }: UpdateConductorLocationFormProps) {
-    const updateMutation = trpc.conductorLocations.update.useMutation();
-    const utils = trpc.useUtils();
+    const form = useUpdateConductorLocationForm(data);
+    const { t } = useTranslation("updateConductorLocationModal");
 
-    const form = useForm<UpdateConductorLocationInput>({
-        resolver: zodResolver(updateConductorLocationSchema),
-        values: data,
-    });
-
-    const handleSubmit = form.handleSubmit(async (values) => {
-        await updateMutation.mutateAsync(values);
-        await utils.conductorLocations.getAllByGeometryId.invalidate({
-            geometryId: values.geometryId,
-        });
-        onSubmit();
-    });
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
 
     return (
         <Form {...form}>
@@ -82,7 +71,7 @@ export default function UpdateConductorLocationForm({
                     )}
                 />
 
-                <Button type="submit">{t("form:update")}</Button>
+                <Button type="submit">{t("form:submit")}</Button>
             </StyledForm>
         </Form>
     );

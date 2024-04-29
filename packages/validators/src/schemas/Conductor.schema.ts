@@ -1,6 +1,6 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { conductorId, conductorTypeId, lineId } from "./Ids.schema";
+import { conductorId, conductorTypeId, lineId } from "../Ids.schema";
 
 /** @see https://github.com/aiji42/zod-i18n for Internationalization */
 
@@ -17,17 +17,6 @@ export const createConductorSchema = z.object({
 
 export type CreateConductorInput = z.infer<typeof createConductorSchema>;
 
-export const defaultConductor: CreateConductorInput = {
-    name: "",
-    fromPhase: 0,
-    toPhase: 0,
-    isNeutral: false,
-    bundleNumber: 1,
-    bundleSpacing: 0,
-    typeId: "",
-    lineId: "",
-};
-
 // generate
 
 export const generateConductorsSchema = z.object({
@@ -40,15 +29,6 @@ export const generateConductorsSchema = z.object({
 });
 
 export type GenerateConductorsInput = z.infer<typeof generateConductorsSchema>;
-
-export const defaultGenerateConductors: GenerateConductorsInput = {
-    lineId: "",
-    phaseTypeId: "",
-    neutralTypeId: "",
-    phases: 3,
-    circuits: 2,
-    neutrals: 2,
-};
 
 // getAll
 export const getAllConductorsSchema = z.object({}).optional();
@@ -73,9 +53,18 @@ export type GetConductorByIdInput = z.infer<typeof getConductorByIdSchema>;
 
 // update
 
-export const updateConductorSchema = createConductorSchema.extend({
-    id: conductorId,
-});
+export const updateConductorSchema = createConductorSchema
+    .pick({
+        bundleNumber: true,
+        bundleSpacing: true,
+        fromPhase: true,
+        isNeutral: true,
+        name: true,
+        toPhase: true,
+    })
+    .extend({
+        id: conductorId,
+    });
 
 export type UpdateConductorInput = z.infer<typeof updateConductorSchema>;
 

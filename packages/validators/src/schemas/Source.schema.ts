@@ -1,30 +1,44 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { projectId, sourceId } from "./Ids.schema";
+import { projectId, sourceId } from "../Ids.schema";
 
 // create
 
 export const createSourceSchema = z.object({
     name: z.string().min(2).max(50).trim(),
-    phases: z.coerce
+    phases: z
         .number({
             invalid_type_error: "Please enter a number",
         })
         .int({ message: "Please provide an integer value" })
         .min(0)
         .max(10),
-    voltage: z.coerce.number().positive(),
-    x1r1: z.coerce.number().min(0),
-    x0r0: z.coerce.number().min(0),
-    isc3: z.coerce.number().min(0),
-    isc1: z.coerce.number().min(0),
+    voltage: z.number().positive(),
+    x1r1: z.number().min(0),
+    x0r0: z.number().min(0),
+    isc3: z.number().min(0),
+    isc1: z.number().min(0),
     enabled: z.boolean(),
-    resistance: z.coerce.number().positive(),
-    frequency: z.coerce.number().positive(),
+    resistance: z.number().positive(),
+    frequency: z.number().positive(),
     projectId,
 });
 
 export type CreateSourceInput = z.infer<typeof createSourceSchema>;
+
+// update positions
+
+export const updateSourcePositionsSchema = z
+    .object({
+        id: sourceId,
+        x: z.number(),
+        y: z.number(),
+    })
+    .array();
+
+export type UpdateSourcePositionsInput = z.infer<
+    typeof updateSourcePositionsSchema
+>;
 
 // update general
 

@@ -1,4 +1,4 @@
-import { GeometryID } from "@repo/validators/schemas/Ids.schema";
+import { GeometryID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 
 import columns from "./columns";

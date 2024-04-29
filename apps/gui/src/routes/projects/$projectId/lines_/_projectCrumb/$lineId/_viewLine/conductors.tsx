@@ -15,11 +15,11 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
 import { ConductorTable } from "~/features/conductors";
-import { CreateConductorModalProps } from "~/features/conductors/components/CreateConductorModal/CreateConductorModal";
-import { GenerateConductorsModalProps } from "~/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
+import {
+    useCreateConductorModal,
+    useGenerateConductorsModal,
+} from "~/utils/modals";
 
 export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors"
@@ -30,25 +30,9 @@ export const Route = createFileRoute(
 export default function TransmissionLineConductors() {
     const { lineId } = Route.useParams();
     const { t } = useTranslation("transmissionLineConductors");
-    const createModal = useModal<CreateConductorModalProps>(
-        Modals.CreateConductorModal
-    );
-    const generateModal = useModal<GenerateConductorsModalProps>(
-        Modals.GenerateConductorsModal
-    );
+    const displayCreateModal = useCreateConductorModal(lineId);
+    const displayGenerateModal = useGenerateConductorsModal(lineId);
 
-    function displayCreateModal() {
-        createModal.open({
-            lineId,
-            onClose: createModal.close,
-        });
-    }
-    function displayGenerateModal() {
-        generateModal.open({
-            lineId,
-            onClose: generateModal.close,
-        });
-    }
     return (
         <Card>
             <CardHeader>

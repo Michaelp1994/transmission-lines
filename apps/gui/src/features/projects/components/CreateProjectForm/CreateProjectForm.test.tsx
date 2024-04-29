@@ -9,8 +9,14 @@ import { render, screen } from "~test-utils";
 
 describe("CreateProjectForm", () => {
     test("renders form fields and buttons", () => {
-        const submitHandler = vi.fn();
-        render(<CreateProjectForm onSubmit={submitHandler} />);
+        const validFnHandler = vi.fn();
+        const invalidFnHandler = vi.fn();
+        render(
+            <CreateProjectForm
+                onValid={validFnHandler}
+                onInvalid={invalidFnHandler}
+            />
+        );
 
         // Assert that form fields are rendered
         expect(screen.getByLabelText("Name")).toBeInTheDocument();
@@ -25,10 +31,16 @@ describe("CreateProjectForm", () => {
     });
 
     test("submits form with valid input", async () => {
-        const submitHandler = vi.fn();
+        const validFnHandler = vi.fn();
+        const invalidFnHandler = vi.fn();
         const user = userEvent.setup();
 
-        render(<CreateProjectForm onSubmit={submitHandler} />);
+        render(
+            <CreateProjectForm
+                onValid={validFnHandler}
+                onInvalid={invalidFnHandler}
+            />
+        );
 
         // Fill in form fields with valid input
         await user.type(screen.getByLabelText("Name"), "TestProject123");
@@ -37,17 +49,23 @@ describe("CreateProjectForm", () => {
 
         // Assert that the form is submitted successfully
         // Add your assertions here
-        expect(submitHandler).toHaveBeenCalledTimes(1);
-        expect(submitHandler).toHaveBeenCalledWith({
+        expect(validFnHandler).toHaveBeenCalledTimes(1);
+        expect(validFnHandler).toHaveBeenCalledWith({
             name: "TestProject123",
         });
     });
 
     test("displays error message for invalid input", async () => {
-        const submitHandler = vi.fn();
+        const validFnHandler = vi.fn();
+        const invalidFnHandler = vi.fn();
         const user = userEvent.setup();
 
-        render(<CreateProjectForm onSubmit={submitHandler} />);
+        render(
+            <CreateProjectForm
+                onValid={validFnHandler}
+                onInvalid={invalidFnHandler}
+            />
+        );
         await user.type(screen.getByLabelText("Name"), " ");
         // Fill in form fields with invalid input
 
@@ -57,6 +75,7 @@ describe("CreateProjectForm", () => {
         expect(
             screen.getByText("String must contain at least 3 character(s)")
         ).toBeInTheDocument();
-        expect(submitHandler).toHaveBeenCalledTimes(0);
+        expect(validFnHandler).toHaveBeenCalledTimes(0);
+        expect(invalidFnHandler).toHaveBeenCalledTimes(1);
     });
 });

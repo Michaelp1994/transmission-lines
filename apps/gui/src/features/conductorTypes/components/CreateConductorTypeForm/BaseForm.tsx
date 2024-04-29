@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -12,52 +10,29 @@ import {
     Input,
     NumberInput,
 } from "@repo/ui";
-import {
-    UpdateConductorTypeInput,
-    defaultConductorType,
-    updateConductorTypeSchema,
-} from "@repo/validators";
-import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { ConductorTypeFormInput } from "@repo/validators/forms";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import toast from "~/utils/toast";
-import trpc from "~/utils/trpc";
+import { useCreateConductorTypeForm } from "~/utils/forms";
 
-interface UpdateConductorTypeFormProps {
-    data: UpdateConductorTypeInput;
+interface BaseFromProps {
+    onValid: (values: ConductorTypeFormInput) => void;
+    onInvalid: (errors: FieldErrors<ConductorTypeFormInput>) => void;
 }
 
-export default function UpdateConductorTypeForm({
-    data,
-}: UpdateConductorTypeFormProps) {
-    const updateConductorTypeMutation = trpc.conductorType.update.useMutation();
-    const navigate = useNavigate();
-
+export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
     const { t } = useTranslation("conductorType");
+    const form = useCreateConductorTypeForm();
 
-    const form = useForm<UpdateConductorTypeInput>({
-        resolver: zodResolver(updateConductorTypeSchema),
-        defaultValues: defaultConductorType,
-        values: data,
-    });
-
-    async function onSubmit(values: UpdateConductorTypeInput) {
-        await updateConductorTypeMutation.mutate(values);
-        if (updateConductorTypeMutation.error) {
-            console.log(updateConductorTypeMutation.error);
-            return;
-        }
-        toast.success(`${values.name} has been updated.`);
-        navigate({ to: "/conductor-types" });
-    }
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
-            >
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="name"

@@ -11,23 +11,12 @@ import { Link } from "@tanstack/react-router";
 import { CellContext } from "@tanstack/react-table";
 
 import { Project } from "./RowType";
-import { DeleteProjectModalProps } from "../DeleteProjectModal/DeleteProjectModal";
 
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import { Modals } from "~/components/modals/config";
-import useModal from "~/components/modals/use-modal";
+import { useDeleteProjectModal } from "~/utils/modals";
 
 export default function RowActions({ row }: CellContext<Project, unknown>) {
-    const deleteModal = useModal<DeleteProjectModalProps>(
-        Modals.DeleteProjectModal
-    );
-
-    function displayDeleteModal() {
-        deleteModal.open({
-            projectId: row.original.id,
-            onClose: deleteModal.close,
-        });
-    }
+    const displayDeleteModal = useDeleteProjectModal(row.original.id);
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

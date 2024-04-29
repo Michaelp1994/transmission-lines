@@ -1,67 +1,34 @@
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogOverlay,
-    AlertDialogPortal,
-    AlertDialogTitle,
-    buttonVariants,
-} from "@repo/ui";
-import { ProjectID } from "@repo/validators/schemas/Ids.schema";
-import { useTranslation } from "react-i18next";
+import { ProjectID } from "@repo/validators/Ids";
 
+import BaseDeleteModal from "~/components/BaseDeleteModal";
+import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteProjectModalProps {
-    projectId: ProjectID;
     onClose: () => void;
+    projectId: ProjectID;
 }
 
 export default function DeleteProjectModal({
-    projectId,
     onClose,
+    projectId,
 }: DeleteProjectModalProps) {
-    const { t } = useTranslation("deleteProjectModal");
     const utils = trpc.useUtils();
-    const deleteMutation = trpc.project.delete.useMutation();
+    const deleteMutation = trpc.project.delete.useMutation({
+        async onSuccess(values) {
+            toast.success(`Project ${values.name} deleted`);
+            await utils.project.getAll.invalidate();
+            onClose();
+        },
+        onError(error) {
+            toast.error("Failed to delete project.");
+            console.error(error);
+        },
+    });
+
     async function handleConfirm() {
         await deleteMutation.mutateAsync({ id: projectId });
-        await utils.project.getAll.invalidate();
     }
-    return (
-        <AlertDialog open defaultOpen onOpenChange={onClose}>
-            <AlertDialogPortal>
-                <AlertDialogOverlay />
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>
-                            {t("general:confirmationTitle")}
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            {t("general:cannotUndo")}
-                            <br />
-                            {t("deletionWarning")}
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel>
-                            {t("form:cancel")}
-                        </AlertDialogCancel>
-                        <AlertDialogAction
-                            className={buttonVariants({
-                                variant: "destructive",
-                            })}
-                            onClick={handleConfirm}
-                        >
-                            {t("form:delete")}
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialogPortal>
-        </AlertDialog>
-    );
+
+    return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
 }

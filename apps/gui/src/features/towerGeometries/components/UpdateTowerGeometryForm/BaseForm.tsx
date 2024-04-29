@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,50 +9,36 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    UpdateTowerGeometryInput,
-    updateTowerGeometrySchema,
-} from "@repo/validators";
-import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import toast from "~/utils/toast";
-import trpc from "~/utils/trpc";
+import { useUpdateTowerGeometryForm } from "~/utils/forms";
 
 interface UpdateTowerGeometryFormProps {
-    data: UpdateTowerGeometryInput;
+    data: TowerGeometryFormInput;
+    onValid: (values: TowerGeometryFormInput) => void;
+    onInvalid: (errors: FieldErrors<TowerGeometryFormInput>) => void;
 }
 
-export default function UpdateTowerGeometryForm({
+export default function BaseForm({
     data,
+    onValid,
+    onInvalid,
 }: UpdateTowerGeometryFormProps) {
-    const navigate = useNavigate();
     const { t } = useTranslation("towerGeometry");
 
-    const updateTowerGeometryMutation = trpc.towerGeometry.update.useMutation();
-    const form = useForm<UpdateTowerGeometryInput>({
-        resolver: zodResolver(updateTowerGeometrySchema),
-        values: data || { name: "", id: "" },
-    });
+    const form = useUpdateTowerGeometryForm(data);
 
-    async function onSubmit(values: UpdateTowerGeometryInput) {
-        await updateTowerGeometryMutation.mutateAsync(values);
-        if (updateTowerGeometryMutation.error) {
-            console.log(updateTowerGeometryMutation.error);
-            return;
-        }
-        toast.success(`${values.name} has been updated.`);
-        navigate({ to: "/tower-geometries" });
-    }
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
+
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
-            >
-                {" "}
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="name"

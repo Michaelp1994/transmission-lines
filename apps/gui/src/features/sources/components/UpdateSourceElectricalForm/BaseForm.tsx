@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,
     Form,
@@ -10,14 +9,12 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    UpdateSourceElectricalFormInput,
-    updateSourceElectricalFormSchema,
-} from "@repo/validators/forms/Source.schema";
-import { FieldErrors, useForm } from "react-hook-form";
+import { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import { useUpdateSourceElectricalForm } from "~/utils/forms";
 
 interface UpdateSourceElectricalFormProps {
     data: UpdateSourceElectricalFormInput;
@@ -32,10 +29,7 @@ export default function UpdateSourceElectricalForm({
 }: UpdateSourceElectricalFormProps) {
     const { t } = useTranslation("updateSourceElectricalForm");
 
-    const form = useForm<UpdateSourceElectricalFormInput>({
-        resolver: zodResolver(updateSourceElectricalFormSchema),
-        values: data,
-    });
+    const form = useUpdateSourceElectricalForm(data);
 
     const handleSubmit = form.handleSubmit(
         (values) => onValid(values),

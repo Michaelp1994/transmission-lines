@@ -1,6 +1,7 @@
 import { CreateProjectInput } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { TRPCClientError } from "@trpc/client";
+import { FieldErrors } from "react-hook-form";
 
 import CreateProjectForm from "./CreateProjectForm";
 
@@ -9,18 +10,17 @@ import trpc from "~/utils/trpc";
 
 export default function FormHandler() {
     const navigate = useNavigate();
-    const createMutation = trpc.project.create.useMutation({});
-    async function handleSubmit(values: CreateProjectInput) {
-        try {
-            const newProject = await createMutation.mutateAsync(values);
-            toast.success(`${newProject.name} has been created.`);
+    const createMutation = trpc.project.create.useMutation({
+        onSuccess(data) {
+            toast.success(`${data.name} has been created.`);
             navigate({
                 to: "/projects/$projectId",
                 params: {
-                    projectId: newProject.id,
+                    projectId: data.id,
                 },
             });
-        } catch (error) {
+        },
+        onError(error) {
             if (error instanceof TRPCClientError) {
                 if (error?.data?.zodError) {
                     toast.error(
@@ -36,7 +36,17 @@ export default function FormHandler() {
             } else {
                 toast.error(`Server Side Error!`);
             }
-        }
+        },
+    });
+    function handleValid(values: CreateProjectInput) {
+        createMutation.mutate(values);
     }
-    return <CreateProjectForm onSubmit={handleSubmit} />;
+
+    function handleInvalid(error: FieldErrors<CreateProjectInput>) {
+        console.log(error);
+    }
+
+    return (
+        <CreateProjectForm onValid={handleValid} onInvalid={handleInvalid} />
+    );
 }

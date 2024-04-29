@@ -491,5 +491,41 @@
     "name": {
       "label": "Name"
     }
+  },
+  "createProjectForm": {
+    "name": {
+      "label": "Name"
+    }
+  },
+  "createConductorLocationModal": {
+    "x": {
+      "label": "X"
+    },
+    "y": {
+      "label": "Y"
+    }
+  },
+  "createConductorModal": {
+    "name": {
+      "label": "Name"
+    },
+    "fromPhase": {
+      "label": "From Phase"
+    },
+    "toPhase": {
+      "label": "To Phase"
+    },
+    "bundleNumber": {
+      "label": "Bundle Number"
+    },
+    "bundleSpacing": {
+      "label": "Bundle Spacing"
+    },
+    "isNeutral": {
+      "label": "Is Neutral"
+    },
+    "typeId": {
+      "label": "Conductor Type"
+    }
   }
 }

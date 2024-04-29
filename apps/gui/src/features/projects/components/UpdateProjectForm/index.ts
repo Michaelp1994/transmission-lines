@@ -1,3 +1,3 @@
-import UpdateProjectForm from "./UpdateProjectForm";
+import UpdateProjectForm from "./FormWrapper";
 
 export default UpdateProjectForm;

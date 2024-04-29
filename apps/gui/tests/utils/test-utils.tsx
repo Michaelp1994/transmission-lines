@@ -1,5 +1,5 @@
-import { RenderOptions, render } from "@testing-library/react";
-import React, { ReactElement } from "react";
+import { type RenderOptions, render } from "@testing-library/react";
+import React, { type ReactElement } from "react";
 
 import I18nProvider from "~/contexts/I18nProvider";
 

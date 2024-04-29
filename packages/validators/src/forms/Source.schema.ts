@@ -1,6 +1,8 @@
-import * as z from "zod";
+import { z } from "zod";
 
-export const createSourceFormSchema = z.object({
+// create / update
+
+export const sourceFormSchema = z.object({
     name: z.string().min(2).max(50).trim(),
     phases: z.coerce
         .number({
@@ -19,9 +21,9 @@ export const createSourceFormSchema = z.object({
     frequency: z.coerce.number().positive(),
 });
 
-export type CreateSourceFormInput = z.infer<typeof createSourceFormSchema>;
+export type SourceFormInput = z.infer<typeof sourceFormSchema>;
 
-export const defaultSource: CreateSourceFormInput = {
+export const defaultSource: SourceFormInput = {
     name: "",
     phases: 3,
     voltage: 138,
@@ -36,7 +38,7 @@ export const defaultSource: CreateSourceFormInput = {
 
 // update general source
 
-export const updateSourceGeneralFormSchema = createSourceFormSchema.pick({
+export const updateSourceGeneralFormSchema = sourceFormSchema.pick({
     name: true,
     enabled: true,
 });
@@ -47,7 +49,7 @@ export type UpdateSourceGeneralFormInput = z.infer<
 
 // update electrical source
 
-export const updateSourceElectricalFormSchema = createSourceFormSchema.pick({
+export const updateSourceElectricalFormSchema = sourceFormSchema.pick({
     phases: true,
     voltage: true,
     x1r1: true,

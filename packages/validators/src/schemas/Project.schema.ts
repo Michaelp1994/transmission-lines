@@ -1,18 +1,12 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { projectId } from "./Ids.schema";
-import { updateSourceSchema } from "./Source.schema";
-import { updateTransmissionLineSchema } from "./TransmissionLine.schema";
+import { projectId } from "../Ids.schema";
 
 export const createProjectSchema = z.object({
     name: z.string().min(3).max(100),
 });
 
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;
-
-export const defaultProject: CreateProjectInput = {
-    name: "",
-};
 
 // update
 

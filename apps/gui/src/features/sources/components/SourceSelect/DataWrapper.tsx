@@ -1,4 +1,4 @@
-import { ProjectID } from "@repo/validators/schemas/Ids.schema";
+import { ProjectID } from "@repo/validators/Ids";
 import { forwardRef } from "react";
 
 import SourceSelect from "./SourceSelect";

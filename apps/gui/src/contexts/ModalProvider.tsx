@@ -1,8 +1,21 @@
 import { Suspense, useEffect, useState } from "react";
 
-import { CurrentModal, currentModal } from "./current-modal";
+import { CurrentModal, currentModal } from "~/utils/modals/current-modal";
 
-export default function ModalRenderer() {
+interface ModalProviderProps {
+    children: React.ReactNode;
+}
+
+export default function ModalProvider({ children }: ModalProviderProps) {
+    return (
+        <>
+            <ModalRenderer />
+            {children}
+        </>
+    );
+}
+
+function ModalRenderer() {
     const [modal, updateCurrentModal] = useState<CurrentModal<any> | null>(
         null
     );

@@ -1,3 +1,3 @@
-import CreateTowerGeometryForm from "./CreateTowerGeometryForm";
+import CreateTowerGeometryForm from "./FormHandler";
 
 export default CreateTowerGeometryForm;

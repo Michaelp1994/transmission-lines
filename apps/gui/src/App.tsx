@@ -1,5 +1,5 @@
-import ModalRenderer from "./components/modals/modal-renderer";
 import I18nProvider from "./contexts/I18nProvider";
+import ModalProvider from "./contexts/ModalProvider";
 import RouterProvider from "./contexts/RouterProvider";
 import TrpcProvider from "./contexts/TrpcProvider";
 import "@repo/ui/global.css";
@@ -8,8 +8,9 @@ export default function App() {
     return (
         <TrpcProvider>
             <I18nProvider>
-                <ModalRenderer />
-                <RouterProvider />
+                <ModalProvider>
+                    <RouterProvider />
+                </ModalProvider>
             </I18nProvider>
         </TrpcProvider>
     );

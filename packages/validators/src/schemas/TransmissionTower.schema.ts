@@ -1,6 +1,6 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { geometryId, lineId, towerId } from "./Ids.schema";
+import { geometryId, lineId, towerId } from "../Ids.schema";
 
 // create
 
@@ -15,14 +15,6 @@ export const createTransmissionTowerSchema = z.object({
 export type CreateTransmissionTowerInput = z.infer<
     typeof createTransmissionTowerSchema
 >;
-
-export const defaultTransmissionTower: CreateTransmissionTowerInput = {
-    name: "",
-    resistance: 15,
-    distance: 1,
-    geometryId: "",
-    lineId: "",
-};
 
 // getAllTowersByLineId
 
@@ -60,15 +52,6 @@ export const generateTowersSchema = z.object({
 });
 
 export type GenerateTowersInput = z.infer<typeof generateTowersSchema>;
-
-export const defaultGenerateTowers: GenerateTowersInput = {
-    namePrefix: "T",
-    geometryId: "",
-    numTowers: 10,
-    resistance: 15,
-    distance: 10,
-    lineId: "",
-};
 
 // getTowerParameters
 

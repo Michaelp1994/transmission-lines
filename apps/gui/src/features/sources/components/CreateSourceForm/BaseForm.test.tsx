@@ -10,7 +10,6 @@ const labels = {
     name: /name/i,
     phases: /phases/i,
     frequency: /frequency/i,
-    // enabled: /enabled/i,
     voltage: /voltage/i,
     x1r1: /x1\/r1/i,
     x0r0: /x0\/r0/i,
@@ -39,9 +38,10 @@ describe("Create Source Form", () => {
     });
 
     test("submits form with valid input", async () => {
+        const user = userEvent.setup();
+
         const validHandler = vi.fn();
         const invalidHandler = vi.fn();
-        const user = userEvent.setup();
 
         render(<BaseForm onValid={validHandler} onInvalid={invalidHandler} />);
 
@@ -66,7 +66,6 @@ describe("Create Source Form", () => {
 
         // Submit the form
         await user.click(screen.getByRole("button", { name: "Submit" }));
-
         // Assert that the form is submitted successfully
         expect(invalidHandler).toHaveBeenCalledTimes(0);
 

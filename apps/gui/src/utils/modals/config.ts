@@ -16,9 +16,16 @@ export enum Modals {
     DeleteProjectModal,
     DeleteTowerGeometryModal,
     DeleteSourceModal,
+    DeleteTransmissionLineModal,
 }
 
 export const modalsConfig: Record<Modals, LazyExoticComponent<any>> = {
+    [Modals.DeleteTransmissionLineModal]: React.lazy(
+        () =>
+            import(
+                "~/features/transmissionLines/components/DeleteTransmissionLineModal"
+            )
+    ),
     [Modals.DeleteSourceModal]: React.lazy(
         () => import("~/features/sources/components/DeleteSourceModal")
     ),

@@ -1,5 +1,5 @@
 import { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
-import { SourceID } from "@repo/validators/schemas/Ids.schema";
+import { SourceID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
 import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";

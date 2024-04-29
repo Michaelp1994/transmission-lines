@@ -12,12 +12,12 @@ import {
     PopoverTrigger,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { forwardRef, useState } from "react";
+import { forwardRef, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { RouterOutputs } from "~/utils/trpc";
 
-interface SourceSelectProps
+export interface SourceSelectProps
     extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
     data: RouterOutputs["source"]["getAllByProjectId"];
     onChange?: (value: string | number | readonly string[] | undefined) => void;
@@ -33,19 +33,18 @@ const SourceSelect = forwardRef<HTMLButtonElement, SourceSelectProps>(
                 onChange(currentSource === value ? "" : currentSource);
             setOpen(false);
         }
-
-        function displayName(currentSource: typeof value) {
-            if (currentSource) {
-                const source = data.find(
-                    (source) => source.id === currentSource
+        const currentValue = useMemo(() => {
+            if (value) {
+                const currentSource = data.find(
+                    (source) => source.id === value
                 );
-                if (source) {
-                    return source.name;
+                if (currentSource) {
+                    return currentSource.name;
                 }
-                throw Error("Can't find source name.");
+                throw Error("Can't find source.");
             }
             return t("select");
-        }
+        }, [data, t, value]);
 
         return (
             <Popover open={open} onOpenChange={setOpen}>
@@ -57,7 +56,7 @@ const SourceSelect = forwardRef<HTMLButtonElement, SourceSelectProps>(
                         ref={ref}
                         {...props}
                     >
-                        {displayName(value)}
+                        {currentValue}
 
                         <StyledChevron />
                     </StyledButton>

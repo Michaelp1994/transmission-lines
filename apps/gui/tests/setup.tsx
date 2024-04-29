@@ -12,6 +12,9 @@ vi.mock("@tanstack/react-router", () => ({
     useNavigate() {
         return vi.fn();
     },
+    Link({ children }: { children: React.ReactNode }) {
+        return <a href="#test">{children}</a>;
+    },
 }));
 
 beforeAll(() => {

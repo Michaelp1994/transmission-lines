@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -10,46 +8,32 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    NumberInput,
 } from "@repo/ui";
-import {
-    CreateConductorTypeInput,
-    createConductorTypeSchema,
-    defaultConductorType,
-} from "@repo/validators";
-import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { ConductorTypeFormInput } from "@repo/validators/forms/ConductorType.schema";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import toast from "~/utils/toast";
-import trpc from "~/utils/trpc";
+import { useUpdateConductorTypeForm } from "~/utils/forms";
 
-export default function CreateConductorTypeForm() {
-    const navigate = useNavigate();
+interface BaseFormProps {
+    data: ConductorTypeFormInput;
+    onValid: (values: ConductorTypeFormInput) => void;
+    onInvalid: (errors: FieldErrors<ConductorTypeFormInput>) => void;
+}
+
+export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
     const { t } = useTranslation("conductorType");
-    const createConductorMutation = trpc.conductorType.create.useMutation();
-    const form = useForm<CreateConductorTypeInput>({
-        resolver: zodResolver(createConductorTypeSchema),
-        defaultValues: defaultConductorType,
-    });
+    const form = useUpdateConductorTypeForm(data);
 
-    async function onSubmit(values: CreateConductorTypeInput) {
-        try {
-            await createConductorMutation.mutateAsync(values);
-            toast.success(`${values.name} has been added.`);
-            navigate({ to: "/conductor-types" });
-        } catch (e) {
-            console.log(e);
-            toast.error("There was an error");
-        }
-    }
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
+
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
-            >
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="name"
@@ -73,7 +57,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("surfaceArea.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("surfaceArea.description")}
@@ -89,7 +73,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("outerDiameter.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("outerDiameter.description")}
@@ -105,7 +89,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("coreDiameter.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("coreDiameter.description")}
@@ -137,7 +121,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("layers.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("layers.description")}
@@ -153,7 +137,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("currentCapacity.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("currentCapacity.description")}
@@ -169,7 +153,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("dcResistance25.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("dcResistance25.description")}
@@ -185,7 +169,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("acResistance25.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("acResistance25.description")}
@@ -201,7 +185,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("acResistance50.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("acResistance50.description")}
@@ -217,7 +201,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("acResistance75.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("acResistance75.description")}
@@ -233,7 +217,7 @@ export default function CreateConductorTypeForm() {
                         <FormItem>
                             <FormLabel>{t("gmr.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("gmr.description")}

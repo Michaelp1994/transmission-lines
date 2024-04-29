@@ -73,8 +73,6 @@ describe("Update Source Form", () => {
         const invalidHandler = vi.fn();
         const source = createSourceElectrical();
         const newSource = createSourceElectrical();
-        console.log("source: ", source);
-        console.log("newSource: ", newSource);
         render(
             <Form
                 data={source}

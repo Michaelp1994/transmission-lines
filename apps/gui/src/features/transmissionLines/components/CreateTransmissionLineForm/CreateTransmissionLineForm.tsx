@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,57 +9,37 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    CreateTransmissionLineInput,
-    createTransmissionLineSchema,
-    defaultTransmissionLine,
-} from "@repo/validators";
-import { ProjectID } from "@repo/validators/schemas/Ids.schema";
-import { useNavigate } from "@tanstack/react-router";
-import { useForm } from "react-hook-form";
+import { TransmissionLineFormInput } from "@repo/validators/forms";
+import { ProjectID } from "@repo/validators/Ids";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { SourceSelect } from "~/features/sources";
-import toast from "~/utils/toast";
-import trpc from "~/utils/trpc";
+import { useCreateTransmissionLineForm } from "~/utils/forms";
 
 interface CreateTransmissionLineFormProps {
     projectId: ProjectID;
+    onValid: (values: TransmissionLineFormInput) => void;
+    onInvalid: (errors: FieldErrors<TransmissionLineFormInput>) => void;
 }
 
 export default function CreateTransmissionLineForm({
     projectId,
+    onValid,
+    onInvalid,
 }: CreateTransmissionLineFormProps) {
     const { t } = useTranslation("transmissionLine");
+    const form = useCreateTransmissionLineForm();
 
-    const navigate = useNavigate();
-    const createTransmissionLineMutation =
-        trpc.transmissionLine.create.useMutation();
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (errors) => onInvalid(errors)
+    );
 
-    const form = useForm<CreateTransmissionLineInput>({
-        resolver: zodResolver(createTransmissionLineSchema),
-        values: {
-            ...defaultTransmissionLine,
-            projectId,
-        },
-    });
-
-    async function onSubmit(values: CreateTransmissionLineInput) {
-        const response =
-            await createTransmissionLineMutation.mutateAsync(values);
-        toast.success(`${values.name} has been added to the project.`);
-        navigate({
-            to: `/projects/$projectId/lines/$lineId`,
-            params: { projectId, lineId: response.id },
-        });
-    }
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
-            >
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="name"

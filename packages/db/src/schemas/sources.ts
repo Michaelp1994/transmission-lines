@@ -20,12 +20,12 @@ export const sources = sqliteTable("sources", {
     isc1: integer("isc1").notNull(),
     resistance: real("resistance").notNull(),
     frequency: integer("frequency").notNull(),
-    enabled: integer("id", { mode: "boolean" }).notNull(),
+    enabled: integer("enabled", { mode: "boolean" }).notNull(),
     projectId: text("project_id")
         .references(() => projects.id)
         .notNull(),
-    x: real("x").notNull(),
-    y: real("y").notNull(),
+    x: real("x").notNull().default(0),
+    y: real("y").notNull().default(0),
 });
 
 export type Source = typeof sources.$inferSelect;

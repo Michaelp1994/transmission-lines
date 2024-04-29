@@ -33,6 +33,7 @@
         "@types/uuid": "^9.0.8",
         "drizzle-kit": "^0.20.17",
         "eslint": "^8.57.0",
+        "is-electron": "^2.2.2",
         "tsx": "^4.7.2",
         "typescript": "^5.4.5",
         "unplugin-swc": "^1.4.5",

@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { styled } from "@linaria/react";
 import {
     Button,
@@ -12,19 +11,16 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    CreateSourceFormInput,
-    createSourceFormSchema,
-    defaultSource,
-} from "@repo/validators/forms/Source.schema";
-import { FieldErrors, useForm } from "react-hook-form";
+import { SourceFormInput } from "@repo/validators/forms/Source.schema";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { StyledForm } from "~/components/StyledForm";
+import { useCreateSourceForm } from "~/utils/forms";
 
 interface CreateSourceFormProps {
-    onValid: (values: CreateSourceFormInput) => void;
-    onInvalid: (errors: FieldErrors<CreateSourceFormInput>) => void;
+    onValid: (values: SourceFormInput) => void;
+    onInvalid: (errors: FieldErrors<SourceFormInput>) => void;
 }
 
 export default function CreateSourceForm({
@@ -33,10 +29,7 @@ export default function CreateSourceForm({
 }: CreateSourceFormProps) {
     const { t } = useTranslation("createSourceForm");
 
-    const form = useForm<CreateSourceFormInput>({
-        resolver: zodResolver(createSourceFormSchema),
-        values: defaultSource,
-    });
+    const form = useCreateSourceForm();
 
     const handleSubmit = form.handleSubmit(
         (values) => onValid(values),

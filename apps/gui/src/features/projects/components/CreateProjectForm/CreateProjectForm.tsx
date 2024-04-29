@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,47 +9,44 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    type CreateProjectInput,
-    createProjectSchema,
-    defaultProject,
-} from "@repo/validators/schemas/Project.schema";
-import { useForm } from "react-hook-form";
+import { type ProjectFormInput } from "@repo/validators/forms";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import { useCreateProjectForm } from "~/utils/forms";
 
 interface CreateProjectFormProps {
-    onSubmit: (values: CreateProjectInput) => Promise<void>;
+    onValid: (values: ProjectFormInput) => void;
+    onInvalid: (error: FieldErrors<ProjectFormInput>) => void;
 }
 
 export default function CreateProjectForm({
-    onSubmit,
+    onValid,
+    onInvalid,
 }: CreateProjectFormProps) {
     const { t } = useTranslation("createProjectForm");
+    const form = useCreateProjectForm();
 
-    const form = useForm<CreateProjectInput>({
-        resolver: zodResolver(createProjectSchema),
-        defaultValues: defaultProject,
-    });
+    const handleSubmit = form.handleSubmit(
+        (values) => onValid(values),
+        (error) => onInvalid(error)
+    );
 
     return (
         <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit((values) => onSubmit(values))}
-                onReset={() => form.reset()}
-            >
+            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
                 <FormField
                     control={form.control}
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input type="text" {...field} />
                             </FormControl>
                             <FormDescription>
-                                Name of the project
+                                {t("name.description")}
                             </FormDescription>
                             <FormMessage />
                         </FormItem>

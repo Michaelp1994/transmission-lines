@@ -1,48 +1,70 @@
 import { faker } from "@faker-js/faker";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 
-import SourceSelect from "./SourceSelect";
+import DataWrapper from "./DataWrapper";
 
 import { render, screen, within } from "~test-utils";
 import { createSources } from "~tests/helpers/createSource";
+import MockTrpcProvider from "~tests/mocks/TrpcProvider";
 
-Element.prototype.scrollIntoView = vi.fn();
+describe("Source Select Data Wrapper", () => {
+    const sources = createSources(10);
+    const projectId = faker.string.uuid();
 
-describe("SourceSelect", () => {
-    const data = createSources(10);
-    test("selecting a source triggers onChange", async () => {
+    Element.prototype.scrollIntoView = vi.fn();
+
+    test("all sources are displayed", async () => {
         const user = userEvent.setup();
-        const mockOnChange = vi.fn();
+        const mockFn = vi.fn(() => Promise.resolve(sources));
         render(
-            <SourceSelect
-                data={data}
-                onChange={mockOnChange}
-                value={data[0]!.id}
-            />
+            <MockTrpcProvider mockFn={mockFn}>
+                <DataWrapper projectId={projectId} />
+            </MockTrpcProvider>
         );
-        expect(screen.getByRole("combobox")).toBeInTheDocument();
-        await user.click(screen.getByRole("combobox"));
+        expect(mockFn).toBeCalledWith({ projectId });
+        await user.click(await screen.findByRole("combobox"));
         const dialog = await screen.findByRole("dialog");
-        await user.click(within(dialog).getByText(data[1]!.name));
-        expect(mockOnChange).toHaveBeenCalledWith(data[1]!.id);
+        const options = within(dialog).getAllByRole("option");
+        options.forEach((option, index) => {
+            expect(option.textContent === sources[index]!.name);
+        });
     });
+
+    test("selecting a source", async () => {
+        const user = userEvent.setup();
+        const mockFn = vi.fn(() => Promise.resolve(sources));
+        const mockOnChange = vi.fn();
+        const index = faker.number.int({ min: 0, max: 9 });
+        render(
+            <MockTrpcProvider mockFn={mockFn}>
+                <DataWrapper projectId={projectId} onChange={mockOnChange} />
+            </MockTrpcProvider>
+        );
+        await user.click(await screen.findByRole("combobox"));
+        const dialog = await screen.findByRole("dialog");
+        await user.click(within(dialog).getByText(sources[index]!.name));
+
+        expect(mockOnChange).toHaveBeenCalledWith(sources[index]!.id);
+    });
+
     test("unselecting a source triggers empty onChange", async () => {
         const user = userEvent.setup();
-
+        const mockFn = vi.fn(() => Promise.resolve(sources));
         const mockOnChange = vi.fn();
+        const index = faker.number.int({ min: 0, max: 9 });
         render(
-            <SourceSelect
-                data={data}
-                onChange={mockOnChange}
-                value={data[0]!.id}
-            />
+            <MockTrpcProvider mockFn={mockFn}>
+                <DataWrapper
+                    projectId={projectId}
+                    onChange={mockOnChange}
+                    value={sources[index]!.id}
+                />
+            </MockTrpcProvider>
         );
-        expect(screen.getByRole("combobox")).toBeInTheDocument();
-        await user.click(screen.getByRole("combobox"));
+        await user.click(await screen.findByRole("combobox"));
         const dialog = await screen.findByRole("dialog");
-        await user.click(within(dialog).getByText(data[0]!.name));
+        await user.click(within(dialog).getByText(sources[index]!.name));
         expect(mockOnChange).toHaveBeenCalledWith("");
     });
-    test.todo("");
 });

@@ -13,10 +13,12 @@ import { CellContext } from "@tanstack/react-table";
 import { TransmissionLine } from "./RowType";
 
 import { DeleteIcon, EditIcon, MenuIcon } from "~/components/MenuIcons";
+import { useDeleteTransmissionLineModal } from "~/utils/modals";
 
 export default function ConductorTableRowActions({
     row,
 }: CellContext<TransmissionLine, unknown>) {
+    const displayDeleteModal = useDeleteTransmissionLineModal(row.original.id);
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -43,7 +45,7 @@ export default function ConductorTableRowActions({
                         <span>Edit</span>
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={displayDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

@@ -1,3 +1,3 @@
-import UpdateTowerGeometryForm from "./UpdateTowerGeometryForm";
+import UpdateTowerGeometryForm from "./FormHandler";
 
 export default UpdateTowerGeometryForm;

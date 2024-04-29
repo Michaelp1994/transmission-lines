@@ -1,26 +1,19 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { lineId, projectId } from "./Ids.schema";
+import { lineId, projectId, sourceId } from "../Ids.schema";
 
 // create
 
 export const createTransmissionLineSchema = z.object({
     name: z.string().min(2).max(50).trim(),
-    fromSourceId: z.string().min(1, { message: "Please select a Source" }),
-    toSourceId: z.string().nullable(),
+    fromSourceId: sourceId,
+    toSourceId: sourceId.nullable(),
     projectId,
 });
 
 export type CreateTransmissionLineInput = z.infer<
     typeof createTransmissionLineSchema
 >;
-
-export const defaultTransmissionLine: CreateTransmissionLineInput = {
-    name: "",
-    fromSourceId: "",
-    toSourceId: "",
-    projectId: "",
-};
 
 // update
 

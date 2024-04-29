@@ -14,31 +14,42 @@ import {
     ScrollArea,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { forwardRef, useState } from "react";
+import { forwardRef, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import trpc from "~/utils/trpc";
+import { RouterOutputs } from "~/utils/trpc";
 
 interface ConductorTypeSelectProps
-    extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+    extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onChange"> {
+    data: RouterOutputs["conductorType"]["getAll"];
+    onChange?: (value: string | number | readonly string[] | undefined) => void;
+}
 
 const ConductorTypeSelect = forwardRef<
     HTMLButtonElement,
     ConductorTypeSelectProps
->(({ value, onChange, ...props }, ref) => {
+>(({ data, value, onChange, ...props }, ref) => {
     const { t } = useTranslation("conductorType");
-    const { data, error, isLoading } = trpc.conductorType.getAll.useQuery();
     const [open, setOpen] = useState(false);
-    function handleSelect(currentValue: string) {
+
+    function handleSelect(currentValue: typeof value) {
         if (onChange) onChange(currentValue === value ? "" : currentValue);
         setOpen(false);
     }
-    if (isLoading) {
-        return <div>{t("general:loading")}</div>;
-    }
-    if (error || !data) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
+
+    const selectedName = useMemo(() => {
+        if (value) {
+            const currentConductorType = data.find(
+                (conductorType) => conductorType.id === value
+            );
+            if (currentConductorType) {
+                return currentConductorType.name;
+            }
+            throw Error("Can't find conductor type.");
+        }
+        return t("select");
+    }, [data, t, value]);
+
     return (
         <Popover open={open} onOpenChange={setOpen} modal>
             <PopoverTrigger asChild>
@@ -50,11 +61,7 @@ const ConductorTypeSelect = forwardRef<
                         ref={ref}
                         {...props}
                     >
-                        {value
-                            ? data.find(
-                                  (conductorType) => conductorType.id === value
-                              )?.name
-                            : t("selectConductorType")}
+                        {selectedName}
                         <StyledChevron />
                     </StyledButton>
                 </FormControl>
@@ -66,7 +73,7 @@ const ConductorTypeSelect = forwardRef<
                         <CommandEmpty>{t("noneFound")}</CommandEmpty>
                         <CommandList>
                             <CommandGroup>
-                                {data?.map((conductorType) => (
+                                {data.map((conductorType) => (
                                     <CommandItem
                                         key={conductorType.id}
                                         value={conductorType.id}

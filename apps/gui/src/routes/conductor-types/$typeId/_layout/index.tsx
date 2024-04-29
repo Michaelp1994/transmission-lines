@@ -9,7 +9,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { UpdateConductorTypeForm } from "~/features/conductorTypes";
-import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute("/conductor-types/$typeId/_layout/")({
     component: UpdateConductorTypePage,
@@ -22,16 +21,6 @@ export default function UpdateConductorTypePage() {
     const { typeId } = Route.useParams();
     const { t } = useTranslation("conductorType");
 
-    const { data, isLoading, error } = trpc.conductorType.getById.useQuery({
-        id: typeId,
-    });
-
-    if (isLoading) {
-        return <div>{t("general:loading")}</div>;
-    }
-    if (error || !data) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
     return (
         <Card>
             <CardHeader>
@@ -40,7 +29,7 @@ export default function UpdateConductorTypePage() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateConductorTypeForm data={data} />
+                <UpdateConductorTypeForm conductorTypeId="typeId" />
             </CardContent>
         </Card>
     );

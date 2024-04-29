@@ -1,5 +1,6 @@
 import { styled } from "@linaria/react";
-import { useCallback, useMemo } from "react";
+import { Button } from "@repo/ui";
+import { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
     Background,
     BackgroundVariant,
@@ -7,80 +8,131 @@ import ReactFlow, {
     Edge,
     Node,
     addEdge,
-    useEdgesState,
-    useNodesState,
+    applyEdgeChanges,
+    applyNodeChanges,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
 import { NodeData, NodeType } from "./NodeData";
 import Source from "./Source";
+import TransmissionLine from "./TransmissionLine";
 
-import { RouterOutputs } from "~/utils/trpc";
+import { ButtonsWrapper } from "~/components/StyledForm";
+import toast from "~/utils/toast";
+import trpc, { RouterOutputs } from "~/utils/trpc";
 
 interface ProjectDiagramProps {
-    data: RouterOutputs["project"]["getById"];
+    sources: RouterOutputs["source"]["getAllByProjectId"];
+    transmissionLines: RouterOutputs["transmissionLine"]["getAllByProjectId"];
 }
 
 const nodeTypes = { source: Source };
 
-export default function ProjectDiagram({ data }: ProjectDiagramProps) {
+const edgeTypes = { default: TransmissionLine };
+
+export default function ProjectDiagram({
+    sources,
+    transmissionLines,
+}: ProjectDiagramProps) {
+    const [dirty, setDirty] = useState(false);
+    const utils = trpc.useUtils();
+    const mutation = trpc.source.updatePosition.useMutation({
+        onSuccess() {
+            toast.success("Saved");
+            utils.project.getById.invalidate();
+        },
+    });
+
     const initialNodes: Node<NodeData, NodeType>[] = useMemo(
         () =>
-            data.sources.map((source, num) => ({
+            sources.map((source) => ({
                 id: source.id,
                 type: "source",
-                position: { x: num, y: num },
+                position: { x: source.x, y: source.y },
                 data: {
                     label: source.name,
                     projectId: source.projectId,
                     sourceId: source.id,
                 },
             })),
-        [data.sources]
+        [sources]
     );
 
     const initialEdges: Edge[] = useMemo(
         () =>
-            data.transmissionLines.map((tline) => ({
+            transmissionLines.map((tline) => ({
                 id: tline.id,
                 source: tline.fromSourceId,
                 target: tline.toSourceId!,
+                type: "default",
+                data: {
+                    label: tline.name,
+                    projectId: tline.projectId,
+                    lineId: tline.id,
+                },
             })),
-        [data.transmissionLines]
+        [transmissionLines]
     );
 
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const [nodes, setNodes] = useState(initialNodes);
+    const [edges, setEdges] = useState(initialEdges);
 
     const onConnect = useCallback(
         (params) => setEdges((eds) => addEdge(params, eds)),
         [setEdges]
     );
 
+    const onNodesChange = useCallback((changes) => {
+        setDirty(true);
+        return setNodes((nds) => applyNodeChanges(changes, nds));
+    }, []);
+    const onEdgesChange = useCallback(
+        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+        []
+    );
+
+    function handleSave() {
+        setDirty(false);
+        const changes = nodes.map((node) => ({
+            id: node.id,
+            x: node.position.x,
+            y: node.position.y,
+        }));
+        mutation.mutate(changes);
+    }
     return (
-        <Wrapper>
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                nodeTypes={nodeTypes}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-            >
-                <Controls />
-                {/* <MiniMap /> */}
-                <Background
-                    variant={BackgroundVariant.Dots}
-                    gap={12}
-                    size={1}
-                />
-            </ReactFlow>
-        </Wrapper>
+        <>
+            <DiagramWrapper>
+                <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    nodeTypes={nodeTypes}
+                    edgeTypes={edgeTypes}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    onConnect={onConnect}
+                >
+                    <Controls />
+                    {/* <MiniMap /> */}
+                    <Background
+                        variant={BackgroundVariant.Dots}
+                        gap={12}
+                        size={1}
+                    />
+                </ReactFlow>
+            </DiagramWrapper>
+            <ButtonsWrapper>
+                <Button onClick={handleSave} disabled={!dirty}>
+                    Save
+                </Button>
+            </ButtonsWrapper>
+        </>
     );
 }
 
-const Wrapper = styled.div`
+const DiagramWrapper = styled.div`
     display: flex;
     height: 500px;
     border: 1px solid black;
+    margin-bottom: 1rem;
 `;

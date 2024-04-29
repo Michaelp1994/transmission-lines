@@ -4,12 +4,7 @@ import { describe, expect, test, vi } from "vitest";
 
 import FormHandler from "./FormHandler";
 
-import {
-    render,
-    screen,
-    waitFor,
-    waitForElementToBeRemoved,
-} from "~test-utils";
+import { render, screen, waitForElementToBeRemoved } from "~test-utils";
 import { createSourceElectrical } from "~tests/helpers/createSource";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
 
@@ -35,9 +30,7 @@ describe("Update Source Form", () => {
                 <FormHandler sourceId={sourceId} />
             </MockTrpcProvider>
         );
-        // await waitFor(() =>
-        //     expect(screen.getByText("Loading")).not.toBeInTheDocument()
-        // );
+
         await waitForElementToBeRemoved(screen.getByText(/Loading/i));
         expect(mockTrpcFn).toHaveBeenCalledWith({ id: sourceId });
 

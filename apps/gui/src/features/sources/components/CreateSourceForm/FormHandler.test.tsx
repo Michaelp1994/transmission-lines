@@ -22,10 +22,6 @@ const labels = {
 } as const;
 
 describe("Create Source Form Handler", () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
-    });
-
     test("submits form with valid input", async () => {
         const user = userEvent.setup();
         const projectId = faker.string.uuid();

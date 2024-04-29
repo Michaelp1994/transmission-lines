@@ -1,5 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { styled } from "@linaria/react";
 import {
     Button,
     Form,
@@ -11,15 +9,12 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    UpdateProjectInput,
-    UpdateTowerGeometryInput,
-    updateTowerGeometrySchema,
-} from "@repo/validators";
-import { FieldErrors, useForm } from "react-hook-form";
+import { UpdateProjectInput } from "@repo/validators";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import { useUpdateTowerGeometryForm } from "~/utils/forms";
 
 interface BaseFormProps {
     data: UpdateProjectInput;
@@ -29,11 +24,7 @@ interface BaseFormProps {
 
 export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
     const { t } = useTranslation("updateProjectForm");
-
-    const form = useForm<UpdateTowerGeometryInput>({
-        resolver: zodResolver(updateTowerGeometrySchema),
-        values: data,
-    });
+    const form = useUpdateTowerGeometryForm(data);
 
     const handleSubmit = form.handleSubmit(
         (values) => onValid(values),

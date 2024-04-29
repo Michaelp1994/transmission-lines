@@ -8,6 +8,7 @@ import {
     getSourceByIdSchema,
     updateSourceElectricalSchema,
     updateSourceGeneralSchema,
+    updateSourcePositionsSchema,
 } from "@repo/validators/schemas/Source.schema";
 
 import { publicProcedure, router } from "../trpc";
@@ -101,6 +102,17 @@ export default router({
             if (!updatedSource) throw Error("Can't update source");
 
             return updatedSource;
+        }),
+    updatePosition: publicProcedure
+        .input(updateSourcePositionsSchema)
+        .mutation(async ({ input, ctx: { db } }) => {
+            input.forEach(async (source) => {
+                await db
+                    .update(sources)
+                    .set({ x: source.x, y: source.y })
+                    .where(eq(sources.id, source.id));
+            });
+            // throw new Error("Not implemented");
         }),
     delete: publicProcedure
         .input(deleteSourceSchema)

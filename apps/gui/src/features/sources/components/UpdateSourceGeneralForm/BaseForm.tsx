@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Button,
     Form,
@@ -10,14 +9,12 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import {
-    UpdateSourceGeneralFormInput,
-    updateSourceGeneralFormSchema,
-} from "@repo/validators/forms/Source.schema";
-import { FieldErrors, useForm } from "react-hook-form";
+import { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
+import { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import { useUpdateSourceGeneralForm } from "~/utils/forms";
 
 interface UpdateSourceFormProps {
     data: UpdateSourceGeneralFormInput;
@@ -31,10 +28,8 @@ export default function UpdateSourceForm({
     onInvalid,
 }: UpdateSourceFormProps) {
     const { t } = useTranslation("updateSourceForm");
-    const form = useForm<UpdateSourceGeneralFormInput>({
-        resolver: zodResolver(updateSourceGeneralFormSchema),
-        values: data,
-    });
+
+    const form = useUpdateSourceGeneralForm(data);
 
     const handleSubmit = form.handleSubmit(
         (values) => onValid(values),

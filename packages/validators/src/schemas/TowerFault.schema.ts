@@ -1,10 +1,10 @@
-import * as z from "zod";
+import { z } from "zod";
 
-import { updateTransmissionTowerSchema } from "./TransmissionTower.schema";
+import { lineId, towerId } from "@/Ids.schema";
 
 export const faultLocation = z.object({
-    transmissionLine: z.string().uuid(),
-    tower: updateTransmissionTowerSchema.shape.id,
+    transmissionLine: lineId,
+    tower: towerId,
 });
 
 export const towerFaultSchema = z.object({
