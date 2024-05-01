@@ -17,6 +17,8 @@ vi.mock("@tanstack/react-router", () => ({
     },
 }));
 
+Element.prototype.scrollIntoView = vi.fn();
+
 beforeAll(() => {
     global.ResizeObserver = class ResizeObserver {
         observe() {

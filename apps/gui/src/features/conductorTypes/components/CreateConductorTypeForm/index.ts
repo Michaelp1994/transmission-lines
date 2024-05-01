@@ -1,3 +1,3 @@
-import CreateConductorTypeForm from "./FormWrapper";
+import CreateConductorTypeForm from "./CreateConductorTypeForm";
 
 export default CreateConductorTypeForm;

@@ -1,5 +1,7 @@
 const { resolve } = require("node:path");
+
 const importRules = require("./rules/imports");
+
 const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */

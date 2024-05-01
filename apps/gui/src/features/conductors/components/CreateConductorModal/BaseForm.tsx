@@ -10,7 +10,6 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    NumberInput,
 } from "@repo/ui";
 import { ConductorFormInput } from "@repo/validators/forms/Conductor.schema";
 import { FieldErrors } from "react-hook-form";
@@ -58,7 +57,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                         <FormItem>
                             <FormLabel>{t("fromPhase.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("fromPhase.description")}
@@ -75,7 +74,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                         <FormItem>
                             <FormLabel>{t("toPhase.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("toPhase.description")}
@@ -91,7 +90,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                         <FormItem>
                             <FormLabel>{t("bundleNumber.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("bundleNumber.description")}
@@ -107,7 +106,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                         <FormItem>
                             <FormLabel>{t("bundleSpacing.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("bundleSpacing.description")}

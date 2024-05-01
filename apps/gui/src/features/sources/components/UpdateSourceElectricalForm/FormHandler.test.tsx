@@ -31,7 +31,7 @@ describe("Update Source Form", () => {
             </MockTrpcProvider>
         );
 
-        await waitForElementToBeRemoved(screen.getByText(/Loading/i));
+        await waitForElementToBeRemoved(screen.queryByText(/Loading/i));
         expect(mockTrpcFn).toHaveBeenCalledWith({ id: sourceId });
 
         // Assert that the form is filled with the source data

@@ -9,7 +9,7 @@ import { render, screen, within } from "~test-utils";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
 
 describe("Delete Conductor Modal", () => {
-    test("calls TRPC when confirming", async () => {
+    test("correct data is sent to server on confirmation", async () => {
         const user = userEvent.setup();
         const conductorId = faker.string.uuid();
         const mockFn = vi.fn(() => Promise.resolve({ id: conductorId }));
@@ -35,7 +35,7 @@ describe("Delete Conductor Modal", () => {
         });
         expect(dialog).not.toBeInTheDocument();
     });
-    test("doesn't calls TRPC when cancelling", async () => {
+    test("no data is sent to server on cancellation", async () => {
         const user = userEvent.setup();
         const conductorId = faker.string.uuid();
         const mockFn = vi.fn(() => Promise.resolve({ id: conductorId }));

@@ -16,10 +16,6 @@ export default [
         cell: (info) => info.renderValue(),
     }),
     columnHelper.display({
-        id: "edit",
-        cell: (info) => info.renderValue(),
-    }),
-    columnHelper.display({
         id: "actions",
         header: "",
         meta: {

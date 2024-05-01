@@ -7,7 +7,7 @@ import BaseForm from "./BaseForm";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
-export default function FormWrapper() {
+export default function CreateConductorTypeForm() {
     const navigate = useNavigate();
     const createConductorMutation = trpc.conductorType.create.useMutation({
         onSuccess(values) {

@@ -1,5 +1,8 @@
 const { resolve } = require("node:path");
+
 const importRules = require("./rules/imports");
+const vitestRules = require("./rules/vitest");
+
 const project = resolve(process.cwd(), "tsconfig.json");
 
 /** @type {import("eslint").Linter.Config} */
@@ -8,11 +11,12 @@ module.exports = {
         "airbnb",
         "airbnb-typescript",
         "airbnb/hooks",
+        "plugin:testing-library/react",
         "plugin:react/jsx-runtime",
         "plugin:i18next/recommended",
         "prettier",
     ],
-    plugins: ["i18next", "only-warn"],
+    plugins: ["i18next", "only-warn", "vitest", "testing-library"],
     parserOptions: {
         project,
         EXPERIMENTAL_useProjectService: true,
@@ -29,7 +33,9 @@ module.exports = {
         },
     },
     rules: {
+        ...vitestRules,
         ...importRules,
+        "testing-library/render-result-naming-convention": 0,
         "no-console": 0,
         "i18next/no-literal-string": 0,
         "react/require-default-props": 0,

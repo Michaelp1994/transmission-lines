@@ -6,6 +6,10 @@ export const StyledForm = styled.form`
     gap: 1.5rem;
 `;
 
+StyledForm.defaultProps = {
+    "aria-label": "form",
+};
+
 export const ButtonsWrapper = styled.div`
     display: flex;
     gap: 1rem;

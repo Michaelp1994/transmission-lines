@@ -37,7 +37,10 @@ export default function BaseForm({
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit}>
+            <StyledForm
+                onSubmit={handleSubmit}
+                aria-label="updateConductorLocation"
+            >
                 <FormField
                     control={form.control}
                     name="x"

@@ -4,10 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 
 import ModalProvider from "~/contexts/ModalProvider";
-import {
-    useDeleteConductorModal,
-    useGenerateConductorsModal,
-} from "~/utils/modals";
+import { useGenerateConductorsModal } from "~/utils/modals";
 import { render, screen, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
@@ -22,7 +19,7 @@ const labels = {
 
 // TODO: Doesn't work because of phase type id and neutral type id
 describe("Generate Conductors Modal", () => {
-    test("correct data is sent to TRPC", async () => {
+    test("correct data is sent to server", async () => {
         const user = userEvent.setup();
 
         const generateConductors = {
@@ -60,4 +57,5 @@ describe("Generate Conductors Modal", () => {
         expect(mockFn).toHaveBeenCalledWith(generateConductors);
         expect(dialog).not.toBeInTheDocument();
     });
+    test.todo("incorrect data is not sent to server");
 });

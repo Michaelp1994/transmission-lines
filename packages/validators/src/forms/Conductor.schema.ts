@@ -6,10 +6,10 @@ import { conductorTypeId } from "../Ids.schema";
 
 export const conductorFormSchema = z.object({
     name: z.string().min(2).max(50).trim(),
-    fromPhase: z.number().nonnegative(),
-    toPhase: z.number().nonnegative(),
-    bundleNumber: z.number().min(1),
-    bundleSpacing: z.number().nonnegative(),
+    fromPhase: z.coerce.number().nonnegative(),
+    toPhase: z.coerce.number().nonnegative(),
+    bundleNumber: z.coerce.number().min(1),
+    bundleSpacing: z.coerce.number().nonnegative(),
     isNeutral: z.boolean(),
     typeId: conductorTypeId,
 });
@@ -29,9 +29,9 @@ export const defaultConductor: ConductorFormInput = {
 // generate conductors
 
 export const generateConductorsFormSchema = z.object({
-    phases: z.number().positive(),
-    circuits: z.number().positive(),
-    neutrals: z.number().positive(),
+    phases: z.coerce.number().positive(),
+    circuits: z.coerce.number().positive(),
+    neutrals: z.coerce.number().positive(),
     phaseTypeId: conductorTypeId,
     neutralTypeId: conductorTypeId,
 });

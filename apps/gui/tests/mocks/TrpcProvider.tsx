@@ -1,14 +1,17 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { TRPCClientError, TRPCLink, httpBatchLink } from "@trpc/client";
+import { TRPCClientError, TRPCLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { observable } from "@trpc/server/observable";
 import { useState } from "react";
+import { Mock } from "vitest";
 
-type MockFn = (op: any) => Promise<any>;
+// type MockFn = (op: any) => Promise<any>;
+
+export type TrpcMockFn = Mock<unknown[], Promise<Record<string, unknown>>>;
 
 const trpc = createTRPCReact<any>();
 
-function customLinkFactory(mockFn: MockFn) {
+function customLinkFactory(mockFn: TrpcMockFn) {
     const customLink: TRPCLink<any> = () => {
         // here we just got initialized in the app - this happens once per app
         // useful for storing cache for instance
@@ -17,9 +20,8 @@ function customLinkFactory(mockFn: MockFn) {
             // each link needs to return an observable which propagates results
             return observable((observer) => {
                 // console.log("performing operation:", op);
-                const promise = mockFn(op.input);
                 let _res: any;
-                promise
+                mockFn(op.input)
                     .then((res) => {
                         _res = res;
                         observer.next({
@@ -47,7 +49,7 @@ function customLinkFactory(mockFn: MockFn) {
 
 interface TrpcProviderProps {
     children: React.ReactNode;
-    mockFn: MockFn;
+    mockFn: TrpcMockFn;
 }
 
 export default function MockTrpcProvider({

@@ -1,63 +1,57 @@
-import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import ModalProvider from "~/contexts/ModalProvider";
 import { useDeleteConductorLocationModal } from "~/utils/modals";
-import { render, screen, within } from "~test-utils";
-import MockTrpcProvider from "~tests/mocks/TrpcProvider";
+import { createRender, screen, within } from "~test-utils";
+import { createConductorLocation, mockIds } from "~tests/helpers/mockData";
 
 describe("DeleteConductorLocationModal", () => {
-    test("calls TRPC when confirming", async () => {
-        const user = userEvent.setup();
-        const locationId = faker.number.int();
-        const mockFn = vi.fn(() => Promise.resolve({ id: locationId }));
-        const displayModal = useDeleteConductorLocationModal(locationId);
-        render(
-            <MockTrpcProvider mockFn={mockFn}>
-                <ModalProvider>
-                    <Button onClick={displayModal}>Click Here</Button>
-                </ModalProvider>
-            </MockTrpcProvider>
-        );
+    const mockConductorLocation = createConductorLocation();
+    const locationId = mockIds.locationId();
+    const displayModal = useDeleteConductorLocationModal(locationId);
+    const trpcFn = vi.fn().mockResolvedValue({
+        locationId,
+        ...mockConductorLocation,
+    });
+    const render = createRender(trpcFn);
 
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
+
+    async function setup() {
+        const user = userEvent.setup();
+        const utils = render(
+            <Button onClick={displayModal}>Click Here</Button>
+        );
         await user.click(screen.getByRole("button", { name: /click here/i }));
         const dialog = await screen.findByRole("alertdialog");
+        return { user, dialog, ...utils };
+    }
 
+    test("correct data is sent to server on confirmation", async () => {
+        const { dialog, user } = await setup();
         await user.click(
             within(dialog).getByRole("button", {
                 name: /confirm/i,
             })
         );
-        expect(mockFn).toHaveBeenCalledWith({
+        expect(trpcFn).toHaveBeenCalledWith({
             locationId,
         });
         expect(dialog).not.toBeInTheDocument();
     });
 
-    test("doesn't calls TRPC when cancelling", async () => {
-        const user = userEvent.setup();
-        const locationId = faker.number.int();
-        const mockFn = vi.fn(() => Promise.resolve({ id: locationId }));
-        const displayModal = useDeleteConductorLocationModal(locationId);
-        render(
-            <MockTrpcProvider mockFn={mockFn}>
-                <ModalProvider>
-                    <Button onClick={displayModal}>Click Here</Button>
-                </ModalProvider>
-            </MockTrpcProvider>
-        );
-
-        await user.click(screen.getByRole("button", { name: /click here/i }));
-        const dialog = await screen.findByRole("alertdialog");
+    test("no data is sent to server on cancellation", async () => {
+        const { dialog, user } = await setup();
 
         await user.click(
             within(dialog).getByRole("button", {
                 name: /cancel/i,
             })
         );
-        expect(mockFn).not.toHaveBeenCalled();
+        expect(trpcFn).not.toHaveBeenCalled();
         expect(dialog).not.toBeInTheDocument();
     });
 });

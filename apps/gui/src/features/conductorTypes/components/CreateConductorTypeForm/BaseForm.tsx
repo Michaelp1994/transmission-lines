@@ -8,7 +8,6 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    NumberInput,
 } from "@repo/ui";
 import { ConductorTypeFormInput } from "@repo/validators/forms";
 import { FieldErrors } from "react-hook-form";
@@ -56,7 +55,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("surfaceArea.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("surfaceArea.description")}
@@ -72,7 +71,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("outerDiameter.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("outerDiameter.description")}
@@ -88,7 +87,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("coreDiameter.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("coreDiameter.description")}
@@ -120,7 +119,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("layers.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("layers.description")}
@@ -136,7 +135,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("currentCapacity.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("currentCapacity.description")}
@@ -152,7 +151,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("dcResistance25.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("dcResistance25.description")}
@@ -168,7 +167,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("acResistance25.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("acResistance25.description")}
@@ -184,7 +183,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("acResistance50.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("acResistance50.description")}
@@ -200,7 +199,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("acResistance75.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("acResistance75.description")}
@@ -216,7 +215,7 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                         <FormItem>
                             <FormLabel>{t("gmr.label")}</FormLabel>
                             <FormControl>
-                                <NumberInput type="number" {...field} />
+                                <Input type="number" {...field} />
                             </FormControl>
                             <FormDescription>
                                 {t("gmr.description")}

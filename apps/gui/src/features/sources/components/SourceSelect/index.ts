@@ -1,3 +1,3 @@
-import SourceSelect from "./DataWrapper";
+import SourceSelect from "./SourceSelect";
 
 export default SourceSelect;

@@ -527,5 +527,13 @@
     "typeId": {
       "label": "Conductor Type"
     }
+  },
+  "updateConductorLocationModal": {
+    "x": {
+      "label": "X"
+    },
+    "y": {
+      "label": "Y"
+    }
   }
 }

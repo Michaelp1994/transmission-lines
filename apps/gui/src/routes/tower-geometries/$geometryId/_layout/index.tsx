@@ -9,7 +9,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { UpdateTowerGeometryForm } from "~/features/towerGeometries";
-import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute("/tower-geometries/$geometryId/_layout/")({
     component: TowerGeometryGeneral,

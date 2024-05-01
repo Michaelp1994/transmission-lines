@@ -1,70 +1,64 @@
 import { faker } from "@faker-js/faker";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 
-import DataWrapper from "./DataWrapper";
+import SourceSelect from "./SourceSelect";
 
-import { render, screen, within } from "~test-utils";
-import { createSources } from "~tests/helpers/createSource";
-import MockTrpcProvider from "~tests/mocks/TrpcProvider";
+import { createRender, screen, within } from "~test-utils";
+import { createArray, createSource } from "~tests/helpers/mockData";
 
 describe("Source Select Data Wrapper", () => {
-    const sources = createSources(10);
+    const sources = createArray(10, createSource);
     const projectId = faker.string.uuid();
-
+    const trpcFn = vi.fn().mockResolvedValue(sources);
+    const render = createRender(trpcFn);
+    const mockOnChange = vi.fn();
     Element.prototype.scrollIntoView = vi.fn();
+
+    beforeEach(() => {
+        vi.clearAllMocks();
+    });
 
     test("all sources are displayed", async () => {
         const user = userEvent.setup();
-        const mockFn = vi.fn(() => Promise.resolve(sources));
-        render(
-            <MockTrpcProvider mockFn={mockFn}>
-                <DataWrapper projectId={projectId} />
-            </MockTrpcProvider>
-        );
-        expect(mockFn).toBeCalledWith({ projectId });
+        render(<SourceSelect projectId={projectId} />);
+        expect(trpcFn).toBeCalledWith({ projectId });
         await user.click(await screen.findByRole("combobox"));
         const dialog = await screen.findByRole("dialog");
         const options = within(dialog).getAllByRole("option");
         options.forEach((option, index) => {
-            expect(option.textContent === sources[index]!.name);
+            const currentSource = sources[index]!;
+            expect(option.textContent).toEqual(currentSource.name);
         });
     });
 
     test("selecting a source", async () => {
         const user = userEvent.setup();
-        const mockFn = vi.fn(() => Promise.resolve(sources));
-        const mockOnChange = vi.fn();
+
         const index = faker.number.int({ min: 0, max: 9 });
-        render(
-            <MockTrpcProvider mockFn={mockFn}>
-                <DataWrapper projectId={projectId} onChange={mockOnChange} />
-            </MockTrpcProvider>
-        );
+        const currentSource = sources[index]!;
+        render(<SourceSelect projectId={projectId} onChange={mockOnChange} />);
         await user.click(await screen.findByRole("combobox"));
         const dialog = await screen.findByRole("dialog");
-        await user.click(within(dialog).getByText(sources[index]!.name));
+        await user.click(within(dialog).getByText(currentSource.name));
 
-        expect(mockOnChange).toHaveBeenCalledWith(sources[index]!.id);
+        expect(mockOnChange).toHaveBeenCalledWith(currentSource.id);
     });
 
     test("unselecting a source triggers empty onChange", async () => {
         const user = userEvent.setup();
-        const mockFn = vi.fn(() => Promise.resolve(sources));
-        const mockOnChange = vi.fn();
         const index = faker.number.int({ min: 0, max: 9 });
+        const currentSource = sources[index]!;
         render(
-            <MockTrpcProvider mockFn={mockFn}>
-                <DataWrapper
-                    projectId={projectId}
-                    onChange={mockOnChange}
-                    value={sources[index]!.id}
-                />
-            </MockTrpcProvider>
+            <SourceSelect
+                projectId={projectId}
+                onChange={mockOnChange}
+                value={currentSource.id}
+            />
         );
         await user.click(await screen.findByRole("combobox"));
         const dialog = await screen.findByRole("dialog");
-        await user.click(within(dialog).getByText(sources[index]!.name));
+        await user.click(within(dialog).getByText(currentSource.name));
         expect(mockOnChange).toHaveBeenCalledWith("");
     });
 });

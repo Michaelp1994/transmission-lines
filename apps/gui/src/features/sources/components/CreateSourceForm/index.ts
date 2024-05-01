@@ -1,3 +1,3 @@
-import CreateSourceForm from "./FormHandler";
+import CreateSourceForm from "./CreateSourceForm";
 
 export default CreateSourceForm;

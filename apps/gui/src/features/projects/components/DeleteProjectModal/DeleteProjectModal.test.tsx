@@ -29,7 +29,7 @@ describe("DeleteProjectModal", () => {
         await user.click(confirm);
         expect(mockFn).toHaveBeenCalledWith({ id: projectId });
     });
-    test("TRPC is not called on cancel ", async () => {
+    test("TRPC is not called on cancel", async () => {
         const user = userEvent.setup();
         const mockFn = vi.fn(() => Promise.resolve({ name: "Test Project" }));
         const projectId = faker.string.uuid();

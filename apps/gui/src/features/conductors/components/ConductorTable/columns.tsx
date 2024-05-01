@@ -30,7 +30,12 @@ export default [
     }),
     columnHelper.accessor("isNeutral", {
         header: "Is Neutral?",
-        cell: (info) => (info.renderValue() ? <SquareCheckBig /> : <Square />),
+        cell: (info) =>
+            info.renderValue() ? (
+                <SquareCheckBig aria-label="Yes" />
+            ) : (
+                <Square aria-label="No" />
+            ),
     }),
     columnHelper.accessor("type.name", {
         header: "Conductor Type",

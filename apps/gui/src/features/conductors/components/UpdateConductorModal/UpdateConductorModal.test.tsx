@@ -32,7 +32,7 @@ describe("Update Conductor Modal", () => {
         isNeutral: faker.datatype.boolean(),
         typeId: faker.string.uuid(),
     };
-    test("renders old data correctly", async () => {
+    test("previous data is correctly displayed", async () => {
         const user = userEvent.setup();
 
         const mockFn = vi.fn(() => Promise.resolve());
@@ -48,6 +48,7 @@ describe("Update Conductor Modal", () => {
 
         await user.click(screen.getByRole("button", { name: /click here/i }));
         const dialog = await screen.findByRole("dialog");
+
         const nameInput = await within(dialog).findByLabelText(labels.name);
         const fromPhaseInput = within(dialog).getByLabelText(labels.fromPhase);
         const toPhaseInput = within(dialog).getByLabelText(labels.toPhase);
