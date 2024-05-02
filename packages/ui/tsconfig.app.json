@@ -8,5 +8,11 @@
         }
     },
     "extends": "@repo/typescript-config/react-library.json",
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.test.js",
+        "src/**/*.test.jsx"
+    ]
 }

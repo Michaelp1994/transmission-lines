@@ -1,15 +1,17 @@
-import { UpdateConductorLocationInput } from "@repo/validators";
-import { ConductorLocationFormInput } from "@repo/validators/forms/ConductorLocation.schema";
-import { FieldErrors } from "react-hook-form";
-
+import type { UpdateConductorLocationInput } from "@repo/validators";
+import type { ConductorLocationFormInput } from "@repo/validators/forms/ConductorLocation.schema";
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface FormHandlerProps {
     conductorLocationId: number;
     onSubmit: () => void;
+}
+
+function handleInvalid(errors: FieldErrors<UpdateConductorLocationInput>) {
+    console.log(errors);
 }
 
 export default function FormHandler({
@@ -30,29 +32,23 @@ export default function FormHandler({
             });
             onSubmit();
         },
-        async onError(error) {
+        onError(error) {
             toast.error("Conductor location not updated");
             console.log(error);
         },
     });
 
-    async function handleValid(values: ConductorLocationFormInput) {
-        await updateMutation.mutateAsync({
+    function handleValid(values: ConductorLocationFormInput) {
+        updateMutation.mutate({
             ...values,
             id: conductorLocationId,
         });
     }
 
-    async function handleInvalid(
-        errors: FieldErrors<UpdateConductorLocationInput>
-    ) {
-        console.log(errors);
-    }
-
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError || !data) {
+    if (isError) {
         return <div>Error: {error.message}</div>;
     }
 

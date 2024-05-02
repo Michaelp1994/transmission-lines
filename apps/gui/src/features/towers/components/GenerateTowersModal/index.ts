@@ -1,3 +1,5 @@
-import GenerateTowersModal from "./GenerateTowersModal";
 
-export default GenerateTowersModal;
+
+
+
+export {default} from "./GenerateTowersModal";

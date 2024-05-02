@@ -7,14 +7,15 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { UpdateConductorTypeForm } from "~/features/conductorTypes";
 
 export const Route = createFileRoute("/conductor-types/$typeId/_layout/")({
     component: UpdateConductorTypePage,
-    beforeLoad: () => ({
-        text: "UpdateConductorTypePage",
-    }),
+    beforeLoad: () => {
+        return {
+            text: "UpdateConductorTypePage",
+        };
+    },
 });
 
 export default function UpdateConductorTypePage() {
@@ -29,7 +30,7 @@ export default function UpdateConductorTypePage() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateConductorTypeForm conductorTypeId="typeId" />
+                <UpdateConductorTypeForm conductorTypeId={typeId} />
             </CardContent>
         </Card>
     );

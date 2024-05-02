@@ -10,30 +10,37 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardCopy } from "lucide-react";
-
 import MatrixTable from "~/components/MatrixTable/MatrixTable";
 import trpc from "~/utils/trpc";
 
-function copyToClipboard(matrix: number[][]) {
+async function copyToClipboard(matrix: number[][]) {
     const matrixString = matrix.map((row) => row.join("\t")).join("\n");
-    navigator.clipboard.writeText(matrixString);
+
+    await navigator.clipboard.writeText(matrixString);
 }
 
 export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/"
 )({
     component: LineParametersPage,
-    beforeLoad: () => ({
-        text: "Line Parameter Page",
-    }),
+    beforeLoad: () => {
+        return {
+            text: "Line Parameter Page",
+        };
+    },
 });
 
 export default function LineParametersPage() {
     const { towerId } = Route.useParams();
     const { data, isLoading, isError, error } =
         trpc.tower.getParameters.useQuery({ towerId });
-    if (isLoading) return <div>Loading...</div>;
-    if (isError) return <div>Error: {error.message}</div>;
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (isError) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <Wrapper>

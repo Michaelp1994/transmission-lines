@@ -1,8 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import ModalProvider from "~/contexts/ModalProvider";
 import { useDeleteProjectModal } from "~/utils/modals";
 import { render, screen, within } from "~test-utils";
@@ -14,6 +13,7 @@ describe("DeleteProjectModal", () => {
         const mockFn = vi.fn(() => Promise.resolve({ name: "Test Project" }));
         const projectId = faker.string.uuid();
         const displayModal = useDeleteProjectModal(projectId);
+
         render(
             <MockTrpcProvider mockFn={mockFn}>
                 <ModalProvider>
@@ -26,6 +26,7 @@ describe("DeleteProjectModal", () => {
         const confirm = within(dialog).getByRole("button", {
             name: /confirm/i,
         });
+
         await user.click(confirm);
         expect(mockFn).toHaveBeenCalledWith({ id: projectId });
     });
@@ -34,6 +35,7 @@ describe("DeleteProjectModal", () => {
         const mockFn = vi.fn(() => Promise.resolve({ name: "Test Project" }));
         const projectId = faker.string.uuid();
         const displayModal = useDeleteProjectModal(projectId);
+
         render(
             <MockTrpcProvider mockFn={mockFn}>
                 <ModalProvider>
@@ -46,6 +48,7 @@ describe("DeleteProjectModal", () => {
         const confirm = within(dialog).getByRole("button", {
             name: /cancel/i,
         });
+
         await user.click(confirm);
         expect(mockFn).not.toBeCalled();
     });

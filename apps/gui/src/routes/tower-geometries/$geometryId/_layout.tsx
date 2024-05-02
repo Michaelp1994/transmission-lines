@@ -3,9 +3,9 @@ import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tower-geometries/$geometryId/_layout")({
     component: ViewTowerGeometryPage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "View Tower Geometry",
-    }),
+    } },
 });
 
 export default function ViewTowerGeometryPage() {

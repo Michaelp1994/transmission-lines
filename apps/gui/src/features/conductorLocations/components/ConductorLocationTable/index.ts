@@ -1,3 +1,5 @@
-import ConductorLocationTable from "./ConductorLocationTable";
 
-export default ConductorLocationTable;
+
+
+
+export {default} from "./ConductorLocationTable";

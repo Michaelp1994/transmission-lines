@@ -1,5 +1,4 @@
 import { describe, expect, test } from "vitest";
-
 import hasNoOverlappingConductors from "../src/helpers/hasNoOverlappingConductors";
 
 describe("has no overlapping conductors function", () => {
@@ -8,6 +7,7 @@ describe("has no overlapping conductors function", () => {
             { x: 0, y: 0 },
             { x: 0, y: 0 },
         ]);
+
         expect(result).toBeFalsy();
     });
     test("correctly identifies no overlapping conductors", () => {
@@ -15,6 +15,7 @@ describe("has no overlapping conductors function", () => {
             { x: 0, y: 0 },
             { x: 12, y: 12 },
         ]);
+
         expect(result).toBeTruthy();
     });
 });

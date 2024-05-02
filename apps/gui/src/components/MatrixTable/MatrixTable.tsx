@@ -7,7 +7,7 @@ interface Complex {
 }
 
 interface ParameterTableProps {
-    data: Array<number | Complex>[];
+    data: (number | Complex)[][];
 }
 
 export default function MatrixTable({ data }: ParameterTableProps) {
@@ -15,10 +15,10 @@ export default function MatrixTable({ data }: ParameterTableProps) {
         <Wrapper>
             <Table>
                 <TableBody>
-                    {data.map((row, rowIndex) => (
-                        <TableRow key={rowIndex}>
-                            {row.map((col, colIndex) => (
-                                <TableCell key={colIndex}>
+                    {data.map((row, rowIndex) => 
+                        { return <TableRow key={rowIndex}>
+                            {row.map((col, colIndex) => 
+                                { return <TableCell key={colIndex}>
                                     {typeof col === "number" ? (
                                         <span>{col.toPrecision(5)}</span>
                                     ) : (
@@ -27,10 +27,10 @@ export default function MatrixTable({ data }: ParameterTableProps) {
                                             {col.im.toFixed(5)}
                                         </span>
                                     )}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    ))}
+                                </TableCell> }
+                            )}
+                        </TableRow> }
+                    )}
                 </TableBody>
             </Table>
         </Wrapper>

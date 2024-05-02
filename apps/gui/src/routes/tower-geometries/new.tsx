@@ -7,14 +7,13 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { CreateTowerGeometryForm } from "~/features/towerGeometries";
 
 export const Route = createFileRoute("/tower-geometries/new")({
     component: CreateTowerGeometryPage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "New Tower Geometry",
-    }),
+    } },
 });
 
 export default function CreateTowerGeometryPage() {

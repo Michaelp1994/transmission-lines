@@ -1,4 +1,4 @@
-import React, { LazyExoticComponent } from "react";
+import { type LazyExoticComponent, lazy } from "react";
 
 export enum Modals {
     CreateTowerModal,
@@ -20,67 +20,62 @@ export enum Modals {
 }
 
 export const modalsConfig: Record<Modals, LazyExoticComponent<any>> = {
-    [Modals.DeleteTransmissionLineModal]: React.lazy(
-        () =>
-            import(
-                "~/features/transmissionLines/components/DeleteTransmissionLineModal"
-            )
-    ),
-    [Modals.DeleteSourceModal]: React.lazy(
+    [Modals.DeleteTransmissionLineModal]: lazy(() => {
+        return import(
+            "~/features/transmissionLines/components/DeleteTransmissionLineModal"
+        );
+    }),
+    [Modals.DeleteSourceModal]: lazy(
         () => import("~/features/sources/components/DeleteSourceModal")
     ),
-    [Modals.DeleteTowerGeometryModal]: React.lazy(
-        () =>
-            import(
-                "~/features/towerGeometries/components/DeleteTowerGeometryModal"
-            )
-    ),
-    [Modals.CreateConductorLocationModal]: React.lazy(
-        () =>
-            import(
-                "~/features/conductorLocations/components/CreateConductorLocationModal"
-            )
-    ),
-    [Modals.UpdateConductorLocationModal]: React.lazy(
-        () =>
-            import(
-                "~/features/conductorLocations/components/UpdateConductorLocationModal"
-            )
-    ),
-    [Modals.DeleteConductorLocationModal]: React.lazy(
-        () =>
-            import(
-                "~/features/conductorLocations/components/DeleteConductorLocationModal"
-            )
-    ),
-    [Modals.DeleteProjectModal]: React.lazy(
+    [Modals.DeleteTowerGeometryModal]: lazy(() => {
+        return import(
+            "~/features/towerGeometries/components/DeleteTowerGeometryModal"
+        );
+    }),
+    [Modals.CreateConductorLocationModal]: lazy(() => {
+        return import(
+            "~/features/conductorLocations/components/CreateConductorLocationModal"
+        );
+    }),
+    [Modals.UpdateConductorLocationModal]: lazy(() => {
+        return import(
+            "~/features/conductorLocations/components/UpdateConductorLocationModal"
+        );
+    }),
+    [Modals.DeleteConductorLocationModal]: lazy(() => {
+        return import(
+            "~/features/conductorLocations/components/DeleteConductorLocationModal"
+        );
+    }),
+    [Modals.DeleteProjectModal]: lazy(
         () => import("~/features/projects/components/DeleteProjectModal")
     ),
-    [Modals.CreateTowerModal]: React.lazy(
+    [Modals.CreateTowerModal]: lazy(
         () => import("~/features/towers/components/CreateTowerModal")
     ),
-    [Modals.DeleteTowerModal]: React.lazy(
+    [Modals.DeleteTowerModal]: lazy(
         () => import("~/features/towers/components/DeleteTowerModal")
     ),
-    [Modals.GenerateTowersModal]: React.lazy(
+    [Modals.GenerateTowersModal]: lazy(
         () => import("~/features/towers/components/GenerateTowersModal")
     ),
-    [Modals.TowerParametersModal]: React.lazy(
+    [Modals.TowerParametersModal]: lazy(
         () => import("~/features/towers/components/TowerParametersModal")
     ),
-    [Modals.UpdateTowerModal]: React.lazy(
+    [Modals.UpdateTowerModal]: lazy(
         () => import("~/features/towers/components/UpdateTowerModal")
     ),
-    [Modals.UpdateConductorModal]: React.lazy(
+    [Modals.UpdateConductorModal]: lazy(
         () => import("~/features/conductors/components/UpdateConductorModal")
     ),
-    [Modals.CreateConductorModal]: React.lazy(
+    [Modals.CreateConductorModal]: lazy(
         () => import("~/features/conductors/components/CreateConductorModal")
     ),
-    [Modals.DeleteConductorModal]: React.lazy(
+    [Modals.DeleteConductorModal]: lazy(
         () => import("~/features/conductors/components/DeleteConductorModal")
     ),
-    [Modals.GenerateConductorsModal]: React.lazy(
+    [Modals.GenerateConductorsModal]: lazy(
         () => import("~/features/conductors/components/GenerateConductorsModal")
     ),
 };

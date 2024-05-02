@@ -1,10 +1,8 @@
-import { TransmissionLineFormInput } from "@repo/validators/forms";
-import { ProjectID } from "@repo/validators/Ids";
+import type { TransmissionLineFormInput } from "@repo/validators/forms";
+import type { ProjectID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
-
+import type { FieldErrors } from "react-hook-form";
 import CreateTransmissionLineForm from "./CreateTransmissionLineForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -46,9 +44,9 @@ export default function FormWrapper({ projectId }: FormWrapperProps) {
 
     return (
         <CreateTransmissionLineForm
+            projectId={projectId}
             onValid={handleValid}
             onInvalid={handleInvalid}
-            projectId={projectId}
         />
     );
 }

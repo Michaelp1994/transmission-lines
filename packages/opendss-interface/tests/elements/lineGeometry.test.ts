@@ -1,9 +1,8 @@
 import { describe, expect, test } from "vitest";
-
 import { LineGeometry, LineSpacing } from "@/classes";
 
-describe("Line Geometry components in OpenDSS", () => {
-    test("Create a basic Line Geometry class", () => {
+describe("line Geometry components in OpenDSS", () => {
+    test("create a basic Line Geometry class", () => {
         const spacing = new LineSpacing({
             name: "test_spacing",
             nConds: 2,
@@ -20,6 +19,7 @@ describe("Line Geometry components in OpenDSS", () => {
             units: "km",
         });
         const script = source.create();
+
         expect(script).toStrictEqual([
             "New LineGeometry.geometry1 nconds=2 nphases=2 units=km spacing=test_spacing",
         ]);

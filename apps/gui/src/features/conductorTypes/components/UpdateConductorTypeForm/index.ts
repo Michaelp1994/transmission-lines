@@ -1,3 +1,5 @@
-import UpdateConductorTypeForm from "./FormHandler";
 
-export default UpdateConductorTypeForm;
+
+
+
+export {default} from "./FormHandler";

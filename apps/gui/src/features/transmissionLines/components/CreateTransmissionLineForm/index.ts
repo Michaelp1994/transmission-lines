@@ -1,3 +1,5 @@
-import CreateTransmissionLineForm from "./FormWrapper";
 
-export default CreateTransmissionLineForm;
+
+
+
+export {default} from "./FormWrapper";

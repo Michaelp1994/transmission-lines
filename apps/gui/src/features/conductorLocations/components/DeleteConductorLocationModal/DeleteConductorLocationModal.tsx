@@ -1,5 +1,4 @@
-import { LocationID } from "@repo/validators/Ids";
-
+import type { LocationID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -33,5 +32,6 @@ export default function DeleteConductorLocationModal({
             locationId,
         });
     };
+
     return <BaseDeleteModal onConfirm={handleConfirm} onClose={onClose} />;
 }

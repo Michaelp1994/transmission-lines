@@ -7,9 +7,8 @@ import {
     DialogPortal,
     DialogTitle,
 } from "@repo/ui";
-import { ConductorID } from "@repo/validators/Ids";
+import type { ConductorID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
-
 import FormHandler from "./FormHandler";
 
 export interface UpdateConductorModalProps {

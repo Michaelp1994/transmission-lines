@@ -15,18 +15,17 @@ import {
 import { Check, ChevronsUpDown } from "lucide-react";
 import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-
 import trpc from "~/utils/trpc";
 
 interface TowerGeometrySelectProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 /**
- * for now, the id is coming from the database and being cast to a string,
+ * For now, the id is coming from the database and being cast to a string,
  *  as cmdk doesn't allow using integers for values.
  *  Eventually, either transform to string in the backend or wait for cmdk to fix this.
  *
- * Also the size changes when the text grows/shrinks
+ * Also the size changes when the text grows/shrinks.
  */
 
 const TowerGeometrySelect = forwardRef<
@@ -38,7 +37,7 @@ const TowerGeometrySelect = forwardRef<
     const [open, setOpen] = React.useState(false);
 
     function handleSelect(currentValue: string) {
-        if (onChange) onChange(currentValue === value ? "" : currentValue);
+        if (onChange) {onChange(currentValue === value ? "" : currentValue);}
         setOpen(false);
     }
 
@@ -48,8 +47,9 @@ const TowerGeometrySelect = forwardRef<
     if (error || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
+
     return (
-        <Popover open={open} onOpenChange={setOpen} modal>
+        <Popover modal open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
                 <StyledButton
                     variant="outline"
@@ -73,8 +73,8 @@ const TowerGeometrySelect = forwardRef<
                         <StyledScrollArea>
                             <CommandEmpty>{t("noneFound")}</CommandEmpty>
                             <CommandGroup>
-                                {data?.map((conductorType) => (
-                                    <CommandItem
+                                {data.map((conductorType) => 
+                                    { return <CommandItem
                                         key={conductorType.id}
                                         value={conductorType.id}
                                         keywords={[conductorType.name]}
@@ -86,8 +86,8 @@ const TowerGeometrySelect = forwardRef<
                                             }
                                         />
                                         {conductorType.name}
-                                    </CommandItem>
-                                ))}
+                                    </CommandItem> }
+                                )}
                             </CommandGroup>
                         </StyledScrollArea>
                     </CommandList>

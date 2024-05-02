@@ -1,18 +1,16 @@
 import { styled } from "@linaria/react";
 import {
-    ColumnFiltersState,
-    PaginationState,
+    type ColumnFiltersState,
+    type PaginationState,
     getCoreRowModel,
     useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import columns from "./columns";
-import { ConductorType } from "./RowType";
+import type { ConductorType } from "./RowType";
 import TablePagination from "./TablePagination";
 import TableToolbar from "./TableToolbar";
-
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 

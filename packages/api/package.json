@@ -13,8 +13,8 @@
     "scripts": {
         "build": "tsc -b && tsc-alias",
         "clean": "rm -rf .turbo node_modules dist",
-        "lint": "eslint src/",
-        "lint:fix": "eslint src/ --fix",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "test": "vitest run",
         "typecheck": "tsc --build"
     },
@@ -42,7 +42,7 @@
         "concurrently": "^8.2.2",
         "electron": "^30.0.1",
         "eslint": "^8.57.0",
-        "supertest": "^6.3.4",
+        "supertest": "^7.0.0",
         "typeorm": "^0.3.20",
         "typescript": "^5.4.5",
         "vite": "^5.2.10",

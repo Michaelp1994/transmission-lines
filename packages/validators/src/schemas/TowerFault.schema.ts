@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 import { lineId, towerId } from "@/Ids.schema";
 
 export const faultLocation = z.object({

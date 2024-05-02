@@ -9,12 +9,13 @@ export default function generateTowers(
     const avgDistance = values.distance / values.numTowers;
     const newTowers: CreateTransmissionTowerInput[] = Array(values.numTowers)
         .fill(0)
-        .map((_, index) => ({
+        .map((_, index) => { return {
             name: values.namePrefix + (index + 1),
             resistance: values.resistance,
             distance: avgDistance,
             geometryId: values.geometryId,
             lineId: values.lineId,
-        }));
+        } });
+
     return newTowers;
 }

@@ -1,8 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import ModalProvider from "~/contexts/ModalProvider";
 import { useDeleteConductorModal } from "~/utils/modals";
 import { render, screen, within } from "~test-utils";
@@ -14,6 +13,7 @@ describe("Delete Conductor Modal", () => {
         const conductorId = faker.string.uuid();
         const mockFn = vi.fn(() => Promise.resolve({ id: conductorId }));
         const displayModal = useDeleteConductorModal(conductorId);
+
         render(
             <MockTrpcProvider mockFn={mockFn}>
                 <ModalProvider>
@@ -40,6 +40,7 @@ describe("Delete Conductor Modal", () => {
         const conductorId = faker.string.uuid();
         const mockFn = vi.fn(() => Promise.resolve({ id: conductorId }));
         const displayModal = useDeleteConductorModal(conductorId);
+
         render(
             <MockTrpcProvider mockFn={mockFn}>
                 <ModalProvider>

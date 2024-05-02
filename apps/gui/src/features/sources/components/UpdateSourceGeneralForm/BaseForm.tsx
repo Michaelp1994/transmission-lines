@@ -9,10 +9,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
-import { FieldErrors } from "react-hook-form";
+import type { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useUpdateSourceGeneralForm } from "~/utils/forms";
 
@@ -32,18 +31,18 @@ export default function UpdateSourceForm({
     const form = useUpdateSourceGeneralForm(data);
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
+            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input
@@ -56,8 +55,8 @@ export default function UpdateSourceForm({
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <ButtonsWrapper>

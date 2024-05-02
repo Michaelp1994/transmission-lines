@@ -1,11 +1,9 @@
-import { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
-import { SourceID } from "@repo/validators/Ids";
+import type { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
+import type { SourceID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 

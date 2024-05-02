@@ -1,3 +1,5 @@
-import UpdateSourceGeneralForm from "./FormHandler";
 
-export default UpdateSourceGeneralForm;
+
+
+
+export {default} from "./FormHandler";

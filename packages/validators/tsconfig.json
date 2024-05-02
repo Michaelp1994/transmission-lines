@@ -12,5 +12,5 @@
             "path": "./tsconfig.test.json"
         }
     ],
-    "include": [".eslintrc.cjs"]
+    "include": ["eslint.config.js", "vite.config.ts"]
 }

@@ -1,3 +1,5 @@
-import SourceSelect from "./SourceSelect";
 
-export default SourceSelect;
+
+
+
+export {default} from "./SourceSelect";

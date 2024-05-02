@@ -1,9 +1,8 @@
 import { type RenderOptions, render } from "@testing-library/react";
-import React, { type ReactElement } from "react";
-
+import type React, { type ReactElement } from "react";
 import I18nProvider from "~/contexts/I18nProvider";
 import ModalProvider from "~/contexts/ModalProvider";
-import MockTrpcProvider, { TrpcMockFn } from "~tests/mocks/TrpcProvider";
+import MockTrpcProvider, { type TrpcMockFn } from "~tests/mocks/TrpcProvider";
 
 const defaultRender = (
     ui: ReactElement,
@@ -27,10 +26,10 @@ function AllTheProviders({ children, trpcFn }: AllTheProvidersProps) {
 
 export const createRender = (trpcFn: TrpcMockFn) => {
     return (ui: ReactElement, options?: Omit<RenderOptions, "wrapper">) =>
-        render(ui, {
+        { return render(ui, {
             wrapper: (props) => <AllTheProviders {...props} trpcFn={trpcFn} />,
             ...options,
-        });
+        }) };
 };
 
 export * from "@testing-library/react";

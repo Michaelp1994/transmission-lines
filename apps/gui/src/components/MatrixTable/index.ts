@@ -1,3 +1,5 @@
-import MatrixTable from "./MatrixTable";
 
-export default MatrixTable;
+
+
+
+export {default} from "./MatrixTable";

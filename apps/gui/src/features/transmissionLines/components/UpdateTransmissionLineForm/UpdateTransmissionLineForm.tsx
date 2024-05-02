@@ -9,10 +9,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { UpdateTransmissionLineInput } from "@repo/validators";
+import type { UpdateTransmissionLineInput } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { SourceSelect } from "~/features/sources";
 import { useUpdateTransmissionLineForm } from "~/utils/forms";
@@ -42,17 +41,18 @@ export default function UpdateTransmissionLineForm({
             params: { projectId: values.projectId },
         });
     }
+
     return (
         <Form {...form}>
             <StyledForm
                 onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => form.reset()}
+                onReset={() => { form.reset(); }}
             >
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input
@@ -65,14 +65,14 @@ export default function UpdateTransmissionLineForm({
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="fromSourceId"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("fromSource.label")}</FormLabel>
                             <FormControl>
                                 <SourceSelect
@@ -84,14 +84,14 @@ export default function UpdateTransmissionLineForm({
                                 {t("fromSource.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="toSourceId"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("toSource.label")}</FormLabel>
                             <FormControl>
                                 <SourceSelect
@@ -103,8 +103,8 @@ export default function UpdateTransmissionLineForm({
                                 {t("toSource.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <ButtonsWrapper>
                     <Button type="submit">Save</Button>

@@ -12,5 +12,10 @@
             "path": "./tsconfig.test.json"
         }
     ],
-    "include": [".eslintrc.cjs", "tailwind.config.ts", "postcss.config.js"]
+    "include": [
+        "eslint.config.js",
+        "vite.config.ts",
+        "tailwind.config.ts",
+        "postcss.config.js"
+    ]
 }

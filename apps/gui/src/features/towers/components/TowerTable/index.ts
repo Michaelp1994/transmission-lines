@@ -1,3 +1,5 @@
-import TowerTable from "./TowerTable";
 
-export default TowerTable;
+
+
+
+export {default} from "./TowerTable";

@@ -1,8 +1,7 @@
 import BaseElement from "./BaseElement";
-
 import {
-    OpenDSSReactor,
-    ReactorInput,
+    type OpenDSSReactor,
+    type ReactorInput,
     arrayTransform,
     booleanTransform,
     busTransform,
@@ -47,7 +46,7 @@ export default class Reactor extends BaseElement<ReactorInput, OpenDSSReactor> {
         "repair",
         "baseFreq",
         "enabled",
-    ] as const satisfies Array<keyof OpenDSSReactor>;
+    ] as const satisfies (keyof OpenDSSReactor)[];
 
     transform() {
         return {

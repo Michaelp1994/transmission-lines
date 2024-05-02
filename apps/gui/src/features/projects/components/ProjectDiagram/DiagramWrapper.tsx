@@ -1,7 +1,5 @@
-import { ProjectID } from "@repo/validators/Ids";
-
+import type { ProjectID } from "@repo/validators/Ids";
 import ProjectDiagram from "./ProjectDiagram";
-
 import trpc from "~/utils/trpc";
 
 interface DiagramWrapperProps {
@@ -13,10 +11,10 @@ export default function DiagramWrapper({ projectId }: DiagramWrapperProps) {
     //     projectId,
     // });
 
-    const [sources, transmissionLines] = trpc.useQueries((t) => [
+    const [sources, transmissionLines] = trpc.useQueries((t) => { return [
         t.source.getAllByProjectId({ projectId }),
         t.transmissionLine.getAllByProjectId({ projectId }),
-    ]);
+    ] });
 
     if (sources.isLoading || transmissionLines.isLoading) {
         return <div>Loading...</div>;

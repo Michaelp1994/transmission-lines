@@ -3,9 +3,9 @@
 //     REDUX_DEVTOOLS,
 // } from "electron-devtools-installer";
 
-import { session } from "electron";
 import os from "node:os";
 import path from "node:path";
+import { session } from "electron";
 
 export default async function init() {
     // Install DevTools extensions
@@ -17,6 +17,7 @@ export default async function init() {
             );
             const react =
                 await session.defaultSession.loadExtension(reactDevToolsPath);
+
             console.log(`extension ${react.name} loaded`);
 
             // const reduxDevToolsPath = path.join(
@@ -26,8 +27,8 @@ export default async function init() {
             // const redux =
             //     await session.defaultSession.loadExtension(reduxDevToolsPath);
             // console.log(`extension ${redux.name} loaded`);
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
         }
     }
 }

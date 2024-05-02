@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { TRPCClientError, TRPCLink } from "@trpc/client";
+import { TRPCClientError, type TRPCLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { observable } from "@trpc/server/observable";
 import { useState } from "react";
-import { Mock } from "vitest";
+import type { Mock } from "vitest";
 
 // type MockFn = (op: any) => Promise<any>;
 
@@ -21,6 +21,7 @@ function customLinkFactory(mockFn: TrpcMockFn) {
             return observable((observer) => {
                 // console.log("performing operation:", op);
                 let _res: any;
+
                 mockFn(op.input)
                     .then((res) => {
                         _res = res;
@@ -33,17 +34,19 @@ function customLinkFactory(mockFn: TrpcMockFn) {
                         });
                         observer.complete();
                     })
-                    .catch((err) => {
+                    .catch((error) => {
                         observer.error(
-                            TRPCClientError.from(err, {
+                            TRPCClientError.from(error, {
                                 meta: _res?.meta,
                             })
                         );
                     });
+
                 return () => {};
             });
         };
     };
+
     return customLink;
 }
 
@@ -58,21 +61,21 @@ export default function MockTrpcProvider({
 }: TrpcProviderProps) {
     const [queryClient] = useState(
         () =>
-            new QueryClient({
+            { return new QueryClient({
                 defaultOptions: {
                     queries: {
                         retry: false,
                     },
                 },
-            })
+            }) }
     );
     const [trpcClient] = useState(() =>
-        trpc.createClient({
+        { return trpc.createClient({
             links: [
                 customLinkFactory(mockFn),
                 // httpBatchLink({ url: "http://localhost:5001" }),
             ],
-        })
+        }) }
     );
 
     return (

@@ -1,9 +1,8 @@
 import { describe, expect, test } from "vitest";
-
 import { VSource } from "@/classes";
 
-describe("Creating VSource components in OpenDSS", () => {
-    test("Create a basic Vsource class", () => {
+describe("creating VSource components in OpenDSS", () => {
+    test("create a basic Vsource class", () => {
         const source = new VSource({
             name: "Esoura",
             bus1: {
@@ -17,6 +16,7 @@ describe("Creating VSource components in OpenDSS", () => {
             x1r1: 3,
         });
         const script = source.create();
+
         expect(script).toStrictEqual([
             "New Vsource.Esoura bus1=T1.1.2.3 phases=3 x1r1=3 x0r0=4 isc3=200 isc1=100",
         ]);

@@ -1,3 +1,5 @@
-import CreateTowerModal from "./CreateTowerModal";
 
-export default CreateTowerModal;
+
+
+
+export {default} from "./CreateTowerModal";

@@ -9,11 +9,10 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { TransmissionLineFormInput } from "@repo/validators/forms";
-import { ProjectID } from "@repo/validators/Ids";
-import { FieldErrors } from "react-hook-form";
+import type { TransmissionLineFormInput } from "@repo/validators/forms";
+import type { ProjectID } from "@repo/validators/Ids";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { SourceSelect } from "~/features/sources";
 import { useCreateTransmissionLineForm } from "~/utils/forms";
@@ -33,18 +32,18 @@ export default function CreateTransmissionLineForm({
     const form = useCreateTransmissionLineForm();
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
+            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input
@@ -57,14 +56,14 @@ export default function CreateTransmissionLineForm({
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="fromSourceId"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("fromSource.label")}</FormLabel>
                             <FormControl>
                                 <SourceSelect
@@ -76,14 +75,14 @@ export default function CreateTransmissionLineForm({
                                 {t("fromSource.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="toSourceId"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("toSource.label")}</FormLabel>
                             <FormControl>
                                 <SourceSelect
@@ -95,8 +94,8 @@ export default function CreateTransmissionLineForm({
                                 {t("toSource.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <ButtonsWrapper>
                     <Button variant="destructive" type="reset">

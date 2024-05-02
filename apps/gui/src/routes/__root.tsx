@@ -1,5 +1,4 @@
 import { createRootRouteWithContext } from "@tanstack/react-router";
-
 import DefaultLayout from "~/layouts/DefaultLayout";
 
 export interface RouterContext {
@@ -9,7 +8,7 @@ export interface RouterContext {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
     component: DefaultLayout,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "Home",
-    }),
+    } },
 });

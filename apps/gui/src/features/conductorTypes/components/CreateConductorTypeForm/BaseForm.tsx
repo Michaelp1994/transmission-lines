@@ -9,10 +9,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { ConductorTypeFormInput } from "@repo/validators/forms";
-import { FieldErrors } from "react-hook-form";
+import type { ConductorTypeFormInput } from "@repo/validators/forms";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useCreateConductorTypeForm } from "~/utils/forms";
 
@@ -26,17 +25,18 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
     const form = useCreateConductorTypeForm();
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
+
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
+            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -45,14 +45,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="surfaceArea"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("surfaceArea.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -61,14 +61,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("surfaceArea.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="outerDiameter"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("outerDiameter.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -77,14 +77,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("outerDiameter.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="coreDiameter"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("coreDiameter.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -93,14 +93,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("coreDiameter.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="stranding"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("stranding.label")}</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -109,14 +109,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("stranding.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="layers"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("layers.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -125,14 +125,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("layers.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="currentCapacity"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("currentCapacity.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -141,14 +141,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("currentCapacity.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="dcResistance25"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("dcResistance25.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -157,14 +157,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("dcResistance25.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="acResistance25"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("acResistance25.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -173,14 +173,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("acResistance25.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="acResistance50"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("acResistance50.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -189,14 +189,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("acResistance50.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="acResistance75"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("acResistance75.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -205,14 +205,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("acResistance75.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="gmr"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("gmr.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -221,8 +221,8 @@ export default function BaseForm({ onValid, onInvalid }: BaseFromProps) {
                                 {t("gmr.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <ButtonsWrapper>
                     <Button type="submit">{t("form:submit")}</Button>

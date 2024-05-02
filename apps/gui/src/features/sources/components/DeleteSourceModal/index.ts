@@ -1,3 +1,5 @@
-import DeleteSourceModal from "./DeleteSourceModal";
 
-export default DeleteSourceModal;
+
+
+
+export {default} from "./DeleteSourceModal";

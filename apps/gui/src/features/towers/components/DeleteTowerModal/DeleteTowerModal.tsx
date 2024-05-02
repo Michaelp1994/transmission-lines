@@ -1,5 +1,4 @@
-import { TowerID } from "@repo/validators/Ids";
-
+import type { TowerID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -27,8 +26,10 @@ export default function DeleteTowerModal({
             console.error(error);
         },
     });
+
     async function handleConfirm() {
         await deleteMutation.mutateAsync({ id: towerId });
     }
+
     return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
 }

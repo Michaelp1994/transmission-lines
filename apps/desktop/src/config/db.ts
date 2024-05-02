@@ -1,6 +1,5 @@
-import { app } from "electron";
 import path from "node:path";
-
+import { app } from "electron";
 import databaseInit from "@repo/db";
 
 export const databasePath = app.isPackaged

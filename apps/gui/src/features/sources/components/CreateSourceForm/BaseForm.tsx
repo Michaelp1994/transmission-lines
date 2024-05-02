@@ -11,10 +11,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { SourceFormInput } from "@repo/validators/forms/Source.schema";
-import { FieldErrors } from "react-hook-form";
+import type { SourceFormInput } from "@repo/validators/forms/Source.schema";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { StyledForm } from "~/components/StyledForm";
 import { useCreateSourceForm } from "~/utils/forms";
 
@@ -32,18 +31,18 @@ export default function CreateSourceForm({
     const form = useCreateSourceForm();
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
+            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input
@@ -56,14 +55,14 @@ export default function CreateSourceForm({
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="enabled"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <CheckboxWrapper>
                                 <FormControl>
                                     <Checkbox
@@ -80,14 +79,14 @@ export default function CreateSourceForm({
 
                                 <FormMessage />
                             </CheckboxWrapper>
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="phases"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("phases.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -96,14 +95,14 @@ export default function CreateSourceForm({
                                 {t("phases.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="frequency"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("frequency.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -112,14 +111,14 @@ export default function CreateSourceForm({
                                 {t("frequency.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="voltage"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("voltage.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -128,14 +127,14 @@ export default function CreateSourceForm({
                                 {t("voltage.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="x1r1"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("x1r1.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -144,14 +143,14 @@ export default function CreateSourceForm({
                                 {t("x1r1.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="x0r0"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("x0r0.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -160,14 +159,14 @@ export default function CreateSourceForm({
                                 {t("x0r0.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="isc3"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("isc3.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -176,14 +175,14 @@ export default function CreateSourceForm({
                                 {t("isc3.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="isc1"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("isc1.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -192,14 +191,14 @@ export default function CreateSourceForm({
                                 {t("isc1.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="resistance"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("resistance.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -208,8 +207,8 @@ export default function CreateSourceForm({
                                 {t("resistance.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <ButtonsWrapper>

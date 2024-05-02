@@ -10,10 +10,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { ConductorLocationFormInput } from "@repo/validators/forms";
-import { FieldErrors } from "react-hook-form";
+import type { ConductorLocationFormInput } from "@repo/validators/forms";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { StyledForm } from "~/components/StyledForm";
 import { useCreateConductorLocationForm } from "~/utils/forms";
 
@@ -30,8 +29,8 @@ export default function CreateConductorLocationForm({
     const form = useCreateConductorLocationForm();
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
@@ -40,8 +39,8 @@ export default function CreateConductorLocationForm({
                 <FormField
                     control={form.control}
                     name="x"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("x.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -50,14 +49,14 @@ export default function CreateConductorLocationForm({
                                 {t("x.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="y"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("y.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -66,8 +65,8 @@ export default function CreateConductorLocationForm({
                                 {t("y.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <DialogFooter>

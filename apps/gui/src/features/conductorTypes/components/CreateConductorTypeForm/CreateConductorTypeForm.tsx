@@ -1,18 +1,20 @@
-import { ConductorTypeFormInput } from "@repo/validators/forms/ConductorType.schema";
+import type { ConductorTypeFormInput } from "@repo/validators/forms/ConductorType.schema";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
-
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
+
+function handleInvalid(errors: FieldErrors<ConductorTypeFormInput>) {
+    console.log(errors);
+}
 
 export default function CreateConductorTypeForm() {
     const navigate = useNavigate();
     const createConductorMutation = trpc.conductorType.create.useMutation({
-        onSuccess(values) {
+        async onSuccess(values) {
             toast.success(`${values.name} has been added.`);
-            navigate({ to: "/conductor-types" });
+            await navigate({ to: "/conductor-types" });
         },
         onError(error) {
             console.log(error);
@@ -20,12 +22,8 @@ export default function CreateConductorTypeForm() {
         },
     });
 
-    async function handleValid(values: ConductorTypeFormInput) {
-        createConductorMutation.mutateAsync(values);
-    }
-
-    function handleInvalid(errors: FieldErrors<ConductorTypeFormInput>) {
-        console.log(errors);
+    function handleValid(values: ConductorTypeFormInput) {
+        createConductorMutation.mutate(values);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;

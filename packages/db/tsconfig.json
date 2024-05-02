@@ -12,5 +12,5 @@
         }
     ],
     "extends": "@repo/typescript-config/node.json",
-    "include": [".eslintrc.cjs", "drizzle.config.ts", "vite.config.ts"]
+    "include": ["eslint.config.js", "vite.config.ts", "drizzle.config.ts"]
 }

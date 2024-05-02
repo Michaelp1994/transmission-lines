@@ -1,4 +1,4 @@
-import { Modals, modalsConfig } from "./config";
+import { type Modals, modalsConfig } from "./config";
 
 export interface CurrentModal<P> {
     name: Modals;

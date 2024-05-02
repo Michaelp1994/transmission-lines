@@ -7,14 +7,13 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { CreateConductorTypeForm } from "~/features/conductorTypes";
 
 export const Route = createFileRoute("/conductor-types/new")({
     component: CreateConductorTypePage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "New Conductor Type",
-    }),
+    } },
 });
 
 export default function CreateConductorTypePage() {

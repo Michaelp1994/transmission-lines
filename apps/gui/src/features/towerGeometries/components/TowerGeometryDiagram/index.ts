@@ -1,3 +1,5 @@
-import TowerGeometryDiagram from "./TowerGeometryDiagram";
 
-export default TowerGeometryDiagram;
+
+
+
+export {default} from "./TowerGeometryDiagram";

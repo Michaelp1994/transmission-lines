@@ -9,10 +9,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { ConductorLocationFormInput } from "@repo/validators/forms";
-import { FieldErrors } from "react-hook-form";
+import type { ConductorLocationFormInput } from "@repo/validators/forms";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { StyledForm } from "~/components/StyledForm";
 import { useUpdateConductorLocationForm } from "~/utils/forms";
 
@@ -31,21 +30,21 @@ export default function BaseForm({
     const { t } = useTranslation("updateConductorLocationModal");
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
         <Form {...form}>
             <StyledForm
-                onSubmit={handleSubmit}
                 aria-label="updateConductorLocation"
+                onSubmit={handleSubmit}
             >
                 <FormField
                     control={form.control}
                     name="x"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("x.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -54,14 +53,14 @@ export default function BaseForm({
                                 {t("x.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="y"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("y.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -70,8 +69,8 @@ export default function BaseForm({
                                 {t("y.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <Button type="submit">{t("form:submit")}</Button>

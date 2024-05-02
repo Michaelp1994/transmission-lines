@@ -1,9 +1,7 @@
-import { TowerID } from "@repo/validators/Ids";
-
+import type { TowerID } from "@repo/validators/Ids";
 import { Modals } from "../config";
 import useModal from "../use-modal";
-
-import { DeleteTowerModalProps } from "~/features/towers/components/DeleteTowerModal/DeleteTowerModal";
+import type { DeleteTowerModalProps } from "~/features/towers/components/DeleteTowerModal/DeleteTowerModal";
 
 export default function useDeleteTowerModal(towerId: TowerID) {
     const deleteModal = useModal<DeleteTowerModalProps>(

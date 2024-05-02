@@ -1,3 +1,5 @@
-import createMenu from "./createMenu";
 
-export default createMenu;
+
+
+
+export {default} from "./createMenu";

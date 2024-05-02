@@ -1,21 +1,20 @@
-import {
-    type EmblaCarouselType as CarouselApi,
-    type EmblaOptionsType as CarouselOptions,
-    type EmblaPluginType as CarouselPlugin,
+import type {
+    EmblaCarouselType as CarouselApi,
+    EmblaOptionsType as CarouselOptions,
+    EmblaPluginType as CarouselPlugin,
 } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type CarouselProps = {
+interface CarouselProps {
     opts?: CarouselOptions;
     plugins?: CarouselPlugin[];
     orientation?: "horizontal" | "vertical";
     setApi?: (api: CarouselApi) => void;
-};
+}
 
 type CarouselContextProps = {
     carouselRef: ReturnType<typeof useEmblaCarousel>[0];
@@ -112,11 +111,11 @@ const Carousel = React.forwardRef<
             api.on("select", onSelect);
 
             return () => {
-                api?.off("select", onSelect);
+                api.off("select", onSelect);
             };
         }, [api, onSelect]);
         const value = React.useMemo(
-            () => ({
+            () => { return {
                 carouselRef,
                 api,
                 opts,
@@ -127,7 +126,7 @@ const Carousel = React.forwardRef<
                 scrollNext,
                 canScrollPrev,
                 canScrollNext,
-            }),
+            } },
             [
                 api,
                 carouselRef,
@@ -139,14 +138,15 @@ const Carousel = React.forwardRef<
                 scrollPrev,
             ]
         );
+
         return (
             <CarouselContext.Provider value={value}>
                 <div
                     ref={ref}
-                    onKeyDownCapture={handleKeyDown}
                     className={cn("relative", className)}
                     role="region"
                     aria-roledescription="carousel"
+                    onKeyDownCapture={handleKeyDown}
                     {...props}
                 >
                     {children}
@@ -155,6 +155,7 @@ const Carousel = React.forwardRef<
         );
     }
 );
+
 Carousel.displayName = "Carousel";
 
 const CarouselContent = React.forwardRef<
@@ -177,6 +178,7 @@ const CarouselContent = React.forwardRef<
         </div>
     );
 });
+
 CarouselContent.displayName = "CarouselContent";
 
 const CarouselItem = React.forwardRef<
@@ -199,6 +201,7 @@ const CarouselItem = React.forwardRef<
         />
     );
 });
+
 CarouselItem.displayName = "CarouselItem";
 
 const CarouselPrevious = React.forwardRef<
@@ -212,6 +215,7 @@ const CarouselPrevious = React.forwardRef<
             ref={ref}
             variant={variant}
             size={size}
+            disabled={!canScrollPrev}
             className={cn(
                 "absolute  h-8 w-8 rounded-full",
                 orientation === "horizontal"
@@ -219,7 +223,6 @@ const CarouselPrevious = React.forwardRef<
                     : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
                 className
             )}
-            disabled={!canScrollPrev}
             onClick={scrollPrev}
             {...props}
         >
@@ -228,6 +231,7 @@ const CarouselPrevious = React.forwardRef<
         </Button>
     );
 });
+
 CarouselPrevious.displayName = "CarouselPrevious";
 
 const CarouselNext = React.forwardRef<
@@ -241,6 +245,7 @@ const CarouselNext = React.forwardRef<
             ref={ref}
             variant={variant}
             size={size}
+            disabled={!canScrollNext}
             className={cn(
                 "absolute h-8 w-8 rounded-full",
                 orientation === "horizontal"
@@ -248,7 +253,6 @@ const CarouselNext = React.forwardRef<
                     : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
                 className
             )}
-            disabled={!canScrollNext}
             onClick={scrollNext}
             {...props}
         >
@@ -257,6 +261,7 @@ const CarouselNext = React.forwardRef<
         </Button>
     );
 });
+
 CarouselNext.displayName = "CarouselNext";
 
 export {

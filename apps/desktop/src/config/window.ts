@@ -1,5 +1,4 @@
 import { BrowserWindow, shell } from "electron";
-
 import { is } from "@electron-toolkit/utils";
 
 // import appIcon from "@resources/favicon.ico?asset";
@@ -25,6 +24,7 @@ export default async function create() {
 
     mainWindow.webContents.setWindowOpenHandler((details) => {
         shell.openExternal(details.url);
+
         return { action: "deny" };
     });
 
@@ -34,6 +34,7 @@ export default async function create() {
         await mainWindow.loadURL("http://localhost:5173/");
         // await mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL);
     }
+
     // else {
     //     await mainWindow.loadFile(
     //         fileURLToPath(new URL("../renderer/index.html", import.meta.url))

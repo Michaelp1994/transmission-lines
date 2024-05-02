@@ -16,7 +16,7 @@ import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface ConfirmDialogProps {
-    onConfirm(): void;
+    onConfirm: () => void;
 }
 
 export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
@@ -44,7 +44,7 @@ export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
                     <AlertDialogCancel>{t("form:cancel")}</AlertDialogCancel>
                     <AlertDialogAction
                         className={buttonVariants({ variant: "destructive" })}
-                        onClick={() => onConfirm()}
+                        onClick={() => { onConfirm(); }}
                     >
                         {t("form:delete")}
                     </AlertDialogAction>

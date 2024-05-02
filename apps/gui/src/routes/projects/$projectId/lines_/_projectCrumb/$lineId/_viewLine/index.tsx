@@ -7,7 +7,6 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { UpdateTransmissionLineForm } from "~/features/transmissionLines";
 import trpc from "~/utils/trpc";
 
@@ -29,7 +28,7 @@ export default function TransmissionLineGeneral() {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError || !data) {
+    if (isError) {
         return <div>Error...</div>;
     }
 

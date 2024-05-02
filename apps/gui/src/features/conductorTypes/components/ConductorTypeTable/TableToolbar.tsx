@@ -6,9 +6,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@repo/ui";
-import { Table } from "@tanstack/react-table";
-
-import { ConductorType } from "./RowType";
+import type { Table } from "@tanstack/react-table";
+import type { ConductorType } from "./RowType";
 
 interface ConductorTypeToolbarProps {
     table: Table<ConductorType>;
@@ -43,11 +42,11 @@ export default function ConductorTypeToolbar({
                         />
                     </SelectTrigger>
                     <SelectContent side="top">
-                        {[10, 20, 30, 40, 50].map((pageSize) => (
-                            <SelectItem key={pageSize} value={`${pageSize}`}>
+                        {[10, 20, 30, 40, 50].map((pageSize) => 
+                            { return <SelectItem key={pageSize} value={`${pageSize}`}>
                                 {pageSize}
-                            </SelectItem>
-                        ))}
+                            </SelectItem> }
+                        )}
                     </SelectContent>
                 </Select>
             </RightSide>

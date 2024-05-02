@@ -1,8 +1,7 @@
 import { Button } from "@repo/ui";
 import { defaultConductor } from "@repo/validators/forms/Conductor.schema";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import { useCreateConductorModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
@@ -35,13 +34,16 @@ describe("Create Conductor Modal", () => {
         const utils = render(
             <Button onClick={displayModal}>Click Here</Button>
         );
+
         trpcFn.mockResolvedValueOnce(conductorTypes);
         await userEvent.click(
             screen.getByRole("button", { name: /click here/i })
         );
         const dialog = await screen.findByRole("dialog");
         const form = await within(dialog).findByRole("form");
+
         trpcFn.mockClear();
+
         return {
             ...utils,
             dialog,
@@ -51,7 +53,7 @@ describe("Create Conductor Modal", () => {
     }
 
     test("fill the form out correctly and test that the information is sent to server", async () => {
-        const { user, dialog, form, debug } = await setup();
+        const { user, dialog, form } = await setup();
 
         expect(form).toHaveFormValues(defaultConductor);
 

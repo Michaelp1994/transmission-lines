@@ -1,18 +1,17 @@
 import { z } from "zod";
-
-import { baseElementSchema } from "./base";
 import { busSchema } from "../common";
+import { baseElementSchema } from "./base";
 
 export const faultSchema = baseElementSchema.extend({
     /** Name of first bus. Examples:
      *
-     * bus1=busname
+     * bus1=busname.
      *
-     * bus1=busname.1.2.3
+     * Bus1=busname.1.2.3.
      *
      * Bus2 automatically defaults to busname.0,0,0 unless it was previously defined. */
     bus1: busSchema.optional(),
-    /** Name of 2nd bus of the 2-terminal Fault object. Defaults to all phases connected to first bus, node 0, if not specified. (Shunt Wye Connection to ground reference)
+    /** Name of 2nd bus of the 2-terminal Fault object. Defaults to all phases connected to first bus, node 0, if not specified. (Shunt Wye Connection to ground reference).
      *
      * That is, the Fault defaults to a ground fault unless otherwise specified. */
     bus2: busSchema.optional(),
@@ -24,7 +23,7 @@ export const faultSchema = baseElementSchema.extend({
     "%stddev": z.number().optional(),
     /** Use this to specify a nodal conductance (G) matrix to represent some arbitrary resistance network. Specify in lower triangle form as usual for DSS matrices. */
     gMatrix: z.number().array().optional(),
-    /** Time (sec) at which the fault is established for time varying simulations. Default is 0.0 (on at the beginning of the simulation) */
+    /** Time (sec) at which the fault is established for time varying simulations. Default is 0.0 (on at the beginning of the simulation). */
     onTime: z.number().optional(),
     /** Default is False.  Designate whether the fault is temporary.  For Time-varying simulations, the fault will be removed if the current through the fault drops below the MINAMPS criteria. */
     temporary: z.boolean().optional(),

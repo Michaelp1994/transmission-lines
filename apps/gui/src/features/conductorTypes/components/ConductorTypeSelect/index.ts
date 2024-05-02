@@ -1,3 +1,5 @@
-import ConductorTypeSelect from "./ConductorTypeSelect";
 
-export default ConductorTypeSelect;
+
+
+
+export {default} from "./ConductorTypeSelect";

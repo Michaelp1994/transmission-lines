@@ -1,9 +1,7 @@
 import { faker } from "@faker-js/faker";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import BaseForm from "./BaseForm";
-
 import { render, screen } from "~test-utils";
 
 describe("Update Source Form", () => {
@@ -14,6 +12,7 @@ describe("Update Source Form", () => {
             name: "Test Source",
             enabled: true,
         };
+
         render(
             <BaseForm
                 data={source}
@@ -41,6 +40,7 @@ describe("Update Source Form", () => {
             name: "Test Source",
             enabled: true,
         };
+
         render(
             <BaseForm
                 data={source}
@@ -51,6 +51,7 @@ describe("Update Source Form", () => {
 
         const newName = faker.word.noun(10);
         const nameInput = screen.getByLabelText("Name");
+
         // Fill in the form fields
         await userEvent.clear(nameInput);
         await userEvent.type(nameInput, newName);
@@ -71,6 +72,7 @@ describe("Update Source Form", () => {
             name: "Test Source",
             enabled: true,
         };
+
         render(
             <BaseForm
                 data={source}
@@ -80,6 +82,7 @@ describe("Update Source Form", () => {
         );
 
         const nameInput = screen.getByLabelText("Name");
+
         // Fill in the form fields
         await userEvent.clear(nameInput);
         await userEvent.type(nameInput, "t");

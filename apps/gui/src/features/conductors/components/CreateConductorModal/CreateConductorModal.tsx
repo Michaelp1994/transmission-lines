@@ -5,9 +5,8 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@repo/ui";
-import { LineID } from "@repo/validators/Ids";
+import type { LineID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
-
 import FormHandler from "./FormHandler";
 
 export interface CreateConductorModalProps {

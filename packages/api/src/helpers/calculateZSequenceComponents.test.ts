@@ -1,9 +1,8 @@
 import { describe, expect, it } from "vitest";
-
 import calculateZSequenceComponents from "./calculateZSequenceComponents";
 
 describe("calculate Z Sequence Components", () => {
-    it("should calculate the phase components correctly", () => {
+    test("should calculate the phase components correctly", () => {
         const input = {
             voltage: 138000,
             x1r1: 16,
@@ -18,6 +17,7 @@ describe("calculate Z Sequence Components", () => {
             z1: { re: 0.18118661, im: 2.8989857 },
             z2: { re: 0.18118661, im: 2.8989857 },
         };
+
         expect(result).toEqual(expectedOutput);
     });
 });

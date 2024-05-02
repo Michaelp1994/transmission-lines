@@ -8,6 +8,7 @@ export const Route = createFileRoute(
 
 export default function ResultsPage() {
     const { projectId } = Route.useParams();
+
     return (
         <div>Hello / projects / {projectId} / _viewProjectPage / results!</div>
     );

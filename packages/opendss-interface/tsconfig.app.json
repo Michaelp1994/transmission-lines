@@ -12,5 +12,11 @@
         },
         "outDir": "dist/app"
     },
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.test.js",
+        "src/**/*.test.jsx"
+    ]
 }

@@ -1,9 +1,7 @@
 import { faker } from "@faker-js/faker";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import FormHandler from "./FormHandler";
-
 import { render, screen, waitForElementToBeRemoved } from "~test-utils";
 import { createSourceElectrical } from "~tests/helpers/createSource";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
@@ -25,19 +23,21 @@ describe("Update Source Form", () => {
         const source = createSourceElectrical();
         const newSource = createSourceElectrical();
         const mockTrpcFn = vi.fn(async () => source);
+
         render(
             <MockTrpcProvider mockFn={mockTrpcFn}>
                 <FormHandler sourceId={sourceId} />
             </MockTrpcProvider>
         );
 
-        await waitForElementToBeRemoved(screen.queryByText(/Loading/i));
+        await waitForElementToBeRemoved(screen.queryByText(/loading/i));
         expect(mockTrpcFn).toHaveBeenCalledWith({ id: sourceId });
 
         // Assert that the form is filled with the source data
         for await (const [property, label] of Object.entries(labels)) {
             const key = property as keyof typeof source;
             const input = screen.getByLabelText(label);
+
             expect(input).toHaveValue(source[key]);
         }
 
@@ -46,6 +46,7 @@ describe("Update Source Form", () => {
             const key = property as keyof typeof newSource;
             const newValue = String(newSource[key]);
             const input = screen.getByLabelText(label);
+
             await userEvent.clear(input);
             await userEvent.type(input, newValue);
         }

@@ -1,8 +1,7 @@
-/* eslint-disable import/no-cycle */
+ 
 
 import { relations } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
-
 import { towerGeometries } from "./towerGeometries";
 
 export const conductorLocations = sqliteTable("conductor_locations", {
@@ -19,10 +18,10 @@ export type NewConductorLocation = typeof conductorLocations.$inferInsert;
 
 export const conductorLocationsRelations = relations(
     conductorLocations,
-    ({ one }) => ({
+    ({ one }) => { return {
         towerGeometry: one(towerGeometries, {
             fields: [conductorLocations.geometryId],
             references: [towerGeometries.id],
         }),
-    })
+    } }
 );

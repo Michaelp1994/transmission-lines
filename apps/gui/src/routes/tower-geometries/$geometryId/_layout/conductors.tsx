@@ -10,7 +10,6 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { ConductorLocationTable } from "~/features/conductorLocations";
 import { useCreateConductorLocationModal } from "~/utils/modals";
 

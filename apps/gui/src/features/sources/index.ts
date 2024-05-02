@@ -1,15 +1,15 @@
-import CreateSourceForm from "./components/CreateSourceForm";
-import DeleteSourceModal from "./components/DeleteSourceModal";
-import SourceSelect from "./components/SourceSelect";
-import SourceTable from "./components/SourceTable";
-import UpdateSourceElectricalForm from "./components/UpdateSourceElectricalForm";
-import UpdateSourceGeneralForm from "./components/UpdateSourceGeneralForm";
 
-export {
-    SourceSelect,
-    CreateSourceForm,
-    UpdateSourceGeneralForm,
-    UpdateSourceElectricalForm,
-    SourceTable,
-    DeleteSourceModal,
-};
+
+
+
+
+
+
+
+
+export {default as CreateSourceForm} from "./components/CreateSourceForm";
+export {default as DeleteSourceModal} from "./components/DeleteSourceModal";
+export {default as SourceSelect} from "./components/SourceSelect";
+export {default as SourceTable} from "./components/SourceTable";
+export {default as UpdateSourceElectricalForm} from "./components/UpdateSourceElectricalForm";
+export {default as UpdateSourceGeneralForm} from "./components/UpdateSourceGeneralForm";

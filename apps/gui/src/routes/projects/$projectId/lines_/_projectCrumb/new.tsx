@@ -8,16 +8,15 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { CreateTransmissionLineForm } from "~/features/transmissionLines";
 
 export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/new"
 )({
     component: CreateTransmissionLinePage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "New Transmission Lines",
-    }),
+    } },
 });
 
 export default function CreateTransmissionLinePage() {

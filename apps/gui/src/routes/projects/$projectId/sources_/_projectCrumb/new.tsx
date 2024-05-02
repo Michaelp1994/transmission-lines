@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Card,
     CardContent,
@@ -9,16 +8,17 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { CreateSourceForm } from "~/features/sources";
 
 export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/new"
 )({
     component: CreateSourcePage,
-    beforeLoad: () => ({
-        text: "New Source",
-    }),
+    beforeLoad: () => {
+        return {
+            text: "New Source",
+        };
+    },
 });
 
 export default function CreateSourcePage() {

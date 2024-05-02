@@ -1,5 +1,4 @@
-import { ConductorTypeID } from "@repo/validators/Ids";
-
+import type { ConductorTypeID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -25,8 +24,8 @@ export default function DeleteConductorTypeModal({
         },
     });
 
-    async function handleConfirm() {
-        await deleteMutation.mutateAsync({ id: typeId });
+    function handleConfirm() {
+        deleteMutation.mutate({ id: typeId });
     }
 
     return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;

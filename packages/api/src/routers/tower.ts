@@ -9,7 +9,6 @@ import {
     getTowersByLineIdSchema,
     updateTransmissionTowerSchema,
 } from "@repo/validators";
-
 import generateTowers from "@/helpers/generateTowers";
 import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
 import { publicProcedure, router } from "@/trpc";
@@ -22,7 +21,9 @@ export default router({
                 .insert(transmissionTowers)
                 .values(input)
                 .returning();
-            if (!newTower) throw Error("Can't create tower");
+
+            if (!newTower) {throw new Error("Can't create tower");}
+
             return newTower;
         }),
     generate: publicProcedure
@@ -33,7 +34,9 @@ export default router({
                 .insert(transmissionTowers)
                 .values(towers)
                 .returning();
-            if (!newTowers) throw Error("Can't generate towers");
+
+            if (!newTowers) {throw new Error("Can't generate towers");}
+
             return newTowers;
         }),
     getParameters: publicProcedure
@@ -58,12 +61,13 @@ export default router({
                     },
                 },
             });
-            if (!tower) throw Error("Can't find transmission tower");
+
+            if (!tower) {throw new Error("Can't find transmission tower");}
             if (
                 tower.geometry.conductors.length !==
                 tower.transmissionLine.conductors.length
             ) {
-                throw Error(
+                throw new Error(
                     "Tower Geometry and Transmission Line have different number of conductors"
                 );
             }
@@ -71,6 +75,7 @@ export default router({
                 tower.geometry,
                 tower.transmissionLine.conductors
             );
+
             return matrixes;
         }),
 
@@ -82,7 +87,9 @@ export default router({
                 .set(input)
                 .where(eq(transmissionTowers.id, input.id))
                 .returning();
-            if (!updatedTower) throw Error("Can't update tower");
+
+            if (!updatedTower) {throw new Error("Can't update tower");}
+
             return updatedTower;
         }),
     getById: publicProcedure
@@ -91,7 +98,9 @@ export default router({
             const tower = await db.query.transmissionTowers.findFirst({
                 where: eq(transmissionTowers.id, input.id),
             });
-            if (!tower) throw Error("Can't find tower");
+
+            if (!tower) {throw new Error("Can't find tower");}
+
             return tower;
         }),
     getAllByLineId: publicProcedure
@@ -103,7 +112,9 @@ export default router({
                     geometry: true,
                 },
             });
-            if (!towers) throw Error("Can't find transmission towers");
+
+            if (!towers) {throw new Error("Can't find transmission towers");}
+
             return towers;
         }),
 
@@ -114,7 +125,9 @@ export default router({
                 .delete(transmissionTowers)
                 .where(eq(transmissionTowers.id, input.id))
                 .returning();
-            if (!deletedTower) throw Error("Can't delete tower");
+
+            if (!deletedTower) {throw new Error("Can't delete tower");}
+
             return deletedTower;
         }),
 });

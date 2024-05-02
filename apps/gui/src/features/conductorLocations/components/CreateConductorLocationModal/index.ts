@@ -1,3 +1,5 @@
-import CreateConductorLocationModal from "./CreateConductorLocationModal";
 
-export default CreateConductorLocationModal;
+
+
+
+export {default} from "./CreateConductorLocationModal";

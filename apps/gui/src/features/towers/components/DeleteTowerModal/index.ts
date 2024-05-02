@@ -1,3 +1,5 @@
-import DeleteTowerModal from "./DeleteTowerModal";
 
-export default DeleteTowerModal;
+
+
+
+export {default} from "./DeleteTowerModal";

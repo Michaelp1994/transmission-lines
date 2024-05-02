@@ -1,12 +1,12 @@
-import { Complex, complex, diag, exp, matrix, multiply, pi, pow } from "mathjs";
+import { type Complex, complex, diag, exp, matrix, multiply, pi, pow } from "mathjs";
 
 export type ZPhaseComponents = number[][];
 
-type Input = {
+interface Input {
     z0: Complex;
     z1: Complex;
     z2: Complex;
-};
+}
 
 export default function calculateZPhaseComponents({ z0, z1, z2 }: Input) {
     const zSequenceMatrix = diag([z0, z1, z2]);
@@ -30,5 +30,6 @@ export default function calculateZPhaseComponents({ z0, z1, z2 }: Input) {
     const matrix1 = multiply(alphaMatrix, zSequenceMatrix);
     const matrix2 = multiply(matrix1, alphaMatrix2);
     const zPhaseMatrix = multiply(1 / 3, matrix2);
+
     return zPhaseMatrix;
 }

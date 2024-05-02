@@ -1,9 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
 import { defaultConductorLocation } from "@repo/validators/forms/ConductorLocation.schema";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-
 import { useCreateConductorLocationModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
@@ -20,11 +19,13 @@ describe("Create Conductor Location Modal", () => {
     const trpcFn = vi.fn().mockResolvedValue(mockConductorLocation);
     const render = createRender(trpcFn);
     const displayModal = useCreateConductorLocationModal(geometryId);
+
     async function renderForm() {
         const user = userEvent.setup();
         const utils = render(
             <Button onClick={displayModal}>Click Here</Button>
         );
+
         await userEvent.click(
             screen.getByRole("button", { name: /click here/i })
         );
@@ -45,12 +46,14 @@ describe("Create Conductor Location Modal", () => {
 
     test("fill out form correctly and test that the information is sent to server", async () => {
         const { form, user, dialog } = await renderForm();
+
         expect(form).toHaveFormValues(defaultConductorLocation);
         await completeForm(user, form, labels, mockConductorLocation);
 
         const confirm = within(dialog).getByRole("button", {
             name: /create/i,
         });
+
         await user.click(confirm);
 
         expect(trpcFn).toHaveBeenCalledWith({
@@ -72,6 +75,7 @@ describe("Create Conductor Location Modal", () => {
         const confirm = within(dialog).getByRole("button", {
             name: /create/i,
         });
+
         await user.click(confirm);
 
         expect(trpcFn).not.toHaveBeenCalled();

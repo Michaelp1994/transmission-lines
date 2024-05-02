@@ -1,3 +1,5 @@
-import ProjectDiagram from "./DiagramWrapper";
 
-export default ProjectDiagram;
+
+
+
+export {default} from "./DiagramWrapper";

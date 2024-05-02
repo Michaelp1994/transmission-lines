@@ -1,7 +1,5 @@
 import { z } from "zod";
-
 import { baseElementSchema } from "./base";
-
 import { unitsSchema } from "@/enums";
 
 export const lineSpacingSchema = baseElementSchema.extend({

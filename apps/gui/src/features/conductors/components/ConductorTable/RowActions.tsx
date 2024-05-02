@@ -7,10 +7,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui";
-import { CellContext } from "@tanstack/react-table";
-
-import { Conductor } from "./RowType";
-
+import type { CellContext } from "@tanstack/react-table";
+import type { Conductor } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
 import {
     useDeleteConductorModal,

@@ -1,8 +1,7 @@
 import BaseElement from "./BaseElement";
-
 import {
-    LineInput,
-    OpenDSSLine,
+    type LineInput,
+    type OpenDSSLine,
     arrayTransform,
     booleanTransform,
     busTransform,
@@ -58,7 +57,7 @@ export default class Line extends BaseElement<LineInput, OpenDSSLine> {
         "repair",
         "baseFreq",
         "enabled",
-    ] as const satisfies Array<keyof OpenDSSLine>;
+    ] as const satisfies (keyof OpenDSSLine)[];
 
     transform() {
         return {

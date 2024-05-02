@@ -1,3 +1,5 @@
-import SourceTable from "./SourceTable";
 
-export default SourceTable;
+
+
+
+export {default} from "./SourceTable";

@@ -11,9 +11,8 @@ import {
     TabsList,
     TabsTrigger,
 } from "@repo/ui";
-import { TowerID } from "@repo/validators/Ids";
+import type { TowerID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
-
 import trpc from "~/utils/trpc";
 
 export interface TowerParametersModalProps {

@@ -1,5 +1,4 @@
 import { describe, expect, test } from "vitest";
-
 import splitStringsIntoRows from "@/helpers/splitArray";
 
 describe("splitArray", () => {
@@ -7,8 +6,10 @@ describe("splitArray", () => {
         // Example usage:
         const inputArray = ["abcde", "xyz", "ijklm", "uvwxy", "qrst"];
         const result = splitStringsIntoRows(inputArray);
+
         result.forEach((row) => {
             const rowLength = row.length;
+
             // const rowLength = row.reduce((acc, str) => acc + str.length, 0);
             expect(rowLength).toBeLessThanOrEqual(150);
         });

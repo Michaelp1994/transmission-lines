@@ -7,9 +7,7 @@ import {
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
 import { Handle, Position } from "reactflow";
-
-import { NodeData } from "./NodeData";
-
+import type { NodeData } from "./NodeData";
 import { useDeleteSourceModal } from "~/utils/modals";
 
 interface SourceProps {
@@ -18,6 +16,7 @@ interface SourceProps {
 
 export default function Source({ data }: SourceProps) {
     const displayDeleteModal = useDeleteSourceModal(data.sourceId);
+
     return (
         <>
             <Handle type="target" position={Position.Left} />

@@ -1,44 +1,44 @@
-import * as LabelPrimitive from "@radix-ui/react-label";
+import type * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
 import {
     Controller,
-    ControllerProps,
-    FieldPath,
-    FieldValues,
+    type ControllerProps,
+    type FieldPath,
+    type FieldValues,
     FormProvider,
     useFormContext,
 } from "react-hook-form";
-
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 const Form = FormProvider;
 
-type FormFieldContextValue<
+interface FormFieldContextValue<
     TFieldValues extends FieldValues = FieldValues,
     TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> = {
+> {
     name: TName;
-};
+}
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
     {} as FormFieldContextValue
 );
 
-const FormField = <
+function FormField<
     TFieldValues extends FieldValues = FieldValues,
     TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
     ...props
-}: ControllerProps<TFieldValues, TName>) => {
+}: ControllerProps<TFieldValues, TName>) {
     const value = React.useMemo(() => ({ name: props.name }), [props.name]);
+
     return (
         <FormFieldContext.Provider value={value}>
             <Controller {...props} />
         </FormFieldContext.Provider>
     );
-};
+}
 
 const useFormField = () => {
     const fieldContext = React.useContext(FormFieldContext);
@@ -63,9 +63,9 @@ const useFormField = () => {
     };
 };
 
-type FormItemContextValue = {
+interface FormItemContextValue {
     id: string;
-};
+}
 
 const FormItemContext = React.createContext<FormItemContextValue>(
     {} as FormItemContextValue
@@ -77,12 +77,14 @@ const FormItem = React.forwardRef<
 >(({ className, ...props }, ref) => {
     const id = React.useId();
     const value = React.useMemo(() => ({ id }), [id]);
+
     return (
         <FormItemContext.Provider value={value}>
             <div ref={ref} className={cn("space-y-2", className)} {...props} />
         </FormItemContext.Provider>
     );
 });
+
 FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef<
@@ -100,6 +102,7 @@ const FormLabel = React.forwardRef<
         />
     );
 });
+
 FormLabel.displayName = "FormLabel";
 
 const FormControl = React.forwardRef<
@@ -113,16 +116,17 @@ const FormControl = React.forwardRef<
         <Slot
             ref={ref}
             id={formItemId}
+            aria-invalid={Boolean(error)}
             aria-describedby={
                 !error
-                    ? `${formDescriptionId}`
+                    ? formDescriptionId
                     : `${formDescriptionId} ${formMessageId}`
             }
-            aria-invalid={!!error}
             {...props}
         />
     );
 });
+
 FormControl.displayName = "FormControl";
 
 const FormDescription = React.forwardRef<
@@ -140,6 +144,7 @@ const FormDescription = React.forwardRef<
         />
     );
 });
+
 FormDescription.displayName = "FormDescription";
 
 const FormMessage = React.forwardRef<
@@ -147,7 +152,7 @@ const FormMessage = React.forwardRef<
     React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
     const { error, formMessageId } = useFormField();
-    const body = error ? String(error?.message) : children;
+    const body = error ? String(error.message) : children;
 
     if (!body) {
         return null;
@@ -164,6 +169,7 @@ const FormMessage = React.forwardRef<
         </p>
     );
 });
+
 FormMessage.displayName = "FormMessage";
 
 export {

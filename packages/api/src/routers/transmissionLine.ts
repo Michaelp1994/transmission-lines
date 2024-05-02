@@ -8,7 +8,6 @@ import {
     getTransmissionLineByIdSchema,
     updateTransmissionLineSchema,
 } from "@repo/validators/schemas/TransmissionLine.schema";
-
 import { publicProcedure, router } from "../trpc";
 
 export default router({
@@ -19,6 +18,7 @@ export default router({
                 await db.query.transmissionLines.findMany({
                     where: eq(transmissionLines.projectId, input.projectId),
                 });
+
             return allTransmissionLines;
         }),
     getAllByProjectId: publicProcedure
@@ -32,6 +32,7 @@ export default router({
                         toSource: true,
                     },
                 });
+
             return allTransmissionLines;
         }),
     getById: publicProcedure
@@ -42,7 +43,9 @@ export default router({
                     where: eq(transmissionLines.id, input.id),
                 }
             );
-            if (!transmissionLine) throw Error("Can't find transmission line");
+
+            if (!transmissionLine) {throw new Error("Can't find transmission line");}
+
             return transmissionLine;
         }),
     create: publicProcedure
@@ -52,7 +55,9 @@ export default router({
                 .insert(transmissionLines)
                 .values(input)
                 .returning();
-            if (!newTransmissionLine) throw Error("Can't create source");
+
+            if (!newTransmissionLine) {throw new Error("Can't create source");}
+
             return newTransmissionLine;
         }),
     update: publicProcedure
@@ -63,8 +68,9 @@ export default router({
                 .set(input)
                 .where(eq(transmissionLines.id, input.id))
                 .returning();
+
             if (!updatedTranmissionLine)
-                throw Error("Can't update transmission line");
+                {throw new Error("Can't update transmission line");}
 
             return updatedTranmissionLine;
         }),
@@ -75,8 +81,10 @@ export default router({
                 .delete(transmissionLines)
                 .where(eq(transmissionLines.id, input.id))
                 .returning();
+
             if (!deletedTranmissionLine)
-                throw Error("Can't delete transmission line");
+                {throw new Error("Can't delete transmission line");}
+
             return deletedTranmissionLine;
         }),
 });

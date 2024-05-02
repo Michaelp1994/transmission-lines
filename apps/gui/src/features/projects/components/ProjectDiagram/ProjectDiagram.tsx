@@ -5,21 +5,20 @@ import ReactFlow, {
     Background,
     BackgroundVariant,
     Controls,
-    Edge,
-    Node,
+    type Edge,
+    type Node,
     addEdge,
     applyEdgeChanges,
     applyNodeChanges,
 } from "reactflow";
 
 import "reactflow/dist/style.css";
-import { NodeData, NodeType } from "./NodeData";
+import type { NodeData, NodeType } from "./NodeData";
 import Source from "./Source";
 import TransmissionLine from "./TransmissionLine";
-
 import { ButtonsWrapper } from "~/components/StyledForm";
 import toast from "~/utils/toast";
-import trpc, { RouterOutputs } from "~/utils/trpc";
+import trpc, { type RouterOutputs } from "~/utils/trpc";
 
 interface ProjectDiagramProps {
     sources: RouterOutputs["source"]["getAllByProjectId"];
@@ -45,7 +44,7 @@ export default function ProjectDiagram({
 
     const initialNodes: Node<NodeData, NodeType>[] = useMemo(
         () =>
-            sources.map((source) => ({
+            { return sources.map((source) => { return {
                 id: source.id,
                 type: "source",
                 position: { x: source.x, y: source.y },
@@ -54,13 +53,13 @@ export default function ProjectDiagram({
                     projectId: source.projectId,
                     sourceId: source.id,
                 },
-            })),
+            } }) },
         [sources]
     );
 
     const initialEdges: Edge[] = useMemo(
         () =>
-            transmissionLines.map((tline) => ({
+            { return transmissionLines.map((tline) => { return {
                 id: tline.id,
                 source: tline.fromSourceId,
                 target: tline.toSourceId!,
@@ -70,7 +69,7 @@ export default function ProjectDiagram({
                     projectId: tline.projectId,
                     lineId: tline.id,
                 },
-            })),
+            } }) },
         [transmissionLines]
     );
 
@@ -78,28 +77,31 @@ export default function ProjectDiagram({
     const [edges, setEdges] = useState(initialEdges);
 
     const onConnect = useCallback(
-        (params) => setEdges((eds) => addEdge(params, eds)),
+        (params) => { setEdges((eds) => addEdge(params, eds)); },
         [setEdges]
     );
 
     const onNodesChange = useCallback((changes) => {
         setDirty(true);
-        return setNodes((nds) => applyNodeChanges(changes, nds));
+
+        setNodes((nds) => applyNodeChanges(changes, nds));
     }, []);
     const onEdgesChange = useCallback(
-        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+        (changes) => { setEdges((eds) => applyEdgeChanges(changes, eds)); },
         []
     );
 
     function handleSave() {
         setDirty(false);
-        const changes = nodes.map((node) => ({
+        const changes = nodes.map((node) => { return {
             id: node.id,
             x: node.position.x,
             y: node.position.y,
-        }));
+        } });
+
         mutation.mutate(changes);
     }
+
     return (
         <>
             <DiagramWrapper>
@@ -122,7 +124,7 @@ export default function ProjectDiagram({
                 </ReactFlow>
             </DiagramWrapper>
             <ButtonsWrapper>
-                <Button onClick={handleSave} disabled={!dirty}>
+                <Button disabled={!dirty} onClick={handleSave}>
                     Save
                 </Button>
             </ButtonsWrapper>

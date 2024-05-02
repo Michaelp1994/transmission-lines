@@ -7,11 +7,11 @@ import {
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import UserButton from "./UserButton";
 
 export default function NavBar() {
     const { t, i18n } = useTranslation("general");
+
     function changeLanguage(checked: boolean) {
         if (checked) {
             i18n.changeLanguage("pt-BR");
@@ -19,6 +19,7 @@ export default function NavBar() {
             i18n.changeLanguage("en-AU");
         }
     }
+
     return (
         <Wrapper>
             <NavigationMenu>

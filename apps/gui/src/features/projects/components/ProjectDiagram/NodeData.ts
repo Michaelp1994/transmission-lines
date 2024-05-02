@@ -1,4 +1,4 @@
-import { ProjectID, SourceID } from "@repo/validators/Ids";
+import type { ProjectID, SourceID } from "@repo/validators/Ids";
 
 export interface NodeData {
     label: string;

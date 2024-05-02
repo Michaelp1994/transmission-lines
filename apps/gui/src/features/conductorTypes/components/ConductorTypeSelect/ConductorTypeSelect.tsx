@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
-import BaseSelect, { BaseSelectProps } from "~/components/BaseSelect";
+import BaseSelect, { type BaseSelectProps } from "~/components/BaseSelect";
 import trpc from "~/utils/trpc";
 
 interface ConductorTypeSelectProps extends Omit<BaseSelectProps, "data"> {}
@@ -20,7 +19,10 @@ const ConductorTypeSelect = React.forwardRef<
     if (error || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
+
     return <BaseSelect {...props} data={data} ref={ref} />;
 });
+
+ConductorTypeSelect.displayName = "ConductorTypeSelect";
 
 export default ConductorTypeSelect;

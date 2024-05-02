@@ -8,14 +8,14 @@ afterEach(() => {
     cleanup();
 });
 
-vi.mock("@tanstack/react-router", () => ({
+vi.mock("@tanstack/react-router", () => { return {
     useNavigate() {
         return vi.fn();
     },
     Link({ children }: { children: React.ReactNode }) {
         return <a href="#test">{children}</a>;
     },
-}));
+} });
 
 Element.prototype.scrollIntoView = vi.fn();
 

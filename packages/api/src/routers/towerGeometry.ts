@@ -11,7 +11,6 @@ import {
     getTowerGeometryByIdSchema,
     updateTowerGeometrySchema,
 } from "@repo/validators";
-
 import { publicProcedure, router } from "../trpc";
 
 export default router({
@@ -20,6 +19,7 @@ export default router({
         .query(async ({ ctx: { db } }) => {
             const allTowerGeometries =
                 await db.query.towerGeometries.findMany();
+
             return allTowerGeometries;
         }),
     getById: publicProcedure
@@ -28,7 +28,9 @@ export default router({
             const towerGeometry = await db.query.towerGeometries.findFirst({
                 where: eq(towerGeometries.id, input.id),
             });
-            if (!towerGeometry) throw Error("Can't find tower geometry");
+
+            if (!towerGeometry) {throw new Error("Can't find tower geometry");}
+
             return towerGeometry;
         }),
     create: publicProcedure
@@ -38,8 +40,9 @@ export default router({
                 .insert(towerGeometries)
                 .values(input)
                 .returning();
+
             if (!newTowerGeometry) {
-                throw Error("Failed to create a new Tower Geometry");
+                throw new Error("Failed to create a new Tower Geometry");
             }
 
             return newTowerGeometry;
@@ -52,15 +55,16 @@ export default router({
                 .set(input)
                 .where(eq(towerGeometries.id, input.id))
                 .returning();
+
             if (!updatedTowerGeometry)
-                throw Error("Can't update tower geometry");
+                {throw new Error("Can't update tower geometry");}
 
             return updatedTowerGeometry;
         }),
     delete: publicProcedure
         .input(deleteTowerGeometrySchema)
         .mutation(async ({ input, ctx: { db } }) =>
-            db.transaction((tx) => {
+            { return db.transaction((tx) => {
                 tx.delete(conductorLocations)
                     .where(eq(conductorLocations.geometryId, input.id))
                     .run();
@@ -69,13 +73,15 @@ export default router({
                     .where(eq(towerGeometries.id, input.id))
                     .returning()
                     .get();
+
                 if (!deletedTowerGeometry) {
                     tx.rollback();
-                    throw Error("Can't delete tower geometry");
+                    throw new Error("Can't delete tower geometry");
                 }
+
                 return deletedTowerGeometry;
 
                 // return deletedTowerGeometry;
-            })
+            }) }
         ),
 });

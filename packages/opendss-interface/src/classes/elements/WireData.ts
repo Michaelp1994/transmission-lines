@@ -1,8 +1,7 @@
 import BaseElement from "./BaseElement";
-
 import {
-    OpenDSSWireData,
-    WireDataInput,
+    type OpenDSSWireData,
+    type WireDataInput,
     arrayTransform,
     numberTransform,
     wireDataSchema,
@@ -35,7 +34,7 @@ export default class WireData extends BaseElement<
         "seasons",
         "ratings",
         "capRadius",
-    ] as const satisfies Array<keyof OpenDSSWireData>;
+    ] as const satisfies (keyof OpenDSSWireData)[];
 
     transform() {
         return {

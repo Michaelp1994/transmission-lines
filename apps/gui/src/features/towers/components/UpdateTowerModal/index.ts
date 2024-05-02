@@ -1,3 +1,5 @@
-import UpdateTowerModal from "./UpdateTowerModal";
 
-export default UpdateTowerModal;
+
+
+
+export {default} from "./UpdateTowerModal";

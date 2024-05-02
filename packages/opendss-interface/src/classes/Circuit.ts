@@ -1,14 +1,13 @@
-import BaseElement from "./elements/BaseElement";
+import type BaseElement from "./elements/BaseElement";
 import OpenDssDriver from "./OpenDssDriver";
-
-import { OpenDSSOptions, optionsSchema } from "@/schemas";
+import { type OpenDSSOptions, optionsSchema } from "@/schemas";
 
 export default class Circuit {
-    components: Array<BaseElement> = [];
+    components: BaseElement[] = [];
 
-    solution: Array<any> = [];
+    solution: any[] = [];
 
-    isSolved: boolean = false;
+    isSolved = false;
 
     name: string;
 
@@ -17,7 +16,7 @@ export default class Circuit {
     constructor(
         name: string,
         options?: OpenDSSOptions,
-        debug: boolean = false
+        debug = false
     ) {
         this.driver = new OpenDssDriver(debug);
         this.name = name;
@@ -44,6 +43,7 @@ export default class Circuit {
     build() {
         this.components.forEach((component) => {
             const script = component.create();
+
             this.driver.sendArray(script);
         });
     }
@@ -60,7 +60,7 @@ export default class Circuit {
 
     getCurrents(element: BaseElement) {
         if (!this.isSolved) {
-            throw Error("Circuit is not solved");
+            throw new Error("Circuit is not solved");
         }
 
         return this.driver.getCurrents(element.getFullName());

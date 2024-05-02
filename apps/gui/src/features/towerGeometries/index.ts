@@ -1,15 +1,15 @@
-import CreateTowerGeometryForm from "./components/CreateTowerGeometryForm";
-import DeleteTowerGeometryModal from "./components/DeleteTowerGeometryModal";
-import TowerGeometriesTable from "./components/TowerGeometriesTable";
-import TowerGeometryDiagram from "./components/TowerGeometryDiagram";
-import TowerGeometrySelect from "./components/TowerGeometrySelect";
-import UpdateTowerGeometryForm from "./components/UpdateTowerGeometryForm";
 
-export {
-    TowerGeometriesTable,
-    TowerGeometrySelect,
-    TowerGeometryDiagram,
-    CreateTowerGeometryForm,
-    UpdateTowerGeometryForm,
-    DeleteTowerGeometryModal,
-};
+
+
+
+
+
+
+
+
+export {default as CreateTowerGeometryForm} from "./components/CreateTowerGeometryForm";
+export {default as DeleteTowerGeometryModal} from "./components/DeleteTowerGeometryModal";
+export {default as TowerGeometriesTable} from "./components/TowerGeometriesTable";
+export {default as TowerGeometryDiagram} from "./components/TowerGeometryDiagram";
+export {default as TowerGeometrySelect} from "./components/TowerGeometrySelect";
+export {default as UpdateTowerGeometryForm} from "./components/UpdateTowerGeometryForm";

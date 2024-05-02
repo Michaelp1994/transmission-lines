@@ -12,5 +12,6 @@ export default function MockRouterProvider({
     children,
 }: MockRouterProviderProps) {
     const router = {};
+
     return <Context.Provider value={router}>{children}</Context.Provider>;
 }

@@ -1,3 +1,4 @@
+import { z } from "zod";
 import {
     cktModelSchema,
     controlModeOptionSchema,
@@ -8,7 +9,6 @@ import {
     randomSchema,
     reduceOptionSchema,
 } from "@enums/index";
-import { z } from "zod";
 
 export const optionsSchema = z.object({
     /** Set default annual growth rate, percent, for loads with no growth curve specified. Default is 2.5. */
@@ -79,7 +79,7 @@ export const optionsSchema = z.object({
     earthModel: earthModelSchema.optional(),
     /** Set the command string required to start up the editor preferred by the user. Does not require a circuit defined. */
     editor: z.string().optional(),
-    /** Sets the active DSS element by name. You can use the complete object spec (class.name) or just the name.  if full name is specifed, class becomes the active class, also. */
+    /** Sets the active DSS element by name. You can use the complete object spec (class.name) or just the name.  If full name is specifed, class becomes the active class, also. */
     element: z.string().optional(),
     /** Maximum permissible per unit voltage for emergency (contingency) conditions. Default is 1.08. */
     emergvmaxpu: z.number().optional(),
@@ -123,7 +123,7 @@ export const optionsSchema = z.object({
     log: z.boolean().optional(),
     /** Executive.LongLineCorrection */
     longLineCorrection: z.number().optional(),
-    /** Which EnergyMeter register(s) to use for Losses in AutoAdd Mode. May be one or more registers.  if more than one, register values are summed together. Array of integer values > 0.  Defaults to 13 (for Zone kWh Losses).  */
+    /** Which EnergyMeter register(s) to use for Losses in AutoAdd Mode. May be one or more registers.  If more than one, register values are summed together. Array of integer values > 0.  Defaults to 13 (for Zone kWh Losses).  */
     lossregs: z.number().optional(),
     /** Weighting factor for Losses in AutoAdd functions.  Defaults to 1.0. */
     lossweight: z.number().optional(),
@@ -172,7 +172,7 @@ export const optionsSchema = z.object({
      * LD2 (load-duration 2)
      * AutoAdd (see AddType)
      * YearlyVQ (Yearly Vector Quantiaztion)
-     * DutyVQ (Duty Vector Quantiaztion)
+     * DutyVQ (Duty Vector Quantiaztion).
      */
     mode: modeSchema.optional(),
     /** {YES/TRUE | NO/FALSE}  Default is NO. For Harmonic solution, neglect the Load shunt admittance branch that can siphon off some of the Load injection current.  */
@@ -192,7 +192,7 @@ export const optionsSchema = z.object({
     /** Number of solutions or time steps to perform for each Solve command. Defaults for selected modes:
      * Daily = 24
      * Yearly = 8760
-     * Duty = 100
+     * Duty = 100.
      */
     number: z.number().optional(),
     /** Delivers the number of physical processors (Cores) available on the computer. If your computers processor has less than 64 cores, this number should be equal to the half of the available CPUs, otherise the number should  be the same (Read Only) */
@@ -227,9 +227,9 @@ export const optionsSchema = z.object({
     recorder: z.boolean().optional(),
     /** { Default or [null] | Shortlines [Zmag=nnn] | MergeParallel | BreakLoops | Switches | Ends | Laterals}  Strategy for reducing feeders. Default is to eliminate all dangling end buses and buses without load, caps, or taps.
      *
-     * "Shortlines [Zmag=0.02]" merges short branches with impedance less than Zmag (default = 0.02 ohms)
+     * "Shortlines [Zmag=0.02]" merges short branches with impedance less than Zmag (default = 0.02 ohms).
      *
-     * "MergeParallel" merges lines that have been found to be in parallel
+     * "MergeParallel" merges lines that have been found to be in parallel.
      *
      * "Breakloops" disables one of the lines at the head of a loop.
      *
@@ -292,7 +292,7 @@ export const optionsSchema = z.object({
     trapezoidal: z.boolean().optional(),
     /** Sets the active DSS class type.  Same as Class=... */
     type: z.number().optional(),
-    /** Which EnergyMeter register(s) to use for UE in AutoAdd Mode. May be one or more registers.  if more than one, register values are summed together. Array of integer values > 0.  Defaults to 11 (for Load EEN).  */
+    /** Which EnergyMeter register(s) to use for UE in AutoAdd Mode. May be one or more registers.  If more than one, register values are summed together. Array of integer values > 0.  Defaults to 11 (for Load EEN).  */
     uEregs: z.number().optional(),
     /** Weighting factor for UE/EEN in AutoAdd functions.  Defaults to 1.0. */
     UEweight: z.number().optional(),
@@ -300,11 +300,11 @@ export const optionsSchema = z.object({
     voltagebases: z.number().array().optional(),
     /** {YES/TRUE | NO/FALSE} Default = FALSE. For yearly solution mode, sets voltage exception reporting on/off. DemandInterval must be set to true for this to have effect. */
     voltexceptionreport: z.boolean().optional(),
-    /** Sets the Year (integer number) to be used for the solution. for certain solution types, this determines the growth multiplier. */
+    /** Sets the Year (integer number) to be used for the solution. For certain solution types, this determines the growth multiplier. */
     year: z.number().optional(),
     /** Sets the Zmag option (in Ohms) for ReduceOption Shortlines option. Lines have less line mode impedance are reduced. */
     zmag: z.number().optional(),
-    /** {YES/TRUE | NO/FALSE}  Default is No. if No, then meter zones are recomputed each time there is a change in the circuit. If Yes, then meter zones are not recomputed unless they have not yet been computed. Meter zones are normally recomputed on Solve command following a circuit change. */
+    /** {YES/TRUE | NO/FALSE}  Default is No. If No, then meter zones are recomputed each time there is a change in the circuit. If Yes, then meter zones are not recomputed unless they have not yet been computed. Meter zones are normally recomputed on Solve command following a circuit change. */
     zonelock: z.boolean().optional(),
 });
 

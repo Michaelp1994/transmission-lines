@@ -1,7 +1,6 @@
 import { Button } from "@repo/ui";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-
 import { useUpdateConductorLocationModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
@@ -28,6 +27,7 @@ describe("Update Conductor Location Modal", () => {
         const utils = render(
             <Button onClick={displayModal}>Click Here</Button>
         );
+
         await userEvent.click(
             screen.getByRole("button", { name: /click here/i })
         );
@@ -48,6 +48,7 @@ describe("Update Conductor Location Modal", () => {
 
     test("fill out form correctly and check that the correct information is sent to server", async () => {
         const { dialog, form, user } = await setup();
+
         expect(trpcFn).toHaveBeenCalledTimes(1);
         expect(trpcFn).toHaveBeenCalledWith({
             locationId,
@@ -58,6 +59,7 @@ describe("Update Conductor Location Modal", () => {
         const confirm = within(dialog).getByRole("button", {
             name: /submit/i,
         });
+
         await user.click(confirm);
         expect(trpcFn).toHaveBeenLastCalledWith({
             id: locationId,
@@ -69,6 +71,7 @@ describe("Update Conductor Location Modal", () => {
 
     test("fill out form incorrectly and check that information is not sent to server", async () => {
         const { dialog, form, user } = await setup();
+
         await completeForm(user, form, labels, {
             ...newConductorLocation,
             y: -5,
@@ -76,6 +79,7 @@ describe("Update Conductor Location Modal", () => {
         const confirm = within(dialog).getByRole("button", {
             name: /submit/i,
         });
+
         await user.click(confirm);
 
         expect(trpcFn).toHaveBeenCalledTimes(1);

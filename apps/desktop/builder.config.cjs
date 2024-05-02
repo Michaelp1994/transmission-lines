@@ -9,7 +9,7 @@ module.exports = {
     electronVersion: "28.2.1",
     electronLanguages: ["en-GB", "en-US", "pt-BR", "pt-PT"],
     directories: {
-        // eslint-disable-next-line no-template-curly-in-string
+         
         output: "releases/${version}/${os}",
     },
     files: [

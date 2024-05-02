@@ -9,7 +9,7 @@ export default function splitStringsIntoRows(inputArray: string[]): string[] {
     inputArray.forEach((str) => {
         if (currentRowLength + str.length <= MAX_LENGTH) {
             currentRow.push(str);
-            currentRowLength += str.length;
+            currentRowLength = currentRowLength + str.length;
         } else {
             resultArray.push(currentRow.join(" "));
             currentRow = [`~ ${str}`];

@@ -20,11 +20,11 @@ type AllKeys<T> = {
 type HasKeys<T> = AllKeys<Required<T>>;
 
 declare module "winax" {
-    type WinaxOptions = {
+    interface WinaxOptions {
         activate: boolean;
         getobject: boolean;
         type: boolean;
-    };
+    }
     class Object extends OpenDSSengine.DSS {
         constructor(value: "OpenDSSengine.DSS", options?: WinaxOptions);
     }

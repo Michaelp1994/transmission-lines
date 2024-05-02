@@ -12,7 +12,7 @@
         }
     ],
     "include": [
-        ".eslintrc.cjs",
+        "eslint.config.js",
         "builder.config.cjs",
         "playwright.config.ts",
         "vite.config.ts"

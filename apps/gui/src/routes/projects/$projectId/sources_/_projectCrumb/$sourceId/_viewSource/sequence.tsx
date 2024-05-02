@@ -7,7 +7,6 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import MatrixTable from "~/components/MatrixTable";
 import trpc from "~/utils/trpc";
 
@@ -15,25 +14,29 @@ export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence"
 )({
     component: ViewSourcePage,
-    beforeLoad: () => ({
-        text: "View Source",
-    }),
+    beforeLoad: () => {
+        return {
+            text: "View Source",
+        };
+    },
 });
 
 export default function ViewSourcePage() {
     const { sourceId } = Route.useParams();
     const { t } = useTranslation("source");
 
-    const { data, isLoading, error } = trpc.source.getPhaseComponents.useQuery({
-        id: sourceId,
-    });
+    const { data, isLoading, isError } =
+        trpc.source.getPhaseComponents.useQuery({
+            id: sourceId,
+        });
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error || !data) {
+    if (isError) {
         return <div>{t("general:errorMessage")}</div>;
     }
+
     return (
         <>
             <Card>

@@ -1,11 +1,9 @@
-import { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
-import { GeometryID } from "@repo/validators/Ids";
+import type { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
+import type { GeometryID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -13,17 +11,22 @@ interface FormHandlerProps {
     geometryId: GeometryID;
 }
 
+function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
+    console.log(errors);
+}
+
 export default function FormHandler({ geometryId }: FormHandlerProps) {
     const { t } = useTranslation("towerGeometry");
     const navigate = useNavigate();
 
-    const { data, error, isLoading } = trpc.towerGeometry.getById.useQuery({
-        id: geometryId,
-    });
+    const { data, error, isLoading, isError } =
+        trpc.towerGeometry.getById.useQuery({
+            id: geometryId,
+        });
     const updateMutation = trpc.towerGeometry.update.useMutation({
-        onSuccess(values) {
+        async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
-            navigate({ to: "/tower-geometries" });
+            await navigate({ to: "/tower-geometries" });
         },
         onError(error) {
             toast.error("Can't update Tower Geometry");
@@ -31,21 +34,17 @@ export default function FormHandler({ geometryId }: FormHandlerProps) {
         },
     });
 
-    async function handleValid(values: TowerGeometryFormInput) {
-        await updateMutation.mutateAsync({
+    function handleValid(values: TowerGeometryFormInput) {
+        updateMutation.mutate({
             ...values,
             id: geometryId,
         });
     }
 
-    async function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
-        console.log(errors);
-    }
-
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error || !data) {
+    if (isError) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

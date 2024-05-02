@@ -1,5 +1,4 @@
 import { describe, expect, test } from "vitest";
-
 import {
     Circuit,
     Line,
@@ -9,11 +8,12 @@ import {
     VSource,
     WireData,
 } from "@/classes";
-import { type OpenDSSOptions } from "@/schemas";
+import type { OpenDSSOptions } from "@/schemas";
 
-describe("Testing circuit class", () => {
-    test("Create a circuit", () => {
+describe("testing circuit class", () => {
+    test("create a circuit", () => {
         const circuit = new Circuit("testProject");
+
         expect(circuit.name).toBe("testProject");
         circuit.close();
     });
@@ -25,10 +25,12 @@ describe("Testing circuit class", () => {
             "%stddev": 5,
         } as const satisfies OpenDSSOptions;
         const circuit = new Circuit("testProject", options);
+
         Object.entries(options).forEach(([name, value]) => {
             const result = circuit.driver.getOption(
                 name as keyof OpenDSSOptions
             );
+
             expect(result).toBe(value.toString());
         });
         circuit.close();
@@ -50,6 +52,7 @@ describe("Testing circuit class", () => {
             x0r0: 4,
             x1r1: 3,
         });
+
         circuit.add(source);
 
         const reactor = new Reactor({
@@ -66,6 +69,7 @@ describe("Testing circuit class", () => {
             r: 2,
             phases: 1,
         });
+
         circuit.add(reactor);
 
         const cable = new WireData({
@@ -77,6 +81,7 @@ describe("Testing circuit class", () => {
             radUnits: "mm",
             rac: 0.5,
         });
+
         circuit.add(cable);
 
         const spacing1 = new LineSpacing({
@@ -87,6 +92,7 @@ describe("Testing circuit class", () => {
             h: [4, 5, 6, 10],
             x: [1, 2, 3, 10],
         });
+
         circuit.add(spacing1);
 
         const geometry1 = new LineGeometry({
@@ -96,6 +102,7 @@ describe("Testing circuit class", () => {
             spacing: spacing1,
             wires: [cable, cable, cable, cable],
         });
+
         circuit.add(geometry1);
 
         const line = new Line({
@@ -113,6 +120,7 @@ describe("Testing circuit class", () => {
             units: "m",
             geometry: geometry1,
         });
+
         circuit.add(line);
         circuit.build();
         circuit.solve();
@@ -120,6 +128,7 @@ describe("Testing circuit class", () => {
         expect(circuit.driver.getNumElements()).toBe(4);
         const lineCurrents = circuit.getCurrents(line);
         const reactorCurrents = circuit.getCurrents(reactor);
+
         expect(lineCurrents).toHaveLength(8);
         expect(reactorCurrents).toHaveLength(2);
         circuit.close();

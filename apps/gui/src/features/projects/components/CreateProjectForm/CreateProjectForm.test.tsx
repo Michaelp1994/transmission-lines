@@ -1,8 +1,6 @@
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import CreateProjectForm from "./CreateProjectForm";
-
 import { render, screen } from "~test-utils";
 
 // import MockApp from "./MockApp";
@@ -11,6 +9,7 @@ describe("CreateProjectForm", () => {
     test("renders form fields and buttons", () => {
         const validFnHandler = vi.fn();
         const invalidFnHandler = vi.fn();
+
         render(
             <CreateProjectForm
                 onValid={validFnHandler}

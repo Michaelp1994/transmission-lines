@@ -1,9 +1,7 @@
-import { GenerateConductorsFormInput } from "@repo/validators/forms/Conductor.schema";
-import { LineID } from "@repo/validators/Ids";
-import { FieldErrors } from "react-hook-form";
-
+import type { GenerateConductorsFormInput } from "@repo/validators/forms/Conductor.schema";
+import type { LineID } from "@repo/validators/Ids";
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 

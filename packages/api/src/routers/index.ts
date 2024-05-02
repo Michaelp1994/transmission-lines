@@ -1,3 +1,4 @@
+import { router } from "../trpc";
 import conductor from "./conductor";
 import conductorLocations from "./conductorLocation";
 import conductorType from "./conductorType";
@@ -7,7 +8,6 @@ import source from "./source";
 import tower from "./tower";
 import towerGeometry from "./towerGeometry";
 import transmissionLine from "./transmissionLine";
-import { router } from "../trpc";
 
 export const appRouter = router({
     conductor,

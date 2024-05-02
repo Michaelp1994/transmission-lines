@@ -8,7 +8,6 @@ import {
     DialogTitle,
 } from "@repo/ui";
 import { useTranslation } from "react-i18next";
-
 import FormHandler from "./FormHandler";
 
 export interface UpdateConductorLocationModalProps {
@@ -34,8 +33,8 @@ export default function UpdateConductorLocationModal({
                         </DialogDescription>
                     </DialogHeader>
                     <FormHandler
-                        onSubmit={onClose}
                         conductorLocationId={conductorLocationId}
+                        onSubmit={onClose}
                     />
                 </DialogContent>
             </DialogPortal>

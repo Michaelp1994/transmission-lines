@@ -1,8 +1,7 @@
 import BaseElement from "./BaseElement";
-
 import {
-    FaultInput,
-    OpenDSSFault,
+    type FaultInput,
+    type OpenDSSFault,
     arrayTransform,
     booleanTransform,
     busTransform,
@@ -32,7 +31,7 @@ export default class Fault extends BaseElement<FaultInput, OpenDSSFault> {
         "repair",
         "baseFreq",
         "enabled",
-    ] satisfies Array<keyof OpenDSSFault>;
+    ] satisfies (keyof OpenDSSFault)[];
 
     constructor(input: FaultInput) {
         super();

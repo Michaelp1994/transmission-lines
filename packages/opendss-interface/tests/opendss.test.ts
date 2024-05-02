@@ -6,10 +6,9 @@ import {
     expect,
     test,
 } from "vitest";
-
 import { OpenDssDriver } from "@/classes";
 
-describe("OpenDSS Driver", () => {
+describe("openDSS Driver", () => {
     let driver: OpenDssDriver;
 
     beforeAll(() => {
@@ -22,15 +21,17 @@ describe("OpenDSS Driver", () => {
         driver.close();
     });
 
-    test("Can get version", () => {
+    test("can get version", () => {
         const version = driver.dss.Version;
+
         // "Version 9.7.1.1 (64-bit build); License Status: Open "
         expect(version).toMatch(/Version .*/);
     });
-    test("Create a circuit", () => {
+    test("create a circuit", () => {
         driver.createCircuit("testcircuit1");
         const activeCircuit = driver.getActiveCircuit();
         const numCircuits = driver.dss.NumCircuits;
+
         expect(activeCircuit).toBe("testcircuit1");
         expect(numCircuits).toBe(1);
     });

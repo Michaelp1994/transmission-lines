@@ -1,3 +1,5 @@
-import GenerateConductorsModal from "./GenerateConductorsModal";
 
-export default GenerateConductorsModal;
+
+
+
+export {default} from "./GenerateConductorsModal";

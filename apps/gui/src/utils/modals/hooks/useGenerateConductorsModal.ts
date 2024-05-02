@@ -1,9 +1,7 @@
-import { LineID } from "@repo/validators/Ids";
-
+import type { LineID } from "@repo/validators/Ids";
 import { Modals } from "../config";
 import useModal from "../use-modal";
-
-import { GenerateConductorsModalProps } from "~/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
+import type { GenerateConductorsModalProps } from "~/features/conductors/components/GenerateConductorsModal/GenerateConductorsModal";
 
 export default function useGenerateConductorsModal(lineId: LineID) {
     const generateModal = useModal<GenerateConductorsModalProps>(

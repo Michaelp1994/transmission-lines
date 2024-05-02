@@ -1,3 +1,5 @@
-import UpdateProjectForm from "./FormWrapper";
 
-export default UpdateProjectForm;
+
+
+
+export {default} from "./FormWrapper";

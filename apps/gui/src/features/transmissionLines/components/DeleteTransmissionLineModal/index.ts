@@ -1,3 +1,5 @@
-import DeleteTransmissionLineModal from "./DeleteTransmissionLineModal";
 
-export default DeleteTransmissionLineModal;
+
+
+
+export {default} from "./DeleteTransmissionLineModal";

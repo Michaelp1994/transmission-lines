@@ -10,9 +10,7 @@ import {
     updateSourceGeneralSchema,
     updateSourcePositionsSchema,
 } from "@repo/validators/schemas/Source.schema";
-
 import { publicProcedure, router } from "../trpc";
-
 import calculateZPhaseComponents from "@/helpers/calculateZPhaseComponents";
 import calculateZSequenceComponents from "@/helpers/calculateZSequenceComponents";
 
@@ -39,7 +37,8 @@ export default router({
             const source = await db.query.sources.findFirst({
                 where: eq(sources.id, input.id),
             });
-            if (!source) throw Error("Can't find source");
+
+            if (!source) {throw new Error("Can't find source");}
 
             const { z0, z1, z2 } = calculateZSequenceComponents({
                 voltage: source.voltage * 1000,
@@ -51,6 +50,7 @@ export default router({
 
             const zPhaseMatrix = calculateZPhaseComponents({ z0, z1, z2 });
             const outputMatrix = zPhaseMatrix.toArray();
+
             return {
                 phaseMatrix: outputMatrix,
                 z0: { re: z0.re, im: z0.im },
@@ -64,7 +64,8 @@ export default router({
             const source = await db.query.sources.findFirst({
                 where: eq(sources.id, input.id),
             });
-            if (!source) throw Error("Can't find source");
+
+            if (!source) {throw new Error("Can't find source");}
 
             return source;
         }),
@@ -75,7 +76,8 @@ export default router({
                 .insert(sources)
                 .values(input)
                 .returning();
-            if (!newSource) throw Error("Can't create source");
+
+            if (!newSource) {throw new Error("Can't create source");}
 
             return newSource;
         }),
@@ -87,7 +89,8 @@ export default router({
                 .set(input)
                 .where(eq(sources.id, input.id))
                 .returning();
-            if (!updatedSource) throw Error("Can't update source");
+
+            if (!updatedSource) {throw new Error("Can't update source");}
 
             return updatedSource;
         }),
@@ -99,7 +102,8 @@ export default router({
                 .set(input)
                 .where(eq(sources.id, input.id))
                 .returning();
-            if (!updatedSource) throw Error("Can't update source");
+
+            if (!updatedSource) {throw new Error("Can't update source");}
 
             return updatedSource;
         }),
@@ -121,7 +125,8 @@ export default router({
                 .delete(sources)
                 .where(eq(sources.id, input.id))
                 .returning();
-            if (!deletedSource) throw Error("Can't delete source");
+
+            if (!deletedSource) {throw new Error("Can't delete source");}
 
             return deletedSource;
         }),

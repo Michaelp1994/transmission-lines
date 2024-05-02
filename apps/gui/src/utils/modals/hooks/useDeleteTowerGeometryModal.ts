@@ -1,9 +1,7 @@
-import { GeometryID } from "@repo/validators/Ids";
-
+import type { GeometryID } from "@repo/validators/Ids";
 import { Modals } from "../config";
 import useModal from "../use-modal";
-
-import { DeleteTowerGeometryModalProps } from "~/features/towerGeometries/components/DeleteTowerGeometryModal/DeleteTowerGeometryModal";
+import type { DeleteTowerGeometryModalProps } from "~/features/towerGeometries/components/DeleteTowerGeometryModal/DeleteTowerGeometryModal";
 
 export default function useDeleteTowerGeometryModal(geometryId: GeometryID) {
     const deleteModal = useModal<DeleteTowerGeometryModalProps>(

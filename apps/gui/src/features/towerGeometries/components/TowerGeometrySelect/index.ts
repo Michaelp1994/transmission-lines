@@ -1,3 +1,5 @@
-import TowerGeometrySelect from "./TowerGeometrySelect";
 
-export default TowerGeometrySelect;
+
+
+
+export {default} from "./TowerGeometrySelect";

@@ -8,10 +8,8 @@ import {
     DropdownMenuTrigger,
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
-import { CellContext } from "@tanstack/react-table";
-
-import { TowerGeometry } from "./RowType";
-
+import type { CellContext } from "@tanstack/react-table";
+import type { TowerGeometry } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
 import { useDeleteTowerGeometryModal } from "~/utils/modals";
 

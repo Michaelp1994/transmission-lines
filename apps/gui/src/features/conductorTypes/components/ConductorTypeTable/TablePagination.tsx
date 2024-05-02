@@ -4,15 +4,14 @@ import {
     PaginationContent,
     PaginationItem,
 } from "@repo/ui";
-import { Table } from "@tanstack/react-table";
+import type { Table } from "@tanstack/react-table";
 import {
     ChevronLeft,
     ChevronRight,
     ChevronsLeft,
     ChevronsRight,
 } from "lucide-react";
-
-import { ConductorType } from "./RowType";
+import type { ConductorType } from "./RowType";
 
 interface ConductorTypeTablePaginationProps {
     table: Table<ConductorType>;
@@ -27,8 +26,8 @@ export default function ConductorTypeTablePagination({
                 <PaginationItem>
                     <Button
                         variant="outline"
-                        onClick={() => table.setPageIndex(0)}
                         disabled={!table.getCanPreviousPage()}
+                        onClick={() => { table.setPageIndex(0); }}
                     >
                         <ChevronsLeft className="h-4 w-4" />
                     </Button>
@@ -36,8 +35,8 @@ export default function ConductorTypeTablePagination({
                 <PaginationItem>
                     <Button
                         variant="outline"
-                        onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
+                        onClick={() => { table.previousPage(); }}
                     >
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
@@ -45,8 +44,8 @@ export default function ConductorTypeTablePagination({
                 <PaginationItem>
                     <Button
                         variant="outline"
-                        onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
+                        onClick={() => { table.nextPage(); }}
                     >
                         <ChevronRight className="h-4 w-4" />
                     </Button>
@@ -54,8 +53,8 @@ export default function ConductorTypeTablePagination({
                 <PaginationItem>
                     <Button
                         variant="outline"
-                        onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
+                        onClick={() => { table.nextPage(); }}
                     >
                         <ChevronsRight className="h-4 w-4" />
                     </Button>

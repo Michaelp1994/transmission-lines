@@ -1,3 +1,5 @@
-import DeleteConductorTypeModal from "./DeleteConductorTypeModal";
 
-export default DeleteConductorTypeModal;
+
+
+
+export {default} from "./DeleteConductorTypeModal";

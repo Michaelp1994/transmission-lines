@@ -1,8 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import ModalProvider from "~/contexts/ModalProvider";
 import { useUpdateConductorModal } from "~/utils/modals";
 import { render, screen, within } from "~test-utils";
@@ -32,6 +31,7 @@ describe("Update Conductor Modal", () => {
         isNeutral: faker.datatype.boolean(),
         typeId: faker.string.uuid(),
     };
+
     test("previous data is correctly displayed", async () => {
         const user = userEvent.setup();
 
@@ -59,7 +59,6 @@ describe("Update Conductor Modal", () => {
         const bundleSpacingInput = within(dialog).getByLabelText(
             labels.bundleSpacing
         );
-        const isNeutralInput = within(dialog).getByLabelText(labels.isNeutral);
         const typeIdInput = within(dialog).getByLabelText(labels.typeId);
 
         expect(nameInput).toHaveValue(oldConductor.name);

@@ -1,5 +1,4 @@
-import { LineID } from "@repo/validators/Ids";
-
+import type { LineID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -32,5 +31,6 @@ export default function DeleteTransmissionLineModal({
             id: lineId,
         });
     }
+
     return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
 }

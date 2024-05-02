@@ -1,12 +1,12 @@
 import { type ChildProcess, spawn } from "child_process";
 import electronPath from "electron";
-
 import swc from "@rollup/plugin-swc";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 const electronPlugin = () => {
     let pr: ChildProcess;
+
     return {
         name: "prebuild-commands",
         // handleHotUpdate: async () => {
@@ -14,6 +14,7 @@ const electronPlugin = () => {
         // },
         writeBundle: async () => {
             const cwd = (process && process.cwd()) || __dirname;
+
             console.log("spawning electron...");
             pr = spawn(
                 electronPath as unknown as string,

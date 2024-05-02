@@ -1,3 +1,5 @@
-import UpdateTransmissionLineForm from "./UpdateTransmissionLineForm";
 
-export default UpdateTransmissionLineForm;
+
+
+
+export {default} from "./UpdateTransmissionLineForm";

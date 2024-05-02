@@ -1,9 +1,8 @@
 import { describe, expect, test } from "vitest";
-
 import { Line } from "@/classes";
 
-describe("Line components in OpenDSS", () => {
-    test("Create a basic Line class", () => {
+describe("line components in OpenDSS", () => {
+    test("create a basic Line class", () => {
         const line = new Line({
             name: "Line1",
             bus1: {
@@ -13,6 +12,7 @@ describe("Line components in OpenDSS", () => {
             phases: 3,
         });
         const script = line.create();
+
         expect(script).toStrictEqual(["New Line.Line1 bus1=T1.1.2.3 phases=3"]);
     });
 });

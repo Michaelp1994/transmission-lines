@@ -1,6 +1,5 @@
 import { initTRPC } from "@trpc/server";
 import { ZodError } from "zod";
-
 import type { Context } from "./context";
 
 /**
@@ -10,6 +9,7 @@ import type { Context } from "./context";
 const t = initTRPC.context<Context>().create({
     errorFormatter(opts) {
         const { shape, error } = opts;
+
         return {
             ...shape,
             data: {
@@ -25,7 +25,7 @@ const t = initTRPC.context<Context>().create({
 
 /**
  * Export reusable router and procedure helpers
- * that can be used throughout the router
+ * that can be used throughout the router.
  */
 export const {
     router,

@@ -1,9 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
 import { Square, SquareCheckBig } from "lucide-react";
-
 import RowActions from "./RowActions";
-import { Conductor } from "./RowType";
+import type { Conductor } from "./RowType";
 
 const columnHelper = createColumnHelper<Conductor>();
 
@@ -31,11 +30,11 @@ export default [
     columnHelper.accessor("isNeutral", {
         header: "Is Neutral?",
         cell: (info) =>
-            info.renderValue() ? (
+            { return info.renderValue() ? (
                 <SquareCheckBig aria-label="Yes" />
             ) : (
                 <Square aria-label="No" />
-            ),
+            ) },
     }),
     columnHelper.accessor("type.name", {
         header: "Conductor Type",

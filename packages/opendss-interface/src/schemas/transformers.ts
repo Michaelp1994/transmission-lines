@@ -1,9 +1,10 @@
-import { Bus } from "@/schemas";
+import type { Bus } from "@/schemas";
 
-export const arrayTransform = (input?: Array<string | number>) =>
+export const arrayTransform = (input?: (string | number)[]) =>
     input !== undefined ? `[${input.join(" ")}]` : undefined;
 export const booleanTransform = (input?: boolean) => {
-    if (input === undefined) return undefined;
+    if (input === undefined) {return undefined;}
+
     return input ? "true" : "false";
 };
 export const busTransform = (input?: Bus) =>

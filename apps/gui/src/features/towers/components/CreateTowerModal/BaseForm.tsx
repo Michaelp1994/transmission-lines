@@ -10,10 +10,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { TransmissionTowerFormInput } from "@repo/validators/forms/TransmissionTower.schema";
-import { FieldErrors } from "react-hook-form";
+import type { TransmissionTowerFormInput } from "@repo/validators/forms/TransmissionTower.schema";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { StyledForm } from "~/components/StyledForm";
 import { TowerGeometrySelect } from "~/features/towerGeometries";
 import { useCreateTransmissionTowerForm } from "~/utils/forms";
@@ -28,17 +27,18 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
     const { t } = useTranslation("addTowerModal");
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
+
     return (
         <Form {...form}>
             <StyledForm onSubmit={handleSubmit}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -47,14 +47,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="distance"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("distance.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -63,15 +63,15 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                                 {t("distance.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <FormField
                     control={form.control}
                     name="resistance"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("resistance.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -80,15 +80,15 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                                 {t("resistance.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <FormField
                     control={form.control}
                     name="geometryId"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("geometryId.label")}</FormLabel>
                             <FormControl>
                                 <TowerGeometrySelect {...field} />
@@ -97,8 +97,8 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                                 {t("geometryId.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <DialogFooter>
                     <Button type="submit">{t("form:create")}</Button>

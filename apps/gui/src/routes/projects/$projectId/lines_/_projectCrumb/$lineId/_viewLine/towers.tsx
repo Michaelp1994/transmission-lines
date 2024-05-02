@@ -14,7 +14,6 @@ import {
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { TowerTable } from "~/features/towers";
 import { useCreateTowerModal, useGenerateTowersModal } from "~/utils/modals";
 

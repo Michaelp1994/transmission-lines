@@ -1,5 +1,4 @@
-import { UserEvent } from "@testing-library/user-event";
-
+import type { UserEvent } from "@testing-library/user-event";
 import { within } from "~test-utils";
 
 export default async function completeForm(
@@ -12,12 +11,14 @@ export default async function completeForm(
         switch (typeof data[key]) {
             case "boolean": {
                 const checkbox = within(form).getByLabelText(label);
+
                 console.log(data[key]);
                 console.log(checkbox.ariaChecked);
                 console.log(typeof data[key]);
-                console.log(typeof !!checkbox.ariaChecked);
-                if (data[key] !== !!checkbox.ariaChecked) {
+                console.log(typeof Boolean(checkbox.ariaChecked));
+                if (data[key] !== Boolean(checkbox.ariaChecked)) {
                     const input = within(form).getByLabelText(label);
+
                     await user.click(input);
                     console.log("clicked");
                 }
@@ -26,6 +27,7 @@ export default async function completeForm(
             default: {
                 const value = String(data[key]);
                 const input = within(form).getByLabelText(label);
+
                 await user.clear(input);
                 await user.type(input, value);
                 break;

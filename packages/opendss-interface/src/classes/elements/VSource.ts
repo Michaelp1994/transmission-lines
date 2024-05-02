@@ -1,8 +1,7 @@
 import BaseElement from "./BaseElement";
-
 import {
-    OpenDSSVSource,
-    VSourceInput,
+    type OpenDSSVSource,
+    type VSourceInput,
     arrayTransform,
     booleanTransform,
     busTransform,
@@ -50,7 +49,7 @@ export default class VSource extends BaseElement<VSourceInput, OpenDSSVSource> {
         "spectrum",
         "baseFreq",
         "enabled",
-    ] as const satisfies Array<keyof OpenDSSVSource>;
+    ] as const satisfies (keyof OpenDSSVSource)[];
 
     constructor(input: VSourceInput) {
         super();

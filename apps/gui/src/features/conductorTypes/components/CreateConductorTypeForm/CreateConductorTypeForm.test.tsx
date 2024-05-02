@@ -1,8 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { describe, expect, test, vi } from "vitest";
-
 import CreateConductorTypeForm from "./CreateConductorTypeForm";
-
 import { render, screen } from "~test-utils";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
 
@@ -14,10 +12,10 @@ const labels = {
     stranding: /stranding/i,
     layers: /layers/i,
     currentCapacity: /current capacity/i,
-    dcResistance25: /25° DC/i,
-    acResistance25: /25° AC/i,
-    acResistance50: /50° AC/i,
-    acResistance75: /75° AC/i,
+    dcResistance25: /25° dc/i,
+    acResistance25: /25° ac/i,
+    acResistance50: /50° ac/i,
+    acResistance75: /75° ac/i,
     gmr: /geometric mean radius/i,
 };
 
@@ -51,6 +49,7 @@ describe("Create Conductor Type Form", () => {
             acResistance75: faker.number.float({ min: 0, max: 100 }),
             gmr: faker.number.float({ min: 0, max: 100 }),
         };
+
         render(
             <MockTrpcProvider mockFn={mockFn}>
                 <CreateConductorTypeForm />

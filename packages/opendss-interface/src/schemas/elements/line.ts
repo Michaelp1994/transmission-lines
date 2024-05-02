@@ -1,9 +1,7 @@
-import { LineGeometry } from "@classes/elements";
 import { z } from "zod";
-
-import { baseElementSchema } from "./base";
 import { busSchema } from "../common";
-
+import { baseElementSchema } from "./base";
+import { LineGeometry } from "@classes/elements";
 import { earthModelSchema, unitsSchema } from "@/enums";
 
 export const lineSchema = baseElementSchema.extend({
@@ -11,9 +9,9 @@ export const lineSchema = baseElementSchema.extend({
      *
      * Example:
      *
-     * bus1=busname   (assumes all terminals connected in normal phase order)
+     * bus1=busname   (assumes all terminals connected in normal phase order).
      *
-     * bus1=busname.3.1.2.0 (specify terminal to node connections explicitly) */
+     * Bus1=busname.3.1.2.0 (specify terminal to node connections explicitly) */
     bus1: busSchema.optional(),
 
     /** Name of bus to which 2nd terminal is connected. */
@@ -104,7 +102,7 @@ export const lineSchema = baseElementSchema.extend({
      *
      * Specify the Spacing first, using "nphases" cncables.
      *
-     * You may later specify "nconds-nphases" wires for separate neutrals
+     * You may later specify "nconds-nphases" wires for separate neutrals.
      *
      * Redundant with wires */
     cnCables: z.string().array().optional(),
@@ -115,17 +113,17 @@ export const lineSchema = baseElementSchema.extend({
      *
      * Specify the Spacing first, using "nphases" tscables.
      *
-     * You may later specify "nconds-nphases" wires for separate neutrals
+     * You may later specify "nconds-nphases" wires for separate neutrals.
      *
      * Redundant with wires */
     tsCables: z.string().array().optional(),
 
-    /** Alternate way to specify C1. MicroS per unit length
+    /** Alternate way to specify C1. MicroS per unit length.
      *
      * Redundant with C1 */
     b1: z.number().optional(),
 
-    /** Alternate way to specify C0. MicroS per unit length
+    /** Alternate way to specify C0. MicroS per unit length.
      *
      * Redundant with C0 */
     b0: z.number().optional(),
@@ -133,14 +131,14 @@ export const lineSchema = baseElementSchema.extend({
     /** Defines the number of ratings to be defined for the wire, to be used only when defining seasonal ratings using the "Ratings" property. */
     seasons: z.number().optional(),
 
-    /** An array of ratings to be used when the seasonal ratings flag is True. It can be used to insert
+    /** An array of ratings to be used when the seasonal ratings flag is True. It can be used to insert.
      *
-     * multiple ratings to change during a QSTS simulation to evaluate different ratings in lines. */
+     * Multiple ratings to change during a QSTS simulation to evaluate different ratings in lines. */
     ratings: z.number().array().optional(),
 
     /** Code designating the type of line.
      *
-     * One of: OH, UG, UG_TS, UG_CN, SWT_LDBRK, SWT_FUSE, SWT_SECT, SWT_REC, SWT_DISC, SWT_BRK, SWT_ELBOW
+     * One of: OH, UG, UG_TS, UG_CN, SWT_LDBRK, SWT_FUSE, SWT_SECT, SWT_REC, SWT_DISC, SWT_BRK, SWT_ELBOW.
      *
      * OpenDSS currently does not use this internally. For whatever purpose the user defines. Default is OH. */
     lineType: z.string().optional(),

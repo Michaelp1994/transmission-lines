@@ -9,10 +9,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { UpdateProjectInput } from "@repo/validators";
-import { FieldErrors } from "react-hook-form";
+import type { UpdateProjectInput } from "@repo/validators";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useUpdateTowerGeometryForm } from "~/utils/forms";
 
@@ -27,18 +26,18 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
     const form = useUpdateTowerGeometryForm(data);
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
+            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -47,8 +46,8 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <ButtonsWrapper>
                     <Button type="submit">{t("form:submit")}</Button>

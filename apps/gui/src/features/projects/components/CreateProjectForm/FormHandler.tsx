@@ -1,10 +1,8 @@
-import { CreateProjectInput } from "@repo/validators";
+import type { CreateProjectInput } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
 import { TRPCClientError } from "@trpc/client";
-import { FieldErrors } from "react-hook-form";
-
+import type { FieldErrors } from "react-hook-form";
 import CreateProjectForm from "./CreateProjectForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -22,7 +20,7 @@ export default function FormHandler() {
         },
         onError(error) {
             if (error instanceof TRPCClientError) {
-                if (error?.data?.zodError) {
+                if (error.data?.zodError) {
                     toast.error(
                         `name: ${error.data.zodError.fieldErrors.name[0]}`
                     );
@@ -38,6 +36,7 @@ export default function FormHandler() {
             }
         },
     });
+
     function handleValid(values: CreateProjectInput) {
         createMutation.mutate(values);
     }

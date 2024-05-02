@@ -1,5 +1,5 @@
 import { styled } from "@linaria/react";
-import { TowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
+import type { TowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
 import { useWatch } from "react-hook-form";
 import { Circle, Layer, Line, Stage } from "react-konva";
 
@@ -27,16 +27,16 @@ export default function TowerGeometryDiagram() {
                 />
                 {fields &&
                     Array.isArray(fields) &&
-                    fields.map((location, index) => (
-                        <Circle
+                    fields.map((location, index) => 
+                        { return <Circle
                             key={index}
                             x={location.x * SCALE}
                             y={-location.y * SCALE}
                             width={10}
                             height={10}
                             fill="black"
-                        />
-                    ))}
+                        /> }
+                    )}
             </Layer>
         </StyledStage>
     );

@@ -13,5 +13,11 @@
         }
     ],
     "extends": "@repo/typescript-config/react-library.json",
-    "include": ["tests"]
+    "include": [
+        "tests",
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.test.js",
+        "src/**/*.test.jsx"
+    ]
 }

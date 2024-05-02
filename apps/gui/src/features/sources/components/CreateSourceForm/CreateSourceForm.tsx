@@ -1,10 +1,8 @@
-import { SourceFormInput } from "@repo/validators/forms/Source.schema";
-import { ProjectID } from "@repo/validators/Ids";
+import type { SourceFormInput } from "@repo/validators/forms/Source.schema";
+import type { ProjectID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
-
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 

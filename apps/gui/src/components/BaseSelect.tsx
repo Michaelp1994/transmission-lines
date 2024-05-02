@@ -33,7 +33,9 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
         const [open, setOpen] = useState(false);
 
         function handleSelect(currentValue: typeof value) {
-            if (onChange) onChange(currentValue === value ? "" : currentValue);
+            if (onChange) {
+                onChange(currentValue === value ? "" : currentValue);
+            }
             setOpen(false);
         }
 
@@ -42,16 +44,18 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
                 const currentConductorType = data.find(
                     (conductorType) => conductorType.id === value
                 );
+
                 if (currentConductorType) {
                     return currentConductorType.name;
                 }
-                throw Error("Can't find conductor type.");
+                throw new Error("Can't find conductor type.");
             }
+
             return t("select");
         }, [data, t, value]);
 
         return (
-            <Popover open={open} onOpenChange={setOpen} modal>
+            <Popover modal open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <StyledButton
                         variant="outline"
@@ -71,21 +75,24 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
                             <CommandEmpty>{t("noneFound")}</CommandEmpty>
                             <CommandList>
                                 <CommandGroup>
-                                    {data.map((conductorType) => (
-                                        <CommandItem
-                                            key={conductorType.id}
-                                            value={conductorType.id}
-                                            keywords={[conductorType.name]}
-                                            onSelect={handleSelect}
-                                        >
-                                            <StyledIcon
-                                                selected={
-                                                    value === conductorType.id
-                                                }
-                                            />
-                                            {conductorType.name}
-                                        </CommandItem>
-                                    ))}
+                                    {data.map((conductorType) => {
+                                        return (
+                                            <CommandItem
+                                                key={conductorType.id}
+                                                value={conductorType.id}
+                                                keywords={[conductorType.name]}
+                                                onSelect={handleSelect}
+                                            >
+                                                <StyledIcon
+                                                    selected={
+                                                        value ===
+                                                        conductorType.id
+                                                    }
+                                                />
+                                                {conductorType.name}
+                                            </CommandItem>
+                                        );
+                                    })}
                                 </CommandGroup>
                             </CommandList>
                         </StyledScrollArea>
@@ -95,6 +102,8 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
         );
     }
 );
+
+BaseSelect.displayName = "BaseSelect";
 
 export default BaseSelect;
 

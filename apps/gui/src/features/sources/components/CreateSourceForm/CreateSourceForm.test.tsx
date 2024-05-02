@@ -1,9 +1,7 @@
 import { faker } from "@faker-js/faker";
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-
 import CreateSourceForm from "./CreateSourceForm";
-
 import { createRender, screen } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
 import { createSource } from "~tests/helpers/mockData";
@@ -44,6 +42,7 @@ describe("Create Source Form", () => {
 
     test("submits form with valid input", async () => {
         const user = userEvent.setup();
+
         render(<CreateSourceForm projectId={fakeSource.projectId} />);
 
         // Fill in form fields with valid input

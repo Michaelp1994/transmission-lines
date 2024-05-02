@@ -1,11 +1,9 @@
-import { UpdateTowerGeometryInput } from "@repo/validators";
-import { ProjectID } from "@repo/validators/Ids";
+import type { UpdateTowerGeometryInput } from "@repo/validators";
+import type { ProjectID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -41,6 +39,7 @@ export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
     if (error || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
+
     return (
         <BaseForm data={data} onValid={handleValid} onInvalid={handleInvalid} />
     );

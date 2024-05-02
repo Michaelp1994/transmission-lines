@@ -1,6 +1,5 @@
 import { Suspense, useEffect, useState } from "react";
-
-import { CurrentModal, currentModal } from "~/utils/modals/current-modal";
+import { type CurrentModal, currentModal } from "~/utils/modals/current-modal";
 
 interface ModalProviderProps {
     children: React.ReactNode;
@@ -16,18 +15,16 @@ export default function ModalProvider({ children }: ModalProviderProps) {
 }
 
 function ModalRenderer() {
-    const [modal, updateCurrentModal] = useState<CurrentModal<any> | null>(
-        null
-    );
+    const [modal, setModal] = useState<CurrentModal<any> | null>(null);
 
-    useEffect(() => currentModal.subscribe(updateCurrentModal), []);
+    useEffect(() => currentModal.subscribe(setModal), []);
 
     if (modal) {
         const Modal = currentModal.get(modal.name);
 
         return (
             <Suspense>
-                <Modal {...modal?.props} />
+                <Modal {...modal.props} />
             </Suspense>
         );
     }

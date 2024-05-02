@@ -1,11 +1,11 @@
-import ConductorTypeSelect from "./components/ConductorTypeSelect";
-import ConductorTypeTable from "./components/ConductorTypeTable";
-import CreateConductorTypeForm from "./components/CreateConductorTypeForm";
-import UpdateConductorTypeForm from "./components/UpdateConductorTypeForm";
 
-export {
-    ConductorTypeTable,
-    ConductorTypeSelect,
-    UpdateConductorTypeForm,
-    CreateConductorTypeForm,
-};
+
+
+
+
+
+
+export {default as ConductorTypeSelect} from "./components/ConductorTypeSelect";
+export {default as ConductorTypeTable} from "./components/ConductorTypeTable";
+export {default as CreateConductorTypeForm} from "./components/CreateConductorTypeForm";
+export {default as UpdateConductorTypeForm} from "./components/UpdateConductorTypeForm";

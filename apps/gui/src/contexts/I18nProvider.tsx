@@ -1,6 +1,5 @@
 import i18n from "i18next";
 import { I18nextProvider, initReactI18next } from "react-i18next";
-
 import enAU from "~/locales/en-AU.json";
 import ptBR from "~/locales/pt-BR.json";
 
@@ -16,6 +15,7 @@ export default function I18nProvider({
     children: React.ReactNode;
 }) {
     const instance = i18n.createInstance();
+
     instance.use(initReactI18next).init({
         resources,
         defaultNS,
@@ -25,6 +25,7 @@ export default function I18nProvider({
             escapeValue: false,
         },
     });
+
     return (
         <I18nextProvider i18n={instance} defaultNS={defaultNS}>
             {children}

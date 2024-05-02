@@ -1,16 +1,14 @@
 import { z } from "zod";
-
-import { baseElementSchema } from "./base";
 import { busSchema } from "../common";
-
+import { baseElementSchema } from "./base";
 import { connSchema } from "@/enums";
 
 export const reactorSchema = baseElementSchema.extend({
     /** Name of bus to which the main terminal (1) is connected.
      *
-     * bus1=busname
+     * Bus1=busname.
      *
-     * bus1=busname.1.2.3
+     * Bus1=busname.1.2.3.
      *
      * The VSOURCE object is a two-terminal voltage source (thevenin equivalent). Bus2 defaults to Bus1 with all phases connected to ground (node 0) unless previously specified. This is a Yg connection. If you want something different, define the Bus2 property ezplicitly. */
     bus1: busSchema.optional(),
@@ -44,7 +42,7 @@ export const reactorSchema = baseElementSchema.extend({
     rp: z.number().optional(),
     /** Positive-sequence impedance, ohms, as a 2-element array representing a complex number. Example:
      *
-     * Z1=[1, 2]  ! represents 1 + j2
+     * Z1=[1, 2]  ! Represents 1 + j2.
      *
      * If defined, Z1, Z2, and Z0 are used to define the impedance matrix of the REACTOR. Z1 MUST BE DEFINED TO USE THIS OPTION FOR DEFINING THE MATRIX.
      *
@@ -52,7 +50,7 @@ export const reactorSchema = baseElementSchema.extend({
     z1: z.number().array().optional(),
     /** Negative-sequence impedance, ohms, as a 2-element array representing a complex number. Example:
      *
-     * Z2=[1, 2]  ! represents 1 + j2
+     * Z2=[1, 2]  ! Represents 1 + j2.
      *
      * Used to define the impedance matrix of the REACTOR if Z1 is also specified.
      *
@@ -60,7 +58,7 @@ export const reactorSchema = baseElementSchema.extend({
     z2: z.number().array().optional(),
     /** Zero-sequence impedance, ohms, as a 2-element array representing a complex number. Example:
      *
-     * Z0=[3, 4]  ! represents 3 + j4
+     * Z0=[3, 4]  ! Represents 3 + j4.
      *
      * Used to define the impedance matrix of the REACTOR if Z1 is also specified.
      *
@@ -68,11 +66,11 @@ export const reactorSchema = baseElementSchema.extend({
     z0: z.number().array().optional(),
     /** Alternative way of defining R and X properties. Enter a 2-element array representing R +jX in ohms. Example:
      *
-     * Z=[5  10]   ! equivalent to R=5  X=10 */
+     * Z=[5  10]   ! Equivalent to R=5  X=10 */
     z: z.number().array().optional(),
-    /** Name of XYCurve object, previously defined, describing per-unit variation of phase resistance, R, vs. frequency. Applies to resistance specified by R or Z property. If actual values are not known, R often increases by approximately the square root of frequency. */
+    /** Name of XYCurve object, previously defined, describing per-unit variation of phase resistance, R, vs. Frequency. Applies to resistance specified by R or Z property. If actual values are not known, R often increases by approximately the square root of frequency. */
     rCurve: z.string().optional(),
-    /** Name of XYCurve object, previously defined, describing per-unit variation of phase inductance, L=X/w, vs. frequency. Applies to reactance specified by X, LmH, Z, or kvar property.L generally decreases somewhat with frequency above the base frequency, approaching a limit at a few kHz. */
+    /** Name of XYCurve object, previously defined, describing per-unit variation of phase inductance, L=X/w, vs. Frequency. Applies to reactance specified by X, LmH, Z, or kvar property.L generally decreases somewhat with frequency above the base frequency, approaching a limit at a few kHz. */
     lCurve: z.string().optional(),
     /** Inductance, mH. Alternate way to define the reactance, X, property.
      *

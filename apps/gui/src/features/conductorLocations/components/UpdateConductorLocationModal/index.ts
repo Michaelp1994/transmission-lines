@@ -1,3 +1,5 @@
-import UpdateConductorLocationModal from "./UpdateConductorLocationModal";
 
-export default UpdateConductorLocationModal;
+
+
+
+export {default} from "./UpdateConductorLocationModal";

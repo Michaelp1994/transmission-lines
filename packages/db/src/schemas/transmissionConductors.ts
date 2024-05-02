@@ -1,9 +1,8 @@
-/* eslint-disable import/no-cycle */
+ 
 
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
-
 import { conductorTypes } from "./conductorTypes";
 import { transmissionLines } from "./transmissionLines";
 
@@ -31,7 +30,7 @@ export type NewTransmissionConductor =
 
 export const transmissionConductorsRelations = relations(
     transmissionConductors,
-    ({ one }) => ({
+    ({ one }) => { return {
         type: one(conductorTypes, {
             fields: [transmissionConductors.typeId],
             references: [conductorTypes.id],
@@ -40,5 +39,5 @@ export const transmissionConductorsRelations = relations(
             fields: [transmissionConductors.lineId],
             references: [transmissionLines.id],
         }),
-    })
+    } }
 );

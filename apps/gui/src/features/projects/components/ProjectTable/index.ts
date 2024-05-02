@@ -1,3 +1,5 @@
-import ProjectTable from "./ProjectTable";
 
-export default ProjectTable;
+
+
+
+export {default} from "./ProjectTable";

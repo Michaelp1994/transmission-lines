@@ -1,8 +1,6 @@
 import { BrowserWindow, app, dialog } from "electron";
-
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
-
 import { dataSource } from "./config/db";
 import setupDevTools from "./config/devTools";
 import setupLogging from "./config/logging";
@@ -23,11 +21,12 @@ app.whenReady().then(async () => {
     const window = await createWindow();
 
     const server = createServer(dataSource, { browserWindow: window, dialog });
+
     server.listen(5001);
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
-        if (BrowserWindow.getAllWindows().length === 0) createWindow();
+        if (BrowserWindow.getAllWindows().length === 0) {createWindow();}
     });
 
     if (

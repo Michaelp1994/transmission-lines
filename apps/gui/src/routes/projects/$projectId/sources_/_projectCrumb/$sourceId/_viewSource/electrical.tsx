@@ -6,23 +6,21 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
-
 import { UpdateSourceElectricalForm } from "~/features/sources";
-import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical"
 )({
     component: ViewSourcePage,
-    beforeLoad: () => ({
-        text: "View Source",
-    }),
+    beforeLoad: () => {
+        return {
+            text: "View Source",
+        };
+    },
 });
 
 export default function ViewSourcePage() {
     const { sourceId } = Route.useParams();
-    const { t } = useTranslation("source");
 
     return (
         <Card>

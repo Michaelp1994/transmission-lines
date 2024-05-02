@@ -8,15 +8,14 @@ import {
     DropdownMenuTrigger,
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
-import { CellContext } from "@tanstack/react-table";
-
-import { Project } from "./RowType";
-
+import type { CellContext } from "@tanstack/react-table";
+import type { Project } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
 import { useDeleteProjectModal } from "~/utils/modals";
 
 export default function RowActions({ row }: CellContext<Project, unknown>) {
     const displayDeleteModal = useDeleteProjectModal(row.original.id);
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>

@@ -8,10 +8,8 @@ import {
     DropdownMenuTrigger,
 } from "@repo/ui";
 import { Link } from "@tanstack/react-router";
-import { CellContext } from "@tanstack/react-table";
-
-import { TransmissionTower } from "./RowType";
-
+import type { CellContext } from "@tanstack/react-table";
+import type { TransmissionTower } from "./RowType";
 import {
     DeleteIcon,
     EditIcon,

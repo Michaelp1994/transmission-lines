@@ -1,3 +1,5 @@
-import TowerGeometriesTable from "./TowerGeometriesTable";
 
-export default TowerGeometriesTable;
+
+
+
+export {default} from "./TowerGeometriesTable";

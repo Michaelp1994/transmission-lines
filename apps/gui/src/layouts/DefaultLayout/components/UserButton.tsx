@@ -11,7 +11,6 @@ import {
     DropdownMenuTrigger,
 } from "@repo/ui";
 import { CircleUser } from "lucide-react";
-
 import SettingsModal from "./SettingsModal";
 
 export default function UserButton() {
@@ -32,7 +31,7 @@ export default function UserButton() {
                     <span className="sr-only">Toggle user menu</span>
                 </Button>
             </DropdownMenuTrigger>
-            <UserMenu align="end" forceMount>
+            <UserMenu forceMount align="end">
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">

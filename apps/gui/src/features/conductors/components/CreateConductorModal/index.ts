@@ -1,3 +1,5 @@
-import CreateConductorModal from "./CreateConductorModal";
 
-export default CreateConductorModal;
+
+
+
+export {default} from "./CreateConductorModal";

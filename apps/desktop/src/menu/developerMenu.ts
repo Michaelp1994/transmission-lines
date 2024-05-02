@@ -3,8 +3,10 @@ export default {
     submenu: [
         {
             label: "Open Dev Tools",
-            click: async (_menuItem, browserWindow) => {
-                if (browserWindow) browserWindow.webContents.openDevTools();
+            click(_, browserWindow) {
+                if (browserWindow) {
+                    browserWindow.webContents.openDevTools();
+                }
             },
         },
     ],

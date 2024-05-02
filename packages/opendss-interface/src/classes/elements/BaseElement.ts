@@ -1,6 +1,5 @@
-import splitStringsIntoRows from "@helpers/splitArray";
 import { v4 as uuidv4 } from "uuid";
-
+import splitStringsIntoRows from "@helpers/splitArray";
 import type {
     BaseElementInput,
     OpenDSSBaseElement,
@@ -17,7 +16,7 @@ export default abstract class BaseElement<
 
     protected abstract type: string;
 
-    protected abstract parameters: Array<keyof O>;
+    protected abstract parameters: (keyof O)[];
 
     getFullName() {
         return `${this.type}.${this.values.name}`;
@@ -30,14 +29,17 @@ export default abstract class BaseElement<
     create() {
         const output = this.transform();
         const script: string[] = [`New ${output.name}`];
+
         this.parameters.forEach((key) => {
             if (key in output && output[key] !== undefined) {
                 // @ts-expect-error FIXME: Can't specify that the keyof O is only a string
                 const parameter = key.toLowerCase();
                 const value = output[key];
+
                 script.push(`${parameter}=${value}`);
             }
         });
+
         return splitStringsIntoRows(script);
     }
     abstract transform(): O;

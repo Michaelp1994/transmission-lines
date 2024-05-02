@@ -1,6 +1,11 @@
-import CreateProjectForm from "./components/CreateProjectForm";
-import ProjectDiagram from "./components/ProjectDiagram";
-import ProjectTable from "./components/ProjectTable";
-import UpdateProjectForm from "./components/UpdateProjectForm";
 
-export { ProjectTable, CreateProjectForm, UpdateProjectForm, ProjectDiagram };
+
+
+
+
+
+
+export {default as CreateProjectForm} from "./components/CreateProjectForm";
+export {default as ProjectDiagram} from "./components/ProjectDiagram";
+export {default as ProjectTable} from "./components/ProjectTable";
+export {default as UpdateProjectForm} from "./components/UpdateProjectForm";

@@ -1,9 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { TRPCError } from "@trpc/server";
 import { describe, expect, test, vi } from "vitest";
-
 import ConductorTable from "./ConductorTable";
-
 import { createRender, screen } from "~test-utils";
 import { createArray, createConductorTable } from "~tests/helpers/mockData";
 import verifyTable from "~tests/helpers/verifyTable";
@@ -27,6 +25,7 @@ describe("Conductor Table", () => {
     test("calls server with correct data and displays all rows of data correctly", async () => {
         render(<ConductorTable lineId={lineId} />);
         const table = await screen.findByRole("table");
+
         expect(trpcFn).toHaveBeenCalledWith({ lineId });
         verifyTable(table, columns, conductors);
     });

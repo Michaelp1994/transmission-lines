@@ -1,9 +1,7 @@
-import { LocationID } from "@repo/validators/Ids";
-
+import type { LocationID } from "@repo/validators/Ids";
 import { Modals } from "../config";
 import useModal from "../use-modal";
-
-import { DeleteConductorLocationModalProps } from "~/features/conductorLocations/components/DeleteConductorLocationModal/DeleteConductorLocationModal";
+import type { DeleteConductorLocationModalProps } from "~/features/conductorLocations/components/DeleteConductorLocationModal/DeleteConductorLocationModal";
 
 export default function useDeleteConductorLocationModal(
     locationId: LocationID

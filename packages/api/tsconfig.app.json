@@ -13,5 +13,11 @@
             "path": "../opendss-interface/tsconfig.app.json"
         }
     ],
-    "include": ["src"]
+    "include": ["src"],
+    "exclude": [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/*.test.js",
+        "src/**/*.test.jsx"
+    ]
 }

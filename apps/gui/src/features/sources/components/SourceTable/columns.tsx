@@ -1,17 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-
 import SourceTableRowActions from "./RowActions";
-import { Source } from "./RowType";
+import type { Source } from "./RowType";
 
 const columnHelper = createColumnHelper<Source>();
 
 export default [
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "sourceTable" }),
-        cell: (info) => (
-            <Link
+        cell: (info) => 
+            { return <Link
                 to="/projects/$projectId/sources/$sourceId"
                 params={{
                     sourceId: info.row.original.id,
@@ -19,8 +18,8 @@ export default [
                 }}
             >
                 {info.getValue()}
-            </Link>
-        ),
+            </Link> }
+        ,
     }),
     columnHelper.accessor("x1r1", {
         header: () => "X1/R1",

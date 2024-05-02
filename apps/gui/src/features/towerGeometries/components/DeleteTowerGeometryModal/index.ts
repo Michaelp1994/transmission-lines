@@ -1,3 +1,5 @@
-import DeleteTowerGeometryModal from "./DeleteTowerGeometryModal";
 
-export default DeleteTowerGeometryModal;
+
+
+
+export {default} from "./DeleteTowerGeometryModal";

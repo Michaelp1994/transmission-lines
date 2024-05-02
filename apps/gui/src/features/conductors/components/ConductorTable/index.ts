@@ -1,3 +1,5 @@
-import ConductorTable from "./ConductorTable";
 
-export default ConductorTable;
+
+
+
+export {default} from "./ConductorTable";

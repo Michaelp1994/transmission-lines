@@ -9,10 +9,9 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
-import { FieldErrors } from "react-hook-form";
+import type { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useUpdateSourceElectricalForm } from "~/utils/forms";
 
@@ -32,18 +31,18 @@ export default function UpdateSourceElectricalForm({
     const form = useUpdateSourceElectricalForm(data);
 
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => form.reset()}>
+            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
                 <FormField
                     control={form.control}
                     name="phases"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("phases.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -52,14 +51,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("phases.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="frequency"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("frequency.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -68,14 +67,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("frequency.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="voltage"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("voltage.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -84,14 +83,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("voltage.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="x1r1"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("x1r1.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -100,14 +99,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("x1r1.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="x0r0"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("x0r0.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -116,14 +115,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("x0r0.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="isc3"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("isc3.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -132,14 +131,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("isc3.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="isc1"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("isc1.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -148,14 +147,14 @@ export default function UpdateSourceElectricalForm({
                                 {t("isc1.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="resistance"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("resistance.label")}</FormLabel>
                             <FormControl>
                                 <Input type="number" {...field} />
@@ -164,8 +163,8 @@ export default function UpdateSourceElectricalForm({
                                 {t("resistance.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <ButtonsWrapper>

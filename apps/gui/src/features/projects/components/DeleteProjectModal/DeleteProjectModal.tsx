@@ -1,5 +1,4 @@
-import { ProjectID } from "@repo/validators/Ids";
-
+import type { ProjectID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";

@@ -8,7 +8,6 @@ import {
     getConductorLocationByIdSchema,
     updateConductorLocationSchema,
 } from "@repo/validators/schemas/ConductorLocation.schema";
-
 import { publicProcedure, router } from "../trpc";
 
 export default router({
@@ -16,6 +15,7 @@ export default router({
         .input(getAllConductorLocationsSchema)
         .query(async ({ ctx: { db } }) => {
             const allConductors = await db.query.conductorLocations.findMany();
+
             return allConductors;
         }),
     getAllByGeometryId: publicProcedure
@@ -24,7 +24,9 @@ export default router({
             const towers = await db.query.conductorLocations.findMany({
                 where: eq(conductorLocations.geometryId, input.geometryId),
             });
-            if (!towers) throw Error("Can't find transmission conductors");
+
+            if (!towers) {throw new Error("Can't find transmission conductors");}
+
             return towers;
         }),
     getById: publicProcedure
@@ -33,7 +35,9 @@ export default router({
             const conductorType = await db.query.conductorLocations.findFirst({
                 where: eq(conductorLocations.id, input.locationId),
             });
-            if (!conductorType) throw Error("Can't find conductor");
+
+            if (!conductorType) {throw new Error("Can't find conductor");}
+
             return conductorType;
         }),
 
@@ -44,7 +48,9 @@ export default router({
                 .insert(conductorLocations)
                 .values(input)
                 .returning();
-            if (!newConductor) throw Error("Can't create conductor");
+
+            if (!newConductor) {throw new Error("Can't create conductor");}
+
             return newConductor;
         }),
     // generate: publicProcedure
@@ -65,7 +71,8 @@ export default router({
                 .set(input)
                 .where(eq(conductorLocations.id, input.id))
                 .returning();
-            if (!updatedConductor) throw Error("Can't update conductor");
+
+            if (!updatedConductor) {throw new Error("Can't update conductor");}
 
             return updatedConductor;
         }),
@@ -76,7 +83,8 @@ export default router({
                 .delete(conductorLocations)
                 .where(eq(conductorLocations.id, input.locationId))
                 .returning();
-            if (!deletedConductor) throw Error("Can't delete conductor");
+
+            if (!deletedConductor) {throw new Error("Can't delete conductor");}
 
             return deletedConductor;
         }),

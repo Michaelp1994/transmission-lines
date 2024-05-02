@@ -1,7 +1,6 @@
-import { ProjectID } from "@repo/validators/Ids";
+import type { ProjectID } from "@repo/validators/Ids";
 import { forwardRef } from "react";
-
-import BaseSelect, { BaseSelectProps } from "~/components/BaseSelect";
+import BaseSelect, { type BaseSelectProps } from "~/components/BaseSelect";
 import trpc from "~/utils/trpc";
 
 interface DataWrapperProps extends Omit<BaseSelectProps, "data"> {
@@ -15,9 +14,9 @@ const DataWrapper = forwardRef<HTMLButtonElement, DataWrapperProps>(
                 projectId,
             });
 
-        if (isLoading) return <div>Loading...</div>;
+        if (isLoading) {return <div>Loading...</div>;}
 
-        if (isError) return <div>Error: {error.message}</div>;
+        if (isError) {return <div>Error: {error.message}</div>;}
 
         return <BaseSelect data={data} ref={ref} {...props} />;
     }

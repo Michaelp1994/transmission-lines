@@ -9,11 +9,10 @@ import { Link } from "lucide-react";
 import {
     BaseEdge,
     EdgeLabelRenderer,
-    EdgeProps,
+    type EdgeProps,
     getBezierPath,
     useReactFlow,
 } from "reactflow";
-
 import { useDeleteTransmissionLineModal } from "~/utils/modals";
 
 export default function TransmissionLine({

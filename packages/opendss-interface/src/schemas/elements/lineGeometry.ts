@@ -1,8 +1,6 @@
-import { LineSpacing, WireData } from "@classes/elements";
 import { z } from "zod";
-
 import { baseElementSchema } from "./base";
-
+import { LineSpacing, WireData } from "@classes/elements";
 import { unitsSchema } from "@/enums";
 
 export const lineGeometrySchema = baseElementSchema.extend({
@@ -12,13 +10,13 @@ export const lineGeometrySchema = baseElementSchema.extend({
     nphases: z.number().optional(),
     /** Set this = number of the conductor you wish to define. Default is 1. */
     cond: z.number().optional(),
-    /** Code from WireData. MUST BE PREVIOUSLY DEFINED. no default.
+    /** Code from WireData. MUST BE PREVIOUSLY DEFINED. No default.
      *
-     * Specifies use of Overhead Line parameter calculation,
+     * Specifies use of Overhead Line parameter calculation,.
      *
      * Unless Tape Shield cable previously assigned to phases, and this wire is a neutral. */
     wire: z.string().optional(),
-    /** x coordinate. */
+    /** X coordinate. */
     x: z.number().optional(),
     /** Height of conductor. */
     h: z.number().optional(),
@@ -44,9 +42,9 @@ export const lineGeometrySchema = baseElementSchema.extend({
      *
      * Alternative to individual wire inputs. ALL MUST BE PREVIOUSLY DEFINED.
      *
-     * Must match "nconds" as previously defined for this geometry,
+     * Must match "nconds" as previously defined for this geometry,.
      *
-     * unless TSData or CNData were previously assigned to phases, and these wires are neutrals.
+     * Unless TSData or CNData were previously assigned to phases, and these wires are neutrals.
      *
      * Must be used in conjunction with the Spacing property.
      *
@@ -55,13 +53,13 @@ export const lineGeometrySchema = baseElementSchema.extend({
         .custom<WireData>((data) => data instanceof WireData)
         .array()
         .optional(),
-    /** Code from CNData. MUST BE PREVIOUSLY DEFINED. no default.
+    /** Code from CNData. MUST BE PREVIOUSLY DEFINED. No default.
      *
      * Specifies use of Concentric Neutral cable parameter calculation.
      *
      * Redundant with wire */
     cncable: z.string().optional(),
-    /** Code from TSData. MUST BE PREVIOUSLY DEFINED. no default.
+    /** Code from TSData. MUST BE PREVIOUSLY DEFINED. No default.
      *
      * Specifies use of Tape Shield cable parameter calculation.
      *
@@ -85,13 +83,13 @@ export const lineGeometrySchema = baseElementSchema.extend({
     tscables: z.string().array().optional(),
     /** Defines the number of ratings to be defined for the wire, to be used only when defining seasonal ratings using the "Ratings" property. Defaults to first conductor if not specified. */
     seasons: z.number().optional(),
-    /** An array of ratings to be used when the seasonal ratings flag is True. It can be used to insert
+    /** An array of ratings to be used when the seasonal ratings flag is True. It can be used to insert.
      *
-     * multiple ratings to change during a QSTS simulation to evaluate different ratings in lines.Defaults to first conductor if not specified. */
+     * Multiple ratings to change during a QSTS simulation to evaluate different ratings in lines.Defaults to first conductor if not specified. */
     ratings: z.number().array().optional(),
     /** Code designating the type of line.
      *
-     * One of: OH, UG, UG_TS, UG_CN, SWT_LDBRK, SWT_FUSE, SWT_SECT, SWT_REC, SWT_DISC, SWT_BRK, SWT_ELBOW
+     * One of: OH, UG, UG_TS, UG_CN, SWT_LDBRK, SWT_FUSE, SWT_SECT, SWT_REC, SWT_DISC, SWT_BRK, SWT_ELBOW.
      *
      * OpenDSS currently does not use this internally. For whatever purpose the user defines. Default is OH. */
     lineType: z.string().optional(),

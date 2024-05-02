@@ -1,3 +1,5 @@
-import ConductorTypeTable from "./ConductorTypeTable";
 
-export default ConductorTypeTable;
+
+
+
+export {default} from "./ConductorTypeTable";

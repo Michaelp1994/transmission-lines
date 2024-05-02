@@ -1,5 +1,4 @@
 import fs from "fs/promises";
-
 import { SqliteError, eq } from "@repo/db/drizzle";
 import { projects } from "@repo/db/schemas/projects";
 import {
@@ -14,7 +13,6 @@ import {
 } from "@repo/validators/schemas/Project.schema";
 import { TRPCError } from "@trpc/server";
 import { ZodError, ZodIssueCode } from "zod";
-
 import { publicProcedure, router } from "../trpc";
 
 // import buildCircuit from "@/helpers/buildCircuit";
@@ -24,6 +22,7 @@ export default router({
         .input(getAllProjectsSchema)
         .query(({ ctx: { db } }) => {
             const allProjects = db.query.projects.findMany();
+
             return allProjects;
         }),
     getById: publicProcedure
@@ -36,7 +35,8 @@ export default router({
                 },
                 where: eq(projects.id, input.id),
             });
-            if (!project) throw Error("Can't find project");
+
+            if (!project) {throw new Error("Can't find project");}
 
             return project;
         }),
@@ -48,16 +48,18 @@ export default router({
                     .insert(projects)
                     .values(input)
                     .returning();
+
                 if (!newProject)
-                    throw new TRPCError({
+                    {throw new TRPCError({
                         code: "INTERNAL_SERVER_ERROR",
                         message: "Can't create project",
-                    });
+                    });}
+
                 return newProject;
-            } catch (e) {
+            } catch (error) {
                 if (
-                    e instanceof SqliteError &&
-                    e.code === "SQLITE_CONSTRAINT_UNIQUE"
+                    error instanceof SqliteError &&
+                    error.code === "SQLITE_CONSTRAINT_UNIQUE"
                 ) {
                     throw new TRPCError({
                         code: "BAD_REQUEST",
@@ -87,7 +89,8 @@ export default router({
                 .set(input)
                 .where(eq(projects.id, input.id))
                 .returning();
-            if (!updatedProject) throw Error("Can't update project");
+
+            if (!updatedProject) {throw new Error("Can't update project");}
 
             return updatedProject;
         }),
@@ -98,7 +101,8 @@ export default router({
                 .delete(projects)
                 .where(eq(projects.id, input.id))
                 .returning();
-            if (!deletedProject) throw Error("Can't delete project");
+
+            if (!deletedProject) {throw new Error("Can't delete project");}
 
             return deletedProject;
         }),
@@ -128,13 +132,15 @@ export default router({
                     sources: true,
                 },
             });
-            if (!project) throw Error("Can't find project");
+
+            if (!project) {throw new Error("Can't find project");}
         }),
     import: publicProcedure.mutation(async ({ ctx: { electron, db } }) => {
         if (!electron) {
             throw new Error("Not in electron context");
         }
         const currentBrowser = electron.browserWindow;
+
         if (!currentBrowser) {
             throw new Error("No browser window found");
         }
@@ -148,9 +154,11 @@ export default router({
                 ],
             }
         );
+
         if (!openDialogReturn.canceled) {
             const fileName = openDialogReturn.filePaths[0];
-            if (!fileName) throw Error("Can't get file name");
+
+            if (!fileName) {throw new Error("Can't get file name");}
             const file = await fs.readFile(fileName);
             const contents = JSON.parse(file.toString());
             const input = importProjectSchema.parse(contents);
@@ -172,6 +180,7 @@ export default router({
                 throw new Error("Not in electron context");
             }
             const currentBrowser = electron.browserWindow;
+
             if (!currentBrowser) {
                 throw new Error("No browser window found");
             }
@@ -184,6 +193,7 @@ export default router({
                     ],
                 }
             );
+
             if (!saveDialogReturn.canceled) {
                 const fileName = saveDialogReturn.filePath!;
                 const project = await db.query.projects.findFirst({
@@ -200,9 +210,12 @@ export default router({
                 });
                 // TODO: maybe include versioning, conductor types and tower geometries used in the project.
                 const fileContents = JSON.stringify(project, undefined, 2);
+
                 await fs.writeFile(fileName, fileContents);
+
                 return true;
             }
+
             return null;
         }),
 });

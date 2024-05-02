@@ -1,13 +1,15 @@
-import { Modals } from "./config";
+import type { Modals } from "./config";
 import { currentModal } from "./current-modal";
 
-const useModal = <P>(name: Modals) => ({
-    open: (props: P) => {
-        currentModal.set({ name, props });
-    },
-    close: () => {
-        currentModal.set(null);
-    },
-});
+const useModal = <P>(name: Modals) => {
+    return {
+        open: (props: P) => {
+            currentModal.set({ name, props });
+        },
+        close: () => {
+            currentModal.set(null);
+        },
+    };
+};
 
 export default useModal;

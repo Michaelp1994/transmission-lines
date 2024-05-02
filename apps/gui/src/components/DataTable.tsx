@@ -8,7 +8,7 @@ import {
     TableRow,
 } from "@repo/ui";
 import {
-    ColumnDef,
+    type ColumnDef,
     flexRender,
     getCoreRowModel,
     useReactTable,
@@ -27,31 +27,32 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
+
     return (
         <TableWrapper>
             <Table>
                 <TableHeader>
-                    {table.getHeaderGroups().map((headerGroup) => (
-                        <TableRow key={headerGroup.id}>
-                            {headerGroup.headers.map((header) => (
-                                <TableHead key={header.id}>
+                    {table.getHeaderGroups().map((headerGroup) => 
+                        { return <TableRow key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => 
+                                { return <TableHead key={header.id}>
                                     {header.isPlaceholder
                                         ? null
                                         : flexRender(
                                               header.column.columnDef.header,
                                               header.getContext()
                                           )}
-                                </TableHead>
-                            ))}
-                        </TableRow>
-                    ))}
+                                </TableHead> }
+                            )}
+                        </TableRow> }
+                    )}
                 </TableHeader>
                 <TableBody>
-                    {table.getRowModel().rows?.length ? (
-                        table.getRowModel().rows.map((row) => (
-                            <TableRow key={row.id}>
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell
+                    {table.getRowModel().rows.length > 0 ? (
+                        table.getRowModel().rows.map((row) => 
+                            { return <TableRow key={row.id}>
+                                {row.getVisibleCells().map((cell) => 
+                                    { return <TableCell
                                         key={cell.id}
                                         align={
                                             (cell.column.columnDef.meta as any)
@@ -62,10 +63,10 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
                                             cell.column.columnDef.cell,
                                             cell.getContext()
                                         )}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ))
+                                    </TableCell> }
+                                )}
+                            </TableRow> }
+                        )
                     ) : (
                         <TableRow>
                             <NoResultsCell colSpan={columns.length}>

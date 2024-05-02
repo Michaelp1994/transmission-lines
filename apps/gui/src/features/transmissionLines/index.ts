@@ -1,9 +1,9 @@
-import CreateTransmissionLineForm from "./components/CreateTransmissionLineForm";
-import TransmissionLineTable from "./components/TransmissionLinesTable";
-import UpdateTransmissionLineForm from "./components/UpdateTransmissionLineForm";
 
-export {
-    TransmissionLineTable,
-    UpdateTransmissionLineForm,
-    CreateTransmissionLineForm,
-};
+
+
+
+
+
+export {default as CreateTransmissionLineForm} from "./components/CreateTransmissionLineForm";
+export {default as TransmissionLineTable} from "./components/TransmissionLinesTable";
+export {default as UpdateTransmissionLineForm} from "./components/UpdateTransmissionLineForm";

@@ -1,8 +1,6 @@
-import userEvent from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-
 import Form from "./BaseForm";
-
 import { render, screen } from "~test-utils";
 import { createSourceElectrical } from "~tests/helpers/createSource";
 
@@ -22,6 +20,7 @@ describe("Update Source Form", () => {
         const validHandler = vi.fn();
         const invalidHandler = vi.fn();
         const source = createSourceElectrical();
+
         render(
             <Form
                 data={source}
@@ -48,6 +47,7 @@ describe("Update Source Form", () => {
         const validHandler = vi.fn();
         const invalidHandler = vi.fn();
         const source = createSourceElectrical();
+
         render(
             <Form
                 data={source}
@@ -64,6 +64,7 @@ describe("Update Source Form", () => {
         for await (const [property, label] of Object.entries(labels)) {
             const key = property as keyof typeof source;
             const value = source[key];
+
             expect(screen.getByLabelText(label)).toHaveValue(value);
         }
     });
@@ -73,6 +74,7 @@ describe("Update Source Form", () => {
         const invalidHandler = vi.fn();
         const source = createSourceElectrical();
         const newSource = createSourceElectrical();
+
         render(
             <Form
                 data={source}
@@ -85,6 +87,7 @@ describe("Update Source Form", () => {
             const key = property as keyof typeof newSource;
             const value = String(newSource[key]);
             const input = screen.getByLabelText(label);
+
             await userEvent.clear(input);
             await userEvent.type(input, value);
         }
@@ -101,6 +104,7 @@ describe("Update Source Form", () => {
         const validHandler = vi.fn();
         const invalidHandler = vi.fn();
         const source = createSourceElectrical();
+
         render(
             <Form
                 data={source}
@@ -110,6 +114,7 @@ describe("Update Source Form", () => {
         );
 
         const input = screen.getByLabelText(/phases/i);
+
         // Fill in the form fields
         await userEvent.clear(input);
         await userEvent.type(input, "-1");

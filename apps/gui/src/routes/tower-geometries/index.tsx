@@ -10,14 +10,13 @@ import {
 } from "@repo/ui";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { TowerGeometriesTable } from "~/features/towerGeometries";
 
 export const Route = createFileRoute("/tower-geometries/")({
     component: AllTowerGeometriesPage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "Tower Geometries",
-    }),
+    } },
 });
 
 export default function AllTowerGeometriesPage() {

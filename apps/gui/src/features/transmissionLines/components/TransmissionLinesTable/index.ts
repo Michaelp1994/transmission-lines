@@ -1,3 +1,5 @@
-import TransmissionLineTable from "./TransmissionLineTable";
 
-export default TransmissionLineTable;
+
+
+
+export {default} from "./TransmissionLineTable";

@@ -1,8 +1,7 @@
 import BaseElement from "./BaseElement";
-
 import {
-    LineSpacingInput,
-    OpenDSSLineSpacing,
+    type LineSpacingInput,
+    type OpenDSSLineSpacing,
     arrayTransform,
     lineSpacingSchema,
     numberTransform,
@@ -16,9 +15,7 @@ export default class LineSpacing extends BaseElement<
 
     type = "LineSpacing";
 
-    parameters = ["nConds", "nPhases", "x", "h", "units"] satisfies Array<
-        keyof OpenDSSLineSpacing
-    >;
+    parameters = ["nConds", "nPhases", "x", "h", "units"] satisfies (keyof OpenDSSLineSpacing)[];
 
     constructor(input: LineSpacingInput) {
         super();

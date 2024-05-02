@@ -1,17 +1,16 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-
 import RowActions from "./RowActions";
-import { TransmissionLine } from "./RowType";
+import type { TransmissionLine } from "./RowType";
 
 const columnHelper = createColumnHelper<TransmissionLine>();
 
 export default [
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "conductorConfiguration" }),
-        cell: (info) => (
-            <Link
+        cell: (info) => 
+            { return <Link
                 to="/projects/$projectId/lines/$lineId"
                 params={{
                     lineId: info.row.original.id,
@@ -19,8 +18,8 @@ export default [
                 }}
             >
                 {info.getValue()}
-            </Link>
-        ),
+            </Link> }
+        ,
     }),
     columnHelper.accessor("fromSource.name", {
         header: () => "From",

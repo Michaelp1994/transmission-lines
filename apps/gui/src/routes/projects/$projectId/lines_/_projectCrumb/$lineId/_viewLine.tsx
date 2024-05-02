@@ -5,9 +5,9 @@ export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
 )({
     component: ViewTransmissionLinePage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "Transmission Line",
-    }),
+    } },
 });
 
 export default function ViewTransmissionLinePage() {

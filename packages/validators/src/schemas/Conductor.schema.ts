@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 import { conductorId, conductorTypeId, lineId } from "../Ids.schema";
 
 /** @see https://github.com/aiji42/zod-i18n for Internationalization */

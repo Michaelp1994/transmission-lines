@@ -9,7 +9,6 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
-
 import { ProjectTable } from "~/features/projects";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -20,20 +19,25 @@ export const Route = createFileRoute("/projects/")({
 
 export default function AllProjectsPage() {
     const navigate = useNavigate();
-    const openProjectMutation = trpc.project.import.useMutation();
-
-    async function importProject() {
-        try {
-            const data = await openProjectMutation.mutateAsync();
-            if (!data) return; // The user closed the open file dialog
-            navigate({
+    const openProjectMutation = trpc.project.import.useMutation({
+        async onSuccess(values) {
+            if (!values) {
+                // The user closed the open file dialog
+                return;
+            }
+            await navigate({
                 to: "/projects/$projectId",
-                params: { projectId: data.id },
+                params: { projectId: values.id },
             });
-        } catch (e) {
-            console.log(e);
+        },
+        onError(error) {
+            console.log(error);
             toast.error("There is an error in your file");
-        }
+        },
+    });
+
+    function importProject() {
+        openProjectMutation.mutate();
     }
 
     return (
@@ -44,9 +48,7 @@ export default function AllProjectsPage() {
                     <CardDescription>Select a project to begin</CardDescription>
                 </CardHeaderText>
                 <CardHeaderActions>
-                    <Button onClick={() => importProject()}>
-                        Import Project
-                    </Button>
+                    <Button onClick={importProject}>Import Project</Button>
                     <Button asChild>
                         <Link to="/projects/new">New Project</Link>
                     </Button>

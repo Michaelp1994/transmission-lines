@@ -1,3 +1,5 @@
-import DeleteConductorLocationModal from "./DeleteConductorLocationModal";
 
-export default DeleteConductorLocationModal;
+
+
+
+export {default} from "./DeleteConductorLocationModal";

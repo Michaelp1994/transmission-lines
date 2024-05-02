@@ -1,5 +1,4 @@
 import { z } from "zod";
-
 import { projectId } from "../Ids.schema";
 
 export const createProjectSchema = z.object({

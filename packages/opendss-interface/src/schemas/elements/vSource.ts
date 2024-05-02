@@ -1,17 +1,15 @@
 import { z } from "zod";
-
-import { baseElementSchema } from "./base";
 import { busSchema } from "../common";
-
+import { baseElementSchema } from "./base";
 import { modelSchema, scanTypeSchema, sequenceSchema } from "@/enums";
 
 export const vSourceSchema = baseElementSchema.extend({
     circuit: z.boolean().optional(),
     /** Name of bus to which the main terminal (1) is connected.
      *
-     * bus1=busname
+     * Bus1=busname.
      *
-     * bus1=busname.1.2.3
+     * Bus1=busname.1.2.3.
      *
      * The VSOURCE object is a two-terminal voltage source (thevenin equivalent). Bus2 defaults to Bus1 with all phases connected to ground (node 0) unless previously specified. This is a Yg connection. If you want something different, define the Bus2 property explicitly. */
     bus1: busSchema.optional(),
@@ -41,7 +39,7 @@ export const vSourceSchema = baseElementSchema.extend({
     isc3: z.number().optional(),
     /** Alternate method of defining the source impedance.
      *
-     * single-phase short circuit current, amps.  Default is 10500. */
+     * Single-phase short circuit current, amps.  Default is 10500. */
     isc1: z.number().optional(),
     /** Alternate method of defining the source impedance.
      *
@@ -73,15 +71,15 @@ export const vSourceSchema = baseElementSchema.extend({
     sequence: sequenceSchema.optional(),
     /** Name of bus to which 2nd terminal is connected.
      *
-     * bus2=busname
+     * Bus2=busname.
      *
-     * bus2=busname.1.2.3
+     * Bus2=busname.1.2.3.
      *
      * Default is Bus1.0.0.0 (grounded wye connection) */
     bus2: busSchema.optional(),
     /** Positive-sequence equivalent source impedance, ohms, as a 2-element array representing a complex number. Example:
      *
-     * Z1=[1, 2]  ! represents 1 + j2
+     * Z1=[1, 2]  ! Represents 1 + j2.
      *
      * If defined, Z1, Z2, and Z0 are used to define the impedance matrix of the VSOURCE. Z1 MUST BE DEFINED TO USE THIS OPTION FOR DEFINING THE MATRIX.
      *
@@ -89,7 +87,7 @@ export const vSourceSchema = baseElementSchema.extend({
     z1: z.number().array().optional(),
     /** Zero-sequence equivalent source impedance, ohms, as a 2-element array representing a complex number. Example:
      *
-     * Z0=[3, 4]  ! represents 3 + j4
+     * Z0=[3, 4]  ! Represents 3 + j4.
      *
      * Used to define the impedance matrix of the VSOURCE if Z1 is also specified.
      *
@@ -97,7 +95,7 @@ export const vSourceSchema = baseElementSchema.extend({
     z0: z.number().array().optional(),
     /** Negative-sequence equivalent source impedance, ohms, as a 2-element array representing a complex number. Example:
      *
-     * Z2=[1, 2]  ! represents 1 + j2
+     * Z2=[1, 2]  ! Represents 1 + j2.
      *
      * Used to define the impedance matrix of the VSOURCE if Z1 is also specified.
      *

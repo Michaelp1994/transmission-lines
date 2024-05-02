@@ -1,7 +1,7 @@
-import { ConductorLocation } from "@repo/db/schemas/conductorLocations";
-import { ConductorType } from "@repo/db/schemas/conductorTypes";
-import { TowerGeometry } from "@repo/db/schemas/towerGeometries";
-import { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
+import type { ConductorLocation } from "@repo/db/schemas/conductorLocations";
+import type { ConductorType } from "@repo/db/schemas/conductorTypes";
+import type { TowerGeometry } from "@repo/db/schemas/towerGeometries";
+import type { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
 import * as Math from "mathjs";
 
 function calcDistance(
@@ -49,9 +49,9 @@ export default function buildTransmissionLineMatrix(
     const xMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
     const pMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
 
-    // eslint-disable-next-line no-restricted-syntax
+     
     for (const [i, firstConductor] of conductors.entries()) {
-        // eslint-disable-next-line no-restricted-syntax
+         
         for (const [j, secondConductor] of conductors.entries()) {
             const imageDistance = calcImageDistance(
                 geometry.conductors[i]!,
@@ -69,6 +69,7 @@ export default function buildTransmissionLineMatrix(
                     (1 / (2 * Math.pi * e0)) * 10 ** -9,
                     Math.log(Math.divide(imageDistance, radius) as number)
                 ); // m/nF
+
                 xMatrix.subset(Math.index(i, i), reactance);
                 rMatrix.subset(Math.index(i, i), resistance);
                 pMatrix.subset(Math.index(i, i), elastance);
@@ -89,6 +90,7 @@ export default function buildTransmissionLineMatrix(
                         Math.divide(imageDistance, conductorDistance) as number
                     ) *
                     10 ** -9; // m/nF
+
                 xMatrix.subset(Math.index(i, j), reactance);
                 rMatrix.subset(Math.index(i, j), resistance);
                 pMatrix.subset(Math.index(i, j), elastance);
@@ -96,6 +98,7 @@ export default function buildTransmissionLineMatrix(
         }
     }
     const cMatrix = Math.inv(pMatrix); // nF/m
+
     return {
         rMatrix: rMatrix.toArray(),
         xMatrix: xMatrix.toArray(),

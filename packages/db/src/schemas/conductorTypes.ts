@@ -1,9 +1,8 @@
-/* eslint-disable import/no-cycle */
+ 
 
 import { relations } from "drizzle-orm";
 import { real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
-
 import { conductorLayers } from "./conductorLayers";
 import { transmissionConductors } from "./transmissionConductors";
 
@@ -30,8 +29,8 @@ export type NewConductorType = typeof conductorTypes.$inferInsert;
 
 export const conductorTypesRelations = relations(
     conductorTypes,
-    ({ many }) => ({
+    ({ many }) => { return {
         conductors: many(transmissionConductors),
         layers: many(conductorLayers),
-    })
+    } }
 );

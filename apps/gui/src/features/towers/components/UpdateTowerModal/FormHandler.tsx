@@ -1,9 +1,7 @@
-import { UpdateTransmissionTowerInput } from "@repo/validators";
-import { TowerID } from "@repo/validators/Ids";
-import { FieldErrors } from "react-hook-form";
-
+import type { UpdateTransmissionTowerInput } from "@repo/validators";
+import type { TowerID } from "@repo/validators/Ids";
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -45,6 +43,7 @@ export default function FormHandler({ towerId, onFinish }: FormHandlerProps) {
     if (isError) {
         return <div>Error</div>;
     }
+
     return (
         <BaseForm data={data} onValid={handleValid} onInvalid={handleInvalid} />
     );

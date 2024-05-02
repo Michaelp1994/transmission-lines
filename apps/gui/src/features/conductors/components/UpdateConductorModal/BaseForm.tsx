@@ -12,10 +12,9 @@ import {
     Input,
     NumberInput,
 } from "@repo/ui";
-import { ConductorFormInput } from "@repo/validators/forms/Conductor.schema";
-import { FieldErrors } from "react-hook-form";
+import type { ConductorFormInput } from "@repo/validators/forms/Conductor.schema";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import { StyledForm } from "~/components/StyledForm";
 import { ConductorTypeSelect } from "~/features/conductorTypes";
 import { useUpdateConductorForm } from "~/utils/forms";
@@ -30,17 +29,18 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
     const form = useUpdateConductorForm(data);
     const { t } = useTranslation("updateConductorModal");
     const handleSubmit = form.handleSubmit(
-        (values) => onValid(values),
-        (errors) => onInvalid(errors)
+        (values) => { onValid(values); },
+        (errors) => { onInvalid(errors); }
     );
+
     return (
         <Form {...form}>
             <StyledForm onSubmit={handleSubmit}>
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("name.label")}</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -49,14 +49,14 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("name.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="fromPhase"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("fromPhase.label")}</FormLabel>
                             <FormControl>
                                 <NumberInput type="number" {...field} />
@@ -65,15 +65,15 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("fromPhase.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
 
                 <FormField
                     control={form.control}
                     name="toPhase"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("toPhase.label")}</FormLabel>
                             <FormControl>
                                 <NumberInput type="number" {...field} />
@@ -82,14 +82,14 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("toPhase.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="bundleNumber"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("bundleNumber.label")}</FormLabel>
                             <FormControl>
                                 <NumberInput type="number" {...field} />
@@ -98,14 +98,14 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("bundleNumber.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="bundleSpacing"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("bundleSpacing.label")}</FormLabel>
                             <FormControl>
                                 <NumberInput type="number" {...field} />
@@ -114,14 +114,14 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("bundleSpacing.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="isNeutral"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("isNeutral.label")}</FormLabel>
                             <FormControl>
                                 <Checkbox
@@ -133,14 +133,14 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("isNeutral.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <FormField
                     control={form.control}
                     name="typeId"
-                    render={({ field }) => (
-                        <FormItem>
+                    render={({ field }) => 
+                        { return <FormItem>
                             <FormLabel>{t("typeId.label")}</FormLabel>
                             <FormControl>
                                 <ConductorTypeSelect {...field} />
@@ -149,8 +149,8 @@ export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
                                 {t("typeId.description")}
                             </FormDescription>
                             <FormMessage />
-                        </FormItem>
-                    )}
+                        </FormItem> }
+                    }
                 />
                 <DialogFooter>
                     <Button type="submit">{t("form:update")}</Button>

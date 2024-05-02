@@ -1,11 +1,9 @@
-import { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
-import { SourceID } from "@repo/validators/Ids";
+import type { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
+import type { SourceID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
-import { FieldErrors } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
@@ -27,6 +25,7 @@ export default function FormHandler({ sourceId }: FormHandlerProps) {
             ...values,
             id: sourceId,
         });
+
         toast.success(`${result.name} has been updated.`);
         navigate({
             to: "/projects/$projectId/sources",

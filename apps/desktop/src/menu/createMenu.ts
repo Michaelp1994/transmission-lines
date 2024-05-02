@@ -1,5 +1,4 @@
 import { Menu } from "electron";
-
 import developerMenu from "./developerMenu";
 
 export default function createMenu() {

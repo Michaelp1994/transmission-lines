@@ -16,9 +16,8 @@ import {
     Input,
     NumberInput,
 } from "@repo/ui";
-import { LineID } from "@repo/validators/Ids";
+import type { LineID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
-
 import { StyledForm } from "~/components/StyledForm";
 import { TowerGeometrySelect } from "~/features/towerGeometries";
 import { useGenerateTowersForm } from "~/utils/forms";
@@ -51,7 +50,7 @@ export default function GenerateTowersModal({
             <DialogContent>
                 <Form {...form}>
                     <StyledForm
-                        onReset={() => form.reset()}
+                        onReset={() => { form.reset(); }}
                         onSubmit={handleSubmit}
                     >
                         <DialogHeader>
@@ -64,8 +63,8 @@ export default function GenerateTowersModal({
                         <FormField
                             control={form.control}
                             name="namePrefix"
-                            render={({ field }) => (
-                                <FormItem>
+                            render={({ field }) => 
+                                { return <FormItem>
                                     <FormLabel>
                                         {t("namePrefix.label")}
                                     </FormLabel>
@@ -76,14 +75,14 @@ export default function GenerateTowersModal({
                                         {t("namePrefix.description")}
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>
-                            )}
+                                </FormItem> }
+                            }
                         />
                         <FormField
                             control={form.control}
                             name="geometryId"
-                            render={({ field }) => (
-                                <FormItem>
+                            render={({ field }) => 
+                                { return <FormItem>
                                     <FormLabel>
                                         {t("geometryId.label")}
                                     </FormLabel>
@@ -94,14 +93,14 @@ export default function GenerateTowersModal({
                                         {t("geometryId.description")}
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>
-                            )}
+                                </FormItem> }
+                            }
                         />
                         <FormField
                             control={form.control}
                             name="numTowers"
-                            render={({ field }) => (
-                                <FormItem>
+                            render={({ field }) => 
+                                { return <FormItem>
                                     <FormLabel>
                                         {t("numTowers.label")}
                                     </FormLabel>
@@ -112,14 +111,14 @@ export default function GenerateTowersModal({
                                         {t("numTowers.description")}
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>
-                            )}
+                                </FormItem> }
+                            }
                         />
                         <FormField
                             control={form.control}
                             name="resistance"
-                            render={({ field }) => (
-                                <FormItem>
+                            render={({ field }) => 
+                                { return <FormItem>
                                     <FormLabel>
                                         {t("resistance.label")}
                                     </FormLabel>
@@ -130,14 +129,14 @@ export default function GenerateTowersModal({
                                         {t("resistance.description")}
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>
-                            )}
+                                </FormItem> }
+                            }
                         />
                         <FormField
                             control={form.control}
                             name="distance"
-                            render={({ field }) => (
-                                <FormItem>
+                            render={({ field }) => 
+                                { return <FormItem>
                                     <FormLabel>{t("distance.label")}</FormLabel>
                                     <FormControl>
                                         <NumberInput type="number" {...field} />
@@ -146,8 +145,8 @@ export default function GenerateTowersModal({
                                         {t("distance.description")}
                                     </FormDescription>
                                     <FormMessage />
-                                </FormItem>
-                            )}
+                                </FormItem> }
+                            }
                         />
 
                         <DialogFooter>

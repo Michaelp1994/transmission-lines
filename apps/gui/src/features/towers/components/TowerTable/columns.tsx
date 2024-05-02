@@ -1,8 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-
 import RowActions from "./RowActions";
-import { TransmissionTower } from "./RowType";
+import type { TransmissionTower } from "./RowType";
 
 const columnHelper = createColumnHelper<TransmissionTower>();
 

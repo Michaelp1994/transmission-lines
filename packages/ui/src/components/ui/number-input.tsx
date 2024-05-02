@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Input } from "./input";
 
 export interface NumberInputProps
@@ -8,8 +7,8 @@ export interface NumberInputProps
 }
 
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
-    ({ value, type, onChange, ...props }, ref) => (
-        <Input
+    ({ value, type, onChange, ...props }, ref) => 
+        { return <Input
             type="number"
             ref={ref}
             value={Number.isNaN(value) || value === 0 ? "" : String(value)}
@@ -22,12 +21,14 @@ const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
                         value: Number.isNaN(output) ? 0 : output,
                     },
                 };
+
                 onChange?.(newEvent);
             }}
             {...props}
-        />
-    )
+        /> }
+    
 );
+
 NumberInput.displayName = "NumberInput";
 
 export { NumberInput };

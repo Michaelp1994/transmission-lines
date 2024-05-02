@@ -1,8 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-
 import RowActions from "./RowActions";
-import { ConductorLocation } from "./type";
+import type { ConductorLocation } from "./type";
 
 const columnHelper = createColumnHelper<ConductorLocation>();
 

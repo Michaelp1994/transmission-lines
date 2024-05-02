@@ -7,14 +7,13 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { CreateProjectForm } from "~/features/projects";
 
 export const Route = createFileRoute("/projects/new")({
     component: CreateProjectPage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "New Project",
-    }),
+    } },
 });
 
 export default function CreateProjectPage() {

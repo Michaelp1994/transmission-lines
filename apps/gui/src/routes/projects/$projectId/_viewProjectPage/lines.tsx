@@ -13,7 +13,6 @@ import {
 } from "@repo/ui";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { TransmissionLineTable } from "~/features/transmissionLines";
 
 export const Route = createFileRoute(

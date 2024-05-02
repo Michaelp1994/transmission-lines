@@ -10,14 +10,13 @@ import {
 } from "@repo/ui";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
-
 import { ConductorTypeTable } from "~/features/conductorTypes";
 
 export const Route = createFileRoute("/conductor-types/")({
     component: AllConductorTypesPage,
-    beforeLoad: () => ({
+    beforeLoad: () => { return {
         text: "Conductor Types",
-    }),
+    } },
 });
 
 export default function AllConductorTypesPage() {

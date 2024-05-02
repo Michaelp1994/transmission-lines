@@ -1,9 +1,7 @@
-import { TransmissionTowerFormInput } from "@repo/validators/forms/TransmissionTower.schema";
-import { LineID } from "@repo/validators/Ids";
-import { FieldErrors } from "react-hook-form";
-
+import type { TransmissionTowerFormInput } from "@repo/validators/forms/TransmissionTower.schema";
+import type { LineID } from "@repo/validators/Ids";
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 

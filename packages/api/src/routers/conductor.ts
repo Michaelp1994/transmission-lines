@@ -9,9 +9,7 @@ import {
     getConductorByIdSchema,
     updateConductorSchema,
 } from "@repo/validators/schemas/Conductor.schema";
-
 import { publicProcedure, router } from "../trpc";
-
 import generateConductors from "@/helpers/generateConductors";
 
 export default router({
@@ -20,6 +18,7 @@ export default router({
         .query(async ({ ctx: { db } }) => {
             const allConductors =
                 await db.query.transmissionConductors.findMany();
+
             return allConductors;
         }),
     getAllByLineId: publicProcedure
@@ -31,7 +30,9 @@ export default router({
                     type: true,
                 },
             });
-            if (!towers) throw Error("Can't find transmission conductors");
+
+            if (!towers) {throw new Error("Can't find transmission conductors");}
+
             return towers;
         }),
     getById: publicProcedure
@@ -41,7 +42,9 @@ export default router({
                 await db.query.transmissionConductors.findFirst({
                     where: eq(transmissionConductors.id, input.id),
                 });
-            if (!conductorType) throw Error("Can't find conductor");
+
+            if (!conductorType) {throw new Error("Can't find conductor");}
+
             return conductorType;
         }),
 
@@ -52,7 +55,9 @@ export default router({
                 .insert(transmissionConductors)
                 .values(input)
                 .returning();
-            if (!newConductor) throw Error("Can't create conductor");
+
+            if (!newConductor) {throw new Error("Can't create conductor");}
+
             return newConductor;
         }),
     generate: publicProcedure
@@ -75,7 +80,8 @@ export default router({
                 .set({ ...input })
                 .where(eq(transmissionConductors.id, input.id))
                 .returning();
-            if (!updatedConductor) throw Error("Can't update conductor");
+
+            if (!updatedConductor) {throw new Error("Can't update conductor");}
 
             return updatedConductor;
         }),
@@ -86,7 +92,8 @@ export default router({
                 .delete(transmissionConductors)
                 .where(eq(transmissionConductors.id, input.id))
                 .returning();
-            if (!deletedConductor) throw Error("Can't delete conductor");
+
+            if (!deletedConductor) {throw new Error("Can't delete conductor");}
 
             return deletedConductor;
         }),

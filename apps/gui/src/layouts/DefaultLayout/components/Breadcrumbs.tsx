@@ -12,11 +12,11 @@ import React from "react";
 
 export default function Breadcrumbs() {
     const routes = useMatches();
-    const filteredRoutes = routes.filter((route) => route.routeContext?.text);
-    const crumbs = filteredRoutes.map((match) => ({
+    const filteredRoutes = routes.filter((route) => route.routeContext.text);
+    const crumbs = filteredRoutes.map((match) => { return {
         text: match.routeContext.text,
         link: match.pathname,
-    }));
+    } });
 
     return (
         <Wrapper>
@@ -32,6 +32,7 @@ export default function Breadcrumbs() {
                                 </BreadcrumbItem>
                             );
                         }
+
                         return (
                             <React.Fragment key={index}>
                                 <BreadcrumbItem>

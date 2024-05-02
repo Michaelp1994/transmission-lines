@@ -1,9 +1,7 @@
-import { LocationID } from "@repo/validators/Ids";
-
+import type { LocationID } from "@repo/validators/Ids";
 import { Modals } from "../config";
 import useModal from "../use-modal";
-
-import { UpdateConductorLocationModalProps } from "~/features/conductorLocations/components/UpdateConductorLocationModal/UpdateConductorLocationModal";
+import type { UpdateConductorLocationModalProps } from "~/features/conductorLocations/components/UpdateConductorLocationModal/UpdateConductorLocationModal";
 
 export default function useUpdateConductorLocationModal(
     conductorLocationId: LocationID

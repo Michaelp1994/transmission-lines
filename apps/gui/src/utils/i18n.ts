@@ -1,6 +1,5 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-
 import enAU from "~/locales/en-AU.json";
 import ptBR from "~/locales/pt-BR.json";
 
@@ -10,7 +9,8 @@ export const resources = {
     "pt-BR": ptBR,
 } as const;
 
-i18n.use(initReactI18next) // passes i18n down to react-i18next
+await i18n
+    .use(initReactI18next) // passes i18n down to react-i18next
     .init({
         resources,
         defaultNS,

@@ -1,8 +1,6 @@
-import { ConductorLocationFormInput } from "@repo/validators/forms";
-import { FieldErrors } from "react-hook-form";
-
+import type { ConductorLocationFormInput } from "@repo/validators/forms";
+import type { FieldErrors } from "react-hook-form";
 import BaseForm from "./BaseForm";
-
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 

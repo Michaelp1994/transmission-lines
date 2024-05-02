@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
-
 import { ProjectDiagram } from "~/features/projects";
 
 export const Route = createFileRoute(
@@ -11,6 +10,7 @@ export const Route = createFileRoute(
 
 export default function Diagram() {
     const { projectId } = Route.useParams();
+
     return (
         <Card>
             <CardHeader>

@@ -1,3 +1,5 @@
-import TowerParametersModal from "./TowerParametersModal";
 
-export default TowerParametersModal;
+
+
+
+export {default} from "./TowerParametersModal";

@@ -1,11 +1,11 @@
-import ConductorLocationTable from "./components/ConductorLocationTable";
-import CreateConductorLocationModal from "./components/CreateConductorLocationModal";
-import DeleteConductorLocationModal from "./components/DeleteConductorLocationModal";
-import UpdateConductorLocationModal from "./components/UpdateConductorLocationModal";
 
-export {
-    ConductorLocationTable,
-    CreateConductorLocationModal,
-    UpdateConductorLocationModal,
-    DeleteConductorLocationModal,
-};
+
+
+
+
+
+
+export {default as ConductorLocationTable} from "./components/ConductorLocationTable";
+export {default as CreateConductorLocationModal} from "./components/CreateConductorLocationModal";
+export {default as DeleteConductorLocationModal} from "./components/DeleteConductorLocationModal";
+export {default as UpdateConductorLocationModal} from "./components/UpdateConductorLocationModal";
