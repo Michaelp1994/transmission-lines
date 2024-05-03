@@ -25,8 +25,8 @@ export default function DeleteTowerGeometryModal({
         },
     });
 
-    async function handleConfirm() {
-        await deleteMutation.mutateAsync({ id: geometryId });
+    function handleConfirm() {
+        deleteMutation.mutate({ id: geometryId });
     }
 
     return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;

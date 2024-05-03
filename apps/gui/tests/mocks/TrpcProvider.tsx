@@ -7,9 +7,9 @@ import type { Mock } from "vitest";
 
 // type MockFn = (op: any) => Promise<any>;
 
-export type TrpcMockFn = Mock<unknown[], Promise<Record<string, unknown>>>;
+export type TrpcMockFn = Mock;
 
-const trpc = createTRPCReact<any>();
+const trpc = createTRPCReact();
 
 function customLinkFactory(mockFn: TrpcMockFn) {
     const customLink: TRPCLink<any> = () => {
@@ -59,24 +59,23 @@ export default function MockTrpcProvider({
     children,
     mockFn,
 }: TrpcProviderProps) {
-    const [queryClient] = useState(
-        () =>
-            { return new QueryClient({
-                defaultOptions: {
-                    queries: {
-                        retry: false,
-                    },
+    const [queryClient] = useState(() => {
+        return new QueryClient({
+            defaultOptions: {
+                queries: {
+                    retry: false,
                 },
-            }) }
-    );
-    const [trpcClient] = useState(() =>
-        { return trpc.createClient({
+            },
+        });
+    });
+    const [trpcClient] = useState(() => {
+        return trpc.createClient({
             links: [
                 customLinkFactory(mockFn),
                 // httpBatchLink({ url: "http://localhost:5001" }),
             ],
-        }) }
-    );
+        });
+    });
 
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>

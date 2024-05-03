@@ -1,80 +1,57 @@
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import CreateProjectForm from "./CreateProjectForm";
-import { render, screen } from "~test-utils";
-
-// import MockApp from "./MockApp";
+import { screen, within, createRender } from "~test-utils";
+import { createMockProject } from "~tests/helpers/mockData";
 
 describe("CreateProjectForm", () => {
-    test("renders form fields and buttons", () => {
-        const validFnHandler = vi.fn();
-        const invalidFnHandler = vi.fn();
+    const mockProject = createMockProject();
+    const trpcFn = vi.fn().mockResolvedValue(mockProject);
 
-        render(
-            <CreateProjectForm
-                onValid={validFnHandler}
-                onInvalid={invalidFnHandler}
-            />
-        );
+    const render = createRender(trpcFn);
 
-        // Assert that form fields are rendered
-        expect(screen.getByLabelText("Name")).toBeInTheDocument();
-
-        // Assert that buttons are rendered
-        expect(
-            screen.getByRole("button", { name: "Reset" })
-        ).toBeInTheDocument();
-        expect(
-            screen.getByRole("button", { name: "Submit" })
-        ).toBeInTheDocument();
-    });
-
-    test("submits form with valid input", async () => {
-        const validFnHandler = vi.fn();
-        const invalidFnHandler = vi.fn();
+    function setup() {
         const user = userEvent.setup();
 
-        render(
-            <CreateProjectForm
-                onValid={validFnHandler}
-                onInvalid={invalidFnHandler}
-            />
-        );
+        const utils = render(<CreateProjectForm />);
+
+        return {
+            ...utils,
+            user,
+        };
+    }
+
+    test("submits form with valid input", async () => {
+        const { user } = setup();
 
         // Fill in form fields with valid input
-        await user.type(screen.getByLabelText("Name"), "TestProject123");
+        await user.type(screen.getByLabelText(/name/i), mockProject.name);
         // Submit the form
-        await user.click(screen.getByRole("button", { name: "Submit" }));
+        await user.click(screen.getByRole("button", { name: /submit/i }));
 
-        // Assert that the form is submitted successfully
-        // Add your assertions here
-        expect(validFnHandler).toHaveBeenCalledTimes(1);
-        expect(validFnHandler).toHaveBeenCalledWith({
-            name: "TestProject123",
-        });
+        const toast = await screen.findByRole("status");
+
+        // Assert
+        expect(
+            within(toast).getByText(`${mockProject.name} has been created.`)
+        ).toBeInTheDocument();
+        expect(trpcFn).toBeCalledTimes(1);
+        expect(trpcFn).toHaveBeenCalledWith(mockProject);
     });
 
     test("displays error message for invalid input", async () => {
-        const validFnHandler = vi.fn();
-        const invalidFnHandler = vi.fn();
-        const user = userEvent.setup();
+        const { user } = setup();
 
-        render(
-            <CreateProjectForm
-                onValid={validFnHandler}
-                onInvalid={invalidFnHandler}
-            />
-        );
-        await user.type(screen.getByLabelText("Name"), " ");
-        // Fill in form fields with invalid input
-
+        // Fill in form fields with valid input
+        await user.type(screen.getByLabelText(/name/i), "1");
         // Submit the form
-        await user.click(screen.getByRole("button", { name: "Submit" }));
-        // Assert that error message is displayed
+        await user.click(screen.getByRole("button", { name: /submit/i }));
+
+        // Assert that the form is submitted successfully
+        // Add your assertions here
         expect(
-            screen.getByText("String must contain at least 3 character(s)")
+            screen.getByText(/name must be at least 3 character\(s\)/i)
         ).toBeInTheDocument();
-        expect(validFnHandler).toHaveBeenCalledTimes(0);
-        expect(invalidFnHandler).toHaveBeenCalledTimes(1);
+        expect(trpcFn).not.toHaveBeenCalled();
     });
 });

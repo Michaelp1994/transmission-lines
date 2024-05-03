@@ -1,9 +1,175 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "54cacbd8-fbe7-4885-90bc-cfe49df81f1f",
+  "id": "a078fb04-f980-4fe9-8ae1-3ea7c6da2f37",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
+    "conductor_layers": {
+      "name": "conductor_layers",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "numFibres": {
+          "name": "numFibres",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "diameterFibre": {
+          "name": "diameterFibre",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "materialTypeId": {
+          "name": "materialTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "conductorTypeId": {
+          "name": "conductorTypeId",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "conductor_layers_materialTypeId_conductor_materials_id_fk": {
+          "name": "conductor_layers_materialTypeId_conductor_materials_id_fk",
+          "tableFrom": "conductor_layers",
+          "tableTo": "conductor_materials",
+          "columnsFrom": [
+            "materialTypeId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "conductor_layers_conductorTypeId_conductor_types_id_fk": {
+          "name": "conductor_layers_conductorTypeId_conductor_types_id_fk",
+          "tableFrom": "conductor_layers",
+          "tableTo": "conductor_types",
+          "columnsFrom": [
+            "conductorTypeId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "conductor_locations": {
+      "name": "conductor_locations",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "x": {
+          "name": "x",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "y": {
+          "name": "y",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tower_geometry_id": {
+          "name": "tower_geometry_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "conductor_locations_tower_geometry_id_tower_geometries_id_fk": {
+          "name": "conductor_locations_tower_geometry_id_tower_geometries_id_fk",
+          "tableFrom": "conductor_locations",
+          "tableTo": "tower_geometries",
+          "columnsFrom": [
+            "tower_geometry_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "conductor_materials": {
+      "name": "conductor_materials",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "relative_permeability": {
+          "name": "relative_permeability",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "relative_permittivity": {
+          "name": "relative_permittivity",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "conductor_types": {
       "name": "conductor_types",
       "columns": {
@@ -104,57 +270,6 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "conductor_locations": {
-      "name": "conductor_locations",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "x": {
-          "name": "x",
-          "type": "real",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "y": {
-          "name": "y",
-          "type": "real",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "tower_geometry_id": {
-          "name": "tower_geometry_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "conductor_locations_tower_geometry_id_tower_geometries_id_fk": {
-          "name": "conductor_locations_tower_geometry_id_tower_geometries_id_fk",
-          "tableFrom": "conductor_locations",
-          "tableTo": "tower_geometries",
-          "columnsFrom": [
-            "tower_geometry_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
     "projects": {
       "name": "projects",
       "columns": {
@@ -173,7 +288,15 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "projects_name_unique": {
+          "name": "projects_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
@@ -211,14 +334,14 @@
         },
         "x1r1": {
           "name": "x1r1",
-          "type": "integer",
+          "type": "real",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
         "x0r0": {
           "name": "x0r0",
-          "type": "integer",
+          "type": "real",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -239,7 +362,7 @@
         },
         "resistance": {
           "name": "resistance",
-          "type": "integer",
+          "type": "real",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -251,12 +374,35 @@
           "notNull": true,
           "autoincrement": false
         },
+        "enabled": {
+          "name": "enabled",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "project_id": {
           "name": "project_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "x": {
+          "name": "x",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        },
+        "y": {
+          "name": "y",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
         }
       },
       "indexes": {},
@@ -355,7 +501,7 @@
         },
         "type_id": {
           "name": "type_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -517,7 +663,7 @@
         },
         "geometryId": {
           "name": "geometryId",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

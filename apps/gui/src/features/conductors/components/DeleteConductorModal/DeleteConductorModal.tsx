@@ -27,8 +27,8 @@ export default function DeleteConductorModal({
         },
     });
 
-    async function handleConfirm() {
-        await deleteMutation.mutateAsync({ id: conductorId });
+    function handleConfirm() {
+        deleteMutation.mutate({ id: conductorId });
     }
 
     return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;

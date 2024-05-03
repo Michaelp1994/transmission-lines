@@ -14,9 +14,11 @@ import { TowerGeometriesTable } from "~/features/towerGeometries";
 
 export const Route = createFileRoute("/tower-geometries/")({
     component: AllTowerGeometriesPage,
-    beforeLoad: () => { return {
-        text: "Tower Geometries",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "Tower Geometries",
+        };
+    },
 });
 
 export default function AllTowerGeometriesPage() {

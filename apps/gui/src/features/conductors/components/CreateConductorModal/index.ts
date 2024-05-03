@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./CreateConductorModal";
+export { default } from "./CreateConductorModal";

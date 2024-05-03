@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./ProjectTable";
+export { default } from "./ProjectTable";

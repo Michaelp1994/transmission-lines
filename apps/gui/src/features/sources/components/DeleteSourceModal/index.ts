@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./DeleteSourceModal";
+export { default } from "./DeleteSourceModal";

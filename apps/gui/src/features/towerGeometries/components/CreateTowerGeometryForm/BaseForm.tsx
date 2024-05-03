@@ -25,28 +25,39 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
 
     const form = useCreateTowerGeometryForm();
     const handleSubmit = form.handleSubmit(
-        (values) => { onValid(values); },
-        (errors) => { onInvalid(errors); }
+        (values) => {
+            onValid(values);
+        },
+        (errors) => {
+            onInvalid(errors);
+        }
     );
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
+            <StyledForm
+                onSubmit={handleSubmit}
+                onReset={() => {
+                    form.reset();
+                }}
+            >
                 <FormField
                     control={form.control}
                     name="name"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("name.label")}</FormLabel>
-                            <FormControl>
-                                <Input {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("name.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("name.label")}</FormLabel>
+                                <FormControl>
+                                    <Input {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("name.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
 
                 <ButtonsWrapper>

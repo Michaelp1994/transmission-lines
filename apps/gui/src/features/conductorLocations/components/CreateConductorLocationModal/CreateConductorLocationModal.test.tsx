@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
 import { defaultConductorLocation } from "@repo/validators/forms/ConductorLocation.schema";
 import { userEvent } from "@testing-library/user-event";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { useCreateConductorLocationModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
@@ -20,7 +20,7 @@ describe("Create Conductor Location Modal", () => {
     const render = createRender(trpcFn);
     const displayModal = useCreateConductorLocationModal(geometryId);
 
-    async function renderForm() {
+    async function setup() {
         const user = userEvent.setup();
         const utils = render(
             <Button onClick={displayModal}>Click Here</Button>
@@ -40,12 +40,8 @@ describe("Create Conductor Location Modal", () => {
         };
     }
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     test("fill out form correctly and test that the information is sent to server", async () => {
-        const { form, user, dialog } = await renderForm();
+        const { form, user, dialog } = await setup();
 
         expect(form).toHaveFormValues(defaultConductorLocation);
         await completeForm(user, form, labels, mockConductorLocation);
@@ -65,7 +61,7 @@ describe("Create Conductor Location Modal", () => {
     });
 
     test("incorrect data is not sent to server", async () => {
-        const { form, user, dialog } = await renderForm();
+        const { form, user, dialog } = await setup();
 
         await completeForm(user, form, labels, {
             ...mockConductorLocation,

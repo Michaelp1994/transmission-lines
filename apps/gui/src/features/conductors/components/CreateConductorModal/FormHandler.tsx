@@ -10,12 +10,16 @@ interface FormHandlerProps {
     onFinished: () => void;
 }
 
+function handleInvalid(errors: FieldErrors<ConductorFormInput>) {
+    console.log(errors);
+}
+
 export default function FormHandler({ lineId, onFinished }: FormHandlerProps) {
     const utils = trpc.useUtils();
     const createConductorMutation = trpc.conductor.create.useMutation({
-        onSuccess(data) {
+        async onSuccess(data) {
             toast.success("Conductor created");
-            utils.conductor.getAllByLineId.invalidate({
+            await utils.conductor.getAllByLineId.invalidate({
                 lineId: data.lineId,
             });
             onFinished();
@@ -28,9 +32,6 @@ export default function FormHandler({ lineId, onFinished }: FormHandlerProps) {
 
     function handleValid(data: ConductorFormInput) {
         createConductorMutation.mutate({ ...data, lineId });
-    }
-    function handleInvalid(errors: FieldErrors<ConductorFormInput>) {
-        console.log(errors);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;

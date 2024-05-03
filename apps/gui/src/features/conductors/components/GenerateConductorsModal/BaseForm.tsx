@@ -25,8 +25,12 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
     const { t } = useTranslation("generateConductors");
     const form = useGenerateConductorsForm();
     const handleSubmit = form.handleSubmit(
-        (values) => { onValid(values); },
-        (error) => { onInvalid(error); }
+        (values) => {
+            onValid(values);
+        },
+        (error) => {
+            onInvalid(error);
+        }
     );
 
     return (
@@ -35,87 +39,97 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                 <FormField
                     control={form.control}
                     name="phases"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("phases.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("phases.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("phases.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("phases.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
                 <FormField
                     control={form.control}
                     name="circuits"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("circuits.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("circuits.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("circuits.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("circuits.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
 
                 <FormField
                     control={form.control}
                     name="neutrals"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("neutrals.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("neutrals.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("neutrals.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("neutrals.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
                 <FormField
                     control={form.control}
                     name="phaseTypeId"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>
-                                {t("phaseConductorType.label")}
-                            </FormLabel>
-                            <FormControl>
-                                <ConductorTypeSelect {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("phaseConductorType.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>
+                                    {t("phaseConductorType.label")}
+                                </FormLabel>
+                                <FormControl>
+                                    <ConductorTypeSelect {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("phaseConductorType.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
                 <FormField
                     control={form.control}
                     name="neutralTypeId"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>
-                                {t("neutralConductorType.label")}
-                            </FormLabel>
-                            <FormControl>
-                                <ConductorTypeSelect {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("neutralConductorType.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>
+                                    {t("neutralConductorType.label")}
+                                </FormLabel>
+                                <FormControl>
+                                    <ConductorTypeSelect {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("neutralConductorType.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
                 <ButtonsWrapper>
                     <Button type="submit">{t("form:generate")}</Button>

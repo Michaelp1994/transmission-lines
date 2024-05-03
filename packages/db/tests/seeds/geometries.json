@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "name": "K1",
         "conductors": [
             {
@@ -38,9 +37,7 @@
         ]
     },
     {
-        "id": 2,
         "name": "Esoura-Toyota",
-        "nphases": 3,
         "conductors": [
             {
                 "x": -7.5,
@@ -65,9 +62,7 @@
         ]
     },
     {
-        "id": 3,
         "name": "DL3",
-        "nphases": 6,
         "conductors": [
             {
                 "x": -3.1,

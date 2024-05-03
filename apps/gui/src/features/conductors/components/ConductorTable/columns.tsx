@@ -29,12 +29,13 @@ export default [
     }),
     columnHelper.accessor("isNeutral", {
         header: "Is Neutral?",
-        cell: (info) =>
-            { return info.renderValue() ? (
+        cell: (info) => {
+            return info.renderValue() ? (
                 <SquareCheckBig aria-label="Yes" />
             ) : (
                 <Square aria-label="No" />
-            ) },
+            );
+        },
     }),
     columnHelper.accessor("type.name", {
         header: "Conductor Type",

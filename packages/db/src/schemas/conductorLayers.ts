@@ -1,5 +1,3 @@
- 
-
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { conductorMaterials } from "./conductorMaterials";
 import { conductorTypes } from "./conductorTypes";

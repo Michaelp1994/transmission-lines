@@ -1,5 +1,3 @@
- 
-
 import { relations } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
@@ -27,22 +25,24 @@ export type NewTransmissionLine = typeof transmissionLines.$inferInsert;
 
 export const transmissionLinesRelations = relations(
     transmissionLines,
-    ({ one, many }) => { return {
-        fromSource: one(sources, {
-            fields: [transmissionLines.fromSourceId],
-            references: [sources.id],
-            relationName: "fromSource",
-        }),
-        toSource: one(sources, {
-            fields: [transmissionLines.toSourceId],
-            references: [sources.id],
-            relationName: "toSource",
-        }),
-        project: one(projects, {
-            fields: [transmissionLines.projectId],
-            references: [projects.id],
-        }),
-        towers: many(transmissionTowers),
-        conductors: many(transmissionConductors),
-    } }
+    ({ one, many }) => {
+        return {
+            fromSource: one(sources, {
+                fields: [transmissionLines.fromSourceId],
+                references: [sources.id],
+                relationName: "fromSource",
+            }),
+            toSource: one(sources, {
+                fields: [transmissionLines.toSourceId],
+                references: [sources.id],
+                relationName: "toSource",
+            }),
+            project: one(projects, {
+                fields: [transmissionLines.projectId],
+                references: [projects.id],
+            }),
+            towers: many(transmissionTowers),
+            conductors: many(transmissionConductors),
+        };
+    }
 );

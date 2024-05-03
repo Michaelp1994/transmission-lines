@@ -11,9 +11,11 @@ import { CreateTowerGeometryForm } from "~/features/towerGeometries";
 
 export const Route = createFileRoute("/tower-geometries/new")({
     component: CreateTowerGeometryPage,
-    beforeLoad: () => { return {
-        text: "New Tower Geometry",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "New Tower Geometry",
+        };
+    },
 });
 
 export default function CreateTowerGeometryPage() {

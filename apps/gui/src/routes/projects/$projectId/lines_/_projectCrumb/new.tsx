@@ -14,9 +14,11 @@ export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/new"
 )({
     component: CreateTransmissionLinePage,
-    beforeLoad: () => { return {
-        text: "New Transmission Lines",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "New Transmission Lines",
+        };
+    },
 });
 
 export default function CreateTransmissionLinePage() {
@@ -24,21 +26,15 @@ export default function CreateTransmissionLinePage() {
     const { projectId } = Route.useParams();
 
     return (
-        <Wrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>{t("add.title")}</CardTitle>
-                    </CardHeaderText>
-                </CardHeader>
-                <CardContent>
-                    <CreateTransmissionLineForm projectId={projectId} />
-                </CardContent>
-            </Card>
-        </Wrapper>
+        <Card>
+            <CardHeader>
+                <CardHeaderText>
+                    <CardTitle>{t("add.title")}</CardTitle>
+                </CardHeaderText>
+            </CardHeader>
+            <CardContent>
+                <CreateTransmissionLineForm projectId={projectId} />
+            </CardContent>
+        </Card>
     );
 }
-
-const Wrapper = styled.div`
-    padding-bottom: 2rem;
-`;

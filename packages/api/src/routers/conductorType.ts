@@ -31,7 +31,9 @@ export default router({
                 })
                 .from(conductorTypes);
 
-            if (!totalCount) {throw new Error("Could not get totalCount");}
+            if (!totalCount) {
+                throw new Error("Could not get totalCount");
+            }
             const pageCount = input
                 ? Math.ceil(totalCount.value / input.pageSize)
                 : -1;
@@ -45,7 +47,9 @@ export default router({
                 where: eq(conductorTypes.id, input.id),
             });
 
-            if (!conductorType) {throw new Error("Can't find conductor type");}
+            if (!conductorType) {
+                throw new Error("Can't find conductor type");
+            }
 
             return conductorType;
         }),
@@ -57,7 +61,9 @@ export default router({
                 .values(input)
                 .returning();
 
-            if (!newConductorType) {throw new Error("Can't create conductor type");}
+            if (!newConductorType) {
+                throw new Error("Can't create conductor type");
+            }
 
             return newConductorType;
         }),
@@ -70,8 +76,9 @@ export default router({
                 .where(eq(conductorTypes.id, input.id))
                 .returning();
 
-            if (!updatedConductorType)
-                {throw new Error("Can't update conductor type");}
+            if (!updatedConductorType) {
+                throw new Error("Can't update conductor type");
+            }
 
             return updatedConductorType;
         }),
@@ -83,7 +90,9 @@ export default router({
                 .where(eq(conductorTypes.id, input.id))
                 .returning();
 
-            if (!deletedConductor) {throw new Error("Can't update conductor type");}
+            if (!deletedConductor) {
+                throw new Error("Can't update conductor type");
+            }
 
             return deletedConductor;
         }),

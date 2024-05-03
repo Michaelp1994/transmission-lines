@@ -22,7 +22,9 @@ export default router({
                 .values(input)
                 .returning();
 
-            if (!newTower) {throw new Error("Can't create tower");}
+            if (!newTower) {
+                throw new Error("Can't create tower");
+            }
 
             return newTower;
         }),
@@ -35,7 +37,9 @@ export default router({
                 .values(towers)
                 .returning();
 
-            if (!newTowers) {throw new Error("Can't generate towers");}
+            if (!newTowers) {
+                throw new Error("Can't generate towers");
+            }
 
             return newTowers;
         }),
@@ -62,7 +66,9 @@ export default router({
                 },
             });
 
-            if (!tower) {throw new Error("Can't find transmission tower");}
+            if (!tower) {
+                throw new Error("Can't find transmission tower");
+            }
             if (
                 tower.geometry.conductors.length !==
                 tower.transmissionLine.conductors.length
@@ -88,7 +94,9 @@ export default router({
                 .where(eq(transmissionTowers.id, input.id))
                 .returning();
 
-            if (!updatedTower) {throw new Error("Can't update tower");}
+            if (!updatedTower) {
+                throw new Error("Can't update tower");
+            }
 
             return updatedTower;
         }),
@@ -99,7 +107,9 @@ export default router({
                 where: eq(transmissionTowers.id, input.id),
             });
 
-            if (!tower) {throw new Error("Can't find tower");}
+            if (!tower) {
+                throw new Error("Can't find tower");
+            }
 
             return tower;
         }),
@@ -113,7 +123,9 @@ export default router({
                 },
             });
 
-            if (!towers) {throw new Error("Can't find transmission towers");}
+            if (!towers) {
+                throw new Error("Can't find transmission towers");
+            }
 
             return towers;
         }),
@@ -126,7 +138,9 @@ export default router({
                 .where(eq(transmissionTowers.id, input.id))
                 .returning();
 
-            if (!deletedTower) {throw new Error("Can't delete tower");}
+            if (!deletedTower) {
+                throw new Error("Can't delete tower");
+            }
 
             return deletedTower;
         }),

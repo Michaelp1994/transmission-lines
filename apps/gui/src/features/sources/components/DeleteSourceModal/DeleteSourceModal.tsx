@@ -26,8 +26,8 @@ export default function DeleteSourceModal({
         },
     });
 
-    async function handleConfirm() {
-        await deleteMutation.mutateAsync({
+    function handleConfirm() {
+        deleteMutation.mutate({
             id: sourceId,
         });
     }

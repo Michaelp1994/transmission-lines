@@ -1,5 +1,3 @@
- 
-
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
@@ -30,14 +28,16 @@ export type NewTransmissionConductor =
 
 export const transmissionConductorsRelations = relations(
     transmissionConductors,
-    ({ one }) => { return {
-        type: one(conductorTypes, {
-            fields: [transmissionConductors.typeId],
-            references: [conductorTypes.id],
-        }),
-        transmissionLine: one(transmissionLines, {
-            fields: [transmissionConductors.lineId],
-            references: [transmissionLines.id],
-        }),
-    } }
+    ({ one }) => {
+        return {
+            type: one(conductorTypes, {
+                fields: [transmissionConductors.typeId],
+                references: [conductorTypes.id],
+            }),
+            transmissionLine: one(transmissionLines, {
+                fields: [transmissionConductors.lineId],
+                references: [transmissionLines.id],
+            }),
+        };
+    }
 );

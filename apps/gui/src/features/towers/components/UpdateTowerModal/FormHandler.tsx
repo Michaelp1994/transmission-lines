@@ -10,6 +10,10 @@ interface FormHandlerProps {
     onFinish: () => void;
 }
 
+function handleInvalid(errors: FieldErrors<UpdateTransmissionTowerInput>) {
+    console.error(errors);
+}
+
 export default function FormHandler({ towerId, onFinish }: FormHandlerProps) {
     const utils = trpc.useUtils();
     const { data, isLoading, isError } = trpc.tower.getById.useQuery({
@@ -29,12 +33,8 @@ export default function FormHandler({ towerId, onFinish }: FormHandlerProps) {
         },
     });
 
-    async function handleValid(values: UpdateTransmissionTowerInput) {
-        await updateMutation.mutateAsync(values);
-    }
-
-    function handleInvalid(errors: FieldErrors<UpdateTransmissionTowerInput>) {
-        console.error(errors);
+    function handleValid(values: UpdateTransmissionTowerInput) {
+        updateMutation.mutate(values);
     }
 
     if (isLoading) {

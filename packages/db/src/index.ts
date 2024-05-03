@@ -11,7 +11,7 @@ export interface DBContext {
     db: BetterSQLite3Database<typeof schema>;
 }
 
-function databaseInit(path: string): DBContext {
+export default function databaseInit(path: string | Buffer): DBContext {
     const nativeBinding = isElectron()
         ? "../../prebuilds/win32-x64/better-sqlite3.node"
         : undefined;
@@ -24,5 +24,3 @@ function databaseInit(path: string): DBContext {
 
     return { conn, db };
 }
-
-export default databaseInit;

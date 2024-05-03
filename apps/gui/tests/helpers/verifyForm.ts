@@ -1,7 +1,7 @@
 import { expect } from "vitest";
 import { within } from "~test-utils";
 
-export default async function verifyForm(
+export default function verifyForm(
     form: HTMLElement,
     inputLabels: Record<string, RegExp>,
     values?: Record<string, unknown>

@@ -9,14 +9,16 @@ const columnHelper = createColumnHelper<Project>();
 const columns = [
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "projectTable" }),
-        cell: (props) => 
-            { return <Link
-                to="/projects/$projectId"
-                params={{ projectId: props.row.original.id }}
-            >
-                {props.getValue()}
-            </Link> }
-        ,
+        cell: (props) => {
+            return (
+                <Link
+                    to="/projects/$projectId"
+                    params={{ projectId: props.row.original.id }}
+                >
+                    {props.getValue()}
+                </Link>
+            );
+        },
     }),
     columnHelper.display({
         id: "id",

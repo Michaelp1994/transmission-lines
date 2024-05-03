@@ -44,7 +44,9 @@ export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
                     <AlertDialogCancel>{t("form:cancel")}</AlertDialogCancel>
                     <AlertDialogAction
                         className={buttonVariants({ variant: "destructive" })}
-                        onClick={() => { onConfirm(); }}
+                        onClick={() => {
+                            onConfirm();
+                        }}
                     >
                         {t("form:delete")}
                     </AlertDialogAction>

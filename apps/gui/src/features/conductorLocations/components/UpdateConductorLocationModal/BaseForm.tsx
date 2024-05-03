@@ -30,8 +30,12 @@ export default function BaseForm({
     const { t } = useTranslation("updateConductorLocationModal");
 
     const handleSubmit = form.handleSubmit(
-        (values) => { onValid(values); },
-        (errors) => { onInvalid(errors); }
+        (values) => {
+            onValid(values);
+        },
+        (errors) => {
+            onInvalid(errors);
+        }
     );
 
     return (
@@ -43,34 +47,38 @@ export default function BaseForm({
                 <FormField
                     control={form.control}
                     name="x"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("x.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("x.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("x.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("x.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
                 <FormField
                     control={form.control}
                     name="y"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("y.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("y.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("y.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("y.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
 
                 <Button type="submit">{t("form:submit")}</Button>

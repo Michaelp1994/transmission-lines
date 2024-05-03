@@ -14,7 +14,7 @@
     ],
     "extends": "@repo/typescript-config/react-library.json",
     "include": [
-        "tests",
+        "tests/**/*",
         "src/**/*.test.ts",
         "src/**/*.test.tsx",
         "src/**/*.test.js",

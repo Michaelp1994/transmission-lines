@@ -3,9 +3,11 @@ import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/conductor-types/$typeId/_layout")({
     component: ViewConductorTypePage,
-    beforeLoad: () => { return {
-        text: "View Conductor Type",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "View Conductor Type",
+        };
+    },
 });
 
 export default function ViewConductorTypePage() {

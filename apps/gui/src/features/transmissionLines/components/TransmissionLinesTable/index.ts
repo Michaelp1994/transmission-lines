@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./TransmissionLineTable";
+export { default } from "./TransmissionLineTable";

@@ -27,16 +27,18 @@ export default function TowerGeometryDiagram() {
                 />
                 {fields &&
                     Array.isArray(fields) &&
-                    fields.map((location, index) => 
-                        { return <Circle
-                            key={index}
-                            x={location.x * SCALE}
-                            y={-location.y * SCALE}
-                            width={10}
-                            height={10}
-                            fill="black"
-                        /> }
-                    )}
+                    fields.map((location, index) => {
+                        return (
+                            <Circle
+                                key={index}
+                                x={location.x * SCALE}
+                                y={-location.y * SCALE}
+                                width={10}
+                                height={10}
+                                fill="black"
+                            />
+                        );
+                    })}
             </Layer>
         </StyledStage>
     );

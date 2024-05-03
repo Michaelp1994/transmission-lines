@@ -13,11 +13,7 @@ export default class Circuit {
 
     driver: OpenDssDriver;
 
-    constructor(
-        name: string,
-        options?: OpenDSSOptions,
-        debug = false
-    ) {
+    constructor(name: string, options?: OpenDSSOptions, debug = false) {
         this.driver = new OpenDssDriver(debug);
         this.name = name;
         this.driver.createCircuit(name);

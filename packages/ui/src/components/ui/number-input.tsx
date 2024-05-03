@@ -7,26 +7,28 @@ export interface NumberInputProps
 }
 
 const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
-    ({ value, type, onChange, ...props }, ref) => 
-        { return <Input
-            type="number"
-            ref={ref}
-            value={Number.isNaN(value) || value === 0 ? "" : String(value)}
-            onChange={(e) => {
-                const output = parseInt(e.target.value, 10) as any;
-                const newEvent = {
-                    ...e,
-                    target: {
-                        ...e.target,
-                        value: Number.isNaN(output) ? 0 : output,
-                    },
-                };
+    ({ value, type, onChange, ...props }, ref) => {
+        return (
+            <Input
+                type="number"
+                ref={ref}
+                value={Number.isNaN(value) || value === 0 ? "" : String(value)}
+                onChange={(e) => {
+                    const output = parseInt(e.target.value, 10) as any;
+                    const newEvent = {
+                        ...e,
+                        target: {
+                            ...e.target,
+                            value: Number.isNaN(output) ? 0 : output,
+                        },
+                    };
 
-                onChange?.(newEvent);
-            }}
-            {...props}
-        /> }
-    
+                    onChange?.(newEvent);
+                }}
+                {...props}
+            />
+        );
+    }
 );
 
 NumberInput.displayName = "NumberInput";

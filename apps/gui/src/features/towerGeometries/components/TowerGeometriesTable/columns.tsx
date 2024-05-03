@@ -9,17 +9,19 @@ const columnHelper = createColumnHelper<TowerGeometry>();
 export default [
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "towerGeometry" }),
-        cell: (info) => 
-            { return <Link
-                draggable={false}
-                to="/tower-geometries/$geometryId"
-                params={{
-                    geometryId: info.row.original.id,
-                }}
-            >
-                {info.getValue()}
-            </Link> }
-        ,
+        cell: (info) => {
+            return (
+                <Link
+                    draggable={false}
+                    to="/tower-geometries/$geometryId"
+                    params={{
+                        geometryId: info.row.original.id,
+                    }}
+                >
+                    {info.getValue()}
+                </Link>
+            );
+        },
     }),
     columnHelper.display({
         id: "id",

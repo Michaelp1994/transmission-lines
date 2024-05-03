@@ -9,6 +9,10 @@ interface FormHandlerProps {
     onFinish: () => void;
 }
 
+function handleInvalid(errors: FieldErrors<ConductorLocationFormInput>) {
+    console.log(errors);
+}
+
 export default function FormHandler({
     geometryId,
     onFinish,
@@ -30,10 +34,6 @@ export default function FormHandler({
 
     function handleValid(data: ConductorLocationFormInput) {
         createMutation.mutate({ ...data, geometryId });
-    }
-
-    function handleInvalid(errors: FieldErrors<ConductorLocationFormInput>) {
-        console.log(errors);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;

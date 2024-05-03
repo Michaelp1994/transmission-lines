@@ -10,11 +10,18 @@ interface FormHandlerProps {
     onFinish: () => void;
 }
 
+function handleInvalid(errors: FieldErrors<ConductorFormInput>) {
+    console.error(errors);
+}
+
 export default function FormHandler({
     conductorId,
     onFinish,
 }: FormHandlerProps) {
     const utils = trpc.useUtils();
+    const { data, error, isLoading } = trpc.conductor.getById.useQuery({
+        id: conductorId,
+    });
     const updateMutation = trpc.conductor.update.useMutation({
         async onSuccess(values) {
             await utils.conductor.getAllByLineId.invalidate({
@@ -29,15 +36,9 @@ export default function FormHandler({
         },
     });
 
-    async function handleValid(values: ConductorFormInput) {
-        await updateMutation.mutateAsync({ ...values, id: conductorId });
+    function handleValid(values: ConductorFormInput) {
+        updateMutation.mutate({ ...values, id: conductorId });
     }
-    function handleInvalid(errors: FieldErrors<ConductorFormInput>) {
-        console.error(errors);
-    }
-    const { data, error, isLoading } = trpc.conductor.getById.useQuery({
-        id: conductorId,
-    });
 
     if (isLoading) {
         return <div>Loading...</div>;

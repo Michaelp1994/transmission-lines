@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./DeleteTowerModal";
+export { default } from "./DeleteTowerModal";

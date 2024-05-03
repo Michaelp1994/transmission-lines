@@ -2,7 +2,7 @@
     "name": "@repo/db",
     "type": "module",
     "exports": {
-        ".": "./src/db.ts",
+        ".": "./src/index.ts",
         "./drizzle": "./src/drizzle.ts",
         "./schemas/*": "./src/schemas/*.ts",
         "./migrate": "./src/migrations/index.ts",
@@ -12,16 +12,17 @@
     "scripts": {
         "clean": "rm -rf .turbo node_modules dist",
         "db:push": "drizzle-kit push:sqlite",
+        "seed": "tsx tests/seedDb.ts",
         "db:studio": "drizzle-kit studio",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "migrate": "tsx src/migrate.ts",
+        "migrate": "drizzle-kit generate:sqlite",
         "test": "vitest run",
         "typecheck": "tsc --build"
     },
     "dependencies": {
         "better-sqlite3": "^9.6.0",
-        "drizzle-orm": "^0.30.9",
+        "drizzle-orm": "^0.30.10",
         "drizzle-zod": "^0.5.1",
         "uuid": "^9.0.1"
     },
@@ -29,15 +30,16 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/better-sqlite3": "^7.6.10",
-        "@types/node": "^20.12.7",
+        "@types/node": "^20.12.8",
         "@types/uuid": "^9.0.8",
         "drizzle-kit": "^0.20.17",
         "eslint": "^8.57.0",
+        "faker": "^6.6.6",
         "is-electron": "^2.2.2",
         "tsx": "^4.8.2",
         "typescript": "^5.4.5",
         "unplugin-swc": "^1.4.5",
-        "vite": "^5.2.10",
+        "vite": "^5.2.11",
         "vite-tsconfig-paths": "^4.3.2",
         "vitest": "^1.5.3"
     }

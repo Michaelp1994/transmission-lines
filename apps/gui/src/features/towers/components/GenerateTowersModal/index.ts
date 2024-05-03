@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./GenerateTowersModal";
+export { default } from "./GenerateTowersModal";

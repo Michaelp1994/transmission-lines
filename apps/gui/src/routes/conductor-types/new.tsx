@@ -11,9 +11,11 @@ import { CreateConductorTypeForm } from "~/features/conductorTypes";
 
 export const Route = createFileRoute("/conductor-types/new")({
     component: CreateConductorTypePage,
-    beforeLoad: () => { return {
-        text: "New Conductor Type",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "New Conductor Type",
+        };
+    },
 });
 
 export default function CreateConductorTypePage() {

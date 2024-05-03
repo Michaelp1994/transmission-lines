@@ -1,4 +1,4 @@
-const labels = {
+export const labels = {
     name: /name/i,
     fromPhase: /from phase/i,
     toPhase: /to phase/i,

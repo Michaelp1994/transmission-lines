@@ -49,9 +49,7 @@ export default function buildTransmissionLineMatrix(
     const xMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
     const pMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
 
-     
     for (const [i, firstConductor] of conductors.entries()) {
-         
         for (const [j, secondConductor] of conductors.entries()) {
             const imageDistance = calcImageDistance(
                 geometry.conductors[i]!,

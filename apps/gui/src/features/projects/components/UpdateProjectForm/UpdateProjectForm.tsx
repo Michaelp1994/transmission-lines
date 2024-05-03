@@ -11,6 +11,10 @@ interface UpdateProjectFormProps {
     projectId: ProjectID;
 }
 
+function handleInvalid(errors: FieldErrors<UpdateTowerGeometryInput>) {
+    console.log(errors);
+}
+
 export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("updateProjectForm");
@@ -19,24 +23,25 @@ export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
         id: projectId,
     });
 
-    const updateMutation = trpc.project.update.useMutation();
+    const updateMutation = trpc.project.update.useMutation({
+        async onSuccess(values) {
+            toast.success(`${values.name} has been updated.`);
+            await navigate({ to: "/projects" });
+        },
+        onError(error) {
+            toast.error("Failed to update project");
+            console.error(error);
+        },
+    });
 
-    async function handleValid(values: UpdateTowerGeometryInput) {
-        await updateMutation.mutateAsync(values);
-        toast.success(`${values.name} has been updated.`);
-        navigate({ to: "/projects" });
-    }
-
-    async function handleInvalid(
-        errors: FieldErrors<UpdateTowerGeometryInput>
-    ) {
-        console.log(errors);
+    function handleValid(values: UpdateTowerGeometryInput) {
+        updateMutation.mutate(values);
     }
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error || !data) {
+    if (error) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

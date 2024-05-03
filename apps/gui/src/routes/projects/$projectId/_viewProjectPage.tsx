@@ -1,21 +1,24 @@
 import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
-import trpc from "~/utils/trpc";
+
+// import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute("/projects/$projectId/_viewProjectPage")({
     component: ViewProjectPage,
-    beforeLoad: () => { return {
-        text: "View Project",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "View Project",
+        };
+    },
 });
 
 export default function ViewProjectPage() {
     const { projectId } = Route.useParams();
-    const exportMutation = trpc.project.export.useMutation();
+    // const exportMutation = trpc.project.export.useMutation();
 
-    async function exportProject() {
-        await exportMutation.mutateAsync({ id: projectId });
-    }
+    // function exportProject() {
+    //     exportMutation.mutate({ id: projectId });
+    // }
 
     return (
         <Wrapper>

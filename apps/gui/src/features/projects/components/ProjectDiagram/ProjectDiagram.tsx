@@ -42,9 +42,9 @@ export default function ProjectDiagram({
         },
     });
 
-    const initialNodes: Node<NodeData, NodeType>[] = useMemo(
-        () =>
-            { return sources.map((source) => { return {
+    const initialNodes: Node<NodeData, NodeType>[] = useMemo(() => {
+        return sources.map((source) => {
+            return {
                 id: source.id,
                 type: "source",
                 position: { x: source.x, y: source.y },
@@ -53,13 +53,13 @@ export default function ProjectDiagram({
                     projectId: source.projectId,
                     sourceId: source.id,
                 },
-            } }) },
-        [sources]
-    );
+            };
+        });
+    }, [sources]);
 
-    const initialEdges: Edge[] = useMemo(
-        () =>
-            { return transmissionLines.map((tline) => { return {
+    const initialEdges: Edge[] = useMemo(() => {
+        return transmissionLines.map((tline) => {
+            return {
                 id: tline.id,
                 source: tline.fromSourceId,
                 target: tline.toSourceId!,
@@ -69,15 +69,17 @@ export default function ProjectDiagram({
                     projectId: tline.projectId,
                     lineId: tline.id,
                 },
-            } }) },
-        [transmissionLines]
-    );
+            };
+        });
+    }, [transmissionLines]);
 
     const [nodes, setNodes] = useState(initialNodes);
     const [edges, setEdges] = useState(initialEdges);
 
     const onConnect = useCallback(
-        (params) => { setEdges((eds) => addEdge(params, eds)); },
+        (params) => {
+            setEdges((eds) => addEdge(params, eds));
+        },
         [setEdges]
     );
 
@@ -86,18 +88,19 @@ export default function ProjectDiagram({
 
         setNodes((nds) => applyNodeChanges(changes, nds));
     }, []);
-    const onEdgesChange = useCallback(
-        (changes) => { setEdges((eds) => applyEdgeChanges(changes, eds)); },
-        []
-    );
+    const onEdgesChange = useCallback((changes) => {
+        setEdges((eds) => applyEdgeChanges(changes, eds));
+    }, []);
 
     function handleSave() {
         setDirty(false);
-        const changes = nodes.map((node) => { return {
-            id: node.id,
-            x: node.position.x,
-            y: node.position.y,
-        } });
+        const changes = nodes.map((node) => {
+            return {
+                id: node.id,
+                x: node.position.x,
+                y: node.position.y,
+            };
+        });
 
         mutation.mutate(changes);
     }

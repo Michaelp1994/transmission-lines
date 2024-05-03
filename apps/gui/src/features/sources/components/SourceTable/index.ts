@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./SourceTable";
+export { default } from "./SourceTable";

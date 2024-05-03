@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./ConductorTable";
+export { default } from "./ConductorTable";

@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./UpdateTransmissionLineForm";
+export { default } from "./UpdateTransmissionLineForm";

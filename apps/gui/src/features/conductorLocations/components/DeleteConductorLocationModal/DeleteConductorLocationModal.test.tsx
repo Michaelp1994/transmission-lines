@@ -15,10 +15,6 @@ describe("DeleteConductorLocationModal", () => {
     });
     const render = createRender(trpcFn);
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     async function setup() {
         const user = userEvent.setup();
         const utils = render(

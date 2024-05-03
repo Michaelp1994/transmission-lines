@@ -9,18 +9,26 @@ export default function verifyTable(
     const rowgroups = within(table).getAllByRole("rowgroup");
 
     expect(rowgroups).toHaveLength(2);
-    if (!rowgroups[1]) {throw new Error("Table doesn't have a body");}
+    if (!rowgroups[1]) {
+        throw new Error("Table doesn't have a body");
+    }
     const rows = within(rowgroups[1]).getAllByRole("row");
 
     expect(rows).toHaveLength(data.length);
     rows.forEach((row, rowIndex) => {
         const current = data[rowIndex];
 
-        if (!current) {throw new Error("Data doesn't match the table rows");}
+        if (!current) {
+            throw new Error("Data doesn't match the table rows");
+        }
         const cells = within(row).getAllByRole("cell");
 
         columns.forEach((property, colIndex) => {
-            const cell = cells[colIndex]!;
+            const cell = cells[colIndex];
+
+            if (!cell) {
+                throw new Error("Data doesn't match the table cells");
+            }
 
             if (property.includes(".")) {
                 const value = property

@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./UpdateConductorLocationModal";
+export { default } from "./UpdateConductorLocationModal";

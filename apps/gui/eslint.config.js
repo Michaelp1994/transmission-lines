@@ -5,6 +5,15 @@ import reactConfig from "@repo/eslint-config/react.js";
 export default [
     ...reactConfig,
     {
-        files: ["src/**/*.{ts,tsx}"],
+        languageOptions: {
+            parserOptions: {
+                EXPERIMENTAL_useProjectService: {
+                    /*** @link https://github.com/typescript-eslint/typescript-eslint/issues/9032 */
+                    maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING:
+                        Infinity,
+                },
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
     },
 ];

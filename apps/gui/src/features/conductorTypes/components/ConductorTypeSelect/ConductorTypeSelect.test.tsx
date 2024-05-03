@@ -13,10 +13,6 @@ describe("Conductor Type Select", () => {
     const onChangeFn = vi.fn();
     const render = createRender(trpcFn);
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     test("all sources are displayed", async () => {
         const user = userEvent.setup();
 

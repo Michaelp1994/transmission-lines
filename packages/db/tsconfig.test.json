@@ -14,7 +14,8 @@
     ],
     "extends": "@repo/typescript-config/node.json",
     "include": [
-        "tests",
+        "tests/**/*",
+        "tests/**/*.json",
         "src/**/*.test.ts",
         "src/**/*.test.tsx",
         "src/**/*.test.js",

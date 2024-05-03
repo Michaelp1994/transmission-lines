@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./DeleteProjectModal";
+export { default } from "./DeleteProjectModal";

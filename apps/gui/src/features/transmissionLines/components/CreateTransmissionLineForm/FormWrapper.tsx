@@ -10,13 +10,17 @@ interface FormWrapperProps {
     projectId: ProjectID;
 }
 
+async function handleInvalid(errors: FieldErrors<TransmissionLineFormInput>) {
+    console.log(errors);
+}
+
 export default function FormWrapper({ projectId }: FormWrapperProps) {
     const navigate = useNavigate();
     const createTransmissionLineMutation =
         trpc.transmissionLine.create.useMutation({
-            onSuccess(data) {
+            async onSuccess(data) {
                 toast.success(`${data.name} has been added to the project.`);
-                navigate({
+                await navigate({
                     to: `/projects/$projectId/lines/$lineId`,
                     params: { projectId: data.projectId, lineId: data.id },
                 });
@@ -29,17 +33,11 @@ export default function FormWrapper({ projectId }: FormWrapperProps) {
             },
         });
 
-    async function handleValid(values: TransmissionLineFormInput) {
-        await createTransmissionLineMutation.mutateAsync({
+    function handleValid(values: TransmissionLineFormInput) {
+        createTransmissionLineMutation.mutate({
             ...values,
             projectId,
         });
-    }
-
-    async function handleInvalid(
-        errors: FieldErrors<TransmissionLineFormInput>
-    ) {
-        console.log(errors);
     }
 
     return (

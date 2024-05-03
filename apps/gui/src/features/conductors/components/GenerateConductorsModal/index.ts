@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./GenerateConductorsModal";
+export { default } from "./GenerateConductorsModal";

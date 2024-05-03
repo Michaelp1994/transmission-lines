@@ -1,64 +1,35 @@
-import {
-    Button,
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    Input,
-} from "@repo/ui";
-import type { ProjectFormInput } from "@repo/validators/forms";
+import type { CreateProjectInput } from "@repo/validators";
+import { useNavigate } from "@tanstack/react-router";
 import type { FieldErrors } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { useCreateProjectForm } from "~/utils/forms";
+import BaseForm from "./BaseForm";
+import toast from "~/utils/toast";
+import trpc from "~/utils/trpc";
 
-interface CreateProjectFormProps {
-    onValid: (values: ProjectFormInput) => void;
-    onInvalid: (error: FieldErrors<ProjectFormInput>) => void;
+function handleInvalid(error: FieldErrors<CreateProjectInput>) {
+    console.log(error);
 }
 
-export default function CreateProjectForm({
-    onValid,
-    onInvalid,
-}: CreateProjectFormProps) {
-    const { t } = useTranslation("createProjectForm");
-    const form = useCreateProjectForm();
+export default function CreateProjectForm() {
+    const navigate = useNavigate();
+    const createMutation = trpc.project.create.useMutation({
+        async onSuccess(data) {
+            toast.success(`${data.name} has been created.`);
+            await navigate({
+                to: "/projects/$projectId",
+                params: {
+                    projectId: data.id,
+                },
+            });
+        },
+        onError(error) {
+            toast.error(`Can't create project`);
+            console.log("Error", error);
+        },
+    });
 
-    const handleSubmit = form.handleSubmit(
-        (values) => { onValid(values); },
-        (error) => { onInvalid(error); }
-    );
+    function handleValid(values: CreateProjectInput) {
+        createMutation.mutate(values);
+    }
 
-    return (
-        <Form {...form}>
-            <StyledForm onSubmit={handleSubmit} onReset={() => { form.reset(); }}>
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("name.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="text" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("name.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
-                />
-
-                <ButtonsWrapper>
-                    <Button variant="destructive" type="reset">
-                        {t("form:reset")}
-                    </Button>
-                    <Button type="submit">{t("form:submit")}</Button>
-                </ButtonsWrapper>
-            </StyledForm>
-        </Form>
-    );
+    return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;
 }

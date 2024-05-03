@@ -1,5 +1,3 @@
- 
-
 import { relations } from "drizzle-orm";
 import { real, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
@@ -27,10 +25,9 @@ export const conductorTypes = sqliteTable("conductor_types", {
 export type ConductorType = typeof conductorTypes.$inferSelect;
 export type NewConductorType = typeof conductorTypes.$inferInsert;
 
-export const conductorTypesRelations = relations(
-    conductorTypes,
-    ({ many }) => { return {
+export const conductorTypesRelations = relations(conductorTypes, ({ many }) => {
+    return {
         conductors: many(transmissionConductors),
         layers: many(conductorLayers),
-    } }
-);
+    };
+});

@@ -30,7 +30,7 @@ export default function SettingsModal() {
                 <DialogHeader>
                     <DialogTitle>{t("modalTitle")}</DialogTitle>
                     <DialogDescription>
-                        {t("modalDescription")}
+                        {t("modalDescription")} {"  "}
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>

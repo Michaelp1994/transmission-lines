@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./DiagramWrapper";
+export { default } from "./DiagramWrapper";

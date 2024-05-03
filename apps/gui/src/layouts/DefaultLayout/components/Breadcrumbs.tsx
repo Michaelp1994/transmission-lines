@@ -13,10 +13,12 @@ import React from "react";
 export default function Breadcrumbs() {
     const routes = useMatches();
     const filteredRoutes = routes.filter((route) => route.routeContext.text);
-    const crumbs = filteredRoutes.map((match) => { return {
-        text: match.routeContext.text,
-        link: match.pathname,
-    } });
+    const crumbs = filteredRoutes.map((match) => {
+        return {
+            text: match.routeContext.text,
+            link: match.pathname,
+        };
+    });
 
     return (
         <Wrapper>

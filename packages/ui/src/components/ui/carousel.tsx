@@ -114,8 +114,8 @@ const Carousel = React.forwardRef<
                 api.off("select", onSelect);
             };
         }, [api, onSelect]);
-        const value = React.useMemo(
-            () => { return {
+        const value = React.useMemo(() => {
+            return {
                 carouselRef,
                 api,
                 opts,
@@ -126,18 +126,17 @@ const Carousel = React.forwardRef<
                 scrollNext,
                 canScrollPrev,
                 canScrollNext,
-            } },
-            [
-                api,
-                carouselRef,
-                canScrollNext,
-                canScrollPrev,
-                opts,
-                orientation,
-                scrollNext,
-                scrollPrev,
-            ]
-        );
+            };
+        }, [
+            api,
+            carouselRef,
+            canScrollNext,
+            canScrollPrev,
+            opts,
+            orientation,
+            scrollNext,
+            scrollPrev,
+        ]);
 
         return (
             <CarouselContext.Provider value={value}>

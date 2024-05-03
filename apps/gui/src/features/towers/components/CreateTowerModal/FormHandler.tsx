@@ -10,6 +10,10 @@ interface FormHandlerProps {
     onClose: () => void;
 }
 
+function handleInvalid(errors: FieldErrors<TransmissionTowerFormInput>) {
+    console.log(errors);
+}
+
 export default function FormHandler({ lineId, onClose }: FormHandlerProps) {
     const utils = trpc.useUtils();
 
@@ -27,13 +31,9 @@ export default function FormHandler({ lineId, onClose }: FormHandlerProps) {
         },
     });
 
-    async function handleValid(values: TransmissionTowerFormInput) {
-        await createTowerMutation.mutateAsync({ ...values, lineId });
+    function handleValid(values: TransmissionTowerFormInput) {
+        createTowerMutation.mutate({ ...values, lineId });
         onClose();
-    }
-
-    function handleInvalid(errors: FieldErrors<TransmissionTowerFormInput>) {
-        console.log(errors);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;

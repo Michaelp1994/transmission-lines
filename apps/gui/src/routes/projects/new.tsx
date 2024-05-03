@@ -11,9 +11,11 @@ import { CreateProjectForm } from "~/features/projects";
 
 export const Route = createFileRoute("/projects/new")({
     component: CreateProjectPage,
-    beforeLoad: () => { return {
-        text: "New Project",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "New Project",
+        };
+    },
 });
 
 export default function CreateProjectPage() {

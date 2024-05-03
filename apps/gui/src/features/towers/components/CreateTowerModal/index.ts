@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./CreateTowerModal";
+export { default } from "./CreateTowerModal";

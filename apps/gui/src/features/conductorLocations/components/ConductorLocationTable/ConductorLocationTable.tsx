@@ -11,7 +11,7 @@ interface ConductorLocationTableProps {
 export default function ConductorLocationTable({
     geometryId,
 }: ConductorLocationTableProps) {
-    const { t } = useTranslation("towerGeometry");
+    const { t } = useTranslation("conductorLocationTable");
     const {
         data = [],
         error,

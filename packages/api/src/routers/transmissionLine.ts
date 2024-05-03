@@ -44,7 +44,9 @@ export default router({
                 }
             );
 
-            if (!transmissionLine) {throw new Error("Can't find transmission line");}
+            if (!transmissionLine) {
+                throw new Error("Can't find transmission line");
+            }
 
             return transmissionLine;
         }),
@@ -56,7 +58,9 @@ export default router({
                 .values(input)
                 .returning();
 
-            if (!newTransmissionLine) {throw new Error("Can't create source");}
+            if (!newTransmissionLine) {
+                throw new Error("Can't create source");
+            }
 
             return newTransmissionLine;
         }),
@@ -69,8 +73,9 @@ export default router({
                 .where(eq(transmissionLines.id, input.id))
                 .returning();
 
-            if (!updatedTranmissionLine)
-                {throw new Error("Can't update transmission line");}
+            if (!updatedTranmissionLine) {
+                throw new Error("Can't update transmission line");
+            }
 
             return updatedTranmissionLine;
         }),
@@ -82,8 +87,9 @@ export default router({
                 .where(eq(transmissionLines.id, input.id))
                 .returning();
 
-            if (!deletedTranmissionLine)
-                {throw new Error("Can't delete transmission line");}
+            if (!deletedTranmissionLine) {
+                throw new Error("Can't delete transmission line");
+            }
 
             return deletedTranmissionLine;
         }),

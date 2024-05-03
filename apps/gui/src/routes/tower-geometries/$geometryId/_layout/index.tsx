@@ -11,9 +11,11 @@ import { UpdateTowerGeometryForm } from "~/features/towerGeometries";
 
 export const Route = createFileRoute("/tower-geometries/$geometryId/_layout/")({
     component: TowerGeometryGeneral,
-    beforeLoad: () => { return {
-        text: "View Tower Geometry",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "View Tower Geometry",
+        };
+    },
 });
 
 export default function TowerGeometryGeneral() {

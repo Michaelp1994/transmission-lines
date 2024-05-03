@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./UpdateTowerModal";
+export { default } from "./UpdateTowerModal";

@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./createMenu";
+export { default } from "./createMenu";

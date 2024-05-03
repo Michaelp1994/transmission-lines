@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import { SqliteError, eq } from "@repo/db/drizzle";
+import { eq } from "@repo/db/drizzle";
 import { projects } from "@repo/db/schemas/projects";
 import {
     createProjectSchema,
@@ -11,8 +11,6 @@ import {
     solveProjectSchema,
     updateProjectSchema,
 } from "@repo/validators/schemas/Project.schema";
-import { TRPCError } from "@trpc/server";
-import { ZodError, ZodIssueCode } from "zod";
 import { publicProcedure, router } from "../trpc";
 
 // import buildCircuit from "@/helpers/buildCircuit";
@@ -36,50 +34,25 @@ export default router({
                 where: eq(projects.id, input.id),
             });
 
-            if (!project) {throw new Error("Can't find project");}
+            if (!project) {
+                throw new Error("Can't find project");
+            }
 
             return project;
         }),
     create: publicProcedure
         .input(createProjectSchema)
         .mutation(async ({ input, ctx: { db } }) => {
-            try {
-                const [newProject] = await db
-                    .insert(projects)
-                    .values(input)
-                    .returning();
+            const [newProject] = await db
+                .insert(projects)
+                .values(input)
+                .returning();
 
-                if (!newProject)
-                    {throw new TRPCError({
-                        code: "INTERNAL_SERVER_ERROR",
-                        message: "Can't create project",
-                    });}
-
-                return newProject;
-            } catch (error) {
-                if (
-                    error instanceof SqliteError &&
-                    error.code === "SQLITE_CONSTRAINT_UNIQUE"
-                ) {
-                    throw new TRPCError({
-                        code: "BAD_REQUEST",
-                        message: "Can't create project",
-                        cause: new ZodError([
-                            {
-                                path: ["name"],
-                                code: ZodIssueCode.custom,
-                                message:
-                                    "This name has already been used in another project.",
-                            },
-                        ]),
-                    });
-                } else {
-                    throw new TRPCError({
-                        code: "INTERNAL_SERVER_ERROR",
-                        message: "Can't create project",
-                    });
-                }
+            if (!newProject) {
+                throw new Error("Can't create Project");
             }
+
+            return newProject;
         }),
     update: publicProcedure
         .input(updateProjectSchema)
@@ -90,7 +63,9 @@ export default router({
                 .where(eq(projects.id, input.id))
                 .returning();
 
-            if (!updatedProject) {throw new Error("Can't update project");}
+            if (!updatedProject) {
+                throw new Error("Can't update project");
+            }
 
             return updatedProject;
         }),
@@ -102,7 +77,9 @@ export default router({
                 .where(eq(projects.id, input.id))
                 .returning();
 
-            if (!deletedProject) {throw new Error("Can't delete project");}
+            if (!deletedProject) {
+                throw new Error("Can't delete project");
+            }
 
             return deletedProject;
         }),
@@ -133,7 +110,9 @@ export default router({
                 },
             });
 
-            if (!project) {throw new Error("Can't find project");}
+            if (!project) {
+                throw new Error("Can't find project");
+            }
         }),
     import: publicProcedure.mutation(async ({ ctx: { electron, db } }) => {
         if (!electron) {
@@ -158,7 +137,9 @@ export default router({
         if (!openDialogReturn.canceled) {
             const fileName = openDialogReturn.filePaths[0];
 
-            if (!fileName) {throw new Error("Can't get file name");}
+            if (!fileName) {
+                throw new Error("Can't get file name");
+            }
             const file = await fs.readFile(fileName);
             const contents = JSON.parse(file.toString());
             const input = importProjectSchema.parse(contents);
@@ -195,7 +176,7 @@ export default router({
             );
 
             if (!saveDialogReturn.canceled) {
-                const fileName = saveDialogReturn.filePath!;
+                const fileName = saveDialogReturn.filePath;
                 const project = await db.query.projects.findFirst({
                     where: eq(projects.id, input.id),
                     with: {

@@ -26,8 +26,8 @@ export default function DeleteTransmissionLineModal({
         },
     });
 
-    async function handleConfirm() {
-        await deleteMutation.mutateAsync({
+    function handleConfirm() {
+        deleteMutation.mutate({
             id: lineId,
         });
     }

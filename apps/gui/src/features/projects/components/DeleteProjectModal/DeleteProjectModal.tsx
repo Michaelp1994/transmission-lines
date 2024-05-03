@@ -25,8 +25,8 @@ export default function DeleteProjectModal({
         },
     });
 
-    async function handleConfirm() {
-        await deleteMutation.mutateAsync({ id: projectId });
+    function handleConfirm() {
+        deleteMutation.mutate({ id: projectId });
     }
 
     return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;

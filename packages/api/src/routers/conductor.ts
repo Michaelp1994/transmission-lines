@@ -24,16 +24,14 @@ export default router({
     getAllByLineId: publicProcedure
         .input(getAllConductorsByLineIdSchema)
         .query(async ({ input, ctx: { db } }) => {
-            const towers = await db.query.transmissionConductors.findMany({
+            const conductors = await db.query.transmissionConductors.findMany({
                 where: eq(transmissionConductors.lineId, input.lineId),
                 with: {
                     type: true,
                 },
             });
 
-            if (!towers) {throw new Error("Can't find transmission conductors");}
-
-            return towers;
+            return conductors;
         }),
     getById: publicProcedure
         .input(getConductorByIdSchema)
@@ -43,7 +41,9 @@ export default router({
                     where: eq(transmissionConductors.id, input.id),
                 });
 
-            if (!conductorType) {throw new Error("Can't find conductor");}
+            if (!conductorType) {
+                throw new Error("Can't find conductor");
+            }
 
             return conductorType;
         }),
@@ -56,7 +56,9 @@ export default router({
                 .values(input)
                 .returning();
 
-            if (!newConductor) {throw new Error("Can't create conductor");}
+            if (!newConductor) {
+                throw new Error("Can't create conductor");
+            }
 
             return newConductor;
         }),
@@ -81,7 +83,9 @@ export default router({
                 .where(eq(transmissionConductors.id, input.id))
                 .returning();
 
-            if (!updatedConductor) {throw new Error("Can't update conductor");}
+            if (!updatedConductor) {
+                throw new Error("Can't update conductor");
+            }
 
             return updatedConductor;
         }),
@@ -93,7 +97,9 @@ export default router({
                 .where(eq(transmissionConductors.id, input.id))
                 .returning();
 
-            if (!deletedConductor) {throw new Error("Can't delete conductor");}
+            if (!deletedConductor) {
+                throw new Error("Can't delete conductor");
+            }
 
             return deletedConductor;
         }),

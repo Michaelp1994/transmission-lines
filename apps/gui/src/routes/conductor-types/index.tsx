@@ -14,9 +14,11 @@ import { ConductorTypeTable } from "~/features/conductorTypes";
 
 export const Route = createFileRoute("/conductor-types/")({
     component: AllConductorTypesPage,
-    beforeLoad: () => { return {
-        text: "Conductor Types",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "Conductor Types",
+        };
+    },
 });
 
 export default function AllConductorTypesPage() {

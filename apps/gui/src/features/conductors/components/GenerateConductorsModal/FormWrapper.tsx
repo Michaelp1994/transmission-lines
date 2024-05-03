@@ -10,6 +10,10 @@ interface FormWrapperProps {
     onFinish: () => void;
 }
 
+function handleInvalid(errors: FieldErrors<GenerateConductorsFormInput>) {
+    console.log(errors);
+}
+
 export default function FormWrapper({ lineId, onFinish }: FormWrapperProps) {
     const utils = trpc.useUtils();
     const generateConductorsMutation = trpc.conductor.generate.useMutation({
@@ -20,21 +24,17 @@ export default function FormWrapper({ lineId, onFinish }: FormWrapperProps) {
             });
             onFinish();
         },
-        async onError(error) {
+        onError(error) {
             toast.error("Can't generate conductors");
             console.log(error);
         },
     });
 
-    async function handleValid(values: GenerateConductorsFormInput) {
-        await generateConductorsMutation.mutateAsync({
+    function handleValid(values: GenerateConductorsFormInput) {
+        generateConductorsMutation.mutate({
             ...values,
             lineId,
         });
-    }
-
-    function handleInvalid(errors: FieldErrors<GenerateConductorsFormInput>) {
-        console.log(errors);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;

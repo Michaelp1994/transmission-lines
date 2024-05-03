@@ -1,6 +1,5 @@
 import {
     Button,
-    DialogFooter,
     Form,
     FormControl,
     FormDescription,
@@ -13,7 +12,7 @@ import {
 import type { ConductorLocationFormInput } from "@repo/validators/forms";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { StyledForm } from "~/components/StyledForm";
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useCreateConductorLocationForm } from "~/utils/forms";
 
 interface CreateConductorLocationFormProps {
@@ -29,8 +28,12 @@ export default function CreateConductorLocationForm({
     const form = useCreateConductorLocationForm();
 
     const handleSubmit = form.handleSubmit(
-        (values) => { onValid(values); },
-        (errors) => { onInvalid(errors); }
+        (values) => {
+            onValid(values);
+        },
+        (errors) => {
+            onInvalid(errors);
+        }
     );
 
     return (
@@ -39,39 +42,42 @@ export default function CreateConductorLocationForm({
                 <FormField
                     control={form.control}
                     name="x"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("x.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("x.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("x.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("x.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
                 <FormField
                     control={form.control}
                     name="y"
-                    render={({ field }) => 
-                        { return <FormItem>
-                            <FormLabel>{t("y.label")}</FormLabel>
-                            <FormControl>
-                                <Input type="number" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                {t("y.description")}
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem> }
-                    }
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("y.label")}</FormLabel>
+                                <FormControl>
+                                    <Input type="number" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("y.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
                 />
-
-                <DialogFooter>
+                <ButtonsWrapper>
                     <Button type="submit">{t("form:create")}</Button>
-                </DialogFooter>
+                </ButtonsWrapper>
             </StyledForm>
         </Form>
     );

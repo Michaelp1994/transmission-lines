@@ -5,12 +5,16 @@ import BaseForm from "./BaseForm";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
+function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
+    console.log(errors);
+}
+
 export default function FormHandler() {
     const navigate = useNavigate();
     const createMutation = trpc.towerGeometry.create.useMutation({
-        onSuccess(values) {
+        async onSuccess(values) {
             toast.success(`${values.name} has been added.`);
-            navigate({ to: "/tower-geometries" });
+            await navigate({ to: "/tower-geometries" });
         },
         onError(error) {
             toast.error("Can't create Tower Geometry");
@@ -18,11 +22,8 @@ export default function FormHandler() {
         },
     });
 
-    async function handleValid(values: TowerGeometryFormInput) {
-        await createMutation.mutateAsync(values);
-    }
-    async function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
-        console.log(errors);
+    function handleValid(values: TowerGeometryFormInput) {
+        createMutation.mutate(values);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;

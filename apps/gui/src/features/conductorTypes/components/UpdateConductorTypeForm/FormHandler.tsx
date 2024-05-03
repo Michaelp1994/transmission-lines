@@ -23,9 +23,9 @@ export default function FormHandler({ conductorTypeId }: FormHandlerProps) {
         id: conductorTypeId,
     });
     const updateMutation = trpc.conductorType.update.useMutation({
-        onSuccess(values) {
+        async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
-            navigate({ to: "/conductor-types" });
+            await navigate({ to: "/conductor-types" });
         },
         onError(error) {
             toast.error("Failed to update conductor type");
@@ -33,8 +33,8 @@ export default function FormHandler({ conductorTypeId }: FormHandlerProps) {
         },
     });
 
-    async function handleValid(values: ConductorTypeFormInput) {
-        await updateMutation.mutateAsync({ ...values, id: conductorTypeId });
+    function handleValid(values: ConductorTypeFormInput) {
+        updateMutation.mutate({ ...values, id: conductorTypeId });
     }
 
     if (isLoading) {

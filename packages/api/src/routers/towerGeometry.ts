@@ -29,7 +29,9 @@ export default router({
                 where: eq(towerGeometries.id, input.id),
             });
 
-            if (!towerGeometry) {throw new Error("Can't find tower geometry");}
+            if (!towerGeometry) {
+                throw new Error("Can't find tower geometry");
+            }
 
             return towerGeometry;
         }),
@@ -56,15 +58,16 @@ export default router({
                 .where(eq(towerGeometries.id, input.id))
                 .returning();
 
-            if (!updatedTowerGeometry)
-                {throw new Error("Can't update tower geometry");}
+            if (!updatedTowerGeometry) {
+                throw new Error("Can't update tower geometry");
+            }
 
             return updatedTowerGeometry;
         }),
     delete: publicProcedure
         .input(deleteTowerGeometrySchema)
-        .mutation(async ({ input, ctx: { db } }) =>
-            { return db.transaction((tx) => {
+        .mutation(async ({ input, ctx: { db } }) => {
+            return db.transaction((tx) => {
                 tx.delete(conductorLocations)
                     .where(eq(conductorLocations.geometryId, input.id))
                     .run();
@@ -82,6 +85,6 @@ export default router({
                 return deletedTowerGeometry;
 
                 // return deletedTowerGeometry;
-            }) }
-        ),
+            });
+        }),
 });

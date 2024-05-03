@@ -9,16 +9,18 @@ const columnHelper = createColumnHelper<ConductorType>();
 export default [
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "conductorType" }),
-        cell: (info) => 
-            { return <Link
-                to="/conductor-types/$typeId"
-                params={{
-                    typeId: info.row.original.id,
-                }}
-            >
-                {info.getValue()}
-            </Link> }
-        ,
+        cell: (info) => {
+            return (
+                <Link
+                    to="/conductor-types/$typeId"
+                    params={{
+                        typeId: info.row.original.id,
+                    }}
+                >
+                    {info.getValue()}
+                </Link>
+            );
+        },
     }),
     columnHelper.accessor("outerDiameter", {
         header: () => t("outerDiameter.label", { ns: "conductorType" }),

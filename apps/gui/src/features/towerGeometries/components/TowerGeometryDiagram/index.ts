@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./TowerGeometryDiagram";
+export { default } from "./TowerGeometryDiagram";

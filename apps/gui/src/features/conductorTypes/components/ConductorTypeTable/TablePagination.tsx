@@ -27,7 +27,9 @@ export default function ConductorTypeTablePagination({
                     <Button
                         variant="outline"
                         disabled={!table.getCanPreviousPage()}
-                        onClick={() => { table.setPageIndex(0); }}
+                        onClick={() => {
+                            table.setPageIndex(0);
+                        }}
                     >
                         <ChevronsLeft className="h-4 w-4" />
                     </Button>
@@ -36,7 +38,9 @@ export default function ConductorTypeTablePagination({
                     <Button
                         variant="outline"
                         disabled={!table.getCanPreviousPage()}
-                        onClick={() => { table.previousPage(); }}
+                        onClick={() => {
+                            table.previousPage();
+                        }}
                     >
                         <ChevronLeft className="h-4 w-4" />
                     </Button>
@@ -45,7 +49,9 @@ export default function ConductorTypeTablePagination({
                     <Button
                         variant="outline"
                         disabled={!table.getCanNextPage()}
-                        onClick={() => { table.nextPage(); }}
+                        onClick={() => {
+                            table.nextPage();
+                        }}
                     >
                         <ChevronRight className="h-4 w-4" />
                     </Button>
@@ -54,7 +60,9 @@ export default function ConductorTypeTablePagination({
                     <Button
                         variant="outline"
                         disabled={!table.getCanNextPage()}
-                        onClick={() => { table.nextPage(); }}
+                        onClick={() => {
+                            table.nextPage();
+                        }}
                     >
                         <ChevronsRight className="h-4 w-4" />
                     </Button>

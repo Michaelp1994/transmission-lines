@@ -27,11 +27,9 @@ export default function DeleteConductorLocationModal({
         },
     });
 
-    const handleConfirm = async () => {
-        await deleteMutation.mutateAsync({
-            locationId,
-        });
-    };
+    function handleConfirm() {
+        deleteMutation.mutate({ locationId });
+    }
 
     return <BaseDeleteModal onConfirm={handleConfirm} onClose={onClose} />;
 }

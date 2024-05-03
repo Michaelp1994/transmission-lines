@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./FormWrapper";
+export { default } from "./FormWrapper";

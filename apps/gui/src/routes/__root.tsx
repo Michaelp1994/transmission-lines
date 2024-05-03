@@ -8,7 +8,9 @@ export interface RouterContext {
 
 export const Route = createRootRouteWithContext<RouterContext>()({
     component: DefaultLayout,
-    beforeLoad: () => { return {
-        text: "Home",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "Home",
+        };
+    },
 });

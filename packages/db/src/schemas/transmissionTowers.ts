@@ -1,5 +1,3 @@
- 
-
 import { relations } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
@@ -26,14 +24,16 @@ export type NewTransmissionTower = typeof transmissionTowers.$inferInsert;
 
 export const transmissionTowersRelations = relations(
     transmissionTowers,
-    ({ one }) => { return {
-        transmissionLine: one(transmissionLines, {
-            fields: [transmissionTowers.lineId],
-            references: [transmissionLines.id],
-        }),
-        geometry: one(towerGeometries, {
-            fields: [transmissionTowers.geometryId],
-            references: [towerGeometries.id],
-        }),
-    } }
+    ({ one }) => {
+        return {
+            transmissionLine: one(transmissionLines, {
+                fields: [transmissionTowers.lineId],
+                references: [transmissionLines.id],
+            }),
+            geometry: one(towerGeometries, {
+                fields: [transmissionTowers.geometryId],
+                references: [towerGeometries.id],
+            }),
+        };
+    }
 );

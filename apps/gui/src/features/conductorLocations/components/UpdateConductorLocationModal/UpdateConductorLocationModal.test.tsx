@@ -42,10 +42,6 @@ describe("Update Conductor Location Modal", () => {
         };
     }
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     test("fill out form correctly and check that the correct information is sent to server", async () => {
         const { dialog, form, user } = await setup();
 

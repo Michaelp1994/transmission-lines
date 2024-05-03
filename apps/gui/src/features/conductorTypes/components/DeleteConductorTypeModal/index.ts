@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./DeleteConductorTypeModal";
+export { default } from "./DeleteConductorTypeModal";

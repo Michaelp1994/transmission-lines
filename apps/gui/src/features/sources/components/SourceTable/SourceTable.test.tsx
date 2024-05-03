@@ -33,12 +33,11 @@ describe("Source Table", () => {
 
     test("shows error when data is not received.", async () => {
         const projectId = faker.string.uuid();
-        const mockTrpcFn = vi.fn(
-            () =>
-                { return new Promise((_resolve, reject) => {
-                    reject(new TRPCError({ code: "INTERNAL_SERVER_ERROR" }));
-                }) }
-        );
+        const mockTrpcFn = vi.fn(() => {
+            return new Promise((_resolve, reject) => {
+                reject(new TRPCError({ code: "INTERNAL_SERVER_ERROR" }));
+            });
+        });
 
         render(<SourceTable projectId={projectId} />);
         expect(mockTrpcFn).toHaveBeenCalledWith({ projectId });

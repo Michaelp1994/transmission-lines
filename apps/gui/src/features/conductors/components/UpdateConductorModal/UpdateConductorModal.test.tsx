@@ -5,6 +5,7 @@ import { describe, expect, test, vi } from "vitest";
 import ModalProvider from "~/contexts/ModalProvider";
 import { useUpdateConductorModal } from "~/utils/modals";
 import { render, screen, within } from "~test-utils";
+import { createConductor, mockIds } from "~tests/helpers/mockData";
 import MockTrpcProvider from "~tests/mocks/TrpcProvider";
 
 const labels = {
@@ -20,17 +21,8 @@ const labels = {
 
 // TODO: doesnt work because of the type id
 describe("Update Conductor Modal", () => {
-    const oldConductor = {
-        id: faker.string.uuid(),
-        name: faker.number.int(),
-        fromPhase: faker.number.int(),
-        toPhase: faker.number.int(),
-        lineId: faker.string.uuid(),
-        bundleNumber: faker.number.int(),
-        bundleSpacing: faker.number.float(),
-        isNeutral: faker.datatype.boolean(),
-        typeId: faker.string.uuid(),
-    };
+    const conductorId = mockIds.conductorId();
+    const oldConductor = createConductor();
 
     test("previous data is correctly displayed", async () => {
         const user = userEvent.setup();

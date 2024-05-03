@@ -1,4 +1,13 @@
-import { type Complex, complex, diag, exp, matrix, multiply, pi, pow } from "mathjs";
+import {
+    type Complex,
+    complex,
+    diag,
+    exp,
+    matrix,
+    multiply,
+    pi,
+    pow,
+} from "mathjs";
 
 export type ZPhaseComponents = number[][];
 

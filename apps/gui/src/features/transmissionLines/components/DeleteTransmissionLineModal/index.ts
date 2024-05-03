@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./DeleteTransmissionLineModal";
+export { default } from "./DeleteTransmissionLineModal";

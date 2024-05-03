@@ -37,7 +37,9 @@ const TowerGeometrySelect = forwardRef<
     const [open, setOpen] = React.useState(false);
 
     function handleSelect(currentValue: string) {
-        if (onChange) {onChange(currentValue === value ? "" : currentValue);}
+        if (onChange) {
+            onChange(currentValue === value ? "" : currentValue);
+        }
         setOpen(false);
     }
 
@@ -73,21 +75,23 @@ const TowerGeometrySelect = forwardRef<
                         <StyledScrollArea>
                             <CommandEmpty>{t("noneFound")}</CommandEmpty>
                             <CommandGroup>
-                                {data.map((conductorType) => 
-                                    { return <CommandItem
-                                        key={conductorType.id}
-                                        value={conductorType.id}
-                                        keywords={[conductorType.name]}
-                                        onSelect={handleSelect}
-                                    >
-                                        <StyledCheck
-                                            selected={
-                                                value === conductorType.id
-                                            }
-                                        />
-                                        {conductorType.name}
-                                    </CommandItem> }
-                                )}
+                                {data.map((conductorType) => {
+                                    return (
+                                        <CommandItem
+                                            key={conductorType.id}
+                                            value={conductorType.id}
+                                            keywords={[conductorType.name]}
+                                            onSelect={handleSelect}
+                                        >
+                                            <StyledCheck
+                                                selected={
+                                                    value === conductorType.id
+                                                }
+                                            />
+                                            {conductorType.name}
+                                        </CommandItem>
+                                    );
+                                })}
                             </CommandGroup>
                         </StyledScrollArea>
                     </CommandList>

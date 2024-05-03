@@ -11,38 +11,38 @@ interface FormHandlerProps {
     sourceId: SourceID;
 }
 
+function handleInvalid(errors: FieldErrors<UpdateSourceGeneralFormInput>) {
+    console.log(errors);
+}
+
 export default function FormHandler({ sourceId }: FormHandlerProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("source");
 
-    const updateSourceMutation = trpc.source.updateGeneral.useMutation();
-    const { data, isLoading, error } = trpc.source.getById.useQuery({
+    const updateSourceMutation = trpc.source.updateGeneral.useMutation({
+        async onSuccess(values) {
+            toast.success(`${values.name} has been updated.`);
+            await navigate({
+                to: "/projects/$projectId/sources",
+                params: { projectId: values.projectId },
+            });
+        },
+    });
+    const { data, isLoading, isError } = trpc.source.getById.useQuery({
         id: sourceId,
     });
 
-    async function handleValid(values: UpdateSourceGeneralFormInput) {
-        const result = await updateSourceMutation.mutateAsync({
+    function handleValid(values: UpdateSourceGeneralFormInput) {
+        updateSourceMutation.mutate({
             ...values,
             id: sourceId,
         });
-
-        toast.success(`${result.name} has been updated.`);
-        navigate({
-            to: "/projects/$projectId/sources",
-            params: { projectId: result.projectId },
-        });
-    }
-
-    async function handleInvalid(
-        errors: FieldErrors<UpdateSourceGeneralFormInput>
-    ) {
-        console.log(errors);
     }
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error || !data) {
+    if (isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

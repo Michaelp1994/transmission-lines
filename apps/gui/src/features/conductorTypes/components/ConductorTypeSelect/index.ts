@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./ConductorTypeSelect";
+export { default } from "./ConductorTypeSelect";

@@ -1,4 +1,9 @@
 import { faker } from "@faker-js/faker";
+import type { ConductorFormInput } from "@repo/validators/forms/Conductor.schema";
+import type { ConductorLocationFormInput } from "@repo/validators/forms/ConductorLocation.schema";
+import type { ConductorTypeFormInput } from "@repo/validators/forms/ConductorType.schema";
+import type { ProjectFormInput } from "@repo/validators/forms/Project.schema";
+import type { SourceFormInput } from "@repo/validators/forms/Source.schema";
 
 export const geometryId = () => faker.string.uuid();
 
@@ -13,7 +18,18 @@ export const mockIds = {
     locationId: () => faker.number.int(), // conductor Location
 };
 
-export function createSource() {
+export function createMockProject(): ProjectFormInput {
+    return {
+        name: faker.word.noun({
+            length: {
+                min: 5,
+                max: 20,
+            },
+        }),
+    };
+}
+
+export function createSource(): SourceFormInput {
     return {
         id: faker.string.uuid(),
         name: faker.string.alpha({ length: { min: 5, max: 20 } }),
@@ -32,21 +48,21 @@ export function createSource() {
     };
 }
 
-export function createConductorLocation() {
+export function createConductorLocation(): ConductorLocationFormInput {
     return {
         x: faker.number.float({ min: 1, max: 10, fractionDigits: 2 }),
         y: faker.number.float({ min: 1, max: 10, fractionDigits: 2 }),
     };
 }
 
-export function createConductorType() {
+export function createConductorType(): ConductorTypeFormInput {
     return {
         id: faker.string.uuid(),
         name: faker.string.alpha(10),
     };
 }
 
-export function createConductor() {
+export function createConductor(): ConductorFormInput {
     return {
         lineId: faker.string.uuid(),
         name: faker.string.alpha({ length: { min: 5, max: 20 } }),
@@ -79,6 +95,17 @@ export function createConductorTable() {
         type: {
             name: faker.string.alpha(10),
         },
+    };
+}
+
+export function createGenerateConductor() {
+    return {
+        lineId: faker.string.uuid(),
+        phases: faker.number.int(),
+        circuits: faker.number.int(),
+        neutrals: faker.number.int(),
+        phaseTypeId: faker.string.uuid(),
+        neutralTypeId: faker.string.uuid(),
     };
 }
 

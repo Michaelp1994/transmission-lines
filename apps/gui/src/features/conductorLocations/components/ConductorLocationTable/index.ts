@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./ConductorLocationTable";
+export { default } from "./ConductorLocationTable";

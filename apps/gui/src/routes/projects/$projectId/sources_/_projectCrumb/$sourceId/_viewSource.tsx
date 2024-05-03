@@ -5,9 +5,11 @@ export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
 )({
     component: ViewTransmissionLinePage,
-    beforeLoad: () => { return {
-        text: "Sources",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "Sources",
+        };
+    },
 });
 
 export default function ViewTransmissionLinePage() {

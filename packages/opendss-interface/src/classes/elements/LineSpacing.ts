@@ -15,7 +15,13 @@ export default class LineSpacing extends BaseElement<
 
     type = "LineSpacing";
 
-    parameters = ["nConds", "nPhases", "x", "h", "units"] satisfies (keyof OpenDSSLineSpacing)[];
+    parameters = [
+        "nConds",
+        "nPhases",
+        "x",
+        "h",
+        "units",
+    ] satisfies (keyof OpenDSSLineSpacing)[];
 
     constructor(input: LineSpacingInput) {
         super();

@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./TowerParametersModal";
+export { default } from "./TowerParametersModal";

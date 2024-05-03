@@ -11,7 +11,7 @@ export const createContext = (dataSource: DBContext, electron?: Electron) => {
     return {
         db: dataSource.db,
         electron,
-    }
+    };
 };
 
 export type Context = ReturnType<typeof createContext>;

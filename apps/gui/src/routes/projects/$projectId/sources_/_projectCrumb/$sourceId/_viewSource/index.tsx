@@ -13,9 +13,11 @@ export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
 )({
     component: ViewSourcePage,
-    beforeLoad: () => { return {
-        text: "View Source",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "View Source",
+        };
+    },
 });
 
 export default function ViewSourcePage() {

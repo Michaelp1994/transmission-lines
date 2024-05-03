@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./CreateConductorTypeForm";
+export { default } from "./CreateConductorTypeForm";

@@ -25,7 +25,9 @@ export default router({
                 where: eq(conductorLocations.geometryId, input.geometryId),
             });
 
-            if (!towers) {throw new Error("Can't find transmission conductors");}
+            if (!towers) {
+                throw new Error("Can't find transmission conductors");
+            }
 
             return towers;
         }),
@@ -36,7 +38,9 @@ export default router({
                 where: eq(conductorLocations.id, input.locationId),
             });
 
-            if (!conductorType) {throw new Error("Can't find conductor");}
+            if (!conductorType) {
+                throw new Error("Can't find conductor");
+            }
 
             return conductorType;
         }),
@@ -49,7 +53,9 @@ export default router({
                 .values(input)
                 .returning();
 
-            if (!newConductor) {throw new Error("Can't create conductor");}
+            if (!newConductor) {
+                throw new Error("Can't create conductor");
+            }
 
             return newConductor;
         }),
@@ -72,7 +78,9 @@ export default router({
                 .where(eq(conductorLocations.id, input.id))
                 .returning();
 
-            if (!updatedConductor) {throw new Error("Can't update conductor");}
+            if (!updatedConductor) {
+                throw new Error("Can't update conductor");
+            }
 
             return updatedConductor;
         }),
@@ -84,7 +92,9 @@ export default router({
                 .where(eq(conductorLocations.id, input.locationId))
                 .returning();
 
-            if (!deletedConductor) {throw new Error("Can't delete conductor");}
+            if (!deletedConductor) {
+                throw new Error("Can't delete conductor");
+            }
 
             return deletedConductor;
         }),

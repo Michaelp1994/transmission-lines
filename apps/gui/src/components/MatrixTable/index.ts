@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./MatrixTable";
+export { default } from "./MatrixTable";

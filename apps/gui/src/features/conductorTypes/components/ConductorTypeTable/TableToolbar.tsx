@@ -42,11 +42,16 @@ export default function ConductorTypeToolbar({
                         />
                     </SelectTrigger>
                     <SelectContent side="top">
-                        {[10, 20, 30, 40, 50].map((pageSize) => 
-                            { return <SelectItem key={pageSize} value={`${pageSize}`}>
-                                {pageSize}
-                            </SelectItem> }
-                        )}
+                        {[10, 20, 30, 40, 50].map((pageSize) => {
+                            return (
+                                <SelectItem
+                                    key={pageSize}
+                                    value={`${pageSize}`}
+                                >
+                                    {pageSize}
+                                </SelectItem>
+                            );
+                        })}
                     </SelectContent>
                 </Select>
             </RightSide>

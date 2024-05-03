@@ -38,7 +38,9 @@ export default router({
                 where: eq(sources.id, input.id),
             });
 
-            if (!source) {throw new Error("Can't find source");}
+            if (!source) {
+                throw new Error("Can't find source");
+            }
 
             const { z0, z1, z2 } = calculateZSequenceComponents({
                 voltage: source.voltage * 1000,
@@ -65,7 +67,9 @@ export default router({
                 where: eq(sources.id, input.id),
             });
 
-            if (!source) {throw new Error("Can't find source");}
+            if (!source) {
+                throw new Error("Can't find source");
+            }
 
             return source;
         }),
@@ -77,7 +81,9 @@ export default router({
                 .values(input)
                 .returning();
 
-            if (!newSource) {throw new Error("Can't create source");}
+            if (!newSource) {
+                throw new Error("Can't create source");
+            }
 
             return newSource;
         }),
@@ -90,7 +96,9 @@ export default router({
                 .where(eq(sources.id, input.id))
                 .returning();
 
-            if (!updatedSource) {throw new Error("Can't update source");}
+            if (!updatedSource) {
+                throw new Error("Can't update source");
+            }
 
             return updatedSource;
         }),
@@ -103,7 +111,9 @@ export default router({
                 .where(eq(sources.id, input.id))
                 .returning();
 
-            if (!updatedSource) {throw new Error("Can't update source");}
+            if (!updatedSource) {
+                throw new Error("Can't update source");
+            }
 
             return updatedSource;
         }),
@@ -126,7 +136,9 @@ export default router({
                 .where(eq(sources.id, input.id))
                 .returning();
 
-            if (!deletedSource) {throw new Error("Can't delete source");}
+            if (!deletedSource) {
+                throw new Error("Can't delete source");
+            }
 
             return deletedSource;
         }),

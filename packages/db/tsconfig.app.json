@@ -8,7 +8,7 @@
         "outDir": "dist"
     },
     "extends": "@repo/typescript-config/node.json",
-    "include": ["src"],
+    "include": ["src/**/*", "src/**/*.json"],
     "exclude": [
         "src/**/*.test.ts",
         "src/**/*.test.tsx",

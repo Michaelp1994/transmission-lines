@@ -25,9 +25,6 @@ describe("Create Source Form", () => {
     const trpcFn = vi.fn().mockResolvedValue(fakeSource);
     const render = createRender(trpcFn);
 
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
     test("renders form fields and buttons", () => {
         render(<CreateSourceForm projectId={fakeSource.projectId} />);
         // Assert that form fields are rendered

@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./TowerTable";
+export { default } from "./TowerTable";

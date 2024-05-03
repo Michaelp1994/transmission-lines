@@ -11,10 +11,12 @@ export default function DiagramWrapper({ projectId }: DiagramWrapperProps) {
     //     projectId,
     // });
 
-    const [sources, transmissionLines] = trpc.useQueries((t) => { return [
-        t.source.getAllByProjectId({ projectId }),
-        t.transmissionLine.getAllByProjectId({ projectId }),
-    ] });
+    const [sources, transmissionLines] = trpc.useQueries((t) => {
+        return [
+            t.source.getAllByProjectId({ projectId }),
+            t.transmissionLine.getAllByProjectId({ projectId }),
+        ];
+    });
 
     if (sources.isLoading || transmissionLines.isLoading) {
         return <div>Loading...</div>;

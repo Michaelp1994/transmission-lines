@@ -2,7 +2,9 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/projects")({
     component: () => <Outlet />,
-    beforeLoad: () => { return {
-        text: "Projects",
-    } },
+    beforeLoad: () => {
+        return {
+            text: "Projects",
+        };
+    },
 });

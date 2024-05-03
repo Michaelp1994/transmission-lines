@@ -1,5 +1,1 @@
-
-
-
-
-export {default} from "./UpdateConductorModal";
+export { default } from "./UpdateConductorModal";

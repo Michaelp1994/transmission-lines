@@ -14,9 +14,13 @@ const DataWrapper = forwardRef<HTMLButtonElement, DataWrapperProps>(
                 projectId,
             });
 
-        if (isLoading) {return <div>Loading...</div>;}
+        if (isLoading) {
+            return <div>Loading...</div>;
+        }
 
-        if (isError) {return <div>Error: {error.message}</div>;}
+        if (isError) {
+            return <div>Error: {error.message}</div>;
+        }
 
         return <BaseSelect data={data} ref={ref} {...props} />;
     }

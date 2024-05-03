@@ -8,30 +8,26 @@ export default async function completeForm(
     data: Record<string, unknown>
 ) {
     for await (const [key, label] of Object.entries(labels)) {
-        switch (typeof data[key]) {
-            case "boolean": {
-                const checkbox = within(form).getByLabelText(label);
+        if (typeof data[key] === "boolean") {
+            const checkbox = within(form).getByLabelText(label);
 
-                console.log(data[key]);
-                console.log(checkbox.ariaChecked);
-                console.log(typeof data[key]);
-                console.log(typeof Boolean(checkbox.ariaChecked));
-                if (data[key] !== Boolean(checkbox.ariaChecked)) {
-                    const input = within(form).getByLabelText(label);
-
-                    await user.click(input);
-                    console.log("clicked");
-                }
-                break;
-            }
-            default: {
-                const value = String(data[key]);
+            console.log(data[key]);
+            console.log(checkbox.ariaChecked);
+            console.log(typeof data[key]);
+            console.log(typeof Boolean(checkbox.ariaChecked));
+            if (data[key] !== Boolean(checkbox.ariaChecked)) {
                 const input = within(form).getByLabelText(label);
 
-                await user.clear(input);
-                await user.type(input, value);
-                break;
+                await user.click(input);
+                console.log("clicked");
             }
+        } else {
+            const value = String(data[key]);
+            const input = within(form).getByLabelText(label);
+
+            await user.clear(input);
+            await user.type(input, value);
+            break;
         }
     }
 }

@@ -32,12 +32,12 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@rollup/plugin-swc": "^0.3.0",
-        "electron": "30.0.1",
+        "electron": "30.0.2",
         "electron-builder": "24.13.3",
         "eslint": "^8.57.0",
         "playwright": "^1.43.1",
         "typescript": "^5.4.5",
-        "vite": "^5.2.10",
+        "vite": "^5.2.11",
         "wait-on": "^7.2.0",
         "xvfb-maybe": "^0.2.1"
     }

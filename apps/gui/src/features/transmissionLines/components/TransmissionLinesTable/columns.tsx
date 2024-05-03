@@ -9,17 +9,19 @@ const columnHelper = createColumnHelper<TransmissionLine>();
 export default [
     columnHelper.accessor("name", {
         header: () => t("name.label", { ns: "conductorConfiguration" }),
-        cell: (info) => 
-            { return <Link
-                to="/projects/$projectId/lines/$lineId"
-                params={{
-                    lineId: info.row.original.id,
-                    projectId: info.row.original.projectId,
-                }}
-            >
-                {info.getValue()}
-            </Link> }
-        ,
+        cell: (info) => {
+            return (
+                <Link
+                    to="/projects/$projectId/lines/$lineId"
+                    params={{
+                        lineId: info.row.original.id,
+                        projectId: info.row.original.projectId,
+                    }}
+                >
+                    {info.getValue()}
+                </Link>
+            );
+        },
     }),
     columnHelper.accessor("fromSource.name", {
         header: () => "From",

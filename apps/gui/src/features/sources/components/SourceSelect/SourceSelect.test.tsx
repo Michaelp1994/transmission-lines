@@ -12,12 +12,6 @@ describe("Source Select Data Wrapper", () => {
     const render = createRender(trpcFn);
     const mockOnChange = vi.fn();
 
-    Element.prototype.scrollIntoView = vi.fn();
-
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     test("all sources are displayed", async () => {
         const user = userEvent.setup();
 

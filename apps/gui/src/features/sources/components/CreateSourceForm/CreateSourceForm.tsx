@@ -10,15 +10,19 @@ interface CreateSourceFormProps {
     projectId: ProjectID;
 }
 
+function handleInvalid(errors: FieldErrors<SourceFormInput>) {
+    console.log(errors);
+}
+
 export default function CreateSourceForm({ projectId }: CreateSourceFormProps) {
     const navigate = useNavigate();
 
     const createMutation = trpc.source.create.useMutation({
-        onSuccess: (result) => {
-            toast.success(`${result.name} has been added to the project.`);
-            navigate({
+        async onSuccess(values) {
+            toast.success(`${values.name} has been added to the project.`);
+            await navigate({
                 to: "/projects/$projectId/sources/$sourceId",
-                params: { projectId: result.projectId, sourceId: result.id },
+                params: { projectId: values.projectId, sourceId: values.id },
             });
         },
         onError: (error) => {
@@ -26,15 +30,11 @@ export default function CreateSourceForm({ projectId }: CreateSourceFormProps) {
         },
     });
 
-    async function handleValid(values: SourceFormInput) {
-        await createMutation.mutateAsync({
+    function handleValid(values: SourceFormInput) {
+        createMutation.mutate({
             ...values,
             projectId,
         });
-    }
-
-    async function handleInvalid(errors: FieldErrors<SourceFormInput>) {
-        console.log(errors);
     }
 
     return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;
