@@ -1,6 +1,6 @@
 import { Button } from "@repo/ui";
 import { userEvent } from "@testing-library/user-event";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { useUpdateConductorLocationModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
@@ -79,6 +79,7 @@ describe("Update Conductor Location Modal", () => {
         await user.click(confirm);
 
         expect(trpcFn).toHaveBeenCalledTimes(1);
+
         expect(dialog).toBeInTheDocument();
     });
 });

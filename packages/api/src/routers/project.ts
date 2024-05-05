@@ -27,10 +27,6 @@ export default router({
         .input(getProjectByIdSchema)
         .query(async ({ input, ctx: { db } }) => {
             const project = await db.query.projects.findFirst({
-                with: {
-                    sources: true,
-                    transmissionLines: true,
-                },
                 where: eq(projects.id, input.id),
             });
 

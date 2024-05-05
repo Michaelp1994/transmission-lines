@@ -9,21 +9,21 @@ import {
     FormMessage,
     Input,
 } from "@repo/ui";
-import type { UpdateProjectInput } from "@repo/validators";
+import type { ProjectFormInput } from "@repo/validators/forms/Project.schema";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { useUpdateTowerGeometryForm } from "~/utils/forms";
+import { useUpdateProjectForm } from "~/utils/forms";
 
 interface BaseFormProps {
-    data: UpdateProjectInput;
-    onValid: (values: UpdateProjectInput) => void;
-    onInvalid: (errors: FieldErrors<UpdateProjectInput>) => void;
+    data: ProjectFormInput;
+    onValid: (values: ProjectFormInput) => void;
+    onInvalid: (errors: FieldErrors<ProjectFormInput>) => void;
 }
 
 export default function BaseForm({ data, onValid, onInvalid }: BaseFormProps) {
     const { t } = useTranslation("updateProjectForm");
-    const form = useUpdateTowerGeometryForm(data);
+    const form = useUpdateProjectForm(data);
 
     const handleSubmit = form.handleSubmit(
         (values) => {

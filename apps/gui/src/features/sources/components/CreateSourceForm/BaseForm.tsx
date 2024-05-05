@@ -14,7 +14,7 @@ import {
 import type { SourceFormInput } from "@repo/validators/forms/Source.schema";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { StyledForm } from "~/components/StyledForm";
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useCreateSourceForm } from "~/utils/forms";
 
 interface CreateSourceFormProps {
@@ -252,12 +252,6 @@ export default function CreateSourceForm({
         </Form>
     );
 }
-
-const ButtonsWrapper = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-`;
 
 const CheckboxWrapper = styled.div`
     display: flex;

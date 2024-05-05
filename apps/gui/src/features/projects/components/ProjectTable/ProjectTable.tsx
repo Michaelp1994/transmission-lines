@@ -5,13 +5,13 @@ import trpc from "~/utils/trpc";
 
 export default function ProjectTable() {
     const { t } = useTranslation("transmissionLine");
-    const { data, error, isLoading } = trpc.project.getAll.useQuery();
+    const { data, isError, isLoading } = trpc.project.getAll.useQuery();
 
-    if (error) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
+    }
+    if (isError || !data) {
+        return <div>{t("general:errorMessage")}</div>;
     }
 
     return <DataTable data={data} columns={columns} />;

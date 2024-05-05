@@ -5,7 +5,7 @@ import { useDeleteProjectModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import { createMockProject, mockIds } from "~tests/helpers/mockData";
 
-describe("DeleteProjectModal", () => {
+describe("Delete Project Modal", () => {
     const mockProject = createMockProject();
     const projectId = mockIds.projectId();
     const trpcFn = vi.fn().mockResolvedValue(mockProject);
@@ -31,7 +31,9 @@ describe("DeleteProjectModal", () => {
         });
 
         await user.click(confirm);
-        expect(trpcFn).toHaveBeenCalledWith({ id: projectId });
+        expect(trpcFn).toHaveBeenCalledWith("mutation", "project.delete", {
+            id: projectId,
+        });
     });
     test("no data is sent to server on cancellation", async () => {
         const { user, dialog } = await setup();

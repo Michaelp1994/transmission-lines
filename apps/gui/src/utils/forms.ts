@@ -44,6 +44,13 @@ export const useCreateProjectForm = () => {
     });
 };
 
+export const useUpdateProjectForm = (data: ProjectFormInput) => {
+    return useForm<ProjectFormInput>({
+        resolver: zodResolver(projectFormSchema),
+        values: data,
+    });
+};
+
 export const useCreateConductorLocationForm = () => {
     return useForm<ConductorLocationFormInput>({
         resolver: zodResolver(conductorLocationFormSchema),

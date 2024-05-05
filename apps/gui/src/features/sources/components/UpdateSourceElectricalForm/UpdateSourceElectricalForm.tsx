@@ -1,4 +1,4 @@
-import type { UpdateSourceGeneralFormInput } from "@repo/validators/forms/Source.schema";
+import type { UpdateSourceElectricalFormInput } from "@repo/validators/forms/Source.schema";
 import type { SourceID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
 import type { FieldErrors } from "react-hook-form";
@@ -11,15 +11,19 @@ interface FormHandlerProps {
     sourceId: SourceID;
 }
 
-function handleInvalid(errors: FieldErrors<UpdateSourceGeneralFormInput>) {
+function handleInvalid(errors: FieldErrors<UpdateSourceElectricalFormInput>) {
     console.log(errors);
 }
 
-export default function FormHandler({ sourceId }: FormHandlerProps) {
+export default function UpdateSourceElectricalForm({
+    sourceId,
+}: FormHandlerProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("source");
-
-    const updateSourceMutation = trpc.source.updateGeneral.useMutation({
+    const { data, isLoading, isError } = trpc.source.getById.useQuery({
+        id: sourceId,
+    });
+    const updateSourceMutation = trpc.source.updateElectrical.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
             await navigate({
@@ -28,11 +32,8 @@ export default function FormHandler({ sourceId }: FormHandlerProps) {
             });
         },
     });
-    const { data, isLoading, isError } = trpc.source.getById.useQuery({
-        id: sourceId,
-    });
 
-    function handleValid(values: UpdateSourceGeneralFormInput) {
+    function handleValid(values: UpdateSourceElectricalFormInput) {
         updateSourceMutation.mutate({
             ...values,
             id: sourceId,

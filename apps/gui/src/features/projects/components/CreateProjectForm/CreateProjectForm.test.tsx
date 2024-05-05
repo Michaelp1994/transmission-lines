@@ -3,6 +3,9 @@ import { describe, expect, test, vi } from "vitest";
 import CreateProjectForm from "./CreateProjectForm";
 import { screen, within, createRender } from "~test-utils";
 import { createMockProject } from "~tests/helpers/mockData";
+import completeForm from "~tests/helpers/completeForm";
+
+const labels = { name: /name/i };
 
 describe("CreateProjectForm", () => {
     const mockProject = createMockProject();
@@ -14,18 +17,20 @@ describe("CreateProjectForm", () => {
         const user = userEvent.setup();
 
         const utils = render(<CreateProjectForm />);
+        const form = utils.getByRole("form");
 
         return {
             ...utils,
+            form,
             user,
         };
     }
 
     test("submits form with valid input", async () => {
-        const { user } = setup();
+        const { user, form } = setup();
 
         // Fill in form fields with valid input
-        await user.type(screen.getByLabelText(/name/i), mockProject.name);
+        await completeForm(user, form, labels, mockProject);
         // Submit the form
         await user.click(screen.getByRole("button", { name: /submit/i }));
 
@@ -36,7 +41,11 @@ describe("CreateProjectForm", () => {
             within(toast).getByText(`${mockProject.name} has been created.`)
         ).toBeInTheDocument();
         expect(trpcFn).toBeCalledTimes(1);
-        expect(trpcFn).toHaveBeenCalledWith(mockProject);
+        expect(trpcFn).toHaveBeenCalledWith(
+            "mutation",
+            "project.create",
+            mockProject
+        );
     });
 
     test("displays error message for invalid input", async () => {

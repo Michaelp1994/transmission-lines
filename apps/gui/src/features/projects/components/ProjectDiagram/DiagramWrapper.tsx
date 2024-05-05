@@ -22,9 +22,9 @@ export default function DiagramWrapper({ projectId }: DiagramWrapperProps) {
         return <div>Loading...</div>;
     }
     if (
-        sources.error ||
+        sources.isError ||
         !sources.data ||
-        transmissionLines.error ||
+        transmissionLines.isError ||
         !transmissionLines.data
     ) {
         return <div>Error</div>;

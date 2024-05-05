@@ -1,124 +1,52 @@
-import {
-    Button,
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    Input,
-} from "@repo/ui";
 import type { TransmissionLineFormInput } from "@repo/validators/forms";
 import type { ProjectID } from "@repo/validators/Ids";
+import { useNavigate } from "@tanstack/react-router";
 import type { FieldErrors } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { SourceSelect } from "~/features/sources";
-import { useCreateTransmissionLineForm } from "~/utils/forms";
+import BaseForm from "./BaseForm";
+import toast from "~/utils/toast";
+import trpc from "~/utils/trpc";
 
 interface CreateTransmissionLineFormProps {
     projectId: ProjectID;
-    onValid: (values: TransmissionLineFormInput) => void;
-    onInvalid: (errors: FieldErrors<TransmissionLineFormInput>) => void;
+}
+
+function handleInvalid(errors: FieldErrors<TransmissionLineFormInput>) {
+    console.log(errors);
 }
 
 export default function CreateTransmissionLineForm({
     projectId,
-    onValid,
-    onInvalid,
 }: CreateTransmissionLineFormProps) {
-    const { t } = useTranslation("transmissionLine");
-    const form = useCreateTransmissionLineForm();
+    const navigate = useNavigate();
+    const createTransmissionLineMutation =
+        trpc.transmissionLine.create.useMutation({
+            async onSuccess(data) {
+                toast.success(`${data.name} has been added to the project.`);
+                await navigate({
+                    to: `/projects/$projectId/lines/$lineId`,
+                    params: { projectId: data.projectId, lineId: data.id },
+                });
+            },
+            onError(error, variables) {
+                toast.error(
+                    `Failed to create transmission line: ${variables.name}.`
+                );
+                console.log(error);
+            },
+        });
 
-    const handleSubmit = form.handleSubmit(
-        (values) => {
-            onValid(values);
-        },
-        (errors) => {
-            onInvalid(errors);
-        }
-    );
+    function handleValid(values: TransmissionLineFormInput) {
+        createTransmissionLineMutation.mutate({
+            ...values,
+            projectId,
+        });
+    }
 
     return (
-        <Form {...form}>
-            <StyledForm
-                onSubmit={handleSubmit}
-                onReset={() => {
-                    form.reset();
-                }}
-            >
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => {
-                        return (
-                            <FormItem>
-                                <FormLabel>{t("name.label")}</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="text"
-                                        placeholder={t("name.placeholder")}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("name.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        );
-                    }}
-                />
-                <FormField
-                    control={form.control}
-                    name="fromSourceId"
-                    render={({ field }) => {
-                        return (
-                            <FormItem>
-                                <FormLabel>{t("fromSource.label")}</FormLabel>
-                                <FormControl>
-                                    <SourceSelect
-                                        projectId={projectId}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("fromSource.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        );
-                    }}
-                />
-                <FormField
-                    control={form.control}
-                    name="toSourceId"
-                    render={({ field }) => {
-                        return (
-                            <FormItem>
-                                <FormLabel>{t("toSource.label")}</FormLabel>
-                                <FormControl>
-                                    <SourceSelect
-                                        projectId={projectId}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("toSource.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        );
-                    }}
-                />
-                <ButtonsWrapper>
-                    <Button variant="destructive" type="reset">
-                        {t("form:reset")}
-                    </Button>
-                    <Button type="submit">{t("form:submit")}</Button>
-                </ButtonsWrapper>
-            </StyledForm>
-        </Form>
+        <BaseForm
+            projectId={projectId}
+            onValid={handleValid}
+            onInvalid={handleInvalid}
+        />
     );
 }

@@ -29,12 +29,8 @@ export function createMockProject(): ProjectFormInput {
     };
 }
 
-export function createSource(): SourceFormInput {
+export function createElectricalSource() {
     return {
-        id: faker.string.uuid(),
-        name: faker.string.alpha({ length: { min: 5, max: 20 } }),
-        enabled: faker.datatype.boolean(),
-        projectId: faker.string.uuid(),
         phases: faker.number.int(10),
         voltage: faker.number.float({ min: 1, max: 1000, fractionDigits: 3 }),
         frequency: faker.number.int({ min: 1, max: 60 }),
@@ -43,8 +39,34 @@ export function createSource(): SourceFormInput {
         isc3: faker.number.int(25000),
         isc1: faker.number.int(25000),
         resistance: faker.number.float({ min: 1, max: 25, fractionDigits: 2 }),
-        x: faker.number.float({ min: 1, max: 25, fractionDigits: 2 }),
-        y: faker.number.float({ min: 1, max: 25, fractionDigits: 2 }),
+    };
+}
+
+export function createGeneralSource() {
+    return {
+        name: faker.string.alpha({ length: { min: 5, max: 20 } }),
+        enabled: faker.datatype.boolean(),
+    };
+}
+
+export function createSource(): SourceFormInput {
+    const electrical = createElectricalSource();
+    const general = createGeneralSource();
+
+    return {
+        ...general,
+        ...electrical,
+    };
+}
+
+export function getSource() {
+    const source = createSource();
+
+    return {
+        ...source,
+        id: faker.string.uuid(),
+        x: faker.number.float({ min: 1, max: 10, fractionDigits: 2 }),
+        y: faker.number.float({ min: 1, max: 10, fractionDigits: 2 }),
     };
 }
 
@@ -57,14 +79,23 @@ export function createConductorLocation(): ConductorLocationFormInput {
 
 export function createConductorType(): ConductorTypeFormInput {
     return {
-        id: faker.string.uuid(),
         name: faker.string.alpha(10),
+        acResistance75: faker.number.float(10),
+        gmr: faker.number.float(),
+        outerDiameter: faker.number.float(10),
+        acResistance25: faker.number.float(10),
+        acResistance50: faker.number.float(10),
+        coreDiameter: faker.number.float(10),
+        currentCapacity: faker.number.float(10),
+        dcResistance25: faker.number.float(10),
+        layers: faker.number.int(10),
+        stranding: `${faker.string.numeric(10)}/ ${faker.string.numeric(10)}`,
+        surfaceArea: faker.number.float(10),
     };
 }
 
 export function createConductor(): ConductorFormInput {
     return {
-        lineId: faker.string.uuid(),
         name: faker.string.alpha({ length: { min: 5, max: 20 } }),
         fromPhase: faker.number.int({ min: 1, max: 20 }),
         toPhase: faker.number.int({ min: 1, max: 20 }),

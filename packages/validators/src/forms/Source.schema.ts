@@ -3,13 +3,17 @@ import { z } from "zod";
 // create / update
 
 export const sourceFormSchema = z.object({
-    name: z.string().min(2).max(50).trim(),
-    phases: z.coerce
-        .number({
-            invalid_type_error: "Please enter a number",
+    name: z
+        .string()
+        .min(3, {
+            message: "Name must be at least 3 character(s)",
         })
+        .max(50)
+        .trim(),
+    phases: z.coerce
+        .number()
         .int({ message: "Please provide an integer value" })
-        .min(0)
+        .min(1)
         .max(10),
     voltage: z.coerce.number().positive(),
     x1r1: z.coerce.number().min(0),

@@ -1,8 +1,8 @@
-import type { UpdateTowerGeometryInput } from "@repo/validators";
 import type { ProjectID } from "@repo/validators/Ids";
 import { useNavigate } from "@tanstack/react-router";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import type { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
 import BaseForm from "./BaseForm";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -11,7 +11,7 @@ interface UpdateProjectFormProps {
     projectId: ProjectID;
 }
 
-function handleInvalid(errors: FieldErrors<UpdateTowerGeometryInput>) {
+function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
     console.log(errors);
 }
 
@@ -19,7 +19,7 @@ export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("updateProjectForm");
 
-    const { data, error, isLoading } = trpc.project.getById.useQuery({
+    const { data, isError, isLoading } = trpc.project.getById.useQuery({
         id: projectId,
     });
 
@@ -34,14 +34,14 @@ export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
         },
     });
 
-    function handleValid(values: UpdateTowerGeometryInput) {
-        updateMutation.mutate(values);
+    function handleValid(values: TowerGeometryFormInput) {
+        updateMutation.mutate({ ...values, id: projectId });
     }
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error) {
+    if (isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 
