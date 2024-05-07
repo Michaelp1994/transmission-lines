@@ -2,6 +2,7 @@ import { type LazyExoticComponent, lazy } from "react";
 
 export enum Modals {
     CreateTowerModal,
+    DeleteConductorTypeModal,
     DeleteTowerModal,
     GenerateTowersModal,
     TowerParametersModal,
@@ -20,6 +21,11 @@ export enum Modals {
 }
 
 export const modalsConfig: Record<Modals, LazyExoticComponent<any>> = {
+    [Modals.DeleteConductorTypeModal]: lazy(() => {
+        return import(
+            "~/features/conductorTypes/components/DeleteConductorTypeModal"
+        );
+    }),
     [Modals.DeleteTransmissionLineModal]: lazy(() => {
         return import(
             "~/features/transmissionLines/components/DeleteTransmissionLineModal"

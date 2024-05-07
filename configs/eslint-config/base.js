@@ -33,6 +33,17 @@ export default [
             "@typescript-eslint/explicit-module-boundary-types": "off",
             "@typescript-eslint/no-use-before-define": "off",
             "@typescript-eslint/naming-convention": "off",
+            "@typescript-eslint/restrict-template-expressions": [
+                "error",
+                {
+                    allowNumber: true,
+                    allowAny: false,
+                    allowBoolean: false,
+                    allowNullish: false,
+                    allowRegExp: false,
+                    allowNever: false,
+                },
+            ],
             "fsecond/prefer-destructured-optionals": "off",
             "@typescript-eslint/no-misused-promises": [
                 "error",

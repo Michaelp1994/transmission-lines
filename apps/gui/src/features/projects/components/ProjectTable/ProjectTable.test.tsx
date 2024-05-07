@@ -3,14 +3,14 @@ import { describe, expect, test, vi } from "vitest";
 import { userEvent } from "@testing-library/user-event";
 import ProjectTable from "./ProjectTable";
 import { createRender, screen } from "~test-utils";
-import { createArray, createMockProject } from "~tests/helpers/mockData";
+import { createArray, createProject } from "~tests/helpers/mockData";
 import verifyTable from "~tests/helpers/verifyTable";
 
 const columns = ["name"];
 
-describe("Conductor Location Table", () => {
+describe("Project Table", () => {
     const user = userEvent.setup();
-    const projects = createArray(10, createMockProject);
+    const projects = createArray(10, createProject);
     const trpcFn = vi.fn().mockResolvedValue(projects);
     const render = createRender(trpcFn);
 

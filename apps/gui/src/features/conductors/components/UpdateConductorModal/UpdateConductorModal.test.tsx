@@ -1,65 +1,98 @@
-import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
-import ModalProvider from "~/contexts/ModalProvider";
 import { useUpdateConductorModal } from "~/utils/modals";
-import { render, screen, within } from "~test-utils";
-import { createConductor, mockIds } from "~tests/helpers/mockData";
-import MockTrpcProvider from "~tests/mocks/TrpcProvider";
+import { createRender, screen, within } from "~test-utils";
+import completeForm from "~tests/helpers/completeForm";
+import {
+    createArray,
+    createConductor,
+    getConductorType,
+    mockIds,
+} from "~tests/helpers/mockData";
+import selectAction from "~tests/helpers/selectAction";
 
 const labels = {
     name: /name/i,
     fromPhase: /from phase/i,
     toPhase: /to phase/i,
-    lineId: /line id/i,
     bundleNumber: /bundle number/i,
     bundleSpacing: /bundle spacing/i,
     isNeutral: /is neutral/i,
-    typeId: /type id/i,
 };
 
-// TODO: doesnt work because of the type id
 describe("Update Conductor Modal", () => {
     const conductorId = mockIds.conductorId();
-    const oldConductor = createConductor();
+    const conductorTypes = createArray(10, getConductorType);
+    const [oldConductor] = createConductor(conductorTypes);
+    const [newConductor, conductorType] = createConductor(conductorTypes);
+    const trpcFn = vi.fn().mockResolvedValue(newConductor);
 
-    test("previous data is correctly displayed", async () => {
+    const render = createRender(trpcFn);
+    const displayModal = useUpdateConductorModal(conductorId);
+
+    async function setup() {
         const user = userEvent.setup();
 
-        const mockFn = vi.fn(() => Promise.resolve());
-        const displayModal = useUpdateConductorModal(oldConductor.id);
+        trpcFn.mockResolvedValueOnce(oldConductor);
+        trpcFn.mockResolvedValueOnce(conductorTypes);
 
-        render(
-            <MockTrpcProvider mockFn={mockFn}>
-                <ModalProvider>
-                    <Button onClick={displayModal}>Click Here</Button>
-                </ModalProvider>
-            </MockTrpcProvider>
+        const utils = render(
+            <Button onClick={displayModal}>Click Here</Button>
         );
 
         await user.click(screen.getByRole("button", { name: /click here/i }));
         const dialog = await screen.findByRole("dialog");
+        const form = await within(dialog).findByRole("form");
 
-        const nameInput = await within(dialog).findByLabelText(labels.name);
-        const fromPhaseInput = within(dialog).getByLabelText(labels.fromPhase);
-        const toPhaseInput = within(dialog).getByLabelText(labels.toPhase);
-        const lineIdInput = within(dialog).getByLabelText(labels.lineId);
-        const bundleNumberInput = within(dialog).getByLabelText(
-            labels.bundleNumber
-        );
-        const bundleSpacingInput = within(dialog).getByLabelText(
-            labels.bundleSpacing
-        );
-        const typeIdInput = within(dialog).getByLabelText(labels.typeId);
+        return { user, form, dialog, ...utils };
+    }
+    test("correctly calls API", async () => {
+        await setup();
+        expect(trpcFn).toHaveBeenCalledWith("query", "conductor.getById", {
+            id: conductorId,
+        });
+    });
+    test("submits form with valid input", async () => {
+        const { form, user } = await setup();
 
-        expect(nameInput).toHaveValue(oldConductor.name);
-        expect(fromPhaseInput).toHaveValue(oldConductor.fromPhase);
-        expect(toPhaseInput).toHaveValue(oldConductor.toPhase);
-        expect(lineIdInput).toHaveValue(oldConductor.lineId);
-        expect(bundleNumberInput).toHaveValue(oldConductor.bundleNumber);
-        expect(bundleSpacingInput).toHaveValue(oldConductor.bundleSpacing);
-        // expect(isNeutralInput).toHaveValue(oldConductor.isNeutral.valueOf); TODO: check input of checkbox
-        expect(typeIdInput).toHaveValue(oldConductor.typeId);
+        await completeForm(user, form, labels, newConductor);
+
+        // select Conductor Type
+        await selectAction(user, form, /conductor type/i, conductorType.name);
+        const submitBtn = within(form).getByRole("button", { name: /submit/i });
+
+        await user.click(submitBtn);
+        expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+        expect(trpcFn).toHaveBeenLastCalledWith(
+            "mutation",
+            "conductor.update",
+            {
+                ...newConductor,
+                id: conductorId,
+            }
+        );
+    });
+    test("submits form with invalid input", async () => {
+        const { form, user, dialog } = await setup();
+        const badConductor = {
+            ...newConductor,
+            bundleSpacing: -1,
+        };
+
+        await completeForm(user, form, labels, badConductor);
+
+        // select Conductor Type
+        await selectAction(user, form, /conductor type/i, conductorType.name);
+        const submitBtn = within(form).getByRole("button", { name: /submit/i });
+
+        await user.click(submitBtn);
+        expect(dialog).toBeInTheDocument();
+        expect(trpcFn).not.toHaveBeenCalledWith(
+            "mutation",
+            "conductor.update",
+            expect.anything()
+        );
     });
 });

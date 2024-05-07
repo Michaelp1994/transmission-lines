@@ -14,3 +14,4 @@ export { default as useTowerParametersModal } from "./hooks/useTowerParametersMo
 export { default as useUpdateConductorLocationModal } from "./hooks/useUpdateConductorLocationModal";
 export { default as useUpdateConductorModal } from "./hooks/useUpdateConductorModal";
 export { default as useUpdateTowerModal } from "./hooks/useUpdateTowerModal";
+export { default as useDeleteConductorTypeModal } from "./hooks/useDeleteConductorTypeModal";

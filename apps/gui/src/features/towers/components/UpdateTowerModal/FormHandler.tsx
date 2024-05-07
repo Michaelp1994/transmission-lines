@@ -1,6 +1,6 @@
-import type { UpdateTransmissionTowerInput } from "@repo/validators";
 import type { TowerID } from "@repo/validators/Ids";
 import type { FieldErrors } from "react-hook-form";
+import type { TransmissionTowerFormInput } from "@repo/validators/forms/TransmissionTower.schema";
 import BaseForm from "./BaseForm";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
@@ -10,7 +10,7 @@ interface FormHandlerProps {
     onFinish: () => void;
 }
 
-function handleInvalid(errors: FieldErrors<UpdateTransmissionTowerInput>) {
+function handleInvalid(errors: FieldErrors<TransmissionTowerFormInput>) {
     console.error(errors);
 }
 
@@ -33,14 +33,14 @@ export default function FormHandler({ towerId, onFinish }: FormHandlerProps) {
         },
     });
 
-    function handleValid(values: UpdateTransmissionTowerInput) {
-        updateMutation.mutate(values);
+    function handleValid(values: TransmissionTowerFormInput) {
+        updateMutation.mutate({ ...values, id: towerId });
     }
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError) {
+    if (isError || !data) {
         return <div>Error</div>;
     }
 

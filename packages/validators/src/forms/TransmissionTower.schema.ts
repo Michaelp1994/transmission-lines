@@ -5,8 +5,8 @@ import { geometryId } from "../Ids.schema";
 
 export const transmissionTowerFormSchema = z.object({
     name: z.string().min(2).max(50).trim(),
-    resistance: z.number(),
-    distance: z.number(),
+    resistance: z.coerce.number(),
+    distance: z.coerce.number(),
     geometryId,
 });
 
@@ -25,9 +25,9 @@ export const defaultTransmissionTower: TransmissionTowerFormInput = {
 
 export const generateTowersFormSchema = z.object({
     namePrefix: z.string().min(1),
-    numTowers: z.number().positive(),
-    resistance: z.number().positive(),
-    distance: z.number().positive(),
+    numTowers: z.coerce.number().positive(),
+    resistance: z.coerce.number().positive(),
+    distance: z.coerce.number().positive(),
     geometryId,
 });
 

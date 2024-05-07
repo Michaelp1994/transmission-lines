@@ -1,32 +1,28 @@
-import {
-    Button,
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-    Input,
-} from "@repo/ui";
-import type { UpdateTransmissionLineInput } from "@repo/validators";
 import { useNavigate } from "@tanstack/react-router";
-import { useTranslation } from "react-i18next";
-import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { SourceSelect } from "~/features/sources";
-import { useUpdateTransmissionLineForm } from "~/utils/forms";
+import type { FieldErrors } from "react-hook-form";
+import type { TransmissionLineFormInput } from "@repo/validators/forms/TransmissionLine.schema";
+import type { LineID } from "@repo/validators/Ids";
+import BaseForm from "./BaseForm";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateTransmissionLineFormProps {
-    data: UpdateTransmissionLineInput;
+    lineId: LineID;
+}
+
+function handleInvalid(errors: FieldErrors<TransmissionLineFormInput>) {
+    console.log(errors);
 }
 
 export default function UpdateTransmissionLineForm({
-    data,
+    lineId,
 }: UpdateTransmissionLineFormProps) {
     const navigate = useNavigate();
-    const { t } = useTranslation("transmissionLine");
+    const { data, isLoading, isError } = trpc.transmissionLine.getById.useQuery(
+        {
+            id: lineId,
+        }
+    );
 
     const updateTransmissionLineMutation =
         trpc.transmissionLine.update.useMutation({
@@ -38,88 +34,19 @@ export default function UpdateTransmissionLineForm({
                 });
             },
         });
-    const form = useUpdateTransmissionLineForm(data);
 
-    function onSubmit(values: UpdateTransmissionLineInput) {
-        updateTransmissionLineMutation.mutate(values);
+    function handleValid(values: TransmissionLineFormInput) {
+        updateTransmissionLineMutation.mutate({ ...values, id: lineId });
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (isError || !data) {
+        return <div>Error...</div>;
     }
 
     return (
-        <Form {...form}>
-            <StyledForm
-                onSubmit={form.handleSubmit(onSubmit)}
-                onReset={() => {
-                    form.reset();
-                }}
-            >
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => {
-                        return (
-                            <FormItem>
-                                <FormLabel>{t("name.label")}</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="text"
-                                        placeholder={t("name.placeholder")}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("name.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        );
-                    }}
-                />
-                <FormField
-                    control={form.control}
-                    name="fromSourceId"
-                    render={({ field }) => {
-                        return (
-                            <FormItem>
-                                <FormLabel>{t("fromSource.label")}</FormLabel>
-                                <FormControl>
-                                    <SourceSelect
-                                        projectId={data.projectId}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("fromSource.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        );
-                    }}
-                />
-                <FormField
-                    control={form.control}
-                    name="toSourceId"
-                    render={({ field }) => {
-                        return (
-                            <FormItem>
-                                <FormLabel>{t("toSource.label")}</FormLabel>
-                                <FormControl>
-                                    <SourceSelect
-                                        projectId={data.projectId}
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    {t("toSource.description")}
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        );
-                    }}
-                />
-                <ButtonsWrapper>
-                    <Button type="submit">Save</Button>
-                </ButtonsWrapper>
-            </StyledForm>
-        </Form>
+        <BaseForm data={data} onValid={handleValid} onInvalid={handleInvalid} />
     );
 }

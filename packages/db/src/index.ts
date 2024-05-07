@@ -20,7 +20,5 @@ export default function databaseInit(path: string | Buffer): DBContext {
     });
     const db = drizzle(conn, { schema });
 
-    console.log("dataSource initialized");
-
     return { conn, db };
 }

@@ -443,7 +443,19 @@
     }
   },
   "updateTowerModal": {
-    "modalTitle": "Edit Tower"
+    "modalTitle": "Edit Tower",
+    "name": {
+      "label": "Name"
+    },
+    "resistance": {
+      "label": "Resistance"
+    },
+    "distance": {
+      "label": "Distance"
+    },
+    "geometryId": {
+      "label": "Geometry Type"
+    }
   },
   "towerGeomeryConductors": {
     "title": "Conductors"
@@ -534,6 +546,17 @@
     },
     "y": {
       "label": "Y"
+    }
+  },
+  "createTransmissionLineForm": {
+    "name": {
+      "label": "Name"
+    },
+    "fromSource": {
+      "label": "From Source"
+    },
+    "toSource": {
+      "label": "To Source"
     }
   }
 }

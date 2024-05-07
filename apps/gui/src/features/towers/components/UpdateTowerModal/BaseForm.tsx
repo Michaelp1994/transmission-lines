@@ -8,9 +8,8 @@ import {
     FormLabel,
     FormMessage,
     Input,
-    NumberInput,
 } from "@repo/ui";
-import type { UpdateTransmissionTowerInput } from "@repo/validators";
+import type { TransmissionTowerFormInput } from "@repo/validators/forms/TransmissionTower.schema";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
@@ -18,9 +17,9 @@ import { TowerGeometrySelect } from "~/features/towerGeometries";
 import { useUpdateTransmissionTowerForm } from "~/utils/forms";
 
 interface BaseFormProps {
-    data: UpdateTransmissionTowerInput;
-    onValid: (values: UpdateTransmissionTowerInput) => void;
-    onInvalid: (errors: FieldErrors<UpdateTransmissionTowerInput>) => void;
+    data: TransmissionTowerFormInput;
+    onValid: (values: TransmissionTowerFormInput) => void;
+    onInvalid: (errors: FieldErrors<TransmissionTowerFormInput>) => void;
 }
 
 export default function BaseForm({ onValid, onInvalid, data }: BaseFormProps) {
@@ -32,6 +31,8 @@ export default function BaseForm({ onValid, onInvalid, data }: BaseFormProps) {
             onValid(values);
         },
         (errors) => {
+            console.log(form.getValues());
+
             onInvalid(errors);
         }
     );
@@ -65,7 +66,7 @@ export default function BaseForm({ onValid, onInvalid, data }: BaseFormProps) {
                             <FormItem>
                                 <FormLabel>{t("resistance.label")}</FormLabel>
                                 <FormControl>
-                                    <NumberInput type="number" {...field} />
+                                    <Input type="number" {...field} />
                                 </FormControl>
                                 <FormDescription>
                                     {t("resistance.description")}
@@ -84,7 +85,7 @@ export default function BaseForm({ onValid, onInvalid, data }: BaseFormProps) {
                             <FormItem>
                                 <FormLabel>{t("distance.label")}</FormLabel>
                                 <FormControl>
-                                    <NumberInput type="number" {...field} />
+                                    <Input type="number" {...field} />
                                 </FormControl>
                                 <FormDescription>
                                     {t("distance.description")}

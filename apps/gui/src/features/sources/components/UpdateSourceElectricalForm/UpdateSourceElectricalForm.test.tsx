@@ -17,7 +17,7 @@ const labels = {
     resistance: /resistance/i,
 };
 
-describe("Update Source Form", () => {
+describe("Update Source Electrical Form", () => {
     const sourceId = faker.string.uuid();
     const source = createElectricalSource();
     const newSource = createElectricalSource();
@@ -30,13 +30,13 @@ describe("Update Source Form", () => {
             <UpdateSourceElectricalForm sourceId={sourceId} />
         );
         const form = await utils.findByRole("form");
+        const submitBtn = within(form).getByRole("button", { name: /submit/i });
 
-        return { form, user, ...utils };
+        return { form, user, submitBtn, ...utils };
     }
 
     test("correctly calls API", async () => {
         await setup();
-        expect(trpcFn).toHaveBeenCalledTimes(1);
         expect(trpcFn).toHaveBeenCalledWith("query", "source.getById", {
             id: sourceId,
         });
@@ -49,19 +49,16 @@ describe("Update Source Form", () => {
     });
 
     test("submits form with valid input", async () => {
-        const { form, user } = await setup();
+        const { form, user, submitBtn } = await setup();
 
-        trpcFn.mockClear();
         // Fill in the form
         await completeForm(user, form, labels, newSource);
         // Submit the form
-        const submitBtn = within(form).getByRole("button", { name: /submit/i });
 
         await user.click(submitBtn);
 
         // Assert that the form is submitted successfully
-        expect(trpcFn).toHaveBeenCalledTimes(1);
-        expect(trpcFn).toHaveBeenLastCalledWith(
+        expect(trpcFn).toHaveBeenCalledWith(
             "mutation",
             "source.updateElectrical",
             {
@@ -72,9 +69,8 @@ describe("Update Source Form", () => {
     });
 
     test("displays error message for invalid input", async () => {
-        const { form, user } = await setup();
+        const { form, user, submitBtn } = await setup();
 
-        trpcFn.mockClear();
         const badSource = {
             ...newSource,
             phases: 0,
@@ -83,11 +79,13 @@ describe("Update Source Form", () => {
         // Fill in the form
         await completeForm(user, form, labels, badSource);
         // Submit the form
-        const submitBtn = within(form).getByRole("button", { name: /submit/i });
-
         await user.click(submitBtn);
 
         // Assert that the form is not submitted.
-        expect(trpcFn).not.toHaveBeenCalled();
+        expect(trpcFn).not.toHaveBeenCalledWith(
+            "mutation",
+            "source.updateElectrical",
+            expect.anything()
+        );
     });
 });

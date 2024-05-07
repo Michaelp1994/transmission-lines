@@ -15,7 +15,7 @@ export type CreateConductorLocationInput = z.infer<
 // update
 
 export const updateConductorLocationSchema = createConductorLocationSchema
-    .pick({ x: true, y: true })
+    .omit({ geometryId: true })
     .extend({
         id: locationId,
     });

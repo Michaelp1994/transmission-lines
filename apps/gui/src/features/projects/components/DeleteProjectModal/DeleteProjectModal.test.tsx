@@ -3,10 +3,10 @@ import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { useDeleteProjectModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
-import { createMockProject, mockIds } from "~tests/helpers/mockData";
+import { createProject, mockIds } from "~tests/helpers/mockData";
 
 describe("Delete Project Modal", () => {
-    const mockProject = createMockProject();
+    const mockProject = createProject();
     const projectId = mockIds.projectId();
     const trpcFn = vi.fn().mockResolvedValue(mockProject);
     const render = createRender(trpcFn);

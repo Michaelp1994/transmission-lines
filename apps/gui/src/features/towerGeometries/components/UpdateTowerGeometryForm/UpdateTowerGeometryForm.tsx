@@ -15,7 +15,9 @@ function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
     console.log(errors);
 }
 
-export default function FormHandler({ geometryId }: FormHandlerProps) {
+export default function UpdateTowerGeometryForm({
+    geometryId,
+}: FormHandlerProps) {
     const { t } = useTranslation("towerGeometry");
     const navigate = useNavigate();
 

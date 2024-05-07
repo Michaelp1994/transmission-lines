@@ -16,11 +16,13 @@ export type CreateTransmissionLineInput = z.infer<
 
 // update
 
-export const updateTransmissionLineSchema = createTransmissionLineSchema.extend(
-    {
+export const updateTransmissionLineSchema = createTransmissionLineSchema
+    .omit({
+        projectId: true,
+    })
+    .extend({
         id: lineId,
-    }
-);
+    });
 
 export type UpdateTransmissionLineInput = z.infer<
     typeof updateTransmissionLineSchema

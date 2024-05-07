@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import { faker } from "@faker-js/faker";
 import UpdateProjectForm from "./UpdateProjectForm";
 import { createRender, screen, within } from "~test-utils";
-import { createMockProject, mockIds } from "~tests/helpers/mockData";
+import { createProject, mockIds } from "~tests/helpers/mockData";
 import completeForm from "~tests/helpers/completeForm";
 
 const labels = {
@@ -11,8 +11,8 @@ const labels = {
 };
 
 describe("Update Project Form", () => {
-    const oldProject = createMockProject();
-    const newProject = createMockProject();
+    const oldProject = createProject();
+    const newProject = createProject();
     const projectId = mockIds.projectId();
     const trpcFn = vi.fn().mockResolvedValue(oldProject);
     const render = createRender(trpcFn);

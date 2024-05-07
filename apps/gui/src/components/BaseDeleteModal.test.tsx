@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import BaseDeleteModal from "./BaseDeleteModal";
 import { render, screen } from "~test-utils";
 
-describe("Delete Project Modal", () => {
+describe("Base Delete Modal", () => {
     test("confirm delete", async () => {
         const user = userEvent.setup();
 

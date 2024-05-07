@@ -9,15 +9,15 @@ interface TowerTableProps {
 
 export default function TowerTable({ lineId }: TowerTableProps) {
     const { t } = useTranslation("transmissionLine");
-    const { data, error, isLoading } = trpc.tower.getAllByLineId.useQuery({
+    const { data, isError, isLoading } = trpc.tower.getAllByLineId.useQuery({
         lineId,
     });
 
-    if (error) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
+    }
+    if (isError || !data) {
+        return <div>{t("general:errorMessage")}</div>;
     }
 
     return <DataTable data={data} columns={columns} />;

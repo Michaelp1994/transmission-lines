@@ -3,11 +3,12 @@ import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import SourceSelect from "./SourceSelect";
 import { createRender, within } from "~test-utils";
-import { createArray, getSource } from "~tests/helpers/mockData";
+import { createArray, getSource, mockIds } from "~tests/helpers/mockData";
+import UnreachableError from "~tests/UnreachableError";
 
 describe("Source Select", () => {
     const sources = createArray(10, getSource);
-    const projectId = faker.string.uuid();
+    const projectId = mockIds.projectId();
     const trpcFn = vi.fn().mockResolvedValue(sources);
     const render = createRender(trpcFn);
     const mockOnChange = vi.fn();
@@ -28,7 +29,7 @@ describe("Source Select", () => {
 
         return { user, dialog, combobox, ...utils };
     }
-    test("correct data is sent to the server", async () => {
+    test("correct data is requested from the server", async () => {
         await setup("");
 
         expect(trpcFn).toBeCalledWith("query", "source.getAllByProjectId", {
@@ -46,7 +47,7 @@ describe("Source Select", () => {
             const currentSource = sources[index];
 
             if (!currentSource) {
-                throw new Error("Unreachable code path");
+                throw new UnreachableError();
             }
 
             expect(option.textContent).toEqual(currentSource.name);
@@ -60,7 +61,7 @@ describe("Source Select", () => {
         const selectedSource = sources[index];
 
         if (!selectedSource) {
-            throw new Error("Unreachable code path");
+            throw new UnreachableError();
         }
 
         await user.click(within(dialog).getByText(selectedSource.name));

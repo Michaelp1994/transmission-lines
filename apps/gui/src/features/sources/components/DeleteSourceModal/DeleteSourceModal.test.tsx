@@ -3,14 +3,14 @@ import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { useDeleteSourceModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
-import { createSource, mockIds } from "~tests/helpers/mockData";
+import { getSource } from "~tests/helpers/mockData";
 
 describe("Delete Source Modal", () => {
-    const sourceId = mockIds.sourceId();
-    const displayDeleteModal = useDeleteSourceModal(sourceId);
+    const source = getSource();
 
-    const source = createSource();
-    const trpcMockFn = vi.fn().mockResolvedValue({ source, id: sourceId });
+    const displayDeleteModal = useDeleteSourceModal(source.id);
+
+    const trpcMockFn = vi.fn().mockResolvedValue(source);
     const render = createRender(trpcMockFn);
 
     async function setup() {
@@ -32,7 +32,7 @@ describe("Delete Source Modal", () => {
             within(dialog).getByRole("button", { name: /confirm/i })
         );
         expect(trpcMockFn).toBeCalledWith("mutation", "source.delete", {
-            id: sourceId,
+            id: source.id,
         });
         expect(dialog).not.toBeInTheDocument();
     });

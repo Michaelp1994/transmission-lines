@@ -101,6 +101,8 @@ const TowerGeometrySelect = forwardRef<
     );
 });
 
+TowerGeometrySelect.displayName = "TowerGeometrySelect";
+
 export default TowerGeometrySelect;
 
 const StyledCheck = styled(Check)<{ selected: boolean }>`

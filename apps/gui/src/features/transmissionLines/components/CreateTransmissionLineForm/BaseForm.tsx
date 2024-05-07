@@ -28,7 +28,7 @@ export default function CreateTransmissionLineForm({
     onValid,
     onInvalid,
 }: CreateTransmissionLineFormProps) {
-    const { t } = useTranslation("transmissionLine");
+    const { t } = useTranslation("createTransmissionLineForm");
     const form = useCreateTransmissionLineForm();
 
     const handleSubmit = form.handleSubmit(

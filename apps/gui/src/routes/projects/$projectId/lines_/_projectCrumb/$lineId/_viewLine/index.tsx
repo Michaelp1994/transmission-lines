@@ -19,19 +19,6 @@ export const Route = createFileRoute(
 export default function TransmissionLineGeneral() {
     const { lineId } = Route.useParams();
 
-    const { data, isLoading, isError } = trpc.transmissionLine.getById.useQuery(
-        {
-            id: lineId,
-        }
-    );
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    if (isError) {
-        return <div>Error...</div>;
-    }
-
     return (
         <Card>
             <CardHeader>
@@ -43,7 +30,7 @@ export default function TransmissionLineGeneral() {
                 </CardHeaderText>
             </CardHeader>
             <CardContent>
-                <UpdateTransmissionLineForm data={data} />
+                <UpdateTransmissionLineForm lineId={lineId} />
             </CardContent>
         </Card>
     );

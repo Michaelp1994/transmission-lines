@@ -1,5 +1,5 @@
+import { faker } from "@faker-js/faker";
 import { Button } from "@repo/ui";
-import { defaultConductor } from "@repo/validators/forms/Conductor.schema";
 import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import { useCreateConductorModal } from "~/utils/modals";
@@ -8,8 +8,10 @@ import completeForm from "~tests/helpers/completeForm";
 import {
     createArray,
     createConductor,
-    createConductorType,
+    getConductorType,
+    mockIds,
 } from "~tests/helpers/mockData";
+import selectAction from "~tests/helpers/selectAction";
 
 const labels = {
     name: /name/i,
@@ -18,16 +20,15 @@ const labels = {
     bundleNumber: /bundle number/i,
     bundleSpacing: /bundle spacing/i,
     isNeutral: /is neutral/i,
-    // typeId: /conductor type/i,
 };
 
-// TODO: mockFn is being called for the conductor type select which is erroring.
 describe("Create Conductor Modal", () => {
-    const newConductor = createConductor();
-    const conductorTypes = createArray(10, createConductorType);
+    const lineId = mockIds.lineId();
+    const conductorTypes = createArray(10, getConductorType);
+    const [newConductor, conductorType] = createConductor(conductorTypes);
     const trpcFn = vi.fn().mockResolvedValue(newConductor);
     const render = createRender(trpcFn);
-    const displayModal = useCreateConductorModal(newConductor.lineId);
+    const displayModal = useCreateConductorModal(lineId);
 
     async function setup() {
         const user = userEvent.setup();
@@ -41,51 +42,61 @@ describe("Create Conductor Modal", () => {
         );
         const dialog = await screen.findByRole("dialog");
         const form = await within(dialog).findByRole("form");
-
-        trpcFn.mockClear();
+        const confirmBtn = within(dialog).getByRole("button", {
+            name: /create/i,
+        });
 
         return {
             ...utils,
             dialog,
             form,
+            confirmBtn,
             user,
         };
     }
 
     test("fill the form out correctly and test that the information is sent to server", async () => {
-        const { user, dialog, form } = await setup();
-
-        expect(form).toHaveFormValues(defaultConductor);
+        const { user, dialog, form, confirmBtn } = await setup();
 
         await completeForm(user, form, labels, newConductor);
+        // conductor type select
+        await selectAction(user, form, /conductor type/i, conductorType.name);
 
-        const conductorTypeButton =
-            within(form).getByLabelText(/conductor type/i);
+        await user.click(confirmBtn);
 
-        await user.click(conductorTypeButton);
-
-        // TODO: I don't know how but it's only capturing one of the two dialogs.
-        const popup = await screen.findByRole("dialog");
-
-        await user.click(
-            await within(popup).findByText(conductorTypes[0]!.name)
+        expect(trpcFn).toHaveBeenLastCalledWith(
+            "mutation",
+            "conductor.create",
+            {
+                ...newConductor,
+                lineId,
+            }
         );
-
-        const confirm = within(dialog).getByRole("button", {
-            name: /create/i,
-        });
-
-        expect(form).toHaveFormValues(newConductor);
-
-        await user.click(confirm);
-
-        expect(trpcFn).toHaveBeenLastCalledWith({
-            ...newConductor,
-            typeId: conductorTypes[0]!.id,
-        });
-        // expect(trpcFn).toHaveBeenCalledTimes(1);
         expect(dialog).not.toBeInTheDocument();
     });
 
-    test.todo("incorrect data is not sent to server");
+    test("incorrect data is not sent to server", async () => {
+        const { user, dialog, form, confirmBtn } = await setup();
+        const badConductor = {
+            ...newConductor,
+            name: faker.string.alpha(),
+        };
+
+        await completeForm(user, form, labels, badConductor);
+        // await completeForm(user, form, formData, badConductor);
+
+        // // conductor type select
+        await selectAction(user, form, /conductor type/i, conductorType.name);
+
+        // expect(form).toHaveFormValues(newConductor);
+
+        await user.click(confirmBtn);
+
+        expect(trpcFn).not.toHaveBeenCalledWith(
+            "mutation",
+            "conductor.create",
+            expect.anything()
+        );
+        expect(dialog).toBeInTheDocument();
+    });
 });

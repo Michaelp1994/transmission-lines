@@ -1,9 +1,8 @@
-import { faker } from "@faker-js/faker";
 import { TRPCError } from "@trpc/server";
 import { describe, expect, test, vi } from "vitest";
 import SourceTable from "./SourceTable";
 import { createRender } from "~test-utils";
-import { createArray, createSource } from "~tests/helpers/mockData";
+import { createArray, createSource, mockIds } from "~tests/helpers/mockData";
 import verifyTable from "~tests/helpers/verifyTable";
 
 const columns = [
@@ -20,7 +19,7 @@ describe("Source Table", () => {
     const sources = createArray(10, createSource);
     const trpcFn = vi.fn().mockResolvedValue(sources);
     const render = createRender(trpcFn);
-    const projectId = faker.string.uuid();
+    const projectId = mockIds.projectId();
 
     async function setup() {
         const utils = render(<SourceTable projectId={projectId} />);

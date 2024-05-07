@@ -26,7 +26,11 @@ describe("Conductor Table", () => {
         render(<ConductorTable lineId={lineId} />);
         const table = await screen.findByRole("table");
 
-        expect(trpcFn).toHaveBeenCalledWith({ lineId });
+        expect(trpcFn).toHaveBeenCalledWith(
+            "query",
+            "conductor.getAllByLineId",
+            { lineId }
+        );
         verifyTable(table, columns, conductors);
     });
 

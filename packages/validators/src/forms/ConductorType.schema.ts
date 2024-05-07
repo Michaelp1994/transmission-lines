@@ -4,17 +4,17 @@ import { z } from "zod";
 
 export const conductorTypeFormSchema = z.object({
     name: z.string().min(2),
-    surfaceArea: z.number().positive().optional(),
+    surfaceArea: z.coerce.number().positive().optional(),
     stranding: z.string().optional(),
-    outerDiameter: z.number().positive(),
-    coreDiameter: z.number().positive().optional(),
-    layers: z.number().optional(),
-    currentCapacity: z.number().positive().optional(),
-    dcResistance25: z.number().positive().optional(),
-    acResistance25: z.number().positive().optional(),
-    acResistance50: z.number().positive().optional(),
-    acResistance75: z.number().positive(),
-    gmr: z.number().positive(),
+    outerDiameter: z.coerce.number().positive(),
+    coreDiameter: z.coerce.number().positive().optional(),
+    layers: z.coerce.number().optional(),
+    currentCapacity: z.coerce.number().positive().optional(),
+    dcResistance25: z.coerce.number().positive().optional(),
+    acResistance25: z.coerce.number().positive().optional(),
+    acResistance50: z.coerce.number().positive().optional(),
+    acResistance75: z.coerce.number().positive(),
+    gmr: z.coerce.number().positive(),
 });
 
 export type ConductorTypeFormInput = z.infer<typeof conductorTypeFormSchema>;

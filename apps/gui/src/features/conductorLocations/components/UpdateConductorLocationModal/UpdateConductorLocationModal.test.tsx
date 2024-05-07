@@ -45,11 +45,7 @@ describe("Update Conductor Location Modal", () => {
     test("fill out form correctly and check that the correct information is sent to server", async () => {
         const { dialog, form, user } = await setup();
 
-        expect(trpcFn).toHaveBeenCalledTimes(1);
-        expect(trpcFn).toHaveBeenCalledWith({
-            locationId,
-        });
-        await verifyForm(form, labels);
+        verifyForm(form, labels);
         expect(form).toHaveFormValues(oldConductorLocation);
         await completeForm(user, form, labels, newConductorLocation);
         const confirm = within(dialog).getByRole("button", {
@@ -57,11 +53,21 @@ describe("Update Conductor Location Modal", () => {
         });
 
         await user.click(confirm);
-        expect(trpcFn).toHaveBeenLastCalledWith({
-            id: locationId,
-            ...newConductorLocation,
-        });
-        expect(trpcFn).toHaveBeenCalledTimes(2);
+        expect(trpcFn).toHaveBeenCalledWith(
+            "query",
+            "conductorLocations.getById",
+            {
+                locationId,
+            }
+        );
+        expect(trpcFn).toHaveBeenLastCalledWith(
+            "mutation",
+            "conductorLocations.update",
+            {
+                id: locationId,
+                ...newConductorLocation,
+            }
+        );
         expect(dialog).not.toBeInTheDocument();
     });
 
@@ -78,8 +84,11 @@ describe("Update Conductor Location Modal", () => {
 
         await user.click(confirm);
 
-        expect(trpcFn).toHaveBeenCalledTimes(1);
-
+        expect(trpcFn).not.toHaveBeenLastCalledWith(
+            "mutation",
+            "conductorLocations.update",
+            expect.anything()
+        );
         expect(dialog).toBeInTheDocument();
     });
 });

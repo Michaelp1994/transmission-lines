@@ -4,15 +4,15 @@ import { describe, expect, test, vi } from "vitest";
 import UpdateSourceGeneralForm from "./UpdateSourceGeneralForm";
 import { createRender, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
-import { createGeneralSource } from "~tests/helpers/mockData";
+import { createGeneralSource, mockIds } from "~tests/helpers/mockData";
 
 const labels = {
     name: /name/i,
     enabled: /enabled/i,
 };
 
-describe("Update Source Form", () => {
-    const sourceId = faker.string.uuid();
+describe("Update Source General Form", () => {
+    const sourceId = mockIds.sourceId();
     const source = createGeneralSource();
     const newSource = createGeneralSource();
     const trpcFn = vi.fn().mockResolvedValue(source);

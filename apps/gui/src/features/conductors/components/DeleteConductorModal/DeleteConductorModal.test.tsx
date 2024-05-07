@@ -31,7 +31,7 @@ describe("Delete Conductor Modal", () => {
                 name: /confirm/i,
             })
         );
-        expect(trpcFn).toHaveBeenCalledWith({
+        expect(trpcFn).toHaveBeenCalledWith("mutation", "conductor.delete", {
             id: conductorId,
         });
         expect(dialog).not.toBeInTheDocument();

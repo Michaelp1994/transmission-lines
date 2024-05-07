@@ -20,7 +20,11 @@ describe("Conductor Location Table", () => {
     test("correct data is sent to the server", () => {
         render(<ConductorLocationTable geometryId={geometryId} />);
         expect(trpcFn).toBeCalledTimes(1);
-        expect(trpcFn).toBeCalledWith({ geometryId });
+        expect(trpcFn).toBeCalledWith(
+            "query",
+            "conductorLocations.getAllByGeometryId",
+            { geometryId }
+        );
     });
 
     test("displays all rows of data correctly", async () => {

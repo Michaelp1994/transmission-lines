@@ -53,13 +53,8 @@ export type GetConductorByIdInput = z.infer<typeof getConductorByIdSchema>;
 // update
 
 export const updateConductorSchema = createConductorSchema
-    .pick({
-        bundleNumber: true,
-        bundleSpacing: true,
-        fromPhase: true,
-        isNeutral: true,
-        name: true,
-        toPhase: true,
+    .omit({
+        lineId: true,
     })
     .extend({
         id: conductorId,

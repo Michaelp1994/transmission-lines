@@ -19,7 +19,7 @@ export default function FormHandler({ conductorTypeId }: FormHandlerProps) {
     const navigate = useNavigate();
     const { t } = useTranslation("conductorType");
 
-    const { data, isLoading, error } = trpc.conductorType.getById.useQuery({
+    const { data, isLoading, isError } = trpc.conductorType.getById.useQuery({
         id: conductorTypeId,
     });
     const updateMutation = trpc.conductorType.update.useMutation({
@@ -40,7 +40,7 @@ export default function FormHandler({ conductorTypeId }: FormHandlerProps) {
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error) {
+    if (isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

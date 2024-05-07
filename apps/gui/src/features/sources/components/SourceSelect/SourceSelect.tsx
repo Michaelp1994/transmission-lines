@@ -7,9 +7,9 @@ interface DataWrapperProps extends Omit<BaseSelectProps, "data"> {
     projectId: ProjectID;
 }
 
-const DataWrapper = forwardRef<HTMLButtonElement, DataWrapperProps>(
+const SourceSelect = forwardRef<HTMLButtonElement, DataWrapperProps>(
     ({ projectId, ...props }, ref) => {
-        const { data, isLoading, isError, error } =
+        const { data, isLoading, isError } =
             trpc.source.getAllByProjectId.useQuery({
                 projectId,
             });
@@ -18,12 +18,14 @@ const DataWrapper = forwardRef<HTMLButtonElement, DataWrapperProps>(
             return <div>Loading...</div>;
         }
 
-        if (isError) {
-            return <div>Error: {error.message}</div>;
+        if (isError || !data) {
+            return <div>Error!</div>;
         }
 
         return <BaseSelect data={data} ref={ref} {...props} />;
     }
 );
 
-export default DataWrapper;
+SourceSelect.displayName = "SourceSelect";
+
+export default SourceSelect;

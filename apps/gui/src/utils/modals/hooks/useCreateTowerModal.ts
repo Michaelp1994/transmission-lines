@@ -5,7 +5,7 @@ import type { CreateTowerModalProps } from "~/features/towers/components/CreateT
 
 export default function useCreateTowerModal(lineId: LineID) {
     const createModal = useModal<CreateTowerModalProps>(
-        Modals.CreateConductorModal
+        Modals.CreateTowerModal
     );
 
     return () => {

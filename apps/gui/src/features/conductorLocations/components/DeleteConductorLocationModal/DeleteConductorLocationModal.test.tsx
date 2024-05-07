@@ -1,11 +1,11 @@
 import { Button } from "@repo/ui";
 import { userEvent } from "@testing-library/user-event";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { useDeleteConductorLocationModal } from "~/utils/modals";
 import { createRender, screen, within } from "~test-utils";
 import { createConductorLocation, mockIds } from "~tests/helpers/mockData";
 
-describe("DeleteConductorLocationModal", () => {
+describe("Delete Conductor Location Modal", () => {
     const mockConductorLocation = createConductorLocation();
     const locationId = mockIds.locationId();
     const displayModal = useDeleteConductorLocationModal(locationId);
@@ -35,9 +35,13 @@ describe("DeleteConductorLocationModal", () => {
                 name: /confirm/i,
             })
         );
-        expect(trpcFn).toHaveBeenCalledWith({
-            locationId,
-        });
+        expect(trpcFn).toHaveBeenCalledWith(
+            "mutation",
+            "conductorLocations.delete",
+            {
+                locationId,
+            }
+        );
         expect(dialog).not.toBeInTheDocument();
     });
 
@@ -49,7 +53,11 @@ describe("DeleteConductorLocationModal", () => {
                 name: /cancel/i,
             })
         );
-        expect(trpcFn).not.toHaveBeenCalled();
+        expect(trpcFn).not.toHaveBeenCalledWith(
+            "mutation",
+            "conductorLocations.delete",
+            expect.anything()
+        );
         expect(dialog).not.toBeInTheDocument();
     });
 });

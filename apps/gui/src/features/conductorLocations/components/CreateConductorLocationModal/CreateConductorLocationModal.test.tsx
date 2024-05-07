@@ -46,16 +46,20 @@ describe("Create Conductor Location Modal", () => {
         expect(form).toHaveFormValues(defaultConductorLocation);
         await completeForm(user, form, labels, mockConductorLocation);
 
-        const confirm = within(dialog).getByRole("button", {
+        const confirmBtn = within(dialog).getByRole("button", {
             name: /create/i,
         });
 
-        await user.click(confirm);
+        await user.click(confirmBtn);
 
-        expect(trpcFn).toHaveBeenCalledWith({
-            geometryId,
-            ...mockConductorLocation,
-        });
+        expect(trpcFn).toHaveBeenCalledWith(
+            "mutation",
+            "conductorLocations.create",
+            {
+                geometryId,
+                ...mockConductorLocation,
+            }
+        );
         expect(trpcFn).toHaveBeenCalledTimes(1);
         expect(dialog).not.toBeInTheDocument();
     });
@@ -68,13 +72,17 @@ describe("Create Conductor Location Modal", () => {
             y: faker.number.int({ min: -10, max: -1 }),
         });
 
-        const confirm = within(dialog).getByRole("button", {
+        const confirmBtn = within(dialog).getByRole("button", {
             name: /create/i,
         });
 
-        await user.click(confirm);
+        await user.click(confirmBtn);
 
-        expect(trpcFn).not.toHaveBeenCalled();
+        expect(trpcFn).not.toHaveBeenCalledWith(
+            "mutation",
+            "conductorLocations.create",
+            expect.anything()
+        );
         expect(dialog).toBeInTheDocument();
     });
 });

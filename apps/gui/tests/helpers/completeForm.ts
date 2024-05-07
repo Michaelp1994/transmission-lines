@@ -11,18 +11,22 @@ export default async function completeForm(
         if (typeof data[key] === "boolean") {
             const checkbox = within(form).getByLabelText(label);
 
-            console.log("have: ", Boolean(checkbox.ariaChecked));
-            console.log("wanted: ", data[key]);
-            if (data[key] !== Boolean(checkbox.ariaChecked)) {
+            if (
+                data[key] !==
+                Boolean(
+                    checkbox.attributes.getNamedItem("data-state")?.value ===
+                        "checked"
+                )
+            ) {
                 const input = within(form).getByLabelText(label);
 
                 await user.click(input);
-                console.log("clicked");
             }
         } else {
             const value = String(data[key]);
             const input = within(form).getByLabelText(label);
 
+            console.log(label);
             await user.clear(input);
             await user.type(input, value);
         }

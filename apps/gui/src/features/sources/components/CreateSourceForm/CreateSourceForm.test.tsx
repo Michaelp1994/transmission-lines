@@ -3,7 +3,7 @@ import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import type { SourceFormInput } from "@repo/validators/forms/Source.schema";
 import CreateSourceForm from "./CreateSourceForm";
-import { createRender, screen, within } from "~test-utils";
+import { createRender, within } from "~test-utils";
 import completeForm from "~tests/helpers/completeForm";
 import { createSource, mockIds } from "~tests/helpers/mockData";
 
@@ -40,7 +40,7 @@ describe("Create Source Form", () => {
 
         await completeForm(user, form, labels, fakeSource);
         // Submit the form
-        await user.click(screen.getByRole("button", { name: /submit/i }));
+        await user.click(within(form).getByRole("button", { name: /submit/i }));
         // Assert that the form is submitted successfully
         expect(trpcFn).toBeCalledTimes(1);
         expect(trpcFn).toBeCalledWith("mutation", "source.create", {
@@ -59,13 +59,17 @@ describe("Create Source Form", () => {
         });
 
         // Submit the form
-        await user.click(screen.getByRole("button", { name: /submit/i }));
+        await user.click(within(form).getByRole("button", { name: /submit/i }));
         // Assert that the form is submitted successfully
 
         // Add your assertions here
         expect(
             within(form).getByText(/name must be at least 3 character\(s\)/i)
         ).toBeInTheDocument();
-        expect(trpcFn).not.toBeCalled();
+        expect(trpcFn).not.toBeCalledWith(
+            "mutation",
+            "source.create",
+            expect.anything()
+        );
     });
 });

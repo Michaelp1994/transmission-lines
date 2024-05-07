@@ -30,8 +30,9 @@ export type GetTowerByIdInput = z.infer<typeof getTowerByIdSchema>;
 
 // update
 
-export const updateTransmissionTowerSchema =
-    createTransmissionTowerSchema.extend({
+export const updateTransmissionTowerSchema = createTransmissionTowerSchema
+    .omit({ lineId: true })
+    .extend({
         id: towerId,
     });
 

@@ -2,13 +2,13 @@ import { userEvent } from "@testing-library/user-event";
 import { describe, expect, test, vi } from "vitest";
 import CreateProjectForm from "./CreateProjectForm";
 import { screen, within, createRender } from "~test-utils";
-import { createMockProject } from "~tests/helpers/mockData";
+import { createProject } from "~tests/helpers/mockData";
 import completeForm from "~tests/helpers/completeForm";
 
 const labels = { name: /name/i };
 
-describe("CreateProjectForm", () => {
-    const mockProject = createMockProject();
+describe("Create Project Form", () => {
+    const mockProject = createProject();
     const trpcFn = vi.fn().mockResolvedValue(mockProject);
 
     const render = createRender(trpcFn);
