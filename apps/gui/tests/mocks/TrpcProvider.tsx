@@ -22,7 +22,6 @@ function customLinkFactory(mockFn: TrpcMockFn) {
                 // console.log("performing operation:", op);
                 let _res: any;
 
-                console.log(op);
                 mockFn(op.type, op.path, op.input)
                     .then((res) => {
                         _res = res;

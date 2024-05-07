@@ -26,7 +26,6 @@ export default async function completeForm(
             const value = String(data[key]);
             const input = within(form).getByLabelText(label);
 
-            console.log(label);
             await user.clear(input);
             await user.type(input, value);
         }

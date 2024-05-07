@@ -7,9 +7,9 @@ const sheriffOptions = {
     react: false,
     next: false,
     lodash: false,
-    playwright: false,
+    playwright: true,
     jest: false,
-    vitest: true,
+    vitest: false,
 };
 
 /** @type {import("eslint").Linter.FlatConfig[]} */

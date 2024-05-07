@@ -31,8 +31,6 @@ export default function BaseForm({ onValid, onInvalid, data }: BaseFormProps) {
             onValid(values);
         },
         (errors) => {
-            console.log(form.getValues());
-
             onInvalid(errors);
         }
     );

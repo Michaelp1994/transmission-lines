@@ -49,7 +49,7 @@ describe("openDSS Driver", () => {
 
         expect(driver.getNumElements()).toBe(4);
 
-        expect(driver.getElementNames()).toEqual([
+        expect(driver.getElementNames()).toStrictEqual([
             "Vsource.source",
             "Vsource.source1",
             "Vsource.source2",
@@ -58,7 +58,7 @@ describe("openDSS Driver", () => {
 
         driver.solve();
 
-        expect(driver.getNodeNames()).toEqual([
+        expect(driver.getNodeNames()).toStrictEqual([
             "sourcebus.1",
             "sourcebus.2",
             "sourcebus.3",
@@ -73,7 +73,7 @@ describe("openDSS Driver", () => {
             "bus3.3",
         ]);
 
-        expect(driver.getBusNames()).toEqual([
+        expect(driver.getBusNames()).toStrictEqual([
             "sourcebus",
             "bus1",
             "bus2",
