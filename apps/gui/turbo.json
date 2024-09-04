@@ -1,9 +1,16 @@
 {
-  "extends": ["//"],
-  "pipeline": {
+  "extends": [
+    "//"
+  ],
+  "tasks": {
     "build": {
-      "outputs": ["dist/**"],
-      "inputs": ["src/**", "vite.config.ts"]
+      "outputs": [
+        "dist/**"
+      ],
+      "inputs": [
+        "src/**",
+        "vite.config.ts"
+      ]
     }
   }
 }

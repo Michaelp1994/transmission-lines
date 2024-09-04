@@ -306,7 +306,7 @@ importers:
         version: 7.0.0
       typeorm:
         specifier: ^0.3.20
-        version: 0.3.20(better-sqlite3@11.2.1)
+        version: 0.3.20
       typescript:
         specifier: ^5.5.4
         version: 5.5.4
@@ -14674,7 +14674,7 @@ snapshots:
 
   typed-function@4.2.1: {}
 
-  typeorm@0.3.20(better-sqlite3@11.2.1):
+  typeorm@0.3.20:
     dependencies:
       '@sqltools/formatter': 1.2.5
       app-root-path: 3.1.0
@@ -14691,8 +14691,6 @@ snapshots:
       tslib: 2.7.0
       uuid: 9.0.1
       yargs: 17.7.2
-    optionalDependencies:
-      better-sqlite3: 11.2.1
     transitivePeerDependencies:
       - supports-color
 

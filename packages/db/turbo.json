@@ -1,15 +1,20 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-
-    "extends": ["//"],
-    "pipeline": {
-        "build": {
-            "dependsOn": ["^build"],
-            "outputs": ["dist/**"]
-        },
-        "db:push": {
-            "cache": false,
-            "interactive": true
-        }
+  "$schema": "https://turbo.build/schema.json",
+  "extends": [
+    "//"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "db:push": {
+      "cache": false,
+      "interactive": true
     }
+  }
 }

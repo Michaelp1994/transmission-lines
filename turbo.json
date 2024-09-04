@@ -1,38 +1,51 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "globalDependencies": ["**/.env.*local"],
-    "globalEnv": ["PORT"],
-    "pipeline": {
-        "build": {
-            "dependsOn": ["^build"]
-        },
-        "package": {
-            "dependsOn": ["desktop#build", "gui#build"],
-            "outputs": ["dist/**"]
-        },
-        "rebuild": {
-            "cache": false
-        },
-        "prebuild": {
-            "cache": false
-        },
-        "test": {
-            "outputs": ["coverage/**"],
-            "dependsOn": []
-        },
-        "db:push": {},
-        "lint": {},
-        "lint:fix": {},
-        "typecheck": {},
-        "dev": {
-            "cache": false,
-            "persistent": true
-        },
-        "clean": {
-            "cache": false
-        },
-        "watch": {
-            "cache": false
-        }
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
+  "globalEnv": [
+    "PORT"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "package": {
+      "dependsOn": [
+        "desktop#build",
+        "gui#build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "rebuild": {
+      "cache": false
+    },
+    "prebuild": {
+      "cache": false
+    },
+    "test": {
+      "outputs": [
+        "coverage/**"
+      ],
+      "dependsOn": []
+    },
+    "db:push": {},
+    "lint": {},
+    "lint:fix": {},
+    "typecheck": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    },
+    "watch": {
+      "cache": false
     }
+  }
 }

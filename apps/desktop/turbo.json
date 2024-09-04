@@ -1,19 +1,30 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "extends": ["//"],
-    "pipeline": {
-        "build": {
-            "dependsOn": ["^build"],
-            "outputs": ["dist/**"]
-        },
-        "dev": {
-            "dependsOn": ["setup-dev"]
-        },
-        "test": {
-            "dependsOn": ["^build", "build"]
-        },
-        "setup-dev": {
-            "cache": false
-        }
+  "$schema": "https://turbo.build/schema.json",
+  "extends": [
+    "//"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "dev": {
+      "dependsOn": [
+        "setup-dev"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^build",
+        "build"
+      ]
+    },
+    "setup-dev": {
+      "cache": false
     }
+  }
 }

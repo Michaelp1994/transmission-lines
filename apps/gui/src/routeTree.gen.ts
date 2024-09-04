@@ -307,162 +307,282 @@ const ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute =
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
     '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
       preLoaderRoute: typeof ProjectsImport
       parentRoute: typeof rootRoute
     }
     '/conductor-types/new': {
+      id: '/conductor-types/new'
+      path: '/conductor-types/new'
+      fullPath: '/conductor-types/new'
       preLoaderRoute: typeof ConductorTypesNewImport
       parentRoute: typeof rootRoute
     }
     '/projects/new': {
+      id: '/projects/new'
+      path: '/new'
+      fullPath: '/projects/new'
       preLoaderRoute: typeof ProjectsNewImport
       parentRoute: typeof ProjectsImport
     }
     '/tower-geometries/new': {
+      id: '/tower-geometries/new'
+      path: '/tower-geometries/new'
+      fullPath: '/tower-geometries/new'
       preLoaderRoute: typeof TowerGeometriesNewImport
       parentRoute: typeof rootRoute
     }
     '/conductor-types/': {
+      id: '/conductor-types/'
+      path: '/conductor-types'
+      fullPath: '/conductor-types'
       preLoaderRoute: typeof ConductorTypesIndexImport
       parentRoute: typeof rootRoute
     }
     '/projects/': {
+      id: '/projects/'
+      path: '/'
+      fullPath: '/projects/'
       preLoaderRoute: typeof ProjectsIndexImport
       parentRoute: typeof ProjectsImport
     }
     '/tower-geometries/': {
+      id: '/tower-geometries/'
+      path: '/tower-geometries'
+      fullPath: '/tower-geometries'
       preLoaderRoute: typeof TowerGeometriesIndexImport
       parentRoute: typeof rootRoute
     }
     '/conductor-types/$typeId': {
+      id: '/conductor-types/$typeId'
+      path: '/conductor-types/$typeId'
+      fullPath: '/conductor-types/$typeId'
       preLoaderRoute: typeof ConductorTypesTypeIdImport
       parentRoute: typeof rootRoute
     }
     '/conductor-types/$typeId/_layout': {
+      id: '/conductor-types/$typeId/_layout'
+      path: '/conductor-types/$typeId'
+      fullPath: '/conductor-types/$typeId'
       preLoaderRoute: typeof ConductorTypesTypeIdLayoutImport
       parentRoute: typeof ConductorTypesTypeIdRoute
     }
     '/projects/$projectId': {
+      id: '/projects/$projectId'
+      path: '/$projectId'
+      fullPath: '/projects/$projectId'
       preLoaderRoute: typeof ProjectsProjectIdImport
       parentRoute: typeof ProjectsImport
     }
     '/projects/$projectId/_viewProjectPage': {
+      id: '/projects/$projectId/_viewProjectPage'
+      path: '/$projectId'
+      fullPath: '/projects/$projectId'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageImport
       parentRoute: typeof ProjectsProjectIdRoute
     }
     '/tower-geometries/$geometryId': {
+      id: '/tower-geometries/$geometryId'
+      path: '/tower-geometries/$geometryId'
+      fullPath: '/tower-geometries/$geometryId'
       preLoaderRoute: typeof TowerGeometriesGeometryIdImport
       parentRoute: typeof rootRoute
     }
     '/tower-geometries/$geometryId/_layout': {
+      id: '/tower-geometries/$geometryId/_layout'
+      path: '/tower-geometries/$geometryId'
+      fullPath: '/tower-geometries/$geometryId'
       preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutImport
       parentRoute: typeof TowerGeometriesGeometryIdRoute
     }
     '/conductor-types/$typeId/_layout/properties': {
+      id: '/conductor-types/$typeId/_layout/properties'
+      path: '/properties'
+      fullPath: '/conductor-types/$typeId/properties'
       preLoaderRoute: typeof ConductorTypesTypeIdLayoutPropertiesImport
       parentRoute: typeof ConductorTypesTypeIdLayoutImport
     }
     '/projects/$projectId/_viewProjectPage/diagram': {
+      id: '/projects/$projectId/_viewProjectPage/diagram'
+      path: '/diagram'
+      fullPath: '/projects/$projectId/diagram'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageDiagramImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
     }
     '/projects/$projectId/_viewProjectPage/lines': {
+      id: '/projects/$projectId/_viewProjectPage/lines'
+      path: '/lines'
+      fullPath: '/projects/$projectId/lines'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageLinesImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
     }
     '/projects/$projectId/_viewProjectPage/results': {
+      id: '/projects/$projectId/_viewProjectPage/results'
+      path: '/results'
+      fullPath: '/projects/$projectId/results'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageResultsImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
     }
     '/projects/$projectId/_viewProjectPage/sources': {
+      id: '/projects/$projectId/_viewProjectPage/sources'
+      path: '/sources'
+      fullPath: '/projects/$projectId/sources'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageSourcesImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
     }
     '/projects/$projectId/lines': {
+      id: '/projects/$projectId/lines'
+      path: '/lines'
+      fullPath: '/projects/$projectId/lines'
       preLoaderRoute: typeof ProjectsProjectIdLinesImport
       parentRoute: typeof ProjectsProjectIdImport
     }
     '/projects/$projectId/lines/_projectCrumb': {
+      id: '/projects/$projectId/lines/_projectCrumb'
+      path: '/lines'
+      fullPath: '/projects/$projectId/lines'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
       parentRoute: typeof ProjectsProjectIdLinesRoute
     }
     '/projects/$projectId/sources': {
+      id: '/projects/$projectId/sources'
+      path: '/sources'
+      fullPath: '/projects/$projectId/sources'
       preLoaderRoute: typeof ProjectsProjectIdSourcesImport
       parentRoute: typeof ProjectsProjectIdImport
     }
     '/projects/$projectId/sources/_projectCrumb': {
+      id: '/projects/$projectId/sources/_projectCrumb'
+      path: '/sources'
+      fullPath: '/projects/$projectId/sources'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
       parentRoute: typeof ProjectsProjectIdSourcesRoute
     }
     '/tower-geometries/$geometryId/_layout/conductors': {
+      id: '/tower-geometries/$geometryId/_layout/conductors'
+      path: '/conductors'
+      fullPath: '/tower-geometries/$geometryId/conductors'
       preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutConductorsImport
       parentRoute: typeof TowerGeometriesGeometryIdLayoutImport
     }
     '/conductor-types/$typeId/_layout/': {
+      id: '/conductor-types/$typeId/_layout/'
+      path: '/'
+      fullPath: '/conductor-types/$typeId/'
       preLoaderRoute: typeof ConductorTypesTypeIdLayoutIndexImport
       parentRoute: typeof ConductorTypesTypeIdLayoutImport
     }
     '/projects/$projectId/_viewProjectPage/': {
+      id: '/projects/$projectId/_viewProjectPage/'
+      path: '/'
+      fullPath: '/projects/$projectId/'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageIndexImport
       parentRoute: typeof ProjectsProjectIdViewProjectPageImport
     }
     '/tower-geometries/$geometryId/_layout/': {
+      id: '/tower-geometries/$geometryId/_layout/'
+      path: '/'
+      fullPath: '/tower-geometries/$geometryId/'
       preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutIndexImport
       parentRoute: typeof TowerGeometriesGeometryIdLayoutImport
     }
     '/projects/$projectId/lines/_projectCrumb/new': {
+      id: '/projects/$projectId/lines/_projectCrumb/new'
+      path: '/new'
+      fullPath: '/projects/$projectId/lines/new'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbNewImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
     }
     '/projects/$projectId/sources/_projectCrumb/new': {
+      id: '/projects/$projectId/sources/_projectCrumb/new'
+      path: '/new'
+      fullPath: '/projects/$projectId/sources/new'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbNewImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId': {
+      id: '/projects/$projectId/lines/_projectCrumb/$lineId'
+      path: '/$lineId'
+      fullPath: '/projects/$projectId/lines/$lineId'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine': {
+      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine'
+      path: '/$lineId'
+      fullPath: '/projects/$projectId/lines/$lineId'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdRoute
     }
     '/projects/$projectId/sources/_projectCrumb/$sourceId': {
+      id: '/projects/$projectId/sources/_projectCrumb/$sourceId'
+      path: '/$sourceId'
+      fullPath: '/projects/$projectId/sources/$sourceId'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
     }
     '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource': {
+      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource'
+      path: '/$sourceId'
+      fullPath: '/projects/$projectId/sources/$sourceId'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdRoute
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors': {
+      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors'
+      path: '/conductors'
+      fullPath: '/projects/$projectId/lines/$lineId/conductors'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers': {
+      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers'
+      path: '/towers'
+      fullPath: '/projects/$projectId/lines/$lineId/towers'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
     }
     '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical': {
+      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical'
+      path: '/electrical'
+      fullPath: '/projects/$projectId/sources/$sourceId/electrical'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
     }
     '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence': {
+      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence'
+      path: '/sequence'
+      fullPath: '/projects/$projectId/sources/$sourceId/sequence'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/': {
+      id: '/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/'
+      path: '/$towerId'
+      fullPath: '/projects/$projectId/lines/$lineId/$towerId'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
     }
     '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/': {
+      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/'
+      path: '/'
+      fullPath: '/projects/$projectId/lines/$lineId/'
       preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport
       parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
     }
     '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/': {
+      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/'
+      path: '/'
+      fullPath: '/projects/$projectId/sources/$sourceId/'
       preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport
       parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
     }
@@ -471,64 +591,309 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren([
+export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  ProjectsRoute.addChildren([
+  ProjectsRoute: ProjectsRoute.addChildren({
     ProjectsNewRoute,
     ProjectsIndexRoute,
-    ProjectsProjectIdRoute.addChildren([
-      ProjectsProjectIdViewProjectPageRoute.addChildren([
-        ProjectsProjectIdViewProjectPageDiagramRoute,
-        ProjectsProjectIdViewProjectPageLinesRoute,
-        ProjectsProjectIdViewProjectPageResultsRoute,
-        ProjectsProjectIdViewProjectPageSourcesRoute,
-        ProjectsProjectIdViewProjectPageIndexRoute,
-      ]),
-      ProjectsProjectIdLinesRoute.addChildren([
-        ProjectsProjectIdLinesprojectCrumbRoute.addChildren([
-          ProjectsProjectIdLinesprojectCrumbNewRoute,
-          ProjectsProjectIdLinesprojectCrumbLineIdRoute.addChildren([
-            ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute.addChildren([
-              ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute,
-              ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute,
-              ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute,
-            ]),
-            ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute,
-          ]),
-        ]),
-      ]),
-      ProjectsProjectIdSourcesRoute.addChildren([
-        ProjectsProjectIdSourcesprojectCrumbRoute.addChildren([
-          ProjectsProjectIdSourcesprojectCrumbNewRoute,
-          ProjectsProjectIdSourcesprojectCrumbSourceIdRoute.addChildren([
-            ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute.addChildren(
-              [
-                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute,
-                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute,
-                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute,
-              ],
-            ),
-          ]),
-        ]),
-      ]),
-    ]),
-  ]),
+    ProjectsProjectIdRoute: ProjectsProjectIdRoute.addChildren({
+      ProjectsProjectIdViewProjectPageRoute:
+        ProjectsProjectIdViewProjectPageRoute.addChildren({
+          ProjectsProjectIdViewProjectPageDiagramRoute,
+          ProjectsProjectIdViewProjectPageLinesRoute,
+          ProjectsProjectIdViewProjectPageResultsRoute,
+          ProjectsProjectIdViewProjectPageSourcesRoute,
+          ProjectsProjectIdViewProjectPageIndexRoute,
+        }),
+      ProjectsProjectIdLinesRoute: ProjectsProjectIdLinesRoute.addChildren({
+        ProjectsProjectIdLinesprojectCrumbRoute:
+          ProjectsProjectIdLinesprojectCrumbRoute.addChildren({
+            ProjectsProjectIdLinesprojectCrumbNewRoute,
+            ProjectsProjectIdLinesprojectCrumbLineIdRoute:
+              ProjectsProjectIdLinesprojectCrumbLineIdRoute.addChildren({
+                ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute:
+                  ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute.addChildren(
+                    {
+                      ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute,
+                      ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute,
+                      ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute,
+                    },
+                  ),
+                ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute,
+              }),
+          }),
+      }),
+      ProjectsProjectIdSourcesRoute: ProjectsProjectIdSourcesRoute.addChildren({
+        ProjectsProjectIdSourcesprojectCrumbRoute:
+          ProjectsProjectIdSourcesprojectCrumbRoute.addChildren({
+            ProjectsProjectIdSourcesprojectCrumbNewRoute,
+            ProjectsProjectIdSourcesprojectCrumbSourceIdRoute:
+              ProjectsProjectIdSourcesprojectCrumbSourceIdRoute.addChildren({
+                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute:
+                  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute.addChildren(
+                    {
+                      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute,
+                      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute,
+                      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute,
+                    },
+                  ),
+              }),
+          }),
+      }),
+    }),
+  }),
   ConductorTypesNewRoute,
   TowerGeometriesNewRoute,
   ConductorTypesIndexRoute,
   TowerGeometriesIndexRoute,
-  ConductorTypesTypeIdRoute.addChildren([
-    ConductorTypesTypeIdLayoutRoute.addChildren([
-      ConductorTypesTypeIdLayoutPropertiesRoute,
-      ConductorTypesTypeIdLayoutIndexRoute,
-    ]),
-  ]),
-  TowerGeometriesGeometryIdRoute.addChildren([
-    TowerGeometriesGeometryIdLayoutRoute.addChildren([
-      TowerGeometriesGeometryIdLayoutConductorsRoute,
-      TowerGeometriesGeometryIdLayoutIndexRoute,
-    ]),
-  ]),
-])
+  ConductorTypesTypeIdRoute: ConductorTypesTypeIdRoute.addChildren({
+    ConductorTypesTypeIdLayoutRoute:
+      ConductorTypesTypeIdLayoutRoute.addChildren({
+        ConductorTypesTypeIdLayoutPropertiesRoute,
+        ConductorTypesTypeIdLayoutIndexRoute,
+      }),
+  }),
+  TowerGeometriesGeometryIdRoute: TowerGeometriesGeometryIdRoute.addChildren({
+    TowerGeometriesGeometryIdLayoutRoute:
+      TowerGeometriesGeometryIdLayoutRoute.addChildren({
+        TowerGeometriesGeometryIdLayoutConductorsRoute,
+        TowerGeometriesGeometryIdLayoutIndexRoute,
+      }),
+  }),
+})
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/projects",
+        "/conductor-types/new",
+        "/tower-geometries/new",
+        "/conductor-types/",
+        "/tower-geometries/",
+        "/conductor-types/$typeId",
+        "/tower-geometries/$geometryId"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx",
+      "children": [
+        "/projects/new",
+        "/projects/",
+        "/projects/$projectId"
+      ]
+    },
+    "/conductor-types/new": {
+      "filePath": "conductor-types/new.tsx"
+    },
+    "/projects/new": {
+      "filePath": "projects/new.tsx",
+      "parent": "/projects"
+    },
+    "/tower-geometries/new": {
+      "filePath": "tower-geometries/new.tsx"
+    },
+    "/conductor-types/": {
+      "filePath": "conductor-types/index.tsx"
+    },
+    "/projects/": {
+      "filePath": "projects/index.tsx",
+      "parent": "/projects"
+    },
+    "/tower-geometries/": {
+      "filePath": "tower-geometries/index.tsx"
+    },
+    "/conductor-types/$typeId": {
+      "filePath": "conductor-types/$typeId",
+      "children": [
+        "/conductor-types/$typeId/_layout"
+      ]
+    },
+    "/conductor-types/$typeId/_layout": {
+      "filePath": "conductor-types/$typeId/_layout.tsx",
+      "parent": "/conductor-types/$typeId",
+      "children": [
+        "/conductor-types/$typeId/_layout/properties",
+        "/conductor-types/$typeId/_layout/"
+      ]
+    },
+    "/projects/$projectId": {
+      "filePath": "projects/$projectId",
+      "parent": "/projects",
+      "children": [
+        "/projects/$projectId/_viewProjectPage",
+        "/projects/$projectId/lines",
+        "/projects/$projectId/sources"
+      ]
+    },
+    "/projects/$projectId/_viewProjectPage": {
+      "filePath": "projects/$projectId/_viewProjectPage.tsx",
+      "parent": "/projects/$projectId",
+      "children": [
+        "/projects/$projectId/_viewProjectPage/diagram",
+        "/projects/$projectId/_viewProjectPage/lines",
+        "/projects/$projectId/_viewProjectPage/results",
+        "/projects/$projectId/_viewProjectPage/sources",
+        "/projects/$projectId/_viewProjectPage/"
+      ]
+    },
+    "/tower-geometries/$geometryId": {
+      "filePath": "tower-geometries/$geometryId",
+      "children": [
+        "/tower-geometries/$geometryId/_layout"
+      ]
+    },
+    "/tower-geometries/$geometryId/_layout": {
+      "filePath": "tower-geometries/$geometryId/_layout.tsx",
+      "parent": "/tower-geometries/$geometryId",
+      "children": [
+        "/tower-geometries/$geometryId/_layout/conductors",
+        "/tower-geometries/$geometryId/_layout/"
+      ]
+    },
+    "/conductor-types/$typeId/_layout/properties": {
+      "filePath": "conductor-types/$typeId/_layout/properties.tsx",
+      "parent": "/conductor-types/$typeId/_layout"
+    },
+    "/projects/$projectId/_viewProjectPage/diagram": {
+      "filePath": "projects/$projectId/_viewProjectPage/diagram.tsx",
+      "parent": "/projects/$projectId/_viewProjectPage"
+    },
+    "/projects/$projectId/_viewProjectPage/lines": {
+      "filePath": "projects/$projectId/_viewProjectPage/lines.tsx",
+      "parent": "/projects/$projectId/_viewProjectPage"
+    },
+    "/projects/$projectId/_viewProjectPage/results": {
+      "filePath": "projects/$projectId/_viewProjectPage/results.tsx",
+      "parent": "/projects/$projectId/_viewProjectPage"
+    },
+    "/projects/$projectId/_viewProjectPage/sources": {
+      "filePath": "projects/$projectId/_viewProjectPage/sources.tsx",
+      "parent": "/projects/$projectId/_viewProjectPage"
+    },
+    "/projects/$projectId/lines": {
+      "filePath": "projects/$projectId/lines_",
+      "parent": "/projects/$projectId",
+      "children": [
+        "/projects/$projectId/lines/_projectCrumb"
+      ]
+    },
+    "/projects/$projectId/lines/_projectCrumb": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb.tsx",
+      "parent": "/projects/$projectId/lines",
+      "children": [
+        "/projects/$projectId/lines/_projectCrumb/new",
+        "/projects/$projectId/lines/_projectCrumb/$lineId"
+      ]
+    },
+    "/projects/$projectId/sources": {
+      "filePath": "projects/$projectId/sources_",
+      "parent": "/projects/$projectId",
+      "children": [
+        "/projects/$projectId/sources/_projectCrumb"
+      ]
+    },
+    "/projects/$projectId/sources/_projectCrumb": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb.tsx",
+      "parent": "/projects/$projectId/sources",
+      "children": [
+        "/projects/$projectId/sources/_projectCrumb/new",
+        "/projects/$projectId/sources/_projectCrumb/$sourceId"
+      ]
+    },
+    "/tower-geometries/$geometryId/_layout/conductors": {
+      "filePath": "tower-geometries/$geometryId/_layout/conductors.tsx",
+      "parent": "/tower-geometries/$geometryId/_layout"
+    },
+    "/conductor-types/$typeId/_layout/": {
+      "filePath": "conductor-types/$typeId/_layout/index.tsx",
+      "parent": "/conductor-types/$typeId/_layout"
+    },
+    "/projects/$projectId/_viewProjectPage/": {
+      "filePath": "projects/$projectId/_viewProjectPage/index.tsx",
+      "parent": "/projects/$projectId/_viewProjectPage"
+    },
+    "/tower-geometries/$geometryId/_layout/": {
+      "filePath": "tower-geometries/$geometryId/_layout/index.tsx",
+      "parent": "/tower-geometries/$geometryId/_layout"
+    },
+    "/projects/$projectId/lines/_projectCrumb/new": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/new.tsx",
+      "parent": "/projects/$projectId/lines/_projectCrumb"
+    },
+    "/projects/$projectId/sources/_projectCrumb/new": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb/new.tsx",
+      "parent": "/projects/$projectId/sources/_projectCrumb"
+    },
+    "/projects/$projectId/lines/_projectCrumb/$lineId": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId",
+      "parent": "/projects/$projectId/lines/_projectCrumb",
+      "children": [
+        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine",
+        "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/"
+      ]
+    },
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine.tsx",
+      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId",
+      "children": [
+        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors",
+        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers",
+        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/"
+      ]
+    },
+    "/projects/$projectId/sources/_projectCrumb/$sourceId": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId",
+      "parent": "/projects/$projectId/sources/_projectCrumb",
+      "children": [
+        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
+      ]
+    },
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource.tsx",
+      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId",
+      "children": [
+        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical",
+        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence",
+        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
+      ]
+    },
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/conductors.tsx",
+      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
+    },
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/towers.tsx",
+      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
+    },
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/electrical.tsx",
+      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
+    },
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/sequence.tsx",
+      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
+    },
+    "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/$towerId_/index.tsx",
+      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId"
+    },
+    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/": {
+      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/index.tsx",
+      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
+    },
+    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/": {
+      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/index.tsx",
+      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
+    }
+  }
+}
+ROUTE_MANIFEST_END */
