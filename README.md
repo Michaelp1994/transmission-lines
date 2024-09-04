@@ -20,3 +20,9 @@
 -   [ ] Pagination
 -   [ ] Multiple Selection in table
 -   [ ] Inline Datatable editing (Conductor Location)
+
+## Setup
+
+`bash
+choco install python visualstudio2022-workload-vctools -y
+`

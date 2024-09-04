@@ -5,9 +5,9 @@
     "license": "MIT",
     "type": "module",
     "devDependencies": {
-        "@eslint/js": "^9.1.1",
-        "eslint": "^8.57.0",
-        "eslint-config-sheriff": "^18.3.0",
-        "typescript-eslint": "^7.8.0"
+        "@eslint/js": "^9.9.1",
+        "eslint": "^9.9.1",
+        "eslint-config-sheriff": "^21.2.0",
+        "typescript-eslint": "^8.4.0"
     }
 }
