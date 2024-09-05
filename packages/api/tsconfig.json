@@ -1,18 +1,14 @@
 {
+    "extends": "@repo/typescript-config/internal-package.json",
     "compilerOptions": {
-        "checkJs": true,
-        "outDir": "./dist",
-        "noEmit": true
+        "declaration": false,
+        "declarationMap": false,
+        "outDir": "dist",
+        "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
     },
-    "references": [
-        {
-            "path": "./tsconfig.app.json"
-        },
-        {
-            "path": "./tsconfig.test.json"
-        }
-    ],
-    "extends": "@repo/typescript-config/node.json",
-    "include": ["eslint.config.js", "vite.config.ts"],
+    "tsc-alias": {
+        "resolveFullPaths": true
+    },
+    "include": ["src"],
     "exclude": ["node_modules"]
 }

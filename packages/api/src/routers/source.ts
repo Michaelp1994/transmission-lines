@@ -11,8 +11,8 @@ import {
     updateSourcePositionsSchema,
 } from "@repo/validators/schemas/Source.schema";
 import { publicProcedure, router } from "../trpc";
-import calculateZPhaseComponents from "@/helpers/calculateZPhaseComponents";
-import calculateZSequenceComponents from "@/helpers/calculateZSequenceComponents";
+import calculateZPhaseComponents from "../helpers/calculateZPhaseComponents";
+import calculateZSequenceComponents from "../helpers/calculateZSequenceComponents";
 
 export default router({
     getAll: publicProcedure

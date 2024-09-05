@@ -1,64 +1,44 @@
-import { type ChildProcess, spawn } from "child_process";
-import electronPath from "electron";
-import swc from "@rollup/plugin-swc";
-import { defineConfig } from "vite";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { join } from "path";
+import { builtinModules } from "module";
 
-const electronPlugin = () => {
-    let pr: ChildProcess;
+const PACKAGE_ROOT = __dirname;
 
-    return {
-        name: "prebuild-commands",
-        // handleHotUpdate: async () => {
-        //     runElectron();
-        // },
-        writeBundle: async () => {
-            const cwd = (process && process.cwd()) || __dirname;
-
-            console.log("spawning electron...");
-            pr = spawn(
-                electronPath as unknown as string,
-                ["dist/index.js", "--inspect=9229"],
-                {
-                    cwd,
-                }
-            );
-            pr.stdout?.on("data", (data) => {
-                console.log(`${data}`);
-            });
+/**
+ * @type {import('vite').UserConfig}
+ * @see https://vitejs.dev/config/
+ */
+const config = {
+    mode: process.env.MODE,
+    root: PACKAGE_ROOT,
+    envDir: process.cwd(),
+    resolve: {
+        alias: {
+            "/@/": join(PACKAGE_ROOT, "src") + "/",
         },
-        watchChange: async () => {
-            if (pr) {
-                pr.kill();
-            }
-        },
-    };
-};
-
-export default defineConfig({
-    plugins: [electronPlugin(), tsconfigPaths()],
-    optimizeDeps: {
-        force: true,
     },
     build: {
-        ssr: true,
-        target: "esnext",
-        sourcemap: true,
+        sourcemap: "inline",
+        target: `node20`,
+        outDir: "dist",
+        assetsDir: ".",
+        minify: process.env.MODE !== "development",
         lib: {
-            // Could also be a dictionary or array of multiple entry points
             entry: "src/index.ts",
-            name: "MyLib",
-            // the proper extensions will be added
-            fileName: "main",
             formats: ["es"],
         },
         rollupOptions: {
+            external: [
+                "electron",
+                "electron-devtools-installer",
+                ...builtinModules.flatMap((p) => [p, `node:${p}`]),
+            ],
             output: {
-                format: "esm",
+                entryFileNames: "[name].js",
             },
-            // make sure to externalize deps that shouldn't be bundled
-            // into your library
-            external: ["electron", "better-sqlite3"],
         },
+        emptyOutDir: true,
+        brotliSize: false,
     },
-});
+};
+
+export default config;

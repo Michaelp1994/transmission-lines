@@ -1,5 +1,5 @@
 // @ts-check
-import electronConfig from "@repo/eslint-config/electron.js";
+import baseConfig from "@repo/eslint-config/base.js";
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
-export default [...electronConfig];
+/** @type {import("eslint").Linter.Config[]} */
+export default [...baseConfig];

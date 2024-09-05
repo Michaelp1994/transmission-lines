@@ -4,6 +4,7 @@ node_modules
 *.log
 .next
 dist
+out
 dist-ssr
 *.local
 .env

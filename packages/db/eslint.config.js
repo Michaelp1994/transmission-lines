@@ -1,27 +1,7 @@
 // @ts-check
-import nodeConfig from "@repo/eslint-config/node.js";
+import baseConfig from "@repo/eslint-config/base.js";
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
-const config = [
-    ...nodeConfig,
-    {
-        languageOptions: {
-            parserOptions: {
-                EXPERIMENTAL_useProjectService: {
-                    /*** @link https://github.com/typescript-eslint/typescript-eslint/issues/9032 */
-                    maximumDefaultProjectFileMatchCount_THIS_WILL_SLOW_DOWN_LINTING:
-                        Infinity,
-                },
-                tsconfigRootDir: import.meta.dirname,
-            },
-        },
-    },
-    {
-        files: ["tests/**/*", "**/*.test.ts", "**/*.spec.ts"],
-        rules: {
-            "@typescript-eslint/no-non-null-assertion": "off",
-        },
-    },
-];
+/** @type {import("eslint").Linter.Config[]} */
+const config = [...baseConfig];
 
 export default config;

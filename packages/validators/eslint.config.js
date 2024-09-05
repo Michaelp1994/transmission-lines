@@ -1,5 +1,5 @@
 // @ts-check
-import nodeConfig from "@repo/eslint-config/node.js";
+import baseConfig from "@repo/eslint-config/base.js";
 
-/** @type {import("eslint").Linter.FlatConfig[]} */
-export default [...nodeConfig];
+/** @type {import("eslint").Linter.Config[]} */
+export default [...baseConfig];

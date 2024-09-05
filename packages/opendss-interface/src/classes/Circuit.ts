@@ -1,6 +1,6 @@
 import type BaseElement from "./elements/BaseElement";
 import OpenDssDriver from "./OpenDssDriver";
-import { type OpenDSSOptions, optionsSchema } from "@/schemas";
+import { type OpenDSSOptions, optionsSchema } from "../schemas";
 
 export default class Circuit {
     components: BaseElement[] = [];

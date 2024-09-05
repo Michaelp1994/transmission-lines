@@ -2,7 +2,7 @@ import { styled } from "@linaria/react";
 import { Toaster } from "@repo/ui";
 import { Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
-import Breadcrumbs from "./components/Breadcrumbs";
+// import Breadcrumbs from "./components/Breadcrumbs";
 import NavBar from "./components/NavBar";
 
 export default function DefaultLayout() {
@@ -11,7 +11,7 @@ export default function DefaultLayout() {
             <NavBar />
 
             <OutletContainer>
-                <Breadcrumbs />
+                {/* <Breadcrumbs /> */}
                 <Outlet />
             </OutletContainer>
             <Toaster richColors closeButton position="bottom-center" />

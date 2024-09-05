@@ -9,9 +9,9 @@ import {
     getTowersByLineIdSchema,
     updateTransmissionTowerSchema,
 } from "@repo/validators";
-import generateTowers from "@/helpers/generateTowers";
-import buildTransmissionLineMatrix from "@/helpers/transmissionLineParameters";
-import { publicProcedure, router } from "@/trpc";
+import generateTowers from "../helpers/generateTowers";
+import buildTransmissionLineMatrix from "../helpers/transmissionLineParameters";
+import { publicProcedure, router } from "../trpc";
 
 export default router({
     create: publicProcedure

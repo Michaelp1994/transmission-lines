@@ -10,7 +10,7 @@ import {
     updateConductorSchema,
 } from "@repo/validators/schemas/Conductor.schema";
 import { publicProcedure, router } from "../trpc";
-import generateConductors from "@/helpers/generateConductors";
+import generateConductors from "../helpers/generateConductors";
 
 export default router({
     getAll: publicProcedure

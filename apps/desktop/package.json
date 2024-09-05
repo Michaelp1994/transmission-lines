@@ -6,25 +6,25 @@
     "license": "ISC",
     "author": "Michael Poulgrain",
     "type": "module",
-    "main": "dist/index.js",
+    "main": "./dist/index.js",
     "scripts": {
-        "// dev": "electron --inspect=9229 .",
-        "// prebuild": "electron-builder install-app-deps",
         "build": "vite build",
-        "clean": "rm -rf .turbo node_modules dist",
-        "dev": "vite build -w",
+        "clean": "rm -rf .turbo node_modules dist out",
+        "dev": "node scripts/watch.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "package": "electron-builder build -c builder.config.cjs",
         "rebuild": "electron-rebuild",
-        "setup-dev": "wait-on http://localhost:5173/",
+        "start": "electron-vite preview",
         "test": "xvfb-maybe -- playwright test",
         "typecheck": "tsc --build"
     },
     "dependencies": {
+        "@electron-toolkit/preload": "^3.0.1",
         "@electron-toolkit/utils": "^3.0.0",
         "@repo/api": "workspace:*",
-        "@repo/db": "workspace:^"
+        "@repo/db": "workspace:*",
+        "electron-updater": "^6.1.7"
     },
     "devDependencies": {
         "@electron/rebuild": "^3.6.0",
@@ -32,13 +32,20 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@rollup/plugin-swc": "^0.3.1",
+        "@types/node": "^20.14.8",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react": "^4.3.1",
         "electron": "32.0.1",
         "electron-builder": "25.0.5",
         "eslint": "^9.9.1",
+        "eslint-plugin-react": "^7.34.3",
         "playwright": "^1.46.1",
+        "prettier": "^3.3.2",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
         "typescript": "^5.5.4",
         "vite": "^5.4.3",
-        "wait-on": "^8.0.0",
         "xvfb-maybe": "^0.2.1"
     }
 }
