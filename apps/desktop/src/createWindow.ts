@@ -1,7 +1,7 @@
 import { BrowserWindow, shell } from "electron";
 import { is } from "@electron-toolkit/utils";
 
-export default async function create() {
+export default async function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
         show: false,

@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Table,
     TableBody,
@@ -29,7 +28,7 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
     });
 
     return (
-        <TableWrapper>
+        <div className="border rounded-md">
             <Table>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => {
@@ -80,9 +79,12 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
                         })
                     ) : (
                         <TableRow>
-                            <NoResultsCell colSpan={columns.length}>
+                            <TableCell
+                                className="h-24 text-center"
+                                colSpan={columns.length}
+                            >
                                 {t("noResults")}
-                            </NoResultsCell>
+                            </TableCell>
                         </TableRow>
                     )}
                 </TableBody>
@@ -103,16 +105,6 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
                     ))}
                 </TableFooter> */}
             </Table>
-        </TableWrapper>
+        </div>
     );
 }
-
-const NoResultsCell = styled(TableCell)`
-    height: 6rem;
-    text-align: center;
-`;
-
-const TableWrapper = styled.div`
-    border-radius: 0.375rem;
-    border-width: 1px;
-`;

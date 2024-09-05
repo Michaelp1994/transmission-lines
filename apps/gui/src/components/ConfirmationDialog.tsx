@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -26,7 +25,7 @@ export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
         <AlertDialog>
             <AlertDialogTrigger asChild>
                 <Button variant="destructive" size="icon">
-                    <CloseIcon />
+                    <Trash2 className="h-6 w-6" />
                 </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
@@ -55,8 +54,3 @@ export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
         </AlertDialog>
     );
 }
-
-const CloseIcon = styled(Trash2)`
-    height: 24px;
-    width: 24px;
-`;

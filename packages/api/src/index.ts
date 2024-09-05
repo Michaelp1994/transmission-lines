@@ -12,9 +12,6 @@ const createServer = (dataSource: DBContext, electron?: Electron) => {
         },
         router: appRouter,
     });
-
-    // server.listen(5001);
-    // console.log("server listening on port 5001");
     return server;
 };
 

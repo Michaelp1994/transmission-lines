@@ -14,8 +14,6 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
-        "@linaria/core": "^6.2.0",
-        "@linaria/react": "^6.2.1",
         "@repo/ui": "workspace:*",
         "@repo/validators": "workspace:*",
         "@tanstack/react-query": "^5.54.1",
@@ -24,7 +22,6 @@
         "@trpc/client": "11.0.0-rc.364",
         "@trpc/react-query": "11.0.0-rc.364",
         "@trpc/server": "11.0.0-rc.364",
-        "@wyw-in-js/babel-preset": "^0.5.4",
         "date-fns": "^3.6.0",
         "i18next": "^23.14.0",
         "lucide-react": "^0.438.0",

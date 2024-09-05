@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     Checkbox,
@@ -137,14 +136,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                     render={({ field }) => {
                         return (
                             <FormItem>
-                                <CheckboxRow>
+                                <div>
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
                                         />
                                     </FormControl>
-                                    <CheckboxText>
+                                    <div>
                                         <FormLabel>
                                             {t("isNeutral.label")}
                                         </FormLabel>
@@ -152,8 +151,8 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
                                             {t("isNeutral.description")}
                                         </FormDescription>
                                         <FormMessage />
-                                    </CheckboxText>
-                                </CheckboxRow>
+                                    </div>
+                                </div>
                             </FormItem>
                         );
                     }}
@@ -184,14 +183,14 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
     );
 }
 
-const CheckboxRow = styled.div`
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-`;
+// const CheckboxRow = styled.div`
+//     display: flex;
+//     gap: 1rem;
+//     align-items: center;
+// `;
 
-const CheckboxText = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-`;
+// const CheckboxText = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     gap: 0.25rem;
+// `;

@@ -1,7 +1,4 @@
-import { join } from "path";
 import { builtinModules } from "module";
-
-const PACKAGE_ROOT = __dirname;
 
 /**
  * @type {import('vite').UserConfig}
@@ -9,13 +6,8 @@ const PACKAGE_ROOT = __dirname;
  */
 const config = {
     mode: process.env.MODE,
-    root: PACKAGE_ROOT,
+    // root: PACKAGE_ROOT,
     envDir: process.cwd(),
-    resolve: {
-        alias: {
-            "/@/": join(PACKAGE_ROOT, "src") + "/",
-        },
-    },
     build: {
         sourcemap: "inline",
         target: `node20`,

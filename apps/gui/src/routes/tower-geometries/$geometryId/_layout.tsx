@@ -14,49 +14,31 @@ export default function ViewTowerGeometryPage() {
     const { geometryId } = Route.useParams();
 
     return (
-        <Wrapper>
-            <Title>Tower Geometry</Title>
+        <div className="mx-8">
+            <h1>Tower Geometry</h1>
             <Grid>
                 <nav className="grid gap-4 text-sm text-muted-foreground">
-                    <StyledLink
+                    <Link
                         to="/tower-geometries/$geometryId"
                         params={{ geometryId }}
                         activeOptions={{ exact: true }}
                     >
                         General
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/tower-geometries/$geometryId/conductors"
                         params={{ geometryId }}
                     >
                         Conductors
-                    </StyledLink>
+                    </Link>
                 </nav>
                 <div className="grid gap-4">
                     <Outlet />
                 </div>
             </Grid>
-        </Wrapper>
+        </div>
     );
 }
-const Wrapper = styled.div`
-    margin-left: 2rem;
-    margin-right: 2rem;
-`;
-const Title = styled.h1`
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-`;
-
-const StyledLink = styled(Link)`
-    font-weight: 300;
-    &.active {
-        font-weight: 600;
-    }
-`;
-
 const Grid = styled.div`
     display: grid;
     gap: 1.5rem;

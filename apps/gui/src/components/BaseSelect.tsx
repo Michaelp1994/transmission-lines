@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     Command,
@@ -10,11 +9,11 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-    ScrollArea,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { cn } from "@repo/ui/utils";
 
 type Data = {
     id: string;
@@ -57,7 +56,8 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
         return (
             <Popover modal open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
-                    <StyledButton
+                    <Button
+                        className="justify-between w-full"
                         variant="outline"
                         role="combobox"
                         aria-expanded={open}
@@ -65,39 +65,39 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
                         {...props}
                     >
                         {selectedName}
-                        <StyledChevron />
-                    </StyledButton>
+                        <ChevronsUpDown className=" ml-2 flex-shrink-0 w-4 h-4 opacity-50" />
+                    </Button>
                 </PopoverTrigger>
-                <StyledPopoverContent>
+                <PopoverContent>
                     <Command>
                         <CommandInput placeholder={t("searchConductors")} />
-                        <StyledScrollArea>
-                            <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                            <CommandList>
-                                <CommandGroup>
-                                    {data.map((conductorType) => {
-                                        return (
-                                            <CommandItem
-                                                key={conductorType.id}
-                                                value={conductorType.id}
-                                                keywords={[conductorType.name]}
-                                                onSelect={handleSelect}
-                                            >
-                                                <StyledIcon
-                                                    selected={
-                                                        value ===
-                                                        conductorType.id
-                                                    }
-                                                />
-                                                {conductorType.name}
-                                            </CommandItem>
-                                        );
-                                    })}
-                                </CommandGroup>
-                            </CommandList>
-                        </StyledScrollArea>
+                        <CommandEmpty>{t("noneFound")}</CommandEmpty>
+                        <CommandList>
+                            <CommandGroup>
+                                {data.map((conductorType) => {
+                                    return (
+                                        <CommandItem
+                                            key={conductorType.id}
+                                            value={conductorType.id}
+                                            keywords={[conductorType.name]}
+                                            onSelect={handleSelect}
+                                        >
+                                            <Check
+                                                className={cn(
+                                                    "w-4 h-4 mr-2",
+                                                    value ===
+                                                        conductorType.id &&
+                                                        "opacity-100"
+                                                )}
+                                            />
+                                            {conductorType.name}
+                                        </CommandItem>
+                                    );
+                                })}
+                            </CommandGroup>
+                        </CommandList>
                     </Command>
-                </StyledPopoverContent>
+                </PopoverContent>
             </Popover>
         );
     }
@@ -106,32 +106,3 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
 BaseSelect.displayName = "BaseSelect";
 
 export default BaseSelect;
-
-const StyledIcon = styled(Check)<{ selected: boolean }>`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-    opacity: ${(props) => (props.selected ? 1 : 0)};
-`;
-
-const StyledChevron = styled(ChevronsUpDown)`
-    margin-left: 0.5rem;
-    flex-shrink: 0;
-    width: 1rem;
-    height: 1rem;
-    opacity: 0.5;
-`;
-
-const StyledPopoverContent = styled(PopoverContent)`
-    padding: 0;
-    width: 200px;
-`;
-
-const StyledButton = styled(Button)`
-    justify-content: space-between;
-    width: 100%;
-`;
-
-const StyledScrollArea = styled(ScrollArea)`
-    height: 20rem;
-`;

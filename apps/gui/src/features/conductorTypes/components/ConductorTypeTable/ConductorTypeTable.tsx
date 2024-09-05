@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     type ColumnFiltersState,
     type PaginationState,
@@ -59,16 +58,10 @@ export default function ConductorTypeTable() {
     }
 
     return (
-        <Wrapper>
+        <div className="flex flex-col gap-4">
             <TableToolbar table={table} />
             <DataTable data={data} columns={columns} />
             <TablePagination table={table} />
-        </Wrapper>
+        </div>
     );
 }
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;

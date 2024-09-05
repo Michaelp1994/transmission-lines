@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import { Table, TableBody, TableCell, TableRow } from "@repo/ui";
 
 interface Complex {
@@ -12,7 +11,7 @@ interface ParameterTableProps {
 
 export default function MatrixTable({ data }: ParameterTableProps) {
     return (
-        <Wrapper>
+        <div>
             <Table>
                 <TableBody>
                     {data.map((row, rowIndex) => {
@@ -39,8 +38,6 @@ export default function MatrixTable({ data }: ParameterTableProps) {
                     })}
                 </TableBody>
             </Table>
-        </Wrapper>
+        </div>
     );
 }
-
-const Wrapper = styled.div``;
