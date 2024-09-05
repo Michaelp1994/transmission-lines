@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tower-geometries/$geometryId/_layout")({
@@ -16,7 +15,7 @@ export default function ViewTowerGeometryPage() {
     return (
         <div className="mx-8">
             <h1>Tower Geometry</h1>
-            <Grid>
+            <div>
                 <nav className="grid gap-4 text-sm text-muted-foreground">
                     <Link
                         to="/tower-geometries/$geometryId"
@@ -35,13 +34,7 @@ export default function ViewTowerGeometryPage() {
                 <div className="grid gap-4">
                     <Outlet />
                 </div>
-            </Grid>
+            </div>
         </div>
     );
 }
-const Grid = styled.div`
-    display: grid;
-    gap: 1.5rem;
-    align-items: flex-start;
-    grid-template-columns: 180px 1fr;
-`;

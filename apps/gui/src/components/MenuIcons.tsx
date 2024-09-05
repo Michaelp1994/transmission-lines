@@ -1,25 +1,17 @@
-import { styled } from "@linaria/react";
 import { Delete, EllipsisVertical, Eye, Pencil } from "lucide-react";
 
-export const MenuIcon = styled(EllipsisVertical)`
-    width: 1rem;
-    height: 1rem;
-`;
+export function MenuIcon() {
+    return <EllipsisVertical className="w-4 h-4" />;
+}
 
-export const ViewIcon = styled(Eye)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
+export function ViewIcon() {
+    return <Eye className="w-4 h-4" />;
+}
 
-export const DeleteIcon = styled(Delete)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
+export function DeleteIcon() {
+    return <Delete className="w-4 h-4" />;
+}
 
-export const EditIcon = styled(Pencil)`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-`;
+export function EditIcon() {
+    return <Pencil className="h-4 w-4" />;
+}

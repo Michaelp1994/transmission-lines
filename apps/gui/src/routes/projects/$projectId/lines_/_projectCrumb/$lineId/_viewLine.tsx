@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute(
@@ -16,60 +15,34 @@ export default function ViewTransmissionLinePage() {
     const { projectId, lineId } = Route.useParams();
 
     return (
-        <Wrapper>
-            <Title>Transmission Line</Title>
-            <Grid>
+        <div>
+            <h1>Transmission Line</h1>
+            <div>
                 <nav className="grid gap-4 text-sm text-muted-foreground">
-                    <StyledLink
+                    <Link
                         to="/projects/$projectId/lines/$lineId"
                         params={{ projectId, lineId }}
                         activeOptions={{ exact: true }}
                     >
                         General
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/projects/$projectId/lines/$lineId/conductors"
                         params={{ projectId, lineId }}
                     >
                         Conductors
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/projects/$projectId/lines/$lineId/towers"
                         params={{ projectId, lineId }}
                     >
                         Towers
-                    </StyledLink>
+                    </Link>
                 </nav>
                 <div className="grid gap-4">
                     <Outlet />
                 </div>
-            </Grid>
-        </Wrapper>
+            </div>
+        </div>
     );
 }
-const Wrapper = styled.div`
-    margin-left: 2rem;
-    margin-right: 2rem;
-`;
-const Title = styled.h1`
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-`;
-
-const StyledLink = styled(Link)`
-    font-weight: 300;
-    &.active {
-        font-weight: 600;
-    }
-`;
-
-const Grid = styled.div`
-    display: grid;
-    gap: 1.5rem;
-    align-items: flex-start;
-    /* width: 100%; */
-    /* max-width: 72rem; */
-    grid-template-columns: 180px 1fr;
-`;

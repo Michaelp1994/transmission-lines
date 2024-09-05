@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     DropdownMenu,
@@ -31,7 +30,7 @@ export default function UserButton() {
                     <span className="sr-only">Toggle user menu</span>
                 </Button>
             </DropdownMenuTrigger>
-            <UserMenu forceMount align="end">
+            <DropdownMenuContent className="w-56" forceMount align="end">
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">
@@ -60,11 +59,7 @@ export default function UserButton() {
                     Log out
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                 </DropdownMenuItem>
-            </UserMenu>
+            </DropdownMenuContent>
         </DropdownMenu>
     );
 }
-
-const UserMenu = styled(DropdownMenuContent)`
-    width: 14rem;
-`;

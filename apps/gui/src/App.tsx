@@ -2,7 +2,7 @@ import I18nProvider from "./contexts/I18nProvider";
 import ModalProvider from "./contexts/ModalProvider";
 import RouterProvider from "./contexts/RouterProvider";
 import TrpcProvider from "./contexts/TrpcProvider";
-import "@repo/ui/global.css";
+import "./styles/globals.css";
 
 export default function App() {
     return (

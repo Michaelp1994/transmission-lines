@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     ContextMenu,
     ContextMenuContent,
@@ -20,7 +19,7 @@ export default function Source({ data }: SourceProps) {
     return (
         <>
             <Handle type="target" position={Position.Left} />
-            <Wrapper>
+            <div>
                 <ContextMenu>
                     <ContextMenuTrigger>{data.label}</ContextMenuTrigger>
                     <ContextMenuContent>
@@ -40,15 +39,8 @@ export default function Source({ data }: SourceProps) {
                         </ContextMenuItem>
                     </ContextMenuContent>
                 </ContextMenu>
-            </Wrapper>
+            </div>
             <Handle type="source" position={Position.Right} />
         </>
     );
 }
-
-const Wrapper = styled.div`
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 1rem;
-    background-color: white;
-`;

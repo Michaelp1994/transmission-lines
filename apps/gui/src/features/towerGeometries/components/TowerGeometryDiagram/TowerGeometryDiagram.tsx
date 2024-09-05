@@ -1,4 +1,4 @@
-// import { styled } from "@linaria/react";
+//
 // import type { TowerGeometryInput } from "@repo/validators/schemas/TowerGeometry.schema";
 // import { useWatch } from "react-hook-form";
 // import { Circle, Layer, Line, Stage } from "react-konva";
@@ -44,7 +44,3 @@ export default function TowerGeometryDiagram() {
         // </StyledStage>
     );
 }
-
-// const StyledStage = styled(Stage)`
-//     border: 1px solid black;
-// `;

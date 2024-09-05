@@ -69,18 +69,3 @@ export default function NavBar() {
         </div>
     );
 }
-
-// const Wrapper = styled.nav`
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//     width: 100%;
-//     border-bottom: 1px solid hsl(var(--border));
-//     padding: 12px;
-//     background-color: white;
-// `;
-// const RightSide = styled.div`
-//     display: flex;
-//     align-items: center;
-//     gap: 12px;
-// `;

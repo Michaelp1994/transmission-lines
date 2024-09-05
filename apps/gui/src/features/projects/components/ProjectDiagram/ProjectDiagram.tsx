@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import { Button } from "@repo/ui";
 import { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
@@ -107,7 +106,7 @@ export default function ProjectDiagram({
 
     return (
         <>
-            <DiagramWrapper>
+            <div>
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
@@ -125,7 +124,7 @@ export default function ProjectDiagram({
                         size={1}
                     />
                 </ReactFlow>
-            </DiagramWrapper>
+            </div>
             <ButtonsWrapper>
                 <Button disabled={!dirty} onClick={handleSave}>
                     Save
@@ -134,10 +133,3 @@ export default function ProjectDiagram({
         </>
     );
 }
-
-const DiagramWrapper = styled.div`
-    display: flex;
-    height: 500px;
-    border: 1px solid black;
-    margin-bottom: 1rem;
-`;

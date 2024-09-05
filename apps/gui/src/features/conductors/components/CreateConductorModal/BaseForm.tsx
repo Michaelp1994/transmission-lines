@@ -182,15 +182,3 @@ export default function BaseForm({ onValid, onInvalid }: BaseFormProps) {
         </Form>
     );
 }
-
-// const CheckboxRow = styled.div`
-//     display: flex;
-//     gap: 1rem;
-//     align-items: center;
-// `;
-
-// const CheckboxText = styled.div`
-//     display: flex;
-//     flex-direction: column;
-//     gap: 0.25rem;
-// `;

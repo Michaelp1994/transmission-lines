@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     Checkbox,
@@ -77,24 +76,24 @@ export default function UpdateSourceForm({
                     render={({ field }) => {
                         return (
                             <FormItem>
-                                <CheckboxWrapper>
+                                <div>
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
                                             onCheckedChange={field.onChange}
                                         />
                                     </FormControl>
-                                    <CheckboxText>
+                                    <div>
                                         <FormLabel>
                                             {t("enabled.label")}
                                         </FormLabel>
                                         <FormDescription>
                                             {t("enabled.description")}
                                         </FormDescription>
-                                    </CheckboxText>
+                                    </div>
 
                                     <FormMessage />
-                                </CheckboxWrapper>
+                                </div>
                             </FormItem>
                         );
                     }}
@@ -116,20 +115,3 @@ export default function UpdateSourceForm({
         </Form>
     );
 }
-
-const CheckboxWrapper = styled.div`
-    display: flex;
-    padding: 1rem;
-    margin-top: 0.25rem;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    border-radius: 0.375rem;
-    border-width: 1px;
-`;
-
-const CheckboxText = styled.div`
-    /* margin-top: 0.25rem; */
-    margin-left: 0.75rem;
-    line-height: 1;
-`;

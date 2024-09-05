@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -21,39 +20,29 @@ export default function Breadcrumbs() {
     });
 
     return (
-        <Wrapper>
-            <Breadcrumb>
-                <BreadcrumbList>
-                    {crumbs.map((crumb, index) => {
-                        if (index === crumbs.length - 1) {
-                            return (
-                                <BreadcrumbItem key={index}>
-                                    <BreadcrumbPage>
-                                        {crumb.text}
-                                    </BreadcrumbPage>
-                                </BreadcrumbItem>
-                            );
-                        }
-
+        <Breadcrumb>
+            <BreadcrumbList>
+                {crumbs.map((crumb, index) => {
+                    if (index === crumbs.length - 1) {
                         return (
-                            <React.Fragment key={index}>
-                                <BreadcrumbItem>
-                                    <BreadcrumbLink asChild>
-                                        <Link to={crumb.link}>
-                                            {crumb.text}
-                                        </Link>
-                                    </BreadcrumbLink>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator />
-                            </React.Fragment>
+                            <BreadcrumbItem key={index}>
+                                <BreadcrumbPage>{crumb.text}</BreadcrumbPage>
+                            </BreadcrumbItem>
                         );
-                    })}
-                </BreadcrumbList>
-            </Breadcrumb>
-        </Wrapper>
+                    }
+
+                    return (
+                        <React.Fragment key={index}>
+                            <BreadcrumbItem>
+                                <BreadcrumbLink asChild>
+                                    <Link to={crumb.link}>{crumb.text}</Link>
+                                </BreadcrumbLink>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                        </React.Fragment>
+                    );
+                })}
+            </BreadcrumbList>
+        </Breadcrumb>
     );
 }
-
-const Wrapper = styled.div`
-    margin-bottom: 2rem;
-`;

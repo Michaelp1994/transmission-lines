@@ -16,7 +16,6 @@
         "package": "electron-builder build -c builder.config.cjs",
         "rebuild": "electron-rebuild",
         "start": "electron-vite preview",
-        "test": "xvfb-maybe -- playwright test",
         "typecheck": "tsc --build"
     },
     "dependencies": {

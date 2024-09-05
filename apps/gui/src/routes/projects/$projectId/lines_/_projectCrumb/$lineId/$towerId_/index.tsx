@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     Card,
@@ -43,7 +42,7 @@ export default function LineParametersPage() {
     }
 
     return (
-        <Wrapper>
+        <div>
             <Card>
                 <CardHeader>
                     <CardHeaderText>
@@ -104,12 +103,6 @@ export default function LineParametersPage() {
                     <MatrixTable data={data.cMatrix} />
                 </CardContent>
             </Card>
-        </Wrapper>
+        </div>
     );
 }
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-`;

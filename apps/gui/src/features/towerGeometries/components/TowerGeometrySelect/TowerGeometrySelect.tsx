@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Button,
     Command,
@@ -10,7 +9,6 @@ import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-    ScrollArea,
 } from "@repo/ui";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React, { forwardRef } from "react";
@@ -53,7 +51,7 @@ const TowerGeometrySelect = forwardRef<
     return (
         <Popover modal open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <StyledButton
+                <Button
                     variant="outline"
                     role="combobox"
                     ref={ref}
@@ -65,38 +63,36 @@ const TowerGeometrySelect = forwardRef<
                               (towerGeometry) => towerGeometry.id === value
                           )?.name
                         : t("nothingSelected")}
-                    <StyledChevron />
-                </StyledButton>
+                    <ChevronsUpDown />
+                </Button>
             </PopoverTrigger>
-            <StyledPopoverContent>
+            <PopoverContent>
                 <Command>
                     <CommandInput placeholder={t("searchPlaceholder")} />
                     <CommandList>
-                        <StyledScrollArea>
-                            <CommandEmpty>{t("noneFound")}</CommandEmpty>
-                            <CommandGroup>
-                                {data.map((conductorType) => {
-                                    return (
-                                        <CommandItem
-                                            key={conductorType.id}
-                                            value={conductorType.id}
-                                            keywords={[conductorType.name]}
-                                            onSelect={handleSelect}
-                                        >
-                                            <StyledCheck
-                                                selected={
-                                                    value === conductorType.id
-                                                }
-                                            />
-                                            {conductorType.name}
-                                        </CommandItem>
-                                    );
-                                })}
-                            </CommandGroup>
-                        </StyledScrollArea>
+                        <CommandEmpty>{t("noneFound")}</CommandEmpty>
+                        <CommandGroup>
+                            {data.map((conductorType) => {
+                                return (
+                                    <CommandItem
+                                        key={conductorType.id}
+                                        value={conductorType.id}
+                                        keywords={[conductorType.name]}
+                                        onSelect={handleSelect}
+                                    >
+                                        <Check
+                                            selected={
+                                                value === conductorType.id
+                                            }
+                                        />
+                                        {conductorType.name}
+                                    </CommandItem>
+                                );
+                            })}
+                        </CommandGroup>
                     </CommandList>
                 </Command>
-            </StyledPopoverContent>
+            </PopoverContent>
         </Popover>
     );
 });
@@ -104,32 +100,3 @@ const TowerGeometrySelect = forwardRef<
 TowerGeometrySelect.displayName = "TowerGeometrySelect";
 
 export default TowerGeometrySelect;
-
-const StyledCheck = styled(Check)<{ selected: boolean }>`
-    margin-right: 0.5rem;
-    width: 1rem;
-    height: 1rem;
-    opacity: ${(props) => (props.selected ? 1 : 0)};
-`;
-
-const StyledScrollArea = styled(ScrollArea)`
-    height: 20rem;
-`;
-
-const StyledChevron = styled(ChevronsUpDown)`
-    margin-left: 0.5rem;
-    flex-shrink: 0;
-    width: 1rem;
-    height: 1rem;
-    opacity: 0.5;
-`;
-
-const StyledPopoverContent = styled(PopoverContent)`
-    padding: 0;
-    width: 200px;
-`;
-
-const StyledButton = styled(Button)`
-    justify-content: space-between;
-    width: 100%;
-`;

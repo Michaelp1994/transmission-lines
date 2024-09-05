@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import { Link, Outlet, createFileRoute } from "@tanstack/react-router";
 
 // import trpc from "~/utils/trpc";
@@ -21,72 +20,47 @@ export default function ViewProjectPage() {
     // }
 
     return (
-        <Wrapper>
-            <Title>Project</Title>
+        <div>
+            <h1>Project</h1>
 
-            <Grid>
+            <div>
                 <nav className="grid gap-4 text-sm text-muted-foreground">
-                    <StyledLink
+                    <Link
                         activeOptions={{ exact: true }}
                         to="/projects/$projectId"
                         params={{ projectId }}
                     >
                         General
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/projects/$projectId/sources"
                         params={{ projectId }}
                     >
                         Sources
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/projects/$projectId/lines"
                         params={{ projectId }}
                     >
                         Transmission Lines
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/projects/$projectId/results"
                         params={{ projectId }}
                     >
                         Results
-                    </StyledLink>
-                    <StyledLink
+                    </Link>
+                    <Link
                         to="/projects/$projectId/diagram"
                         params={{ projectId }}
                     >
                         Diagram
-                    </StyledLink>
+                    </Link>
                 </nav>
                 <div className="grid gap-4">
                     <Outlet />
                 </div>
-            </Grid>
-        </Wrapper>
+            </div>
+        </div>
     );
 }
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;
-
-const Title = styled.h1`
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-`;
-
-const StyledLink = styled(Link)`
-    font-weight: 300;
-    &.active {
-        font-weight: 600;
-    }
-`;
-const Grid = styled.div`
-    display: grid;
-    gap: 1.5rem;
-    align-items: flex-start;
-    grid-template-columns: 180px 1fr;
-`;

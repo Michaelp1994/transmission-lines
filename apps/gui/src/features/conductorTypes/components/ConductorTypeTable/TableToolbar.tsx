@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Select,
     SelectContent,
@@ -16,8 +15,8 @@ export default function ConductorTypeToolbar({
     table,
 }: ConductorTypeToolbarProps) {
     return (
-        <ToolbarContainer>
-            <LeftSide>
+        <div>
+            <div>
                 {/* <StyledInput
                 value={
                     (table.getColumn("name")?.getFilterValue() as string) ?? ""
@@ -27,8 +26,8 @@ export default function ConductorTypeToolbar({
                 }
                 placeholder="Search conductor types..."
             /> */}
-            </LeftSide>
-            <RightSide>
+            </div>
+            <div>
                 Rows per page:
                 <Select
                     value={`${table.getState().pagination.pageSize}`}
@@ -54,25 +53,7 @@ export default function ConductorTypeToolbar({
                         })}
                     </SelectContent>
                 </Select>
-            </RightSide>
-        </ToolbarContainer>
+            </div>
+        </div>
     );
 }
-
-const ToolbarContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-const LeftSide = styled.div`
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-`;
-
-const RightSide = styled.div`
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-`;

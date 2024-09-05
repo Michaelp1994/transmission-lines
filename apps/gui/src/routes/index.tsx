@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     Card,
     CardContent,
@@ -14,21 +13,13 @@ export const Route = createFileRoute("/")({
 
 export default function HomePage() {
     return (
-        <PageWrapper>
-            <Card>
-                <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>Home</CardTitle>
-                    </CardHeaderText>
-                </CardHeader>
-                <CardContent />
-            </Card>
-        </PageWrapper>
+        <Card>
+            <CardHeader>
+                <CardHeaderText>
+                    <CardTitle>Home</CardTitle>
+                </CardHeaderText>
+            </CardHeader>
+            <CardContent />
+        </Card>
     );
 }
-
-const PageWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;

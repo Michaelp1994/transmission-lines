@@ -1,4 +1,3 @@
-import { styled } from "@linaria/react";
 import {
     ContextMenu,
     ContextMenuContent,
@@ -41,7 +40,7 @@ export default function TransmissionLine({
         <>
             <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
             <EdgeLabelRenderer>
-                <Wrapper labelX={labelX} labelY={labelY}>
+                <div>
                     <ContextMenu>
                         <ContextMenuTrigger>{data.label}</ContextMenuTrigger>
                         <ContextMenuContent>
@@ -61,19 +60,8 @@ export default function TransmissionLine({
                             </ContextMenuItem>
                         </ContextMenuContent>
                     </ContextMenu>
-                </Wrapper>
+                </div>
             </EdgeLabelRenderer>
         </>
     );
 }
-
-const Wrapper = styled.div<{ labelX: number; labelY: number }>`
-    position: absolute;
-    background-color: white;
-    padding: 1rem;
-    border-radius: 5px;
-    border: 1px solid black;
-    transform: translate(-50%, -50%)
-        translate(${(props) => props.labelX}px, ${(props) => props.labelY}px);
-    font-size: 12px;
-`;

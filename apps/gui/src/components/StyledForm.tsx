@@ -1,17 +1,7 @@
-import { styled } from "@linaria/react";
+export function StyledForm() {
+    return <form className="flex flex-col gap-6" aria-label="form" />;
+}
 
-export const StyledForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-`;
-
-StyledForm.defaultProps = {
-    "aria-label": "form",
-};
-
-export const ButtonsWrapper = styled.div`
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-`;
+export function ButtonsWrapper() {
+    return <div className="flex gap-4 justify-end" />;
+}
