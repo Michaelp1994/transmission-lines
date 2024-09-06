@@ -30,7 +30,7 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/better-sqlite3": "^7.6.11",
-        "@types/node": "^22.5.3",
+        "@types/node": "^22.5.4",
         "@types/uuid": "^10.0.0",
         "drizzle-kit": "^0.24.2",
         "eslint": "^9.9.1",

@@ -12,9 +12,6 @@ export interface DBContext {
 }
 
 export function databaseInit(path: string | Buffer): DBContext {
-    // const nativeBinding = isElectron()
-    //     ? "../../prebuilds/win32-x64/better-sqlite3.node"
-    //     : undefined;
     const conn = new Connection(path);
     const db = drizzle(conn, { schema });
 

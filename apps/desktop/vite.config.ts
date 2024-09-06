@@ -21,6 +21,7 @@ const config = {
         rollupOptions: {
             external: [
                 "electron",
+                "better-sqlite3",
                 "electron-devtools-installer",
                 ...builtinModules.flatMap((p) => [p, `node:${p}`]),
             ],

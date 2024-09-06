@@ -13,7 +13,7 @@ export default function TrpcProvider({
         return trpc.createClient({
             links: [
                 httpBatchLink({
-                    url: `http://localhost:${import.meta.env.VITE_PORT}`,
+                    url: `http://localhost:5001`,
                 }),
             ],
         });

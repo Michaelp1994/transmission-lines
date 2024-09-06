@@ -4,9 +4,10 @@ export default {
         {
             label: "Open Dev Tools",
             click(_, browserWindow) {
-                if (browserWindow) {
-                    browserWindow.webContents.openDevTools();
+                if (!browserWindow) {
+                    throw Error("No Browser Window");
                 }
+                browserWindow.webContents.openDevTools();
             },
         },
     ],

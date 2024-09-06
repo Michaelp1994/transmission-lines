@@ -6,12 +6,22 @@ import {
     CardTitle,
 } from "@repo/ui";
 import { createFileRoute } from "@tanstack/react-router";
+import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute("/")({
     component: HomePage,
 });
 
 export default function HomePage() {
+    const { data, error, isLoading, isError } = trpc.meta.version.useQuery();
+
+    if (isLoading) {
+        return "is Loading...";
+    }
+    if (isError) {
+        console.log(error);
+        return "Is Error!";
+    }
     return (
         <Card>
             <CardHeader>
@@ -19,7 +29,7 @@ export default function HomePage() {
                     <CardTitle>Home</CardTitle>
                 </CardHeaderText>
             </CardHeader>
-            <CardContent />
+            <CardContent>{data}</CardContent>
         </Card>
     );
 }

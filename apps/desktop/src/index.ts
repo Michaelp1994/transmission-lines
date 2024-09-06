@@ -3,6 +3,11 @@ import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
 import createWindow from "./createWindow";
 import { databaseInit } from "@repo/db";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.whenReady().then(async () => {
     // Set app user model id for windows
@@ -13,12 +18,22 @@ app.whenReady().then(async () => {
     app.on("browser-window-created", async (_, window) => {
         optimizer.watchWindowShortcuts(window);
     });
-
     const window = await createWindow();
-    const dataSource = await databaseInit("./database.sqlite");
-    const server = createServer(dataSource, { browserWindow: window, dialog });
+    try {
+        const dbPath = path.join(__dirname, `../database.sqlite`);
+        const dataSource = databaseInit(dbPath);
+        const server = createServer(dataSource, {
+            browserWindow: window,
+            dialog,
+        });
 
-    server.listen(5001);
+        server.listen(5001);
+        console.log("listening on port 5001");
+    } catch (e) {
+        console.log("CATCH BLOCK");
+        console.log(e);
+    }
+
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
