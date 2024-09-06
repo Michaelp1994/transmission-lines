@@ -1,12 +1,12 @@
 import {
-    Button,
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@repo/ui";
+} from "@repo/ui/dropdown-menu";
+import { Button } from "@repo/ui/button";
 import type { CellContext } from "@tanstack/react-table";
 import type { Conductor } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";

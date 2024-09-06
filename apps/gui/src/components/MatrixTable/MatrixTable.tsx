@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableRow } from "@repo/ui";
+import { Table, TableBody, TableCell, TableRow } from "@repo/ui/table";
 
 interface Complex {
     re: number;

@@ -5,7 +5,7 @@ import {
     BreadcrumbList,
     BreadcrumbPage,
     BreadcrumbSeparator,
-} from "@repo/ui";
+} from "@repo/ui/breadcrumb";
 import { Link, useMatches } from "@tanstack/react-router";
 import React from "react";
 

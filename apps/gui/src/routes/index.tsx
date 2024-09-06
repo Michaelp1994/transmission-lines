@@ -1,10 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import trpc from "~/utils/trpc";
 
@@ -25,9 +19,7 @@ export default function HomePage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>Home</CardTitle>
-                </CardHeaderText>
+                <CardTitle>Home</CardTitle>
             </CardHeader>
             <CardContent>{data}</CardContent>
         </Card>

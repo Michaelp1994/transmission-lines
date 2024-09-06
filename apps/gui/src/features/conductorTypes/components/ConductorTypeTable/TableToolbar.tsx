@@ -4,7 +4,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@repo/ui";
+} from "@repo/ui/select";
 import type { Table } from "@tanstack/react-table";
 import type { ConductorType } from "./RowType";
 

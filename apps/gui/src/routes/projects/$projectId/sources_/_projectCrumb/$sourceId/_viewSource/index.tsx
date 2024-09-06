@@ -1,10 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { UpdateSourceGeneralForm } from "~/features/sources";
@@ -27,9 +21,7 @@ export default function ViewSourcePage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>{t("edit.title")}</CardTitle>
-                </CardHeaderText>
+                <CardTitle>{t("edit.title")}</CardTitle>
             </CardHeader>
             <CardContent>
                 <UpdateSourceGeneralForm sourceId={sourceId} />

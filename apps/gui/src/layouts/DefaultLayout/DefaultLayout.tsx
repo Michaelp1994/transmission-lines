@@ -1,4 +1,4 @@
-import { Toaster } from "@repo/ui";
+import { Toaster } from "@repo/ui/sonner";
 import { Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 // import Breadcrumbs from "./components/Breadcrumbs";

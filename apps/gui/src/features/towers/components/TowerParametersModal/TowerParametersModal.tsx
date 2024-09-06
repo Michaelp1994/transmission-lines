@@ -6,11 +6,8 @@ import {
     DialogOverlay,
     DialogPortal,
     DialogTitle,
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@repo/ui";
+} from "@repo/ui/dialog";
+import { Tabs, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import type { TowerID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 import trpc from "~/utils/trpc";

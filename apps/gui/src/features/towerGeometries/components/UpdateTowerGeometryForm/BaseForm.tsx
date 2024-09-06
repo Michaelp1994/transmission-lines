@@ -1,5 +1,4 @@
 import {
-    Button,
     Form,
     FormControl,
     FormDescription,
@@ -7,8 +6,9 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-    Input,
-} from "@repo/ui";
+} from "@repo/ui/form";
+import { Input } from "@repo/ui/input";
+import { Button } from "@repo/ui/button";
 import type { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";

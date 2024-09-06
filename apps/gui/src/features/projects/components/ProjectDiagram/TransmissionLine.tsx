@@ -3,7 +3,7 @@ import {
     ContextMenuContent,
     ContextMenuItem,
     ContextMenuTrigger,
-} from "@repo/ui";
+} from "@repo/ui/context-menu";
 import { Link } from "lucide-react";
 import {
     BaseEdge,

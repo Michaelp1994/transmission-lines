@@ -1,15 +1,13 @@
+import { Button } from "@repo/ui/button";
 import {
-    Button,
     Command,
     CommandEmpty,
     CommandGroup,
     CommandInput,
     CommandItem,
     CommandList,
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@repo/ui";
+} from "@repo/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";

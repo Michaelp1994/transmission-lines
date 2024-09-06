@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { ProjectDiagram } from "~/features/projects";
 

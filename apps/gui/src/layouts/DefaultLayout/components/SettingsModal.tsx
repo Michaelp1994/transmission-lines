@@ -1,5 +1,4 @@
 import {
-    Button,
     Dialog,
     DialogContent,
     DialogDescription,
@@ -7,9 +6,9 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-    DropdownMenuItem,
-    DropdownMenuShortcut,
-} from "@repo/ui";
+} from "@repo/ui/dialog";
+import { Button } from "@repo/ui/button";
+import { DropdownMenuItem, DropdownMenuShortcut } from "@repo/ui/dropdown-menu";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 

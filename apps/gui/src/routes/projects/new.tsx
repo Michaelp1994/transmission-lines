@@ -3,9 +3,8 @@ import {
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { CreateProjectForm } from "~/features/projects";
 
@@ -22,10 +21,8 @@ export default function CreateProjectPage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>Create Project</CardTitle>
-                    <CardDescription>Create a new project</CardDescription>
-                </CardHeaderText>
+                <CardTitle>Create Project</CardTitle>
+                <CardDescription>Create a new project</CardDescription>
             </CardHeader>
             <CardContent>
                 <CreateProjectForm />

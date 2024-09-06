@@ -1,13 +1,11 @@
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
+import { Button } from "@repo/ui/button";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { TowerGeometriesTable } from "~/features/towerGeometries";
@@ -27,19 +25,15 @@ export default function AllTowerGeometriesPage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>Tower Geometries</CardTitle>
-                    <CardDescription>
-                        Tower Geometries in the database
-                    </CardDescription>
-                </CardHeaderText>
-                <CardHeaderActions>
-                    <Button asChild>
-                        <Link to="/tower-geometries/new">
-                            {t("add.buttonText")}
-                        </Link>
-                    </Button>
-                </CardHeaderActions>
+                <CardTitle>Tower Geometries</CardTitle>
+                <CardDescription>
+                    Tower Geometries in the database
+                </CardDescription>
+                <Button asChild>
+                    <Link to="/tower-geometries/new">
+                        {t("add.buttonText")}
+                    </Link>
+                </Button>
             </CardHeader>
             <CardContent>
                 <TowerGeometriesTable />

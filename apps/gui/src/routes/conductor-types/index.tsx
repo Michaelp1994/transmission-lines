@@ -1,13 +1,11 @@
+import { Button } from "@repo/ui/button";
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ConductorTypeTable } from "~/features/conductorTypes";
@@ -27,19 +25,14 @@ export default function AllConductorTypesPage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>Conductor Types</CardTitle>
-                    <CardDescription>
-                        Conductor types in the database
-                    </CardDescription>
-                </CardHeaderText>
-                <CardHeaderActions>
-                    <Button asChild>
-                        <Link to="/conductor-types/new">
-                            {t("add.buttonText")}
-                        </Link>
-                    </Button>
-                </CardHeaderActions>
+                <CardTitle>Conductor Types</CardTitle>
+                <CardDescription>
+                    Conductor types in the database
+                </CardDescription>
+
+                <Button asChild>
+                    <Link to="/conductor-types/new">{t("add.buttonText")}</Link>
+                </Button>
             </CardHeader>
             <CardContent>
                 <ConductorTypeTable />

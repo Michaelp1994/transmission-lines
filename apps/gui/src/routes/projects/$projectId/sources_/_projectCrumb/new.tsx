@@ -3,9 +3,8 @@ import {
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { CreateSourceForm } from "~/features/sources";
@@ -28,10 +27,8 @@ export default function CreateSourcePage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>{t("add.title")}</CardTitle>
-                    <CardDescription>{t("add.description")}</CardDescription>
-                </CardHeaderText>
+                <CardTitle>{t("add.title")}</CardTitle>
+                <CardDescription>{t("add.description")}</CardDescription>
             </CardHeader>
             <CardContent>
                 <CreateSourceForm projectId={projectId} />

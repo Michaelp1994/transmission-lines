@@ -1,10 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { CreateConductorTypeForm } from "~/features/conductorTypes";
@@ -24,9 +18,7 @@ export default function CreateConductorTypePage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>{t("add.title")}</CardTitle>
-                </CardHeaderText>
+                <CardTitle>{t("add.title")}</CardTitle>
             </CardHeader>
             <CardContent>
                 <CreateConductorTypeForm />

@@ -1,13 +1,11 @@
+import { Button } from "@repo/ui/button";
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ProjectTable } from "~/features/projects";
 import toast from "~/utils/toast";
@@ -43,16 +41,13 @@ export default function AllProjectsPage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>All Projects</CardTitle>
-                    <CardDescription>Select a project to begin</CardDescription>
-                </CardHeaderText>
-                <CardHeaderActions>
-                    <Button onClick={importProject}>Import Project</Button>
-                    <Button asChild>
-                        <Link to="/projects/new">New Project</Link>
-                    </Button>
-                </CardHeaderActions>
+                <CardTitle>All Projects</CardTitle>
+                <CardDescription>Select a project to begin</CardDescription>
+
+                <Button onClick={importProject}>Import Project</Button>
+                <Button asChild>
+                    <Link to="/projects/new">New Project</Link>
+                </Button>
             </CardHeader>
             <CardContent>
                 <ProjectTable />

@@ -3,7 +3,7 @@ import {
     NavigationMenuItem,
     NavigationMenuList,
     navigationMenuTriggerStyle,
-} from "@repo/ui";
+} from "@repo/ui/navigation-menu";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import UserButton from "./UserButton";

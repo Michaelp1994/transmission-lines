@@ -1,10 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import MatrixTable from "~/components/MatrixTable";
@@ -41,9 +35,7 @@ export default function ViewSourcePage() {
         <>
             <Card>
                 <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>Z Sequence Matrix</CardTitle>
-                    </CardHeaderText>
+                    <CardTitle>Z Sequence Matrix</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div>
@@ -59,9 +51,7 @@ export default function ViewSourcePage() {
             </Card>
             <Card>
                 <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>Z Phase Matrix</CardTitle>
-                    </CardHeaderText>
+                    <CardTitle>Z Phase Matrix</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <MatrixTable data={data.phaseMatrix} />

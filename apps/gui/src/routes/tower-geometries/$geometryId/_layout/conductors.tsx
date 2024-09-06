@@ -1,13 +1,11 @@
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
+import { Button } from "@repo/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ConductorLocationTable } from "~/features/conductorLocations";
@@ -27,13 +25,9 @@ export default function TowerGeometryConductors() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>{t("title")}</CardTitle>
-                    <CardDescription>{t("description")}</CardDescription>
-                </CardHeaderText>
-                <CardHeaderActions>
-                    <Button onClick={displayCreateModal}>Add</Button>
-                </CardHeaderActions>
+                <CardTitle>{t("title")}</CardTitle>
+                <CardDescription>{t("description")}</CardDescription>
+                <Button onClick={displayCreateModal}>Add</Button>
             </CardHeader>
             <CardContent>
                 <ConductorLocationTable geometryId={geometryId} />

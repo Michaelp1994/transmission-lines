@@ -5,7 +5,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@repo/ui";
+} from "@repo/ui/table";
 import {
     type ColumnDef,
     flexRender,

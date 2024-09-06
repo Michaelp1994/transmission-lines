@@ -1,6 +1,4 @@
 import {
-    Button,
-    Checkbox,
     Form,
     FormControl,
     FormDescription,
@@ -8,13 +6,15 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-    Input,
-} from "@repo/ui";
+} from "@repo/ui/form";
+import { Input } from "@repo/ui/input";
+import { Button } from "@repo/ui/button";
 import type { SourceFormInput } from "@repo/validators/forms/Source.schema";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { useCreateSourceForm } from "~/utils/forms";
+import { Checkbox } from "@repo/ui/checkbox";
 
 interface CreateSourceFormProps {
     onValid: (values: SourceFormInput) => void;

@@ -1,10 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { UpdateSourceElectricalForm } from "~/features/sources";
 
@@ -12,6 +6,7 @@ export const Route = createFileRoute(
     "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical"
 )({
     component: ViewSourcePage,
+
     beforeLoad: () => {
         return {
             text: "View Source",
@@ -25,9 +20,7 @@ export default function ViewSourcePage() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>Electrical Properties</CardTitle>
-                </CardHeaderText>
+                <CardTitle>Electrical Properties</CardTitle>
             </CardHeader>
             <CardContent>
                 <UpdateSourceElectricalForm sourceId={sourceId} />

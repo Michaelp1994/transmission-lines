@@ -1,12 +1,5 @@
-import {
-    Button,
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
+import { Button } from "@repo/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardCopy } from "lucide-react";
 import MatrixTable from "~/components/MatrixTable/MatrixTable";
@@ -45,19 +38,15 @@ export default function LineParametersPage() {
         <div>
             <Card>
                 <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>R Matrix</CardTitle>
-                    </CardHeaderText>
-                    <CardHeaderActions>
-                        <Button
-                            size="icon"
-                            variant="secondary"
-                            type="button"
-                            onClick={() => copyToClipboard(data.rMatrix)}
-                        >
-                            <ClipboardCopy />
-                        </Button>
-                    </CardHeaderActions>
+                    <CardTitle>R Matrix</CardTitle>
+                    <Button
+                        size="icon"
+                        variant="secondary"
+                        type="button"
+                        onClick={() => copyToClipboard(data.rMatrix)}
+                    >
+                        <ClipboardCopy />
+                    </Button>
                 </CardHeader>
                 <CardContent>
                     <MatrixTable data={data.rMatrix} />
@@ -65,19 +54,15 @@ export default function LineParametersPage() {
             </Card>
             <Card>
                 <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>X Matrix</CardTitle>
-                    </CardHeaderText>
-                    <CardHeaderActions>
-                        <Button
-                            size="icon"
-                            variant="secondary"
-                            type="button"
-                            onClick={() => copyToClipboard(data.xMatrix)}
-                        >
-                            <ClipboardCopy />
-                        </Button>
-                    </CardHeaderActions>
+                    <CardTitle>X Matrix</CardTitle>
+                    <Button
+                        size="icon"
+                        variant="secondary"
+                        type="button"
+                        onClick={() => copyToClipboard(data.xMatrix)}
+                    >
+                        <ClipboardCopy />
+                    </Button>
                 </CardHeader>
                 <CardContent>
                     <MatrixTable data={data.xMatrix} />
@@ -85,19 +70,15 @@ export default function LineParametersPage() {
             </Card>
             <Card>
                 <CardHeader>
-                    <CardHeaderText>
-                        <CardTitle>C Matrix</CardTitle>
-                    </CardHeaderText>
-                    <CardHeaderActions>
-                        <Button
-                            size="icon"
-                            variant="secondary"
-                            type="button"
-                            onClick={() => copyToClipboard(data.cMatrix)}
-                        >
-                            <ClipboardCopy />
-                        </Button>
-                    </CardHeaderActions>
+                    <CardTitle>C Matrix</CardTitle>
+                    <Button
+                        size="icon"
+                        variant="secondary"
+                        type="button"
+                        onClick={() => copyToClipboard(data.cMatrix)}
+                    >
+                        <ClipboardCopy />
+                    </Button>
                 </CardHeader>
                 <CardContent>
                     <MatrixTable data={data.cMatrix} />

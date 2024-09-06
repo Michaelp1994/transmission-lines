@@ -1,9 +1,9 @@
 import {
-    Button,
     Pagination,
     PaginationContent,
     PaginationItem,
-} from "@repo/ui";
+} from "@repo/ui/pagination";
+import { Button } from "@repo/ui/button";
 import type { Table } from "@tanstack/react-table";
 import {
     ChevronLeft,

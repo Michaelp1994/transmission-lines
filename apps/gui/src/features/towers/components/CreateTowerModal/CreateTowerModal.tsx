@@ -4,7 +4,7 @@ import {
     DialogDescription,
     DialogHeader,
     DialogTitle,
-} from "@repo/ui";
+} from "@repo/ui/dialog";
 import type { LineID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 import FormHandler from "./FormHandler";

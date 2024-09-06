@@ -9,8 +9,8 @@ import {
     AlertDialogOverlay,
     AlertDialogPortal,
     AlertDialogTitle,
-    buttonVariants,
-} from "@repo/ui";
+} from "@repo/ui/alert-dialog";
+import { buttonVariants } from "@repo/ui/button";
 import { useTranslation } from "react-i18next";
 
 interface BaseModalProps {

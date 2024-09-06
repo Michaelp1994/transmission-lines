@@ -1,10 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardHeaderText,
-    CardTitle,
-} from "@repo/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { UpdateProjectForm } from "~/features/projects";
@@ -20,9 +14,7 @@ export default function ProjectGeneral() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>{t("title")}</CardTitle>
-                </CardHeaderText>
+                <CardTitle>{t("title")}</CardTitle>
             </CardHeader>
             <CardContent>
                 <UpdateProjectForm projectId={projectId} />

@@ -1,4 +1,4 @@
-import { Button } from "@repo/ui";
+import { Button } from "@repo/ui/button";
 import { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
     Background,

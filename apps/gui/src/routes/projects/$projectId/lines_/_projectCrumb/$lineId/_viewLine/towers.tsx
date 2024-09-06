@@ -1,17 +1,17 @@
 import {
-    Button,
     Card,
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderActions,
-    CardHeaderText,
     CardTitle,
+} from "@repo/ui/card";
+import { Button } from "@repo/ui/button";
+import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-} from "@repo/ui";
+} from "@repo/ui/tooltip";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { TowerTable } from "~/features/towers";
@@ -32,36 +32,30 @@ export default function TransmissionLineTowers() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>{t("title")}</CardTitle>
-                    <CardDescription>{t("description")}</CardDescription>
-                </CardHeaderText>
-                <CardHeaderActions>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button onClick={displayCreateModal}>
-                                    Add
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>Add a Tower to the Line</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button onClick={displayGenerateModal}>
-                                    {t("form:generate")}
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>Generate tower configuration</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                </CardHeaderActions>
+                <CardTitle>{t("title")}</CardTitle>
+                <CardDescription>{t("description")}</CardDescription>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button onClick={displayCreateModal}>Add</Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Add a Tower to the Line</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <Button onClick={displayGenerateModal}>
+                                {t("form:generate")}
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Generate tower configuration</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </CardHeader>
             <CardContent>
                 <TowerTable lineId={lineId} />

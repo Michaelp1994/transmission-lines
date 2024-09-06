@@ -1,5 +1,4 @@
 import {
-    Button,
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuGroup,
@@ -8,7 +7,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuShortcut,
     DropdownMenuTrigger,
-} from "@repo/ui";
+} from "@repo/ui/dropdown-menu";
+import { Button } from "@repo/ui/button";
 import { CircleUser } from "lucide-react";
 import SettingsModal from "./SettingsModal";
 

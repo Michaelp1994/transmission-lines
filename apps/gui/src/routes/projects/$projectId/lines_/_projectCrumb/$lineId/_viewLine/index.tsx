@@ -3,9 +3,8 @@ import {
     CardContent,
     CardDescription,
     CardHeader,
-    CardHeaderText,
     CardTitle,
-} from "@repo/ui";
+} from "@repo/ui/card";
 import { createFileRoute } from "@tanstack/react-router";
 import { UpdateTransmissionLineForm } from "~/features/transmissionLines";
 import trpc from "~/utils/trpc";
@@ -22,12 +21,10 @@ export default function TransmissionLineGeneral() {
     return (
         <Card>
             <CardHeader>
-                <CardHeaderText>
-                    <CardTitle>General</CardTitle>
-                    <CardDescription>
-                        General information about the transmission line.
-                    </CardDescription>
-                </CardHeaderText>
+                <CardTitle>General</CardTitle>
+                <CardDescription>
+                    General information about the transmission line.
+                </CardDescription>
             </CardHeader>
             <CardContent>
                 <UpdateTransmissionLineForm lineId={lineId} />

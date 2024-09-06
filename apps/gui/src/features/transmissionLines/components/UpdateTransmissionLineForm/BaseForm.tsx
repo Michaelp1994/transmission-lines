@@ -1,14 +1,14 @@
 import {
     Form,
+    FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
-    FormControl,
-    Input,
-    FormDescription,
     FormMessage,
-    Button,
-} from "@repo/ui";
+} from "@repo/ui/form";
+import { Input } from "@repo/ui/input";
+import { Button } from "@repo/ui/button";
 import type { TransmissionLineFormInput } from "@repo/validators/forms/TransmissionLine.schema";
 import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";

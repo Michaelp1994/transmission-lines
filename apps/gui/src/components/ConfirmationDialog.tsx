@@ -8,9 +8,8 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
-    Button,
-    buttonVariants,
-} from "@repo/ui";
+} from "@repo/ui/alert-dialog";
+import { Button, buttonVariants } from "@repo/ui/button";
 import { Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 

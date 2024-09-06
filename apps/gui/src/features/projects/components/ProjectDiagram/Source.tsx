@@ -3,7 +3,7 @@ import {
     ContextMenuContent,
     ContextMenuItem,
     ContextMenuTrigger,
-} from "@repo/ui";
+} from "@repo/ui/context-menu";
 import { Link } from "@tanstack/react-router";
 import { Handle, Position } from "reactflow";
 import type { NodeData } from "./NodeData";
