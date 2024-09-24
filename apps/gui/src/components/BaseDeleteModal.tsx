@@ -1,3 +1,4 @@
+import { useModal } from "@ebay/nice-modal-react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -14,18 +15,14 @@ import { buttonVariants } from "@repo/ui/button";
 import { useTranslation } from "react-i18next";
 
 interface BaseModalProps {
-    onClose: () => void;
     onConfirm: () => void;
 }
 
-export default function BaseDeleteModal({
-    onConfirm,
-    onClose,
-}: BaseModalProps) {
+export default function BaseDeleteModal({ onConfirm }: BaseModalProps) {
     const { t } = useTranslation("general");
-
+    const modal = useModal();
     return (
-        <AlertDialog open defaultOpen onOpenChange={onClose}>
+        <AlertDialog open defaultOpen onOpenChange={() => modal.hide()}>
             <AlertDialogPortal>
                 <AlertDialogOverlay />
                 <AlertDialogContent>

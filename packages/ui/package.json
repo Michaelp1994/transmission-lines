@@ -7,7 +7,8 @@
     "type": "module",
     "exports": {
         "./utils": "./src/lib/utils.ts",
-        "./*": "./src/components/*.tsx"
+        "./*": "./src/components/*.tsx",
+        "./hooks/*": "./src/hooks/*.ts"
     },
     "types": "./src/index.ts",
     "files": [
@@ -55,6 +56,7 @@
         "date-fns": "^3.6.0",
         "embla-carousel-react": "8.2.0",
         "lucide-react": "^0.438.0",
+        "next-themes": "^0.3.0",
         "postcss-cli": "^11.0.0",
         "react-day-picker": "^9.0.8",
         "react-hook-form": "^7.53.0",

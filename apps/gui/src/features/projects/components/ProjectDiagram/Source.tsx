@@ -7,14 +7,18 @@ import {
 import { Link } from "@tanstack/react-router";
 import { Handle, Position } from "reactflow";
 import type { NodeData } from "./NodeData";
-import { useDeleteSourceModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 interface SourceProps {
     data: NodeData;
 }
 
 export default function Source({ data }: SourceProps) {
-    const displayDeleteModal = useDeleteSourceModal(data.sourceId);
+    function showDeleteModal() {
+        NiceModal.show("delete-source", {
+            sourceId: data.sourceId,
+        });
+    }
 
     return (
         <>
@@ -34,7 +38,7 @@ export default function Source({ data }: SourceProps) {
                                 View
                             </Link>
                         </ContextMenuItem>
-                        <ContextMenuItem onClick={displayDeleteModal}>
+                        <ContextMenuItem onClick={showDeleteModal}>
                             Delete
                         </ContextMenuItem>
                     </ContextMenuContent>

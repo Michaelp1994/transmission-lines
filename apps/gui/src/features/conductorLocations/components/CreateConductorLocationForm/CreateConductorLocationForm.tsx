@@ -9,36 +9,53 @@ import {
 } from "@repo/ui/form";
 import { Input } from "@repo/ui/input";
 import { Button } from "@repo/ui/button";
-import type { ConductorLocationFormInput } from "@repo/validators/forms";
-import type { FieldErrors } from "react-hook-form";
+import {
+    conductorLocationFormSchema,
+    defaultConductorLocation,
+    type ConductorLocationFormInput,
+} from "@repo/validators/forms";
 import { useTranslation } from "react-i18next";
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { useCreateConductorLocationForm } from "~/utils/forms";
+import { useForm } from "@repo/ui/hooks/use-form";
+import toast from "~/utils/toast";
+import trpc from "~/utils/trpc";
+import type { GeometryID } from "@repo/validators/Ids";
 
 interface CreateConductorLocationFormProps {
-    onValid: (values: ConductorLocationFormInput) => void;
-    onInvalid: (errors: FieldErrors<ConductorLocationFormInput>) => void;
+    geometryId: GeometryID;
 }
 
 export default function CreateConductorLocationForm({
-    onValid,
-    onInvalid,
+    geometryId,
 }: CreateConductorLocationFormProps) {
+    const utils = trpc.useUtils();
     const { t } = useTranslation("createConductorLocationModal");
-    const form = useCreateConductorLocationForm();
-
-    const handleSubmit = form.handleSubmit(
-        (values) => {
-            onValid(values);
+    const form = useForm<ConductorLocationFormInput>({
+        schema: conductorLocationFormSchema,
+        defaultValues: defaultConductorLocation,
+    });
+    const createMutation = trpc.conductorLocations.create.useMutation({
+        onSuccess: async () => {
+            toast.success("Conductor location created");
+            await utils.conductorLocations.getAllByGeometryId.invalidate({
+                geometryId,
+            });
         },
-        (errors) => {
-            onInvalid(errors);
-        }
-    );
+        onError: (error) => {
+            toast.error("Failed to create conductor location");
+            console.error(error);
+        },
+    });
+
+    function handleValid(data: ConductorLocationFormInput) {
+        createMutation.mutate({ ...data, geometryId });
+    }
 
     return (
         <Form {...form}>
-            <StyledForm onSubmit={handleSubmit}>
+            <StyledForm
+                onSubmit={(e) => void form.handleSubmit(handleValid)(e)}
+            >
                 <FormField
                     control={form.control}
                     name="x"

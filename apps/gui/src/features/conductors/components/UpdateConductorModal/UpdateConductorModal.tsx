@@ -10,32 +10,35 @@ import {
 import type { ConductorID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 import FormHandler from "./FormHandler";
+import NiceModal from "@ebay/nice-modal-react";
 
 export interface UpdateConductorModalProps {
     conductorId: ConductorID;
     onClose: () => void;
 }
 
-export default function UpdateConductorModal({
-    conductorId,
-    onClose,
-}: UpdateConductorModalProps) {
-    const { t } = useTranslation("updateConductorModal");
+export default NiceModal.create(
+    ({ conductorId, onClose }: UpdateConductorModalProps) => {
+        const { t } = useTranslation("updateConductorModal");
 
-    return (
-        <Dialog open defaultOpen onOpenChange={onClose}>
-            <DialogPortal>
-                <DialogOverlay />
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>{t("modalTitle")}</DialogTitle>
-                        <DialogDescription>
-                            {t("modalDescription")}
-                        </DialogDescription>
-                    </DialogHeader>
-                    <FormHandler conductorId={conductorId} onFinish={onClose} />
-                </DialogContent>
-            </DialogPortal>
-        </Dialog>
-    );
-}
+        return (
+            <Dialog open defaultOpen onOpenChange={onClose}>
+                <DialogPortal>
+                    <DialogOverlay />
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>{t("modalTitle")}</DialogTitle>
+                            <DialogDescription>
+                                {t("modalDescription")}
+                            </DialogDescription>
+                        </DialogHeader>
+                        <FormHandler
+                            conductorId={conductorId}
+                            onFinish={onClose}
+                        />
+                    </DialogContent>
+                </DialogPortal>
+            </Dialog>
+        );
+    }
+);

@@ -16,13 +16,21 @@ import {
     MenuIcon,
     ViewIcon,
 } from "~/components/MenuIcons";
-import { useDeleteTowerModal, useUpdateTowerModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function RowActions({
     row,
 }: CellContext<TransmissionTower, unknown>) {
-    const displayUpdateModal = useUpdateTowerModal(row.original.id);
-    const displayDeleteModal = useDeleteTowerModal(row.original.id);
+    function showUpdateModal() {
+        NiceModal.show("update-tower", {
+            towerId: row.original.id,
+        });
+    }
+    function showDeleteModal() {
+        NiceModal.show("delete-tower", {
+            towerId: row.original.id,
+        });
+    }
 
     return (
         <DropdownMenu>
@@ -50,11 +58,11 @@ export default function RowActions({
                         <span>View</span>
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayUpdateModal}>
+                <DropdownMenuItem onClick={showUpdateModal}>
                     <EditIcon />
                     <span>Edit</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

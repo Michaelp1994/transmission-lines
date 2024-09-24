@@ -10,15 +10,20 @@ import { Button } from "@repo/ui/button";
 import type { CellContext } from "@tanstack/react-table";
 import type { Conductor } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import {
-    useDeleteConductorModal,
-    useUpdateConductorModal,
-} from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function RowActions({ row }: CellContext<Conductor, unknown>) {
-    const displayUpdateModal = useUpdateConductorModal(row.original.id);
-    const displayDeleteModal = useDeleteConductorModal(row.original.id);
+    function showUpdateModal() {
+        NiceModal.show("update-conductor", {
+            conductorId: row.original.id,
+        });
+    }
 
+    function showDeleteModal() {
+        NiceModal.show("delete-conductor", {
+            conductorId: row.original.id,
+        });
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -33,11 +38,11 @@ export default function RowActions({ row }: CellContext<Conductor, unknown>) {
             <DropdownMenuContent align="end" className="w-[160px]">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={displayUpdateModal}>
+                <DropdownMenuItem onClick={showUpdateModal}>
                     <ViewIcon />
                     <span>View</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

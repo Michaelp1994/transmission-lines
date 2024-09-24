@@ -10,20 +10,18 @@ import {
 import type { TowerID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 import FormHandler from "./FormHandler";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
 export interface UpdateTowerModalProps {
     towerId: TowerID;
-    onClose: () => void;
 }
 
-export default function UpdateTowerModal({
-    onClose,
-    towerId,
-}: UpdateTowerModalProps) {
+export default NiceModal.create(({ towerId }: UpdateTowerModalProps) => {
+    const modal = useModal();
     const { t } = useTranslation("updateTowerModal");
 
     return (
-        <Dialog open defaultOpen onOpenChange={onClose}>
+        <Dialog open defaultOpen onOpenChange={() => modal.hide()}>
             <DialogPortal>
                 <DialogOverlay />
                 <DialogContent>
@@ -33,9 +31,9 @@ export default function UpdateTowerModal({
                             {t("modalDescription")}
                         </DialogDescription>
                     </DialogHeader>
-                    <FormHandler towerId={towerId} onFinish={onClose} />
+                    <FormHandler towerId={towerId} />
                 </DialogContent>
             </DialogPortal>
         </Dialog>
     );
-}
+});

@@ -15,7 +15,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { TowerTable } from "~/features/towers";
-import { useCreateTowerModal, useGenerateTowersModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers"
@@ -26,8 +26,18 @@ export const Route = createFileRoute(
 export default function TransmissionLineTowers() {
     const { lineId } = Route.useParams();
     const { t } = useTranslation("towerConfiguration");
-    const displayCreateModal = useCreateTowerModal(lineId);
-    const displayGenerateModal = useGenerateTowersModal(lineId);
+
+    function showCreateModal() {
+        NiceModal.show("create-tower", {
+            lineId,
+        });
+    }
+
+    function showGenerateModal() {
+        NiceModal.show("generate-towers", {
+            lineId,
+        });
+    }
 
     return (
         <Card>
@@ -37,7 +47,7 @@ export default function TransmissionLineTowers() {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button onClick={displayCreateModal}>Add</Button>
+                            <Button onClick={showCreateModal}>Add</Button>
                         </TooltipTrigger>
                         <TooltipContent>
                             <p>Add a Tower to the Line</p>
@@ -47,7 +57,7 @@ export default function TransmissionLineTowers() {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button onClick={displayGenerateModal}>
+                            <Button onClick={showGenerateModal}>
                                 {t("form:generate")}
                             </Button>
                         </TooltipTrigger>

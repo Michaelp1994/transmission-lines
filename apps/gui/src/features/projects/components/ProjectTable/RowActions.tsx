@@ -11,11 +11,14 @@ import { Link } from "@tanstack/react-router";
 import type { CellContext } from "@tanstack/react-table";
 import type { Project } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import { useDeleteProjectModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function RowActions({ row }: CellContext<Project, unknown>) {
-    const displayDeleteModal = useDeleteProjectModal(row.original.id);
-
+    function showDeleteModal() {
+        NiceModal.show("delete-project", {
+            projectId: row.original.id,
+        });
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -39,7 +42,7 @@ export default function RowActions({ row }: CellContext<Project, unknown>) {
                         View
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     Delete
                 </DropdownMenuItem>

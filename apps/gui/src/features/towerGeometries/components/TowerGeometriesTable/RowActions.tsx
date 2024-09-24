@@ -11,13 +11,16 @@ import { Link } from "@tanstack/react-router";
 import type { CellContext } from "@tanstack/react-table";
 import type { TowerGeometry } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import { useDeleteTowerGeometryModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function RowActions({
     row,
 }: CellContext<TowerGeometry, unknown>) {
-    const displayDeleteModal = useDeleteTowerGeometryModal(row.original.id);
-
+    function showDeleteModal() {
+        NiceModal.show("delete-tower-geometry", {
+            geometryId: row.original.id,
+        });
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -42,7 +45,7 @@ export default function RowActions({
                     </Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

@@ -15,10 +15,7 @@ import { Button } from "@repo/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { ConductorTable } from "~/features/conductors";
-import {
-    useCreateConductorModal,
-    useGenerateConductorsModal,
-} from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export const Route = createFileRoute(
     "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors"
@@ -29,19 +26,26 @@ export const Route = createFileRoute(
 export default function TransmissionLineConductors() {
     const { lineId } = Route.useParams();
     const { t } = useTranslation("transmissionLineConductors");
-    const displayCreateModal = useCreateConductorModal(lineId);
-    const displayGenerateModal = useGenerateConductorsModal(lineId);
+    function showCreateModal() {
+        NiceModal.show("create-conductor", {
+            lineId,
+        });
+    }
+
+    function showGenerateModal() {
+        NiceModal.show("generate-conductors", { lineId });
+    }
 
     return (
         <Card>
             <CardHeader>
                 <CardTitle>{t("title")}</CardTitle>
                 <CardDescription>{t("description")}</CardDescription>
-                <Button onClick={displayCreateModal}>Add</Button>
+                <Button onClick={showCreateModal}>Add</Button>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button onClick={displayGenerateModal}>
+                            <Button onClick={showGenerateModal}>
                                 {t("form:generate")}
                             </Button>
                         </TooltipTrigger>

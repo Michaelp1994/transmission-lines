@@ -1,3 +1,4 @@
+import NiceModal from "@ebay/nice-modal-react";
 import {
     ContextMenu,
     ContextMenuContent,
@@ -12,7 +13,6 @@ import {
     getBezierPath,
     useReactFlow,
 } from "reactflow";
-import { useDeleteTransmissionLineModal } from "~/utils/modals";
 
 export default function TransmissionLine({
     id,
@@ -34,8 +34,11 @@ export default function TransmissionLine({
         targetY,
         targetPosition,
     });
-    const displayDeleteModal = useDeleteTransmissionLineModal(data.lineId);
-
+    function showDeleteModal() {
+        NiceModal.show("delete-transmission-line", {
+            lineId: data.lineId,
+        });
+    }
     return (
         <>
             <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />

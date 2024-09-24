@@ -1,3 +1,4 @@
+import NiceModal from "@ebay/nice-modal-react";
 import type { TowerID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
@@ -5,13 +6,9 @@ import trpc from "~/utils/trpc";
 
 export interface DeleteTowerModalProps {
     towerId: TowerID;
-    onClose: () => void;
 }
 
-export default function DeleteTowerModal({
-    towerId,
-    onClose,
-}: DeleteTowerModalProps) {
+export default NiceModal.create(({ towerId }: DeleteTowerModalProps) => {
     const utils = trpc.useUtils();
     const deleteMutation = trpc.tower.delete.useMutation({
         async onSuccess(data) {
@@ -19,7 +16,6 @@ export default function DeleteTowerModal({
             await utils.tower.getAllByLineId.invalidate({
                 lineId: data.lineId,
             });
-            onClose();
         },
         onError(error) {
             toast.error("Can't delete Tower");
@@ -31,5 +27,5 @@ export default function DeleteTowerModal({
         deleteMutation.mutate({ id: towerId });
     }
 
-    return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
-}
+    return <BaseDeleteModal onConfirm={handleConfirm} />;
+});

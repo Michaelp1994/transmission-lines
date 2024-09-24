@@ -30,7 +30,7 @@ app.whenReady().then(async () => {
         server.listen(5001);
         console.log("listening on port 5001");
     } catch (e) {
-        console.log("CATCH BLOCK");
+        console.log("Problem starting server....");
         console.log(e);
     }
 

@@ -10,16 +10,22 @@ import { Button } from "@repo/ui/button";
 import type { CellContext } from "@tanstack/react-table";
 import type { ConductorLocation } from "./type";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import {
-    useDeleteConductorLocationModal,
-    useUpdateConductorLocationModal,
-} from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function RowActions({
     row,
 }: CellContext<ConductorLocation, unknown>) {
-    const displayUpdateModal = useUpdateConductorLocationModal(row.original.id);
-    const displayDeleteModal = useDeleteConductorLocationModal(row.original.id);
+    function showUpdateModal() {
+        NiceModal.show("update-conductor-location", {
+            conductorLocationId: row.original.id,
+        });
+    }
+
+    function showDeleteModal() {
+        NiceModal.show("delete-conductor-location", {
+            conductorLocationId: row.original.id,
+        });
+    }
 
     return (
         <DropdownMenu>
@@ -35,11 +41,11 @@ export default function RowActions({
             <DropdownMenuContent align="end" className="w-[160px]">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={displayUpdateModal}>
+                <DropdownMenuItem onClick={showUpdateModal}>
                     <ViewIcon />
                     <span>View</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

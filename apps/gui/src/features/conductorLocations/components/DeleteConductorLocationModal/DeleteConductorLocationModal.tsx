@@ -1,35 +1,34 @@
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import type { LocationID } from "@repo/validators/Ids";
 import BaseDeleteModal from "~/components/BaseDeleteModal";
 import toast from "~/utils/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteConductorLocationModalProps {
-    locationId: LocationID;
-    onClose: () => void;
+    conductorLocationId: LocationID;
 }
 
-export default function DeleteConductorLocationModal({
-    locationId,
-    onClose,
-}: DeleteConductorLocationModalProps) {
-    const utils = trpc.useUtils();
-    const deleteMutation = trpc.conductorLocations.delete.useMutation({
-        async onSuccess(data) {
-            toast.success("Conductor location deleted");
-            await utils.conductorLocations.getAllByGeometryId.invalidate({
-                geometryId: data.geometryId,
-            });
-            onClose();
-        },
-        onError(error) {
-            toast.error("Can't delete Conductor Location");
-            console.error(error);
-        },
-    });
+export default NiceModal.create(
+    ({ conductorLocationId }: DeleteConductorLocationModalProps) => {
+        const modal = useModal();
+        const utils = trpc.useUtils();
+        const deleteMutation = trpc.conductorLocations.delete.useMutation({
+            async onSuccess(data) {
+                toast.success("Conductor location deleted");
+                await utils.conductorLocations.getAllByGeometryId.invalidate({
+                    geometryId: data.geometryId,
+                });
+            },
+            onError(error) {
+                toast.error("Can't delete Conductor Location");
+                console.error(error);
+            },
+        });
 
-    function handleConfirm() {
-        deleteMutation.mutate({ locationId });
+        function handleConfirm() {
+            deleteMutation.mutate({ locationId: conductorLocationId });
+        }
+
+        return <BaseDeleteModal onConfirm={handleConfirm} onClose={onClose} />;
     }
-
-    return <BaseDeleteModal onConfirm={handleConfirm} onClose={onClose} />;
-}
+);

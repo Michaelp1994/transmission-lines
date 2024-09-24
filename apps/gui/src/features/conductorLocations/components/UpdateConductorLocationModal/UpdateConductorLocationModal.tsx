@@ -9,35 +9,34 @@ import {
 } from "@repo/ui/dialog";
 import { useTranslation } from "react-i18next";
 import FormHandler from "./FormHandler";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
+import type { LocationID } from "@repo/validators/Ids";
 
 export interface UpdateConductorLocationModalProps {
-    conductorLocationId: number;
-    onClose: () => void;
+    conductorLocationId: LocationID;
 }
 
-export default function UpdateConductorLocationModal({
-    conductorLocationId,
-    onClose,
-}: UpdateConductorLocationModalProps) {
-    const { t } = useTranslation("updateConductorModal");
-
-    return (
-        <Dialog open defaultOpen onOpenChange={onClose}>
-            <DialogPortal>
-                <DialogOverlay />
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>{t("modalTitle")}</DialogTitle>
-                        <DialogDescription>
-                            {t("modalDescription")}
-                        </DialogDescription>
-                    </DialogHeader>
-                    <FormHandler
-                        conductorLocationId={conductorLocationId}
-                        onSubmit={onClose}
-                    />
-                </DialogContent>
-            </DialogPortal>
-        </Dialog>
-    );
-}
+export default NiceModal.create(
+    ({ conductorLocationId }: UpdateConductorLocationModalProps) => {
+        const { t } = useTranslation("updateConductorModal");
+        const modal = useModal();
+        return (
+            <Dialog open defaultOpen onOpenChange={onClose}>
+                <DialogPortal>
+                    <DialogOverlay />
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>{t("modalTitle")}</DialogTitle>
+                            <DialogDescription>
+                                {t("modalDescription")}
+                            </DialogDescription>
+                        </DialogHeader>
+                        <FormHandler
+                            conductorLocationId={conductorLocationId}
+                        />
+                    </DialogContent>
+                </DialogPortal>
+            </Dialog>
+        );
+    }
+);

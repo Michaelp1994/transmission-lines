@@ -11,13 +11,16 @@ import { Link } from "@tanstack/react-router";
 import type { CellContext } from "@tanstack/react-table";
 import type { TransmissionLine } from "./RowType";
 import { DeleteIcon, EditIcon, MenuIcon } from "~/components/MenuIcons";
-import { useDeleteTransmissionLineModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function ConductorTableRowActions({
     row,
 }: CellContext<TransmissionLine, unknown>) {
-    const displayDeleteModal = useDeleteTransmissionLineModal(row.original.id);
-
+    function showDeleteModal() {
+        NiceModal.show("delete-tranmission-line", {
+            lineId: row.original.id,
+        });
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -44,7 +47,7 @@ export default function ConductorTableRowActions({
                         <span>Edit</span>
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

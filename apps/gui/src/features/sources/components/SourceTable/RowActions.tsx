@@ -11,13 +11,16 @@ import { Link } from "@tanstack/react-router";
 import type { CellContext } from "@tanstack/react-table";
 import type { Source } from "./RowType";
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import { useDeleteSourceModal } from "~/utils/modals";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function SourceTableRowActions({
     row,
 }: CellContext<Source, unknown>) {
-    const displayDeleteModal = useDeleteSourceModal(row.original.id);
-
+    function showDeleteModal() {
+        NiceModal.show("delete-source", {
+            sourceId: row.original.id,
+        });
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -44,7 +47,7 @@ export default function SourceTableRowActions({
                         <span>View</span>
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={displayDeleteModal}>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     <span>Delete</span>
                 </DropdownMenuItem>

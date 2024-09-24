@@ -8,20 +8,17 @@ import {
 import type { LineID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
 import FormWrapper from "./FormWrapper";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
 export interface GenerateConductorsModalProps {
     lineId: LineID;
-    onClose: () => void;
 }
 
-export default function GenerateConductorsModal({
-    lineId,
-    onClose,
-}: GenerateConductorsModalProps) {
+export default NiceModal.create(({ lineId }: GenerateConductorsModalProps) => {
     const { t } = useTranslation("generateConductors");
-
+    const modal = useModal();
     return (
-        <Dialog open defaultOpen onOpenChange={onClose}>
+        <Dialog open defaultOpen onOpenChange={() => modal.hide()}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>{t("modalTitle")}</DialogTitle>
@@ -29,8 +26,8 @@ export default function GenerateConductorsModal({
                         {t("modalDescription")}
                     </DialogDescription>
                 </DialogHeader>
-                <FormWrapper lineId={lineId} onFinish={onClose} />
+                <FormWrapper lineId={lineId} />
             </DialogContent>
         </Dialog>
     );
-}
+});
