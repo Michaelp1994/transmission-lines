@@ -21,7 +21,7 @@ export default NiceModal.create(({ towerId }: UpdateTowerModalProps) => {
     const { t } = useTranslation("updateTowerModal");
 
     return (
-        <Dialog open defaultOpen onOpenChange={() => modal.hide()}>
+        <Dialog open={modal.visible} onOpenChange={() => modal.hide()}>
             <DialogPortal>
                 <DialogOverlay />
                 <DialogContent>

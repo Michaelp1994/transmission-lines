@@ -17,6 +17,7 @@ import { Route as ProjectsImport } from './routes/projects'
 import { Route as IndexImport } from './routes/index'
 import { Route as TowerGeometriesIndexImport } from './routes/tower-geometries/index'
 import { Route as ProjectsIndexImport } from './routes/projects/index'
+import { Route as ProjectIndexImport } from './routes/project/index'
 import { Route as ConductorTypesIndexImport } from './routes/conductor-types/index'
 import { Route as TowerGeometriesNewImport } from './routes/tower-geometries/new'
 import { Route as ProjectsNewImport } from './routes/projects/new'
@@ -102,6 +103,11 @@ const TowerGeometriesIndexRoute = TowerGeometriesIndexImport.update({
 const ProjectsIndexRoute = ProjectsIndexImport.update({
   path: '/',
   getParentRoute: () => ProjectsRoute,
+} as any)
+
+const ProjectIndexRoute = ProjectIndexImport.update({
+  path: '/project/',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const ConductorTypesIndexRoute = ConductorTypesIndexImport.update({
@@ -346,6 +352,13 @@ declare module '@tanstack/react-router' {
       path: '/conductor-types'
       fullPath: '/conductor-types'
       preLoaderRoute: typeof ConductorTypesIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/project/': {
+      id: '/project/'
+      path: '/project'
+      fullPath: '/project'
+      preLoaderRoute: typeof ProjectIndexImport
       parentRoute: typeof rootRoute
     }
     '/projects/': {
@@ -645,6 +658,7 @@ export const routeTree = rootRoute.addChildren({
   ConductorTypesNewRoute,
   TowerGeometriesNewRoute,
   ConductorTypesIndexRoute,
+  ProjectIndexRoute,
   TowerGeometriesIndexRoute,
   ConductorTypesTypeIdRoute: ConductorTypesTypeIdRoute.addChildren({
     ConductorTypesTypeIdLayoutRoute:
@@ -675,6 +689,7 @@ export const routeTree = rootRoute.addChildren({
         "/conductor-types/new",
         "/tower-geometries/new",
         "/conductor-types/",
+        "/project/",
         "/tower-geometries/",
         "/conductor-types/$typeId",
         "/tower-geometries/$geometryId"
@@ -703,6 +718,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/conductor-types/": {
       "filePath": "conductor-types/index.tsx"
+    },
+    "/project/": {
+      "filePath": "project/index.tsx"
     },
     "/projects/": {
       "filePath": "projects/index.tsx",

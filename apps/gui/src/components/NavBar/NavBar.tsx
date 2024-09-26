@@ -20,7 +20,7 @@ export default function NavBar() {
     }
 
     return (
-        <div>
+        <div className="flex justify-between items-center gap-4 px-4 py-2 border-b bg-background">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
@@ -34,11 +34,11 @@ export default function NavBar() {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to="/projects"
+                            to="/project"
                             draggable={false}
                             className={navigationMenuTriggerStyle()}
                         >
-                            {t("projects")}
+                            {t("project")}
                         </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
@@ -63,8 +63,6 @@ export default function NavBar() {
             </NavigationMenu>
             <div>
                 <UserButton />
-                {/* <Switch id="language" onCheckedChange={changeLanguage} />{" "}
-                <Label htmlFor="language">{t("changeLanguage")}</Label> */}
             </div>
         </div>
     );

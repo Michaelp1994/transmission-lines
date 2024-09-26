@@ -36,14 +36,6 @@ import {
     updateSourceGeneralFormSchema,
 } from "@repo/validators/forms";
 import { useForm } from "react-hook-form";
-
-export const useCreateProjectForm = () => {
-    return useForm<ProjectFormInput>({
-        resolver: zodResolver(projectFormSchema),
-        defaultValues: defaultProject,
-    });
-};
-
 export const useUpdateProjectForm = (data: ProjectFormInput) => {
     return useForm<ProjectFormInput>({
         resolver: zodResolver(projectFormSchema),

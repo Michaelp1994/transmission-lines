@@ -22,7 +22,7 @@ export default NiceModal.create(
         const { t } = useTranslation("updateConductorModal");
 
         return (
-            <Dialog open defaultOpen onOpenChange={onClose}>
+            <Dialog open={modal.visible} onOpenChange={onClose}>
                 <DialogPortal>
                     <DialogOverlay />
                     <DialogContent>

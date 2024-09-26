@@ -5,7 +5,7 @@ import {
     ContextMenuItem,
     ContextMenuTrigger,
 } from "@repo/ui/context-menu";
-import { Link } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import {
     BaseEdge,
     EdgeLabelRenderer,
@@ -58,9 +58,7 @@ export default function TransmissionLine({
                                     View
                                 </Link>
                             </ContextMenuItem>
-                            <ContextMenuItem onClick={displayDeleteModal}>
-                                Delete
-                            </ContextMenuItem>
+                            <ContextMenuItem>Delete</ContextMenuItem>
                         </ContextMenuContent>
                     </ContextMenu>
                 </div>

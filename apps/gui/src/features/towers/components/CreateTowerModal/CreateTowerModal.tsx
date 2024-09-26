@@ -20,7 +20,7 @@ export default NiceModal.create(
         const { t } = useTranslation("addTowerModal");
 
         return (
-            <Dialog open defaultOpen onOpenChange={onClose}>
+            <Dialog open={modal.visible} onOpenChange={onClose}>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>{t("modalTitle")}</DialogTitle>

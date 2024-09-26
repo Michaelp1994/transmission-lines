@@ -22,6 +22,7 @@ import {
     UpdateTowerModal,
 } from "~/features/towers";
 import DeleteTransmissionLineModal from "~/features/transmissionLines/components/DeleteTransmissionLineModal";
+import SettingsModal from "~/components/NavBar/SettingsModal";
 
 NiceModal.register("create-conductor-location", CreateConductorLocationModal);
 NiceModal.register("update-conductor-location", UpdateConductorLocationModal);
@@ -46,3 +47,4 @@ NiceModal.register("generate-conductors", GenerateConductorsModal);
 
 NiceModal.register("ceate-tower", CreateTowerModal);
 NiceModal.register("generate-towers", GenerateTowersModal);
+NiceModal.register("settings", SettingsModal);

@@ -4,6 +4,8 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
+    CardToolbar,
+    CardWrapper,
 } from "@repo/ui/card";
 import { Button } from "@repo/ui/button";
 import { Link, createFileRoute } from "@tanstack/react-router";
@@ -23,21 +25,25 @@ export default function AllTowerGeometriesPage() {
     const { t } = useTranslation("towerGeometry");
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Tower Geometries</CardTitle>
-                <CardDescription>
-                    Tower Geometries in the database
-                </CardDescription>
+        <CardWrapper>
+            <CardToolbar>
                 <Button asChild>
                     <Link to="/tower-geometries/new">
                         {t("add.buttonText")}
                     </Link>
                 </Button>
-            </CardHeader>
-            <CardContent>
-                <TowerGeometriesTable />
-            </CardContent>
-        </Card>
+            </CardToolbar>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Tower Geometries</CardTitle>
+                    <CardDescription>
+                        Tower Geometries in the database
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <TowerGeometriesTable />
+                </CardContent>
+            </Card>
+        </CardWrapper>
     );
 }

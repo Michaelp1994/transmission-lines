@@ -2,6 +2,14 @@ import * as React from "react";
 
 import { cn } from "../lib/utils";
 
+export function CardWrapper({ children }: { children: React.ReactNode }) {
+    return <div className="space-y-4">{children}</div>;
+}
+
+export function CardToolbar({ children }: { children: React.ReactNode }) {
+    return <div className="flex justify-end gap-4">{children}</div>;
+}
+
 const Card = React.forwardRef<
     HTMLDivElement,
     React.HTMLAttributes<HTMLDivElement>

@@ -19,7 +19,7 @@ export default NiceModal.create(({ lineId }: CreateConductorModalProps) => {
     const { t } = useTranslation("createConductorModal");
 
     return (
-        <Dialog open defaultOpen onOpenChange={() => modal.hide()}>
+        <Dialog open={modal.visible} onOpenChange={() => modal.hide()}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>{t("modalTitle")}</DialogTitle>

@@ -5,6 +5,8 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
+    CardToolbar,
+    CardWrapper,
 } from "@repo/ui/card";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ProjectTable } from "~/features/projects";
@@ -39,19 +41,22 @@ export default function AllProjectsPage() {
     }
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>All Projects</CardTitle>
-                <CardDescription>Select a project to begin</CardDescription>
-
+        <CardWrapper>
+            <CardToolbar>
                 <Button onClick={importProject}>Import Project</Button>
                 <Button asChild>
                     <Link to="/projects/new">New Project</Link>
                 </Button>
-            </CardHeader>
-            <CardContent>
-                <ProjectTable />
-            </CardContent>
-        </Card>
+            </CardToolbar>
+            <Card>
+                <CardHeader>
+                    <CardTitle>All Projects</CardTitle>
+                    <CardDescription>Select a project to begin</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <ProjectTable />
+                </CardContent>
+            </Card>
+        </CardWrapper>
     );
 }

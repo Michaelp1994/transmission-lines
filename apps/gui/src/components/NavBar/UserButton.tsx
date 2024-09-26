@@ -11,16 +11,12 @@ import {
 import { Button } from "@repo/ui/button";
 import { CircleUser } from "lucide-react";
 import SettingsModal from "./SettingsModal";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function UserButton() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                {/* <StyledButton variant="ghost">
-                <Avatar asChild>
-                    <UserIcon />
-                </Avatar>
-            </StyledButton> */}
                 <Button
                     variant="secondary"
                     size="icon"
@@ -51,7 +47,12 @@ export default function UserButton() {
                         Billing
                         <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                     </DropdownMenuItem>
-                    <SettingsModal />
+                    <DropdownMenuItem
+                        onClick={() => NiceModal.show("settings")}
+                    >
+                        Settings
+                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                    </DropdownMenuItem>
                     <DropdownMenuItem>New Team</DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />

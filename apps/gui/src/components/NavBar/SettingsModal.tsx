@@ -5,17 +5,12 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@repo/ui/dialog";
-import type { LineID } from "@repo/validators/Ids";
+
 import { useTranslation } from "react-i18next";
-import FormWrapper from "./FormWrapper";
 import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
-export interface GenerateConductorsModalProps {
-    lineId: LineID;
-}
-
-export default NiceModal.create(({ lineId }: GenerateConductorsModalProps) => {
-    const { t } = useTranslation("generateConductors");
+export default NiceModal.create(() => {
+    const { t } = useTranslation("settingsModal");
     const modal = useModal();
     return (
         <Dialog open={modal.visible} onOpenChange={() => modal.hide()}>
@@ -26,7 +21,6 @@ export default NiceModal.create(({ lineId }: GenerateConductorsModalProps) => {
                         {t("modalDescription")}
                     </DialogDescription>
                 </DialogHeader>
-                <FormWrapper lineId={lineId} />
             </DialogContent>
         </Dialog>
     );

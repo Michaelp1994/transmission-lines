@@ -17,17 +17,6 @@ export default function ConductorTypeToolbar({
     return (
         <div>
             <div>
-                {/* <StyledInput
-                value={
-                    (table.getColumn("name")?.getFilterValue() as string) ?? ""
-                }
-                onChange={(event) =>
-                    table.getColumn("name")?.setFilterValue(event.target.value)
-                }
-                placeholder="Search conductor types..."
-            /> */}
-            </div>
-            <div>
                 Rows per page:
                 <Select
                     value={`${table.getState().pagination.pageSize}`}
