@@ -1,125 +1,29 @@
 import fs from "fs/promises";
-import { eq } from "@repo/db/drizzle";
-import { projects } from "@repo/db/schemas/projects";
 import {
     createProjectSchema,
-    deleteProjectSchema,
-    exportProjectSchema,
-    getAllProjectsSchema,
-    getProjectByIdSchema,
-    importProjectSchema,
-    solveProjectSchema,
-    updateProjectSchema,
+    getProjectSchema,
+    openProjectSchema,
 } from "@repo/validators/schemas/Project.schema";
 import { publicProcedure, router } from "../trpc";
 
 // import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
-    getAll: publicProcedure
-        .input(getAllProjectsSchema)
-        .query(({ ctx: { db } }) => {
-            const allProjects = db.query.projects.findMany();
-
-            return allProjects;
+    getProject: publicProcedure
+        .input(getProjectSchema)
+        .query(async ({ ctx }) => {
+            return ctx.store.project;
         }),
-    getById: publicProcedure
-        .input(getProjectByIdSchema)
-        .query(async ({ input, ctx: { db } }) => {
-            const project = await db.query.projects.findFirst({
-                where: eq(projects.id, input.id),
-            });
-
-            if (!project) {
-                throw new Error("Can't find project");
-            }
-
-            return project;
-        }),
-    create: publicProcedure
-        .input(createProjectSchema)
-        .mutation(async ({ input, ctx: { db } }) => {
-            const [newProject] = await db
-                .insert(projects)
-                .values(input)
-                .returning();
-
-            if (!newProject) {
-                throw new Error("Can't create Project");
-            }
-
-            return newProject;
-        }),
-    update: publicProcedure
-        .input(updateProjectSchema)
-        .mutation(async ({ input, ctx: { db } }) => {
-            const [updatedProject] = await db
-                .update(projects)
-                .set(input)
-                .where(eq(projects.id, input.id))
-                .returning();
-
-            if (!updatedProject) {
-                throw new Error("Can't update project");
-            }
-
-            return updatedProject;
-        }),
-    delete: publicProcedure
-        .input(deleteProjectSchema)
-        .mutation(async ({ input, ctx: { db } }) => {
-            const [deletedProject] = await db
-                .delete(projects)
-                .where(eq(projects.id, input.id))
-                .returning();
-
-            if (!deletedProject) {
-                throw new Error("Can't delete project");
-            }
-
-            return deletedProject;
-        }),
-
-    solve: publicProcedure
-        .input(solveProjectSchema)
-        .query(async ({ input, ctx: { db } }) => {
-            const project = await db.query.projects.findFirst({
-                where: eq(projects.id, input.id),
-                with: {
-                    transmissionLines: {
-                        with: {
-                            conductors: {
-                                with: {
-                                    type: true,
-                                },
-                            },
-                            fromSource: true,
-                            toSource: true,
-                            towers: {
-                                with: {
-                                    geometry: true,
-                                },
-                            },
-                        },
-                    },
-                    sources: true,
-                },
-            });
-
-            if (!project) {
-                throw new Error("Can't find project");
-            }
-        }),
-    import: publicProcedure.mutation(async ({ ctx: { electron, db } }) => {
-        if (!electron) {
+    open: publicProcedure.mutation(async ({ ctx }) => {
+        if (!ctx.electron) {
             throw new Error("Not in electron context");
         }
-        const currentBrowser = electron.browserWindow;
+        const currentBrowser = ctx.electron.browserWindow;
 
         if (!currentBrowser) {
             throw new Error("No browser window found");
         }
-        const openDialogReturn = await electron.dialog.showOpenDialog(
+        const openDialogReturn = await ctx.electron.dialog.showOpenDialog(
             currentBrowser,
             {
                 properties: ["openFile"],
@@ -138,61 +42,70 @@ export default router({
             }
             const file = await fs.readFile(fileName);
             const contents = JSON.parse(file.toString());
-            const input = importProjectSchema.parse(contents);
+            const input = openProjectSchema.parse(contents);
             // TODO: check if exists and which version is more up to date, then prompt user if they want to replace it.
-            const [project] = await db
-                .insert(projects)
-                .values(input)
-                .returning();
 
-            return project;
+            ctx.store.project = input;
+
+            return ctx.store.project;
         }
 
         return null;
     }),
-    export: publicProcedure
-        .input(exportProjectSchema)
-        .mutation(async ({ input, ctx: { electron, db } }) => {
-            if (!electron) {
-                throw new Error("Not in electron context");
-            }
-            const currentBrowser = electron.browserWindow;
+    create: publicProcedure
+        .input(createProjectSchema)
+        .mutation(async ({ input, ctx }) => {
+            ctx.store.project = input;
+            return input;
+        }),
+    close: publicProcedure.mutation(async ({ input, ctx }) => {
+        ctx.store.project = null;
+        return input;
+    }),
+    save: publicProcedure.mutation(async ({ ctx }) => {
+        if (!ctx.store.project) {
+            throw new Error("Can't save without project");
+        }
+    }),
 
-            if (!currentBrowser) {
-                throw new Error("No browser window found");
+    saveAs: publicProcedure.mutation(async ({ ctx }) => {
+        if (!ctx.store.project) {
+            throw new Error("Can't save without project");
+        }
+        if (!ctx.electron) {
+            throw new Error("Not in electron context");
+        }
+        const currentBrowser = ctx.electron.browserWindow;
+
+        if (!currentBrowser) {
+            throw new Error("No browser window found");
+        }
+
+        const saveDialogReturn = await ctx.electron.dialog.showSaveDialog(
+            currentBrowser,
+            {
+                filters: [
+                    { name: "Project", extensions: ["study"] },
+                    { name: "All Files", extensions: ["*"] },
+                ],
             }
-            const saveDialogReturn = await electron.dialog.showSaveDialog(
-                currentBrowser,
-                {
-                    filters: [
-                        { name: "Project", extensions: ["study"] },
-                        { name: "All Files", extensions: ["*"] },
-                    ],
-                }
+        );
+
+        if (!saveDialogReturn.canceled) {
+            const fileName = saveDialogReturn.filePath;
+
+            // TODO: maybe include versioning, conductor types and tower geometries used in the project.
+            const fileContents = JSON.stringify(
+                ctx.store.project,
+                undefined,
+                2
             );
 
-            if (!saveDialogReturn.canceled) {
-                const fileName = saveDialogReturn.filePath;
-                const project = await db.query.projects.findFirst({
-                    where: eq(projects.id, input.id),
-                    with: {
-                        sources: true,
-                        transmissionLines: {
-                            with: {
-                                towers: true,
-                                conductors: true,
-                            },
-                        },
-                    },
-                });
-                // TODO: maybe include versioning, conductor types and tower geometries used in the project.
-                const fileContents = JSON.stringify(project, undefined, 2);
+            await fs.writeFile(fileName, fileContents);
 
-                await fs.writeFile(fileName, fileContents);
+            return true;
+        }
 
-                return true;
-            }
-
-            return null;
-        }),
+        return null;
+    }),
 });

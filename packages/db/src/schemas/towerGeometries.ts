@@ -2,7 +2,6 @@ import { relations } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
 import { conductorLocations } from "./conductorLocations";
-import { transmissionTowers } from "./transmissionTowers";
 
 export const towerGeometries = sqliteTable("tower_geometries", {
     id: text("id")
@@ -18,7 +17,6 @@ export const towerGeometriesRelations = relations(
     towerGeometries,
     ({ many }) => {
         return {
-            towers: many(transmissionTowers),
             conductors: many(conductorLocations),
         };
     }

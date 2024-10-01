@@ -1,22 +1,9 @@
-import { relations } from "drizzle-orm";
-import { sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { v4 as uuidv4 } from "uuid";
-import { sources } from "./sources";
-import { transmissionLines } from "./transmissionLines";
+import { type Source } from "./sources";
+import { type TransmissionLine } from "./transmissionLines";
 
-export const projects = sqliteTable("projects", {
-    id: text("id")
-        .primaryKey()
-        .$defaultFn(() => uuidv4()),
-    name: text("name").notNull().unique(),
-});
-
-export type Project = typeof projects.$inferSelect;
-export type NewProject = typeof projects.$inferInsert;
-
-export const projectsRelations = relations(projects, ({ many }) => {
-    return {
-        sources: many(sources),
-        transmissionLines: many(transmissionLines),
-    };
-});
+export interface Project {
+    id: string;
+    name: string;
+    sources: Source[];
+    transmissionLines: TransmissionLine[];
+}

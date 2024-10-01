@@ -9,11 +9,17 @@ export type CreateProjectInput = z.infer<typeof createProjectSchema>;
 
 // update
 
-export const updateProjectSchema = createProjectSchema.extend({
-    id: projectId,
+export const updateProjectSchema = z.object({
+    name: z.string().min(3).max(100),
 });
 
 export type UpdateProjectInput = z.infer<typeof updateProjectSchema>;
+
+// getProject
+
+export const getProjectSchema = z.object({});
+
+export type GetProjectInput = z.infer<typeof getProjectSchema>;
 
 // getAllProjects
 
@@ -41,17 +47,13 @@ export type SolveProjectInput = z.infer<typeof solveProjectSchema>;
 
 // import
 
-export const importProjectSchema = z.object({
-    id: projectId,
+export const openProjectSchema = z.object({
     name: z.string(),
-    // sources: updateSourceSchema.array().optional(),
-    // transmissionLines: updateTransmissionLineSchema.array().optional(),
+    version: z.string(),
 });
-
-export type ImportProjectInput = z.infer<typeof importProjectSchema>;
 
 // export
 
-export const exportProjectSchema = z.object({ id: projectId });
+export const exportProjectSchema = z.object({});
 
 export type ExportProjectInput = z.infer<typeof exportProjectSchema>;

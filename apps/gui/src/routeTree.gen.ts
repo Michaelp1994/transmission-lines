@@ -13,7 +13,6 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ProjectsImport } from './routes/projects'
 import { Route as IndexImport } from './routes/index'
 import { Route as TowerGeometriesIndexImport } from './routes/tower-geometries/index'
 import { Route as ProjectsIndexImport } from './routes/projects/index'
@@ -70,11 +69,6 @@ const ProjectsProjectIdLinesprojectCrumbLineIdImport = createFileRoute(
 
 // Create/Update Routes
 
-const ProjectsRoute = ProjectsImport.update({
-  path: '/projects',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
@@ -86,8 +80,8 @@ const TowerGeometriesGeometryIdRoute = TowerGeometriesGeometryIdImport.update({
 } as any)
 
 const ProjectsProjectIdRoute = ProjectsProjectIdImport.update({
-  path: '/$projectId',
-  getParentRoute: () => ProjectsRoute,
+  path: '/projects/$projectId',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const ConductorTypesTypeIdRoute = ConductorTypesTypeIdImport.update({
@@ -101,8 +95,8 @@ const TowerGeometriesIndexRoute = TowerGeometriesIndexImport.update({
 } as any)
 
 const ProjectsIndexRoute = ProjectsIndexImport.update({
-  path: '/',
-  getParentRoute: () => ProjectsRoute,
+  path: '/projects/',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const ProjectIndexRoute = ProjectIndexImport.update({
@@ -121,8 +115,8 @@ const TowerGeometriesNewRoute = TowerGeometriesNewImport.update({
 } as any)
 
 const ProjectsNewRoute = ProjectsNewImport.update({
-  path: '/new',
-  getParentRoute: () => ProjectsRoute,
+  path: '/projects/new',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const ConductorTypesNewRoute = ConductorTypesNewImport.update({
@@ -319,13 +313,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsImport
-      parentRoute: typeof rootRoute
-    }
     '/conductor-types/new': {
       id: '/conductor-types/new'
       path: '/conductor-types/new'
@@ -335,10 +322,10 @@ declare module '@tanstack/react-router' {
     }
     '/projects/new': {
       id: '/projects/new'
-      path: '/new'
+      path: '/projects/new'
       fullPath: '/projects/new'
       preLoaderRoute: typeof ProjectsNewImport
-      parentRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
     }
     '/tower-geometries/new': {
       id: '/tower-geometries/new'
@@ -363,10 +350,10 @@ declare module '@tanstack/react-router' {
     }
     '/projects/': {
       id: '/projects/'
-      path: '/'
-      fullPath: '/projects/'
+      path: '/projects'
+      fullPath: '/projects'
       preLoaderRoute: typeof ProjectsIndexImport
-      parentRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
     }
     '/tower-geometries/': {
       id: '/tower-geometries/'
@@ -391,14 +378,14 @@ declare module '@tanstack/react-router' {
     }
     '/projects/$projectId': {
       id: '/projects/$projectId'
-      path: '/$projectId'
+      path: '/projects/$projectId'
       fullPath: '/projects/$projectId'
       preLoaderRoute: typeof ProjectsProjectIdImport
-      parentRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
     }
     '/projects/$projectId/_viewProjectPage': {
       id: '/projects/$projectId/_viewProjectPage'
-      path: '/$projectId'
+      path: '/projects/$projectId'
       fullPath: '/projects/$projectId'
       preLoaderRoute: typeof ProjectsProjectIdViewProjectPageImport
       parentRoute: typeof ProjectsProjectIdRoute
@@ -606,59 +593,12 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
-  ProjectsRoute: ProjectsRoute.addChildren({
-    ProjectsNewRoute,
-    ProjectsIndexRoute,
-    ProjectsProjectIdRoute: ProjectsProjectIdRoute.addChildren({
-      ProjectsProjectIdViewProjectPageRoute:
-        ProjectsProjectIdViewProjectPageRoute.addChildren({
-          ProjectsProjectIdViewProjectPageDiagramRoute,
-          ProjectsProjectIdViewProjectPageLinesRoute,
-          ProjectsProjectIdViewProjectPageResultsRoute,
-          ProjectsProjectIdViewProjectPageSourcesRoute,
-          ProjectsProjectIdViewProjectPageIndexRoute,
-        }),
-      ProjectsProjectIdLinesRoute: ProjectsProjectIdLinesRoute.addChildren({
-        ProjectsProjectIdLinesprojectCrumbRoute:
-          ProjectsProjectIdLinesprojectCrumbRoute.addChildren({
-            ProjectsProjectIdLinesprojectCrumbNewRoute,
-            ProjectsProjectIdLinesprojectCrumbLineIdRoute:
-              ProjectsProjectIdLinesprojectCrumbLineIdRoute.addChildren({
-                ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute:
-                  ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute.addChildren(
-                    {
-                      ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute,
-                      ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute,
-                      ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute,
-                    },
-                  ),
-                ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute,
-              }),
-          }),
-      }),
-      ProjectsProjectIdSourcesRoute: ProjectsProjectIdSourcesRoute.addChildren({
-        ProjectsProjectIdSourcesprojectCrumbRoute:
-          ProjectsProjectIdSourcesprojectCrumbRoute.addChildren({
-            ProjectsProjectIdSourcesprojectCrumbNewRoute,
-            ProjectsProjectIdSourcesprojectCrumbSourceIdRoute:
-              ProjectsProjectIdSourcesprojectCrumbSourceIdRoute.addChildren({
-                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute:
-                  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute.addChildren(
-                    {
-                      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute,
-                      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute,
-                      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute,
-                    },
-                  ),
-              }),
-          }),
-      }),
-    }),
-  }),
   ConductorTypesNewRoute,
+  ProjectsNewRoute,
   TowerGeometriesNewRoute,
   ConductorTypesIndexRoute,
   ProjectIndexRoute,
+  ProjectsIndexRoute,
   TowerGeometriesIndexRoute,
   ConductorTypesTypeIdRoute: ConductorTypesTypeIdRoute.addChildren({
     ConductorTypesTypeIdLayoutRoute:
@@ -666,6 +606,51 @@ export const routeTree = rootRoute.addChildren({
         ConductorTypesTypeIdLayoutPropertiesRoute,
         ConductorTypesTypeIdLayoutIndexRoute,
       }),
+  }),
+  ProjectsProjectIdRoute: ProjectsProjectIdRoute.addChildren({
+    ProjectsProjectIdViewProjectPageRoute:
+      ProjectsProjectIdViewProjectPageRoute.addChildren({
+        ProjectsProjectIdViewProjectPageDiagramRoute,
+        ProjectsProjectIdViewProjectPageLinesRoute,
+        ProjectsProjectIdViewProjectPageResultsRoute,
+        ProjectsProjectIdViewProjectPageSourcesRoute,
+        ProjectsProjectIdViewProjectPageIndexRoute,
+      }),
+    ProjectsProjectIdLinesRoute: ProjectsProjectIdLinesRoute.addChildren({
+      ProjectsProjectIdLinesprojectCrumbRoute:
+        ProjectsProjectIdLinesprojectCrumbRoute.addChildren({
+          ProjectsProjectIdLinesprojectCrumbNewRoute,
+          ProjectsProjectIdLinesprojectCrumbLineIdRoute:
+            ProjectsProjectIdLinesprojectCrumbLineIdRoute.addChildren({
+              ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute:
+                ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute.addChildren(
+                  {
+                    ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute,
+                    ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute,
+                    ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute,
+                  },
+                ),
+              ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute,
+            }),
+        }),
+    }),
+    ProjectsProjectIdSourcesRoute: ProjectsProjectIdSourcesRoute.addChildren({
+      ProjectsProjectIdSourcesprojectCrumbRoute:
+        ProjectsProjectIdSourcesprojectCrumbRoute.addChildren({
+          ProjectsProjectIdSourcesprojectCrumbNewRoute,
+          ProjectsProjectIdSourcesprojectCrumbSourceIdRoute:
+            ProjectsProjectIdSourcesprojectCrumbSourceIdRoute.addChildren({
+              ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute:
+                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute.addChildren(
+                  {
+                    ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute,
+                    ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute,
+                    ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute,
+                  },
+                ),
+            }),
+        }),
+    }),
   }),
   TowerGeometriesGeometryIdRoute: TowerGeometriesGeometryIdRoute.addChildren({
     TowerGeometriesGeometryIdLayoutRoute:
@@ -685,33 +670,26 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/projects",
         "/conductor-types/new",
+        "/projects/new",
         "/tower-geometries/new",
         "/conductor-types/",
         "/project/",
+        "/projects/",
         "/tower-geometries/",
         "/conductor-types/$typeId",
+        "/projects/$projectId",
         "/tower-geometries/$geometryId"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/projects": {
-      "filePath": "projects.tsx",
-      "children": [
-        "/projects/new",
-        "/projects/",
-        "/projects/$projectId"
-      ]
-    },
     "/conductor-types/new": {
       "filePath": "conductor-types/new.tsx"
     },
     "/projects/new": {
-      "filePath": "projects/new.tsx",
-      "parent": "/projects"
+      "filePath": "projects/new.tsx"
     },
     "/tower-geometries/new": {
       "filePath": "tower-geometries/new.tsx"
@@ -723,8 +701,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "project/index.tsx"
     },
     "/projects/": {
-      "filePath": "projects/index.tsx",
-      "parent": "/projects"
+      "filePath": "projects/index.tsx"
     },
     "/tower-geometries/": {
       "filePath": "tower-geometries/index.tsx"
@@ -745,7 +722,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/projects/$projectId": {
       "filePath": "projects/$projectId",
-      "parent": "/projects",
       "children": [
         "/projects/$projectId/_viewProjectPage",
         "/projects/$projectId/lines",

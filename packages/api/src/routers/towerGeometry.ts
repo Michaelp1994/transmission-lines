@@ -1,8 +1,5 @@
 import { eq } from "@repo/db/drizzle";
-import {
-    NewConductorLocation,
-    conductorLocations,
-} from "@repo/db/schemas/conductorLocations";
+import { conductorLocations } from "@repo/db/schemas/conductorLocations";
 import { towerGeometries } from "@repo/db/schemas/towerGeometries";
 import {
     createTowerGeometrySchema,

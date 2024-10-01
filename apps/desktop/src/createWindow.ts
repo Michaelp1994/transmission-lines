@@ -1,9 +1,16 @@
-import { BrowserWindow, shell } from "electron";
+import { BrowserWindow, shell, screen } from "electron";
 import { is } from "@electron-toolkit/utils";
 
 export default async function createWindow() {
     // Create the browser window.
+    const displays = screen.getAllDisplays();
+    const externalDisplay = displays.find((display) => {
+        return display.bounds.x !== 0 || display.bounds.y !== 0;
+    });
+
     const mainWindow = new BrowserWindow({
+        x: externalDisplay ? externalDisplay.bounds.x : 0,
+        y: externalDisplay ? externalDisplay.bounds.y : 0,
         show: false,
         autoHideMenuBar: true,
     });

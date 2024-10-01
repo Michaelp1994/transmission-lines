@@ -5,6 +5,7 @@ import createWindow from "./createWindow";
 import { databaseInit } from "@repo/db";
 import path from "path";
 import { fileURLToPath } from "url";
+import project from "./global.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,13 +20,18 @@ app.whenReady().then(async () => {
         optimizer.watchWindowShortcuts(window);
     });
     const window = await createWindow();
+
     try {
         const dbPath = path.join(__dirname, `../database.sqlite`);
         const dataSource = databaseInit(dbPath);
-        const server = createServer(dataSource, {
-            browserWindow: window,
-            dialog,
-        });
+        const server = createServer(
+            dataSource,
+            {
+                browserWindow: window,
+                dialog,
+            },
+            project
+        );
 
         server.listen(5001);
         console.log("listening on port 5001");
