@@ -1,28 +1,37 @@
-import type { ProjectID } from "@repo/validators/Ids";
-import { useNavigate } from "@tanstack/react-router";
-import type { FieldErrors } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import type { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
-import BaseForm from "./BaseForm";
-import toast from "~/utils/toast";
+
+import { Button } from "@repo/ui/button";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@repo/ui/form";
+import { useForm } from "@repo/ui/hooks/use-form";
+import { Input } from "@repo/ui/input";
+import { projectFormSchema } from "@repo/validators/forms/Project.schema";
+import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateProjectFormProps {
-    projectId: ProjectID;
+    onFinish?: () => void;
 }
 
-function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
-    console.log(errors);
-}
-
-export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
-    const navigate = useNavigate();
+export default function UpdateProjectForm({}: UpdateProjectFormProps) {
     const { t } = useTranslation("updateProjectForm");
-
-    const { data, isError, isLoading } = trpc.project.getById.useQuery({
-        id: projectId,
+    const navigate = useNavigate();
+    const { data, isError, isLoading } = trpc.project.getCurrent.useQuery({});
+    const form = useForm({
+        schema: projectFormSchema,
+        values: data,
     });
-
     const updateMutation = trpc.project.update.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
@@ -35,7 +44,7 @@ export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
     });
 
     function handleValid(values: TowerGeometryFormInput) {
-        updateMutation.mutate({ ...values, id: projectId });
+        updateMutation.mutate(values);
     }
 
     if (isLoading) {
@@ -46,6 +55,35 @@ export default function FormWrapper({ projectId }: UpdateProjectFormProps) {
     }
 
     return (
-        <BaseForm data={data} onValid={handleValid} onInvalid={handleInvalid} />
+        <Form {...form}>
+            <StyledForm
+                onReset={() => {
+                    form.reset();
+                }}
+                onSubmit={form.handleSubmit(handleValid)}
+            >
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("name.label")}</FormLabel>
+                                <FormControl>
+                                    <Input {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("name.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
+                />
+                <ButtonsWrapper>
+                    <Button type="submit">{t("form:submit")}</Button>
+                </ButtonsWrapper>
+            </StyledForm>
+        </Form>
     );
 }

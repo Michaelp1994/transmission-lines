@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { projectId } from "../Ids.schema";
 
 export const createProjectSchema = z.object({
     name: z.string().min(3).max(100),
@@ -29,19 +28,19 @@ export type GetAllProjectsInput = z.infer<typeof getAllProjectsSchema>;
 
 // getById
 
-export const getProjectByIdSchema = z.object({ id: projectId });
+export const getProjectByIdSchema = z.object({});
 
 export type GetProjectByIdInput = z.infer<typeof getProjectByIdSchema>;
 
 // delete
 
-export const deleteProjectSchema = z.object({ id: projectId });
+export const deleteProjectSchema = z.object({});
 
 export type DeleteProjectInput = z.infer<typeof deleteProjectSchema>;
 
 // solve
 
-export const solveProjectSchema = z.object({ id: projectId });
+export const solveProjectSchema = z.object({});
 
 export type SolveProjectInput = z.infer<typeof solveProjectSchema>;
 

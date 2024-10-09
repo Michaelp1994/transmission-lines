@@ -1,3 +1,6 @@
+import type { LocationID } from "@repo/validators/Ids";
+
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
     Dialog,
     DialogContent,
@@ -8,9 +11,8 @@ import {
     DialogTitle,
 } from "@repo/ui/dialog";
 import { useTranslation } from "react-i18next";
-import FormHandler from "./FormHandler";
-import NiceModal, { useModal } from "@ebay/nice-modal-react";
-import type { LocationID } from "@repo/validators/Ids";
+
+import UpdateConductorLocationForm from "../UpdateConductorLocationForm";
 
 export interface UpdateConductorLocationModalProps {
     conductorLocationId: LocationID;
@@ -18,10 +20,10 @@ export interface UpdateConductorLocationModalProps {
 
 export default NiceModal.create(
     ({ conductorLocationId }: UpdateConductorLocationModalProps) => {
-        const { t } = useTranslation("updateConductorModal");
+        const { t } = useTranslation("updateConductorLocationModal");
         const modal = useModal();
         return (
-            <Dialog open={modal.visible} onOpenChange={onClose}>
+            <Dialog onOpenChange={() => modal.hide()} open={modal.visible}>
                 <DialogPortal>
                     <DialogOverlay />
                     <DialogContent>
@@ -31,8 +33,9 @@ export default NiceModal.create(
                                 {t("modalDescription")}
                             </DialogDescription>
                         </DialogHeader>
-                        <FormHandler
+                        <UpdateConductorLocationForm
                             conductorLocationId={conductorLocationId}
+                            onFinish={() => modal.hide()}
                         />
                     </DialogContent>
                 </DialogPortal>

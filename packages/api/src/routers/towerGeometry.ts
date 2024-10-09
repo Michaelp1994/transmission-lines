@@ -7,24 +7,24 @@ import {
     getAllTowerGeometriesSchema,
     getTowerGeometryByIdSchema,
     updateTowerGeometrySchema,
-} from "@repo/validators";
+} from "@repo/validators/schemas/TowerGeometry.schema";
+
 import { publicProcedure, router } from "../trpc";
 
 export default router({
     getAll: publicProcedure
         .input(getAllTowerGeometriesSchema)
         .query(async ({ ctx: { db } }) => {
-            const allTowerGeometries =
-                await db.query.towerGeometries.findMany();
-
+            const allTowerGeometries = await db.select().from(towerGeometries);
             return allTowerGeometries;
         }),
     getById: publicProcedure
         .input(getTowerGeometryByIdSchema)
         .query(async ({ input, ctx: { db } }) => {
-            const towerGeometry = await db.query.towerGeometries.findFirst({
-                where: eq(towerGeometries.id, input.id),
-            });
+            const [towerGeometry] = await db
+                .select()
+                .from(towerGeometries)
+                .where(eq(towerGeometries.id, input.id));
 
             if (!towerGeometry) {
                 throw new Error("Can't find tower geometry");
@@ -80,8 +80,6 @@ export default router({
                 }
 
                 return deletedTowerGeometry;
-
-                // return deletedTowerGeometry;
             });
         }),
 });

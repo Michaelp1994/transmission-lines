@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-import RowActions from "./RowActions";
+
 import type { ConductorType } from "./RowType";
+
+import RowActions from "./RowActions";
 
 const columnHelper = createColumnHelper<ConductorType>();
 
@@ -12,10 +14,10 @@ export default [
         cell: (info) => {
             return (
                 <Link
-                    to="/conductor-types/$typeId"
                     params={{
                         typeId: info.row.original.id,
                     }}
+                    to="/libraries/conductor-types/$typeId"
                 >
                     {info.getValue()}
                 </Link>

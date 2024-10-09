@@ -1,20 +1,23 @@
 import {
     type ColumnFiltersState,
-    type PaginationState,
     getCoreRowModel,
+    type PaginationState,
     useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import columns from "./columns";
-import type { ConductorType } from "./RowType";
-import TablePagination from "./TablePagination";
-import TableToolbar from "./TableToolbar";
+
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
+import type { ConductorType } from "./RowType";
+
+import columns from "./columns";
+import TablePagination from "./TablePagination";
+import TableToolbar from "./TableToolbar";
+
 export default function ConductorTypeTable() {
-    const { t } = useTranslation("conductorType");
+    const { t } = useTranslation("conductorTypeTable");
 
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0,
@@ -60,7 +63,7 @@ export default function ConductorTypeTable() {
     return (
         <div className="flex flex-col gap-4">
             <TableToolbar table={table} />
-            <DataTable data={data} columns={columns} />
+            <DataTable columns={columns} data={data} />
             <TablePagination table={table} />
         </div>
     );

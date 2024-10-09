@@ -24,11 +24,11 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/activex-opendssengine": "^4.0.0",
-        "concurrently": "^8.2.2",
-        "eslint": "^9.9.1",
-        "typescript": "^5.5.4",
+        "concurrently": "^9.0.1",
+        "eslint": "^9.12.0",
+        "typescript": "^5.6.2",
         "vite-tsconfig-paths": "^5.0.1",
-        "vitest": "^2.0.5"
+        "vitest": "^2.1.2"
     },
     "peerDependencies": {
         "winax": "^3.4.2"

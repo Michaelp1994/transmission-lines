@@ -1,3 +1,6 @@
+import type { GeometryID } from "@repo/validators/Ids";
+
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
     Dialog,
     DialogContent,
@@ -5,10 +8,9 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@repo/ui/dialog";
-import type { GeometryID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
+
 import CreateConductorLocationForm from "../CreateConductorLocationForm";
-import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
 export interface CreateConductorLocationModalProps {
     geometryId: GeometryID;
@@ -19,7 +21,7 @@ export default NiceModal.create(
         const modal = useModal();
         const { t } = useTranslation("createConductorLocationModal");
         return (
-            <Dialog open={modal.visible} onOpenChange={() => modal.hide()}>
+            <Dialog onOpenChange={() => modal.hide()} open={modal.visible}>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>{t("modalTitle")}</DialogTitle>
@@ -27,7 +29,10 @@ export default NiceModal.create(
                             {t("modalDescription")}
                         </DialogDescription>
                     </DialogHeader>
-                    <CreateConductorLocationForm geometryId={geometryId} />
+                    <CreateConductorLocationForm
+                        geometryId={geometryId}
+                        onFinish={() => modal.hide()}
+                    />
                 </DialogContent>
             </Dialog>
         );

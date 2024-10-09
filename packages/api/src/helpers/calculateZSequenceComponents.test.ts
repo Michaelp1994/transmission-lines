@@ -1,4 +1,5 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect } from "vitest";
+
 import calculateZSequenceComponents from "./calculateZSequenceComponents";
 
 describe("calculate Z Sequence Components", () => {

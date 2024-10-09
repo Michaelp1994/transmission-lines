@@ -1,9 +1,12 @@
 import type { DBContext } from "@repo/db";
+
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors";
+
 import type { Electron } from "./context";
-import { appRouter } from "./routers";
 import type { Store } from "./store";
+
+import { appRouter } from "./routers";
 
 const createServer = (
     dataSource: DBContext,

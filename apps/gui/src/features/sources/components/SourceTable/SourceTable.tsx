@@ -1,24 +1,22 @@
 import { useTranslation } from "react-i18next";
-import columns from "./columns";
+
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
-interface SourceTableProps {
-    projectId: string;
-}
+import columns from "./columns";
 
-export default function SourceTable({ projectId }: SourceTableProps) {
-    const { t } = useTranslation("transmissionLine");
-    const { data, error, isLoading } = trpc.source.getAllByProjectId.useQuery({
-        projectId,
-    });
+// interface SourceTableProps {}
 
-    if (error) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
+export default function SourceTable() {
+    const { t } = useTranslation("sourceTable");
+    const { data, isError, isLoading } = trpc.source.getAll.useQuery({});
+
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
+    if (isError || !data) {
+        return <div>{t("general:errorMessage")}</div>;
+    }
 
-    return <DataTable data={data} columns={columns} />;
+    return <DataTable columns={columns} data={data} />;
 }

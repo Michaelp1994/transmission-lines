@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/card";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+
 import HomePageMenu from "~/components/HomePageMenu";
-import trpc from "~/utils/trpc";
 
 export const Route = createFileRoute("/")({
     component: HomePage,

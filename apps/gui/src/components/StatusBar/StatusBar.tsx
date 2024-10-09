@@ -9,8 +9,8 @@ export default function StatusBar() {
                 {new Date().getFullYear()} -{" "}
                 <a
                     href="https://github.com/tauri-apps/tauri"
-                    target="_blank"
                     rel="noreferrer"
+                    target="_blank"
                 >
                     © Michael Poulgrain
                 </a>

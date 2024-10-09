@@ -1,28 +1,24 @@
-import type { ProjectID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
-import columns from "./columns";
+
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
-interface TransmissionLineTableProps {
-    projectId: ProjectID;
-}
+import columns from "./columns";
 
-export default function TransmissionLineTable({
-    projectId,
-}: TransmissionLineTableProps) {
-    const { t } = useTranslation("transmissionLine");
-    const { data, error, isLoading } =
-        trpc.transmissionLine.getAllByProjectId.useQuery({
-            projectId,
-        });
+// interface TransmissionLineTableProps {}
 
-    if (error) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
+export default function TransmissionLineTable() {
+    const { t } = useTranslation("transmissionLineTable");
+    const { data, isError, isLoading } = trpc.transmissionLine.getAll.useQuery(
+        {}
+    );
+
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
+    if (isError || !data) {
+        return <div>{t("general:errorMessage")}</div>;
+    }
 
-    return <DataTable data={data} columns={columns} />;
+    return <DataTable columns={columns} data={data} />;
 }

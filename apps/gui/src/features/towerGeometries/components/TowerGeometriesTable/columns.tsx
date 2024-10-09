@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-import RowActions from "./RowActions";
+
 import type { TowerGeometry } from "./RowType";
+
+import RowActions from "./RowActions";
 
 const columnHelper = createColumnHelper<TowerGeometry>();
 
@@ -13,10 +15,10 @@ export default [
             return (
                 <Link
                     draggable={false}
-                    to="/tower-geometries/$geometryId"
                     params={{
                         geometryId: info.row.original.id,
                     }}
+                    to="/libraries/tower-geometries/$geometryId"
                 >
                     {info.getValue()}
                 </Link>

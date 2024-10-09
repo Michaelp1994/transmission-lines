@@ -1,7 +1,8 @@
-import { z } from "zod";
-import { baseElementSchema } from "./base";
-import { LineSpacing, WireData } from "@classes/elements";
 import { unitsSchema } from "@/enums";
+import { LineSpacing, WireData } from "@classes/elements";
+import { z } from "zod";
+
+import { baseElementSchema } from "./base";
 
 export const lineGeometrySchema = baseElementSchema.extend({
     /** Number of conductors in this geometry. Default is 3. Triggers memory allocations. Define first! */

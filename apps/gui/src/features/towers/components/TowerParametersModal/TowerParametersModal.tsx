@@ -1,3 +1,5 @@
+import type { TowerID } from "@repo/validators/Ids";
+
 import {
     Dialog,
     DialogContent,
@@ -7,9 +9,9 @@ import {
     DialogPortal,
     DialogTitle,
 } from "@repo/ui/dialog";
-import { Tabs, TabsList, TabsTrigger } from "@repo/ui/tabs";
-import type { TowerID } from "@repo/validators/Ids";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import { useTranslation } from "react-i18next";
+
 import trpc from "~/utils/trpc";
 
 export interface TowerParametersModalProps {
@@ -27,7 +29,7 @@ export default function TowerParametersModal({
     });
 
     return (
-        <Dialog open onOpenChange={onClose}>
+        <Dialog onOpenChange={onClose} open>
             <DialogPortal>
                 <DialogOverlay />
 

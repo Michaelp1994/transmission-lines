@@ -2,6 +2,7 @@ import type { ConductorLocation } from "@repo/db/schemas/conductorLocations";
 import type { ConductorType } from "@repo/db/schemas/conductorTypes";
 import type { TowerGeometry } from "@repo/db/schemas/towerGeometries";
 import type { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
+
 import * as Math from "mathjs";
 
 function calcDistance(
@@ -23,16 +24,9 @@ function calcImageDistance(
     );
 }
 
-type TowerGeometryWithLocations = TowerGeometry & {
-    conductors: ConductorLocation[];
-};
-type TransmissionConductorWithTypes = TransmissionConductor & {
-    type: ConductorType;
-};
-
 export default function buildTransmissionLineMatrix(
-    geometry: TowerGeometryWithLocations,
-    conductors: TransmissionConductorWithTypes[]
+    locations: ConductorLocation[],
+    conductors: ConductorType[]
 ) {
     console.log("Calculating Transmission line parameters...");
     const u0 = 1.2566370621219 * 10 ** -6; // N/A^2
@@ -52,16 +46,16 @@ export default function buildTransmissionLineMatrix(
     for (const [i, firstConductor] of conductors.entries()) {
         for (const [j, secondConductor] of conductors.entries()) {
             const imageDistance = calcImageDistance(
-                geometry.conductors[i]!,
-                geometry.conductors[j]!
+                locations[i]!,
+                locations[j]!
             ); // m
 
             if (i === j) {
-                const radius = firstConductor.type.outerDiameter / 2; // m
+                const radius = firstConductor.outerDiameter / 2; // m
                 const selfReactance =
-                    u0 * freq * Math.log(1 / firstConductor.type.gmr); // ohm/m
+                    u0 * freq * Math.log(1 / firstConductor.gmr); // ohm/m
                 const resistance =
-                    firstConductor.type.acResistance75 + resistanceGround; // ohm/m
+                    firstConductor.acResistance75 + resistanceGround; // ohm/m
                 const reactance = selfReactance + reactanceGround; // ohm/m
                 const elastance = Math.multiply(
                     (1 / (2 * Math.pi * e0)) * 10 ** -9,
@@ -73,8 +67,8 @@ export default function buildTransmissionLineMatrix(
                 pMatrix.subset(Math.index(i, i), elastance);
             } else {
                 const conductorDistance = calcDistance(
-                    geometry.conductors[i]!,
-                    geometry.conductors[j]!
+                    locations[i]!,
+                    locations[j]!
                 ); // m
                 const mutualReactance = Math.multiply(
                     u0 * freq,

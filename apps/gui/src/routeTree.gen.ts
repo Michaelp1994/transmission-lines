@@ -14,292 +14,156 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as TowerGeometriesIndexImport } from './routes/tower-geometries/index'
-import { Route as ProjectsIndexImport } from './routes/projects/index'
-import { Route as ProjectIndexImport } from './routes/project/index'
-import { Route as ConductorTypesIndexImport } from './routes/conductor-types/index'
-import { Route as TowerGeometriesNewImport } from './routes/tower-geometries/new'
-import { Route as ProjectsNewImport } from './routes/projects/new'
-import { Route as ConductorTypesNewImport } from './routes/conductor-types/new'
-import { Route as TowerGeometriesGeometryIdLayoutImport } from './routes/tower-geometries/$geometryId/_layout'
-import { Route as ProjectsProjectIdViewProjectPageImport } from './routes/projects/$projectId/_viewProjectPage'
-import { Route as ConductorTypesTypeIdLayoutImport } from './routes/conductor-types/$typeId/_layout'
-import { Route as TowerGeometriesGeometryIdLayoutIndexImport } from './routes/tower-geometries/$geometryId/_layout/index'
-import { Route as ProjectsProjectIdViewProjectPageIndexImport } from './routes/projects/$projectId/_viewProjectPage/index'
-import { Route as ConductorTypesTypeIdLayoutIndexImport } from './routes/conductor-types/$typeId/_layout/index'
-import { Route as TowerGeometriesGeometryIdLayoutConductorsImport } from './routes/tower-geometries/$geometryId/_layout/conductors'
-import { Route as ProjectsProjectIdSourcesprojectCrumbImport } from './routes/projects/$projectId/sources_/_projectCrumb'
-import { Route as ProjectsProjectIdLinesprojectCrumbImport } from './routes/projects/$projectId/lines_/_projectCrumb'
-import { Route as ProjectsProjectIdViewProjectPageSourcesImport } from './routes/projects/$projectId/_viewProjectPage/sources'
-import { Route as ProjectsProjectIdViewProjectPageResultsImport } from './routes/projects/$projectId/_viewProjectPage/results'
-import { Route as ProjectsProjectIdViewProjectPageLinesImport } from './routes/projects/$projectId/_viewProjectPage/lines'
-import { Route as ProjectsProjectIdViewProjectPageDiagramImport } from './routes/projects/$projectId/_viewProjectPage/diagram'
-import { Route as ConductorTypesTypeIdLayoutPropertiesImport } from './routes/conductor-types/$typeId/_layout/properties'
-import { Route as ProjectsProjectIdSourcesprojectCrumbNewImport } from './routes/projects/$projectId/sources_/_projectCrumb/new'
-import { Route as ProjectsProjectIdLinesprojectCrumbNewImport } from './routes/projects/$projectId/lines_/_projectCrumb/new'
-import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource'
-import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine'
-import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/index'
-import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/index'
-import { Route as ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/$towerId_/index'
-import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/sequence'
-import { Route as ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport } from './routes/projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/electrical'
-import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/towers'
-import { Route as ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsImport } from './routes/projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/conductors'
+import { Route as ProjectNewImport } from './routes/project/new'
+import { Route as ProjectLayoutImport } from './routes/project/_layout'
+import { Route as LibrariesLayoutImport } from './routes/libraries/_layout'
+import { Route as ProjectLayoutIndexImport } from './routes/project/_layout/index'
+import { Route as LibrariesLayoutIndexImport } from './routes/libraries/_layout/index'
+import { Route as ProjectLayoutResultsImport } from './routes/project/_layout/results'
+import { Route as ProjectLayoutDiagramImport } from './routes/project/_layout/diagram'
+import { Route as ProjectLayoutSourcesIndexImport } from './routes/project/_layout/sources/index'
+import { Route as ProjectLayoutLinesIndexImport } from './routes/project/_layout/lines/index'
+import { Route as LibrariesLayoutTowerGeometriesIndexImport } from './routes/libraries/_layout/tower-geometries/index'
+import { Route as LibrariesLayoutConductorTypesIndexImport } from './routes/libraries/_layout/conductor-types/index'
+import { Route as ProjectLayoutSourcesNewImport } from './routes/project/_layout/sources/new'
+import { Route as ProjectLayoutLinesNewImport } from './routes/project/_layout/lines/new'
+import { Route as LibrariesLayoutTowerGeometriesNewImport } from './routes/libraries/_layout/tower-geometries/new'
+import { Route as LibrariesLayoutConductorTypesNewImport } from './routes/libraries/_layout/conductor-types/new'
+import { Route as ProjectLayoutSourcesSourceIdIndexImport } from './routes/project/_layout/sources/$sourceId/index'
+import { Route as ProjectLayoutLinesLineIdIndexImport } from './routes/project/_layout/lines/$lineId/index'
+import { Route as LibrariesLayoutTowerGeometriesGeometryIdIndexImport } from './routes/libraries/_layout/tower-geometries/$geometryId/index'
+import { Route as LibrariesLayoutConductorTypesTypeIdIndexImport } from './routes/libraries/_layout/conductor-types/$typeId/index'
+import { Route as ProjectLayoutLinesLineIdTowerIdIndexImport } from './routes/project/_layout/lines/$lineId/$towerId/index'
 
 // Create Virtual Routes
 
-const TowerGeometriesGeometryIdImport = createFileRoute(
-  '/tower-geometries/$geometryId',
-)()
-const ProjectsProjectIdImport = createFileRoute('/projects/$projectId')()
-const ConductorTypesTypeIdImport = createFileRoute('/conductor-types/$typeId')()
-const ProjectsProjectIdSourcesImport = createFileRoute(
-  '/projects/$projectId/sources',
-)()
-const ProjectsProjectIdLinesImport = createFileRoute(
-  '/projects/$projectId/lines',
-)()
-const ProjectsProjectIdSourcesprojectCrumbSourceIdImport = createFileRoute(
-  '/projects/$projectId/sources/_projectCrumb/$sourceId',
-)()
-const ProjectsProjectIdLinesprojectCrumbLineIdImport = createFileRoute(
-  '/projects/$projectId/lines/_projectCrumb/$lineId',
-)()
+const ProjectImport = createFileRoute('/project')()
+const LibrariesImport = createFileRoute('/libraries')()
 
 // Create/Update Routes
+
+const ProjectRoute = ProjectImport.update({
+  path: '/project',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LibrariesRoute = LibrariesImport.update({
+  path: '/libraries',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
-const TowerGeometriesGeometryIdRoute = TowerGeometriesGeometryIdImport.update({
-  path: '/tower-geometries/$geometryId',
-  getParentRoute: () => rootRoute,
+const ProjectNewRoute = ProjectNewImport.update({
+  path: '/new',
+  getParentRoute: () => ProjectRoute,
 } as any)
 
-const ProjectsProjectIdRoute = ProjectsProjectIdImport.update({
-  path: '/projects/$projectId',
-  getParentRoute: () => rootRoute,
+const ProjectLayoutRoute = ProjectLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => ProjectRoute,
 } as any)
 
-const ConductorTypesTypeIdRoute = ConductorTypesTypeIdImport.update({
-  path: '/conductor-types/$typeId',
-  getParentRoute: () => rootRoute,
+const LibrariesLayoutRoute = LibrariesLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => LibrariesRoute,
 } as any)
 
-const TowerGeometriesIndexRoute = TowerGeometriesIndexImport.update({
-  path: '/tower-geometries/',
-  getParentRoute: () => rootRoute,
+const ProjectLayoutIndexRoute = ProjectLayoutIndexImport.update({
+  path: '/',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const ProjectsIndexRoute = ProjectsIndexImport.update({
-  path: '/projects/',
-  getParentRoute: () => rootRoute,
+const LibrariesLayoutIndexRoute = LibrariesLayoutIndexImport.update({
+  path: '/',
+  getParentRoute: () => LibrariesLayoutRoute,
 } as any)
 
-const ProjectIndexRoute = ProjectIndexImport.update({
-  path: '/project/',
-  getParentRoute: () => rootRoute,
+const ProjectLayoutResultsRoute = ProjectLayoutResultsImport.update({
+  path: '/results',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const ConductorTypesIndexRoute = ConductorTypesIndexImport.update({
-  path: '/conductor-types/',
-  getParentRoute: () => rootRoute,
+const ProjectLayoutDiagramRoute = ProjectLayoutDiagramImport.update({
+  path: '/diagram',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const TowerGeometriesNewRoute = TowerGeometriesNewImport.update({
-  path: '/tower-geometries/new',
-  getParentRoute: () => rootRoute,
+const ProjectLayoutSourcesIndexRoute = ProjectLayoutSourcesIndexImport.update({
+  path: '/sources/',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const ProjectsNewRoute = ProjectsNewImport.update({
-  path: '/projects/new',
-  getParentRoute: () => rootRoute,
+const ProjectLayoutLinesIndexRoute = ProjectLayoutLinesIndexImport.update({
+  path: '/lines/',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const ConductorTypesNewRoute = ConductorTypesNewImport.update({
-  path: '/conductor-types/new',
-  getParentRoute: () => rootRoute,
+const LibrariesLayoutTowerGeometriesIndexRoute =
+  LibrariesLayoutTowerGeometriesIndexImport.update({
+    path: '/tower-geometries/',
+    getParentRoute: () => LibrariesLayoutRoute,
+  } as any)
+
+const LibrariesLayoutConductorTypesIndexRoute =
+  LibrariesLayoutConductorTypesIndexImport.update({
+    path: '/conductor-types/',
+    getParentRoute: () => LibrariesLayoutRoute,
+  } as any)
+
+const ProjectLayoutSourcesNewRoute = ProjectLayoutSourcesNewImport.update({
+  path: '/sources/new',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const ProjectsProjectIdSourcesRoute = ProjectsProjectIdSourcesImport.update({
-  path: '/sources',
-  getParentRoute: () => ProjectsProjectIdRoute,
+const ProjectLayoutLinesNewRoute = ProjectLayoutLinesNewImport.update({
+  path: '/lines/new',
+  getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
-const ProjectsProjectIdLinesRoute = ProjectsProjectIdLinesImport.update({
-  path: '/lines',
-  getParentRoute: () => ProjectsProjectIdRoute,
-} as any)
-
-const TowerGeometriesGeometryIdLayoutRoute =
-  TowerGeometriesGeometryIdLayoutImport.update({
-    id: '/_layout',
-    getParentRoute: () => TowerGeometriesGeometryIdRoute,
+const LibrariesLayoutTowerGeometriesNewRoute =
+  LibrariesLayoutTowerGeometriesNewImport.update({
+    path: '/tower-geometries/new',
+    getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
-const ProjectsProjectIdViewProjectPageRoute =
-  ProjectsProjectIdViewProjectPageImport.update({
-    id: '/_viewProjectPage',
-    getParentRoute: () => ProjectsProjectIdRoute,
+const LibrariesLayoutConductorTypesNewRoute =
+  LibrariesLayoutConductorTypesNewImport.update({
+    path: '/conductor-types/new',
+    getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
-const ConductorTypesTypeIdLayoutRoute = ConductorTypesTypeIdLayoutImport.update(
-  {
-    id: '/_layout',
-    getParentRoute: () => ConductorTypesTypeIdRoute,
-  } as any,
-)
-
-const TowerGeometriesGeometryIdLayoutIndexRoute =
-  TowerGeometriesGeometryIdLayoutIndexImport.update({
-    path: '/',
-    getParentRoute: () => TowerGeometriesGeometryIdLayoutRoute,
+const ProjectLayoutSourcesSourceIdIndexRoute =
+  ProjectLayoutSourcesSourceIdIndexImport.update({
+    path: '/sources/$sourceId/',
+    getParentRoute: () => ProjectLayoutRoute,
   } as any)
 
-const ProjectsProjectIdViewProjectPageIndexRoute =
-  ProjectsProjectIdViewProjectPageIndexImport.update({
-    path: '/',
-    getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
+const ProjectLayoutLinesLineIdIndexRoute =
+  ProjectLayoutLinesLineIdIndexImport.update({
+    path: '/lines/$lineId/',
+    getParentRoute: () => ProjectLayoutRoute,
   } as any)
 
-const ConductorTypesTypeIdLayoutIndexRoute =
-  ConductorTypesTypeIdLayoutIndexImport.update({
-    path: '/',
-    getParentRoute: () => ConductorTypesTypeIdLayoutRoute,
+const LibrariesLayoutTowerGeometriesGeometryIdIndexRoute =
+  LibrariesLayoutTowerGeometriesGeometryIdIndexImport.update({
+    path: '/tower-geometries/$geometryId/',
+    getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
-const TowerGeometriesGeometryIdLayoutConductorsRoute =
-  TowerGeometriesGeometryIdLayoutConductorsImport.update({
-    path: '/conductors',
-    getParentRoute: () => TowerGeometriesGeometryIdLayoutRoute,
+const LibrariesLayoutConductorTypesTypeIdIndexRoute =
+  LibrariesLayoutConductorTypesTypeIdIndexImport.update({
+    path: '/conductor-types/$typeId/',
+    getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
-const ProjectsProjectIdSourcesprojectCrumbRoute =
-  ProjectsProjectIdSourcesprojectCrumbImport.update({
-    id: '/_projectCrumb',
-    getParentRoute: () => ProjectsProjectIdSourcesRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbRoute =
-  ProjectsProjectIdLinesprojectCrumbImport.update({
-    id: '/_projectCrumb',
-    getParentRoute: () => ProjectsProjectIdLinesRoute,
-  } as any)
-
-const ProjectsProjectIdViewProjectPageSourcesRoute =
-  ProjectsProjectIdViewProjectPageSourcesImport.update({
-    path: '/sources',
-    getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
-  } as any)
-
-const ProjectsProjectIdViewProjectPageResultsRoute =
-  ProjectsProjectIdViewProjectPageResultsImport.update({
-    path: '/results',
-    getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
-  } as any)
-
-const ProjectsProjectIdViewProjectPageLinesRoute =
-  ProjectsProjectIdViewProjectPageLinesImport.update({
-    path: '/lines',
-    getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
-  } as any)
-
-const ProjectsProjectIdViewProjectPageDiagramRoute =
-  ProjectsProjectIdViewProjectPageDiagramImport.update({
-    path: '/diagram',
-    getParentRoute: () => ProjectsProjectIdViewProjectPageRoute,
-  } as any)
-
-const ConductorTypesTypeIdLayoutPropertiesRoute =
-  ConductorTypesTypeIdLayoutPropertiesImport.update({
-    path: '/properties',
-    getParentRoute: () => ConductorTypesTypeIdLayoutRoute,
-  } as any)
-
-const ProjectsProjectIdSourcesprojectCrumbSourceIdRoute =
-  ProjectsProjectIdSourcesprojectCrumbSourceIdImport.update({
-    path: '/$sourceId',
-    getParentRoute: () => ProjectsProjectIdSourcesprojectCrumbRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbLineIdRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdImport.update({
-    path: '/$lineId',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbRoute,
-  } as any)
-
-const ProjectsProjectIdSourcesprojectCrumbNewRoute =
-  ProjectsProjectIdSourcesprojectCrumbNewImport.update({
-    path: '/new',
-    getParentRoute: () => ProjectsProjectIdSourcesprojectCrumbRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbNewRoute =
-  ProjectsProjectIdLinesprojectCrumbNewImport.update({
-    path: '/new',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbRoute,
-  } as any)
-
-const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute =
-  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport.update({
-    id: '/_viewSource',
-    getParentRoute: () => ProjectsProjectIdSourcesprojectCrumbSourceIdRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport.update({
-    id: '/_viewLine',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdRoute,
-  } as any)
-
-const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute =
-  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport.update({
-    path: '/',
-    getParentRoute: () =>
-      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport.update({
-    path: '/',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport.update({
-    path: '/$towerId/',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdRoute,
-  } as any)
-
-const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute =
-  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport.update({
-    path: '/sequence',
-    getParentRoute: () =>
-      ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute,
-  } as any)
-
-const ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute =
-  ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport.update(
-    {
-      path: '/electrical',
-      getParentRoute: () =>
-        ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute,
-    } as any,
-  )
-
-const ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport.update({
-    path: '/towers',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute,
-  } as any)
-
-const ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute =
-  ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsImport.update({
-    path: '/conductors',
-    getParentRoute: () => ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute,
+const ProjectLayoutLinesLineIdTowerIdIndexRoute =
+  ProjectLayoutLinesLineIdTowerIdIndexImport.update({
+    path: '/lines/$lineId/$towerId/',
+    getParentRoute: () => ProjectLayoutRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -313,353 +177,412 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/conductor-types/new': {
-      id: '/conductor-types/new'
-      path: '/conductor-types/new'
-      fullPath: '/conductor-types/new'
-      preLoaderRoute: typeof ConductorTypesNewImport
+    '/libraries': {
+      id: '/libraries'
+      path: '/libraries'
+      fullPath: '/libraries'
+      preLoaderRoute: typeof LibrariesImport
       parentRoute: typeof rootRoute
     }
-    '/projects/new': {
-      id: '/projects/new'
-      path: '/projects/new'
-      fullPath: '/projects/new'
-      preLoaderRoute: typeof ProjectsNewImport
-      parentRoute: typeof rootRoute
+    '/libraries/_layout': {
+      id: '/libraries/_layout'
+      path: '/libraries'
+      fullPath: '/libraries'
+      preLoaderRoute: typeof LibrariesLayoutImport
+      parentRoute: typeof LibrariesRoute
     }
-    '/tower-geometries/new': {
-      id: '/tower-geometries/new'
-      path: '/tower-geometries/new'
-      fullPath: '/tower-geometries/new'
-      preLoaderRoute: typeof TowerGeometriesNewImport
-      parentRoute: typeof rootRoute
-    }
-    '/conductor-types/': {
-      id: '/conductor-types/'
-      path: '/conductor-types'
-      fullPath: '/conductor-types'
-      preLoaderRoute: typeof ConductorTypesIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/project/': {
-      id: '/project/'
+    '/project': {
+      id: '/project'
       path: '/project'
       fullPath: '/project'
-      preLoaderRoute: typeof ProjectIndexImport
+      preLoaderRoute: typeof ProjectImport
       parentRoute: typeof rootRoute
     }
-    '/projects/': {
-      id: '/projects/'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsIndexImport
-      parentRoute: typeof rootRoute
+    '/project/_layout': {
+      id: '/project/_layout'
+      path: '/project'
+      fullPath: '/project'
+      preLoaderRoute: typeof ProjectLayoutImport
+      parentRoute: typeof ProjectRoute
     }
-    '/tower-geometries/': {
-      id: '/tower-geometries/'
-      path: '/tower-geometries'
-      fullPath: '/tower-geometries'
-      preLoaderRoute: typeof TowerGeometriesIndexImport
-      parentRoute: typeof rootRoute
+    '/project/new': {
+      id: '/project/new'
+      path: '/new'
+      fullPath: '/project/new'
+      preLoaderRoute: typeof ProjectNewImport
+      parentRoute: typeof ProjectImport
     }
-    '/conductor-types/$typeId': {
-      id: '/conductor-types/$typeId'
-      path: '/conductor-types/$typeId'
-      fullPath: '/conductor-types/$typeId'
-      preLoaderRoute: typeof ConductorTypesTypeIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/conductor-types/$typeId/_layout': {
-      id: '/conductor-types/$typeId/_layout'
-      path: '/conductor-types/$typeId'
-      fullPath: '/conductor-types/$typeId'
-      preLoaderRoute: typeof ConductorTypesTypeIdLayoutImport
-      parentRoute: typeof ConductorTypesTypeIdRoute
-    }
-    '/projects/$projectId': {
-      id: '/projects/$projectId'
-      path: '/projects/$projectId'
-      fullPath: '/projects/$projectId'
-      preLoaderRoute: typeof ProjectsProjectIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/projects/$projectId/_viewProjectPage': {
-      id: '/projects/$projectId/_viewProjectPage'
-      path: '/projects/$projectId'
-      fullPath: '/projects/$projectId'
-      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageImport
-      parentRoute: typeof ProjectsProjectIdRoute
-    }
-    '/tower-geometries/$geometryId': {
-      id: '/tower-geometries/$geometryId'
-      path: '/tower-geometries/$geometryId'
-      fullPath: '/tower-geometries/$geometryId'
-      preLoaderRoute: typeof TowerGeometriesGeometryIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/tower-geometries/$geometryId/_layout': {
-      id: '/tower-geometries/$geometryId/_layout'
-      path: '/tower-geometries/$geometryId'
-      fullPath: '/tower-geometries/$geometryId'
-      preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutImport
-      parentRoute: typeof TowerGeometriesGeometryIdRoute
-    }
-    '/conductor-types/$typeId/_layout/properties': {
-      id: '/conductor-types/$typeId/_layout/properties'
-      path: '/properties'
-      fullPath: '/conductor-types/$typeId/properties'
-      preLoaderRoute: typeof ConductorTypesTypeIdLayoutPropertiesImport
-      parentRoute: typeof ConductorTypesTypeIdLayoutImport
-    }
-    '/projects/$projectId/_viewProjectPage/diagram': {
-      id: '/projects/$projectId/_viewProjectPage/diagram'
+    '/project/_layout/diagram': {
+      id: '/project/_layout/diagram'
       path: '/diagram'
-      fullPath: '/projects/$projectId/diagram'
-      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageDiagramImport
-      parentRoute: typeof ProjectsProjectIdViewProjectPageImport
+      fullPath: '/project/diagram'
+      preLoaderRoute: typeof ProjectLayoutDiagramImport
+      parentRoute: typeof ProjectLayoutImport
     }
-    '/projects/$projectId/_viewProjectPage/lines': {
-      id: '/projects/$projectId/_viewProjectPage/lines'
-      path: '/lines'
-      fullPath: '/projects/$projectId/lines'
-      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageLinesImport
-      parentRoute: typeof ProjectsProjectIdViewProjectPageImport
-    }
-    '/projects/$projectId/_viewProjectPage/results': {
-      id: '/projects/$projectId/_viewProjectPage/results'
+    '/project/_layout/results': {
+      id: '/project/_layout/results'
       path: '/results'
-      fullPath: '/projects/$projectId/results'
-      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageResultsImport
-      parentRoute: typeof ProjectsProjectIdViewProjectPageImport
+      fullPath: '/project/results'
+      preLoaderRoute: typeof ProjectLayoutResultsImport
+      parentRoute: typeof ProjectLayoutImport
     }
-    '/projects/$projectId/_viewProjectPage/sources': {
-      id: '/projects/$projectId/_viewProjectPage/sources'
-      path: '/sources'
-      fullPath: '/projects/$projectId/sources'
-      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageSourcesImport
-      parentRoute: typeof ProjectsProjectIdViewProjectPageImport
+    '/libraries/_layout/': {
+      id: '/libraries/_layout/'
+      path: '/'
+      fullPath: '/libraries/'
+      preLoaderRoute: typeof LibrariesLayoutIndexImport
+      parentRoute: typeof LibrariesLayoutImport
     }
-    '/projects/$projectId/lines': {
-      id: '/projects/$projectId/lines'
+    '/project/_layout/': {
+      id: '/project/_layout/'
+      path: '/'
+      fullPath: '/project/'
+      preLoaderRoute: typeof ProjectLayoutIndexImport
+      parentRoute: typeof ProjectLayoutImport
+    }
+    '/libraries/_layout/conductor-types/new': {
+      id: '/libraries/_layout/conductor-types/new'
+      path: '/conductor-types/new'
+      fullPath: '/libraries/conductor-types/new'
+      preLoaderRoute: typeof LibrariesLayoutConductorTypesNewImport
+      parentRoute: typeof LibrariesLayoutImport
+    }
+    '/libraries/_layout/tower-geometries/new': {
+      id: '/libraries/_layout/tower-geometries/new'
+      path: '/tower-geometries/new'
+      fullPath: '/libraries/tower-geometries/new'
+      preLoaderRoute: typeof LibrariesLayoutTowerGeometriesNewImport
+      parentRoute: typeof LibrariesLayoutImport
+    }
+    '/project/_layout/lines/new': {
+      id: '/project/_layout/lines/new'
+      path: '/lines/new'
+      fullPath: '/project/lines/new'
+      preLoaderRoute: typeof ProjectLayoutLinesNewImport
+      parentRoute: typeof ProjectLayoutImport
+    }
+    '/project/_layout/sources/new': {
+      id: '/project/_layout/sources/new'
+      path: '/sources/new'
+      fullPath: '/project/sources/new'
+      preLoaderRoute: typeof ProjectLayoutSourcesNewImport
+      parentRoute: typeof ProjectLayoutImport
+    }
+    '/libraries/_layout/conductor-types/': {
+      id: '/libraries/_layout/conductor-types/'
+      path: '/conductor-types'
+      fullPath: '/libraries/conductor-types'
+      preLoaderRoute: typeof LibrariesLayoutConductorTypesIndexImport
+      parentRoute: typeof LibrariesLayoutImport
+    }
+    '/libraries/_layout/tower-geometries/': {
+      id: '/libraries/_layout/tower-geometries/'
+      path: '/tower-geometries'
+      fullPath: '/libraries/tower-geometries'
+      preLoaderRoute: typeof LibrariesLayoutTowerGeometriesIndexImport
+      parentRoute: typeof LibrariesLayoutImport
+    }
+    '/project/_layout/lines/': {
+      id: '/project/_layout/lines/'
       path: '/lines'
-      fullPath: '/projects/$projectId/lines'
-      preLoaderRoute: typeof ProjectsProjectIdLinesImport
-      parentRoute: typeof ProjectsProjectIdImport
+      fullPath: '/project/lines'
+      preLoaderRoute: typeof ProjectLayoutLinesIndexImport
+      parentRoute: typeof ProjectLayoutImport
     }
-    '/projects/$projectId/lines/_projectCrumb': {
-      id: '/projects/$projectId/lines/_projectCrumb'
-      path: '/lines'
-      fullPath: '/projects/$projectId/lines'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
-      parentRoute: typeof ProjectsProjectIdLinesRoute
-    }
-    '/projects/$projectId/sources': {
-      id: '/projects/$projectId/sources'
+    '/project/_layout/sources/': {
+      id: '/project/_layout/sources/'
       path: '/sources'
-      fullPath: '/projects/$projectId/sources'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesImport
-      parentRoute: typeof ProjectsProjectIdImport
+      fullPath: '/project/sources'
+      preLoaderRoute: typeof ProjectLayoutSourcesIndexImport
+      parentRoute: typeof ProjectLayoutImport
     }
-    '/projects/$projectId/sources/_projectCrumb': {
-      id: '/projects/$projectId/sources/_projectCrumb'
-      path: '/sources'
-      fullPath: '/projects/$projectId/sources'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
-      parentRoute: typeof ProjectsProjectIdSourcesRoute
+    '/libraries/_layout/conductor-types/$typeId/': {
+      id: '/libraries/_layout/conductor-types/$typeId/'
+      path: '/conductor-types/$typeId'
+      fullPath: '/libraries/conductor-types/$typeId'
+      preLoaderRoute: typeof LibrariesLayoutConductorTypesTypeIdIndexImport
+      parentRoute: typeof LibrariesLayoutImport
     }
-    '/tower-geometries/$geometryId/_layout/conductors': {
-      id: '/tower-geometries/$geometryId/_layout/conductors'
-      path: '/conductors'
-      fullPath: '/tower-geometries/$geometryId/conductors'
-      preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutConductorsImport
-      parentRoute: typeof TowerGeometriesGeometryIdLayoutImport
+    '/libraries/_layout/tower-geometries/$geometryId/': {
+      id: '/libraries/_layout/tower-geometries/$geometryId/'
+      path: '/tower-geometries/$geometryId'
+      fullPath: '/libraries/tower-geometries/$geometryId'
+      preLoaderRoute: typeof LibrariesLayoutTowerGeometriesGeometryIdIndexImport
+      parentRoute: typeof LibrariesLayoutImport
     }
-    '/conductor-types/$typeId/_layout/': {
-      id: '/conductor-types/$typeId/_layout/'
-      path: '/'
-      fullPath: '/conductor-types/$typeId/'
-      preLoaderRoute: typeof ConductorTypesTypeIdLayoutIndexImport
-      parentRoute: typeof ConductorTypesTypeIdLayoutImport
+    '/project/_layout/lines/$lineId/': {
+      id: '/project/_layout/lines/$lineId/'
+      path: '/lines/$lineId'
+      fullPath: '/project/lines/$lineId'
+      preLoaderRoute: typeof ProjectLayoutLinesLineIdIndexImport
+      parentRoute: typeof ProjectLayoutImport
     }
-    '/projects/$projectId/_viewProjectPage/': {
-      id: '/projects/$projectId/_viewProjectPage/'
-      path: '/'
-      fullPath: '/projects/$projectId/'
-      preLoaderRoute: typeof ProjectsProjectIdViewProjectPageIndexImport
-      parentRoute: typeof ProjectsProjectIdViewProjectPageImport
+    '/project/_layout/sources/$sourceId/': {
+      id: '/project/_layout/sources/$sourceId/'
+      path: '/sources/$sourceId'
+      fullPath: '/project/sources/$sourceId'
+      preLoaderRoute: typeof ProjectLayoutSourcesSourceIdIndexImport
+      parentRoute: typeof ProjectLayoutImport
     }
-    '/tower-geometries/$geometryId/_layout/': {
-      id: '/tower-geometries/$geometryId/_layout/'
-      path: '/'
-      fullPath: '/tower-geometries/$geometryId/'
-      preLoaderRoute: typeof TowerGeometriesGeometryIdLayoutIndexImport
-      parentRoute: typeof TowerGeometriesGeometryIdLayoutImport
-    }
-    '/projects/$projectId/lines/_projectCrumb/new': {
-      id: '/projects/$projectId/lines/_projectCrumb/new'
-      path: '/new'
-      fullPath: '/projects/$projectId/lines/new'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbNewImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
-    }
-    '/projects/$projectId/sources/_projectCrumb/new': {
-      id: '/projects/$projectId/sources/_projectCrumb/new'
-      path: '/new'
-      fullPath: '/projects/$projectId/sources/new'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbNewImport
-      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
-    }
-    '/projects/$projectId/lines/_projectCrumb/$lineId': {
-      id: '/projects/$projectId/lines/_projectCrumb/$lineId'
-      path: '/$lineId'
-      fullPath: '/projects/$projectId/lines/$lineId'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbImport
-    }
-    '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine': {
-      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine'
-      path: '/$lineId'
-      fullPath: '/projects/$projectId/lines/$lineId'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdRoute
-    }
-    '/projects/$projectId/sources/_projectCrumb/$sourceId': {
-      id: '/projects/$projectId/sources/_projectCrumb/$sourceId'
-      path: '/$sourceId'
-      fullPath: '/projects/$projectId/sources/$sourceId'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdImport
-      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbImport
-    }
-    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource': {
-      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource'
-      path: '/$sourceId'
-      fullPath: '/projects/$projectId/sources/$sourceId'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
-      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdRoute
-    }
-    '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors': {
-      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors'
-      path: '/conductors'
-      fullPath: '/projects/$projectId/lines/$lineId/conductors'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
-    }
-    '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers': {
-      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers'
-      path: '/towers'
-      fullPath: '/projects/$projectId/lines/$lineId/towers'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
-    }
-    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical': {
-      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical'
-      path: '/electrical'
-      fullPath: '/projects/$projectId/sources/$sourceId/electrical'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalImport
-      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
-    }
-    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence': {
-      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence'
-      path: '/sequence'
-      fullPath: '/projects/$projectId/sources/$sourceId/sequence'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceImport
-      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
-    }
-    '/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/': {
-      id: '/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/'
-      path: '/$towerId'
-      fullPath: '/projects/$projectId/lines/$lineId/$towerId'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdImport
-    }
-    '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/': {
-      id: '/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/'
-      path: '/'
-      fullPath: '/projects/$projectId/lines/$lineId/'
-      preLoaderRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexImport
-      parentRoute: typeof ProjectsProjectIdLinesprojectCrumbLineIdViewLineImport
-    }
-    '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/': {
-      id: '/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/'
-      path: '/'
-      fullPath: '/projects/$projectId/sources/$sourceId/'
-      preLoaderRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexImport
-      parentRoute: typeof ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceImport
+    '/project/_layout/lines/$lineId/$towerId/': {
+      id: '/project/_layout/lines/$lineId/$towerId/'
+      path: '/lines/$lineId/$towerId'
+      fullPath: '/project/lines/$lineId/$towerId'
+      preLoaderRoute: typeof ProjectLayoutLinesLineIdTowerIdIndexImport
+      parentRoute: typeof ProjectLayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  ConductorTypesNewRoute,
-  ProjectsNewRoute,
-  TowerGeometriesNewRoute,
-  ConductorTypesIndexRoute,
-  ProjectIndexRoute,
-  ProjectsIndexRoute,
-  TowerGeometriesIndexRoute,
-  ConductorTypesTypeIdRoute: ConductorTypesTypeIdRoute.addChildren({
-    ConductorTypesTypeIdLayoutRoute:
-      ConductorTypesTypeIdLayoutRoute.addChildren({
-        ConductorTypesTypeIdLayoutPropertiesRoute,
-        ConductorTypesTypeIdLayoutIndexRoute,
-      }),
-  }),
-  ProjectsProjectIdRoute: ProjectsProjectIdRoute.addChildren({
-    ProjectsProjectIdViewProjectPageRoute:
-      ProjectsProjectIdViewProjectPageRoute.addChildren({
-        ProjectsProjectIdViewProjectPageDiagramRoute,
-        ProjectsProjectIdViewProjectPageLinesRoute,
-        ProjectsProjectIdViewProjectPageResultsRoute,
-        ProjectsProjectIdViewProjectPageSourcesRoute,
-        ProjectsProjectIdViewProjectPageIndexRoute,
-      }),
-    ProjectsProjectIdLinesRoute: ProjectsProjectIdLinesRoute.addChildren({
-      ProjectsProjectIdLinesprojectCrumbRoute:
-        ProjectsProjectIdLinesprojectCrumbRoute.addChildren({
-          ProjectsProjectIdLinesprojectCrumbNewRoute,
-          ProjectsProjectIdLinesprojectCrumbLineIdRoute:
-            ProjectsProjectIdLinesprojectCrumbLineIdRoute.addChildren({
-              ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute:
-                ProjectsProjectIdLinesprojectCrumbLineIdViewLineRoute.addChildren(
-                  {
-                    ProjectsProjectIdLinesprojectCrumbLineIdViewLineConductorsRoute,
-                    ProjectsProjectIdLinesprojectCrumbLineIdViewLineTowersRoute,
-                    ProjectsProjectIdLinesprojectCrumbLineIdViewLineIndexRoute,
-                  },
-                ),
-              ProjectsProjectIdLinesprojectCrumbLineIdTowerIdIndexRoute,
-            }),
-        }),
-    }),
-    ProjectsProjectIdSourcesRoute: ProjectsProjectIdSourcesRoute.addChildren({
-      ProjectsProjectIdSourcesprojectCrumbRoute:
-        ProjectsProjectIdSourcesprojectCrumbRoute.addChildren({
-          ProjectsProjectIdSourcesprojectCrumbNewRoute,
-          ProjectsProjectIdSourcesprojectCrumbSourceIdRoute:
-            ProjectsProjectIdSourcesprojectCrumbSourceIdRoute.addChildren({
-              ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute:
-                ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceRoute.addChildren(
-                  {
-                    ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceElectricalRoute,
-                    ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceSequenceRoute,
-                    ProjectsProjectIdSourcesprojectCrumbSourceIdViewSourceIndexRoute,
-                  },
-                ),
-            }),
-        }),
-    }),
-  }),
-  TowerGeometriesGeometryIdRoute: TowerGeometriesGeometryIdRoute.addChildren({
-    TowerGeometriesGeometryIdLayoutRoute:
-      TowerGeometriesGeometryIdLayoutRoute.addChildren({
-        TowerGeometriesGeometryIdLayoutConductorsRoute,
-        TowerGeometriesGeometryIdLayoutIndexRoute,
-      }),
-  }),
-})
+interface LibrariesLayoutRouteChildren {
+  LibrariesLayoutIndexRoute: typeof LibrariesLayoutIndexRoute
+  LibrariesLayoutConductorTypesNewRoute: typeof LibrariesLayoutConductorTypesNewRoute
+  LibrariesLayoutTowerGeometriesNewRoute: typeof LibrariesLayoutTowerGeometriesNewRoute
+  LibrariesLayoutConductorTypesIndexRoute: typeof LibrariesLayoutConductorTypesIndexRoute
+  LibrariesLayoutTowerGeometriesIndexRoute: typeof LibrariesLayoutTowerGeometriesIndexRoute
+  LibrariesLayoutConductorTypesTypeIdIndexRoute: typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
+  LibrariesLayoutTowerGeometriesGeometryIdIndexRoute: typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
+}
+
+const LibrariesLayoutRouteChildren: LibrariesLayoutRouteChildren = {
+  LibrariesLayoutIndexRoute: LibrariesLayoutIndexRoute,
+  LibrariesLayoutConductorTypesNewRoute: LibrariesLayoutConductorTypesNewRoute,
+  LibrariesLayoutTowerGeometriesNewRoute:
+    LibrariesLayoutTowerGeometriesNewRoute,
+  LibrariesLayoutConductorTypesIndexRoute:
+    LibrariesLayoutConductorTypesIndexRoute,
+  LibrariesLayoutTowerGeometriesIndexRoute:
+    LibrariesLayoutTowerGeometriesIndexRoute,
+  LibrariesLayoutConductorTypesTypeIdIndexRoute:
+    LibrariesLayoutConductorTypesTypeIdIndexRoute,
+  LibrariesLayoutTowerGeometriesGeometryIdIndexRoute:
+    LibrariesLayoutTowerGeometriesGeometryIdIndexRoute,
+}
+
+const LibrariesLayoutRouteWithChildren = LibrariesLayoutRoute._addFileChildren(
+  LibrariesLayoutRouteChildren,
+)
+
+interface LibrariesRouteChildren {
+  LibrariesLayoutRoute: typeof LibrariesLayoutRouteWithChildren
+}
+
+const LibrariesRouteChildren: LibrariesRouteChildren = {
+  LibrariesLayoutRoute: LibrariesLayoutRouteWithChildren,
+}
+
+const LibrariesRouteWithChildren = LibrariesRoute._addFileChildren(
+  LibrariesRouteChildren,
+)
+
+interface ProjectLayoutRouteChildren {
+  ProjectLayoutDiagramRoute: typeof ProjectLayoutDiagramRoute
+  ProjectLayoutResultsRoute: typeof ProjectLayoutResultsRoute
+  ProjectLayoutIndexRoute: typeof ProjectLayoutIndexRoute
+  ProjectLayoutLinesNewRoute: typeof ProjectLayoutLinesNewRoute
+  ProjectLayoutSourcesNewRoute: typeof ProjectLayoutSourcesNewRoute
+  ProjectLayoutLinesIndexRoute: typeof ProjectLayoutLinesIndexRoute
+  ProjectLayoutSourcesIndexRoute: typeof ProjectLayoutSourcesIndexRoute
+  ProjectLayoutLinesLineIdIndexRoute: typeof ProjectLayoutLinesLineIdIndexRoute
+  ProjectLayoutSourcesSourceIdIndexRoute: typeof ProjectLayoutSourcesSourceIdIndexRoute
+  ProjectLayoutLinesLineIdTowerIdIndexRoute: typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
+}
+
+const ProjectLayoutRouteChildren: ProjectLayoutRouteChildren = {
+  ProjectLayoutDiagramRoute: ProjectLayoutDiagramRoute,
+  ProjectLayoutResultsRoute: ProjectLayoutResultsRoute,
+  ProjectLayoutIndexRoute: ProjectLayoutIndexRoute,
+  ProjectLayoutLinesNewRoute: ProjectLayoutLinesNewRoute,
+  ProjectLayoutSourcesNewRoute: ProjectLayoutSourcesNewRoute,
+  ProjectLayoutLinesIndexRoute: ProjectLayoutLinesIndexRoute,
+  ProjectLayoutSourcesIndexRoute: ProjectLayoutSourcesIndexRoute,
+  ProjectLayoutLinesLineIdIndexRoute: ProjectLayoutLinesLineIdIndexRoute,
+  ProjectLayoutSourcesSourceIdIndexRoute:
+    ProjectLayoutSourcesSourceIdIndexRoute,
+  ProjectLayoutLinesLineIdTowerIdIndexRoute:
+    ProjectLayoutLinesLineIdTowerIdIndexRoute,
+}
+
+const ProjectLayoutRouteWithChildren = ProjectLayoutRoute._addFileChildren(
+  ProjectLayoutRouteChildren,
+)
+
+interface ProjectRouteChildren {
+  ProjectLayoutRoute: typeof ProjectLayoutRouteWithChildren
+  ProjectNewRoute: typeof ProjectNewRoute
+}
+
+const ProjectRouteChildren: ProjectRouteChildren = {
+  ProjectLayoutRoute: ProjectLayoutRouteWithChildren,
+  ProjectNewRoute: ProjectNewRoute,
+}
+
+const ProjectRouteWithChildren =
+  ProjectRoute._addFileChildren(ProjectRouteChildren)
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/libraries': typeof LibrariesLayoutRouteWithChildren
+  '/project': typeof ProjectLayoutRouteWithChildren
+  '/project/new': typeof ProjectNewRoute
+  '/project/diagram': typeof ProjectLayoutDiagramRoute
+  '/project/results': typeof ProjectLayoutResultsRoute
+  '/libraries/': typeof LibrariesLayoutIndexRoute
+  '/project/': typeof ProjectLayoutIndexRoute
+  '/libraries/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
+  '/libraries/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
+  '/project/lines/new': typeof ProjectLayoutLinesNewRoute
+  '/project/sources/new': typeof ProjectLayoutSourcesNewRoute
+  '/libraries/conductor-types': typeof LibrariesLayoutConductorTypesIndexRoute
+  '/libraries/tower-geometries': typeof LibrariesLayoutTowerGeometriesIndexRoute
+  '/project/lines': typeof ProjectLayoutLinesIndexRoute
+  '/project/sources': typeof ProjectLayoutSourcesIndexRoute
+  '/libraries/conductor-types/$typeId': typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
+  '/libraries/tower-geometries/$geometryId': typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
+  '/project/lines/$lineId': typeof ProjectLayoutLinesLineIdIndexRoute
+  '/project/sources/$sourceId': typeof ProjectLayoutSourcesSourceIdIndexRoute
+  '/project/lines/$lineId/$towerId': typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/libraries': typeof LibrariesLayoutIndexRoute
+  '/project': typeof ProjectLayoutIndexRoute
+  '/project/new': typeof ProjectNewRoute
+  '/project/diagram': typeof ProjectLayoutDiagramRoute
+  '/project/results': typeof ProjectLayoutResultsRoute
+  '/libraries/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
+  '/libraries/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
+  '/project/lines/new': typeof ProjectLayoutLinesNewRoute
+  '/project/sources/new': typeof ProjectLayoutSourcesNewRoute
+  '/libraries/conductor-types': typeof LibrariesLayoutConductorTypesIndexRoute
+  '/libraries/tower-geometries': typeof LibrariesLayoutTowerGeometriesIndexRoute
+  '/project/lines': typeof ProjectLayoutLinesIndexRoute
+  '/project/sources': typeof ProjectLayoutSourcesIndexRoute
+  '/libraries/conductor-types/$typeId': typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
+  '/libraries/tower-geometries/$geometryId': typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
+  '/project/lines/$lineId': typeof ProjectLayoutLinesLineIdIndexRoute
+  '/project/sources/$sourceId': typeof ProjectLayoutSourcesSourceIdIndexRoute
+  '/project/lines/$lineId/$towerId': typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/libraries': typeof LibrariesRouteWithChildren
+  '/libraries/_layout': typeof LibrariesLayoutRouteWithChildren
+  '/project': typeof ProjectRouteWithChildren
+  '/project/_layout': typeof ProjectLayoutRouteWithChildren
+  '/project/new': typeof ProjectNewRoute
+  '/project/_layout/diagram': typeof ProjectLayoutDiagramRoute
+  '/project/_layout/results': typeof ProjectLayoutResultsRoute
+  '/libraries/_layout/': typeof LibrariesLayoutIndexRoute
+  '/project/_layout/': typeof ProjectLayoutIndexRoute
+  '/libraries/_layout/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
+  '/libraries/_layout/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
+  '/project/_layout/lines/new': typeof ProjectLayoutLinesNewRoute
+  '/project/_layout/sources/new': typeof ProjectLayoutSourcesNewRoute
+  '/libraries/_layout/conductor-types/': typeof LibrariesLayoutConductorTypesIndexRoute
+  '/libraries/_layout/tower-geometries/': typeof LibrariesLayoutTowerGeometriesIndexRoute
+  '/project/_layout/lines/': typeof ProjectLayoutLinesIndexRoute
+  '/project/_layout/sources/': typeof ProjectLayoutSourcesIndexRoute
+  '/libraries/_layout/conductor-types/$typeId/': typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
+  '/libraries/_layout/tower-geometries/$geometryId/': typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
+  '/project/_layout/lines/$lineId/': typeof ProjectLayoutLinesLineIdIndexRoute
+  '/project/_layout/sources/$sourceId/': typeof ProjectLayoutSourcesSourceIdIndexRoute
+  '/project/_layout/lines/$lineId/$towerId/': typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/libraries'
+    | '/project'
+    | '/project/new'
+    | '/project/diagram'
+    | '/project/results'
+    | '/libraries/'
+    | '/project/'
+    | '/libraries/conductor-types/new'
+    | '/libraries/tower-geometries/new'
+    | '/project/lines/new'
+    | '/project/sources/new'
+    | '/libraries/conductor-types'
+    | '/libraries/tower-geometries'
+    | '/project/lines'
+    | '/project/sources'
+    | '/libraries/conductor-types/$typeId'
+    | '/libraries/tower-geometries/$geometryId'
+    | '/project/lines/$lineId'
+    | '/project/sources/$sourceId'
+    | '/project/lines/$lineId/$towerId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/libraries'
+    | '/project'
+    | '/project/new'
+    | '/project/diagram'
+    | '/project/results'
+    | '/libraries/conductor-types/new'
+    | '/libraries/tower-geometries/new'
+    | '/project/lines/new'
+    | '/project/sources/new'
+    | '/libraries/conductor-types'
+    | '/libraries/tower-geometries'
+    | '/project/lines'
+    | '/project/sources'
+    | '/libraries/conductor-types/$typeId'
+    | '/libraries/tower-geometries/$geometryId'
+    | '/project/lines/$lineId'
+    | '/project/sources/$sourceId'
+    | '/project/lines/$lineId/$towerId'
+  id:
+    | '__root__'
+    | '/'
+    | '/libraries'
+    | '/libraries/_layout'
+    | '/project'
+    | '/project/_layout'
+    | '/project/new'
+    | '/project/_layout/diagram'
+    | '/project/_layout/results'
+    | '/libraries/_layout/'
+    | '/project/_layout/'
+    | '/libraries/_layout/conductor-types/new'
+    | '/libraries/_layout/tower-geometries/new'
+    | '/project/_layout/lines/new'
+    | '/project/_layout/sources/new'
+    | '/libraries/_layout/conductor-types/'
+    | '/libraries/_layout/tower-geometries/'
+    | '/project/_layout/lines/'
+    | '/project/_layout/sources/'
+    | '/libraries/_layout/conductor-types/$typeId/'
+    | '/libraries/_layout/tower-geometries/$geometryId/'
+    | '/project/_layout/lines/$lineId/'
+    | '/project/_layout/sources/$sourceId/'
+    | '/project/_layout/lines/$lineId/$towerId/'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  LibrariesRoute: typeof LibrariesRouteWithChildren
+  ProjectRoute: typeof ProjectRouteWithChildren
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  LibrariesRoute: LibrariesRouteWithChildren,
+  ProjectRoute: ProjectRouteWithChildren,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
@@ -670,223 +593,126 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/conductor-types/new",
-        "/projects/new",
-        "/tower-geometries/new",
-        "/conductor-types/",
-        "/project/",
-        "/projects/",
-        "/tower-geometries/",
-        "/conductor-types/$typeId",
-        "/projects/$projectId",
-        "/tower-geometries/$geometryId"
+        "/libraries",
+        "/project"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/conductor-types/new": {
-      "filePath": "conductor-types/new.tsx"
-    },
-    "/projects/new": {
-      "filePath": "projects/new.tsx"
-    },
-    "/tower-geometries/new": {
-      "filePath": "tower-geometries/new.tsx"
-    },
-    "/conductor-types/": {
-      "filePath": "conductor-types/index.tsx"
-    },
-    "/project/": {
-      "filePath": "project/index.tsx"
-    },
-    "/projects/": {
-      "filePath": "projects/index.tsx"
-    },
-    "/tower-geometries/": {
-      "filePath": "tower-geometries/index.tsx"
-    },
-    "/conductor-types/$typeId": {
-      "filePath": "conductor-types/$typeId",
+    "/libraries": {
+      "filePath": "libraries",
       "children": [
-        "/conductor-types/$typeId/_layout"
+        "/libraries/_layout"
       ]
     },
-    "/conductor-types/$typeId/_layout": {
-      "filePath": "conductor-types/$typeId/_layout.tsx",
-      "parent": "/conductor-types/$typeId",
+    "/libraries/_layout": {
+      "filePath": "libraries/_layout.tsx",
+      "parent": "/libraries",
       "children": [
-        "/conductor-types/$typeId/_layout/properties",
-        "/conductor-types/$typeId/_layout/"
+        "/libraries/_layout/",
+        "/libraries/_layout/conductor-types/new",
+        "/libraries/_layout/tower-geometries/new",
+        "/libraries/_layout/conductor-types/",
+        "/libraries/_layout/tower-geometries/",
+        "/libraries/_layout/conductor-types/$typeId/",
+        "/libraries/_layout/tower-geometries/$geometryId/"
       ]
     },
-    "/projects/$projectId": {
-      "filePath": "projects/$projectId",
+    "/project": {
+      "filePath": "project",
       "children": [
-        "/projects/$projectId/_viewProjectPage",
-        "/projects/$projectId/lines",
-        "/projects/$projectId/sources"
+        "/project/_layout",
+        "/project/new"
       ]
     },
-    "/projects/$projectId/_viewProjectPage": {
-      "filePath": "projects/$projectId/_viewProjectPage.tsx",
-      "parent": "/projects/$projectId",
+    "/project/_layout": {
+      "filePath": "project/_layout.tsx",
+      "parent": "/project",
       "children": [
-        "/projects/$projectId/_viewProjectPage/diagram",
-        "/projects/$projectId/_viewProjectPage/lines",
-        "/projects/$projectId/_viewProjectPage/results",
-        "/projects/$projectId/_viewProjectPage/sources",
-        "/projects/$projectId/_viewProjectPage/"
+        "/project/_layout/diagram",
+        "/project/_layout/results",
+        "/project/_layout/",
+        "/project/_layout/lines/new",
+        "/project/_layout/sources/new",
+        "/project/_layout/lines/",
+        "/project/_layout/sources/",
+        "/project/_layout/lines/$lineId/",
+        "/project/_layout/sources/$sourceId/",
+        "/project/_layout/lines/$lineId/$towerId/"
       ]
     },
-    "/tower-geometries/$geometryId": {
-      "filePath": "tower-geometries/$geometryId",
-      "children": [
-        "/tower-geometries/$geometryId/_layout"
-      ]
+    "/project/new": {
+      "filePath": "project/new.tsx",
+      "parent": "/project"
     },
-    "/tower-geometries/$geometryId/_layout": {
-      "filePath": "tower-geometries/$geometryId/_layout.tsx",
-      "parent": "/tower-geometries/$geometryId",
-      "children": [
-        "/tower-geometries/$geometryId/_layout/conductors",
-        "/tower-geometries/$geometryId/_layout/"
-      ]
+    "/project/_layout/diagram": {
+      "filePath": "project/_layout/diagram.tsx",
+      "parent": "/project/_layout"
     },
-    "/conductor-types/$typeId/_layout/properties": {
-      "filePath": "conductor-types/$typeId/_layout/properties.tsx",
-      "parent": "/conductor-types/$typeId/_layout"
+    "/project/_layout/results": {
+      "filePath": "project/_layout/results.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/_viewProjectPage/diagram": {
-      "filePath": "projects/$projectId/_viewProjectPage/diagram.tsx",
-      "parent": "/projects/$projectId/_viewProjectPage"
+    "/libraries/_layout/": {
+      "filePath": "libraries/_layout/index.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/projects/$projectId/_viewProjectPage/lines": {
-      "filePath": "projects/$projectId/_viewProjectPage/lines.tsx",
-      "parent": "/projects/$projectId/_viewProjectPage"
+    "/project/_layout/": {
+      "filePath": "project/_layout/index.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/_viewProjectPage/results": {
-      "filePath": "projects/$projectId/_viewProjectPage/results.tsx",
-      "parent": "/projects/$projectId/_viewProjectPage"
+    "/libraries/_layout/conductor-types/new": {
+      "filePath": "libraries/_layout/conductor-types/new.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/projects/$projectId/_viewProjectPage/sources": {
-      "filePath": "projects/$projectId/_viewProjectPage/sources.tsx",
-      "parent": "/projects/$projectId/_viewProjectPage"
+    "/libraries/_layout/tower-geometries/new": {
+      "filePath": "libraries/_layout/tower-geometries/new.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/projects/$projectId/lines": {
-      "filePath": "projects/$projectId/lines_",
-      "parent": "/projects/$projectId",
-      "children": [
-        "/projects/$projectId/lines/_projectCrumb"
-      ]
+    "/project/_layout/lines/new": {
+      "filePath": "project/_layout/lines/new.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/lines/_projectCrumb": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb.tsx",
-      "parent": "/projects/$projectId/lines",
-      "children": [
-        "/projects/$projectId/lines/_projectCrumb/new",
-        "/projects/$projectId/lines/_projectCrumb/$lineId"
-      ]
+    "/project/_layout/sources/new": {
+      "filePath": "project/_layout/sources/new.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/sources": {
-      "filePath": "projects/$projectId/sources_",
-      "parent": "/projects/$projectId",
-      "children": [
-        "/projects/$projectId/sources/_projectCrumb"
-      ]
+    "/libraries/_layout/conductor-types/": {
+      "filePath": "libraries/_layout/conductor-types/index.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/projects/$projectId/sources/_projectCrumb": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb.tsx",
-      "parent": "/projects/$projectId/sources",
-      "children": [
-        "/projects/$projectId/sources/_projectCrumb/new",
-        "/projects/$projectId/sources/_projectCrumb/$sourceId"
-      ]
+    "/libraries/_layout/tower-geometries/": {
+      "filePath": "libraries/_layout/tower-geometries/index.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/tower-geometries/$geometryId/_layout/conductors": {
-      "filePath": "tower-geometries/$geometryId/_layout/conductors.tsx",
-      "parent": "/tower-geometries/$geometryId/_layout"
+    "/project/_layout/lines/": {
+      "filePath": "project/_layout/lines/index.tsx",
+      "parent": "/project/_layout"
     },
-    "/conductor-types/$typeId/_layout/": {
-      "filePath": "conductor-types/$typeId/_layout/index.tsx",
-      "parent": "/conductor-types/$typeId/_layout"
+    "/project/_layout/sources/": {
+      "filePath": "project/_layout/sources/index.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/_viewProjectPage/": {
-      "filePath": "projects/$projectId/_viewProjectPage/index.tsx",
-      "parent": "/projects/$projectId/_viewProjectPage"
+    "/libraries/_layout/conductor-types/$typeId/": {
+      "filePath": "libraries/_layout/conductor-types/$typeId/index.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/tower-geometries/$geometryId/_layout/": {
-      "filePath": "tower-geometries/$geometryId/_layout/index.tsx",
-      "parent": "/tower-geometries/$geometryId/_layout"
+    "/libraries/_layout/tower-geometries/$geometryId/": {
+      "filePath": "libraries/_layout/tower-geometries/$geometryId/index.tsx",
+      "parent": "/libraries/_layout"
     },
-    "/projects/$projectId/lines/_projectCrumb/new": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/new.tsx",
-      "parent": "/projects/$projectId/lines/_projectCrumb"
+    "/project/_layout/lines/$lineId/": {
+      "filePath": "project/_layout/lines/$lineId/index.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/sources/_projectCrumb/new": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb/new.tsx",
-      "parent": "/projects/$projectId/sources/_projectCrumb"
+    "/project/_layout/sources/$sourceId/": {
+      "filePath": "project/_layout/sources/$sourceId/index.tsx",
+      "parent": "/project/_layout"
     },
-    "/projects/$projectId/lines/_projectCrumb/$lineId": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId",
-      "parent": "/projects/$projectId/lines/_projectCrumb",
-      "children": [
-        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine",
-        "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/"
-      ]
-    },
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine.tsx",
-      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId",
-      "children": [
-        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors",
-        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers",
-        "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/"
-      ]
-    },
-    "/projects/$projectId/sources/_projectCrumb/$sourceId": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId",
-      "parent": "/projects/$projectId/sources/_projectCrumb",
-      "children": [
-        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
-      ]
-    },
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource.tsx",
-      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId",
-      "children": [
-        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical",
-        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence",
-        "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/"
-      ]
-    },
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/conductors": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/conductors.tsx",
-      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
-    },
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/towers": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/towers.tsx",
-      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
-    },
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/electrical": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/electrical.tsx",
-      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
-    },
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/sequence": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/sequence.tsx",
-      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
-    },
-    "/projects/$projectId/lines/_projectCrumb/$lineId/$towerId/": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/$towerId_/index.tsx",
-      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId"
-    },
-    "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine/": {
-      "filePath": "projects/$projectId/lines_/_projectCrumb/$lineId/_viewLine/index.tsx",
-      "parent": "/projects/$projectId/lines/_projectCrumb/$lineId/_viewLine"
-    },
-    "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource/": {
-      "filePath": "projects/$projectId/sources_/_projectCrumb/$sourceId/_viewSource/index.tsx",
-      "parent": "/projects/$projectId/sources/_projectCrumb/$sourceId/_viewSource"
+    "/project/_layout/lines/$lineId/$towerId/": {
+      "filePath": "project/_layout/lines/$lineId/$towerId/index.tsx",
+      "parent": "/project/_layout"
     }
   }
 }

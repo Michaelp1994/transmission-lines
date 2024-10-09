@@ -1,19 +1,16 @@
-import BaseElement from "./BaseElement";
 import {
-    type OpenDSSVSource,
-    type VSourceInput,
     arrayTransform,
     booleanTransform,
     busTransform,
     numberTransform,
+    type OpenDSSVSource,
+    type VSourceInput,
     vSourceSchema,
 } from "@/schemas";
 
+import BaseElement from "./BaseElement";
+
 export default class VSource extends BaseElement<VSourceInput, OpenDSSVSource> {
-    values: VSourceInput;
-
-    type = "VSource";
-
     parameters = [
         "bus1",
         "basekv",
@@ -50,6 +47,10 @@ export default class VSource extends BaseElement<VSourceInput, OpenDSSVSource> {
         "baseFreq",
         "enabled",
     ] as const satisfies (keyof OpenDSSVSource)[];
+
+    type = "VSource";
+
+    values: VSourceInput;
 
     constructor(input: VSourceInput) {
         super();

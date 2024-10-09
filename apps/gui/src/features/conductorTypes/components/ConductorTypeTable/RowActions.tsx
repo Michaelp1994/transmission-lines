@@ -1,3 +1,6 @@
+import type { CellContext } from "@tanstack/react-table";
+
+import { Button } from "@repo/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -6,11 +9,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu";
-import { Button } from "@repo/ui/button";
 import { Link } from "@tanstack/react-router";
-import type { CellContext } from "@tanstack/react-table";
-import type { ConductorType } from "./RowType";
+
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
+
+import type { ConductorType } from "./RowType";
 
 export default function ConductorTypeTableActions({
     row,
@@ -19,8 +22,8 @@ export default function ConductorTypeTableActions({
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    variant="ghost"
                     className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+                    variant="ghost"
                 >
                     <MenuIcon />
                     <span className="sr-only">Open menu</span>
@@ -31,8 +34,8 @@ export default function ConductorTypeTableActions({
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                     <Link
-                        to="/conductor-types/$typeId"
                         params={{ typeId: row.original.id }}
+                        to="/conductor-types/$typeId"
                     >
                         <ViewIcon />
                         View

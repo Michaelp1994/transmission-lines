@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { useMemo } from "react";
+
 import trpc from "~/utils/trpc";
 
 export default function TrpcProvider({

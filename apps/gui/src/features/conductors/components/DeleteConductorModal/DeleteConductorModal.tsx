@@ -1,7 +1,9 @@
-import NiceModal from "@ebay/nice-modal-react";
 import type { ConductorID } from "@repo/validators/Ids";
+
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
+
 import BaseDeleteModal from "~/components/BaseDeleteModal";
-import toast from "~/utils/toast";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteConductorModalProps {
@@ -11,13 +13,14 @@ export interface DeleteConductorModalProps {
 export default NiceModal.create(
     ({ conductorId }: DeleteConductorModalProps) => {
         const utils = trpc.useUtils();
+        const modal = useModal();
         const deleteMutation = trpc.conductor.delete.useMutation({
             async onSuccess(data) {
                 toast.success("Conductor deleted");
-                await utils.conductor.getAllByLineId.invalidate({
+                await utils.conductor.getAll.invalidate({
                     lineId: data.lineId,
                 });
-                onClose();
+                await modal.hide();
             },
             onError(error) {
                 toast.error("Can't delete Conductor");

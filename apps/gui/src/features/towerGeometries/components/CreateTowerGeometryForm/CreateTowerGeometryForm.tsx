@@ -1,20 +1,47 @@
-import type { TowerGeometryFormInput } from "@repo/validators/forms";
+import { Button } from "@repo/ui/button";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@repo/ui/form";
+import { useForm } from "@repo/ui/hooks/use-form";
+import { Input } from "@repo/ui/input";
+import {
+    defaultTowerGeometry,
+    type TowerGeometryFormInput,
+    towerGeometryFormSchema,
+} from "@repo/validators/forms";
 import { useNavigate } from "@tanstack/react-router";
-import type { FieldErrors } from "react-hook-form";
-import BaseForm from "./BaseForm";
-import toast from "~/utils/toast";
+import { useTranslation } from "react-i18next";
+
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
-function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
-    console.log(errors);
+interface CreateTowerGeometryFormProps {
+    onFinish?: () => void;
 }
 
-export default function FormHandler() {
+export default function CreateTowerGeometryForm({
+    onFinish,
+}: CreateTowerGeometryFormProps) {
+    const { t } = useTranslation("createTowerGeometryForm");
+
+    const form = useForm({
+        schema: towerGeometryFormSchema,
+        defaultValues: defaultTowerGeometry,
+    });
+
     const navigate = useNavigate();
     const createMutation = trpc.towerGeometry.create.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been added.`);
             await navigate({ to: "/tower-geometries" });
+            if (onFinish) onFinish();
         },
         onError(error) {
             toast.error("Can't create Tower Geometry");
@@ -26,5 +53,40 @@ export default function FormHandler() {
         createMutation.mutate(values);
     }
 
-    return <BaseForm onValid={handleValid} onInvalid={handleInvalid} />;
+    return (
+        <Form {...form}>
+            <StyledForm
+                onReset={() => {
+                    form.reset();
+                }}
+                onSubmit={form.handleSubmit(handleValid)}
+            >
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("name.label")}</FormLabel>
+                                <FormControl>
+                                    <Input {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("name.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
+                />
+
+                <ButtonsWrapper>
+                    <Button type="reset" variant="destructive">
+                        {t("form:reset")}
+                    </Button>
+                    <Button type="submit">{t("form:submit")}</Button>
+                </ButtonsWrapper>
+            </StyledForm>
+        </Form>
+    );
 }

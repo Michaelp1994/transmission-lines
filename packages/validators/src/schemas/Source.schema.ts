@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { projectId, sourceId } from "../Ids.schema";
+
+import { sourceId } from "../Ids.schema";
 
 // create
 
@@ -17,10 +18,8 @@ export const createSourceSchema = z.object({
     x0r0: z.number().min(0),
     isc3: z.number().min(0),
     isc1: z.number().min(0),
-    enabled: z.boolean(),
     resistance: z.number().positive(),
     frequency: z.number().positive(),
-    projectId,
 });
 
 export type CreateSourceInput = z.infer<typeof createSourceSchema>;
@@ -79,17 +78,9 @@ export type UpdateSourceElectricalInput = z.infer<
 
 // getAllSources
 
-export const getAllSourcesSchema = z.object({ projectId });
+export const getAllSourcesSchema = z.object({});
 
 export type GetAllSourcesInput = z.infer<typeof getAllSourcesSchema>;
-
-// getAllSourcesByProjectID
-
-export const getAllSourcesByProjectIdSchema = z.object({ projectId });
-
-export type GetAllSourcesByProjectIdInput = z.infer<
-    typeof getAllSourcesByProjectIdSchema
->;
 
 // getById
 
@@ -102,3 +93,9 @@ export type GetSourceByIdInput = z.infer<typeof getSourceByIdSchema>;
 export const deleteSourceSchema = z.object({ id: sourceId });
 
 export type DeleteSourceInput = z.infer<typeof deleteSourceSchema>;
+
+// getPhaseComponents
+
+export const getPhaseComponentsSchema = z.object({ id: sourceId });
+
+export type GetPhaseComponentsInput = z.infer<typeof getPhaseComponentsSchema>;

@@ -1,34 +1,53 @@
-import type { TowerGeometryFormInput } from "@repo/validators/forms/TowerGeometry.schema";
 import type { GeometryID } from "@repo/validators/Ids";
+
+import { Button } from "@repo/ui/button";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@repo/ui/form";
+import { useForm } from "@repo/ui/hooks/use-form";
+import { Input } from "@repo/ui/input";
+import {
+    type TowerGeometryFormInput,
+    towerGeometryFormSchema,
+} from "@repo/validators/forms/TowerGeometry.schema";
 import { useNavigate } from "@tanstack/react-router";
-import type { FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import BaseForm from "./BaseForm";
-import toast from "~/utils/toast";
+
+import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
-interface FormHandlerProps {
+interface UpdateTowerGeometryFormProps {
     geometryId: GeometryID;
-}
-
-function handleInvalid(errors: FieldErrors<TowerGeometryFormInput>) {
-    console.log(errors);
+    onFinish?: () => void;
 }
 
 export default function UpdateTowerGeometryForm({
     geometryId,
-}: FormHandlerProps) {
-    const { t } = useTranslation("towerGeometry");
+    onFinish,
+}: UpdateTowerGeometryFormProps) {
+    const { t } = useTranslation("updateTowerGeometryForm");
     const navigate = useNavigate();
 
-    const { data, error, isLoading, isError } =
-        trpc.towerGeometry.getById.useQuery({
-            id: geometryId,
-        });
+    const { data, isLoading, isError } = trpc.towerGeometry.getById.useQuery({
+        id: geometryId,
+    });
+    const form = useForm({
+        schema: towerGeometryFormSchema,
+        values: data,
+    });
+
     const updateMutation = trpc.towerGeometry.update.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
             await navigate({ to: "/tower-geometries" });
+            if (onFinish) onFinish();
         },
         onError(error) {
             toast.error("Can't update Tower Geometry");
@@ -51,6 +70,35 @@ export default function UpdateTowerGeometryForm({
     }
 
     return (
-        <BaseForm data={data} onValid={handleValid} onInvalid={handleInvalid} />
+        <Form {...form}>
+            <StyledForm
+                onReset={() => {
+                    form.reset();
+                }}
+                onSubmit={form.handleSubmit(handleValid)}
+            >
+                <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>{t("name.label")}</FormLabel>
+                                <FormControl>
+                                    <Input {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    {t("name.description")}
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
+                />
+                <ButtonsWrapper>
+                    <Button type="submit">{t("form:submit")}</Button>
+                </ButtonsWrapper>
+            </StyledForm>
+        </Form>
     );
 }

@@ -1,19 +1,23 @@
-import fs from "fs/promises";
 import {
     createProjectSchema,
     getProjectSchema,
-    openProjectSchema,
 } from "@repo/validators/schemas/Project.schema";
+import { randomUUID } from "crypto";
+import fs from "fs/promises";
+
 import { publicProcedure, router } from "../trpc";
 
 // import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
-    getProject: publicProcedure
+    getCurrent: publicProcedure
         .input(getProjectSchema)
         .query(async ({ ctx }) => {
             return ctx.store.project;
         }),
+    hasProject: publicProcedure.query(async ({ ctx }) => {
+        return !!ctx.store.project;
+    }),
     open: publicProcedure.mutation(async ({ ctx }) => {
         if (!ctx.electron) {
             throw new Error("Not in electron context");
@@ -42,10 +46,10 @@ export default router({
             }
             const file = await fs.readFile(fileName);
             const contents = JSON.parse(file.toString());
-            const input = openProjectSchema.parse(contents);
+            // const input = openProjectSchema.parse(contents);
             // TODO: check if exists and which version is more up to date, then prompt user if they want to replace it.
 
-            ctx.store.project = input;
+            ctx.store.project = contents;
 
             return ctx.store.project;
         }
@@ -55,7 +59,13 @@ export default router({
     create: publicProcedure
         .input(createProjectSchema)
         .mutation(async ({ input, ctx }) => {
-            ctx.store.project = input;
+            ctx.store.project = {
+                id: randomUUID(),
+                name: input.name,
+                sources: [],
+                transmissionLines: [],
+                solution: { solvedAt: null },
+            };
             return input;
         }),
     close: publicProcedure.mutation(async ({ input, ctx }) => {

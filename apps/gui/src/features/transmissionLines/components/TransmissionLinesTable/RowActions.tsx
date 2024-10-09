@@ -1,3 +1,7 @@
+import type { CellContext } from "@tanstack/react-table";
+
+import NiceModal from "@ebay/nice-modal-react";
+import { Button } from "@repo/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -6,18 +10,17 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu";
-import { Button } from "@repo/ui/button";
 import { Link } from "@tanstack/react-router";
-import type { CellContext } from "@tanstack/react-table";
-import type { TransmissionLine } from "./RowType";
+
 import { DeleteIcon, EditIcon, MenuIcon } from "~/components/MenuIcons";
-import NiceModal from "@ebay/nice-modal-react";
+
+import type { TransmissionLine } from "./RowType";
 
 export default function ConductorTableRowActions({
     row,
 }: CellContext<TransmissionLine, unknown>) {
     function showDeleteModal() {
-        NiceModal.show("delete-tranmission-line", {
+        NiceModal.show("delete-transmission-line", {
             lineId: row.original.id,
         });
     }
@@ -25,8 +28,8 @@ export default function ConductorTableRowActions({
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    variant="ghost"
                     className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+                    variant="ghost"
                 >
                     <MenuIcon />
                     <span className="sr-only">Open menu</span>
@@ -37,11 +40,11 @@ export default function ConductorTableRowActions({
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                     <Link
-                        to="/projects/$projectId/lines/$lineId"
                         params={{
                             projectId: row.original.projectId,
                             lineId: row.original.id,
                         }}
+                        to="project/lines/$lineId"
                     >
                         <EditIcon />
                         <span>Edit</span>

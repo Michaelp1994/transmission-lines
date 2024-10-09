@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+
 import BaseSelect, { type BaseSelectProps } from "~/components/BaseSelect";
 import trpc from "~/utils/trpc";
 
@@ -10,7 +11,7 @@ const ConductorTypeSelect = React.forwardRef<
     ConductorTypeSelectProps
 >(({ ...props }, ref) => {
     const { data, error, isLoading } = trpc.conductorType.getAll.useQuery();
-    const { t } = useTranslation("conductorType");
+    const { t } = useTranslation("conductorTypeSelect");
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;

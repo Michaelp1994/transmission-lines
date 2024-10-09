@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { lineId, projectId, sourceId } from "../Ids.schema";
+
+import { lineId, sourceId } from "../Ids.schema";
 
 // create
 
@@ -7,7 +8,6 @@ export const createTransmissionLineSchema = z.object({
     name: z.string().min(2).max(50).trim(),
     fromSourceId: sourceId,
     toSourceId: sourceId.nullable(),
-    projectId,
 });
 
 export type CreateTransmissionLineInput = z.infer<
@@ -16,13 +16,11 @@ export type CreateTransmissionLineInput = z.infer<
 
 // update
 
-export const updateTransmissionLineSchema = createTransmissionLineSchema
-    .omit({
-        projectId: true,
-    })
-    .extend({
+export const updateTransmissionLineSchema = createTransmissionLineSchema.extend(
+    {
         id: lineId,
-    });
+    }
+);
 
 export type UpdateTransmissionLineInput = z.infer<
     typeof updateTransmissionLineSchema
@@ -30,22 +28,10 @@ export type UpdateTransmissionLineInput = z.infer<
 
 // getAllTransmissionLines
 
-export const getAllTransmissionLinesSchema = z.object({
-    projectId,
-});
+export const getAllTransmissionLinesSchema = z.object({});
 
 export type GetAllTransmissionLinesInput = z.infer<
     typeof getAllTransmissionLinesSchema
->;
-
-// getAllTransmissionLines
-
-export const getAllTransmissionLinesByProjectIdSchema = z.object({
-    projectId,
-});
-
-export type GetAllTransmissionLinesByProjectIdInput = z.infer<
-    typeof getAllTransmissionLinesByProjectIdSchema
 >;
 
 // getById

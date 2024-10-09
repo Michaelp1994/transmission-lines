@@ -1,3 +1,4 @@
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
     Dialog,
     DialogContent,
@@ -5,15 +6,13 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@repo/ui/dialog";
-
 import { useTranslation } from "react-i18next";
-import NiceModal, { useModal } from "@ebay/nice-modal-react";
 
 export default NiceModal.create(() => {
     const { t } = useTranslation("settingsModal");
     const modal = useModal();
     return (
-        <Dialog open={modal.visible} onOpenChange={() => modal.hide()}>
+        <Dialog onOpenChange={() => modal.hide()} open={modal.visible}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>{t("modalTitle")}</DialogTitle>

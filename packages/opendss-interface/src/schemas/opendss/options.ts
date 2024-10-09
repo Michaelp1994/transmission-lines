@@ -1,4 +1,3 @@
-import { z } from "zod";
 import {
     cktModelSchema,
     controlModeOptionSchema,
@@ -9,6 +8,7 @@ import {
     randomSchema,
     reduceOptionSchema,
 } from "@enums/index";
+import { z } from "zod";
 
 export const optionsSchema = z.object({
     /** Set default annual growth rate, percent, for loads with no growth curve specified. Default is 2.5. */

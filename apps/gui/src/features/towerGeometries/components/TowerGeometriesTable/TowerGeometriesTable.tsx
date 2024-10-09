@@ -1,10 +1,12 @@
 import { useTranslation } from "react-i18next";
-import columns from "./columns";
+
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
+import columns from "./columns";
+
 export default function GeometriesTable() {
-    const { t } = useTranslation("towerGeometry");
+    const { t } = useTranslation("geometriesTable");
     const {
         data = [],
         error,
@@ -18,5 +20,5 @@ export default function GeometriesTable() {
         return <div>{t("general:loading")}</div>;
     }
 
-    return <DataTable data={data} columns={columns} />;
+    return <DataTable columns={columns} data={data} />;
 }

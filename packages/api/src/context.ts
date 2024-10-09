@@ -1,5 +1,6 @@
 import type { DBContext } from "@repo/db";
 import type { BrowserWindow, Dialog } from "electron";
+
 import type { Store } from "./store";
 
 export interface Electron {

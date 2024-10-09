@@ -1,17 +1,18 @@
 import type BaseElement from "./elements/BaseElement";
-import OpenDssDriver from "./OpenDssDriver";
+
 import { type OpenDSSOptions, optionsSchema } from "../schemas";
+import OpenDssDriver from "./OpenDssDriver";
 
 export default class Circuit {
     components: BaseElement[] = [];
 
-    solution: any[] = [];
+    driver: OpenDssDriver;
 
     isSolved = false;
 
     name: string;
 
-    driver: OpenDssDriver;
+    solution: any[] = [];
 
     constructor(name: string, options?: OpenDSSOptions, debug = false) {
         this.driver = new OpenDssDriver(debug);
@@ -27,21 +28,29 @@ export default class Circuit {
         this.isSolved = false;
     }
 
-    remove(component: BaseElement) {
-        this.components.findIndex((c) => c.id === component.id);
-        this.components = this.components.filter((c) => c !== component);
-    }
-
-    close() {
-        this.driver.close();
-    }
-
     build() {
         this.components.forEach((component) => {
             const script = component.create();
 
             this.driver.sendArray(script);
         });
+    }
+
+    close() {
+        this.driver.close();
+    }
+
+    getCurrents(element: BaseElement) {
+        if (!this.isSolved) {
+            throw new Error("Circuit is not solved");
+        }
+
+        return this.driver.getCurrents(element.getFullName());
+    }
+
+    remove(component: BaseElement) {
+        this.components.findIndex((c) => c.id === component.id);
+        this.components = this.components.filter((c) => c !== component);
     }
 
     solve() {
@@ -52,13 +61,5 @@ export default class Circuit {
     solveCurrents() {
         this.driver.solve();
         this.isSolved = true;
-    }
-
-    getCurrents(element: BaseElement) {
-        if (!this.isSolved) {
-            throw new Error("Circuit is not solved");
-        }
-
-        return this.driver.getCurrents(element.getFullName());
     }
 }

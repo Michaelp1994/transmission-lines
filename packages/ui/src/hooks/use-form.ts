@@ -1,10 +1,11 @@
+import type { ZodErrorMap, ZodSchema } from "zod";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
     useForm as _useForm,
     type UseFormProps as _UseFormProps,
     type FieldValues,
 } from "react-hook-form";
-import type { ZodSchema, ZodErrorMap } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 interface UseFormProps<
     TFieldValues extends FieldValues = FieldValues,

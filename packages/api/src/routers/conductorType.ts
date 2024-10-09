@@ -7,6 +7,7 @@ import {
     getConductorTypeByIdSchema,
     updateConductorTypeSchema,
 } from "@repo/validators/schemas/ConductorType.schema";
+
 import { publicProcedure, router } from "../trpc";
 
 export default router({

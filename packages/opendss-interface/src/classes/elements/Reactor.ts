@@ -1,24 +1,16 @@
-import BaseElement from "./BaseElement";
 import {
-    type OpenDSSReactor,
-    type ReactorInput,
     arrayTransform,
     booleanTransform,
     busTransform,
     numberTransform,
+    type OpenDSSReactor,
+    type ReactorInput,
     reactorSchema,
 } from "@/schemas";
 
+import BaseElement from "./BaseElement";
+
 export default class Reactor extends BaseElement<ReactorInput, OpenDSSReactor> {
-    values;
-
-    type = "Reactor";
-
-    constructor(input: ReactorInput) {
-        super();
-        this.values = reactorSchema.parse(input);
-    }
-
     parameters = [
         "bus1",
         "bus2",
@@ -47,6 +39,15 @@ export default class Reactor extends BaseElement<ReactorInput, OpenDSSReactor> {
         "baseFreq",
         "enabled",
     ] as const satisfies (keyof OpenDSSReactor)[];
+
+    type = "Reactor";
+
+    values;
+
+    constructor(input: ReactorInput) {
+        super();
+        this.values = reactorSchema.parse(input);
+    }
 
     transform() {
         return {

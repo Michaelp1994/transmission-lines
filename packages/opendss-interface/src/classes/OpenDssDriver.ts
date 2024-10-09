@@ -1,27 +1,29 @@
-import winax from "winax";
-import OpenDSSError from "./OpenDSSError";
 import type { OpenDSSOptions } from "@/schemas";
+
+import winax from "winax";
+
+import OpenDSSError from "./OpenDSSError";
 
 export default class OpenDssDriver {
     debug: boolean;
 
-    isStarted = false;
-
-    isSolved = false;
-
     dss: OpenDSSengine.DSS;
 
-    dssCircuit: OpenDSSengine.DSS["ActiveCircuit"];
+    dssBus: OpenDSSengine.DSS["ActiveCircuit"]["ActiveBus"];
 
-    dssSolution: OpenDSSengine.DSS["ActiveCircuit"]["Solution"];
+    dssCircuit: OpenDSSengine.DSS["ActiveCircuit"];
 
     dssElem: OpenDSSengine.DSS["ActiveCircuit"]["ActiveCktElement"];
 
     dssMathLib: OpenDSSengine.DSS["CmathLib"];
 
-    dssBus: OpenDSSengine.DSS["ActiveCircuit"]["ActiveBus"];
+    dssSolution: OpenDSSengine.DSS["ActiveCircuit"]["Solution"];
 
     dssText: OpenDSSengine.DSS["Text"];
+
+    isSolved = false;
+
+    isStarted = false;
 
     constructor(debug = false) {
         this.debug = debug;
@@ -41,19 +43,43 @@ export default class OpenDssDriver {
         this.dssBus = this.dssCircuit.ActiveBus;
     }
 
+    changeParameter(name: string, property: string, value: string) {
+        this.setActiveElement(name);
+        if (
+            this.dssElem.Properties(property).Name.toLowerCase() !==
+            property.toLowerCase()
+        ) {
+            this.close();
+            throw new OpenDSSError(
+                `Can't find ${property} property on ${name} component.`
+            );
+        }
+
+        this.dssElem.Properties(property).Val = value;
+    }
+
+    clear() {
+        if (!this.isStarted) {
+            throw new OpenDSSError("OpenDSS Engine is not started");
+        }
+        this.dss.ClearAll();
+    }
+
+    close() {
+        if (!this.isStarted) {
+            throw new OpenDSSError("OpenDSS Engine is not started");
+        }
+        this.clear();
+        // @ts-expect-error
+        winax.release(this.dss);
+        this.isStarted = false;
+    }
+
     createCircuit(name: string) {
         if (!this.isStarted) {
             throw new OpenDSSError("OpenDSS Engine is not started");
         }
         this.dss.NewCircuit(name);
-    }
-
-    getVersion() {
-        if (!this.isStarted) {
-            throw new OpenDSSError("OpenDSS Engine is not started");
-        }
-
-        return this.dss.Version;
     }
 
     getActiveCircuit() {
@@ -64,20 +90,29 @@ export default class OpenDssDriver {
         return this.dssCircuit.Name;
     }
 
-    getNumCircuits() {
+    // Requires Solve First
+    getBusNames() {
         if (!this.isStarted) {
             throw new OpenDSSError("OpenDSS Engine is not started");
         }
 
-        return this.dss.NumCircuits;
+        return this.dssCircuit.AllBusNames;
     }
 
-    getNumElements() {
-        if (!this.isStarted) {
-            throw new OpenDSSError("OpenDSS Engine is not started");
-        }
+    getCurrents(name: string) {
+        this.setActiveElement(name);
+        const currents = this.dssElem.Currents as number[];
+        const phases = this.dssElem.NodeOrder as number[];
 
-        return this.dssCircuit.NumCktElements;
+        return phases.map((phase, index) => {
+            return {
+                phase,
+                current: {
+                    current: currents[index * 2],
+                    angle: currents[index * 2 + 1],
+                },
+            };
+        });
     }
 
     getElementNames() {
@@ -97,52 +132,26 @@ export default class OpenDssDriver {
         return this.dssCircuit.AllNodeNames;
     }
 
-    // Requires Solve First
-    getBusNames() {
+    getNumCircuits() {
         if (!this.isStarted) {
             throw new OpenDSSError("OpenDSS Engine is not started");
         }
 
-        return this.dssCircuit.AllBusNames;
+        return this.dss.NumCircuits;
     }
 
-    setActiveCircuit(name: string) {
+    getNumElements() {
         if (!this.isStarted) {
             throw new OpenDSSError("OpenDSS Engine is not started");
         }
-        this.setOption("circuit", name);
+
+        return this.dssCircuit.NumCktElements;
     }
 
-    close() {
-        if (!this.isStarted) {
-            throw new OpenDSSError("OpenDSS Engine is not started");
-        }
-        this.clear();
-        // @ts-expect-error
-        winax.release(this.dss);
-        this.isStarted = false;
-    }
+    getOption(option: keyof OpenDSSOptions) {
+        this.dssText.Command = `GET ${option}`;
 
-    clear() {
-        if (!this.isStarted) {
-            throw new OpenDSSError("OpenDSS Engine is not started");
-        }
-        this.dss.ClearAll();
-    }
-
-    setActiveElement(name: string) {
-        if (this.dssElem.Name === name) {
-            return;
-        }
-        const result = this.dssCircuit.SetActiveElement(name);
-
-        console.log("result: ", result);
-        if (this.dssElem.Name.toLowerCase() !== name.toLowerCase()) {
-            this.close();
-            throw new OpenDSSError(
-                `Can't find ${name} in circuit. [Found ${this.dssElem.Name}]`
-            );
-        }
+        return this.dssText.Result;
     }
 
     getParameter(name: string, property: string) {
@@ -159,68 +168,18 @@ export default class OpenDssDriver {
         return val;
     }
 
-    getCurrents(name: string) {
-        this.setActiveElement(name);
-        const currents = this.dssElem.Currents as number[];
-        const phases = this.dssElem.NodeOrder as number[];
-
-        return phases.map((phase, index) => {
-            return {
-                phase,
-                current: {
-                    current: currents[index * 2],
-                    angle: currents[index * 2 + 1],
-                },
-            };
-        });
-    }
-
-    changeParameter(name: string, property: string, value: string) {
-        this.setActiveElement(name);
-        if (
-            this.dssElem.Properties(property).Name.toLowerCase() !==
-            property.toLowerCase()
-        ) {
-            this.close();
-            throw new OpenDSSError(
-                `Can't find ${property} property on ${name} component.`
-            );
-        }
-
-        this.dssElem.Properties(property).Val = value;
-    }
-
-    setOptions(options: OpenDSSOptions) {
-        Object.entries(options).forEach(([name, value]) => {
-            this.setOption(name, value);
-        });
-    }
-
-    setOption(option: keyof OpenDSSOptions, value: string) {
-        this.sendString(`SET ${option} = ${value}`);
-    }
-
-    getOption(option: keyof OpenDSSOptions) {
-        this.dssText.Command = `GET ${option}`;
-
-        return this.dssText.Result;
-    }
-
-    solve() {
+    getVersion() {
         if (!this.isStarted) {
             throw new OpenDSSError("OpenDSS Engine is not started");
         }
-        this.dssSolution.Solve();
-        if (this.dss.Error.Description || this.dss.Error.Number) {
-            this.close();
-            throw new OpenDSSError(
-                `Error solving: ${this.dss.Error.Description} [${this.dss.Error.Number}]`
-            );
-        }
-        if (!this.dssSolution.Converged) {
-            this.close();
-            throw new Error(`Unknown Error, Solution did not converge.`);
-        }
+
+        return this.dss.Version;
+    }
+
+    sendArray(commands: string[]) {
+        commands.forEach((command) => {
+            this.sendString(command);
+        });
     }
 
     sendString(text: string) {
@@ -242,9 +201,52 @@ export default class OpenDssDriver {
         }
     }
 
-    sendArray(commands: string[]) {
-        commands.forEach((command) => {
-            this.sendString(command);
+    setActiveCircuit(name: string) {
+        if (!this.isStarted) {
+            throw new OpenDSSError("OpenDSS Engine is not started");
+        }
+        this.setOption("circuit", name);
+    }
+
+    setActiveElement(name: string) {
+        if (this.dssElem.Name === name) {
+            return;
+        }
+        const result = this.dssCircuit.SetActiveElement(name);
+
+        console.log("result: ", result);
+        if (this.dssElem.Name.toLowerCase() !== name.toLowerCase()) {
+            this.close();
+            throw new OpenDSSError(
+                `Can't find ${name} in circuit. [Found ${this.dssElem.Name}]`
+            );
+        }
+    }
+
+    setOption(option: keyof OpenDSSOptions, value: string) {
+        this.sendString(`SET ${option} = ${value}`);
+    }
+
+    setOptions(options: OpenDSSOptions) {
+        Object.entries(options).forEach(([name, value]) => {
+            this.setOption(name, value);
         });
+    }
+
+    solve() {
+        if (!this.isStarted) {
+            throw new OpenDSSError("OpenDSS Engine is not started");
+        }
+        this.dssSolution.Solve();
+        if (this.dss.Error.Description || this.dss.Error.Number) {
+            this.close();
+            throw new OpenDSSError(
+                `Error solving: ${this.dss.Error.Description} [${this.dss.Error.Number}]`
+            );
+        }
+        if (!this.dssSolution.Converged) {
+            this.close();
+            throw new Error(`Unknown Error, Solution did not converge.`);
+        }
     }
 }

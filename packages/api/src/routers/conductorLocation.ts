@@ -8,6 +8,7 @@ import {
     getConductorLocationByIdSchema,
     updateConductorLocationSchema,
 } from "@repo/validators/schemas/ConductorLocation.schema";
+
 import { publicProcedure, router } from "../trpc";
 
 export default router({

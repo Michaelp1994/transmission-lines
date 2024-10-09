@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { v4 as uuidv4 } from "uuid";
+
 import { conductorLocations } from "./conductorLocations";
 
 export const towerGeometries = sqliteTable("tower_geometries", {

@@ -5,7 +5,7 @@ export function StyledForm({
     ...props
 }: React.ComponentPropsWithoutRef<"form">) {
     return (
-        <form className="flex flex-col gap-6" aria-label="form" {...props}>
+        <form aria-label="form" className="flex flex-col gap-6" {...props}>
             {children}
         </form>
     );

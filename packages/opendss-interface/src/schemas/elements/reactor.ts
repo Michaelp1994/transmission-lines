@@ -1,7 +1,8 @@
+import { connSchema } from "@/enums";
 import { z } from "zod";
+
 import { busSchema } from "../common";
 import { baseElementSchema } from "./base";
-import { connSchema } from "@/enums";
 
 export const reactorSchema = baseElementSchema.extend({
     /** Name of bus to which the main terminal (1) is connected.

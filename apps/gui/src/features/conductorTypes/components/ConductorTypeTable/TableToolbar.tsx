@@ -1,3 +1,5 @@
+import type { Table } from "@tanstack/react-table";
+
 import {
     Select,
     SelectContent,
@@ -5,7 +7,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@repo/ui/select";
-import type { Table } from "@tanstack/react-table";
+
 import type { ConductorType } from "./RowType";
 
 interface ConductorTypeToolbarProps {
@@ -19,10 +21,10 @@ export default function ConductorTypeToolbar({
             <div>
                 Rows per page:
                 <Select
-                    value={`${table.getState().pagination.pageSize}`}
                     onValueChange={(value) => {
                         table.setPageSize(Number(value));
                     }}
+                    value={`${table.getState().pagination.pageSize}`}
                 >
                     <SelectTrigger className="h-8 w-[70px]">
                         <SelectValue

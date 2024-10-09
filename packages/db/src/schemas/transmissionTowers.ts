@@ -4,4 +4,5 @@ export interface TransmissionTower {
     resistance: number;
     distance: number;
     geometryId: string;
+    lineId: string;
 }

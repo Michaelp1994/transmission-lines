@@ -1,7 +1,9 @@
-import NiceModal from "@ebay/nice-modal-react";
 import type { TowerID } from "@repo/validators/Ids";
+
+import NiceModal from "@ebay/nice-modal-react";
+
 import BaseDeleteModal from "~/components/BaseDeleteModal";
-import toast from "~/utils/toast";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteTowerModalProps {
@@ -13,7 +15,7 @@ export default NiceModal.create(({ towerId }: DeleteTowerModalProps) => {
     const deleteMutation = trpc.tower.delete.useMutation({
         async onSuccess(data) {
             toast.success("Tower deleted");
-            await utils.tower.getAllByLineId.invalidate({
+            await utils.tower.getAll.invalidate({
                 lineId: data.lineId,
             });
         },

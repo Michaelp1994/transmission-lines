@@ -1,24 +1,16 @@
-import BaseElement from "./BaseElement";
 import {
-    type LineInput,
-    type OpenDSSLine,
     arrayTransform,
     booleanTransform,
     busTransform,
+    type LineInput,
     lineSchema,
     numberTransform,
+    type OpenDSSLine,
 } from "@/schemas";
 
+import BaseElement from "./BaseElement";
+
 export default class Line extends BaseElement<LineInput, OpenDSSLine> {
-    values: LineInput;
-
-    type = "Line";
-
-    constructor(input: LineInput) {
-        super();
-        this.values = lineSchema.parse(input);
-    }
-
     parameters = [
         "bus1",
         "bus2",
@@ -58,6 +50,15 @@ export default class Line extends BaseElement<LineInput, OpenDSSLine> {
         "baseFreq",
         "enabled",
     ] as const satisfies (keyof OpenDSSLine)[];
+
+    type = "Line";
+
+    values: LineInput;
+
+    constructor(input: LineInput) {
+        super();
+        this.values = lineSchema.parse(input);
+    }
 
     transform() {
         return {

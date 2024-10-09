@@ -1,25 +1,17 @@
-import BaseElement from "./BaseElement";
 import {
-    type OpenDSSWireData,
-    type WireDataInput,
     arrayTransform,
     numberTransform,
+    type OpenDSSWireData,
+    type WireDataInput,
     wireDataSchema,
 } from "@/schemas";
+
+import BaseElement from "./BaseElement";
 
 export default class WireData extends BaseElement<
     WireDataInput,
     OpenDSSWireData
 > {
-    values;
-
-    type = "WireData";
-
-    constructor(input: WireDataInput) {
-        super();
-        this.values = wireDataSchema.parse(input);
-    }
-
     parameters = [
         "rdc",
         "rac",
@@ -35,6 +27,15 @@ export default class WireData extends BaseElement<
         "ratings",
         "capRadius",
     ] as const satisfies (keyof OpenDSSWireData)[];
+
+    type = "WireData";
+
+    values;
+
+    constructor(input: WireDataInput) {
+        super();
+        this.values = wireDataSchema.parse(input);
+    }
 
     transform() {
         return {

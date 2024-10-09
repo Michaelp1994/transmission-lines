@@ -1,8 +1,10 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
 import { Square, SquareCheckBig } from "lucide-react";
-import RowActions from "./RowActions";
+
 import type { Conductor } from "./RowType";
+
+import RowActions from "./RowActions";
 
 const columnHelper = createColumnHelper<Conductor>();
 

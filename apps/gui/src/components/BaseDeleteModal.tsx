@@ -22,7 +22,7 @@ export default function BaseDeleteModal({ onConfirm }: BaseModalProps) {
     const { t } = useTranslation("general");
     const modal = useModal();
     return (
-        <AlertDialog open={modal.visible} onOpenChange={() => modal.hide()}>
+        <AlertDialog onOpenChange={() => modal.hide()} open={modal.visible}>
             <AlertDialogPortal>
                 <AlertDialogOverlay />
                 <AlertDialogContent>

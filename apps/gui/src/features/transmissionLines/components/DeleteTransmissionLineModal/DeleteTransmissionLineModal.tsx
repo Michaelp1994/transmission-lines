@@ -1,7 +1,9 @@
-import NiceModal from "@ebay/nice-modal-react";
 import type { LineID } from "@repo/validators/Ids";
+
+import NiceModal from "@ebay/nice-modal-react";
+
 import BaseDeleteModal from "~/components/BaseDeleteModal";
-import toast from "~/utils/toast";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteTransmissionLineModalProps {
@@ -14,8 +16,8 @@ export default NiceModal.create(
         const deleteMutation = trpc.transmissionLine.delete.useMutation({
             async onSuccess(values) {
                 toast.success(`Transmission Line ${values.name} deleted`);
-                await utils.transmissionLine.getAllByProjectId.invalidate({
-                    projectId: values.projectId,
+                await utils.transmissionLine.getAll.invalidate({
+                    id: values.id,
                 });
             },
             onError(error) {

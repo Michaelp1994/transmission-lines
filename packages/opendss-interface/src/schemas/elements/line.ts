@@ -1,8 +1,9 @@
+import { earthModelSchema, unitsSchema } from "@/enums";
+import { LineGeometry } from "@classes/elements";
 import { z } from "zod";
+
 import { busSchema } from "../common";
 import { baseElementSchema } from "./base";
-import { LineGeometry } from "@classes/elements";
-import { earthModelSchema, unitsSchema } from "@/enums";
 
 export const lineSchema = baseElementSchema.extend({
     /** Name of bus to which first terminal is connected.

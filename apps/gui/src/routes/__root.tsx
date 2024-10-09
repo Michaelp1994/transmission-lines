@@ -1,12 +1,14 @@
 import { TooltipProvider } from "@repo/ui/tooltip";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { Toaster } from "sonner";
+
+import type trpc from "~/utils/trpc";
+
 import NavBar from "~/components/NavBar";
 import StatusBar from "~/components/StatusBar";
 
 export interface RouterContext {
-    text?: string;
-    link?: string;
+    trpc: typeof trpc;
 }
 
 export const Route = createRootRouteWithContext<RouterContext>()({
@@ -20,7 +22,8 @@ export function DefaultLayout() {
                 <NavBar />
                 <Outlet />
                 <StatusBar />
-                <Toaster richColors closeButton position="bottom-center" />
+                <Toaster closeButton position="bottom-center" richColors />
+                {/* <TanStackRouterDevtools /> */}
             </TooltipProvider>
         </div>
     );

@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { t } from "i18next";
-import RowActions from "./RowActions";
+
 import type { TransmissionLine } from "./RowType";
+
+import RowActions from "./RowActions";
 
 const columnHelper = createColumnHelper<TransmissionLine>();
 
@@ -12,11 +14,10 @@ export default [
         cell: (info) => {
             return (
                 <Link
-                    to="/projects/$projectId/lines/$lineId"
                     params={{
                         lineId: info.row.original.id,
-                        projectId: info.row.original.projectId,
                     }}
+                    to="/project/lines/$lineId"
                 >
                     {info.getValue()}
                 </Link>

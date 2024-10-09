@@ -1,24 +1,26 @@
 import { useTranslation } from "react-i18next";
-import columns from "./columns";
+
 import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
+
+import columns from "./columns";
 
 interface ConductorTableProps {
     lineId: string;
 }
 
 export default function ConductorTable({ lineId }: ConductorTableProps) {
-    const { t } = useTranslation("transmissionLine");
-    const { data, error, isLoading } = trpc.conductor.getAllByLineId.useQuery({
+    const { t } = useTranslation("conductorTable");
+    const { data, error, isLoading } = trpc.conductor.getAll.useQuery({
         lineId,
     });
 
-    if (error) {
-        return <div>{t("general:errorMessage")}</div>;
-    }
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
 
-    return <DataTable data={data} columns={columns} />;
+    if (error || !data) {
+        return <div>{t("general:errorMessage")}</div>;
+    }
+    return <DataTable columns={columns} data={data} />;
 }

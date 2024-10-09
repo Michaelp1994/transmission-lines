@@ -1,3 +1,7 @@
+import type { CellContext } from "@tanstack/react-table";
+
+import NiceModal from "@ebay/nice-modal-react";
+import { Button } from "@repo/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -6,11 +10,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu";
-import { Button } from "@repo/ui/button";
-import type { CellContext } from "@tanstack/react-table";
-import type { Conductor } from "./RowType";
+
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import NiceModal from "@ebay/nice-modal-react";
+
+import type { Conductor } from "./RowType";
 
 export default function RowActions({ row }: CellContext<Conductor, unknown>) {
     function showUpdateModal() {
@@ -28,8 +31,8 @@ export default function RowActions({ row }: CellContext<Conductor, unknown>) {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    variant="ghost"
                     className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+                    variant="ghost"
                 >
                     <MenuIcon />
                     <span className="sr-only">Open menu</span>

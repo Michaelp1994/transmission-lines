@@ -1,3 +1,4 @@
+import { Button } from "@repo/ui/button";
 import {
     Command,
     CommandEmpty,
@@ -7,11 +8,10 @@ import {
     CommandList,
 } from "@repo/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/popover";
+import { cn } from "@repo/ui/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { forwardRef, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { cn } from "@repo/ui/utils";
-import { Button } from "@repo/ui/button";
 
 type Data = {
     id: string;
@@ -38,28 +38,30 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
 
         const selectedName = useMemo(() => {
             if (value) {
-                const currentConductorType = data.find(
-                    (conductorType) => conductorType.id === value
+                const currentOption = data.find(
+                    (options) => options.id === value
                 );
 
-                if (currentConductorType) {
-                    return currentConductorType.name;
+                if (!currentOption) {
+                    console.log({ data, value });
+                    throw new Error("Can't find option.");
                 }
-                throw new Error("Can't find conductor type.");
+
+                return currentOption.name;
             }
 
             return t("select");
         }, [data, t, value]);
 
         return (
-            <Popover modal open={open} onOpenChange={setOpen}>
+            <Popover modal onOpenChange={setOpen} open={open}>
                 <PopoverTrigger asChild>
                     <Button
-                        className="justify-between w-full"
-                        variant="outline"
-                        role="combobox"
                         aria-expanded={open}
+                        className="justify-between w-full"
                         ref={ref}
+                        role="combobox"
+                        variant="outline"
                         {...props}
                     >
                         {selectedName}
@@ -76,16 +78,16 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
                                     return (
                                         <CommandItem
                                             key={conductorType.id}
-                                            value={conductorType.id}
                                             keywords={[conductorType.name]}
                                             onSelect={handleSelect}
+                                            value={conductorType.id}
                                         >
                                             <Check
                                                 className={cn(
                                                     "w-4 h-4 mr-2",
-                                                    value ===
-                                                        conductorType.id &&
-                                                        "opacity-100"
+                                                    value === conductorType.id
+                                                        ? "opacity-100"
+                                                        : "opacity-0"
                                                 )}
                                             />
                                             {conductorType.name}

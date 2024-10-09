@@ -59,13 +59,13 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
                                     {row.getVisibleCells().map((cell) => {
                                         return (
                                             <TableCell
-                                                key={cell.id}
                                                 align={
                                                     (
                                                         cell.column.columnDef
                                                             .meta as any
                                                     )?.align
                                                 }
+                                                key={cell.id}
                                             >
                                                 {flexRender(
                                                     cell.column.columnDef.cell,

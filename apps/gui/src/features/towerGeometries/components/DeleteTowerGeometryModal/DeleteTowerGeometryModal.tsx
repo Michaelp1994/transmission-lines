@@ -1,16 +1,17 @@
-import NiceModal from "@ebay/nice-modal-react";
 import type { GeometryID } from "@repo/validators/Ids";
+
+import NiceModal from "@ebay/nice-modal-react";
+
 import BaseDeleteModal from "~/components/BaseDeleteModal";
-import toast from "~/utils/toast";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteTowerGeometryModalProps {
     geometryId: GeometryID;
-    onClose: () => void;
 }
 
 export default NiceModal.create(
-    ({ geometryId, onClose }: DeleteTowerGeometryModalProps) => {
+    ({ geometryId }: DeleteTowerGeometryModalProps) => {
         const utils = trpc.useUtils();
         const deleteMutation = trpc.towerGeometry.delete.useMutation({
             onError(error) {
@@ -28,6 +29,6 @@ export default NiceModal.create(
             deleteMutation.mutate({ id: geometryId });
         }
 
-        return <BaseDeleteModal onClose={onClose} onConfirm={handleConfirm} />;
+        return <BaseDeleteModal onConfirm={handleConfirm} />;
     }
 );

@@ -1,21 +1,18 @@
-import BaseElement from "./BaseElement";
 import {
-    type LineGeometryInput,
-    type OpenDSSLineGeometry,
     arrayTransform,
     booleanTransform,
+    type LineGeometryInput,
     lineGeometrySchema,
     numberTransform,
+    type OpenDSSLineGeometry,
 } from "@/schemas";
+
+import BaseElement from "./BaseElement";
 
 export default class LineGeometry extends BaseElement<
     LineGeometryInput,
     OpenDSSLineGeometry
 > {
-    values;
-
-    type = "LineGeometry";
-
     parameters = [
         "nconds",
         "nphases",
@@ -37,6 +34,10 @@ export default class LineGeometry extends BaseElement<
         "ratings",
         "lineType",
     ] as const satisfies (keyof OpenDSSLineGeometry)[];
+
+    type = "LineGeometry";
+
+    values;
 
     constructor(input: LineGeometryInput) {
         super();

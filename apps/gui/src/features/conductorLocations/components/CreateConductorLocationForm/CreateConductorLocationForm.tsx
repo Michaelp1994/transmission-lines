@@ -1,3 +1,6 @@
+import type { GeometryID } from "@repo/validators/Ids";
+
+import { Button } from "@repo/ui/button";
 import {
     Form,
     FormControl,
@@ -7,29 +10,30 @@ import {
     FormLabel,
     FormMessage,
 } from "@repo/ui/form";
+import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
-import { Button } from "@repo/ui/button";
 import {
+    type ConductorLocationFormInput,
     conductorLocationFormSchema,
     defaultConductorLocation,
-    type ConductorLocationFormInput,
 } from "@repo/validators/forms";
 import { useTranslation } from "react-i18next";
+
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { useForm } from "@repo/ui/hooks/use-form";
-import toast from "~/utils/toast";
+import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
-import type { GeometryID } from "@repo/validators/Ids";
 
 interface CreateConductorLocationFormProps {
     geometryId: GeometryID;
+    onFinish?: () => void;
 }
 
 export default function CreateConductorLocationForm({
     geometryId,
+    onFinish,
 }: CreateConductorLocationFormProps) {
     const utils = trpc.useUtils();
-    const { t } = useTranslation("createConductorLocationModal");
+    const { t } = useTranslation("createConductorLocationForm");
     const form = useForm<ConductorLocationFormInput>({
         schema: conductorLocationFormSchema,
         defaultValues: defaultConductorLocation,
@@ -40,6 +44,7 @@ export default function CreateConductorLocationForm({
             await utils.conductorLocations.getAllByGeometryId.invalidate({
                 geometryId,
             });
+            if (onFinish) onFinish();
         },
         onError: (error) => {
             toast.error("Failed to create conductor location");

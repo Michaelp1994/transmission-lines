@@ -23,7 +23,7 @@ export default function ConfirmationDialog({ onConfirm }: ConfirmDialogProps) {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="destructive" size="icon">
+                <Button size="icon" variant="destructive">
                     <Trash2 className="h-6 w-6" />
                 </Button>
             </AlertDialogTrigger>

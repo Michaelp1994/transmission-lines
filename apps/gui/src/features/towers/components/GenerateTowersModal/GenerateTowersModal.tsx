@@ -1,3 +1,6 @@
+import type { LineID } from "@repo/validators/Ids";
+
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import {
     Dialog,
     DialogContent,
@@ -5,32 +8,29 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@repo/ui/dialog";
-import type { LineID } from "@repo/validators/Ids";
 import { useTranslation } from "react-i18next";
-import FormWrapper from "./FormWrapper";
-import NiceModal from "@ebay/nice-modal-react";
+
+import GenerateTowersForm from "../GenerateTowersForm";
 
 export interface GenerateTowersModalProps {
     lineId: LineID;
-    onClose: () => void;
 }
 
-export default NiceModal.create(
-    ({ onClose, lineId }: GenerateTowersModalProps) => {
-        const { t } = useTranslation("generateTowers");
-
-        return (
-            <Dialog open={modal.visible} onOpenChange={onClose}>
-                <DialogHeader>
-                    <DialogTitle>{t("modalTitle")}</DialogTitle>
-                    <DialogDescription>
-                        {t("modalDescription")}
-                    </DialogDescription>
-                </DialogHeader>
-                <DialogContent>
-                    <FormWrapper lineId={lineId} onFinish={onClose} />
-                </DialogContent>
-            </Dialog>
-        );
-    }
-);
+export default NiceModal.create(({ lineId }: GenerateTowersModalProps) => {
+    const { t } = useTranslation("generateTowersModal");
+    const modal = useModal();
+    return (
+        <Dialog onOpenChange={() => modal.hide()} open={modal.visible}>
+            <DialogHeader>
+                <DialogTitle>{t("modalTitle")}</DialogTitle>
+                <DialogDescription>{t("modalDescription")}</DialogDescription>
+            </DialogHeader>
+            <DialogContent>
+                <GenerateTowersForm
+                    lineId={lineId}
+                    onFinish={() => modal.hide()}
+                />
+            </DialogContent>
+        </Dialog>
+    );
+});

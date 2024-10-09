@@ -1,6 +1,7 @@
-import { z } from "zod";
-import { baseElementSchema } from "./base";
 import { allUnitsSchema, unitsSchema } from "@/enums";
+import { z } from "zod";
+
+import { baseElementSchema } from "./base";
 
 export const wireDataSchema = baseElementSchema.extend({
     rdc: z.number().optional(),

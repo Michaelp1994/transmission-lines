@@ -1,3 +1,7 @@
+import type { CellContext } from "@tanstack/react-table";
+
+import NiceModal from "@ebay/nice-modal-react";
+import { Button } from "@repo/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -6,12 +10,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu";
-import { Button } from "@repo/ui/button";
 import { Link } from "@tanstack/react-router";
-import type { CellContext } from "@tanstack/react-table";
-import type { Source } from "./RowType";
+
 import { DeleteIcon, MenuIcon, ViewIcon } from "~/components/MenuIcons";
-import NiceModal from "@ebay/nice-modal-react";
+
+import type { Source } from "./RowType";
 
 export default function SourceTableRowActions({
     row,
@@ -25,8 +28,8 @@ export default function SourceTableRowActions({
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    variant="ghost"
                     className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+                    variant="ghost"
                 >
                     <MenuIcon />
                     <span className="sr-only">Open menu</span>
@@ -37,11 +40,10 @@ export default function SourceTableRowActions({
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                     <Link
-                        to="/projects/$projectId/sources/$sourceId"
                         params={{
-                            projectId: row.original.projectId,
                             sourceId: row.original.id,
                         }}
+                        to="/project/sources/$sourceId"
                     >
                         <ViewIcon />
                         <span>View</span>

@@ -1,5 +1,5 @@
-import { BrowserWindow, shell, screen } from "electron";
 import { is } from "@electron-toolkit/utils";
+import { BrowserWindow, screen, shell } from "electron";
 
 export default async function createWindow() {
     // Create the browser window.

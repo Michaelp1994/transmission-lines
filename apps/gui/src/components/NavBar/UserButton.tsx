@@ -1,3 +1,5 @@
+import NiceModal from "@ebay/nice-modal-react";
+import { Button } from "@repo/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,25 +10,22 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "@repo/ui/dropdown-menu";
-import { Button } from "@repo/ui/button";
 import { CircleUser } from "lucide-react";
-import SettingsModal from "./SettingsModal";
-import NiceModal from "@ebay/nice-modal-react";
 
 export default function UserButton() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button
-                    variant="secondary"
-                    size="icon"
                     className="rounded-full"
+                    size="icon"
+                    variant="secondary"
                 >
                     <CircleUser className="h-5 w-5" />
                     <span className="sr-only">Toggle user menu</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" forceMount align="end">
+            <DropdownMenuContent align="end" className="w-56" forceMount>
                 <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">

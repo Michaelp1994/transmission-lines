@@ -1,4 +1,4 @@
 export * from "./common";
 export * from "./elements";
-export { optionsSchema, type OpenDSSOptions } from "./opendss";
+export { type OpenDSSOptions, optionsSchema } from "./opendss";
 export * from "./transformers";

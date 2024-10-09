@@ -1,10 +1,11 @@
-import { BrowserWindow, app, dialog } from "electron";
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
-import createWindow from "./createWindow";
 import { databaseInit } from "@repo/db";
+import { app, BrowserWindow, dialog } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
+
+import createWindow from "./createWindow";
 import project from "./global.js";
 
 const __filename = fileURLToPath(import.meta.url);

@@ -4,12 +4,17 @@ import {
     NavigationMenuList,
     navigationMenuTriggerStyle,
 } from "@repo/ui/navigation-menu";
+import { cn } from "@repo/ui/utils";
 import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+
+import trpc from "~/utils/trpc";
+
 import UserButton from "./UserButton";
 
 export default function NavBar() {
     const { t, i18n } = useTranslation("general");
+    const { data } = trpc.project.hasProject.useQuery();
 
     function changeLanguage(checked: boolean) {
         if (checked) {
@@ -19,44 +24,45 @@ export default function NavBar() {
         }
     }
 
+    const noProject = !data;
+
     return (
         <div className="flex justify-between items-center gap-4 px-4 py-2 border-b bg-background">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
                         <Link
-                            to="/"
                             className={navigationMenuTriggerStyle()}
                             draggable={false}
+                            to="/"
                         >
                             {t("home")}
                         </Link>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
+                    <NavigationMenuItem asChild>
                         <Link
-                            to="/project"
+                            className={cn(
+                                navigationMenuTriggerStyle(),
+                                noProject &&
+                                    "text-muted hover:bg-background hover:text-muted"
+                            )}
+                            disabled={noProject}
                             draggable={false}
-                            className={navigationMenuTriggerStyle()}
+                            to="/project"
                         >
                             {t("project")}
                         </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                         <Link
-                            to="/conductor-types"
-                            draggable={false}
+                            activeProps={{
+                                className: "font-bold",
+                            }}
                             className={navigationMenuTriggerStyle()}
-                        >
-                            {t("conductorTypes")}
-                        </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                        <Link
-                            to="/tower-geometries"
                             draggable={false}
-                            className={navigationMenuTriggerStyle()}
+                            to="/libraries"
                         >
-                            {t("towerGeometries")}
+                            Libraries
                         </Link>
                     </NavigationMenuItem>
                 </NavigationMenuList>

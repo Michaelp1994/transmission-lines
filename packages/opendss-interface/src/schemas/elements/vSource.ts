@@ -1,7 +1,8 @@
+import { modelSchema, scanTypeSchema, sequenceSchema } from "@/enums";
 import { z } from "zod";
+
 import { busSchema } from "../common";
 import { baseElementSchema } from "./base";
-import { modelSchema, scanTypeSchema, sequenceSchema } from "@/enums";
 
 export const vSourceSchema = baseElementSchema.extend({
     circuit: z.boolean().optional(),

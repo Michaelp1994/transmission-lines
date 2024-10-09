@@ -1,26 +1,23 @@
-import { v4 as uuidv4 } from "uuid";
-import splitStringsIntoRows from "@helpers/splitArray";
 import type {
     BaseElementInput,
     OpenDSSBaseElement,
 } from "@/schemas/elements/base";
 
-export default abstract class BaseElement<
-    I extends BaseElementInput = BaseElementInput & { [key: string]: any },
-    O extends OpenDSSBaseElement = OpenDSSBaseElement & { [key: string]: any },
-> {
-    // abstract name: string;
-    abstract values: I;
+import splitStringsIntoRows from "@helpers/splitArray";
+import { v4 as uuidv4 } from "uuid";
 
-    id: string;
+export default abstract class BaseElement<
+    I extends BaseElementInput = BaseElementInput & Record<string, any>,
+    O extends OpenDSSBaseElement = OpenDSSBaseElement & Record<string, any>,
+> {
+    protected abstract parameters: (keyof O)[];
 
     protected abstract type: string;
 
-    protected abstract parameters: (keyof O)[];
+    id: string;
 
-    getFullName() {
-        return `${this.type}.${this.values.name}`;
-    }
+    // abstract name: string;
+    abstract values: I;
 
     constructor() {
         this.id = uuidv4();
@@ -41,6 +38,10 @@ export default abstract class BaseElement<
         });
 
         return splitStringsIntoRows(script);
+    }
+
+    getFullName() {
+        return `${this.type}.${this.values.name}`;
     }
     abstract transform(): O;
 }
