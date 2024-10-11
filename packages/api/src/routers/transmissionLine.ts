@@ -1,3 +1,6 @@
+import { aliasedTable, eq, getTableColumns } from "@repo/db/drizzle";
+import { sources } from "@repo/db/project/sources";
+import { transmissionLines } from "@repo/db/project/transmissionLines";
 import {
     createTransmissionLineSchema,
     deleteTransmissionLineSchema,
@@ -6,35 +9,53 @@ import {
     updateTransmissionLineSchema,
 } from "@repo/validators/schemas/TransmissionLine.schema";
 import { TRPCError } from "@trpc/server";
-import { randomUUID } from "crypto";
 
 import { projectProcedure, router } from "../trpc";
+
+const fromSource = aliasedTable(sources, "fromSource");
+const toSource = aliasedTable(sources, "toSource");
+const columns = getTableColumns(transmissionLines);
 
 export default router({
     getAll: projectProcedure
         .input(getAllTransmissionLinesSchema)
         .query(async ({ ctx }) => {
-            const lines = ctx.store.project.transmissionLines.map((tline) => {
-                const fromSource = ctx.store.project.sources.find(
-                    (source) => source.id === tline.fromSourceId
-                );
-                const toSource = ctx.store.project.sources.find(
-                    (source) => source.id === tline.toSourceId
-                );
-                return {
-                    ...tline,
+            const lines = await ctx.project.db
+                .select({
+                    ...columns,
+                    fromSource: fromSource,
+                    toSource: toSource,
+                })
+                .from(transmissionLines)
+                .innerJoin(
                     fromSource,
+                    eq(transmissionLines.fromSourceId, fromSource.id)
+                )
+                .leftJoin(
                     toSource,
-                };
-            });
+                    eq(transmissionLines.toSourceId, toSource.id)
+                );
             return lines;
         }),
     getById: projectProcedure
         .input(getTransmissionLineByIdSchema)
         .query(async ({ input, ctx }) => {
-            const tline = ctx.store.project.transmissionLines.find(
-                (tline) => tline.id === input.id
-            );
+            const [tline] = await ctx.project.db
+                .select({
+                    ...columns,
+                    fromSource: fromSource,
+                    toSource: toSource,
+                })
+                .from(transmissionLines)
+                .innerJoin(
+                    fromSource,
+                    eq(transmissionLines.fromSourceId, fromSource.id)
+                )
+                .leftJoin(
+                    toSource,
+                    eq(transmissionLines.toSourceId, toSource.id)
+                )
+                .where(eq(transmissionLines.id, input.id));
 
             if (!tline) {
                 throw new TRPCError({
@@ -47,55 +68,43 @@ export default router({
     create: projectProcedure
         .input(createTransmissionLineSchema)
         .mutation(async ({ input, ctx }) => {
-            const newTransmissionLine = {
-                id: randomUUID(),
-                towers: [],
-                conductors: [],
-                ...input,
-            };
-            ctx.store.project?.transmissionLines.push(newTransmissionLine);
+            const [newTransmissionLine] = await ctx.project.db
+                .insert(transmissionLines)
+                .values(input)
+                .returning();
             return newTransmissionLine;
         }),
     update: projectProcedure
         .input(updateTransmissionLineSchema)
         .mutation(async ({ input, ctx }) => {
-            const transmissionLine = ctx.store.project?.transmissionLines.find(
-                (tl) => tl.id === input.id
-            );
+            const [updatedTransmissionLine] = await ctx.project.db
+                .update(transmissionLines)
+                .set(input)
+                .where(eq(transmissionLines.id, input.id))
+                .returning();
 
-            if (!transmissionLine) {
+            if (!updatedTransmissionLine) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
                     message: "No Transmission Line",
                 });
             }
-            return transmissionLine;
+            return updatedTransmissionLine;
         }),
     delete: projectProcedure
         .input(deleteTransmissionLineSchema)
         .mutation(async ({ input, ctx }) => {
-            const index = ctx.store.project.transmissionLines.findIndex(
-                (tl) => tl.id === input.id
-            );
+            const [deletedTransmissionLine] = await ctx.project.db
+                .delete(transmissionLines)
+                .where(eq(transmissionLines.id, input.id))
+                .returning();
 
-            if (index === -1) {
+            if (!deletedTransmissionLine) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
                     message: "No Transmission Line",
                 });
             }
-
-            const [deleted] = ctx.store.project.transmissionLines.splice(
-                index,
-                1
-            );
-
-            if (!deleted) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "No Transmission Line",
-                });
-            }
-            return deleted;
+            return deletedTransmissionLine;
         }),
 });

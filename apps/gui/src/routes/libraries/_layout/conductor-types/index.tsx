@@ -1,41 +1,45 @@
-import { Button } from '@repo/ui/button'
+import { Button } from "@repo/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardToolbar,
-  CardWrapper,
-} from '@repo/ui/card'
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { useTranslation } from 'react-i18next'
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+    CardToolbar,
+    CardWrapper,
+} from "@repo/ui/card";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 
-import { ConductorTypeTable } from '~/features/conductorTypes'
+import { ConductorTypeTable } from "~/features/conductorTypes";
 
-export const Route = createFileRoute('/libraries/_layout/conductor-types/')({
-  component: AllConductorTypesPage,
-})
+export const Route = createFileRoute("/libraries/_layout/conductor-types/")({
+    component: AllConductorTypesPage,
+});
 
 export default function AllConductorTypesPage() {
-  const { t } = useTranslation('conductors')
+    const { t } = useTranslation("conductorTypesPage");
 
-  return (
-    <CardWrapper>
-      <CardToolbar>
-        <Button asChild>
-          <Link to="/libraries/conductor-types/new">{t('add.buttonText')}</Link>
-        </Button>
-      </CardToolbar>
-      <Card>
-        <CardHeader>
-          <CardTitle>Conductor Types</CardTitle>
-          <CardDescription>Conductor types in the database</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ConductorTypeTable />
-        </CardContent>
-      </Card>
-    </CardWrapper>
-  )
+    return (
+        <CardWrapper>
+            <CardToolbar>
+                <Button asChild>
+                    <Link to="/libraries/conductor-types/new">
+                        {t("add.buttonText")}
+                    </Link>
+                </Button>
+            </CardToolbar>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Conductor Types</CardTitle>
+                    <CardDescription>
+                        Conductor types in the database
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <ConductorTypeTable />
+                </CardContent>
+            </Card>
+        </CardWrapper>
+    );
 }

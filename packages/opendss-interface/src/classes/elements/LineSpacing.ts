@@ -1,11 +1,9 @@
+import { arrayTransform, numberTransform } from "../../helpers/transformers";
 import {
-    arrayTransform,
     type LineSpacingInput,
     lineSpacingSchema,
-    numberTransform,
     type OpenDSSLineSpacing,
-} from "@/schemas";
-
+} from "../../schemas/lineSpacing";
 import BaseElement from "./BaseElement";
 
 export default class LineSpacing extends BaseElement<

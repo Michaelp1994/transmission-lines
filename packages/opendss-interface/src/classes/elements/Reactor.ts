@@ -3,11 +3,12 @@ import {
     booleanTransform,
     busTransform,
     numberTransform,
+} from "../../helpers/transformers";
+import {
     type OpenDSSReactor,
     type ReactorInput,
     reactorSchema,
-} from "@/schemas";
-
+} from "../../schemas/reactor";
 import BaseElement from "./BaseElement";
 
 export default class Reactor extends BaseElement<ReactorInput, OpenDSSReactor> {

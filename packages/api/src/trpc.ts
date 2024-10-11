@@ -1,7 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import { ZodError } from "zod";
 
-import type { Context } from "./context";
+import type { Context } from "./index";
 
 /**
  * Initialization of tRPC backend
@@ -26,8 +26,15 @@ const t = initTRPC.context<Context>().create({
 
 export const projectProcedure = t.procedure.use(async function isAuthed(opts) {
     const { ctx } = opts;
-    // `ctx.user` is nullable
-    if (!ctx.store.project) {
+
+    if (!ctx.project.db) {
+        throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "No Current Project",
+        });
+    }
+
+    if (!ctx.project.db.$client.open) {
         throw new TRPCError({
             code: "NOT_FOUND",
             message: "No Current Project",
@@ -36,9 +43,8 @@ export const projectProcedure = t.procedure.use(async function isAuthed(opts) {
 
     return opts.next({
         ctx: {
-            // ✅ user value is known to be non-null now
-            store: {
-                project: ctx.store.project,
+            project: {
+                db: ctx.project.db,
             },
         },
     });

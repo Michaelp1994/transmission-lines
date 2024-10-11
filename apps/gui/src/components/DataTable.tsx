@@ -24,6 +24,7 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
     const table = useReactTable({
         data,
         columns,
+        enableRowSelection: true,
         getCoreRowModel: getCoreRowModel(),
     });
 

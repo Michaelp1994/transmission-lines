@@ -3,17 +3,46 @@ import {
     type BetterSQLite3Database,
     drizzle,
 } from "drizzle-orm/better-sqlite3";
-// import isElectron from "is-electron";
-import * as schema from "./schemas";
+import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import path from "path";
+import { fileURLToPath } from "url";
 
-export interface DBContext {
-    conn: Database;
-    db: BetterSQLite3Database<typeof schema>;
+import * as librarySchema from "./library";
+import * as projectSchema from "./project";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export type LibraryDatabase = BetterSQLite3Database<typeof librarySchema> & {
+    $client: Connection.Database;
+};
+export type ProjectDatabase = BetterSQLite3Database<typeof projectSchema> & {
+    $client: Connection.Database;
+};
+export type DatabaseConnection = Database;
+
+export function initLibrary(path: string | Buffer): LibraryDatabase {
+    const conn = new Connection(path);
+    const db = drizzle(conn, { schema: librarySchema });
+    // check for migrations and ask user if they want to run them.
+    return db;
 }
 
-export function databaseInit(path: string | Buffer): DBContext {
-    const conn = new Connection(path);
-    const db = drizzle(conn, { schema });
+function getMigrationFolder() {
+    return path.join(__dirname, "..", "migrations");
+}
 
-    return { conn, db };
+export async function createProject(path: string): Promise<ProjectDatabase> {
+    const conn = new Connection(path);
+    const db = drizzle(conn, { schema: projectSchema });
+    migrate(db, { migrationsFolder: getMigrationFolder() });
+    return db;
+}
+
+export function openProject(path: string): ProjectDatabase {
+    const conn = new Connection(path, {
+        fileMustExist: true,
+    });
+    const db = drizzle(conn, { schema: projectSchema });
+    return db;
 }

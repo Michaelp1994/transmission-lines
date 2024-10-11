@@ -41,10 +41,9 @@ export default function ConductorTableRowActions({
                 <DropdownMenuItem asChild>
                     <Link
                         params={{
-                            projectId: row.original.projectId,
                             lineId: row.original.id,
                         }}
-                        to="project/lines/$lineId"
+                        to="/project/lines/$lineId"
                     >
                         <EditIcon />
                         <span>Edit</span>

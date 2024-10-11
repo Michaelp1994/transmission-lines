@@ -2,12 +2,13 @@ import {
     arrayTransform,
     booleanTransform,
     busTransform,
+    numberTransform,
+} from "../../helpers/transformers";
+import {
     type FaultInput,
     faultSchema,
-    numberTransform,
     type OpenDSSFault,
-} from "@/schemas";
-
+} from "../../schemas/fault";
 import BaseElement from "./BaseElement";
 
 export default class Fault extends BaseElement<FaultInput, OpenDSSFault> {

@@ -1,12 +1,10 @@
-import type { OpenDSSOptions } from "@/schemas";
-
 import winax from "winax";
+
+import type { OpenDSSOptions } from "../schemas/opendss-options.js";
 
 import OpenDSSError from "./OpenDSSError";
 
 export default class OpenDssDriver {
-    debug: boolean;
-
     dss: OpenDSSengine.DSS;
 
     dssBus: OpenDSSengine.DSS["ActiveCircuit"]["ActiveBus"];
@@ -21,18 +19,12 @@ export default class OpenDssDriver {
 
     dssText: OpenDSSengine.DSS["Text"];
 
-    isSolved = false;
-
-    isStarted = false;
-
-    constructor(debug = false) {
-        this.debug = debug;
+    constructor() {
         this.dss = new winax.Object("OpenDSSengine.DSS");
         if (!this.dss.Start(0)) {
             this.close();
             throw new OpenDSSError("Unable to start OpenDSS engine");
         }
-        this.isStarted = true;
         this.dss.AllowForms = false;
         this.dss.ClearAll();
         this.dssMathLib = this.dss.CmathLib;
@@ -70,7 +62,6 @@ export default class OpenDssDriver {
             throw new OpenDSSError("OpenDSS Engine is not started");
         }
         this.clear();
-        // @ts-expect-error
         winax.release(this.dss);
         this.isStarted = false;
     }

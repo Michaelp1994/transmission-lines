@@ -1,12 +1,13 @@
 import {
     arrayTransform,
     booleanTransform,
+    numberTransform,
+} from "../../helpers/transformers";
+import {
     type LineGeometryInput,
     lineGeometrySchema,
-    numberTransform,
     type OpenDSSLineGeometry,
-} from "@/schemas";
-
+} from "../../schemas/lineGeometry";
 import BaseElement from "./BaseElement";
 
 export default class LineGeometry extends BaseElement<

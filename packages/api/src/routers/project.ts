@@ -1,121 +1,59 @@
-import {
-    createProjectSchema,
-    getProjectSchema,
-} from "@repo/validators/schemas/Project.schema";
-import { randomUUID } from "crypto";
-import fs from "fs/promises";
+import { createProject, openProject } from "@repo/db";
 
-import { publicProcedure, router } from "../trpc";
+import openFileDialog from "../helpers/openFileDialog";
+import saveFileDialog from "../helpers/saveFileDialog";
+import { projectProcedure, publicProcedure, router } from "../trpc";
 
 // import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
-    getCurrent: publicProcedure
-        .input(getProjectSchema)
-        .query(async ({ ctx }) => {
-            return ctx.store.project;
-        }),
-    hasProject: publicProcedure.query(async ({ ctx }) => {
-        return !!ctx.store.project;
-    }),
-    open: publicProcedure.mutation(async ({ ctx }) => {
-        if (!ctx.electron) {
-            throw new Error("Not in electron context");
+    isOpen: publicProcedure.query(async ({ ctx }) => {
+        if (!ctx.project.db) {
+            return false;
         }
-        const currentBrowser = ctx.electron.browserWindow;
-
-        if (!currentBrowser) {
-            throw new Error("No browser window found");
-        }
-        const openDialogReturn = await ctx.electron.dialog.showOpenDialog(
-            currentBrowser,
-            {
-                properties: ["openFile"],
-                filters: [
-                    { name: "Project", extensions: ["study"] },
-                    { name: "All Files", extensions: ["*"] },
-                ],
-            }
-        );
-
-        if (!openDialogReturn.canceled) {
-            const fileName = openDialogReturn.filePaths[0];
-
-            if (!fileName) {
-                throw new Error("Can't get file name");
-            }
-            const file = await fs.readFile(fileName);
-            const contents = JSON.parse(file.toString());
-            // const input = openProjectSchema.parse(contents);
-            // TODO: check if exists and which version is more up to date, then prompt user if they want to replace it.
-
-            ctx.store.project = contents;
-
-            return ctx.store.project;
-        }
-
-        return null;
-    }),
-    create: publicProcedure
-        .input(createProjectSchema)
-        .mutation(async ({ input, ctx }) => {
-            ctx.store.project = {
-                id: randomUUID(),
-                name: input.name,
-                sources: [],
-                transmissionLines: [],
-                solution: { solvedAt: null },
-            };
-            return input;
-        }),
-    close: publicProcedure.mutation(async ({ input, ctx }) => {
-        ctx.store.project = null;
-        return input;
-    }),
-    save: publicProcedure.mutation(async ({ ctx }) => {
-        if (!ctx.store.project) {
-            throw new Error("Can't save without project");
-        }
-    }),
-
-    saveAs: publicProcedure.mutation(async ({ ctx }) => {
-        if (!ctx.store.project) {
-            throw new Error("Can't save without project");
-        }
-        if (!ctx.electron) {
-            throw new Error("Not in electron context");
-        }
-        const currentBrowser = ctx.electron.browserWindow;
-
-        if (!currentBrowser) {
-            throw new Error("No browser window found");
-        }
-
-        const saveDialogReturn = await ctx.electron.dialog.showSaveDialog(
-            currentBrowser,
-            {
-                filters: [
-                    { name: "Project", extensions: ["study"] },
-                    { name: "All Files", extensions: ["*"] },
-                ],
-            }
-        );
-
-        if (!saveDialogReturn.canceled) {
-            const fileName = saveDialogReturn.filePath;
-
-            // TODO: maybe include versioning, conductor types and tower geometries used in the project.
-            const fileContents = JSON.stringify(
-                ctx.store.project,
-                undefined,
-                2
-            );
-
-            await fs.writeFile(fileName, fileContents);
-
+        if (ctx.project.db.$client.open) {
             return true;
         }
+        return false;
+    }),
+    filePath: publicProcedure.query(({ ctx }) => {
+        return ctx.project.db?.$client.name;
+    }),
+    open: publicProcedure.mutation(async ({ ctx }) => {
+        const fileName = await openFileDialog(ctx);
 
-        return null;
+        const db = openProject(fileName);
+        ctx.project.db = db;
+
+        return true;
+    }),
+    create: publicProcedure
+        // .input(createProjectSchema)
+        .mutation(async ({ ctx }) => {
+            const fileName = await saveFileDialog(ctx);
+
+            const db = await createProject(fileName);
+            ctx.project.db = db;
+            return true;
+        }),
+    close: publicProcedure.mutation(async ({ ctx }) => {
+        ctx.project.db?.$client.close();
+        ctx.project.db = null;
+    }),
+    save: projectProcedure.mutation(async ({ ctx }) => {
+        // TODO
+        return true;
+    }),
+
+    saveAs: projectProcedure.mutation(async ({ ctx }) => {
+        const fileName = await saveFileDialog(ctx);
+
+        // TODO: maybe include versioning, conductor types and tower geometries used in the project.
+        await ctx.project.db?.$client.backup(fileName);
+        ctx.project.db?.$client.close();
+        ctx.project.db = null;
+        const db = openProject(fileName);
+
+        ctx.project.db = db;
     }),
 });

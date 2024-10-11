@@ -9,7 +9,6 @@ module.exports = {
     electronVersion: "28.2.1",
     electronLanguages: ["en-GB", "en-US", "pt-BR", "pt-PT"],
     directories: {
-         
         output: "releases/${version}/${os}",
     },
     files: [

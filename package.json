@@ -16,6 +16,7 @@
         "rebuild": "turbo run rebuild",
         "test": "turbo run test",
         "typecheck": "turbo run typecheck",
+        "generate": "turbo run generate",
         "watch": "turbo run watch"
     },
     "devDependencies": {

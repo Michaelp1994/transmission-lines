@@ -1,3 +1,4 @@
+import toast from "@repo/ui/toast";
 import { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
     addEdge,
@@ -13,7 +14,6 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 import type { NodeData, NodeType } from "./NodeData";
@@ -34,7 +34,10 @@ const getId = () => `dndnode_${id++}`;
 
 export default function ProjectDiagram({}: ProjectDiagramProps) {
     const [dirty, setDirty] = useState(false);
-    const { data, isLoading, isError } = trpc.project.getCurrent.useQuery({});
+    const [sources, transmissionLines] = trpc.useQueries((t) => {
+        return [t.source.getAll({}), t.transmissionLine.getAll({})];
+    });
+
     const utils = trpc.useUtils();
     const [type] = useDnD();
     const { screenToFlowPosition } = useReactFlow();
@@ -46,7 +49,7 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
     });
 
     const initialNodes: Node<NodeData, NodeType>[] = useMemo(() => {
-        return data?.sources.map((source) => {
+        return sources.data?.map((source) => {
             return {
                 id: source.id,
                 type: "source",
@@ -57,10 +60,10 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
                 },
             };
         });
-    }, [data]);
+    }, [sources.data]);
 
     const initialEdges: Edge[] = useMemo(() => {
-        return data?.transmissionLines.map((tline) => {
+        return transmissionLines.data?.map((tline) => {
             return {
                 id: tline.id,
                 source: tline.fromSourceId,
@@ -72,7 +75,7 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
                 },
             };
         });
-    }, [data]);
+    }, [transmissionLines.data]);
 
     const [nodes, setNodes] = useState(initialNodes);
     const [edges, setEdges] = useState(initialEdges);
@@ -135,11 +138,16 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
         [screenToFlowPosition, type]
     );
 
-    if (isLoading) {
+    if (sources.isLoading || transmissionLines.isLoading) {
         return <div>Loading...</div>;
     }
 
-    if (isError || !data) {
+    if (
+        sources.isError ||
+        !sources.data ||
+        transmissionLines.isError ||
+        !transmissionLines.data
+    ) {
         return <div>Error!</div>;
     }
 

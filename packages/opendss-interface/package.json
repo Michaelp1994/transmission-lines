@@ -2,11 +2,8 @@
     "name": "@repo/opendss-interface",
     "type": "module",
     "exports": {
-        ".": "./src/index.ts",
-        "./classes/*": "./src/classes/*.ts",
-        "./elements/*": "./src/classes/elements/*.ts",
-        "./elements": "./src/classes/elements/index.ts",
-        "./elements/**/*": "./src/classes/elements/**/*.ts"
+        "./*": "./src/classes/*.ts",
+        "./elements/*": "./src/classes/elements/*.ts"
     },
     "scripts": {
         "clean": "rm -rf .turbo node_modules dist",
@@ -17,6 +14,7 @@
     },
     "dependencies": {
         "uuid": "^10.0.0",
+        "winax": "^3.5.3",
         "zod": "^3.23.8"
     },
     "devDependencies": {
@@ -26,7 +24,7 @@
         "@types/activex-opendssengine": "^4.0.0",
         "concurrently": "^9.0.1",
         "eslint": "^9.12.0",
-        "typescript": "^5.6.2",
+        "typescript": "^5.6.3",
         "vite-tsconfig-paths": "^5.0.1",
         "vitest": "^2.1.2"
     },

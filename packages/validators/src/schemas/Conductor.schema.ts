@@ -68,3 +68,11 @@ export type UpdateConductorInput = z.infer<typeof updateConductorSchema>;
 export const deleteConductorSchema = z.object({ id: conductorId });
 
 export type DeleteConductorInput = z.infer<typeof deleteConductorSchema>;
+
+// delete Many
+
+export const deleteManyConductorsSchema = z.array(conductorId);
+
+export type DeleteManyConductorsInput = z.infer<
+    typeof deleteManyConductorsSchema
+>;

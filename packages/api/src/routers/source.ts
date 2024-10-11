@@ -1,13 +1,14 @@
+import { eq } from "@repo/db/drizzle";
+import { sources } from "@repo/db/project/sources";
 import {
     createSourceSchema,
     deleteSourceSchema,
     getAllSourcesSchema,
     getPhaseComponentsSchema,
     getSourceByIdSchema,
-    updateSourceElectricalSchema,
+    updateSourceSchema,
 } from "@repo/validators/schemas/Source.schema";
 import { TRPCError } from "@trpc/server";
-import { randomUUID } from "crypto";
 
 import calculateZPhaseComponents from "../helpers/calculateZPhaseComponents";
 import calculateZSequenceComponents from "../helpers/calculateZSequenceComponents";
@@ -17,14 +18,18 @@ export default router({
     getAll: projectProcedure
         .input(getAllSourcesSchema)
         .query(async ({ ctx }) => {
-            return ctx.store.project.sources;
+            const allSources = await ctx.project.db.select().from(sources);
+
+            return allSources;
+            // return ctx.store.project.sources;
         }),
     getById: projectProcedure
         .input(getSourceByIdSchema)
         .query(async ({ input, ctx }) => {
-            const source = ctx.store.project.sources.find(
-                (s) => s.id === input.id
-            );
+            const [source] = await ctx.project.db
+                .select()
+                .from(sources)
+                .where(eq(sources.id, input.id));
             if (!source) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
@@ -36,53 +41,63 @@ export default router({
     create: projectProcedure
         .input(createSourceSchema)
         .mutation(async ({ input, ctx }) => {
-            const newSource = {
-                id: randomUUID(),
+            const source = {
                 enabled: true,
                 x: 0,
                 y: 0,
                 ...input,
             };
-            ctx.store.project?.sources.push(newSource);
+            const [newSource] = await ctx.project.db
+                .insert(sources)
+                .values(source)
+                .returning();
+
+            if (!newSource) {
+                throw new TRPCError({
+                    code: "INTERNAL_SERVER_ERROR",
+                    message: "Failed to create source",
+                });
+            }
             return newSource;
         }),
     update: projectProcedure
-        .input(updateSourceElectricalSchema)
+        .input(updateSourceSchema)
         .mutation(async ({ input, ctx }) => {
-            const source = ctx.store.project.sources.find(
-                (s) => s.id === input.id
-            );
-            if (!source) {
+            const [updatedSource] = await ctx.project.db
+                .update(sources)
+                .set(input)
+                .where(eq(sources.id, input.id))
+                .returning();
+            if (!updatedSource) {
                 throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Source not found",
+                    code: "INTERNAL_SERVER_ERROR",
+                    message: "Failed to create source",
                 });
             }
-            Object.assign(source, input);
-            return source;
+            return updatedSource;
         }),
     delete: projectProcedure
         .input(deleteSourceSchema)
         .mutation(async ({ input, ctx }) => {
-            const index = ctx.store.project.sources.findIndex(
-                (s) => s.id === input.id
-            );
-            if (index === -1) {
+            const [deletedSource] = await ctx.project.db
+                .delete(sources)
+                .where(eq(sources.id, input.id))
+                .returning();
+            if (!deletedSource) {
                 throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Source not found",
+                    code: "INTERNAL_SERVER_ERROR",
+                    message: "Failed to delete source",
                 });
             }
-            const [deletedSource] = ctx.store.project.sources.splice(index, 1);
-
             return deletedSource;
         }),
     getPhaseComponents: projectProcedure
         .input(getPhaseComponentsSchema)
         .query(async ({ input, ctx }) => {
-            const source = ctx.store.project.sources.find(
-                (s) => s.id === input.id
-            );
+            const [source] = await ctx.project.db
+                .select()
+                .from(sources)
+                .where(eq(sources.id, input.id));
             if (!source) {
                 throw new TRPCError({
                     code: "NOT_FOUND",

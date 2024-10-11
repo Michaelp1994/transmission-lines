@@ -1,6 +1,6 @@
 import type BaseElement from "./elements/BaseElement";
 
-import { type OpenDSSOptions, optionsSchema } from "../schemas";
+import { type OpenDSSOptions, optionsSchema } from "../schemas/opendss-options";
 import OpenDssDriver from "./OpenDssDriver";
 
 export default class Circuit {
@@ -11,8 +11,6 @@ export default class Circuit {
     isSolved = false;
 
     name: string;
-
-    solution: any[] = [];
 
     constructor(name: string, options?: OpenDSSOptions, debug = false) {
         this.driver = new OpenDssDriver(debug);
@@ -31,7 +29,6 @@ export default class Circuit {
     build() {
         this.components.forEach((component) => {
             const script = component.create();
-
             this.driver.sendArray(script);
         });
     }

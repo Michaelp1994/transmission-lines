@@ -22,6 +22,7 @@ const config = {
             external: [
                 "electron",
                 "better-sqlite3",
+                "winax",
                 "electron-devtools-installer",
                 ...builtinModules.flatMap((p) => [p, `node:${p}`]),
             ],

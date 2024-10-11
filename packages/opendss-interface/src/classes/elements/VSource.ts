@@ -3,11 +3,12 @@ import {
     booleanTransform,
     busTransform,
     numberTransform,
+} from "../../helpers/transformers.js";
+import {
     type OpenDSSVSource,
     type VSourceInput,
     vSourceSchema,
-} from "@/schemas";
-
+} from "../../schemas/vSource.js";
 import BaseElement from "./BaseElement";
 
 export default class VSource extends BaseElement<VSourceInput, OpenDSSVSource> {

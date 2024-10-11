@@ -12,6 +12,7 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     defaultGenerateTowers,
     type GenerateTowersFormInput,
@@ -21,7 +22,6 @@ import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { TowerGeometrySelect } from "~/features/towerGeometries";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface BaseFormProps {
@@ -43,7 +43,7 @@ export default function GenerateTowersForm({
     const generateMutation = trpc.tower.generate.useMutation({
         async onSuccess(values) {
             toast.success(`${values.length} generated successfully`);
-            await utils.tower.getAllByLineId.invalidate({
+            await utils.tower.getAll.invalidate({
                 lineId,
             });
             if (onFinish) onFinish();

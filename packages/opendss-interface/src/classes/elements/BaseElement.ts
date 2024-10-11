@@ -1,10 +1,8 @@
-import type {
-    BaseElementInput,
-    OpenDSSBaseElement,
-} from "@/schemas/elements/base";
-
-import splitStringsIntoRows from "@helpers/splitArray";
 import { v4 as uuidv4 } from "uuid";
+
+import type { BaseElementInput, OpenDSSBaseElement } from "../../schemas/base";
+
+import splitStringsIntoRows from "../../helpers/splitArray";
 
 export default abstract class BaseElement<
     I extends BaseElementInput = BaseElementInput & Record<string, any>,

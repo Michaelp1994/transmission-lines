@@ -38,43 +38,13 @@ export type UpdateSourcePositionsInput = z.infer<
     typeof updateSourcePositionsSchema
 >;
 
-// update general
+// update
 
-export const updateSourceGeneralSchema = createSourceSchema
-    .extend({
-        id: sourceId,
-    })
-    .pick({
-        id: true,
-        name: true,
-        enabled: true,
-    });
+export const updateSourceSchema = createSourceSchema.extend({
+    id: sourceId,
+});
 
-export type UpdateSourceGeneralInput = z.infer<
-    typeof updateSourceGeneralSchema
->;
-
-// update electrical
-
-export const updateSourceElectricalSchema = createSourceSchema
-    .extend({
-        id: sourceId,
-    })
-    .pick({
-        id: true,
-        phases: true,
-        voltage: true,
-        x1r1: true,
-        x0r0: true,
-        isc1: true,
-        isc3: true,
-        resistance: true,
-        frequency: true,
-    });
-
-export type UpdateSourceElectricalInput = z.infer<
-    typeof updateSourceElectricalSchema
->;
+export type UpdateSourceGeneralInput = z.infer<typeof updateSourceSchema>;
 
 // getAllSources
 

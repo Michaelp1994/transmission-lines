@@ -1,70 +1,77 @@
-import { eq } from "@repo/db/drizzle";
-import {
-    conductorLocations,
-    conductorLocations,
-} from "@repo/db/schemas/conductorLocations";
+import { eq, inArray } from "@repo/db/drizzle";
+import { transmissionConductors } from "@repo/db/project/transmissionConductors";
+import { transmissionTowers } from "@repo/db/project/transmissionTowers";
+import { conductorLocations } from "@repo/db/schemas/conductorLocations";
 import { conductorTypes } from "@repo/db/schemas/conductorTypes";
 import { towerGeometries } from "@repo/db/schemas/towerGeometries";
 import {
     createTransmissionTowerSchema,
+    deleteManyTransmissionTowersSchema,
     deleteTransmissionTowerSchema,
     generateTowersSchema,
+    getTowerByIdSchema,
     getTowerParametersSchema,
     getTowersByLineIdSchema,
 } from "@repo/validators/schemas/TransmissionTower.schema";
 import { TRPCError } from "@trpc/server";
-import { randomUUID } from "crypto";
 
 import generateTowers from "../helpers/generateTowers";
 import buildTransmissionLineMatrix from "../helpers/transmissionLineParameters";
-import { publicProcedure, router } from "../trpc";
+import { projectProcedure, router } from "../trpc";
 
 export default router({
-    getAll: publicProcedure
+    getAll: projectProcedure
         .input(getTowersByLineIdSchema)
         .query(async ({ ctx, input }) => {
-            if (!ctx.store.project) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "No Current Project",
-                });
-            }
-            const line = ctx.store.project?.transmissionLines.find(
-                (tline) => tline.id === input.lineId
-            );
-            if (!line) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Can't find Transmission Line",
-                });
-            }
-            const towers = [];
-            for await (const tower of line.towers) {
-                const type = await ctx.db
+            const towers = await ctx.project.db
+                .select()
+                .from(transmissionTowers)
+                .where(eq(transmissionTowers.lineId, input.lineId));
+            const result = [];
+            for await (const tower of towers) {
+                const [geometry] = await ctx.db
                     .select()
                     .from(towerGeometries)
-                    .where(eq(towerGeometries.id, tower.geometryId))
-                    .execute();
-                towers.push({
+                    .where(eq(towerGeometries.id, tower.geometryId));
+                if (!geometry) {
+                    throw new TRPCError({
+                        code: "NOT_FOUND",
+                        message: "Can't find Tower Geometry",
+                    });
+                }
+                result.push({
                     ...tower,
-                    geometry: type[0],
+                    geometry,
                 });
             }
-            return towers;
+            return result;
         }),
-    getParameters: publicProcedure
-        .input(getTowerParametersSchema)
+    getById: projectProcedure
+        .input(getTowerByIdSchema)
         .query(async ({ ctx, input }) => {
-            if (!ctx.store.project) {
+            const [tower] = await ctx.project.db
+                .select()
+                .from(transmissionTowers)
+                .where(eq(transmissionTowers.id, input.id));
+            if (!tower) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
-                    message: "No Current Project",
+                    message: "Can't find Transmission Tower",
                 });
             }
-
-            const tower = ctx.store.project.transmissionLines
-                .flatMap((tline) => tline.towers)
-                .find((tower) => tower.id === input.towerId);
+            const [geometry] = await ctx.db
+                .select()
+                .from(towerGeometries)
+                .where(eq(towerGeometries.id, tower.geometryId));
+            return { ...tower, geometry };
+        }),
+    getParameters: projectProcedure
+        .input(getTowerParametersSchema)
+        .query(async ({ ctx, input }) => {
+            const [tower] = await ctx.project.db
+                .select()
+                .from(transmissionTowers)
+                .where(eq(transmissionTowers.id, input.towerId));
 
             if (!tower) {
                 throw new TRPCError({
@@ -79,20 +86,13 @@ export default router({
                 .where(eq(conductorLocations.geometryId, tower.geometryId))
                 .execute();
 
-            const line = ctx.store.project.transmissionLines.find(
-                (tline) => tline.id === tower.lineId
-            );
-
-            if (!line) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Can't find Transmission Line",
-                });
-            }
+            const conductors = await ctx.project.db
+                .select()
+                .from(transmissionConductors)
+                .where(eq(transmissionConductors.lineId, tower.lineId));
 
             const types = [];
-
-            for await (const conductor of line.conductors) {
+            for await (const conductor of conductors) {
                 const [type] = await ctx.db
                     .select()
                     .from(conductorTypes)
@@ -106,75 +106,62 @@ export default router({
                 }
                 types.push(type);
             }
+            if (locations.length !== types.length) {
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Locations and Types must have the same length",
+                });
+            }
             const matrixes = buildTransmissionLineMatrix(locations, types);
             return matrixes;
         }),
-    create: publicProcedure
+    create: projectProcedure
         .input(createTransmissionTowerSchema)
         .mutation(async ({ input, ctx }) => {
-            const newTower = {
-                id: randomUUID(),
-                ...input,
-            };
-            const line = ctx.store.project?.transmissionLines.find(
-                (tline) => tline.id === input.lineId
-            );
+            const [newTower] = await ctx.project.db
+                .insert(transmissionTowers)
+                .values(input)
+                .returning();
 
-            if (!line) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Can't find Transmission Line",
-                });
-            }
-            line.towers.push(newTower);
-            return newTower;
-        }),
-
-    generate: publicProcedure
-        .input(generateTowersSchema)
-        .mutation(async ({ input, ctx }) => {
-            const line = ctx.store.project?.transmissionLines.find(
-                (tline) => tline.id === input.lineId
-            );
-            if (!line) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Can't find Transmission Line",
-                });
-            }
-            const towers = generateTowers(input);
-            line.towers.push(...towers);
-            return towers;
-        }),
-    delete: publicProcedure
-        .input(deleteTransmissionTowerSchema)
-        .mutation(async ({ input, ctx }) => {
-            if (!ctx.store.project) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "No Current Project",
-                });
-            }
-            const tower = ctx.store.project.transmissionLines
-                .flatMap((tline) => tline.towers)
-                .find((tower) => tower.id === input.id);
-            if (!tower) {
+            if (!newTower) {
                 throw new TRPCError({
                     code: "NOT_FOUND",
                     message: "Can't find Transmission Tower",
                 });
             }
-            const tline = ctx.store.project.transmissionLines.find(
-                (tl) => tl.id === tower.lineId
-            );
-            if (!tline) {
-                throw new TRPCError({
-                    code: "NOT_FOUND",
-                    message: "Can't find Transmission Line",
-                });
-            }
-            const index = tline.towers.findIndex((t) => t.id === tower.id);
-            tline.towers.splice(index, 1);
-            return tower;
+
+            return newTower;
+        }),
+
+    generate: projectProcedure
+        .input(generateTowersSchema)
+        .mutation(async ({ input, ctx }) => {
+            const towers = generateTowers(input);
+            const newTowers = await ctx.project.db
+                .insert(transmissionTowers)
+                .values(towers)
+                .returning();
+
+            return newTowers;
+        }),
+    delete: projectProcedure
+        .input(deleteTransmissionTowerSchema)
+        .mutation(async ({ input, ctx }) => {
+            const [deletedTower] = await ctx.project.db
+                .delete(transmissionTowers)
+                .where(eq(transmissionTowers.id, input.id))
+                .returning();
+
+            return deletedTower;
+        }),
+    deleteMany: projectProcedure
+        .input(deleteManyTransmissionTowersSchema)
+        .mutation(async ({ input, ctx }) => {
+            const [deletedTower] = await ctx.project.db
+                .delete(transmissionTowers)
+                .where(inArray(transmissionTowers.id, input))
+                .returning();
+
+            return deletedTower;
         }),
 });

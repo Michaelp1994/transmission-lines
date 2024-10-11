@@ -1,11 +1,9 @@
+import { arrayTransform, numberTransform } from "../../helpers/transformers.js";
 import {
-    arrayTransform,
-    numberTransform,
     type OpenDSSWireData,
     type WireDataInput,
     wireDataSchema,
-} from "@/schemas";
-
+} from "../../schemas/wireData.js";
 import BaseElement from "./BaseElement";
 
 export default class WireData extends BaseElement<

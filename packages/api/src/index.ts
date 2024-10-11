@@ -1,24 +1,36 @@
-import type { DBContext } from "@repo/db";
+import type { LibraryDatabase, ProjectDatabase } from "@repo/db";
+import type { BrowserWindow, Dialog } from "electron";
 
+export interface Electron {
+    browserWindow: BrowserWindow;
+    dialog: Dialog;
+}
+
+export interface Context {
+    db: LibraryDatabase;
+    project: { db: ProjectDatabase | null };
+    electron: Electron;
+}
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors";
-
-import type { Electron } from "./context";
-import type { Store } from "./store";
 
 import { appRouter } from "./routers";
 
 const createServer = (
-    dataSource: DBContext,
+    library: LibraryDatabase,
     electron: Electron,
-    store: Store
+    project: { db: ProjectDatabase | null }
 ) => {
     const server = createHTTPServer({
         middleware: cors(),
-        createContext() {
-            return { db: dataSource.db, electron, store };
-        },
         router: appRouter,
+        createContext: () => {
+            return {
+                db: library,
+                project,
+                electron,
+            };
+        },
     });
     return server;
 };

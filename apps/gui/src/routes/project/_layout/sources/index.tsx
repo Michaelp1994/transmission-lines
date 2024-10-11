@@ -23,7 +23,7 @@ export const Route = createFileRoute("/project/_layout/sources/")({
 });
 
 export default function ProjectSources() {
-    const { t } = useTranslation("ProjectSources");
+    const { t } = useTranslation("projectSources");
 
     return (
         <CardWrapper>

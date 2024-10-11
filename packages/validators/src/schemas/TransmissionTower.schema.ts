@@ -71,3 +71,11 @@ export const deleteTransmissionTowerSchema = z.object({
 export type DeleteTransmissionTowerInput = z.infer<
     typeof deleteTransmissionTowerSchema
 >;
+
+// delete Many
+
+export const deleteManyTransmissionTowersSchema = z.array(towerId);
+
+export type DeleteManyTransmissionTowersInput = z.infer<
+    typeof deleteManyTransmissionTowersSchema
+>;

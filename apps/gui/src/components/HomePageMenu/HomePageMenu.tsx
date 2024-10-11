@@ -1,27 +1,48 @@
 import { Button } from "@repo/ui/button";
-import { Link } from "@tanstack/react-router";
 import { CircleX, FolderOpen, PlusCircle, Save, SaveAll } from "lucide-react";
 
 import trpc from "~/utils/trpc";
 
 export default function HomePageMenu() {
     const utils = trpc.useUtils();
-    const { data } = trpc.project.hasProject.useQuery();
+    const { data } = trpc.project.isOpen.useQuery();
     const openMutation = trpc.project.open.useMutation({
-        onSuccess() {
-            utils.project.hasProject.invalidate();
+        async onSuccess() {
+            await utils.project.isOpen.invalidate();
+            await utils.project.filePath.invalidate();
+        },
+    });
+    const createMutation = trpc.project.create.useMutation({
+        async onSuccess() {
+            await utils.project.isOpen.invalidate();
+            await utils.project.filePath.invalidate();
         },
     });
     const saveMutation = trpc.project.save.useMutation();
-    const saveAsMutation = trpc.project.saveAs.useMutation();
+    const saveAsMutation = trpc.project.saveAs.useMutation({
+        async onSuccess() {
+            await utils.project.isOpen.invalidate();
+            await utils.project.filePath.invalidate();
+        },
+    });
     const closeMutation = trpc.project.close.useMutation({
         async onSuccess() {
-            await utils.project.hasProject.invalidate();
+            await utils.project.isOpen.invalidate();
+            await utils.project.filePath.invalidate();
         },
     });
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
             <Button
+                className="h-24 w-24 flex flex-col items-center justify-center text-center p-2"
+                disabled={!!data}
+                onClick={() => createMutation.mutate()}
+                variant="outline"
+            >
+                <PlusCircle className="h-8 w-8 mb-2" />
+                <span className="text-xs">New</span>
+            </Button>
+            {/* <Button
                 asChild
                 className="h-24 w-24 flex flex-col items-center justify-center text-center p-2"
                 disabled={!!data}
@@ -31,7 +52,7 @@ export default function HomePageMenu() {
                     <PlusCircle className="h-8 w-8 mb-2" />
                     <span className="text-xs">New</span>
                 </Link>
-            </Button>
+            </Button> */}
             <Button
                 className="h-24 w-24 flex flex-col items-center justify-center text-center p-2"
                 disabled={!!data}

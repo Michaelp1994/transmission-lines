@@ -4,9 +4,8 @@
     "exports": {
         ".": "./src/index.ts",
         "./drizzle": "./src/drizzle.ts",
-        "./schemas/*": "./src/schemas/*.ts",
-        "./migrate": "./src/migrations/index.ts",
-        "./migrations/*": "./src/migrations/**"
+        "./schemas/*": "./src/library/*.ts",
+        "./project/*": "./src/project/*.ts"
     },
     "types": "./src/db.ts",
     "scripts": {
@@ -16,7 +15,7 @@
         "db:studio": "drizzle-kit studio",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "migrate": "drizzle-kit generate:sqlite",
+        "generate": "drizzle-kit generate --config=drizzle-project.config.ts",
         "test": "vitest run",
         "typecheck": "tsc --build"
     },
@@ -37,7 +36,7 @@
         "faker": "^6.6.6",
         "is-electron": "^2.2.2",
         "tsx": "^4.19.1",
-        "typescript": "^5.6.2",
+        "typescript": "^5.6.3",
         "unplugin-swc": "^1.5.1",
         "vite": "^5.4.8",
         "vite-tsconfig-paths": "^5.0.1",

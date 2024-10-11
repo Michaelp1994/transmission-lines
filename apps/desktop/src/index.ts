@@ -1,12 +1,12 @@
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
-import { databaseInit } from "@repo/db";
+import { initLibrary } from "@repo/db";
 import { app, BrowserWindow, dialog } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 
 import createWindow from "./createWindow";
-import project from "./global.js";
+import { store } from "./globals";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,14 +24,14 @@ app.whenReady().then(async () => {
 
     try {
         const dbPath = path.join(__dirname, `../database.sqlite`);
-        const dataSource = databaseInit(dbPath);
+        const library = initLibrary(dbPath);
         const server = createServer(
-            dataSource,
+            library,
             {
                 browserWindow: window,
                 dialog,
             },
-            project
+            store
         );
 
         server.listen(5001);

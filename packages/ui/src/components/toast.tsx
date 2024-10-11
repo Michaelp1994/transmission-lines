@@ -3,7 +3,6 @@ import { toast } from "sonner";
 
 function success(text: string) {
     toast.success(text, {
-        duration: 100000,
         description: format(new Date(), "PPPPpp"),
     });
 }

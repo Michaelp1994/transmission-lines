@@ -2,12 +2,13 @@ import {
     arrayTransform,
     booleanTransform,
     busTransform,
+    numberTransform,
+} from "../../helpers/transformers";
+import {
     type LineInput,
     lineSchema,
-    numberTransform,
     type OpenDSSLine,
-} from "@/schemas";
-
+} from "../../schemas/line";
 import BaseElement from "./BaseElement";
 
 export default class Line extends BaseElement<LineInput, OpenDSSLine> {

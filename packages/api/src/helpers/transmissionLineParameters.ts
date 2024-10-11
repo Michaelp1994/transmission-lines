@@ -1,7 +1,5 @@
 import type { ConductorLocation } from "@repo/db/schemas/conductorLocations";
 import type { ConductorType } from "@repo/db/schemas/conductorTypes";
-import type { TowerGeometry } from "@repo/db/schemas/towerGeometries";
-import type { TransmissionConductor } from "@repo/db/schemas/transmissionConductors";
 
 import * as Math from "mathjs";
 
