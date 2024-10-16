@@ -10,6 +10,11 @@ export const Route = createFileRoute("/results/_layout")({
 
 const itemsWithoutSolution = [
     {
+        to: "/results/worst-case",
+        icon: SquareTerminal,
+        text: "Worst Case Scenario",
+    },
+    {
         to: "/results",
         icon: SquareTerminal,
         text: "Parameters",
@@ -17,6 +22,11 @@ const itemsWithoutSolution = [
 ];
 
 const itemsWithSolution = [
+    {
+        to: "/results/worst-case",
+        icon: SquareTerminal,
+        text: "Worst Case Scenario",
+    },
     {
         to: "/results",
         icon: SquareTerminal,

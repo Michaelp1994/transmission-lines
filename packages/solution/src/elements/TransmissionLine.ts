@@ -1,9 +1,11 @@
-import { type LineID } from "@repo/validators/Ids";
+import type { Project } from "@repo/db/controllers/project";
+
+import OpenDSSInterface from "@repo/opendss-interface";
 import Line from "@repo/opendss-interface/classes/line";
 import LineGeometry from "@repo/opendss-interface/classes/lineGeometry";
-import type { Project } from "@repo/db/controllers/project";
+import { type LineID } from "@repo/validators/Ids";
+
 import TransmissionTower from "./TransmissionTower";
-import OpenDSSInterface from "@repo/opendss-interface";
 
 export default class TransmissionLine {
     id: LineID;

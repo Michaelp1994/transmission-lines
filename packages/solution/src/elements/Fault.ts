@@ -1,11 +1,11 @@
+import type { SourceID } from "@repo/validators/Ids";
+
 import OpenDSSFault from "@repo/opendss-interface/classes/fault";
 import { randomUUID } from "crypto";
 
-import type { SourceID } from "@repo/validators/Ids";
-
 export default class Fault {
-    id: SourceID;
     fault: OpenDSSFault;
+    id: SourceID;
 
     constructor(location: string) {
         this.id = randomUUID();
@@ -24,5 +24,10 @@ export default class Fault {
 
     create() {
         return this.fault.create();
+    }
+
+    setBus(bus: string) {
+        this.fault.parameters.bus1.name = bus;
+        this.fault.parameters.bus2.name = bus;
     }
 }

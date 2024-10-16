@@ -9,22 +9,19 @@ import {
     FormMessage,
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
-import { Input } from "@repo/ui/input";
 import toast from "@repo/ui/toast";
 import {
     defaultSolution,
     type SolutionFormInput,
     solutionFormSchema,
 } from "@repo/validators/forms/Solution.schema";
-import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
+import { SourceSelect } from "~/features/sources";
 import TowerSelect from "~/features/towers/components/TowerSelect";
 import trpc from "~/utils/trpc";
 
 export default function FaultLocationForm() {
-    const { data, isLoading, isError } = trpc.solution.hasSolution.useQuery();
-    const { t } = useTranslation("faultLocationForm");
     const utils = trpc.useUtils();
 
     const form = useForm({
@@ -44,6 +41,7 @@ export default function FaultLocationForm() {
     function handleValid(values: SolutionFormInput) {
         solveMutation.mutate(values);
     }
+
     return (
         <Form {...form}>
             <StyledForm
@@ -54,28 +52,60 @@ export default function FaultLocationForm() {
             >
                 <FormField
                     control={form.control}
-                    name="towerId"
+                    name="sourceId"
                     render={({ field }) => {
                         return (
                             <FormItem>
-                                <FormLabel>{t("towerId.label")}</FormLabel>
+                                <FormLabel>Source</FormLabel>
                                 <FormControl>
-                                    <TowerSelect {...field} />
+                                    <SourceSelect
+                                        {...field}
+                                        onChange={(value) => {
+                                            form.setValue("towerId", "");
+                                            field.onChange(value);
+                                        }}
+                                    />
                                 </FormControl>
-                                <FormDescription>
-                                    {t("towerId.description")}
-                                </FormDescription>
+                                <FormDescription></FormDescription>
                                 <FormMessage />
                             </FormItem>
                         );
                     }}
                 />
-
+                OR
+                <FormField
+                    control={form.control}
+                    name="towerId"
+                    render={({ field }) => {
+                        return (
+                            <FormItem>
+                                <FormLabel>Tower</FormLabel>
+                                <FormControl>
+                                    <TowerSelect
+                                        {...field}
+                                        {...field}
+                                        onChange={(value) => {
+                                            form.setValue("sourceId", "");
+                                            field.onChange(value);
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormDescription></FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        );
+                    }}
+                />
                 <ButtonsWrapper>
-                    <Button type="reset" variant="destructive">
-                        {t("form:reset")}
+                    <Button
+                        disabled={
+                            !form.getValues().sourceId &&
+                            !form.getValues().towerId
+                        }
+                        type="submit"
+                    >
+                        Solve
                     </Button>
-                    <Button type="submit">{t("form:submit")}</Button>
                 </ButtonsWrapper>
             </StyledForm>
         </Form>

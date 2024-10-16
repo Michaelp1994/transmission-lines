@@ -21,6 +21,7 @@ import { Route as LibrariesLayoutImport } from './routes/libraries/_layout'
 import { Route as ResultsLayoutIndexImport } from './routes/results/_layout/index'
 import { Route as ProjectLayoutIndexImport } from './routes/project/_layout/index'
 import { Route as LibrariesLayoutIndexImport } from './routes/libraries/_layout/index'
+import { Route as ResultsLayoutWorstCaseImport } from './routes/results/_layout/worst-case'
 import { Route as ResultsLayoutScriptImport } from './routes/results/_layout/script'
 import { Route as ResultsLayoutSourcesIndexImport } from './routes/results/_layout/sources/index'
 import { Route as ResultsLayoutLinesIndexImport } from './routes/results/_layout/lines/index'
@@ -101,6 +102,11 @@ const ProjectLayoutIndexRoute = ProjectLayoutIndexImport.update({
 const LibrariesLayoutIndexRoute = LibrariesLayoutIndexImport.update({
   path: '/',
   getParentRoute: () => LibrariesLayoutRoute,
+} as any)
+
+const ResultsLayoutWorstCaseRoute = ResultsLayoutWorstCaseImport.update({
+  path: '/worst-case',
+  getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ResultsLayoutScriptRoute = ResultsLayoutScriptImport.update({
@@ -269,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/script'
       fullPath: '/results/script'
       preLoaderRoute: typeof ResultsLayoutScriptImport
+      parentRoute: typeof ResultsLayoutImport
+    }
+    '/results/_layout/worst-case': {
+      id: '/results/_layout/worst-case'
+      path: '/worst-case'
+      fullPath: '/results/worst-case'
+      preLoaderRoute: typeof ResultsLayoutWorstCaseImport
       parentRoute: typeof ResultsLayoutImport
     }
     '/libraries/_layout/': {
@@ -500,6 +513,7 @@ const ProjectRouteWithChildren =
 
 interface ResultsLayoutRouteChildren {
   ResultsLayoutScriptRoute: typeof ResultsLayoutScriptRoute
+  ResultsLayoutWorstCaseRoute: typeof ResultsLayoutWorstCaseRoute
   ResultsLayoutIndexRoute: typeof ResultsLayoutIndexRoute
   ResultsLayoutLinesIndexRoute: typeof ResultsLayoutLinesIndexRoute
   ResultsLayoutSourcesIndexRoute: typeof ResultsLayoutSourcesIndexRoute
@@ -509,6 +523,7 @@ interface ResultsLayoutRouteChildren {
 
 const ResultsLayoutRouteChildren: ResultsLayoutRouteChildren = {
   ResultsLayoutScriptRoute: ResultsLayoutScriptRoute,
+  ResultsLayoutWorstCaseRoute: ResultsLayoutWorstCaseRoute,
   ResultsLayoutIndexRoute: ResultsLayoutIndexRoute,
   ResultsLayoutLinesIndexRoute: ResultsLayoutLinesIndexRoute,
   ResultsLayoutSourcesIndexRoute: ResultsLayoutSourcesIndexRoute,
@@ -539,6 +554,7 @@ export interface FileRoutesByFullPath {
   '/project/new': typeof ProjectNewRoute
   '/results': typeof ResultsLayoutRouteWithChildren
   '/results/script': typeof ResultsLayoutScriptRoute
+  '/results/worst-case': typeof ResultsLayoutWorstCaseRoute
   '/libraries/': typeof LibrariesLayoutIndexRoute
   '/project/': typeof ProjectLayoutIndexRoute
   '/results/': typeof ResultsLayoutIndexRoute
@@ -568,6 +584,7 @@ export interface FileRoutesByTo {
   '/project/new': typeof ProjectNewRoute
   '/results': typeof ResultsLayoutIndexRoute
   '/results/script': typeof ResultsLayoutScriptRoute
+  '/results/worst-case': typeof ResultsLayoutWorstCaseRoute
   '/libraries/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
   '/libraries/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
   '/project/lines/new': typeof ProjectLayoutLinesNewRoute
@@ -598,6 +615,7 @@ export interface FileRoutesById {
   '/results': typeof ResultsRouteWithChildren
   '/results/_layout': typeof ResultsLayoutRouteWithChildren
   '/results/_layout/script': typeof ResultsLayoutScriptRoute
+  '/results/_layout/worst-case': typeof ResultsLayoutWorstCaseRoute
   '/libraries/_layout/': typeof LibrariesLayoutIndexRoute
   '/project/_layout/': typeof ProjectLayoutIndexRoute
   '/results/_layout/': typeof ResultsLayoutIndexRoute
@@ -629,6 +647,7 @@ export interface FileRouteTypes {
     | '/project/new'
     | '/results'
     | '/results/script'
+    | '/results/worst-case'
     | '/libraries/'
     | '/project/'
     | '/results/'
@@ -657,6 +676,7 @@ export interface FileRouteTypes {
     | '/project/new'
     | '/results'
     | '/results/script'
+    | '/results/worst-case'
     | '/libraries/conductor-types/new'
     | '/libraries/tower-geometries/new'
     | '/project/lines/new'
@@ -685,6 +705,7 @@ export interface FileRouteTypes {
     | '/results'
     | '/results/_layout'
     | '/results/_layout/script'
+    | '/results/_layout/worst-case'
     | '/libraries/_layout/'
     | '/project/_layout/'
     | '/results/_layout/'
@@ -798,6 +819,7 @@ export const routeTree = rootRoute
       "parent": "/results",
       "children": [
         "/results/_layout/script",
+        "/results/_layout/worst-case",
         "/results/_layout/",
         "/results/_layout/lines/",
         "/results/_layout/sources/",
@@ -807,6 +829,10 @@ export const routeTree = rootRoute
     },
     "/results/_layout/script": {
       "filePath": "results/_layout/script.tsx",
+      "parent": "/results/_layout"
+    },
+    "/results/_layout/worst-case": {
+      "filePath": "results/_layout/worst-case.tsx",
       "parent": "/results/_layout"
     },
     "/libraries/_layout/": {

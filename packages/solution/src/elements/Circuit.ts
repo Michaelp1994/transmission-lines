@@ -1,33 +1,21 @@
-import type TransmissionLine from "./TransmissionLine";
-import type TowerGeometry from "./TowerGeometry";
-import type ConductorType from "./ConductorType";
 import OpenDSSInterface from "@repo/opendss-interface";
-import type Source from "./Source";
+
+import type ConductorType from "./ConductorType";
 import type Fault from "./Fault";
-import type { LineID, SourceID, TowerID } from "@repo/validators/Ids";
+import type Source from "./Source";
+import type TowerGeometry from "./TowerGeometry";
+import type TransmissionLine from "./TransmissionLine";
 
 export default class Circuit {
-    transmissionLines: TransmissionLine[] = [];
-    sources: Source[] = [];
-    towerGeometries: TowerGeometry[] = [];
     conductorTypes: ConductorType[] = [];
     driver: OpenDSSInterface;
     fault?: Fault;
+    sources: Source[] = [];
+    towerGeometries: TowerGeometry[] = [];
+    transmissionLines: TransmissionLine[] = [];
 
     constructor(openDssDriver: OpenDSSInterface) {
         this.driver = openDssDriver;
-    }
-
-    addSource(source: Source) {
-        this.sources.push(source);
-    }
-
-    addTransmissionLine(transmissionLine: TransmissionLine) {
-        this.transmissionLines.push(transmissionLine);
-    }
-
-    addTowerGeometry(towerGeometry: TowerGeometry) {
-        this.towerGeometries.push(towerGeometry);
     }
 
     addConductorType(conductorType: ConductorType) {
@@ -38,30 +26,36 @@ export default class Circuit {
         this.fault = fault;
     }
 
-    solve() {
-        this.driver.sendArray(["New Circuit.TEST"]);
-        this.sources.forEach((source) => {
-            this.driver.sendArray(source.create());
-        });
-
-        this.towerGeometries.forEach((towerGeometry) => {
-            this.driver.sendArray(towerGeometry.create());
-        });
-
-        this.conductorTypes.forEach((conductorTypes) => {
-            this.driver.sendArray(conductorTypes.create());
-        });
-
-        this.transmissionLines.forEach((transmissionLine) => {
-            this.driver.sendArray(transmissionLine.create());
-        });
-
-        if (this.fault) {
-            this.driver.sendArray(this.fault.create());
-        }
-
-        this.driver.solve();
+    addSource(source: Source) {
+        this.sources.push(source);
     }
+
+    addTowerGeometry(towerGeometry: TowerGeometry) {
+        this.towerGeometries.push(towerGeometry);
+    }
+
+    addTransmissionLine(transmissionLine: TransmissionLine) {
+        this.transmissionLines.push(transmissionLine);
+    }
+
+    getAllCurrents() {
+        const transmissionLines = this.transmissionLines.map((line) =>
+            line.getCurrent(this.driver)
+        );
+
+        const sources = this.sources.map((source) =>
+            source.getCurrent(this.driver)
+        );
+        return {
+            sources,
+            transmissionLines,
+        };
+    }
+
+    getCurrent(elementName: string) {
+        return this.driver.getCurrentsPolar(elementName);
+    }
+
     getScript() {
         const script = ["clearAll", "New Circuit.TEST"];
         this.sources.forEach((source) => {
@@ -87,17 +81,30 @@ export default class Circuit {
         script.push("show currents elements");
         return script;
     }
-    readCurrent() {
-        const transmissionLines = this.transmissionLines.map((line) =>
-            line.getCurrent(this.driver)
-        );
 
-        const sources = this.sources.map((source) =>
-            source.getCurrent(this.driver)
-        );
-        return {
-            sources,
-            transmissionLines,
-        };
+    solve() {
+        this.driver.dss.ClearAll();
+        this.driver.sendArray(["New Circuit.TEST"]);
+        this.sources.forEach((source) => {
+            this.driver.sendArray(source.create());
+        });
+
+        this.towerGeometries.forEach((towerGeometry) => {
+            this.driver.sendArray(towerGeometry.create());
+        });
+
+        this.conductorTypes.forEach((conductorTypes) => {
+            this.driver.sendArray(conductorTypes.create());
+        });
+
+        this.transmissionLines.forEach((transmissionLine) => {
+            this.driver.sendArray(transmissionLine.create());
+        });
+
+        if (this.fault) {
+            this.driver.sendArray(this.fault.create());
+        }
+
+        this.driver.solve();
     }
 }
