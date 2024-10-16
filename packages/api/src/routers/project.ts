@@ -17,12 +17,15 @@ export default router({
         return false;
     }),
     filePath: publicProcedure.query(({ ctx }) => {
-        return ctx.project.db?.$client.name;
+        return ctx.project.fileName;
     }),
     open: publicProcedure.mutation(async ({ ctx }) => {
         const fileName = await openFileDialog(ctx);
-
-        const db = openProject(fileName);
+        ctx.project.fileName = fileName;
+        const db = await openProject(
+            fileName,
+            ctx.electron.app.getPath("sessionData")
+        );
         ctx.project.db = db;
 
         return true;
@@ -32,27 +35,37 @@ export default router({
         .mutation(async ({ ctx }) => {
             const fileName = await saveFileDialog(ctx);
 
-            const db = await createProject(fileName);
+            const db = await createProject(
+                fileName,
+                ctx.electron.app.getPath("sessionData")
+            );
             ctx.project.db = db;
+            ctx.project.fileName = fileName;
             return true;
         }),
-    close: publicProcedure.mutation(async ({ ctx }) => {
+    close: projectProcedure.mutation(async ({ ctx }) => {
         ctx.project.db?.$client.close();
+        ctx.project.fileName = null;
         ctx.project.db = null;
+        ctx.project.solution = null;
     }),
     save: projectProcedure.mutation(async ({ ctx }) => {
         // TODO
+        await ctx.project.db.$client.backup(ctx.project.fileName);
         return true;
     }),
 
     saveAs: projectProcedure.mutation(async ({ ctx }) => {
         const fileName = await saveFileDialog(ctx);
-
+        console.log(fileName);
         // TODO: maybe include versioning, conductor types and tower geometries used in the project.
-        await ctx.project.db?.$client.backup(fileName);
-        ctx.project.db?.$client.close();
-        ctx.project.db = null;
-        const db = openProject(fileName);
+        await ctx.project.db.$client.backup(fileName);
+        ctx.project.db.$client.close();
+        ctx.project.fileName = fileName;
+        const db = await openProject(
+            fileName,
+            ctx.electron.app.getPath("sessionData")
+        );
 
         ctx.project.db = db;
     }),

@@ -39,6 +39,8 @@
     }
   },
   "baseSelect": {
+    "noneFound": "",
+    "search": "",
     "select": ""
   },
   "conductorConfiguration": {
@@ -274,6 +276,14 @@
     "errorPageText": "Algo deu errado, retorne e tente novamente.",
     "title": "Erro"
   },
+  "faultLocationForm": {
+    "name": {
+      "label": ""
+    },
+    "towerId": {
+      "label": ""
+    }
+  },
   "form": {
     "cancel": "Cancelar",
     "create": "",
@@ -295,6 +305,7 @@
     "noResults": "",
     "project": "Projeto",
     "projects": "",
+    "results": "",
     "solve": "Calcular",
     "towerGeometries": "Geometrias da Torre"
   },

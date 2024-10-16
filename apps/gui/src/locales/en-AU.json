@@ -39,6 +39,8 @@
     }
   },
   "baseSelect": {
+    "noneFound": "None Found!",
+    "search": "Search...",
     "select": "Please select an option."
   },
   "conductorConfiguration": {
@@ -274,6 +276,14 @@
     "errorPageText": "Something has gone wrong, please return and try again.",
     "title": "Error"
   },
+  "faultLocationForm": {
+    "name": {
+      "label": "Fault Location"
+    },
+    "towerId": {
+      "label": "Fault Location"
+    }
+  },
   "form": {
     "cancel": "Cancel",
     "create": "Create",
@@ -295,6 +305,7 @@
     "noResults": "No results.",
     "project": "Project",
     "projects": "Projects",
+    "results": "Results",
     "solve": "Solve",
     "towerGeometries": "Tower Geometries"
   },

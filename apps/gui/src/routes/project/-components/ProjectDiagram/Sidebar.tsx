@@ -1,6 +1,14 @@
+import { Button } from "@repo/ui/button";
+
 import { useDnD } from "./DnDContext";
 
-export default function Sidebar() {
+export default function Sidebar({
+    isDirty,
+    onSave,
+}: {
+    isDirty: boolean;
+    onSave: () => void;
+}) {
     const [_, setType] = useDnD();
 
     function onDragStart(event, nodeType) {
@@ -9,18 +17,18 @@ export default function Sidebar() {
     }
 
     return (
-        <aside className="w-72 bg-background border rounded p-4">
-            <div
+        <aside className="flex flex-col justify-between w-72 bg-background border rounded p-4">
+            {/* <div
                 className="h-5 p-1 border rounded mb-2 flex justify-center items-center cursor-grab"
                 draggable
                 onDragStart={(event) => onDragStart(event, "source")}
             >
                 Source
-            </div>
+            </div> */}
 
-            {/* <Button disabled={!dirty} onClick={handleSave}>
+            <Button disabled={!isDirty} onClick={onSave}>
                 Save
-            </Button> */}
+            </Button>
         </aside>
     );
 }

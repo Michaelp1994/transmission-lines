@@ -1,9 +1,11 @@
 import { eq, inArray } from "@repo/db/drizzle";
 import { transmissionConductors } from "@repo/db/project/transmissionConductors";
+import { transmissionLines } from "@repo/db/project/transmissionLines";
 import { transmissionTowers } from "@repo/db/project/transmissionTowers";
 import { conductorLocations } from "@repo/db/schemas/conductorLocations";
 import { conductorTypes } from "@repo/db/schemas/conductorTypes";
 import { towerGeometries } from "@repo/db/schemas/towerGeometries";
+import buildTransmissionLineMatrix from "@repo/solution/transmissionLineParameters";
 import {
     createTransmissionTowerSchema,
     deleteManyTransmissionTowersSchema,
@@ -12,15 +14,28 @@ import {
     getTowerByIdSchema,
     getTowerParametersSchema,
     getTowersByLineIdSchema,
+    updateTransmissionTowerSchema,
 } from "@repo/validators/schemas/TransmissionTower.schema";
 import { TRPCError } from "@trpc/server";
 
 import generateTowers from "../helpers/generateTowers";
-import buildTransmissionLineMatrix from "../helpers/transmissionLineParameters";
 import { projectProcedure, router } from "../trpc";
 
 export default router({
-    getAll: projectProcedure
+    getAll: projectProcedure.query(async ({ ctx }) => {
+        const towers = await ctx.project.db
+            .select()
+            .from(transmissionTowers)
+            .innerJoin(
+                transmissionLines,
+                eq(transmissionTowers.lineId, transmissionLines.id)
+            );
+        return towers.map((tower) => ({
+            id: tower.transmission_towers.id,
+            name: `Line: ${tower.transmission_lines.name} - Tower: ${tower.transmission_towers.name}`,
+        }));
+    }),
+    getAllByLineId: projectProcedure
         .input(getTowersByLineIdSchema)
         .query(async ({ ctx, input }) => {
             const towers = await ctx.project.db
@@ -132,7 +147,22 @@ export default router({
 
             return newTower;
         }),
-
+    update: projectProcedure
+        .input(updateTransmissionTowerSchema)
+        .mutation(async ({ input, ctx }) => {
+            const [updatedTower] = await ctx.project.db
+                .update(transmissionTowers)
+                .set(input)
+                .where(eq(transmissionTowers.id, input.id))
+                .returning();
+            if (!updatedTower) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Can't find Transmission Tower",
+                });
+            }
+            return updatedTower;
+        }),
     generate: projectProcedure
         .input(generateTowersSchema)
         .mutation(async ({ input, ctx }) => {

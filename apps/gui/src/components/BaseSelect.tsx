@@ -70,7 +70,7 @@ const BaseSelect = forwardRef<HTMLButtonElement, BaseSelectProps>(
                 </PopoverTrigger>
                 <PopoverContent>
                     <Command>
-                        <CommandInput placeholder={t("searchConductors")} />
+                        <CommandInput placeholder={t("search")} />
                         <CommandEmpty>{t("noneFound")}</CommandEmpty>
                         <CommandList>
                             <CommandGroup>

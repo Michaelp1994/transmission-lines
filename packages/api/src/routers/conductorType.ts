@@ -14,12 +14,7 @@ export default router({
     getAll: publicProcedure
         .input(getAllConductorTypesSchema)
         .query(async ({ ctx: { db }, input }) => {
-            const findOptions = input && {
-                limit: input.pageSize,
-                offset: input.pageIndex * input.pageSize,
-            };
-            const allConductorTypes =
-                await db.query.conductorTypes.findMany(findOptions);
+            const allConductorTypes = await db.query.conductorTypes.findMany();
 
             return allConductorTypes;
         }),

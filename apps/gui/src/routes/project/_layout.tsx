@@ -14,7 +14,7 @@ export const Route = createFileRoute("/project/_layout")({
 
 const items = [
     {
-        to: "/project/diagram",
+        to: "/project/",
         icon: SquareTerminal,
         text: "Diagram",
     },
@@ -27,11 +27,6 @@ const items = [
         to: "/project/lines",
         icon: UtilityPole,
         text: "Transmission Lines",
-    },
-    {
-        to: "/project/results",
-        icon: SquareSigma,
-        text: "Results",
     },
 ];
 

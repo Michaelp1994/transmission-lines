@@ -1,17 +1,18 @@
 import { eq } from "@repo/db/drizzle";
 import { sources } from "@repo/db/project/sources";
+import calculateZPhaseComponents from "@repo/solution/calculateZPhaseComponents";
+import calculateZSequenceComponents from "@repo/solution/calculateZSequenceComponents";
 import {
     createSourceSchema,
     deleteSourceSchema,
     getAllSourcesSchema,
     getPhaseComponentsSchema,
     getSourceByIdSchema,
+    updateSourcePositionsSchema,
     updateSourceSchema,
 } from "@repo/validators/schemas/Source.schema";
 import { TRPCError } from "@trpc/server";
 
-import calculateZPhaseComponents from "../helpers/calculateZPhaseComponents";
-import calculateZSequenceComponents from "../helpers/calculateZSequenceComponents";
 import { projectProcedure, router } from "../trpc";
 
 export default router({
@@ -75,6 +76,24 @@ export default router({
                 });
             }
             return updatedSource;
+        }),
+    updatePosition: projectProcedure
+        .input(updateSourcePositionsSchema)
+        .mutation(async ({ input, ctx }) => {
+            for await (const source of input) {
+                const [updatedSource] = await ctx.project.db
+                    .update(sources)
+                    .set(source)
+                    .where(eq(sources.id, source.id))
+                    .returning();
+                if (!updatedSource) {
+                    throw new TRPCError({
+                        code: "INTERNAL_SERVER_ERROR",
+                        message: `Failed to update source ${source.id}`,
+                    });
+                }
+            }
+            return true;
         }),
     delete: projectProcedure
         .input(deleteSourceSchema)

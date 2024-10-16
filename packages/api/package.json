@@ -12,7 +12,6 @@
         "dist"
     ],
     "scripts": {
-        "build": "tsc -b && tsc-alias",
         "clean": "rm -rf .turbo node_modules dist",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
@@ -21,7 +20,7 @@
     },
     "dependencies": {
         "@repo/db": "workspace:^",
-        "@repo/opendss-interface": "workspace:^",
+        "@repo/solution": "workspace:^",
         "@repo/validators": "workspace:*",
         "@trpc/server": "11.0.0-rc.364",
         "body-parser": "^1.20.3",

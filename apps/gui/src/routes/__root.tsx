@@ -24,7 +24,7 @@ export function DefaultLayout() {
                 <Outlet />
                 <StatusBar />
                 <Toaster closeButton position="bottom-right" richColors />
-                <TanStackRouterDevtools />
+                {/* <TanStackRouterDevtools /> */}
             </TooltipProvider>
         </div>
     );

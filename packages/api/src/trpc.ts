@@ -1,7 +1,7 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import { ZodError } from "zod";
 
-import type { Context } from "./index";
+import type { Context, ProjectContext } from "./index";
 
 /**
  * Initialization of tRPC backend
@@ -24,9 +24,10 @@ const t = initTRPC.context<Context>().create({
     },
 });
 
-export const projectProcedure = t.procedure.use(async function isAuthed(opts) {
-    const { ctx } = opts;
-
+export const projectProcedure = t.procedure.use(async function isAuthed({
+    ctx,
+    next,
+}) {
     if (!ctx.project.db) {
         throw new TRPCError({
             code: "NOT_FOUND",
@@ -34,18 +35,23 @@ export const projectProcedure = t.procedure.use(async function isAuthed(opts) {
         });
     }
 
-    if (!ctx.project.db.$client.open) {
+    if (!ctx.project.fileName) {
         throw new TRPCError({
             code: "NOT_FOUND",
-            message: "No Current Project",
+            message: "Filename not set",
         });
     }
 
-    return opts.next({
+    if (!ctx.project.db.$client.open) {
+        throw new TRPCError({
+            code: "NOT_FOUND",
+            message: "Connection not open",
+        });
+    }
+
+    return next({
         ctx: {
-            project: {
-                db: ctx.project.db,
-            },
+            project: ctx.project as ProjectContext,
         },
     });
 });

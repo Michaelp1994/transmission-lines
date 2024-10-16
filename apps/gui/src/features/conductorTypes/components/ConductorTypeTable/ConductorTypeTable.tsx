@@ -62,9 +62,7 @@ export default function ConductorTypeTable() {
 
     return (
         <div className="flex flex-col gap-4">
-            <TableToolbar table={table} />
             <DataTable columns={columns} data={data} />
-            <TablePagination table={table} />
         </div>
     );
 }

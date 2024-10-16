@@ -32,17 +32,32 @@ function getMigrationFolder() {
     return path.join(__dirname, "..", "migrations");
 }
 
-export async function createProject(path: string): Promise<ProjectDatabase> {
-    const conn = new Connection(path);
-    const db = drizzle(conn, { schema: projectSchema });
-    migrate(db, { migrationsFolder: getMigrationFolder() });
-    return db;
+export async function createProject(
+    filePath: string,
+    tempPath: string
+): Promise<ProjectDatabase> {
+    const fileConnection = new Connection(filePath);
+    const fileDb = drizzle(fileConnection, { schema: projectSchema });
+    migrate(fileDb, { migrationsFolder: getMigrationFolder() });
+    await fileConnection.backup(path.join(tempPath, "temp.db"));
+
+    fileConnection.close();
+    const tempConnection = new Connection(path.join(tempPath, "temp.db"));
+    const tempDb = drizzle(tempConnection, { schema: projectSchema });
+    return tempDb;
 }
 
-export function openProject(path: string): ProjectDatabase {
-    const conn = new Connection(path, {
-        fileMustExist: true,
+export async function openProject(
+    filePath: string,
+    tempPath: string
+): Promise<ProjectDatabase> {
+    const fileDb = new Connection(filePath, {
+        readonly: true,
     });
-    const db = drizzle(conn, { schema: projectSchema });
+    await fileDb.backup(path.join(tempPath, "temp.db"));
+
+    fileDb.close();
+    const tempDb = new Connection(path.join(tempPath, "temp.db"));
+    const db = drizzle(tempDb, { schema: projectSchema });
     return db;
 }

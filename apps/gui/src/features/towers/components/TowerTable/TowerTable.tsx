@@ -14,12 +14,12 @@ interface TowerTableProps {
 export default function TowerTable({ lineId }: TowerTableProps) {
     const { t } = useTranslation("towerTable");
     const utils = trpc.useUtils();
-    const { data, isError, isLoading } = trpc.tower.getAll.useQuery({
+    const { data, isError, isLoading } = trpc.tower.getAllByLineId.useQuery({
         lineId: lineId,
     });
     const deleteManyMutation = trpc.tower.deleteMany.useMutation({
         onSuccess: () => {
-            utils.tower.getAll.invalidate({ lineId });
+            utils.tower.getAllByLineId.invalidate({ lineId });
         },
     });
     const table = useTable({

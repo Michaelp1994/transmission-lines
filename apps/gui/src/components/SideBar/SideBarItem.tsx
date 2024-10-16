@@ -12,6 +12,9 @@ interface SideBarItemProps {
 export default function SideBarItem(props: SideBarItemProps) {
     return (
         <Link
+            activeOptions={{
+                exact: true,
+            }}
             activeProps={{
                 className: cn(
                     buttonVariants({ variant: "default" }),

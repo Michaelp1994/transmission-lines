@@ -12,6 +12,7 @@ import {
     GenerateConductorsModal,
     UpdateConductorModal,
 } from "~/features/conductors";
+import DeleteConductorTypeModal from "~/features/conductorTypes/components/DeleteConductorTypeModal";
 import { DeleteSourceModal } from "~/features/sources";
 import { DeleteTowerGeometryModal } from "~/features/towerGeometries";
 import {
@@ -35,6 +36,7 @@ NiceModal.register("delete-source", DeleteSourceModal);
 NiceModal.register("delete-transmission-line", DeleteTransmissionLineModal);
 
 NiceModal.register("delete-tower-geometry", DeleteTowerGeometryModal);
+NiceModal.register("delete-conductor-type", DeleteConductorTypeModal);
 
 NiceModal.register("update-tower", UpdateTowerModal);
 NiceModal.register("delete-tower", DeleteTowerModal);

@@ -6,7 +6,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import createWindow from "./createWindow";
-import { store } from "./globals";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,14 +24,11 @@ app.whenReady().then(async () => {
     try {
         const dbPath = path.join(__dirname, `../database.sqlite`);
         const library = initLibrary(dbPath);
-        const server = createServer(
-            library,
-            {
-                browserWindow: window,
-                dialog,
-            },
-            store
-        );
+        const server = createServer(library, {
+            browserWindow: window,
+            dialog,
+            app,
+        });
 
         server.listen(5001);
         console.log("listening on port 5001");

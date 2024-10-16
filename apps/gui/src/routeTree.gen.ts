@@ -14,13 +14,16 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as ResultsLayoutImport } from './routes/results/_layout'
 import { Route as ProjectNewImport } from './routes/project/new'
 import { Route as ProjectLayoutImport } from './routes/project/_layout'
 import { Route as LibrariesLayoutImport } from './routes/libraries/_layout'
+import { Route as ResultsLayoutIndexImport } from './routes/results/_layout/index'
 import { Route as ProjectLayoutIndexImport } from './routes/project/_layout/index'
 import { Route as LibrariesLayoutIndexImport } from './routes/libraries/_layout/index'
-import { Route as ProjectLayoutResultsImport } from './routes/project/_layout/results'
-import { Route as ProjectLayoutDiagramImport } from './routes/project/_layout/diagram'
+import { Route as ResultsLayoutScriptImport } from './routes/results/_layout/script'
+import { Route as ResultsLayoutSourcesIndexImport } from './routes/results/_layout/sources/index'
+import { Route as ResultsLayoutLinesIndexImport } from './routes/results/_layout/lines/index'
 import { Route as ProjectLayoutSourcesIndexImport } from './routes/project/_layout/sources/index'
 import { Route as ProjectLayoutLinesIndexImport } from './routes/project/_layout/lines/index'
 import { Route as LibrariesLayoutTowerGeometriesIndexImport } from './routes/libraries/_layout/tower-geometries/index'
@@ -29,6 +32,8 @@ import { Route as ProjectLayoutSourcesNewImport } from './routes/project/_layout
 import { Route as ProjectLayoutLinesNewImport } from './routes/project/_layout/lines/new'
 import { Route as LibrariesLayoutTowerGeometriesNewImport } from './routes/libraries/_layout/tower-geometries/new'
 import { Route as LibrariesLayoutConductorTypesNewImport } from './routes/libraries/_layout/conductor-types/new'
+import { Route as ResultsLayoutSourcesSourceIdIndexImport } from './routes/results/_layout/sources/$sourceId/index'
+import { Route as ResultsLayoutLinesLineIdIndexImport } from './routes/results/_layout/lines/$lineId/index'
 import { Route as ProjectLayoutSourcesSourceIdIndexImport } from './routes/project/_layout/sources/$sourceId/index'
 import { Route as ProjectLayoutLinesLineIdIndexImport } from './routes/project/_layout/lines/$lineId/index'
 import { Route as LibrariesLayoutTowerGeometriesGeometryIdIndexImport } from './routes/libraries/_layout/tower-geometries/$geometryId/index'
@@ -37,10 +42,16 @@ import { Route as ProjectLayoutLinesLineIdTowerIdIndexImport } from './routes/pr
 
 // Create Virtual Routes
 
+const ResultsImport = createFileRoute('/results')()
 const ProjectImport = createFileRoute('/project')()
 const LibrariesImport = createFileRoute('/libraries')()
 
 // Create/Update Routes
+
+const ResultsRoute = ResultsImport.update({
+  path: '/results',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ProjectRoute = ProjectImport.update({
   path: '/project',
@@ -55,6 +66,11 @@ const LibrariesRoute = LibrariesImport.update({
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const ResultsLayoutRoute = ResultsLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => ResultsRoute,
 } as any)
 
 const ProjectNewRoute = ProjectNewImport.update({
@@ -72,6 +88,11 @@ const LibrariesLayoutRoute = LibrariesLayoutImport.update({
   getParentRoute: () => LibrariesRoute,
 } as any)
 
+const ResultsLayoutIndexRoute = ResultsLayoutIndexImport.update({
+  path: '/',
+  getParentRoute: () => ResultsLayoutRoute,
+} as any)
+
 const ProjectLayoutIndexRoute = ProjectLayoutIndexImport.update({
   path: '/',
   getParentRoute: () => ProjectLayoutRoute,
@@ -82,14 +103,19 @@ const LibrariesLayoutIndexRoute = LibrariesLayoutIndexImport.update({
   getParentRoute: () => LibrariesLayoutRoute,
 } as any)
 
-const ProjectLayoutResultsRoute = ProjectLayoutResultsImport.update({
-  path: '/results',
-  getParentRoute: () => ProjectLayoutRoute,
+const ResultsLayoutScriptRoute = ResultsLayoutScriptImport.update({
+  path: '/script',
+  getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
-const ProjectLayoutDiagramRoute = ProjectLayoutDiagramImport.update({
-  path: '/diagram',
-  getParentRoute: () => ProjectLayoutRoute,
+const ResultsLayoutSourcesIndexRoute = ResultsLayoutSourcesIndexImport.update({
+  path: '/sources/',
+  getParentRoute: () => ResultsLayoutRoute,
+} as any)
+
+const ResultsLayoutLinesIndexRoute = ResultsLayoutLinesIndexImport.update({
+  path: '/lines/',
+  getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ProjectLayoutSourcesIndexRoute = ProjectLayoutSourcesIndexImport.update({
@@ -134,6 +160,18 @@ const LibrariesLayoutConductorTypesNewRoute =
   LibrariesLayoutConductorTypesNewImport.update({
     path: '/conductor-types/new',
     getParentRoute: () => LibrariesLayoutRoute,
+  } as any)
+
+const ResultsLayoutSourcesSourceIdIndexRoute =
+  ResultsLayoutSourcesSourceIdIndexImport.update({
+    path: '/sources/$sourceId/',
+    getParentRoute: () => ResultsLayoutRoute,
+  } as any)
+
+const ResultsLayoutLinesLineIdIndexRoute =
+  ResultsLayoutLinesLineIdIndexImport.update({
+    path: '/lines/$lineId/',
+    getParentRoute: () => ResultsLayoutRoute,
   } as any)
 
 const ProjectLayoutSourcesSourceIdIndexRoute =
@@ -212,19 +250,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectNewImport
       parentRoute: typeof ProjectImport
     }
-    '/project/_layout/diagram': {
-      id: '/project/_layout/diagram'
-      path: '/diagram'
-      fullPath: '/project/diagram'
-      preLoaderRoute: typeof ProjectLayoutDiagramImport
-      parentRoute: typeof ProjectLayoutImport
-    }
-    '/project/_layout/results': {
-      id: '/project/_layout/results'
+    '/results': {
+      id: '/results'
       path: '/results'
-      fullPath: '/project/results'
-      preLoaderRoute: typeof ProjectLayoutResultsImport
-      parentRoute: typeof ProjectLayoutImport
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsImport
+      parentRoute: typeof rootRoute
+    }
+    '/results/_layout': {
+      id: '/results/_layout'
+      path: '/results'
+      fullPath: '/results'
+      preLoaderRoute: typeof ResultsLayoutImport
+      parentRoute: typeof ResultsRoute
+    }
+    '/results/_layout/script': {
+      id: '/results/_layout/script'
+      path: '/script'
+      fullPath: '/results/script'
+      preLoaderRoute: typeof ResultsLayoutScriptImport
+      parentRoute: typeof ResultsLayoutImport
     }
     '/libraries/_layout/': {
       id: '/libraries/_layout/'
@@ -239,6 +284,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/project/'
       preLoaderRoute: typeof ProjectLayoutIndexImport
       parentRoute: typeof ProjectLayoutImport
+    }
+    '/results/_layout/': {
+      id: '/results/_layout/'
+      path: '/'
+      fullPath: '/results/'
+      preLoaderRoute: typeof ResultsLayoutIndexImport
+      parentRoute: typeof ResultsLayoutImport
     }
     '/libraries/_layout/conductor-types/new': {
       id: '/libraries/_layout/conductor-types/new'
@@ -296,6 +348,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectLayoutSourcesIndexImport
       parentRoute: typeof ProjectLayoutImport
     }
+    '/results/_layout/lines/': {
+      id: '/results/_layout/lines/'
+      path: '/lines'
+      fullPath: '/results/lines'
+      preLoaderRoute: typeof ResultsLayoutLinesIndexImport
+      parentRoute: typeof ResultsLayoutImport
+    }
+    '/results/_layout/sources/': {
+      id: '/results/_layout/sources/'
+      path: '/sources'
+      fullPath: '/results/sources'
+      preLoaderRoute: typeof ResultsLayoutSourcesIndexImport
+      parentRoute: typeof ResultsLayoutImport
+    }
     '/libraries/_layout/conductor-types/$typeId/': {
       id: '/libraries/_layout/conductor-types/$typeId/'
       path: '/conductor-types/$typeId'
@@ -323,6 +389,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/project/sources/$sourceId'
       preLoaderRoute: typeof ProjectLayoutSourcesSourceIdIndexImport
       parentRoute: typeof ProjectLayoutImport
+    }
+    '/results/_layout/lines/$lineId/': {
+      id: '/results/_layout/lines/$lineId/'
+      path: '/lines/$lineId'
+      fullPath: '/results/lines/$lineId'
+      preLoaderRoute: typeof ResultsLayoutLinesLineIdIndexImport
+      parentRoute: typeof ResultsLayoutImport
+    }
+    '/results/_layout/sources/$sourceId/': {
+      id: '/results/_layout/sources/$sourceId/'
+      path: '/sources/$sourceId'
+      fullPath: '/results/sources/$sourceId'
+      preLoaderRoute: typeof ResultsLayoutSourcesSourceIdIndexImport
+      parentRoute: typeof ResultsLayoutImport
     }
     '/project/_layout/lines/$lineId/$towerId/': {
       id: '/project/_layout/lines/$lineId/$towerId/'
@@ -378,8 +458,6 @@ const LibrariesRouteWithChildren = LibrariesRoute._addFileChildren(
 )
 
 interface ProjectLayoutRouteChildren {
-  ProjectLayoutDiagramRoute: typeof ProjectLayoutDiagramRoute
-  ProjectLayoutResultsRoute: typeof ProjectLayoutResultsRoute
   ProjectLayoutIndexRoute: typeof ProjectLayoutIndexRoute
   ProjectLayoutLinesNewRoute: typeof ProjectLayoutLinesNewRoute
   ProjectLayoutSourcesNewRoute: typeof ProjectLayoutSourcesNewRoute
@@ -391,8 +469,6 @@ interface ProjectLayoutRouteChildren {
 }
 
 const ProjectLayoutRouteChildren: ProjectLayoutRouteChildren = {
-  ProjectLayoutDiagramRoute: ProjectLayoutDiagramRoute,
-  ProjectLayoutResultsRoute: ProjectLayoutResultsRoute,
   ProjectLayoutIndexRoute: ProjectLayoutIndexRoute,
   ProjectLayoutLinesNewRoute: ProjectLayoutLinesNewRoute,
   ProjectLayoutSourcesNewRoute: ProjectLayoutSourcesNewRoute,
@@ -422,15 +498,50 @@ const ProjectRouteChildren: ProjectRouteChildren = {
 const ProjectRouteWithChildren =
   ProjectRoute._addFileChildren(ProjectRouteChildren)
 
+interface ResultsLayoutRouteChildren {
+  ResultsLayoutScriptRoute: typeof ResultsLayoutScriptRoute
+  ResultsLayoutIndexRoute: typeof ResultsLayoutIndexRoute
+  ResultsLayoutLinesIndexRoute: typeof ResultsLayoutLinesIndexRoute
+  ResultsLayoutSourcesIndexRoute: typeof ResultsLayoutSourcesIndexRoute
+  ResultsLayoutLinesLineIdIndexRoute: typeof ResultsLayoutLinesLineIdIndexRoute
+  ResultsLayoutSourcesSourceIdIndexRoute: typeof ResultsLayoutSourcesSourceIdIndexRoute
+}
+
+const ResultsLayoutRouteChildren: ResultsLayoutRouteChildren = {
+  ResultsLayoutScriptRoute: ResultsLayoutScriptRoute,
+  ResultsLayoutIndexRoute: ResultsLayoutIndexRoute,
+  ResultsLayoutLinesIndexRoute: ResultsLayoutLinesIndexRoute,
+  ResultsLayoutSourcesIndexRoute: ResultsLayoutSourcesIndexRoute,
+  ResultsLayoutLinesLineIdIndexRoute: ResultsLayoutLinesLineIdIndexRoute,
+  ResultsLayoutSourcesSourceIdIndexRoute:
+    ResultsLayoutSourcesSourceIdIndexRoute,
+}
+
+const ResultsLayoutRouteWithChildren = ResultsLayoutRoute._addFileChildren(
+  ResultsLayoutRouteChildren,
+)
+
+interface ResultsRouteChildren {
+  ResultsLayoutRoute: typeof ResultsLayoutRouteWithChildren
+}
+
+const ResultsRouteChildren: ResultsRouteChildren = {
+  ResultsLayoutRoute: ResultsLayoutRouteWithChildren,
+}
+
+const ResultsRouteWithChildren =
+  ResultsRoute._addFileChildren(ResultsRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/libraries': typeof LibrariesLayoutRouteWithChildren
   '/project': typeof ProjectLayoutRouteWithChildren
   '/project/new': typeof ProjectNewRoute
-  '/project/diagram': typeof ProjectLayoutDiagramRoute
-  '/project/results': typeof ProjectLayoutResultsRoute
+  '/results': typeof ResultsLayoutRouteWithChildren
+  '/results/script': typeof ResultsLayoutScriptRoute
   '/libraries/': typeof LibrariesLayoutIndexRoute
   '/project/': typeof ProjectLayoutIndexRoute
+  '/results/': typeof ResultsLayoutIndexRoute
   '/libraries/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
   '/libraries/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
   '/project/lines/new': typeof ProjectLayoutLinesNewRoute
@@ -439,10 +550,14 @@ export interface FileRoutesByFullPath {
   '/libraries/tower-geometries': typeof LibrariesLayoutTowerGeometriesIndexRoute
   '/project/lines': typeof ProjectLayoutLinesIndexRoute
   '/project/sources': typeof ProjectLayoutSourcesIndexRoute
+  '/results/lines': typeof ResultsLayoutLinesIndexRoute
+  '/results/sources': typeof ResultsLayoutSourcesIndexRoute
   '/libraries/conductor-types/$typeId': typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
   '/libraries/tower-geometries/$geometryId': typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
   '/project/lines/$lineId': typeof ProjectLayoutLinesLineIdIndexRoute
   '/project/sources/$sourceId': typeof ProjectLayoutSourcesSourceIdIndexRoute
+  '/results/lines/$lineId': typeof ResultsLayoutLinesLineIdIndexRoute
+  '/results/sources/$sourceId': typeof ResultsLayoutSourcesSourceIdIndexRoute
   '/project/lines/$lineId/$towerId': typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
 }
 
@@ -451,8 +566,8 @@ export interface FileRoutesByTo {
   '/libraries': typeof LibrariesLayoutIndexRoute
   '/project': typeof ProjectLayoutIndexRoute
   '/project/new': typeof ProjectNewRoute
-  '/project/diagram': typeof ProjectLayoutDiagramRoute
-  '/project/results': typeof ProjectLayoutResultsRoute
+  '/results': typeof ResultsLayoutIndexRoute
+  '/results/script': typeof ResultsLayoutScriptRoute
   '/libraries/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
   '/libraries/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
   '/project/lines/new': typeof ProjectLayoutLinesNewRoute
@@ -461,10 +576,14 @@ export interface FileRoutesByTo {
   '/libraries/tower-geometries': typeof LibrariesLayoutTowerGeometriesIndexRoute
   '/project/lines': typeof ProjectLayoutLinesIndexRoute
   '/project/sources': typeof ProjectLayoutSourcesIndexRoute
+  '/results/lines': typeof ResultsLayoutLinesIndexRoute
+  '/results/sources': typeof ResultsLayoutSourcesIndexRoute
   '/libraries/conductor-types/$typeId': typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
   '/libraries/tower-geometries/$geometryId': typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
   '/project/lines/$lineId': typeof ProjectLayoutLinesLineIdIndexRoute
   '/project/sources/$sourceId': typeof ProjectLayoutSourcesSourceIdIndexRoute
+  '/results/lines/$lineId': typeof ResultsLayoutLinesLineIdIndexRoute
+  '/results/sources/$sourceId': typeof ResultsLayoutSourcesSourceIdIndexRoute
   '/project/lines/$lineId/$towerId': typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
 }
 
@@ -476,10 +595,12 @@ export interface FileRoutesById {
   '/project': typeof ProjectRouteWithChildren
   '/project/_layout': typeof ProjectLayoutRouteWithChildren
   '/project/new': typeof ProjectNewRoute
-  '/project/_layout/diagram': typeof ProjectLayoutDiagramRoute
-  '/project/_layout/results': typeof ProjectLayoutResultsRoute
+  '/results': typeof ResultsRouteWithChildren
+  '/results/_layout': typeof ResultsLayoutRouteWithChildren
+  '/results/_layout/script': typeof ResultsLayoutScriptRoute
   '/libraries/_layout/': typeof LibrariesLayoutIndexRoute
   '/project/_layout/': typeof ProjectLayoutIndexRoute
+  '/results/_layout/': typeof ResultsLayoutIndexRoute
   '/libraries/_layout/conductor-types/new': typeof LibrariesLayoutConductorTypesNewRoute
   '/libraries/_layout/tower-geometries/new': typeof LibrariesLayoutTowerGeometriesNewRoute
   '/project/_layout/lines/new': typeof ProjectLayoutLinesNewRoute
@@ -488,10 +609,14 @@ export interface FileRoutesById {
   '/libraries/_layout/tower-geometries/': typeof LibrariesLayoutTowerGeometriesIndexRoute
   '/project/_layout/lines/': typeof ProjectLayoutLinesIndexRoute
   '/project/_layout/sources/': typeof ProjectLayoutSourcesIndexRoute
+  '/results/_layout/lines/': typeof ResultsLayoutLinesIndexRoute
+  '/results/_layout/sources/': typeof ResultsLayoutSourcesIndexRoute
   '/libraries/_layout/conductor-types/$typeId/': typeof LibrariesLayoutConductorTypesTypeIdIndexRoute
   '/libraries/_layout/tower-geometries/$geometryId/': typeof LibrariesLayoutTowerGeometriesGeometryIdIndexRoute
   '/project/_layout/lines/$lineId/': typeof ProjectLayoutLinesLineIdIndexRoute
   '/project/_layout/sources/$sourceId/': typeof ProjectLayoutSourcesSourceIdIndexRoute
+  '/results/_layout/lines/$lineId/': typeof ResultsLayoutLinesLineIdIndexRoute
+  '/results/_layout/sources/$sourceId/': typeof ResultsLayoutSourcesSourceIdIndexRoute
   '/project/_layout/lines/$lineId/$towerId/': typeof ProjectLayoutLinesLineIdTowerIdIndexRoute
 }
 
@@ -502,10 +627,11 @@ export interface FileRouteTypes {
     | '/libraries'
     | '/project'
     | '/project/new'
-    | '/project/diagram'
-    | '/project/results'
+    | '/results'
+    | '/results/script'
     | '/libraries/'
     | '/project/'
+    | '/results/'
     | '/libraries/conductor-types/new'
     | '/libraries/tower-geometries/new'
     | '/project/lines/new'
@@ -514,10 +640,14 @@ export interface FileRouteTypes {
     | '/libraries/tower-geometries'
     | '/project/lines'
     | '/project/sources'
+    | '/results/lines'
+    | '/results/sources'
     | '/libraries/conductor-types/$typeId'
     | '/libraries/tower-geometries/$geometryId'
     | '/project/lines/$lineId'
     | '/project/sources/$sourceId'
+    | '/results/lines/$lineId'
+    | '/results/sources/$sourceId'
     | '/project/lines/$lineId/$towerId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -525,8 +655,8 @@ export interface FileRouteTypes {
     | '/libraries'
     | '/project'
     | '/project/new'
-    | '/project/diagram'
-    | '/project/results'
+    | '/results'
+    | '/results/script'
     | '/libraries/conductor-types/new'
     | '/libraries/tower-geometries/new'
     | '/project/lines/new'
@@ -535,10 +665,14 @@ export interface FileRouteTypes {
     | '/libraries/tower-geometries'
     | '/project/lines'
     | '/project/sources'
+    | '/results/lines'
+    | '/results/sources'
     | '/libraries/conductor-types/$typeId'
     | '/libraries/tower-geometries/$geometryId'
     | '/project/lines/$lineId'
     | '/project/sources/$sourceId'
+    | '/results/lines/$lineId'
+    | '/results/sources/$sourceId'
     | '/project/lines/$lineId/$towerId'
   id:
     | '__root__'
@@ -548,10 +682,12 @@ export interface FileRouteTypes {
     | '/project'
     | '/project/_layout'
     | '/project/new'
-    | '/project/_layout/diagram'
-    | '/project/_layout/results'
+    | '/results'
+    | '/results/_layout'
+    | '/results/_layout/script'
     | '/libraries/_layout/'
     | '/project/_layout/'
+    | '/results/_layout/'
     | '/libraries/_layout/conductor-types/new'
     | '/libraries/_layout/tower-geometries/new'
     | '/project/_layout/lines/new'
@@ -560,10 +696,14 @@ export interface FileRouteTypes {
     | '/libraries/_layout/tower-geometries/'
     | '/project/_layout/lines/'
     | '/project/_layout/sources/'
+    | '/results/_layout/lines/'
+    | '/results/_layout/sources/'
     | '/libraries/_layout/conductor-types/$typeId/'
     | '/libraries/_layout/tower-geometries/$geometryId/'
     | '/project/_layout/lines/$lineId/'
     | '/project/_layout/sources/$sourceId/'
+    | '/results/_layout/lines/$lineId/'
+    | '/results/_layout/sources/$sourceId/'
     | '/project/_layout/lines/$lineId/$towerId/'
   fileRoutesById: FileRoutesById
 }
@@ -572,12 +712,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LibrariesRoute: typeof LibrariesRouteWithChildren
   ProjectRoute: typeof ProjectRouteWithChildren
+  ResultsRoute: typeof ResultsRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LibrariesRoute: LibrariesRouteWithChildren,
   ProjectRoute: ProjectRouteWithChildren,
+  ResultsRoute: ResultsRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -594,7 +736,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/libraries",
-        "/project"
+        "/project",
+        "/results"
       ]
     },
     "/": {
@@ -630,8 +773,6 @@ export const routeTree = rootRoute
       "filePath": "project/_layout.tsx",
       "parent": "/project",
       "children": [
-        "/project/_layout/diagram",
-        "/project/_layout/results",
         "/project/_layout/",
         "/project/_layout/lines/new",
         "/project/_layout/sources/new",
@@ -646,13 +787,27 @@ export const routeTree = rootRoute
       "filePath": "project/new.tsx",
       "parent": "/project"
     },
-    "/project/_layout/diagram": {
-      "filePath": "project/_layout/diagram.tsx",
-      "parent": "/project/_layout"
+    "/results": {
+      "filePath": "results",
+      "children": [
+        "/results/_layout"
+      ]
     },
-    "/project/_layout/results": {
-      "filePath": "project/_layout/results.tsx",
-      "parent": "/project/_layout"
+    "/results/_layout": {
+      "filePath": "results/_layout.tsx",
+      "parent": "/results",
+      "children": [
+        "/results/_layout/script",
+        "/results/_layout/",
+        "/results/_layout/lines/",
+        "/results/_layout/sources/",
+        "/results/_layout/lines/$lineId/",
+        "/results/_layout/sources/$sourceId/"
+      ]
+    },
+    "/results/_layout/script": {
+      "filePath": "results/_layout/script.tsx",
+      "parent": "/results/_layout"
     },
     "/libraries/_layout/": {
       "filePath": "libraries/_layout/index.tsx",
@@ -661,6 +816,10 @@ export const routeTree = rootRoute
     "/project/_layout/": {
       "filePath": "project/_layout/index.tsx",
       "parent": "/project/_layout"
+    },
+    "/results/_layout/": {
+      "filePath": "results/_layout/index.tsx",
+      "parent": "/results/_layout"
     },
     "/libraries/_layout/conductor-types/new": {
       "filePath": "libraries/_layout/conductor-types/new.tsx",
@@ -694,6 +853,14 @@ export const routeTree = rootRoute
       "filePath": "project/_layout/sources/index.tsx",
       "parent": "/project/_layout"
     },
+    "/results/_layout/lines/": {
+      "filePath": "results/_layout/lines/index.tsx",
+      "parent": "/results/_layout"
+    },
+    "/results/_layout/sources/": {
+      "filePath": "results/_layout/sources/index.tsx",
+      "parent": "/results/_layout"
+    },
     "/libraries/_layout/conductor-types/$typeId/": {
       "filePath": "libraries/_layout/conductor-types/$typeId/index.tsx",
       "parent": "/libraries/_layout"
@@ -709,6 +876,14 @@ export const routeTree = rootRoute
     "/project/_layout/sources/$sourceId/": {
       "filePath": "project/_layout/sources/$sourceId/index.tsx",
       "parent": "/project/_layout"
+    },
+    "/results/_layout/lines/$lineId/": {
+      "filePath": "results/_layout/lines/$lineId/index.tsx",
+      "parent": "/results/_layout"
+    },
+    "/results/_layout/sources/$sourceId/": {
+      "filePath": "results/_layout/sources/$sourceId/index.tsx",
+      "parent": "/results/_layout"
     },
     "/project/_layout/lines/$lineId/$towerId/": {
       "filePath": "project/_layout/lines/$lineId/$towerId/index.tsx",

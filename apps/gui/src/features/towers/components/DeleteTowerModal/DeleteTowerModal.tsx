@@ -15,7 +15,7 @@ export default NiceModal.create(({ towerId }: DeleteTowerModalProps) => {
     const deleteMutation = trpc.tower.delete.useMutation({
         async onSuccess(data) {
             toast.success("Tower deleted");
-            await utils.tower.getAll.invalidate({
+            await utils.tower.getAllByLineId.invalidate({
                 lineId: data.lineId,
             });
         },

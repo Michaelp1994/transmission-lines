@@ -12,6 +12,7 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     type TowerGeometryFormInput,
     towerGeometryFormSchema,
@@ -20,7 +21,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateTowerGeometryFormProps {
@@ -46,7 +46,7 @@ export default function UpdateTowerGeometryForm({
     const updateMutation = trpc.towerGeometry.update.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
-            await navigate({ to: "/tower-geometries" });
+            await navigate({ to: "/libraries/tower-geometries" });
             if (onFinish) onFinish();
         },
         onError(error) {

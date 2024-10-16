@@ -1,6 +1,8 @@
+import type { Source } from "@repo/db/project/sources";
+import type { TransmissionLine } from "@repo/db/project/transmissionLines";
+
 import toast from "@repo/ui/toast";
-import { useCallback, useMemo, useState } from "react";
-import ReactFlow, {
+import {
     addEdge,
     applyEdgeChanges,
     applyNodeChanges,
@@ -9,42 +11,34 @@ import ReactFlow, {
     Controls,
     type Edge,
     type Node,
-    ReactFlowProvider,
+    ReactFlow,
     useReactFlow,
-} from "reactflow";
-import "reactflow/dist/style.css";
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import { useCallback, useMemo, useState } from "react";
 
 import trpc from "~/utils/trpc";
 
-import type { NodeData, NodeType } from "./NodeData";
-
-import { DnDProvider, useDnD } from "./DnDContext";
+import { useDnD } from "./DnDContext";
+import nodeTypes from "./nodes";
 import Sidebar from "./Sidebar";
-import Source from "./Source";
-import TransmissionLine from "./TransmissionLine";
-
-interface ProjectDiagramProps {}
-
-const nodeTypes = { source: Source };
-
-const edgeTypes = { default: TransmissionLine };
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-export default function ProjectDiagram({}: ProjectDiagramProps) {
+export default function ProjectDiagram({
+    sources,
+    transmissionLines,
+}: {
+    sources: Source[];
+    transmissionLines: TransmissionLine[];
+}) {
     const [dirty, setDirty] = useState(false);
-    const [sources, transmissionLines] = trpc.useQueries((t) => {
-        return [t.source.getAll({}), t.transmissionLine.getAll({})];
-    });
-
-    const utils = trpc.useUtils();
     const [type] = useDnD();
     const { screenToFlowPosition } = useReactFlow();
     const mutation = trpc.source.updatePosition.useMutation({
         onSuccess() {
             toast.success("Saved");
-            // utils.project.getById.invalidate();
         },
     });
 
@@ -68,7 +62,7 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
                 id: tline.id,
                 source: tline.fromSourceId,
                 target: tline.toSourceId,
-                type: "default",
+                label: tline.name,
                 data: {
                     label: tline.name,
                     lineId: tline.id,
@@ -89,7 +83,6 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
 
     const onNodesChange = useCallback((changes) => {
         setDirty(true);
-
         setNodes((nds) => applyNodeChanges(changes, nds));
     }, []);
 
@@ -138,33 +131,20 @@ export default function ProjectDiagram({}: ProjectDiagramProps) {
         [screenToFlowPosition, type]
     );
 
-    if (sources.isLoading || transmissionLines.isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (
-        sources.isError ||
-        !sources.data ||
-        transmissionLines.isError ||
-        !transmissionLines.data
-    ) {
-        return <div>Error!</div>;
-    }
-
     return (
         <div className="flex h-full w-full gap-4">
-            <Sidebar />
+            <Sidebar isDirty={dirty} onSave={handleSave} />
             <div className="w-full h-full">
                 <ReactFlow
                     edges={edges}
-                    edgeTypes={edgeTypes}
                     nodes={nodes}
                     nodeTypes={nodeTypes}
-                    onConnect={onConnect}
+                    // onConnect={onConnect}
                     onDragOver={onDragOver}
                     onDrop={onDrop}
-                    onEdgesChange={onEdgesChange}
+                    // onEdgesChange={onEdgesChange}
                     onNodesChange={onNodesChange}
+                    proOptions={{ hideAttribution: true }}
                 >
                     <Controls />
                     <Background

@@ -43,7 +43,7 @@ export default function GenerateTowersForm({
     const generateMutation = trpc.tower.generate.useMutation({
         async onSuccess(values) {
             toast.success(`${values.length} generated successfully`);
-            await utils.tower.getAll.invalidate({
+            await utils.tower.getAllByLineId.invalidate({
                 lineId,
             });
             if (onFinish) onFinish();

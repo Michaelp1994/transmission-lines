@@ -1,5 +1,6 @@
 import type { CellContext } from "@tanstack/react-table";
 
+import NiceModal from "@ebay/nice-modal-react";
 import { Button } from "@repo/ui/button";
 import {
     DropdownMenu,
@@ -18,6 +19,11 @@ import type { ConductorType } from "./RowType";
 export default function ConductorTypeTableActions({
     row,
 }: CellContext<ConductorType, unknown>) {
+    function showDeleteModal() {
+        NiceModal.show("delete-conductor-type", {
+            typeId: row.original.id,
+        });
+    }
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -35,13 +41,13 @@ export default function ConductorTypeTableActions({
                 <DropdownMenuItem asChild>
                     <Link
                         params={{ typeId: row.original.id }}
-                        to="/conductor-types/$typeId"
+                        to="/libraries/conductor-types/$typeId"
                     >
                         <ViewIcon />
                         View
                     </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={showDeleteModal}>
                     <DeleteIcon />
                     Delete
                 </DropdownMenuItem>

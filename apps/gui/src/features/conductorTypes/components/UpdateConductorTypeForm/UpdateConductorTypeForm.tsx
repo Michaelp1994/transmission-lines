@@ -13,6 +13,7 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     type ConductorTypeFormInput,
     conductorTypeFormSchema,
@@ -21,7 +22,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateConductorTypeFormProps {
@@ -47,7 +47,7 @@ export default function UpdateConductorTypeForm({
     const updateMutation = trpc.conductorType.update.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been updated.`);
-            await navigate({ to: "/conductor-types" });
+            await navigate({ to: "/libraries/conductor-types" });
             if (onFinish) onFinish();
         },
         onError(error) {

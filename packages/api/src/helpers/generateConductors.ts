@@ -25,8 +25,8 @@ export default function generateConductors(
     for (let i = 0; i < values.neutrals; i = i + 1) {
         newConductors.push({
             name: `N${i + 1}`,
-            fromPhase: 99,
-            toPhase: 99,
+            fromPhase: 20,
+            toPhase: 20,
             isNeutral: true,
             bundleNumber: 1,
             bundleSpacing: 0,

@@ -1,4 +1,4 @@
-import type { Bus } from "../schemas/bus";
+import type { Bus } from "@repo/validators/opendss/bus";
 
 export const arrayTransform = (input?: (string | number)[]) =>
     input !== undefined ? `[${input.join(" ")}]` : undefined;

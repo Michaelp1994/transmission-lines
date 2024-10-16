@@ -53,7 +53,21 @@ export default function NavBar() {
                             {t("project")}
                         </Link>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
+                    <NavigationMenuItem asChild>
+                        <Link
+                            className={cn(
+                                navigationMenuTriggerStyle(),
+                                noProject &&
+                                    "text-muted hover:bg-background hover:text-muted"
+                            )}
+                            disabled={noProject}
+                            draggable={false}
+                            to="/results"
+                        >
+                            {t("results")}
+                        </Link>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem asChild>
                         <Link
                             activeProps={{
                                 className: "font-bold",

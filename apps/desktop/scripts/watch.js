@@ -61,7 +61,7 @@ const setupMainPackageWatcher = ({ config: { server } }) => {
                 spawnProcess = null;
             }
 
-            spawnProcess = spawn(String(electronPath), ["."]);
+            spawnProcess = spawn(String(electronPath), [".", "--inspect"]);
 
             spawnProcess.stdout.on(
                 "data",

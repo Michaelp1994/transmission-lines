@@ -10,6 +10,7 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     defaultTowerGeometry,
     type TowerGeometryFormInput,
@@ -19,7 +20,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface CreateTowerGeometryFormProps {
@@ -40,7 +40,7 @@ export default function CreateTowerGeometryForm({
     const createMutation = trpc.towerGeometry.create.useMutation({
         async onSuccess(values) {
             toast.success(`${values.name} has been added.`);
-            await navigate({ to: "/tower-geometries" });
+            await navigate({ to: "/libraries/tower-geometries" });
             if (onFinish) onFinish();
         },
         onError(error) {
