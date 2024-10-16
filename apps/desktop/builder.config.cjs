@@ -5,8 +5,11 @@
  */
 module.exports = {
     appId: "com.electron.app",
-    productName: "example-app",
-    electronVersion: "28.2.1",
+    productName: "Igrounding",
+    // Use asar and compression when debugging build process.
+    // asar: false,
+    // compression: "store",
+
     electronLanguages: ["en-GB", "en-US", "pt-BR", "pt-PT"],
     directories: {
         output: "releases/${version}/${os}",

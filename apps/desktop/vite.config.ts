@@ -1,12 +1,8 @@
 import { builtinModules } from "module";
+import { UserConfig } from "vite";
 
-/**
- * @type {import('vite').UserConfig}
- * @see https://vitejs.dev/config/
- */
-const config = {
+const config: UserConfig = {
     mode: process.env.MODE,
-    // root: PACKAGE_ROOT,
     envDir: process.cwd(),
     build: {
         sourcemap: "inline",

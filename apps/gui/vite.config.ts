@@ -7,6 +7,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
     plugins: [TanStackRouterVite(), react(), tsconfigPaths()],
+    base: "./",
     test: {
         environment: "jsdom",
         setupFiles: "./tests/setup.tsx",
