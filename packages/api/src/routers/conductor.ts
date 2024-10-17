@@ -24,7 +24,7 @@ export default router({
                 .from(transmissionConductors)
                 .where(eq(transmissionConductors.lineId, input.lineId));
             const result = [];
-            for await (const conductor of conductors) {
+            for await (const [index, conductor] of conductors.entries()) {
                 const [type] = await ctx.db
                     .select()
                     .from(conductorTypes)
@@ -36,6 +36,7 @@ export default router({
                     });
                 }
                 result.push({
+                    number: index + 1,
                     ...conductor,
                     type,
                 });

@@ -8,12 +8,16 @@ import RowActions from "./RowActions";
 const columnHelper = createColumnHelper<ConductorLocation>();
 
 export default [
+    columnHelper.accessor("number", {
+        header: "#",
+        cell: (info) => info.renderValue(),
+    }),
     columnHelper.accessor("x", {
-        header: () => t("x.label", { ns: "conductorLocationTable" }),
+        header: "X",
         cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("y", {
-        header: () => t("y.label", { ns: "conductorLocationTable" }),
+        header: "Y",
         cell: (info) => info.renderValue(),
     }),
     columnHelper.display({

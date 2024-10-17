@@ -29,8 +29,14 @@ export default router({
             if (!towers) {
                 throw new Error("Can't find transmission conductors");
             }
-
-            return towers;
+            const minOrder = Math.min(...towers.map((tower) => tower.id));
+            return towers.map((tower) => ({
+                number: tower.id - minOrder + 1,
+                id: tower.id,
+                x: tower.x,
+                y: tower.y,
+                geometryId: tower.geometryId,
+            }));
         }),
     getById: publicProcedure
         .input(getConductorLocationByIdSchema)

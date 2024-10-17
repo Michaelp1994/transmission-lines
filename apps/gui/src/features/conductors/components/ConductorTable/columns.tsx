@@ -9,6 +9,10 @@ import RowActions from "./RowActions";
 const columnHelper = createColumnHelper<Conductor>();
 
 export default [
+    columnHelper.accessor("number", {
+        header: () => "#",
+        cell: (info) => info.renderValue(),
+    }),
     columnHelper.display({
         id: "select",
         header: ({ table }) => (

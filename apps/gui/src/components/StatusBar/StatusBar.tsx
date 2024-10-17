@@ -1,5 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui/avatar";
-import { Badge, Github, Linkedin } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 
 import trpc from "~/utils/trpc";
 

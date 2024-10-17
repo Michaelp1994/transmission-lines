@@ -2,8 +2,20 @@ import * as React from "react";
 
 import { cn } from "../lib/utils";
 
-export function CardWrapper({ children }: { children: React.ReactNode }) {
-    return <div className="space-y-4">{children}</div>;
+interface CardWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+}
+
+export function CardWrapper({
+    children,
+    className,
+    ...props
+}: CardWrapperProps) {
+    return (
+        <div className={cn("space-y-4", className)} {...props}>
+            {children}
+        </div>
+    );
 }
 
 export function CardToolbar({ children }: { children?: React.ReactNode }) {

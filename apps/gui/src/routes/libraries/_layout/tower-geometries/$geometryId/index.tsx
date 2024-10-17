@@ -14,6 +14,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { t } from "i18next";
 
 import { ConductorLocationTable } from "~/features/conductorLocations";
+import ConductorLocationDiagram from "~/features/conductorLocations/components/ConductorLocationDiagram";
 import { UpdateTowerGeometryForm } from "~/features/towerGeometries";
 
 export const Route = createFileRoute(
@@ -47,22 +48,38 @@ export default function ViewTowerGeometryPage() {
                 </Card>
             </TabsContent>
             <TabsContent value="conductors">
-                <CardWrapper>
-                    <CardToolbar>
-                        <Button onClick={showCreateModal}>Add</Button>
-                    </CardToolbar>
-                    <Card>
-                        <CardHeader>
-                            <CardTitle>{t("title")}</CardTitle>
-                            <CardDescription>
-                                {t("description")}
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <ConductorLocationTable geometryId={geometryId} />
-                        </CardContent>
-                    </Card>
-                </CardWrapper>
+                <div className="flex gap-4 items-center">
+                    <CardWrapper className="w-1/2">
+                        <CardToolbar>
+                            <Button onClick={showCreateModal}>Add</Button>
+                        </CardToolbar>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Conductor List</CardTitle>
+                                <CardDescription>
+                                    {t("description")}
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <ConductorLocationTable
+                                    geometryId={geometryId}
+                                />
+                            </CardContent>
+                        </Card>
+                    </CardWrapper>
+                    <CardWrapper className="w-1/2">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>Conductor Plot</CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                                <ConductorLocationDiagram
+                                    geometryId={geometryId}
+                                />
+                            </CardContent>
+                        </Card>
+                    </CardWrapper>
+                </div>
             </TabsContent>
         </Tabs>
     );
