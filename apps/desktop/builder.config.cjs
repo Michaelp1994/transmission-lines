@@ -7,8 +7,9 @@ module.exports = {
     appId: "com.electron.app",
     productName: "Igrounding",
     // Use asar and compression when debugging build process.
-    // asar: false,
-    // compression: "store",
+    asar: false,
+    compression: "store",
+    // asarUnpack: ["database.sqlite"],
 
     electronLanguages: ["en-GB", "en-US", "pt-BR", "pt-PT"],
     directories: {
