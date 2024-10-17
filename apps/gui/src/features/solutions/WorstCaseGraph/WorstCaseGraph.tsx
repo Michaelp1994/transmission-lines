@@ -45,40 +45,44 @@ export default function WorstCaseGraph() {
             angle: data.sourceCurrents[1].current.angle,
         },
     ];
-    console.log(chartData);
     return (
-        <ChartContainer className="min-h-[500px]" config={chartConfig}>
-            <LineChart
-                data={chartData}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
+        <div className="flex justify-center">
+            <ChartContainer
+                className="min-h-[500px] max-w-screen-lg"
+                config={chartConfig}
             >
-                <CartesianGrid />
-                <XAxis dataKey="name">
-                    <Label position="insideBottom" value="Location" />
-                </XAxis>
-                <YAxis>
-                    <Label
-                        angle={-90}
-                        offset={0}
-                        position="insideLeft"
-                        textAnchor="middle"
-                        value="Current (A)"
+                <LineChart
+                    data={chartData}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid />
+                    <XAxis dataKey="name">
+                        <Label position="insideBottom" value="Location" />
+                    </XAxis>
+                    <YAxis>
+                        <Label
+                            angle={-90}
+                            offset={0}
+                            position="insideLeft"
+                            textAnchor="middle"
+                            value="Current (A)"
+                        />
+                    </YAxis>
+                    <Tooltip content={<ChartTooltipContent />} />
+                    <Line
+                        dataKey="current"
+                        stroke="#8884d8"
+                        strokeWidth={2}
+                        type="linear"
                     />
-                </YAxis>
-                <Tooltip content={<ChartTooltipContent />} />
-                <Line
-                    dataKey="current"
-                    stroke="#8884d8"
-                    strokeWidth={2}
-                    type="linear"
-                />
-            </LineChart>
-        </ChartContainer>
+                </LineChart>
+            </ChartContainer>
+        </div>
     );
 }
 
