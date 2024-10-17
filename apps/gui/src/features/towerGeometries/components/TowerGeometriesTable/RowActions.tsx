@@ -41,7 +41,7 @@ export default function RowActions({
                 <DropdownMenuItem asChild>
                     <Link
                         params={{ geometryId: row.original.id }}
-                        to="/tower-geometries/$geometryId"
+                        to="/libraries/tower-geometries/$geometryId"
                     >
                         <ViewIcon />
                         <span>View</span>
