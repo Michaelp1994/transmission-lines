@@ -11,8 +11,9 @@
             "persistent": true
         },
         "package": {
-            "dependsOn": ["desktop#build", "gui#build"],
-            "outputs": ["dist/**"]
+            "dependsOn": ["igrounding#build", "gui#build"],
+            "outputs": ["dist/**"],
+            "cache": false
         },
         "rebuild": {
             "cache": false
