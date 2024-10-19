@@ -6,6 +6,7 @@
     "exports": {
         ".": "./src/index.ts",
         "./routers/*": "./src/routers/*.ts",
+        "./router": "./src/routers/index.ts",
         "./store": "./src/store.ts"
     },
     "files": [

@@ -1,7 +1,7 @@
 import { builtinModules } from "module";
-import { UserConfig } from "vite";
+import { defineConfig } from "vite";
 
-const config: UserConfig = {
+const config = defineConfig({
     mode: process.env.MODE,
     envDir: process.cwd(),
     build: {
@@ -22,13 +22,21 @@ const config: UserConfig = {
                 "electron-devtools-installer",
                 ...builtinModules.flatMap((p) => [p, `node:${p}`]),
             ],
-            output: {
-                entryFileNames: "[name].js",
-            },
+            input: { index: "./src/index.ts" },
+            output: [
+                {
+                    entryFileNames: "[name].js",
+                    format: "es",
+                },
+                // {
+                //     entryFileNames: "[name].cjs",
+                //     format: "cjs",
+                // },
+            ],
         },
         emptyOutDir: true,
         brotliSize: false,
     },
-};
+});
 
 export default config;

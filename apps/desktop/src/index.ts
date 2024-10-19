@@ -20,22 +20,9 @@ app.whenReady().then(async () => {
         optimizer.watchWindowShortcuts(window);
     });
     const window = await createWindow();
-
-    try {
-        const dbPath = path.join(__dirname, `../database.sqlite`);
-        const library = initLibrary(dbPath);
-        const server = createServer(library, {
-            browserWindow: window,
-            dialog,
-            app,
-        });
-
-        server.listen(5001);
-        console.log("listening on port 5001");
-    } catch (e) {
-        console.log("Problem starting server....");
-        console.log(e);
-    }
+    const dbPath = path.join(__dirname, `../database.sqlite`);
+    const library = initLibrary(dbPath);
+    const server = createServer(library, window);
 
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the

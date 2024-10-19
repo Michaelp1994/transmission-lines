@@ -1,5 +1,6 @@
 import { is } from "@electron-toolkit/utils";
 import { BrowserWindow, screen, shell } from "electron";
+import { createIPCHandler } from "electron-trpc/main";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -18,6 +19,9 @@ export default async function createWindow() {
         y: externalDisplay ? externalDisplay.bounds.y : 0,
         show: false,
         autoHideMenuBar: true,
+        webPreferences: {
+            preload: path.join(__dirname, "../preload.cjs"),
+        },
     });
 
     mainWindow.on("ready-to-show", () => {
