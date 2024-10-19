@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  electron-trpc:
+    hash: 2fffk62ct5kge2tpo4s2zlocwq
+    path: patches/electron-trpc.patch
+
 importers:
 
   .:
@@ -29,6 +34,9 @@ importers:
       '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
+      electron-trpc:
+        specifier: ^0.6.1
+        version: 0.6.1(patch_hash=2fffk62ct5kge2tpo4s2zlocwq)(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(electron@31.7.0)
       electron-updater:
         specifier: ^6.3.9
         version: 6.3.9
@@ -3992,6 +4000,13 @@ packages:
 
   electron-to-chromium@1.5.39:
     resolution: {integrity: sha512-4xkpSR6CjuiaNyvwiWDI85N9AxsvbPawB8xc7yzLPonYTuP19BVgYweKyUMFtHEZgIcHWMt1ks5Cqx2m+6/Grg==}
+
+  electron-trpc@0.6.1:
+    resolution: {integrity: sha512-Yj13UrjjjOW4+TD06YunAML2tgmtSYJMiFw6E6r1D4in/0EZ2MRwMoQc7AtMPAA6In23e+Kmq71e8h0ir+c3Jg==}
+    peerDependencies:
+      '@trpc/client': '>10.0.0'
+      '@trpc/server': '>10.0.0'
+      electron: '>19.0.0'
 
   electron-updater@6.3.9:
     resolution: {integrity: sha512-2PJNONi+iBidkoC5D1nzT9XqsE8Q1X28Fn6xRQhO3YX8qRRyJ3mkV4F1aQsuRnYPqq6Hw+E51y27W75WgDoofw==}
@@ -10123,6 +10138,15 @@ snapshots:
       - supports-color
 
   electron-to-chromium@1.5.39: {}
+
+  electron-trpc@0.6.1(patch_hash=2fffk62ct5kge2tpo4s2zlocwq)(@trpc/client@11.0.0-rc.364(@trpc/server@11.0.0-rc.364))(@trpc/server@11.0.0-rc.364)(electron@31.7.0):
+    dependencies:
+      '@trpc/client': 11.0.0-rc.364(@trpc/server@11.0.0-rc.364)
+      '@trpc/server': 11.0.0-rc.364
+      debug: 4.3.7
+      electron: 31.7.0
+    transitivePeerDependencies:
+      - supports-color
 
   electron-updater@6.3.9:
     dependencies:

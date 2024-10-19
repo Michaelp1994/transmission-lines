@@ -23,6 +23,7 @@
         "@electron-toolkit/utils": "^3.0.0",
         "@repo/api": "workspace:*",
         "@repo/db": "workspace:*",
+        "electron-trpc": "^0.6.1",
         "electron-updater": "^6.3.9"
     },
     "devDependencies": {
