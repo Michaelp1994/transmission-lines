@@ -26,7 +26,7 @@ export default function ConductorTypeTable() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const defaultData: ConductorType[] = [];
 
-    const { data, isLoading, error } = trpc.conductorType.getAll.useQuery(
+    const { data, isLoading, isError } = trpc.conductorType.getAll.useQuery(
         {
             pageIndex: pagination.pageIndex,
             pageSize: pagination.pageSize,
@@ -56,7 +56,7 @@ export default function ConductorTypeTable() {
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error || !data) {
+    if (isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

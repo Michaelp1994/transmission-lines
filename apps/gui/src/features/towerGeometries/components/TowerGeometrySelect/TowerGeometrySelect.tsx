@@ -11,12 +11,12 @@ const TowerGeometrySelect = forwardRef<
     TowerGeometrySelectProps
 >((props, ref) => {
     const { t } = useTranslation("towerGeometrySelect");
-    const { data, error, isLoading } = trpc.towerGeometry.getAll.useQuery();
+    const { data, isError, isLoading } = trpc.towerGeometry.getAll.useQuery();
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (error || !data) {
+    if (isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

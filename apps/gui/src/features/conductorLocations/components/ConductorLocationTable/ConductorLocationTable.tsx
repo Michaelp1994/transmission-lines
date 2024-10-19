@@ -17,11 +17,11 @@ export default function ConductorLocationTable({
     const { t } = useTranslation("conductorLocationTable");
     const {
         data = [],
-        error,
+        isError,
         isLoading,
     } = trpc.conductorLocations.getAllByGeometryId.useQuery({ geometryId });
 
-    if (error) {
+    if (isError) {
         return <div>{t("general:errorMessage")}</div>;
     }
     if (isLoading) {

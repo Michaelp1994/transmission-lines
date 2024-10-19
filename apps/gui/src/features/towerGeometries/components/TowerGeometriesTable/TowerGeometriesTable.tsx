@@ -9,11 +9,11 @@ export default function GeometriesTable() {
     const { t } = useTranslation("geometriesTable");
     const {
         data = [],
-        error,
+        isError,
         isLoading,
     } = trpc.towerGeometry.getAll.useQuery();
 
-    if (error) {
+    if (isError) {
         return <div>{t("general:errorMessage")}</div>;
     }
     if (isLoading) {

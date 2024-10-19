@@ -23,11 +23,11 @@ export default function ConductorLocationDiagram({
 }: ConductorLocationDiagramProps) {
     const {
         data = [],
-        error,
+        isError,
         isLoading,
     } = trpc.conductorLocations.getAllByGeometryId.useQuery({ geometryId });
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error</div>;
+    if (isError) return <div>Error</div>;
     return (
         <ResponsiveContainer aspect={16 / 9} width="100%">
             <ScatterChart
