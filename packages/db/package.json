@@ -1,6 +1,7 @@
 {
     "name": "@repo/db",
     "type": "module",
+    "version": "0.0.1",
     "exports": {
         ".": "./src/index.ts",
         "./drizzle": "./src/drizzle.ts",
