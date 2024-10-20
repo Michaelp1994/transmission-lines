@@ -50,21 +50,25 @@ const LibrariesImport = createFileRoute('/libraries')()
 // Create/Update Routes
 
 const ResultsRoute = ResultsImport.update({
+  id: '/results',
   path: '/results',
   getParentRoute: () => rootRoute,
 } as any)
 
 const ProjectRoute = ProjectImport.update({
+  id: '/project',
   path: '/project',
   getParentRoute: () => rootRoute,
 } as any)
 
 const LibrariesRoute = LibrariesImport.update({
+  id: '/libraries',
   path: '/libraries',
   getParentRoute: () => rootRoute,
 } as any)
 
 const IndexRoute = IndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
@@ -75,6 +79,7 @@ const ResultsLayoutRoute = ResultsLayoutImport.update({
 } as any)
 
 const ProjectNewRoute = ProjectNewImport.update({
+  id: '/new',
   path: '/new',
   getParentRoute: () => ProjectRoute,
 } as any)
@@ -90,122 +95,144 @@ const LibrariesLayoutRoute = LibrariesLayoutImport.update({
 } as any)
 
 const ResultsLayoutIndexRoute = ResultsLayoutIndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ProjectLayoutIndexRoute = ProjectLayoutIndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
 const LibrariesLayoutIndexRoute = LibrariesLayoutIndexImport.update({
+  id: '/',
   path: '/',
   getParentRoute: () => LibrariesLayoutRoute,
 } as any)
 
 const ResultsLayoutWorstCaseRoute = ResultsLayoutWorstCaseImport.update({
+  id: '/worst-case',
   path: '/worst-case',
   getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ResultsLayoutScriptRoute = ResultsLayoutScriptImport.update({
+  id: '/script',
   path: '/script',
   getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ResultsLayoutSourcesIndexRoute = ResultsLayoutSourcesIndexImport.update({
+  id: '/sources/',
   path: '/sources/',
   getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ResultsLayoutLinesIndexRoute = ResultsLayoutLinesIndexImport.update({
+  id: '/lines/',
   path: '/lines/',
   getParentRoute: () => ResultsLayoutRoute,
 } as any)
 
 const ProjectLayoutSourcesIndexRoute = ProjectLayoutSourcesIndexImport.update({
+  id: '/sources/',
   path: '/sources/',
   getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
 const ProjectLayoutLinesIndexRoute = ProjectLayoutLinesIndexImport.update({
+  id: '/lines/',
   path: '/lines/',
   getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
 const LibrariesLayoutTowerGeometriesIndexRoute =
   LibrariesLayoutTowerGeometriesIndexImport.update({
+    id: '/tower-geometries/',
     path: '/tower-geometries/',
     getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
 const LibrariesLayoutConductorTypesIndexRoute =
   LibrariesLayoutConductorTypesIndexImport.update({
+    id: '/conductor-types/',
     path: '/conductor-types/',
     getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
 const ProjectLayoutSourcesNewRoute = ProjectLayoutSourcesNewImport.update({
+  id: '/sources/new',
   path: '/sources/new',
   getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
 const ProjectLayoutLinesNewRoute = ProjectLayoutLinesNewImport.update({
+  id: '/lines/new',
   path: '/lines/new',
   getParentRoute: () => ProjectLayoutRoute,
 } as any)
 
 const LibrariesLayoutTowerGeometriesNewRoute =
   LibrariesLayoutTowerGeometriesNewImport.update({
+    id: '/tower-geometries/new',
     path: '/tower-geometries/new',
     getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
 const LibrariesLayoutConductorTypesNewRoute =
   LibrariesLayoutConductorTypesNewImport.update({
+    id: '/conductor-types/new',
     path: '/conductor-types/new',
     getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
 const ResultsLayoutSourcesSourceIdIndexRoute =
   ResultsLayoutSourcesSourceIdIndexImport.update({
+    id: '/sources/$sourceId/',
     path: '/sources/$sourceId/',
     getParentRoute: () => ResultsLayoutRoute,
   } as any)
 
 const ResultsLayoutLinesLineIdIndexRoute =
   ResultsLayoutLinesLineIdIndexImport.update({
+    id: '/lines/$lineId/',
     path: '/lines/$lineId/',
     getParentRoute: () => ResultsLayoutRoute,
   } as any)
 
 const ProjectLayoutSourcesSourceIdIndexRoute =
   ProjectLayoutSourcesSourceIdIndexImport.update({
+    id: '/sources/$sourceId/',
     path: '/sources/$sourceId/',
     getParentRoute: () => ProjectLayoutRoute,
   } as any)
 
 const ProjectLayoutLinesLineIdIndexRoute =
   ProjectLayoutLinesLineIdIndexImport.update({
+    id: '/lines/$lineId/',
     path: '/lines/$lineId/',
     getParentRoute: () => ProjectLayoutRoute,
   } as any)
 
 const LibrariesLayoutTowerGeometriesGeometryIdIndexRoute =
   LibrariesLayoutTowerGeometriesGeometryIdIndexImport.update({
+    id: '/tower-geometries/$geometryId/',
     path: '/tower-geometries/$geometryId/',
     getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
 const LibrariesLayoutConductorTypesTypeIdIndexRoute =
   LibrariesLayoutConductorTypesTypeIdIndexImport.update({
+    id: '/conductor-types/$typeId/',
     path: '/conductor-types/$typeId/',
     getParentRoute: () => LibrariesLayoutRoute,
   } as any)
 
 const ProjectLayoutLinesLineIdTowerIdIndexRoute =
   ProjectLayoutLinesLineIdTowerIdIndexImport.update({
+    id: '/lines/$lineId/$towerId/',
     path: '/lines/$lineId/$towerId/',
     getParentRoute: () => ProjectLayoutRoute,
   } as any)

@@ -22,7 +22,7 @@
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
         "@types/activex-opendssengine": "^4.0.0",
-        "eslint": "^9.12.0",
+        "eslint": "^9.13.0",
         "typescript": "^5.6.3",
         "vite-tsconfig-paths": "^5.0.1",
         "vitest": "^2.1.3"
