@@ -1,9 +1,9 @@
 import { createProject, openProject } from "@repo/db";
+import { app } from "electron";
 
 import openFileDialog from "../helpers/openFileDialog";
 import saveFileDialog from "../helpers/saveFileDialog";
 import { projectProcedure, publicProcedure, router } from "../trpc";
-
 // import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
@@ -22,10 +22,7 @@ export default router({
     open: publicProcedure.mutation(async ({ ctx }) => {
         const fileName = await openFileDialog(ctx);
         ctx.project.fileName = fileName;
-        const db = await openProject(
-            fileName,
-            ctx.electron.app.getPath("sessionData")
-        );
+        const db = await openProject(fileName, app.getPath("sessionData"));
         ctx.project.db = db;
 
         return true;
@@ -37,7 +34,7 @@ export default router({
 
             const db = await createProject(
                 fileName,
-                ctx.electron.app.getPath("sessionData")
+                app.getPath("sessionData")
             );
             ctx.project.db = db;
             ctx.project.fileName = fileName;
@@ -62,10 +59,7 @@ export default router({
         await ctx.project.db.$client.backup(fileName);
         ctx.project.db.$client.close();
         ctx.project.fileName = fileName;
-        const db = await openProject(
-            fileName,
-            ctx.electron.app.getPath("sessionData")
-        );
+        const db = await openProject(fileName, app.getPath("sessionData"));
 
         ctx.project.db = db;
     }),

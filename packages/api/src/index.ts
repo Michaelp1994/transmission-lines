@@ -1,17 +1,11 @@
 import type { LibraryDatabase, ProjectDatabase } from "@repo/db";
 import type { Solution } from "@repo/solution";
-import type { App, BrowserWindow, Dialog } from "electron";
+import type { BrowserWindow } from "electron";
 
 import { createIPCHandler } from "electron-trpc/main";
 
 import { store } from "./global";
 import { appRouter } from "./routers";
-
-export interface Electron {
-    browserWindow: BrowserWindow;
-    dialog: Dialog;
-    app: App;
-}
 
 export interface ProjectContext {
     db: ProjectDatabase;
@@ -28,16 +22,20 @@ export interface NoProjectContext {
 export interface Context {
     db: LibraryDatabase;
     project: ProjectContext | NoProjectContext;
-    electron: Electron;
+    electron: BrowserWindow;
 }
 
-const createServer = (library: LibraryDatabase, browserWindow) => {
+const createServer = (
+    library: LibraryDatabase,
+    browserWindow: BrowserWindow
+) => {
     const server = createIPCHandler({
         router: appRouter,
         windows: [browserWindow],
-        createContext: () => ({ db: library, project: store }),
+        createContext() {
+            return { db: library, project: store, electron: browserWindow };
+        },
     });
-    console.log("Server listening...");
     return server;
 };
 

@@ -1,24 +1,16 @@
+import { dialog } from "electron";
+
 import type { Context } from "..";
-
 export default async function openFileDialog(ctx: Context) {
-    if (!ctx.electron) {
-        throw new Error("Not in electron context");
-    }
-    const currentBrowser = ctx.electron.browserWindow;
+    const currentBrowser = ctx.electron;
 
-    if (!currentBrowser) {
-        throw new Error("No browser window found");
-    }
-    const openDialogReturn = await ctx.electron.dialog.showOpenDialog(
-        currentBrowser,
-        {
-            properties: ["openFile"],
-            filters: [
-                { name: "Project", extensions: ["study"] },
-                { name: "All Files", extensions: ["*"] },
-            ],
-        }
-    );
+    const openDialogReturn = await dialog.showOpenDialog(currentBrowser, {
+        properties: ["openFile"],
+        filters: [
+            { name: "Project", extensions: ["study"] },
+            { name: "All Files", extensions: ["*"] },
+        ],
+    });
 
     if (openDialogReturn.canceled) {
         throw new Error("User closed dialog");

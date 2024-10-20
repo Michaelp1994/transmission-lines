@@ -1,24 +1,16 @@
+import { dialog } from "electron";
+
 import type { Context } from "..";
 
 export default async function saveFileDialog(ctx: Context) {
-    if (!ctx.electron) {
-        throw new Error("Not in electron context");
-    }
-    const currentBrowser = ctx.electron.browserWindow;
+    const currentBrowser = ctx.electron;
 
-    if (!currentBrowser) {
-        throw new Error("No browser window found");
-    }
-
-    const saveDialogReturn = await ctx.electron.dialog.showSaveDialog(
-        currentBrowser,
-        {
-            filters: [
-                { name: "Project", extensions: ["study"] },
-                { name: "All Files", extensions: ["*"] },
-            ],
-        }
-    );
+    const saveDialogReturn = await dialog.showSaveDialog(currentBrowser, {
+        filters: [
+            { name: "Project", extensions: ["study"] },
+            { name: "All Files", extensions: ["*"] },
+        ],
+    });
 
     if (saveDialogReturn.canceled) {
         throw new Error("User closed dialog");
