@@ -1,6 +1,5 @@
 import { is } from "@electron-toolkit/utils";
 import { BrowserWindow, screen, shell } from "electron";
-import { createIPCHandler } from "electron-trpc/main";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -20,7 +19,7 @@ export default async function createWindow() {
         show: false,
         autoHideMenuBar: true,
         webPreferences: {
-            preload: path.join(__dirname, "../preload.cjs"),
+            preload: path.join(__dirname, "./preload.cjs"),
         },
     });
 
@@ -36,7 +35,7 @@ export default async function createWindow() {
 
     if (is.dev) {
         console.log("dev");
-        await mainWindow.loadURL("http://localhost:5174/");
+        await mainWindow.loadURL("http://localhost:5173/");
     } else {
         console.log(path.join(__dirname, "../renderer/index.html"));
         await mainWindow.loadFile(
