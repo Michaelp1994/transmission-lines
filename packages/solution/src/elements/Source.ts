@@ -1,13 +1,14 @@
 import type { Project } from "@repo/db/controllers/project";
+
+import OpenDSSInterface from "@repo/opendss-interface";
 import Reactor from "@repo/opendss-interface/classes/reactor";
 import VSource from "@repo/opendss-interface/classes/vSource";
 import { SourceID } from "@repo/validators/Ids";
-import OpenDSSInterface from "@repo/opendss-interface";
 
 export default class Source {
     id: SourceID;
-    vSource: VSource;
     reactor: Reactor;
+    vSource: VSource;
 
     constructor(input: Project["sources"][number], phases: number[]) {
         this.id = input.id;

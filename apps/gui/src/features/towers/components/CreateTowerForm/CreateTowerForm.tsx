@@ -12,6 +12,7 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     defaultTransmissionTower,
     type TransmissionTowerFormInput,
@@ -21,7 +22,6 @@ import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { TowerGeometrySelect } from "~/features/towerGeometries";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface FormHandlerProps {

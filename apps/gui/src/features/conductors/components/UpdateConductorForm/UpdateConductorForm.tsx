@@ -14,6 +14,7 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     type ConductorFormInput,
     conductorFormSchema,
@@ -23,7 +24,6 @@ import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { ConductorTypeSelect } from "~/features/conductorTypes";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateConductorFormProps {
