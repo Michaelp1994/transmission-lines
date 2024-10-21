@@ -1,0 +1,36 @@
+name: CI
+
+on:
+    push:
+        branches: ["master"]
+
+jobs:
+    build:
+        name: Publish
+        timeout-minutes: 15
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [macos-latest, ubuntu-latest, windows-latest]
+
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v3
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Build
+              run: pnpm run build
+
+            - name: Typecheck
+              run: pnpm run package
