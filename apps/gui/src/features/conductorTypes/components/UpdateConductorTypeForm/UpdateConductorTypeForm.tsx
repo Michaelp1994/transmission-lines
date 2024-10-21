@@ -1,5 +1,4 @@
 import type { ConductorTypeID } from "@repo/validators/Ids";
-import type { FieldErrors } from "react-hook-form";
 
 import { Button } from "@repo/ui/button";
 import {

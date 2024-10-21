@@ -1,9 +1,9 @@
 import type { LocationID } from "@repo/validators/Ids";
 
-import NiceModal, { useModal } from "@ebay/nice-modal-react";
+import NiceModal from "@ebay/nice-modal-react";
+import toast from "@repo/ui/toast";
 
 import BaseDeleteModal from "~/components/BaseDeleteModal";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteConductorLocationModalProps {
@@ -12,7 +12,6 @@ export interface DeleteConductorLocationModalProps {
 
 export default NiceModal.create(
     ({ conductorLocationId }: DeleteConductorLocationModalProps) => {
-        const modal = useModal();
         const utils = trpc.useUtils();
         const deleteMutation = trpc.conductorLocations.delete.useMutation({
             async onSuccess(data) {

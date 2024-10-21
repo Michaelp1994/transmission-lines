@@ -1,5 +1,3 @@
-import type { ContentType } from "recharts/types/component/Tooltip";
-
 import {
     type ChartConfig,
     ChartContainer,
@@ -85,21 +83,3 @@ export default function WorstCaseGraph() {
         </div>
     );
 }
-
-const CustomTooltip: ContentType<number, string> = ({
-    active,
-    payload,
-    label,
-}) => {
-    if (active && payload && payload.length) {
-        return (
-            <div className="m-0 p-2 bg-white border border-gray-200 whitespace-nowrap">
-                <p>Name: {label}</p>
-                <p>Current: {payload[0].payload.current.toFixed(2)} A</p>
-                <p> Resistance: {payload[0].payload.resistance} Ω</p>
-            </div>
-        );
-    }
-
-    return null;
-};

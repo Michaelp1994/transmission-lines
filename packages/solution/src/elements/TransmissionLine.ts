@@ -47,20 +47,9 @@ export default class TransmissionLine {
             (transmissionLine) => transmissionLine.fromPhase
         );
         const middlePhases = [...Array(numPhases).keys()].map((i) => i + 1); // array from 1 to numPhases
-        const middleNeutrals = [...Array(numNeutrals).keys()].map((i) => 20);
+        const middleNeutrals = [...Array(numNeutrals).keys()].map(() => 20);
         const finalPhases = input.conductors.map(
             (transmissionLine) => transmissionLine.toPhase
-        );
-
-        const neutralPhases = input.conductors.reduce<number[]>(
-            (phases, conductor) => {
-                if (conductor.isNeutral) {
-                    phases.push(conductor.fromPhase);
-                    // phases.push(index + 1);
-                }
-                return phases;
-            },
-            []
         );
 
         input.towers.forEach((tower, index) => {

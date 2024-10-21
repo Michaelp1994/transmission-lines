@@ -1,5 +1,4 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { t } from "i18next";
 
 import type { ConductorLocation } from "./type";
 

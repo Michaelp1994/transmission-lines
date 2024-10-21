@@ -1,3 +1,4 @@
+import { DataTable } from "@repo/ui/data-table/DataTable";
 import {
     type ColumnFiltersState,
     getCoreRowModel,
@@ -7,14 +8,11 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
 import type { ConductorType } from "./RowType";
 
 import columns from "./columns";
-import TablePagination from "./TablePagination";
-import TableToolbar from "./TableToolbar";
 
 export default function ConductorTypeTable() {
     const { t } = useTranslation("conductorTypeTable");
@@ -62,7 +60,7 @@ export default function ConductorTypeTable() {
 
     return (
         <div className="flex flex-col gap-4">
-            <DataTable columns={columns} data={data} />
+            <DataTable table={table} />
         </div>
     );
 }

@@ -1,5 +1,4 @@
 import type { ConductorID } from "@repo/validators/Ids";
-import type { FieldErrors } from "react-hook-form";
 
 import { Button } from "@repo/ui/button";
 import { Checkbox } from "@repo/ui/checkbox";
@@ -14,16 +13,15 @@ import {
 } from "@repo/ui/form";
 import { useForm } from "@repo/ui/hooks/use-form";
 import { Input } from "@repo/ui/input";
+import toast from "@repo/ui/toast";
 import {
     type ConductorFormInput,
     conductorFormSchema,
 } from "@repo/validators/forms/Conductor.schema";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
 import { ConductorTypeSelect } from "~/features/conductorTypes";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 interface UpdateConductorFormProps {

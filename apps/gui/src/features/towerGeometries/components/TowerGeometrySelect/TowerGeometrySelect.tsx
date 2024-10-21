@@ -4,11 +4,9 @@ import { useTranslation } from "react-i18next";
 import BaseSelect, { type BaseSelectProps } from "~/components/BaseSelect";
 import trpc from "~/utils/trpc";
 
-interface TowerGeometrySelectProps extends Omit<BaseSelectProps, "data"> {}
-
 const TowerGeometrySelect = forwardRef<
     HTMLButtonElement,
-    TowerGeometrySelectProps
+    Omit<BaseSelectProps, "data">
 >((props, ref) => {
     const { t } = useTranslation("towerGeometrySelect");
     const { data, isError, isLoading } = trpc.towerGeometry.getAll.useQuery();

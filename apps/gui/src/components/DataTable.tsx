@@ -16,7 +16,7 @@ import { useTranslation } from "react-i18next";
 
 interface DataTableProps<T> {
     data: T[];
-    columns: ColumnDef<T, any>[];
+    columns: ColumnDef<T>[];
 }
 
 export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
@@ -59,15 +59,7 @@ export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
                                 <TableRow key={row.id}>
                                     {row.getVisibleCells().map((cell) => {
                                         return (
-                                            <TableCell
-                                                align={
-                                                    (
-                                                        cell.column.columnDef
-                                                            .meta as any
-                                                    )?.align
-                                                }
-                                                key={cell.id}
-                                            >
+                                            <TableCell key={cell.id}>
                                                 {flexRender(
                                                     cell.column.columnDef.cell,
                                                     cell.getContext()

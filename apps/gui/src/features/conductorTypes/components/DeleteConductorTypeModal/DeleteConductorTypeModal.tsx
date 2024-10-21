@@ -11,24 +11,22 @@ export interface DeleteConductorTypeModalProps {
     onClose: () => void;
 }
 
-export default NiceModal.create(
-    ({ typeId, onClose }: DeleteConductorTypeModalProps) => {
-        const utils = trpc.useUtils();
-        const deleteMutation = trpc.conductorType.delete.useMutation({
-            onSuccess: async (data) => {
-                await utils.conductorType.getAll.invalidate();
-                toast.success(`${data.name} has been deleted`);
-            },
-            onError: (error) => {
-                toast.error("Failed to delete conductor Type");
-                console.log(error);
-            },
-        });
+export default NiceModal.create(({ typeId }: DeleteConductorTypeModalProps) => {
+    const utils = trpc.useUtils();
+    const deleteMutation = trpc.conductorType.delete.useMutation({
+        onSuccess: async (data) => {
+            await utils.conductorType.getAll.invalidate();
+            toast.success(`${data.name} has been deleted`);
+        },
+        onError: (error) => {
+            toast.error("Failed to delete conductor Type");
+            console.log(error);
+        },
+    });
 
-        function handleConfirm() {
-            deleteMutation.mutate({ id: typeId });
-        }
-
-        return <BaseDeleteModal onConfirm={handleConfirm} />;
+    function handleConfirm() {
+        deleteMutation.mutate({ id: typeId });
     }
-);
+
+    return <BaseDeleteModal onConfirm={handleConfirm} />;
+});

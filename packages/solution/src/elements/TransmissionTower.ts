@@ -11,8 +11,8 @@ interface TransmissionTowerInput {
 
 export default class TransmissionTower {
     id: GeometryID;
-    reactor: Reactor;
     name: string;
+    reactor: Reactor;
     constructor(input: TransmissionTowerInput) {
         this.id = input.id;
         this.name = input.name;

@@ -12,7 +12,7 @@ export const nodeTypes = {
     phase: PhaseNode,
 };
 
-export function GroundNode({ data }: { data: NodeData }) {
+export function GroundNode() {
     return (
         <>
             <Handle position={Position.Top} type="target" />

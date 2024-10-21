@@ -1,10 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import {
-    Factory,
-    SquareSigma,
-    SquareTerminal,
-    UtilityPole,
-} from "lucide-react";
+import { Factory, SquareTerminal, UtilityPole } from "lucide-react";
 
 import SideBar from "~/components/SideBar";
 

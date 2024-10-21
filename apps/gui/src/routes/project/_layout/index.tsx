@@ -4,7 +4,6 @@ import { ReactFlowProvider } from "@xyflow/react";
 import trpc from "~/utils/trpc";
 
 import ProjectDiagram from "../-components/ProjectDiagram";
-import { DnDProvider } from "../-components/ProjectDiagram/DnDContext";
 
 export const Route = createFileRoute("/project/_layout/")({
     component: ProjectDiagramPage,
@@ -30,12 +29,10 @@ export default function ProjectDiagramPage() {
 
     return (
         <ReactFlowProvider>
-            <DnDProvider>
-                <ProjectDiagram
-                    sources={sources}
-                    transmissionLines={transmissionLines}
-                />
-            </DnDProvider>
+            <ProjectDiagram
+                sources={sources.data}
+                transmissionLines={transmissionLines.data}
+            />
         </ReactFlowProvider>
     );
 }

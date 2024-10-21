@@ -6,7 +6,7 @@ export interface GroundNodeData extends Record<string, unknown> {
     angle: number;
 }
 
-export default function GroundNode({ data }: { data: GroundNodeData }) {
+export default function GroundNode() {
     return (
         <>
             <Handle id="top" position={Position.Top} type="target" />

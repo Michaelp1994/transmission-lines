@@ -4,11 +4,9 @@ import type { TransmissionLine } from "@repo/db/project/transmissionLines";
 
 export function getConnectedPhases(
     source: Source,
-    transmissionLines: Array<
-        TransmissionLine & {
+    transmissionLines: (TransmissionLine & {
             conductors: TransmissionConductor[];
-        }
-    >
+        })[]
 ) {
     const connectedTransmissionLines = transmissionLines.filter(
         (transmissionLine) =>

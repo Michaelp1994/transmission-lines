@@ -1,9 +1,9 @@
 import type { TowerID } from "@repo/validators/Ids";
 
 import NiceModal from "@ebay/nice-modal-react";
+import toast from "@repo/ui/toast";
 
 import BaseDeleteModal from "~/components/BaseDeleteModal";
-import toast from "@repo/ui/toast";
 import trpc from "~/utils/trpc";
 
 export interface DeleteTowerModalProps {
