@@ -9,14 +9,13 @@
         "db:push": "turbo run db:push",
         "dev": "turbo run dev",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "lint": "turbo run lint",
+        "lint": "turbo run lint --continue",
         "lint:fix": "turbo run lint:fix --continue",
         "package": "turbo run package",
         "rebuild": "turbo run rebuild",
         "test": "turbo run test",
-        "typecheck": "turbo run typecheck",
-        "generate": "turbo run generate",
-        "watch": "turbo run watch"
+        "typecheck": "turbo run typecheck --continue",
+        "generate": "turbo run generate"
     },
     "devDependencies": {
         "@changesets/cli": "^2.27.9",

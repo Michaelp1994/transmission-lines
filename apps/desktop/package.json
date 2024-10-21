@@ -15,7 +15,8 @@
         "lint:fix": "eslint . --fix",
         "package": "electron-builder build -c builder.config.cjs",
         "rebuild": "electron-rebuild -f",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "test": "playwright test"
     },
     "dependencies": {
         "@electron-toolkit/preload": "^3.0.1",
