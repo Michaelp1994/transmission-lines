@@ -22,7 +22,7 @@ export default function calculateZPhaseComponents({ z0, z1, z2 }: Input) {
 
     const alpha = exp(complex(0, (2 / 3) * pi));
 
-    const alphaSquared = pow(alpha, 2);
+    const alphaSquared = pow(alpha, 2) as Complex;
 
     const alphaMatrix = matrix([
         [1, 1, 1],

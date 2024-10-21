@@ -4,7 +4,6 @@ import { app } from "electron";
 import openFileDialog from "../helpers/openFileDialog";
 import saveFileDialog from "../helpers/saveFileDialog";
 import { projectProcedure, publicProcedure, router } from "../trpc";
-// import buildCircuit from "@/helpers/buildCircuit";
 
 export default router({
     isOpen: publicProcedure.query(async ({ ctx }) => {
