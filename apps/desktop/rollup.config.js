@@ -3,8 +3,8 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
 import { builtinModules } from "module";
 import { defineConfig } from "rollup";
+import del from "rollup-plugin-delete";
 
-import runElectron from "./rollup-plugin-run-electron.js";
 export default defineConfig([
     {
         external: [
@@ -20,13 +20,12 @@ export default defineConfig([
             format: "es",
         },
         plugins: [
+            del({ targets: "dist/*" }),
             swc(),
             commonjs({
-                include: /node_modules/,
                 extensions: [".js", ".ts"],
             }),
             nodeResolve(),
-            runElectron(),
         ],
     },
     {
@@ -42,6 +41,12 @@ export default defineConfig([
             file: "dist/preload.cjs",
             format: "cjs",
         },
-        plugins: [swc(), commonjs(), nodeResolve(), runElectron()],
+        plugins: [
+            swc(),
+            commonjs({
+                extensions: [".js", ".ts"],
+            }),
+            nodeResolve(),
+        ],
     },
 ]);

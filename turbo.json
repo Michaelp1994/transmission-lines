@@ -4,7 +4,8 @@
     "globalEnv": ["PORT"],
     "tasks": {
         "build": {
-            "dependsOn": ["^build"]
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"]
         },
         "generate": {
             "cache": false,
