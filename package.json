@@ -4,6 +4,7 @@
     "author": "Michael Poulgrain",
     "scripts": {
         "version": "changeset",
+        "release": "changeset tags",
         "build": "turbo run build",
         "clean": "turbo run clean && rm -rf .turbo node_modules dist",
         "db:push": "turbo run db:push",
