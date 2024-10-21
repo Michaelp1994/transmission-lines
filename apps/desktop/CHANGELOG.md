@@ -1,5 +1,11 @@
 # igrounding
 
+## 1.0.6
+
+### Patch Changes
+
+-   a21255a: Testing Github Releases
+
 ## 1.0.5
 
 ### Patch Changes
