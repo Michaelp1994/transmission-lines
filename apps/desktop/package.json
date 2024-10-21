@@ -1,7 +1,6 @@
 {
     "name": "desktop",
-    "private": true,
-    "version": "0.0.5",
+    "version": "0.0.1",
     "description": "",
     "keywords": [],
     "license": "ISC",

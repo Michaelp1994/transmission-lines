@@ -2,6 +2,7 @@
     "name": "@repo/opendss-interface",
     "type": "module",
     "private": true,
+    "version": "0.0.1",
     "exports": {
         ".": "./src/index.ts",
         "./schemas": "./src/schemas/*.ts",

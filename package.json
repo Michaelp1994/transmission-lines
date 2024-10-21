@@ -1,6 +1,7 @@
 {
     "name": "igrounding",
     "private": true,
+    "version": "0.0.1",
     "author": "Michael Poulgrain",
     "scripts": {
         "version": "changeset",
