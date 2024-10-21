@@ -19,7 +19,7 @@
         "lint:fix": "eslint . --fix",
         "generate": "drizzle-kit generate --config=drizzle-project.config.ts",
         "test": "vitest run",
-        "typecheck": "tsc --build"
+        "typecheck": "tsc --noEmit"
     },
     "dependencies": {
         "better-sqlite3": "^11.4.0",

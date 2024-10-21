@@ -19,7 +19,7 @@
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "test": "vitest run",
-        "typecheck": "tsc --build"
+        "typecheck": "tsc --noEmit"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
