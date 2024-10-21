@@ -27,15 +27,24 @@ jobs:
               run: pnpm install
 
             - name: Create Release Pull Request
+              id: changesets
               uses: changesets/action@v1
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            # - name: Build
-            #   run: pnpm run build
+            - name: Build
+              if: steps.changesets.outputs.hasChangesets == 'true'
+              run: pnpm run build
 
-            # - name: Package
-            #   run: pnpm run package
+            - name: Package
+              if: steps.changesets.outputs.hasChangesets == 'true'
+              run: pnpm run package
+
+            - name: Release
+              if: steps.changesets.outputs.hasChangesets == 'true'
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: apps/desktop/releases/*.exe
 
             # - name: Release
             #   uses: softprops/action-gh-release@v2
