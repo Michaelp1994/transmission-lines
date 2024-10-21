@@ -5,7 +5,7 @@ on:
         branches: ["master"]
 
 jobs:
-    build:
+    release:
         name: Publish
         timeout-minutes: 15
         runs-on: ubuntu-latest
@@ -29,8 +29,6 @@ jobs:
             - name: Create Release Pull Request
               id: changesets
               uses: changesets/action@v1
-              with:
-                  publish: pnpm release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -42,7 +40,15 @@ jobs:
               if: steps.changesets.outputs.hasChangesets == 'true'
               run: pnpm run package
 
-            - name: Release
+            - name: Package
+              if: steps.changesets.outputs.hasChangesets == 'true'
+              run: pnpm run release
+
+            - name: Package
+              if: steps.changesets.outputs.hasChangesets == 'true'
+              run: git push --follow-tags
+
+            - name: Upload
               if: steps.changesets.outputs.hasChangesets == 'true'
               uses: softprops/action-gh-release@v2
               with:

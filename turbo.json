@@ -12,7 +12,7 @@
             "persistent": true
         },
         "package": {
-            "dependsOn": ["igrounding#build", "gui#build"],
+            "dependsOn": ["desktop#build", "gui#build"],
             "outputs": ["dist/**"],
             "cache": false
         },

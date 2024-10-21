@@ -1,6 +1,6 @@
 {
     "name": "@repo/validators",
-    "version": "1.0.1",
+    "private": true,
     "description": "",
     "keywords": [],
     "license": "ISC",
