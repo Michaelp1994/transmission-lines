@@ -2,16 +2,13 @@ name: Publish
 
 on:
     push:
-        branches: ["master"]
+        branches: ["master", "testing-publish"]
 
 jobs:
     build:
         name: Publish
         timeout-minutes: 15
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                os: [windows-latest]
+        runs-on: ubuntu-latest
 
         steps:
             - name: Check out code
@@ -29,8 +26,18 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Build
-              run: pnpm run build
+            - name: Create Release Pull Request
+              uses: changesets/action@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Typecheck
-              run: pnpm run package
+            # - name: Build
+            #   run: pnpm run build
+
+            # - name: Package
+            #   run: pnpm run package
+
+            # - name: Release
+            #   uses: softprops/action-gh-release@v2
+            #   with:
+            #       files: apps/desktop/releases/*.exe
