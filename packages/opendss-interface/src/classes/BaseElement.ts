@@ -26,7 +26,7 @@ export default abstract class BaseElement<
                 key in opendssParameters &&
                 opendssParameters[key] !== undefined
             ) {
-                const parameter = key.toLowerCase();
+                const parameter = key.toString().toLowerCase();
                 const value = opendssParameters[key];
                 script.push(`${parameter}=${value}`);
             }

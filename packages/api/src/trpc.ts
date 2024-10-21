@@ -1,7 +1,8 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import { ZodError } from "zod";
 
-import type { Context, ProjectContext } from "./index";
+import type { ProjectContext } from "./global";
+import type { Context } from "./index";
 
 /**
  * Initialization of tRPC backend
