@@ -1,7 +1,7 @@
 import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
 import { initLibrary } from "@repo/db";
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -22,7 +22,7 @@ app.whenReady().then(async () => {
     const window = await createWindow();
     const dbPath = path.join(__dirname, `../database.sqlite`);
     const library = initLibrary(dbPath);
-    const server = createServer(library, window);
+    createServer(library, window);
 
     app.on("activate", () => {
         // On macOS it's common to re-create a window in the app when the

@@ -13,7 +13,7 @@ import { publicProcedure, router } from "../trpc";
 export default router({
     getAll: publicProcedure
         .input(getAllConductorTypesSchema)
-        .query(async ({ ctx: { db }, input }) => {
+        .query(async ({ ctx: { db } }) => {
             const allConductorTypes = await db.query.conductorTypes.findMany();
 
             return allConductorTypes;
@@ -68,7 +68,7 @@ export default router({
         .mutation(async ({ input, ctx: { db } }) => {
             const [updatedConductorType] = await db
                 .update(conductorTypes)
-                .set({ ...input })
+                .set(input)
                 .where(eq(conductorTypes.id, input.id))
                 .returning();
 

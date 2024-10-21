@@ -13,16 +13,8 @@ import trpc from "~/utils/trpc";
 import UserButton from "./UserButton";
 
 export default function NavBar() {
-    const { t, i18n } = useTranslation("general");
+    const { t } = useTranslation("general");
     const { data } = trpc.project.isOpen.useQuery();
-
-    function changeLanguage(checked: boolean) {
-        if (checked) {
-            i18n.changeLanguage("pt-BR");
-        } else {
-            i18n.changeLanguage("en-AU");
-        }
-    }
 
     const noProject = !data;
 

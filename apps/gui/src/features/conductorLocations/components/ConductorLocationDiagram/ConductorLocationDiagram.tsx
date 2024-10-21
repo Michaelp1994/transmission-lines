@@ -2,14 +2,11 @@ import type { GeometryID } from "@repo/validators/Ids";
 
 import {
     CartesianGrid,
-    Legend,
     ResponsiveContainer,
     Scatter,
     ScatterChart,
-    Tooltip,
     XAxis,
     YAxis,
-    ZAxis,
 } from "recharts";
 
 import trpc from "~/utils/trpc";

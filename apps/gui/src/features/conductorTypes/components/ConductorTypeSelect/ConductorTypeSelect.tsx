@@ -4,11 +4,9 @@ import { useTranslation } from "react-i18next";
 import BaseSelect, { type BaseSelectProps } from "~/components/BaseSelect";
 import trpc from "~/utils/trpc";
 
-interface ConductorTypeSelectProps extends Omit<BaseSelectProps, "data"> {}
-
 const ConductorTypeSelect = React.forwardRef<
     HTMLButtonElement,
-    ConductorTypeSelectProps
+    Omit<BaseSelectProps, "data">
 >(({ ...props }, ref) => {
     const { data, isError, isLoading } = trpc.conductorType.getAll.useQuery();
     const { t } = useTranslation("conductorTypeSelect");

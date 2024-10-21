@@ -1,6 +1,6 @@
 import { TooltipProvider } from "@repo/ui/tooltip";
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+// import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Toaster } from "sonner";
 
 import type trpc from "~/utils/trpc";

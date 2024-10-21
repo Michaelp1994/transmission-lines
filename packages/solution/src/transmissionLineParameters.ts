@@ -43,11 +43,15 @@ export default function buildTransmissionLineMatrix(
     const pMatrix = Math.zeros(numConductors, numConductors) as Math.Matrix;
 
     for (const [i, firstConductor] of conductors.entries()) {
-        for (const [j, secondConductor] of conductors.entries()) {
-            const imageDistance = calcImageDistance(
-                locations[i]!,
-                locations[j]!
-            ); // m
+        for (const [j] of conductors.entries()) {
+            const location1 = locations[i];
+            const location2 = locations[j];
+
+            if (!location1 || !location2) {
+                throw Error("No location found in payload");
+            }
+
+            const imageDistance = calcImageDistance(location1, location2); // m
 
             if (i === j) {
                 const radius = firstConductor.outerDiameter / 2; // m
@@ -65,10 +69,7 @@ export default function buildTransmissionLineMatrix(
                 rMatrix.subset(Math.index(i, i), resistance);
                 pMatrix.subset(Math.index(i, i), elastance);
             } else {
-                const conductorDistance = calcDistance(
-                    locations[i]!,
-                    locations[j]!
-                ); // m
+                const conductorDistance = calcDistance(location1, location2); // m
                 const mutualReactance = Math.multiply(
                     u0 * freq,
                     Math.log(Math.divide(1, conductorDistance) as number)

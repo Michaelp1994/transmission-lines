@@ -1,4 +1,4 @@
-import type { ZodErrorMap, ZodSchema } from "zod";
+import type { ZodSchema } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -9,19 +9,20 @@ import {
 
 interface UseFormProps<
     TFieldValues extends FieldValues = FieldValues,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TContext = any,
 > extends Omit<_UseFormProps<TFieldValues, TContext>, "resolver"> {
     schema: ZodSchema<TFieldValues>;
-    errorMap?: ZodErrorMap;
     values?: NoInfer<TFieldValues>;
 }
 
 export function useForm<
     TFieldValues extends FieldValues = FieldValues,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     TContext = any,
     TTransformedValues extends FieldValues | undefined = undefined,
->({ schema, errorMap, ...props }: UseFormProps<TFieldValues, TContext>) {
-    return _useForm({
+>({ schema, ...props }: UseFormProps<TFieldValues, TContext>) {
+    return _useForm<TFieldValues, TContext, TTransformedValues>({
         ...props,
         resolver: zodResolver(schema),
     });

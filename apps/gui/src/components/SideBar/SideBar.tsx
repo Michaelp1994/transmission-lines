@@ -1,7 +1,7 @@
-import SideBarItem from "./SideBarItem";
+import SideBarItem, { type SideBarItemProps } from "./SideBarItem";
 
 interface SideBarProps {
-    items: any[];
+    items: SideBarItemProps[];
 }
 
 export default function SideBar({ items }: SideBarProps) {

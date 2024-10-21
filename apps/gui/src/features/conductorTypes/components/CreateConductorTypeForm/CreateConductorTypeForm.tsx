@@ -1,5 +1,3 @@
-import type { FieldErrors } from "react-hook-form";
-
 import { Button } from "@repo/ui/button";
 import {
     Form,

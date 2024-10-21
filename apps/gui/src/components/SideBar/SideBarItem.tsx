@@ -3,7 +3,7 @@ import { cn } from "@repo/ui/utils";
 import { Link } from "@tanstack/react-router";
 import { type LucideProps } from "lucide-react";
 
-interface SideBarItemProps {
+export interface SideBarItemProps {
     to: string; // TODO: fix type to tanstack router
     text: string;
     icon: React.FC<LucideProps>;

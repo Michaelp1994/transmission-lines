@@ -13,7 +13,7 @@
         "dev": "node ./scripts/dev.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "package": "electron-builder build -c builder.config.cjs",
+        "package": "electron-builder build -c builder.config.js",
         "rebuild": "electron-rebuild -f",
         "typecheck": "tsc --noEmit",
         "test": "playwright test"

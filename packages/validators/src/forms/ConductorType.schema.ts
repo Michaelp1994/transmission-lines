@@ -4,15 +4,15 @@ import { z } from "zod";
 
 export const conductorTypeFormSchema = z.object({
     name: z.string().min(2),
-    surfaceArea: z.coerce.number().positive().optional(),
-    stranding: z.string().optional(),
+    surfaceArea: z.coerce.number().positive(),
+    stranding: z.string(),
     outerDiameter: z.coerce.number().positive(),
-    coreDiameter: z.coerce.number().positive().optional(),
-    layers: z.coerce.number().optional(),
-    currentCapacity: z.coerce.number().positive().optional(),
-    dcResistance25: z.coerce.number().positive().optional(),
-    acResistance25: z.coerce.number().positive().optional(),
-    acResistance50: z.coerce.number().positive().optional(),
+    coreDiameter: z.coerce.number().positive(),
+    layers: z.coerce.number(),
+    currentCapacity: z.coerce.number().positive(),
+    dcResistance25: z.coerce.number().positive(),
+    acResistance25: z.coerce.number().positive(),
+    acResistance50: z.coerce.number().positive(),
     acResistance75: z.coerce.number().positive(),
     gmr: z.coerce.number().positive(),
 });

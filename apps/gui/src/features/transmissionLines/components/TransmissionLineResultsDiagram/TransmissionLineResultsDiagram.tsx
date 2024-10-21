@@ -16,21 +16,16 @@ interface TransmissionLineResultsDiagramProps {
 export default function TransmissionLineResultsDiagram({
     lineId,
 }: TransmissionLineResultsDiagramProps) {
-    const lineQuery = trpc.transmissionLine.getById.useQuery({
-        id: lineId,
-    });
-    const resultQuery = trpc.solution.getLineCurrents.useQuery({
+    const {
+        isLoading,
+        isError,
+        data: result,
+    } = trpc.solution.getLineCurrents.useQuery({
         id: lineId,
     });
 
-    if (lineQuery.isLoading || resultQuery.isLoading)
-        return <div>Loading...</div>;
-    if (lineQuery.isError || !lineQuery.data) return <div>Error</div>;
-    if (resultQuery.isError || !resultQuery.data) return <div>Error</div>;
-
-    const line = lineQuery.data;
-    const result = resultQuery.data;
-    console.log(result);
+    if (isLoading) return <div>Loading...</div>;
+    if (isError || !result) return <div>Error</div>;
 
     const nodes = [
         ...result.towers.map((tower, index) => {
@@ -52,8 +47,6 @@ export default function TransmissionLineResultsDiagram({
             return getGroundEdges(tower, index);
         }),
     ];
-
-    console.log({ nodes, edges });
 
     return (
         <>

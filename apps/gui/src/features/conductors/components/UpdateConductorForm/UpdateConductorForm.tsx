@@ -1,5 +1,4 @@
 import type { ConductorID } from "@repo/validators/Ids";
-import type { FieldErrors } from "react-hook-form";
 
 import { Button } from "@repo/ui/button";
 import { Checkbox } from "@repo/ui/checkbox";
@@ -19,7 +18,6 @@ import {
     type ConductorFormInput,
     conductorFormSchema,
 } from "@repo/validators/forms/Conductor.schema";
-import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
