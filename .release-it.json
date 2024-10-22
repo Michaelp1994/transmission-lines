@@ -4,7 +4,9 @@
         "release": true,
         "assets": "README.md"
     },
-    "npm": false,
+    "npm": {
+        "publish": false
+    },
     "plugins": {
         "release-it-pnpm": {}
     },
