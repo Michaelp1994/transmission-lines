@@ -2,6 +2,7 @@ import { electronApp, optimizer } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
 import { initLibrary } from "@repo/db";
 import { app, BrowserWindow } from "electron";
+import { autoUpdater } from "electron-updater";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -19,8 +20,11 @@ app.whenReady().then(async () => {
     app.on("browser-window-created", async (_, window) => {
         optimizer.watchWindowShortcuts(window);
     });
+    autoUpdater.checkForUpdatesAndNotify();
     const window = await createWindow();
+
     const dbPath = path.join(__dirname, `../database.sqlite`);
+    console.log(dbPath);
     const library = initLibrary(dbPath);
     createServer(library, window);
 

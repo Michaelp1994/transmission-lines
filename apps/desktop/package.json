@@ -1,7 +1,7 @@
 {
     "name": "desktop",
-    "version": "0.0.3",
     "description": "",
+    "version": "1.0.0",
     "keywords": [],
     "license": "ISC",
     "author": "Michael Poulgrain",
@@ -12,13 +12,12 @@
     },
     "main": "./dist/index.js",
     "scripts": {
+        "package": "electron-builder build -c builder.config.js",
         "build": "rollup -c",
         "clean": "rm -rf .turbo node_modules dist out",
         "dev": "node ./scripts/dev.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "release": "electron-builder build -c builder.config.js",
-        "rebuild": "electron-rebuild -f",
         "typecheck": "tsc --noEmit",
         "test": "playwright test"
     },
@@ -31,6 +30,7 @@
         "electron-updater": "^6.3.9"
     },
     "devDependencies": {
+        "electron-builder": "^25.1.8",
         "@electron/rebuild": "^3.7.0",
         "@playwright/test": "^1.48.1",
         "@repo/eslint-config": "workspace:*",
@@ -41,12 +41,10 @@
         "@swc/core": "^1.7.36",
         "@types/node": "^22.7.7",
         "electron": "31.7.0",
-        "electron-builder": "^25.1.8",
         "eslint": "^9.13.0",
         "playwright": "^1.48.1",
         "prettier": "^3.3.3",
         "rollup": "^4.24.0",
-        "rollup-plugin-delete": "^2.1.0",
         "tslib": "^2.8.0",
         "typescript": "^5.6.3",
         "vite": "^5.4.9",
