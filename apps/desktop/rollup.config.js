@@ -3,7 +3,6 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import swc from "@rollup/plugin-swc";
 import { builtinModules } from "module";
 import { defineConfig } from "rollup";
-import del from "rollup-plugin-delete";
 
 export default defineConfig([
     {
@@ -20,7 +19,6 @@ export default defineConfig([
             format: "es",
         },
         plugins: [
-            del({ targets: "dist/*" }),
             swc(),
             commonjs({
                 extensions: [".js", ".ts"],

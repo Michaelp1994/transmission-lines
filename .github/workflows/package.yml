@@ -3,9 +3,8 @@ name: Package
 on:
     push:
         branches: ["master"]
-
-env:
-    GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tags:
+            - "v*.*.*"
 
 jobs:
     package:
@@ -32,5 +31,12 @@ jobs:
             - name: Build
               run: pnpm run build
 
-            - name: Release
-              run: pnpm run release
+            - name: Create Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: |
+                      dist/*.exe
+                      dist/*.yml
+                  body_path: release-info.md
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
