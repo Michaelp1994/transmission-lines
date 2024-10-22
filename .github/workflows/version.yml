@@ -28,7 +28,7 @@ jobs:
         - name: Install Dependencies
           run: pnpm install
 
-        - name: Release
+        - name: Create Release Pull Request
+          uses: changesets/action@v1
           env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: npx semantic-release
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
