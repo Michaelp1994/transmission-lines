@@ -11,7 +11,7 @@
             "cache": false,
             "persistent": true
         },
-        "package": {
+        "release": {
             "dependsOn": ["desktop#build", "gui#build"],
             "outputs": ["dist/**"],
             "cache": false

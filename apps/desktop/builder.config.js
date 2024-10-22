@@ -10,7 +10,9 @@ export default {
     asar: false,
     compression: "store",
     // asarUnpack: ["database.sqlite"],
-
+    win: {
+        publish: ["github"],
+    },
     electronLanguages: ["en-GB", "en-US", "pt-BR", "pt-PT"],
     directories: {
         output: "releases/${version}/${os}",

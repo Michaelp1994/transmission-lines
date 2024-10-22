@@ -6,6 +6,10 @@
     "license": "ISC",
     "author": "Michael Poulgrain",
     "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Michaelp1994/transmission-lines"
+    },
     "main": "./dist/index.js",
     "scripts": {
         "build": "rollup -c",
@@ -13,7 +17,7 @@
         "dev": "node ./scripts/dev.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "package": "electron-builder build -c builder.config.js",
+        "release": "electron-builder build -c builder.config.js",
         "rebuild": "electron-rebuild -f",
         "typecheck": "tsc --noEmit",
         "test": "playwright test"
