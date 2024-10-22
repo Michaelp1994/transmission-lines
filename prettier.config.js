@@ -1,7 +1,7 @@
 // @ts-check
 
 /** @type {import("prettier").Config} */
-module.exports = {
+export default {
     trailingComma: "es5",
     tabWidth: 4,
     semi: true,
