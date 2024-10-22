@@ -1,5 +1,4 @@
 import { electronApp, optimizer } from "@electron-toolkit/utils";
-import { is } from "@electron-toolkit/utils";
 import createServer from "@repo/api";
 import { initLibrary } from "@repo/db";
 import { app, BrowserWindow } from "electron";
