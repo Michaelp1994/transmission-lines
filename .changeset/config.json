@@ -3,8 +3,8 @@
     "changelog": "@changesets/cli/changelog",
     "commit": false,
     "privatePackages": {
-        "version": false,
-        "tag": false
+        "version": true,
+        "tag": true
     },
     "fixed": [],
     "linked": [],
