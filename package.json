@@ -4,7 +4,6 @@
     "version": "0.0.1",
     "author": "Michael Poulgrain",
     "scripts": {
-        "version": "changeset",
         "release": "semantic-release",
         "build": "turbo run build",
         "clean": "turbo run clean && rm -rf .turbo node_modules dist",
