@@ -1,0 +1,35 @@
+name: Version
+
+on:
+    push:
+        branches: ["master"]
+
+jobs:
+    version:
+        name: Version
+        timeout-minutes: 15
+        runs-on: ubuntu-latest # change to windows-latest when working.
+
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v3
+
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Create Release Pull Request
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: pnpm run ci:release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
