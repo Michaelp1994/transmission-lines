@@ -28,3 +28,5 @@ jobs:
 
             - name: Release
               run: pnpm run ci:release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
