@@ -1,12 +1,12 @@
-name: Version
+name: Release
 
 on:
     push:
         branches: ["master"]
 
 jobs:
-    version:
-        name: Version
+    release:
+        name: Release
         timeout-minutes: 15
         runs-on: ubuntu-latest # change to windows-latest when working.
 
@@ -26,10 +26,5 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Create Release Pull Request
-              id: changesets
-              uses: changesets/action@v1
-              with:
-                  publish: pnpm run ci:release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Release
+              run: pnpm run ci:release
