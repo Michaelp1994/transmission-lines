@@ -19,9 +19,11 @@
         "lint:fix": "turbo run lint:fix --continue",
         "test": "turbo run test",
         "typecheck": "turbo run typecheck --continue",
-        "generate": "turbo run generate"
+        "generate": "turbo run generate",
+        "prepare": "husky"
     },
     "devDependencies": {
+        "husky": "^9.1.6",
         "prettier": "^3.3.3",
         "turbo": "^2.2.1"
     },
