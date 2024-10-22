@@ -1,5 +1,13 @@
 # igrounding
 
+## 0.0.3
+
+### Patch Changes
+
+-   2ccc58a: Version Bump
+-   95f0562: Version Bump
+-   55fe848: Version Bump
+
 ## 0.0.2
 
 ### Patch Changes
