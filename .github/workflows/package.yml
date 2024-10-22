@@ -13,6 +13,9 @@ jobs:
         runs-on: windows-latest # change to windows-latest when working.
 
         steps:
+            - name: Ref Typecheck
+              run: echo ${{ github.ref_type}}
+
             - name: Check out code
               uses: actions/checkout@v4
 
