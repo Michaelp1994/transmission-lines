@@ -1,7 +1,6 @@
 {
     "name": "igrounding",
     "private": true,
-    "version": "0.0.2",
     "author": "Michael Poulgrain",
     "repository": {
         "type": "git",
