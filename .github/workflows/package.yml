@@ -1,12 +1,12 @@
-name: Release
+name: Package
 
 on:
     push:
         branches: ["master"]
 
 jobs:
-    release:
-        name: Release
+    package:
+        name: Package
         timeout-minutes: 15
         runs-on: ubuntu-latest # change to windows-latest when working.
 
@@ -26,7 +26,10 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Release
-              run: pnpm run ci:release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Build/release Electron app
+              uses: samuelmeuli/action-electron-builder@v1
+              with:
+                  github_token: ${{ secrets.github_token }}
+                  # If the commit is tagged with a version (e.g. "v1.0.0"),
+                  # release the app after building
+                  release: ${{ startsWith(github.ref, 'refs/tags/v') }}
