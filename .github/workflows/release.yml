@@ -1,14 +1,15 @@
-name: Version
+name: Release
 
 on:
     push:
+        tags: ["v*"]
         branches: ["master"]
 
 jobs:
     release:
-        name: Publish
+        name: Release
         timeout-minutes: 15
-        runs-on: ubuntu-latest
+        runs-on: windows-latest
 
         steps:
             - name: Check out code
@@ -26,7 +27,13 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Create Release Pull Request
-              uses: changesets/action@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Build
+              run: pnpm run build
+
+            - name: Package
+              run: pnpm run package
+
+            - name: Upload
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: apps/desktop/releases/*.exe
