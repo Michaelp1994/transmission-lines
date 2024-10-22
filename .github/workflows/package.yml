@@ -29,7 +29,8 @@ jobs:
             - name: Build
               run: pnpm run build
 
+            - name: Set Env variable
+              run: SET GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
+
             - name: Release
-              run: GH_TOKEN=${{ secrets.GITHUB_TOKEN }} pnpm run release
-              env:
-                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: pnpm run release
