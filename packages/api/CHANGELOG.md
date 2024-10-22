@@ -1,5 +1,11 @@
 # @repo/api
 
+## 1.0.1
+
+### Patch Changes
+
+-   88780bd: Test Version bump on internal dep
+
 ## 0.0.1
 
 ### Patch Changes
