@@ -2,6 +2,7 @@
     "name": "igrounding",
     "private": true,
     "version": "1.0.3",
+    "type": "module",
     "author": "Michael Poulgrain",
     "repository": {
         "type": "git",
@@ -19,9 +20,16 @@
         "lint:fix": "turbo run lint:fix --continue",
         "test": "turbo run test",
         "typecheck": "turbo run typecheck --continue",
-        "generate": "turbo run generate"
+        "generate": "turbo run generate",
+        "prepare": "husky",
+        "commitlint": "commitlint --edit"
     },
     "devDependencies": {
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
+        "commitizen": "^4.3.1",
+        "commitlint": "^19.5.0",
+        "husky": "^9.1.6",
         "prettier": "^3.3.3",
         "turbo": "^2.2.1"
     },
