@@ -2,7 +2,7 @@ name: Package
 
 on:
     push:
-        branches: ["master"]
+        branches: ["master", "feat--auto-update"]
         tags:
             - "v*.*.*"
 
@@ -31,12 +31,13 @@ jobs:
             - name: Build
               run: pnpm run build
 
+            - name: Package
+              run: pnpm run package
+
             - name: Create Release
               uses: softprops/action-gh-release@v1
               with:
-                  files: |
-                      dist/*.exe
-                      dist/*.yml
-                  body_path: release-info.md
+                  files: README.md
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  tag_name: ${{ github.ref_name }}
