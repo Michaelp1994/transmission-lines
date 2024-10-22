@@ -45,7 +45,7 @@
         "@repo/db": "workspace:*",
         "@repo/eslint-config": "workspace:*",
         "@repo/typescript-config": "workspace:*",
-        "@tanstack/router-devtools": "^1.74.0",
+        "@tanstack/router-devtools": "^1.75.0",
         "@tanstack/router-vite-plugin": "^1.73.1",
         "@testing-library/jest-dom": "^6.6.2",
         "@testing-library/react": "^16.0.1",
