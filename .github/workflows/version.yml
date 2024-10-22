@@ -8,7 +8,7 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
+  version:
     name: Version
     runs-on: ubuntu-latest
     steps:
