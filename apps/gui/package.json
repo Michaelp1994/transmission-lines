@@ -25,7 +25,7 @@
         "@trpc/server": "11.0.0-rc.364",
         "@xyflow/react": "^12.3.2",
         "date-fns": "^4.1.0",
-        "i18next": "^23.16.1",
+        "i18next": "^23.16.2",
         "lucide-react": "^0.453.0",
         "prop-types": "^15.8.1",
         "react": "^18.3.1",
