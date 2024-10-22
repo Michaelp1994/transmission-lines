@@ -1,5 +1,11 @@
 # igrounding
 
+## 0.0.2
+
+### Patch Changes
+
+-   e16c69b: Version Bump
+
 ## 1.0.6
 
 ### Patch Changes
