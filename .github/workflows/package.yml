@@ -8,7 +8,7 @@ jobs:
     package:
         name: Package
         timeout-minutes: 15
-        runs-on: ubuntu-latest # change to windows-latest when working.
+        runs-on: windows-latest # change to windows-latest when working.
 
         steps:
             - name: Check out code
