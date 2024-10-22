@@ -9,6 +9,7 @@ export default {
     // Use asar and compression when debugging build process.
     asar: false,
     compression: "store",
+    publish: null,
     // asarUnpack: ["database.sqlite"],
     electronLanguages: ["en-GB", "en-US", "pt-BR", "pt-PT"],
     directories: {
