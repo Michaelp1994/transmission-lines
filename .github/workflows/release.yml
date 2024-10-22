@@ -2,14 +2,13 @@ name: Release
 
 on:
     push:
-        tags: ["v*"]
         branches: ["master"]
 
 jobs:
     release:
         name: Release
         timeout-minutes: 15
-        runs-on: windows-latest
+        runs-on: ubuntu-latest # change to windows-latest when working.
 
         steps:
             - name: Check out code
@@ -27,13 +26,22 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Build
-              run: pnpm run build
+            - name: Create Release Pull Request
+              id: changesets
+              uses: changesets/action@v1
+              with:
+                  publish: pnpm run ci:release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Package
-              run: pnpm run package
+                  #   - name: Build
+                  #   run: pnpm run build
+
+                  # - name: Package
+                  #   run: pnpm run package
 
             - name: Upload
+              if: steps.changesets.outputs.hasChangesets == 'false'
               uses: softprops/action-gh-release@v2
               with:
-                  files: apps/desktop/releases/*.exe
+                  files: README.md

@@ -4,8 +4,8 @@
     "version": "0.0.1",
     "author": "Michael Poulgrain",
     "scripts": {
-        "release": "changeset",
-        "ci:tag": "changeset tag && git push --follow-tags",
+        "bump": "changeset",
+        "ci:release": "changeset tag && git push --follow-tags",
         "build": "turbo run build",
         "clean": "turbo run clean && rm -rf .turbo node_modules dist",
         "db:push": "turbo run db:push",
