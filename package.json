@@ -10,8 +10,7 @@
     },
     "scripts": {
         "build": "turbo run build",
-        "package": "electron-builder build -c builder.config.js",
-        "rebuild": "electron-rebuild -f",
+        "package": "turbo run package",
         "clean": "turbo run clean && rm -rf .turbo node_modules dist",
         "db:push": "turbo run db:push",
         "dev": "turbo run dev",
@@ -24,13 +23,16 @@
     },
     "devDependencies": {
         "prettier": "^3.3.3",
-        "turbo": "^2.2.1",
-        "electron-builder": "^25.1.8"
+        "semantic-release": "^24.1.3",
+        "turbo": "^2.2.1"
     },
     "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228",
     "pnpm": {
         "patchedDependencies": {
             "electron-trpc": "patches/electron-trpc.patch"
         }
+    },
+    "dependencies": {
+        "@changesets/cli": "^2.27.9"
     }
 }

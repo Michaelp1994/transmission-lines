@@ -1,6 +1,7 @@
 {
     "name": "desktop",
     "description": "",
+    "version": "1.0.0",
     "keywords": [],
     "license": "ISC",
     "author": "Michael Poulgrain",
@@ -11,6 +12,7 @@
     },
     "main": "./dist/index.js",
     "scripts": {
+        "package": "electron-builder build -c builder.config.js",
         "build": "rollup -c",
         "clean": "rm -rf .turbo node_modules dist out",
         "dev": "node ./scripts/dev.js",
@@ -28,6 +30,7 @@
         "electron-updater": "^6.3.9"
     },
     "devDependencies": {
+        "electron-builder": "^25.1.8",
         "@electron/rebuild": "^3.7.0",
         "@playwright/test": "^1.48.1",
         "@repo/eslint-config": "workspace:*",

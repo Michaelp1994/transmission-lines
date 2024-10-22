@@ -24,7 +24,7 @@ app.whenReady().then(async () => {
     autoUpdater.checkForUpdatesAndNotify();
     const window = await createWindow();
 
-    const dbPath = path.join(__dirname, `./database.sqlite`);
+    const dbPath = path.join(__dirname, `../database.sqlite`);
     console.log(dbPath);
     const library = initLibrary(dbPath);
     createServer(library, window);
