@@ -41,7 +41,7 @@ jobs:
                   #   run: pnpm run package
 
             - name: Upload
-              if: steps.changesets.outputs.hasChangesets == 'false'
+              if: steps.changesets.outputs.hasChangesets == 'true'
               uses: softprops/action-gh-release@v2
               with:
                   files: README.md
