@@ -19,7 +19,7 @@
         "lint": "turbo run lint --continue",
         "lint:fix": "turbo run lint:fix --continue",
         "test": "turbo run test",
-        "typecheck": "turbo run typecheck --continue",
+        "typecheck": "turbo run typecheck",
         "generate": "turbo run generate",
         "prepare": "husky",
         "commitlint": "commitlint --edit"
