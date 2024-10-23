@@ -35,7 +35,7 @@ export default function UpdateConductorTypeForm({
     const navigate = useNavigate();
     const { t } = useTranslation("updateConductorTypeForm");
 
-    const { data, isLoading, isError } = trpc.conductorType.getById.useQuery({
+    const [data, query] = trpc.conductorType.getById.useSuspenseQuery({
         id: conductorTypeId,
     });
     const form = useForm({
@@ -59,10 +59,10 @@ export default function UpdateConductorTypeForm({
         updateMutation.mutate({ ...values, id: conductorTypeId });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (isError || !data) {
+    if (query.isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

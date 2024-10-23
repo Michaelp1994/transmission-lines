@@ -17,7 +17,7 @@ import {
 } from "@repo/validators/forms/Solution.schema";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { SourceSelect } from "~/features/sources";
+import SourceSelect from "~/features/sources/components/SourceSelect";
 import TowerSelect from "~/features/towers/components/TowerSelect";
 import trpc from "~/utils/trpc";
 

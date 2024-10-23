@@ -15,7 +15,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Route as rootRoute } from "./routes/__root";
 import { Route as IndexImport } from "./routes/index";
 import { Route as ResultsLayoutImport } from "./routes/results/_layout";
-import { Route as ProjectNewImport } from "./routes/project/new";
 import { Route as ProjectLayoutImport } from "./routes/project/_layout";
 import { Route as LibrariesLayoutImport } from "./routes/libraries/_layout";
 import { Route as ResultsLayoutIndexImport } from "./routes/results/_layout/index";
@@ -76,12 +75,6 @@ const IndexRoute = IndexImport.update({
 const ResultsLayoutRoute = ResultsLayoutImport.update({
     id: "/_layout",
     getParentRoute: () => ResultsRoute,
-} as any);
-
-const ProjectNewRoute = ProjectNewImport.update({
-    id: "/new",
-    path: "/new",
-    getParentRoute: () => ProjectRoute,
 } as any);
 
 const ProjectLayoutRoute = ProjectLayoutImport.update({
@@ -275,13 +268,6 @@ declare module "@tanstack/react-router" {
             fullPath: "/project";
             preLoaderRoute: typeof ProjectLayoutImport;
             parentRoute: typeof ProjectRoute;
-        };
-        "/project/new": {
-            id: "/project/new";
-            path: "/new";
-            fullPath: "/project/new";
-            preLoaderRoute: typeof ProjectNewImport;
-            parentRoute: typeof ProjectImport;
         };
         "/results": {
             id: "/results";
@@ -528,12 +514,10 @@ const ProjectLayoutRouteWithChildren = ProjectLayoutRoute._addFileChildren(
 
 interface ProjectRouteChildren {
     ProjectLayoutRoute: typeof ProjectLayoutRouteWithChildren;
-    ProjectNewRoute: typeof ProjectNewRoute;
 }
 
 const ProjectRouteChildren: ProjectRouteChildren = {
     ProjectLayoutRoute: ProjectLayoutRouteWithChildren,
-    ProjectNewRoute: ProjectNewRoute,
 };
 
 const ProjectRouteWithChildren =
@@ -579,7 +563,6 @@ export interface FileRoutesByFullPath {
     "/": typeof IndexRoute;
     "/libraries": typeof LibrariesLayoutRouteWithChildren;
     "/project": typeof ProjectLayoutRouteWithChildren;
-    "/project/new": typeof ProjectNewRoute;
     "/results": typeof ResultsLayoutRouteWithChildren;
     "/results/script": typeof ResultsLayoutScriptRoute;
     "/results/worst-case": typeof ResultsLayoutWorstCaseRoute;
@@ -609,7 +592,6 @@ export interface FileRoutesByTo {
     "/": typeof IndexRoute;
     "/libraries": typeof LibrariesLayoutIndexRoute;
     "/project": typeof ProjectLayoutIndexRoute;
-    "/project/new": typeof ProjectNewRoute;
     "/results": typeof ResultsLayoutIndexRoute;
     "/results/script": typeof ResultsLayoutScriptRoute;
     "/results/worst-case": typeof ResultsLayoutWorstCaseRoute;
@@ -639,7 +621,6 @@ export interface FileRoutesById {
     "/libraries/_layout": typeof LibrariesLayoutRouteWithChildren;
     "/project": typeof ProjectRouteWithChildren;
     "/project/_layout": typeof ProjectLayoutRouteWithChildren;
-    "/project/new": typeof ProjectNewRoute;
     "/results": typeof ResultsRouteWithChildren;
     "/results/_layout": typeof ResultsLayoutRouteWithChildren;
     "/results/_layout/script": typeof ResultsLayoutScriptRoute;
@@ -672,7 +653,6 @@ export interface FileRouteTypes {
         | "/"
         | "/libraries"
         | "/project"
-        | "/project/new"
         | "/results"
         | "/results/script"
         | "/results/worst-case"
@@ -701,7 +681,6 @@ export interface FileRouteTypes {
         | "/"
         | "/libraries"
         | "/project"
-        | "/project/new"
         | "/results"
         | "/results/script"
         | "/results/worst-case"
@@ -729,7 +708,6 @@ export interface FileRouteTypes {
         | "/libraries/_layout"
         | "/project"
         | "/project/_layout"
-        | "/project/new"
         | "/results"
         | "/results/_layout"
         | "/results/_layout/script"
@@ -814,8 +792,7 @@ export const routeTree = rootRoute
     "/project": {
       "filePath": "project",
       "children": [
-        "/project/_layout",
-        "/project/new"
+        "/project/_layout"
       ]
     },
     "/project/_layout": {
@@ -831,10 +808,6 @@ export const routeTree = rootRoute
         "/project/_layout/sources/$sourceId/",
         "/project/_layout/lines/$lineId/$towerId/"
       ]
-    },
-    "/project/new": {
-      "filePath": "project/new.tsx",
-      "parent": "/project"
     },
     "/results": {
       "filePath": "results",

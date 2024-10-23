@@ -16,7 +16,7 @@ import {
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { TransmissionLineTable } from "~/features/transmissionLines";
+import TransmissionLinesTable from "~/features/transmissionLines/components/TransmissionLinesTable";
 
 export const Route = createFileRoute("/project/_layout/lines/")({
     component: ProjectSources,
@@ -48,7 +48,7 @@ export default function ProjectSources() {
                     <CardTitle>Transmission Lines</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <TransmissionLineTable />
+                    <TransmissionLinesTable />
                 </CardContent>
             </Card>
         </CardWrapper>

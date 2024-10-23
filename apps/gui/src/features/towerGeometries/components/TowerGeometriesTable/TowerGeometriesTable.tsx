@@ -1,6 +1,7 @@
+import { DataTable } from "@repo/ui/data-table/DataTable";
+import useTable from "@repo/ui/hooks/use-table";
 import { useTranslation } from "react-i18next";
 
-import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
 import columns from "./columns";
@@ -12,7 +13,10 @@ export default function GeometriesTable() {
         isError,
         isLoading,
     } = trpc.towerGeometry.getAll.useQuery();
-
+    const table = useTable({
+        data: data,
+        columns,
+    });
     if (isError) {
         return <div>{t("general:errorMessage")}</div>;
     }
@@ -20,5 +24,5 @@ export default function GeometriesTable() {
         return <div>{t("general:loading")}</div>;
     }
 
-    return <DataTable columns={columns} data={data} />;
+    return <DataTable table={table} />;
 }

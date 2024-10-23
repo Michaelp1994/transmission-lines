@@ -21,10 +21,10 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { TowerGeometrySelect } from "~/features/towerGeometries";
+import TowerGeometrySelect from "~/features/towerGeometries/components/TowerGeometrySelect";
 import trpc from "~/utils/trpc";
 
-interface FormHandlerProps {
+interface CreateTowerFormProps {
     lineId: LineID;
     onFinish?: () => void;
 }
@@ -32,7 +32,7 @@ interface FormHandlerProps {
 export default function CreateTowerForm({
     lineId,
     onFinish,
-}: FormHandlerProps) {
+}: CreateTowerFormProps) {
     const utils = trpc.useUtils();
     const form = useForm({
         schema: transmissionTowerFormSchema,

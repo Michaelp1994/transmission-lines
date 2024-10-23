@@ -21,7 +21,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { SourceSelect } from "~/features/sources";
+import SourceSelect from "~/features/sources/components/SourceSelect";
 import trpc from "~/utils/trpc";
 
 interface UpdateTransmissionLineFormProps {
@@ -36,11 +36,9 @@ export default function UpdateTransmissionLineForm({
     const navigate = useNavigate();
     const { t } = useTranslation("updateTransmissionLineForm");
 
-    const { data, isLoading, isError } = trpc.transmissionLine.getById.useQuery(
-        {
-            id: lineId,
-        }
-    );
+    const [data, query] = trpc.transmissionLine.getById.useSuspenseQuery({
+        id: lineId,
+    });
 
     const form = useForm({
         schema: transmissionLineFormSchema,
@@ -62,10 +60,10 @@ export default function UpdateTransmissionLineForm({
         updateTransmissionLineMutation.mutate({ ...values, id: lineId });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError || !data) {
+    if (query.isError || !data) {
         return <div>Error...</div>;
     }
 

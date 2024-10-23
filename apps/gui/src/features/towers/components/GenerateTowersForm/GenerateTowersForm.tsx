@@ -21,7 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { TowerGeometrySelect } from "~/features/towerGeometries";
+import TowerGeometrySelect from "~/features/towerGeometries/components/TowerGeometrySelect";
 import trpc from "~/utils/trpc";
 
 interface BaseFormProps {

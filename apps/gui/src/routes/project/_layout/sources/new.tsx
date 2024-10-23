@@ -8,7 +8,7 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { t } from "i18next";
 
-import { CreateSourceForm } from "~/features/sources";
+import CreateSourceForm from "~/features/sources/components/CreateSourceForm";
 
 export const Route = createFileRoute("/project/_layout/sources/new")({
     component: NewSourcePage,

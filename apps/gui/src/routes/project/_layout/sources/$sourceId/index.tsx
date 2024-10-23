@@ -3,8 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { UpdateSourceForm } from "~/features/sources";
-import SourceSequenceSection from "~/features/sources/components/SourceSequenceSection/SourceSequenceSection";
+import SourceSequenceSection from "~/features/sources/components/SourceSequenceSection";
+import UpdateSourceForm from "~/features/sources/components/UpdateSourceForm";
 
 export const Route = createFileRoute("/project/_layout/sources/$sourceId/")({
     component: ViewSourcePage,

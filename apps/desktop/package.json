@@ -18,7 +18,7 @@
         "dev": "node ./scripts/dev.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "typecheck": "tsc --noEmit",
+        "typecheck": "tsc --noEmit --pretty",
         "test": "playwright test"
     },
     "dependencies": {

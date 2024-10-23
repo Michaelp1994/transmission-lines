@@ -26,11 +26,14 @@ export default function WorstCaseGraph() {
             color: "#8884d8",
         },
     } satisfies ChartConfig;
+    const fromSource = data.sourceCurrents[0];
+    const toSource = data.sourceCurrents[1];
+    if (!fromSource || !toSource) return <div>Error</div>;
     const chartData = [
         {
-            name: data.sourceCurrents[0].name,
-            current: data.sourceCurrents[0].current.current.toFixed(2),
-            angle: data.sourceCurrents[0].current.angle,
+            name: fromSource.name,
+            current: fromSource.current.current.toFixed(2),
+            angle: fromSource.current.angle,
         },
         ...data.towerCurrents.map((tower) => ({
             name: tower.name,
@@ -38,9 +41,9 @@ export default function WorstCaseGraph() {
             angle: tower.current.angle,
         })),
         {
-            name: data.sourceCurrents[1].name,
-            current: data.sourceCurrents[1].current.current.toFixed(2),
-            angle: data.sourceCurrents[1].current.angle,
+            name: toSource.name,
+            current: toSource.current.current.toFixed(2),
+            angle: toSource.current.angle,
         },
     ];
     return (
