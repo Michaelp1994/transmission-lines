@@ -2,7 +2,7 @@ import type { LineID } from "@repo/validators/Ids";
 
 import { Background, MarkerType, ReactFlow } from "@xyflow/react";
 
-import trpc from "~/utils/trpc";
+import trpc, { type RouterOutputs } from "~/utils/trpc";
 
 import type { LineNode } from "./nodes/LineSegmentNode";
 import type { TowerNode } from "./nodes/TowerNode";
@@ -76,7 +76,10 @@ const multiplier = towerWidth + 2 * xGap + lineWidth;
 const towerxOffset = xOffset + lineWidth + xGap;
 const lineyOffset = yOffset + towerHeight / 2 - lineHeight / 2;
 
-function getLineSegmentNodes(line, index: number) {
+function getLineSegmentNodes(
+    line: RouterOutputs["solution"]["getLineCurrents"]["lines"][number],
+    index: number
+) {
     const lineSegmentNode: LineNode = {
         id: `${index}-${line.id}`,
         type: "line",
@@ -91,7 +94,10 @@ function getLineSegmentNodes(line, index: number) {
     return lineSegmentNode;
 }
 
-function getTowerNodes(tower, index: number) {
+function getTowerNodes(
+    tower: RouterOutputs["solution"]["getLineCurrents"]["towers"][number],
+    index: number
+) {
     const towerNode: TowerNode = {
         id: `${tower.id}`,
         type: "tower",
@@ -112,7 +118,10 @@ const groundHeight = 100;
 const groundWidth = 100;
 const groundxOffset = towerxOffset + (towerWidth / 2 - groundWidth / 2);
 
-function getGroundNodes(tower, index: number) {
+function getGroundNodes(
+    tower: RouterOutputs["solution"]["getLineCurrents"]["towers"][number],
+    index: number
+) {
     return {
         id: `${tower.id}-GND`,
         type: "ground",
@@ -126,7 +135,11 @@ function getGroundNodes(tower, index: number) {
     };
 }
 
-function getLineSegmentEdges(lineSegment, index: number, lineId: LineID) {
+function getLineSegmentEdges(
+    lineSegment: RouterOutputs["solution"]["getLineCurrents"]["lines"][number],
+    index: number,
+    lineId: LineID
+) {
     const inSegments = lineSegment.inCurrents.map((linePhase, index2) => {
         return {
             id: `in-${index}-${index2}`,
@@ -188,7 +201,10 @@ function getLineSegmentEdges(lineSegment, index: number, lineId: LineID) {
     return [...inSegments, ...outSegments];
 }
 
-function getGroundEdges(tower, index: number) {
+function getGroundEdges(
+    tower: RouterOutputs["solution"]["getLineCurrents"]["towers"][number],
+    index: number
+) {
     return {
         id: `gnd-edge-${index}`,
         source: `${tower.id}`,

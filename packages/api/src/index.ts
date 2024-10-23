@@ -9,6 +9,7 @@ import { appRouter } from "./routers";
 export interface Context {
     db: LibraryDatabase;
     project: ProjectContext | NoProjectContext;
+    closeProject: () => void;
     electron: BrowserWindow;
 }
 
@@ -23,6 +24,12 @@ const createServer = (
             return Promise.resolve({
                 db: library,
                 project: store,
+                closeProject: () => {
+                    store.db?.$client.close();
+                    store.fileName = null;
+                    store.db = null;
+                    store.solution = null;
+                },
                 electron: browserWindow,
             });
         },

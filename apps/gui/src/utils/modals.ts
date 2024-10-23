@@ -1,26 +1,20 @@
 import NiceModal from "@ebay/nice-modal-react";
 
 import SettingsModal from "~/components/NavBar/SettingsModal";
-import {
-    CreateConductorLocationModal,
-    DeleteConductorLocationModal,
-    UpdateConductorLocationModal,
-} from "~/features/conductorLocations";
-import {
-    CreateConductorModal,
-    DeleteConductorModal,
-    GenerateConductorsModal,
-    UpdateConductorModal,
-} from "~/features/conductors";
+import CreateConductorLocationModal from "~/features/conductorLocations/components/CreateConductorLocationModal";
+import DeleteConductorLocationModal from "~/features/conductorLocations/components/DeleteConductorLocationModal";
+import UpdateConductorLocationModal from "~/features/conductorLocations/components/UpdateConductorLocationModal";
+import CreateConductorModal from "~/features/conductors/components/CreateConductorModal";
+import DeleteConductorModal from "~/features/conductors/components/DeleteConductorModal";
+import GenerateConductorsModal from "~/features/conductors/components/GenerateConductorsModal";
+import UpdateConductorModal from "~/features/conductors/components/UpdateConductorModal";
 import DeleteConductorTypeModal from "~/features/conductorTypes/components/DeleteConductorTypeModal";
-import { DeleteSourceModal } from "~/features/sources";
-import { DeleteTowerGeometryModal } from "~/features/towerGeometries";
-import {
-    CreateTowerModal,
-    DeleteTowerModal,
-    GenerateTowersModal,
-    UpdateTowerModal,
-} from "~/features/towers";
+import DeleteSourceModal from "~/features/sources/components/DeleteSourceModal";
+import DeleteTowerGeometryModal from "~/features/towerGeometries/components/DeleteTowerGeometryModal";
+import CreateTowerModal from "~/features/towers/components/CreateTowerModal";
+import DeleteTowerModal from "~/features/towers/components/DeleteTowerModal";
+import GenerateTowersModal from "~/features/towers/components/GenerateTowersModal";
+import UpdateTowerModal from "~/features/towers/components/UpdateTowerModal";
 import DeleteTransmissionLineModal from "~/features/transmissionLines/components/DeleteTransmissionLineModal";
 
 NiceModal.register("create-conductor-location", CreateConductorLocationModal);

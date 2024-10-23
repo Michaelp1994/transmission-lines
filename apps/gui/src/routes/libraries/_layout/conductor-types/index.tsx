@@ -11,7 +11,7 @@ import {
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { ConductorTypeTable } from "~/features/conductorTypes";
+import ConductorTypeTable from "~/features/conductorTypes/components/ConductorTypeTable";
 
 export const Route = createFileRoute("/libraries/_layout/conductor-types/")({
     component: AllConductorTypesPage,

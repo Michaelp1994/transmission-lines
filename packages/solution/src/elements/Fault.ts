@@ -26,8 +26,14 @@ export default class Fault {
         return this.fault.create();
     }
 
-    setBus(bus: string) {
-        this.fault.parameters.bus1.name = bus;
-        this.fault.parameters.bus2.name = bus;
+    setBus(busName: string) {
+        this.fault.parameters.bus1 = {
+            name: busName,
+            phases: [1],
+        };
+        this.fault.parameters.bus2 = {
+            name: busName,
+            phases: [20],
+        };
     }
 }

@@ -35,7 +35,7 @@ export default function UpdateTowerGeometryForm({
     const { t } = useTranslation("updateTowerGeometryForm");
     const navigate = useNavigate();
 
-    const { data, isLoading, isError } = trpc.towerGeometry.getById.useQuery({
+    const [data, query] = trpc.towerGeometry.getById.useSuspenseQuery({
         id: geometryId,
     });
     const form = useForm({
@@ -62,10 +62,10 @@ export default function UpdateTowerGeometryForm({
         });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (isError) {
+    if (query.isError) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

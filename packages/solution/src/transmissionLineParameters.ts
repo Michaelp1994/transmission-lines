@@ -92,8 +92,8 @@ export default function buildTransmissionLineMatrix(
     const cMatrix = Math.inv(pMatrix); // nF/m
 
     return {
-        rMatrix: rMatrix.toArray(),
-        xMatrix: xMatrix.toArray(),
-        cMatrix: cMatrix.toArray(),
+        rMatrix: rMatrix.toArray() as number[][],
+        xMatrix: xMatrix.toArray() as number[][],
+        cMatrix: cMatrix.toArray() as number[][],
     };
 }

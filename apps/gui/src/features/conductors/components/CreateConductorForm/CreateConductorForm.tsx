@@ -22,7 +22,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { ConductorTypeSelect } from "~/features/conductorTypes";
+import ConductorTypeSelect from "~/features/conductorTypes/components/ConductorTypeSelect";
 import trpc from "~/utils/trpc";
 
 interface BaseFormProps {

@@ -20,27 +20,26 @@ import { useTranslation } from "react-i18next";
 import { StyledForm } from "~/components/StyledForm";
 import trpc from "~/utils/trpc";
 
-interface FormHandlerProps {
+interface UpdateConductorLocationFormProps {
     conductorLocationId: number;
     onFinish?: () => void;
 }
 
-export default function FormHandler({
+export default function UpdateConductorLocationForm({
     conductorLocationId,
     onFinish,
-}: FormHandlerProps) {
+}: UpdateConductorLocationFormProps) {
+    const { t } = useTranslation("updateConductorLocationForm");
     const utils = trpc.useUtils();
-    const { data, isError, isLoading } =
-        trpc.conductorLocations.getById.useQuery({
-            locationId: conductorLocationId,
-        });
+    const [data, query] = trpc.conductorLocations.getById.useSuspenseQuery({
+        locationId: conductorLocationId,
+    });
 
     const form = useForm({
         schema: conductorLocationFormSchema,
         values: data,
     });
 
-    const { t } = useTranslation("updateConductorLocationForm");
     const updateMutation = trpc.conductorLocations.update.useMutation({
         async onSuccess(values) {
             toast.success("Conductor location updated");
@@ -62,10 +61,10 @@ export default function FormHandler({
         });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError) {
+    if (query.isError) {
         return <div>Error</div>;
     }
 

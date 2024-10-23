@@ -40,10 +40,7 @@ export default router({
             return true;
         }),
     close: projectProcedure.mutation(async ({ ctx }) => {
-        ctx.project.db?.$client.close();
-        ctx.project.fileName = null;
-        ctx.project.db = null;
-        ctx.project.solution = null;
+        ctx.closeProject();
     }),
     save: projectProcedure.mutation(async ({ ctx }) => {
         // TODO

@@ -11,7 +11,7 @@ import {
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { TowerGeometriesTable } from "~/features/towerGeometries";
+import TowerGeometriesTable from "~/features/towerGeometries/components/TowerGeometriesTable";
 
 export const Route = createFileRoute("/libraries/_layout/tower-geometries/")({
     component: AllTowerGeometriesPage,
