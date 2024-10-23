@@ -15,9 +15,21 @@ export default router({
     getAll: publicProcedure
         .input(getAllConductorLocationsSchema)
         .query(async ({ ctx: { db } }) => {
-            const allConductors = await db.query.conductorLocations.findMany();
+            const allConductorLocations =
+                await db.query.conductorLocations.findMany();
 
-            return allConductors;
+            const result = [];
+            for await (const [
+                index,
+                conductorLocation,
+            ] of allConductorLocations.entries()) {
+                result.push({
+                    number: index + 1,
+                    ...conductorLocation,
+                });
+            }
+
+            return result;
         }),
     getAllByGeometryId: publicProcedure
         .input(getAllConductorLocationsByGeometryIdSchema)

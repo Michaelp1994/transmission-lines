@@ -20,7 +20,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { SourceSelect } from "~/features/sources";
+import SourceSelect from "~/features/sources/components/SourceSelect";
 import trpc from "~/utils/trpc";
 
 interface CreateTransmissionLineFormProps {

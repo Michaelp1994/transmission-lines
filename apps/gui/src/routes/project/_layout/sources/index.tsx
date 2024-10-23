@@ -16,7 +16,7 @@ import {
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { SourceTable } from "~/features/sources";
+import SourceTable from "~/features/sources/components/SourceTable";
 
 export const Route = createFileRoute("/project/_layout/sources/")({
     component: ProjectSources,

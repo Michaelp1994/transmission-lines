@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { CreateConductorTypeForm } from "~/features/conductorTypes";
+import CreateConductorTypeForm from "~/features/conductorTypes/components/CreateConductorTypeForm";
 
 export const Route = createFileRoute("/libraries/_layout/conductor-types/new")({
     component: CreateConductorTypePage,

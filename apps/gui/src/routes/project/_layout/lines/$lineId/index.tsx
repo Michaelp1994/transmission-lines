@@ -19,9 +19,9 @@ import {
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { ConductorTable } from "~/features/conductors";
-import { TowerTable } from "~/features/towers";
-import { UpdateTransmissionLineForm } from "~/features/transmissionLines";
+import ConductorTable from "~/features/conductors/components/ConductorTable";
+import TowerTable from "~/features/towers/components/TowerTable";
+import UpdateTransmissionLineForm from "~/features/transmissionLines/components/UpdateTransmissionLineForm";
 
 export const Route = createFileRoute("/project/_layout/lines/$lineId/")({
     component: ProjectLinesPage,

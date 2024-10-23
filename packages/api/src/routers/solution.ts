@@ -130,6 +130,12 @@ export default router({
             const tline = ctx.project.solution?.transmissionLines.find(
                 (tl) => tl.id === input.id
             );
+            if (!tline) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Can't find Transmission Line",
+                });
+            }
             return tline;
         }),
 });

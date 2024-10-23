@@ -20,7 +20,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { TowerGeometrySelect } from "~/features/towerGeometries";
+import TowerGeometrySelect from "~/features/towerGeometries/components/TowerGeometrySelect";
 import trpc from "~/utils/trpc";
 
 interface UpdateTowerFormProps {
@@ -35,7 +35,7 @@ export default function UpdateTowerForm({
     const { t } = useTranslation("updateTowerForm");
     const utils = trpc.useUtils();
 
-    const { data, isLoading, isError } = trpc.tower.getById.useQuery({
+    const [data, query] = trpc.tower.getById.useSuspenseQuery({
         id: towerId,
     });
 
@@ -62,10 +62,10 @@ export default function UpdateTowerForm({
         updateMutation.mutate({ ...values, id: towerId });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError || !data) {
+    if (query.isError || !data) {
         return <div>Error</div>;
     }
 

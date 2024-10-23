@@ -34,7 +34,7 @@ export default function UpdateSourceForm({
 }: UpdateSourceFormProps) {
     const { t } = useTranslation("updateSourceForm");
     const navigate = useNavigate();
-    const { data, isError, isLoading } = trpc.source.getById.useQuery({
+    const [data, query] = trpc.source.getById.useSuspenseQuery({
         id: sourceId,
     });
     const form = useForm({
@@ -59,10 +59,10 @@ export default function UpdateSourceForm({
         });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>{t("general:loading")}</div>;
     }
-    if (isError || !data) {
+    if (query.isError || !data) {
         return <div>{t("general:errorMessage")}</div>;
     }
 

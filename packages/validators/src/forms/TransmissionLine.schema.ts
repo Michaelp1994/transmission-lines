@@ -13,7 +13,7 @@ export const transmissionLineFormSchema = z.object({
         .max(50)
         .trim(),
     fromSourceId: sourceId,
-    toSourceId: sourceId.nullable(),
+    toSourceId: sourceId,
 });
 
 export type TransmissionLineFormInput = z.infer<

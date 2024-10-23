@@ -5,8 +5,8 @@ import type { TransmissionLine } from "@repo/db/project/transmissionLines";
 export function getConnectedPhases(
     source: Source,
     transmissionLines: (TransmissionLine & {
-            conductors: TransmissionConductor[];
-        })[]
+        conductors: TransmissionConductor[];
+    })[]
 ) {
     const connectedTransmissionLines = transmissionLines.filter(
         (transmissionLine) =>

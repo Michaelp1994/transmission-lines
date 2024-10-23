@@ -2,7 +2,7 @@ name: Release
 
 on:
     push:
-        branches: ["master"]
+        tags: "v*.*.*"
 jobs:
     release:
         name: Release
@@ -34,7 +34,7 @@ jobs:
             - name: Create Release
               uses: softprops/action-gh-release@v1
               with:
-                  files: releases/Igrounding Setup *.exe
+                  files: "releases/Igrounding Setup *.exe"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   tag_name: ${{ github.ref_name }}

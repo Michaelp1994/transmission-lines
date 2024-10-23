@@ -8,10 +8,7 @@ jobs:
     build:
         name: Build and Test
         timeout-minutes: 15
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                os: [windows-latest]
+        runs-on: windows-latest
 
         steps:
             - name: Check out code
@@ -29,8 +26,8 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            # - name: Typecheck
-            #   run: pnpm run typecheck
+            - name: Typecheck
+              run: pnpm run typecheck
 
             - name: Lint
               run: pnpm run lint

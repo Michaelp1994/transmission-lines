@@ -1,9 +1,13 @@
 import { Handle, Position } from "@xyflow/react";
 
-interface NodeData {
+interface PhaseNodeData {
     phase: number;
     current: number;
     angle: number;
+}
+
+interface SourceNodeData {
+    name: string;
 }
 
 export const nodeTypes = {
@@ -21,7 +25,7 @@ export function GroundNode() {
     );
 }
 
-export function SourceNode({ data }: { data: NodeData }) {
+export function SourceNode({ data }: { data: SourceNodeData }) {
     return (
         <>
             <Handle
@@ -45,7 +49,7 @@ export function SourceNode({ data }: { data: NodeData }) {
     );
 }
 
-export function PhaseNode({ data }: { data: NodeData }) {
+export function PhaseNode({ data }: { data: PhaseNodeData }) {
     return (
         <>
             <Handle position={Position.Left} type="target" />

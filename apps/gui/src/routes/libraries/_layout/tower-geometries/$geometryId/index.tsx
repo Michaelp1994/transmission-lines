@@ -13,9 +13,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import { createFileRoute } from "@tanstack/react-router";
 import { t } from "i18next";
 
-import { ConductorLocationTable } from "~/features/conductorLocations";
 import ConductorLocationDiagram from "~/features/conductorLocations/components/ConductorLocationDiagram";
-import { UpdateTowerGeometryForm } from "~/features/towerGeometries";
+import ConductorLocationTable from "~/features/conductorLocations/components/ConductorLocationTable";
+import UpdateTowerGeometryForm from "~/features/towerGeometries/components/UpdateTowerGeometryForm";
 
 export const Route = createFileRoute(
     "/libraries/_layout/tower-geometries/$geometryId/"

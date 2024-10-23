@@ -31,7 +31,7 @@ export default router({
                     fromSource,
                     eq(transmissionLines.fromSourceId, fromSource.id)
                 )
-                .leftJoin(
+                .innerJoin(
                     toSource,
                     eq(transmissionLines.toSourceId, toSource.id)
                 );
@@ -72,6 +72,12 @@ export default router({
                 .insert(transmissionLines)
                 .values(input)
                 .returning();
+            if (!newTransmissionLine) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Can't create Transmission Line",
+                });
+            }
             return newTransmissionLine;
         }),
     update: projectProcedure

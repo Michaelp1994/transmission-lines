@@ -126,6 +126,17 @@ export default router({
             const sequenceComponents = calculateZSequenceComponents(source);
 
             const phaseMatrix = calculateZPhaseComponents(sequenceComponents);
-            return { ...sequenceComponents, phaseMatrix };
+
+            const z0 = {
+                re: sequenceComponents.z0.re,
+                im: sequenceComponents.z0.im,
+            };
+
+            const z1 = {
+                re: sequenceComponents.z1.re,
+                im: sequenceComponents.z1.im,
+            };
+
+            return { z0, z1, z2: z1, phaseMatrix };
         }),
 });

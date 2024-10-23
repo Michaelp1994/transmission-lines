@@ -21,7 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { ButtonsWrapper, StyledForm } from "~/components/StyledForm";
-import { ConductorTypeSelect } from "~/features/conductorTypes";
+import ConductorTypeSelect from "~/features/conductorTypes/components/ConductorTypeSelect";
 import trpc from "~/utils/trpc";
 
 interface UpdateConductorFormProps {
@@ -36,7 +36,7 @@ export default function UpdateConductorForm({
     const utils = trpc.useUtils();
     const { t } = useTranslation("updateConductorForm");
 
-    const { data, isError, isLoading } = trpc.conductor.getById.useQuery({
+    const [data, query] = trpc.conductor.getById.useSuspenseQuery({
         id: conductorId,
     });
     const form = useForm({
@@ -62,10 +62,10 @@ export default function UpdateConductorForm({
         updateMutation.mutate({ ...values, id: conductorId });
     }
 
-    if (isLoading) {
+    if (query.isLoading) {
         return <div>Loading...</div>;
     }
-    if (isError || !data) {
+    if (query.isError || !data) {
         return <div>Error</div>;
     }
 

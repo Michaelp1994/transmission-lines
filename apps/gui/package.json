@@ -9,7 +9,7 @@
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "test": "vitest run",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit --pretty"
     },
     "dependencies": {
         "@ebay/nice-modal-react": "^1.2.13",

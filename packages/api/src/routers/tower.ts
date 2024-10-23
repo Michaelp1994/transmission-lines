@@ -182,6 +182,12 @@ export default router({
                 .where(eq(transmissionTowers.id, input.id))
                 .returning();
 
+            if (!deletedTower) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Can't find Transmission Tower",
+                });
+            }
             return deletedTower;
         }),
     deleteMany: projectProcedure

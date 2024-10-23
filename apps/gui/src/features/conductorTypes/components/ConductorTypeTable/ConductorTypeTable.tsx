@@ -1,54 +1,22 @@
 import { DataTable } from "@repo/ui/data-table/DataTable";
-import {
-    type ColumnFiltersState,
-    getCoreRowModel,
-    type PaginationState,
-    useReactTable,
-} from "@tanstack/react-table";
-import { useState } from "react";
+import useTable from "@repo/ui/hooks/use-table";
 import { useTranslation } from "react-i18next";
 
 import trpc from "~/utils/trpc";
-
-import type { ConductorType } from "./RowType";
 
 import columns from "./columns";
 
 export default function ConductorTypeTable() {
     const { t } = useTranslation("conductorTypeTable");
+    const {
+        data = [],
+        isLoading,
+        isError,
+    } = trpc.conductorType.getAll.useQuery();
 
-    const [pagination, setPagination] = useState<PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
-    });
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-    const defaultData: ConductorType[] = [];
-
-    const { data, isLoading, isError } = trpc.conductorType.getAll.useQuery(
-        {
-            pageIndex: pagination.pageIndex,
-            pageSize: pagination.pageSize,
-        },
-        { keepPreviousData: true }
-    );
-
-    const { data: pageCount } = trpc.conductorType.getCount.useQuery({
-        pageIndex: pagination.pageIndex,
-        pageSize: pagination.pageSize,
-    });
-
-    const table = useReactTable({
-        data: data || defaultData,
+    const table = useTable({
+        data: data,
         columns,
-        onPaginationChange: setPagination,
-        manualPagination: true,
-        state: {
-            pagination,
-            columnFilters,
-        },
-        pageCount: pageCount ?? -1,
-        getCoreRowModel: getCoreRowModel(),
-        onColumnFiltersChange: setColumnFilters,
     });
 
     if (isLoading) {
