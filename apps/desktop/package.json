@@ -41,7 +41,7 @@
         "@rollup/plugin-swc": "^0.4.0",
         "@swc/core": "^1.7.39",
         "@types/node": "^22.7.8",
-        "electron": "31.7.0",
+        "electron": "33.0.2",
         "eslint": "^9.13.0",
         "playwright": "^1.48.1",
         "prettier": "^3.3.3",
