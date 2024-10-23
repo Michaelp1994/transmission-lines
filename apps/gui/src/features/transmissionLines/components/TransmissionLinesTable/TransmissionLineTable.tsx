@@ -1,6 +1,7 @@
+import { DataTable } from "@repo/ui/data-table/DataTable";
+import useTable from "@repo/ui/hooks/use-table";
 import { useTranslation } from "react-i18next";
 
-import DataTable from "~/components/DataTable";
 import trpc from "~/utils/trpc";
 
 import columns from "./columns";
@@ -9,9 +10,16 @@ import columns from "./columns";
 
 export default function TransmissionLineTable() {
     const { t } = useTranslation("transmissionLineTable");
-    const { data, isError, isLoading } = trpc.transmissionLine.getAll.useQuery(
-        {}
-    );
+    const {
+        data = [],
+        isError,
+        isLoading,
+    } = trpc.transmissionLine.getAll.useQuery({});
+
+    const table = useTable({
+        data: data,
+        columns,
+    });
 
     if (isLoading) {
         return <div>{t("general:loading")}</div>;
@@ -20,5 +28,5 @@ export default function TransmissionLineTable() {
         return <div>{t("general:errorMessage")}</div>;
     }
 
-    return <DataTable columns={columns} data={data} />;
+    return <DataTable table={table} />;
 }
