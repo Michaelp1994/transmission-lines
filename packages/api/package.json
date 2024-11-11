@@ -22,7 +22,7 @@
         "@repo/db": "workspace:^",
         "@repo/solution": "workspace:^",
         "@repo/validators": "workspace:*",
-        "@trpc/server": "11.0.0-rc.364",
+        "@trpc/server": "11.0.0-rc.630",
         "body-parser": "^1.20.3",
         "cors": "^2.8.5",
         "express": "^4.21.1",
