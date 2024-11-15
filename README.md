@@ -1,4 +1,4 @@
-<h3 align="center">Igrounding</h3>
+<h3 align="center">Transmission-Lines</h3>
 
 ## About the Project
 
@@ -18,20 +18,7 @@ The goal of the project is to design an easy to use desktop application for faul
 -   [Tailwind CSS](https://tailwindcss.com/)
 -   [Drizzle ORM](https://orm.drizzle.team/)
 
-## Screenshots
 
-<div align="center">
-  <img src="docs\project_diagram.png"  title="Project Diagram">
-</div>
-<div align="center">
-  <img src="docs\tower_geometry_diagram.png"  title="Tower Geometry Diagram">
-</div>
-<div align="center">
-  <img src="docs\transmission_line_results_diagram.png"  title="Transmission Line Results Diagram">
-</div>
-<div align="center">
-  <img src="docs\worst_case_scenario.png"  title="Worst Case Scenario Diagram">
-</div>
 ## Setup
 
 #### Requirements
@@ -41,7 +28,7 @@ The goal of the project is to design an easy to use desktop application for faul
 
 ### Installation
 
-You can find prebuilt installers for Igrounding on the [Github Releases](https://github.com/Michaelp1994/transmission-lines/releases/latest) page.
+You can find prebuilt installers for Transmission-Lines on the [Github Releases](https://github.com/Michaelp1994/transmission-lines/releases/latest) page.
 
 Alternatively, skip to the section below for instructions on how to build the project directly from source.
 
