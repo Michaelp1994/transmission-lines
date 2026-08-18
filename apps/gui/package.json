@@ -23,6 +23,7 @@
         "@trpc/react-query": "11.0.0-rc.364",
         "@trpc/server": "11.0.0-rc.364",
         "@xyflow/react": "^12.3.2",
+        "electron-trpc": "0.7.1",
         "date-fns": "^4.1.0",
         "i18next": "^23.16.2",
         "lucide-react": "^0.453.0",
@@ -34,7 +35,8 @@
         "react-i18next": "^15.1.0",
         "react-query": "^3.39.3",
         "recharts": "^2.13.0",
-        "zod": "^3.23.8"
+        "zod": "^3.23.8",
+        "sonner": "^1.5.0"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.25.9",

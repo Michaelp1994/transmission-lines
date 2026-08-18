@@ -27,8 +27,10 @@
         "@electron-toolkit/utils": "^3.0.0",
         "@repo/api": "workspace:*",
         "@repo/db": "workspace:*",
-        "electron-trpc": "^0.6.1",
-        "electron-updater": "^6.3.9"
+        "electron-trpc": "^0.7.1",
+        "electron-updater": "^6.3.9",
+        "better-sqlite3": "^11.5.0",
+        "winax": "^3.5.3"
     },
     "devDependencies": {
         "electron-builder": "^25.1.8",
